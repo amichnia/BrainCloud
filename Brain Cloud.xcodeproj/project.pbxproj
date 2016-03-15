@@ -13,6 +13,7 @@
 		C8A4A04F1C981B6C004E055D /* Brain_Cloud.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A04D1C981B6C004E055D /* Brain_Cloud.xcdatamodeld */; };
 		C8A4A0511C981B6C004E055D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8A4A0501C981B6C004E055D /* Assets.xcassets */; };
 		C8A4A0541C981B6C004E055D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8A4A0521C981B6C004E055D /* LaunchScreen.storyboard */; };
+		C8A4A0611C981BCB004E055D /* CanvasBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0601C981BCB004E055D /* CanvasBoard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		C8A4A0501C981B6C004E055D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8A4A0531C981B6C004E055D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C8A4A0551C981B6C004E055D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C8A4A0601C981BCB004E055D /* CanvasBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasBoard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		C8A4A0451C981B6C004E055D /* Brain Cloud */ = {
 			isa = PBXGroup;
 			children = (
+				C8A4A05B1C981B78004E055D /* Classes */,
 				C8A4A0461C981B6C004E055D /* AppDelegate.swift */,
 				C8A4A0481C981B6C004E055D /* ViewController.swift */,
 				C8A4A04A1C981B6C004E055D /* Main.storyboard */,
@@ -65,6 +68,46 @@
 				C8A4A04D1C981B6C004E055D /* Brain_Cloud.xcdatamodeld */,
 			);
 			path = "Brain Cloud";
+			sourceTree = "<group>";
+		};
+		C8A4A05B1C981B78004E055D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C8A4A05C1C981B7D004E055D /* Model */,
+				C8A4A05D1C981B81004E055D /* Views */,
+				C8A4A05E1C981B88004E055D /* View Controllers */,
+				C8A4A05F1C981B8E004E055D /* Other */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		C8A4A05C1C981B7D004E055D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C8A4A0601C981BCB004E055D /* CanvasBoard.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		C8A4A05D1C981B81004E055D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		C8A4A05E1C981B88004E055D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		C8A4A05F1C981B8E004E055D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8A4A0611C981BCB004E055D /* CanvasBoard.swift in Sources */,
 				C8A4A0491C981B6C004E055D /* ViewController.swift in Sources */,
 				C8A4A04F1C981B6C004E055D /* Brain_Cloud.xcdatamodeld in Sources */,
 				C8A4A0471C981B6C004E055D /* AppDelegate.swift in Sources */,
