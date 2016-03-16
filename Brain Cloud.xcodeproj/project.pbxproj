@@ -14,6 +14,7 @@
 		C8A4A0511C981B6C004E055D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8A4A0501C981B6C004E055D /* Assets.xcassets */; };
 		C8A4A0541C981B6C004E055D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8A4A0521C981B6C004E055D /* LaunchScreen.storyboard */; };
 		C8A4A0611C981BCB004E055D /* CanvasBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0601C981BCB004E055D /* CanvasBoard.swift */; };
+		C8A4A0631C99676A004E055D /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0621C99676A004E055D /* CanvasView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		C8A4A0531C981B6C004E055D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C8A4A0551C981B6C004E055D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8A4A0601C981BCB004E055D /* CanvasBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasBoard.swift; sourceTree = "<group>"; };
+		C8A4A0621C99676A004E055D /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 		C8A4A05D1C981B81004E055D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C8A4A0621C99676A004E055D /* CanvasView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			files = (
 				C8A4A0611C981BCB004E055D /* CanvasBoard.swift in Sources */,
 				C8A4A0491C981B6C004E055D /* ViewController.swift in Sources */,
+				C8A4A0631C99676A004E055D /* CanvasView.swift in Sources */,
 				C8A4A04F1C981B6C004E055D /* Brain_Cloud.xcdatamodeld in Sources */,
 				C8A4A0471C981B6C004E055D /* AppDelegate.swift in Sources */,
 			);
@@ -332,6 +336,7 @@
 				C8A4A05A1C981B6C004E055D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

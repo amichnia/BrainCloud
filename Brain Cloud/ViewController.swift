@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var canvasView: CanvasView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,6 +23,16 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func didTap(sender: UITapGestureRecognizer) {
+        let location = sender.locationInView(self.canvasView)
+        
+        let field = self.canvasView[location]
+        print("\(field?.position ?? nil)")
+    }
 
+    @IBAction func didIterate(sender: AnyObject) {
+        self.canvasView.canvasBoard.iteratePossibles(Place.Size.Tiny)
+        self.canvasView.setNeedsDisplay()
+    }
 }
 

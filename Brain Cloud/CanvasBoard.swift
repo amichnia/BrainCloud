@@ -11,21 +11,46 @@ import UIKit
 class CanvasBoard {
 
     var fields : [[Field]]
+    let size : CanvasBoard.Size
+    
+    var allFields : [Field] {
+        return self.fields.reduce([]) { (all, row) -> [Field] in
+            return all + row
+        }
+    }
+    
+    var outline : [Field] {
+        return self.allFields.filter{
+            if case Field.Content.Outline = $0.content {
+                return true
+            }
+            else {
+                return false
+            }
+        }
+    }
+    
     
     init(size: Size){
-        self.fields = Array(count: size.rawValue+2, repeatedValue: Array(count: size.rawValue+2, repeatedValue: Field(position: Position.zero)))
+        self.size = size
+        self.fields = Array(count: size.rawValue, repeatedValue: Array(count: size.rawValue, repeatedValue: Field(position: Position.zero)))
         
         // Fill canvas with fields
-        for row in 0...(size.rawValue+1) {
-            for col in 0...(size.rawValue+1) {
-                self.fields[row][col].position = Position(row: row, col: col)
+        for row in 0..<(size.rawValue) {
+            for col in 0..<(size.rawValue) {
+                self.fields[row][col] = Field(position: Position(row: row, col: col))
                 self.fields[row][col].canvas = self
                 
-                if(row == 0 || col == 0 || row == size.rawValue+1 || col == size.rawValue+1){
+                if(row == 0 || col == 0 ){
+                    self.fields[row][col].content = .Border
+                }
+                if(row == size.rawValue-1 || col == size.rawValue-1){
                     self.fields[row][col].content = .Border
                 }
             }
         }
+        
+        self.setInitialOutline()
     }
     
     subscript(position: Position) -> Field? {
@@ -33,6 +58,36 @@ class CanvasBoard {
             return nil
         }
         return self.fields[position.row][position.col]
+    }
+    
+    func setInitialOutline(){
+        let centralPosition = Position(row: (size.rawValue-1) / 2, col: (size.rawValue-1) / 2)
+        self[centralPosition]?.content = .Outline
+    }
+    
+    func clearPossibles() {
+        for field in self.allFields {
+            if case Field.Content.Possible(place: _) = field.content {
+                field.content = .Empty
+            }
+        }
+        
+        if self.outline.count == 0 {
+            self.setInitialOutline()
+        }
+    }
+    
+    var permutation = 0
+    func iteratePossibles(size: Place.Size) {
+        self.clearPossibles()
+        
+        for field in self.outline {
+            if let place = PossiblePlace(position: field.position, size: size, canvas: self, permutation: permutation) {
+                place.place()
+            }
+        }
+        
+        permutation++
     }
     
     enum Size : Int {
@@ -43,21 +98,19 @@ class CanvasBoard {
 }
 
 class PossiblePlace : Place {
-    static var lastIdentifier : Int = 0
-    var id : Int
     var position : Position
     var canvas : CanvasBoard
     
-    init?(id: Int, position: Position, size: Place.Size, canvas: CanvasBoard) {
-        self.id = id
+    init?(position: Position, size: Place.Size, canvas: CanvasBoard, permutation: Int = 0) {
         self.position = position
         self.canvas = canvas
         
         super.init(size: size)
         
         // Check if can be placed // TODO: start ID
-        for configuration in self.size.generateConfiguration() {
+        for configuration in self.size.generateConfiguration(permutation) {
             if self.canBePlacedOn(canvas, withConfiguration: configuration) {
+                self.position = self.position - configuration
                 return
             }
         }
@@ -80,14 +133,40 @@ class PossiblePlace : Place {
     func place(){
         for offset in self.size.generatePositions() {
             let position = self.position + offset
-            self.canvas[position]?.content = .Possible(id: self.id)
+            self.canvas[position]?.content = .Possible(place: self)
         }
     }
     
+    func occupy(occupiedPlace: OccupiedPlace){
+        // Occupy self positions
+        for offset in self.size.generatePositions() {
+            let position = self.position + offset
+            self.canvas[position]?.content = .Occupied(place: occupiedPlace)
+        }
+        
+        // Modify outline
+        for offset in self.size.generateConfiguration() {
+            let position = self.position + offset
+            self.canvas[position]?.outline()
+        }
+    }
     
 }
 
-
+class OccupiedPlace : Place {
+    var position : Position
+    var canvas : CanvasBoard
+    
+    init(possiblePlace: PossiblePlace){
+        self.position = possiblePlace.position
+        self.canvas = possiblePlace.canvas
+        
+        super.init(size: possiblePlace.size)
+        
+        possiblePlace.occupy(self)
+    }
+    
+}
 
 class Place {
     var size : Size
@@ -107,7 +186,7 @@ class Place {
 
 extension Place.Size {
     
-    func generateConfiguration() -> [Position] {
+    func generateConfiguration(permutation: Int = 0) -> [Position] {
         var configuration : [Position] = []
         var position = Position.zero
         
@@ -131,7 +210,7 @@ extension Place.Size {
             configuration.append(position)
         }
         
-        return configuration
+        return configuration.rotate(permutation % configuration.count)
     }
     
     func generatePositions() -> [Position] {
@@ -159,48 +238,45 @@ class Field {
     
     var isEmpty : Bool { return self.content.empty }
     
-    var left : Field {
-        if case .Border = self.content {
-            return self
-        }
-        else {
-            return self.canvas?[self.position.left] ?? self
+    func outline() {
+        self.left?.addToOutlineIfPossible()
+        self.right?.addToOutlineIfPossible()
+        self.up?.addToOutlineIfPossible()
+        self.down?.addToOutlineIfPossible()
+    }
+    
+    func addToOutlineIfPossible() {
+        if case Content.Empty = self.content {
+            self.content = .Outline
         }
     }
-    var right : Field {
-        if case .Border = self.content {
-            return self
-        }
-        else {
-            return self.canvas?[self.position.right] ?? self
-        }
+    
+    var left : Field? {
+        return self.canvas?[self.position.left]
     }
-    var up : Field {
-        if case .Border = self.content {
-            return self
-        }
-        else {
-            return self.canvas?[self.position.up] ?? self
-        }
+    var right : Field? {
+        return self.canvas?[self.position.right]
     }
-    var down : Field {
-        if case .Border = self.content {
-            return self
-        }
-        else {
-            return self.canvas?[self.position.down] ?? self
-        }
+    var up : Field? {
+        return self.canvas?[self.position.up]
+    }
+    var down : Field? {
+        return self.canvas?[self.position.down]
     }
     
     enum Content {
         case Empty
         case Impossible
-        case Possible(id: Int)
-        case Used(id: Int)
+        case Possible(place: PossiblePlace)
+        case Occupied(place: OccupiedPlace)
+        case Outline
         case Border
         
         var empty : Bool {
             if case .Empty = self {
+                return true
+            }
+            else if case .Outline = self {
                 return true
             }
             else {
@@ -249,4 +325,25 @@ func +=(inout lhs: Position, rhs: Position) {
 
 func -=(inout lhs: Position, rhs: Position) {
     lhs = lhs - rhs
+}
+
+// MARK: - Array shofting
+extension Array {
+    func rotate(shift:Int) -> Array {
+        var array = Array()
+        if (self.count > 0) {
+            array = self
+            if (shift > 0) {
+                for _ in 1...shift {
+                    array.append(array.removeAtIndex(0))
+                }
+            }
+            else if (shift < 0) {
+                for _ in 1...abs(shift) {
+                    array.insert(array.removeAtIndex(array.count-1),atIndex:0)
+                }
+            }
+        }
+        return array
+    }
 }
