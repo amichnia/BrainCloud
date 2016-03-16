@@ -6,15 +6,19 @@
 //  Copyright © 2016 amichnia. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class PossiblePlace : Place {
+    var color = UIColor.blueColor()
+    
     var position : Position
     var canvas : CanvasBoard
     
     init?(position: Position, size: Place.Size, canvas: CanvasBoard, permutation: Int = 0) {
         self.position = position
         self.canvas = canvas
+        
+        self.color = self.color.randomAbbreviation()
         
         super.init(size: size)
         
@@ -54,6 +58,8 @@ class PossiblePlace : Place {
             let position = self.position + offset
             self.canvas[position]?.content = .Occupied(place: occupiedPlace)
         }
+        
+        self.canvas.restoreOutline()
         
         // Modify outline
         for offset in self.size.generateConfiguration() {

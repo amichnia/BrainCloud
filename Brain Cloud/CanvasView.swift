@@ -39,8 +39,8 @@ class CanvasView: UIView {
                     color = UIColor.blackColor()
                 case .Impossible:
                     color = UIColor.redColor()
-                case .Possible(place: _):
-                    color = UIColor.blueColor()
+                case .Possible(place: let place):
+                    color = place.color
                 case .Occupied(place: _):
                     color = UIColor.greenColor()
                 case .Outline:
@@ -63,7 +63,7 @@ class CanvasView: UIView {
         let posx = Int(point.x / self.fieldsSize.width)
         let posy = Int(point.y / self.fieldsSize.height)
         
-        let position = Position(row: posx, col: posy)
+        let position = Position(row: posy, col: posx)
         
         return self.canvasBoard[position]
     }

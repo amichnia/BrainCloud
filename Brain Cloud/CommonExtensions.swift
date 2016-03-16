@@ -6,7 +6,7 @@
 //  Copyright © 2016 amichnia. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 // MARK: - Array shifting
@@ -28,4 +28,22 @@ extension Array {
         }
         return array
     }
+}
+
+extension UIColor {
+    
+    convenience init(rgba: (CGFloat,CGFloat,CGFloat,CGFloat)) {
+        self.init(red: rgba.0, green: rgba.1, blue: rgba.2, alpha: rgba.3)
+    }
+    
+    func randomAbbreviation() -> UIColor {
+        var color : (CGFloat,CGFloat,CGFloat,CGFloat) = (0,0,0,0)
+        self.getRed(&color.0, green: &color.1, blue: &color.2, alpha: &color.3)
+        
+        color.0 += CGFloat(random()%40 - 20)
+        color.1 += CGFloat(random()%40 - 20)
+        
+        return UIColor(rgba: color)
+    }
+    
 }

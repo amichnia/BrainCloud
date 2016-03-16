@@ -46,7 +46,9 @@ class CanvasBoard {
     
     func setInitialOutline(){
         let centralPosition = Position(row: (size.rawValue-1) / 2, col: (size.rawValue-1) / 2)
-        self[centralPosition]?.content = .Outline
+        if let field = self[centralPosition] where field.isEmpty {
+            field.content = .Outline
+        }
     }
     
     enum Size : Int {
@@ -85,6 +87,18 @@ extension CanvasBoard {
         }
     }
     
+    func restoreOutline() {
+        self.clearPossibles()
+        
+        // Recreate outline
+        self.outline = self.savedOutline
+        
+        // Set initial if needed
+        if self.outline.count == 0 {
+            self.setInitialOutline()
+        }
+    }
+    
 }
 
 // MARK: - Canvas - fields clear, possibilities generation
@@ -96,18 +110,10 @@ extension CanvasBoard {
                 field.content = .Empty
             }
         }
-        
-        // Recreate outline
-        self.outline = self.savedOutline
-        
-        // Set initial if needed
-        if self.outline.count == 0 {
-            self.setInitialOutline()
-        }
     }
     
     func iteratePossibles(size: Place.Size) {
-        self.clearPossibles()
+        self.restoreOutline()
         
         for field in self.outline {
             if let place = PossiblePlace(position: field.position, size: size, canvas: self, permutation: permutation) {
