@@ -24,10 +24,17 @@ class ViewController: UIViewController {
     }
 
     @IBAction func didTap(sender: UITapGestureRecognizer) {
-        let location = sender.locationInView(self.canvasView)
+        guard let field = self.canvasView[sender.locationInView(self.canvasView)] else {
+            return
+        }
         
-        let field = self.canvasView[location]
-        print("\(field?.position ?? nil)")
+        print("\(field.position)")
+        
+        if case Field.Content.Possible(place: let place) = field.content {
+            print("POSSIBLE! - Occupying")
+            place.occupy()
+            self.canvasView.setNeedsDisplay()
+        }
     }
 
     @IBAction func didIterate(sender: AnyObject) {

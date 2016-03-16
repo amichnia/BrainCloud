@@ -15,6 +15,10 @@
 		C8A4A0541C981B6C004E055D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8A4A0521C981B6C004E055D /* LaunchScreen.storyboard */; };
 		C8A4A0611C981BCB004E055D /* CanvasBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0601C981BCB004E055D /* CanvasBoard.swift */; };
 		C8A4A0631C99676A004E055D /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0621C99676A004E055D /* CanvasView.swift */; };
+		C8A4A0651C99887E004E055D /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0641C99887E004E055D /* Place.swift */; };
+		C8A4A0671C99891A004E055D /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0661C99891A004E055D /* Position.swift */; };
+		C8A4A0691C998937004E055D /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0681C998937004E055D /* Field.swift */; };
+		C8A4A06B1C99895C004E055D /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A06A1C99895C004E055D /* CommonExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		C8A4A0551C981B6C004E055D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8A4A0601C981BCB004E055D /* CanvasBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasBoard.swift; sourceTree = "<group>"; };
 		C8A4A0621C99676A004E055D /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		C8A4A0641C99887E004E055D /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		C8A4A0661C99891A004E055D /* Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
+		C8A4A0681C998937004E055D /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		C8A4A06A1C99895C004E055D /* CommonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +95,9 @@
 			isa = PBXGroup;
 			children = (
 				C8A4A0601C981BCB004E055D /* CanvasBoard.swift */,
+				C8A4A0641C99887E004E055D /* Place.swift */,
+				C8A4A0661C99891A004E055D /* Position.swift */,
+				C8A4A0681C998937004E055D /* Field.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -109,6 +120,7 @@
 		C8A4A05F1C981B8E004E055D /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				C8A4A06A1C99895C004E055D /* CommonExtensions.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -184,10 +196,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8A4A0671C99891A004E055D /* Position.swift in Sources */,
 				C8A4A0611C981BCB004E055D /* CanvasBoard.swift in Sources */,
+				C8A4A0691C998937004E055D /* Field.swift in Sources */,
 				C8A4A0491C981B6C004E055D /* ViewController.swift in Sources */,
 				C8A4A0631C99676A004E055D /* CanvasView.swift in Sources */,
+				C8A4A0651C99887E004E055D /* Place.swift in Sources */,
 				C8A4A04F1C981B6C004E055D /* Brain_Cloud.xcdatamodeld in Sources */,
+				C8A4A06B1C99895C004E055D /* CommonExtensions.swift in Sources */,
 				C8A4A0471C981B6C004E055D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
