@@ -5,7 +5,7 @@ use_frameworks!
 
 target 'Brain Cloud' do
 
-pod "MMSProfileImagePicker"
+pod 'AlamofireSwiftyJSON'
 pod "AMKSlidingTableViewCell"
 pod "ASIACheckmarkView"
 pod "LTMorphingLabel"

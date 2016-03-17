@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
+import AlamofireSwiftyJSON
 
 class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
 
@@ -41,6 +44,8 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func saveAction(sender: AnyObject) {
+        self.testSearch()
+        
         if let image = self.skillImage.image, name = self.skillNameField.text, experience = Skill.Experience(rawValue: self.experienceSelect.selectedSegmentIndex) where name.characters.count > 0 {
             self.skill = Skill(title: name, image: image, experience: experience)
             self.performSegueWithIdentifier(BackToListSegueIdentifier, sender: self)
@@ -108,6 +113,27 @@ extension AddSkillViewController : UIImagePickerControllerDelegate {
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         
+    }
+    
+}
+
+// MARK: - Networking test
+extension AddSkillViewController {
+    
+    func testSearch() {
+        let URL = "https://www.googleapis.com/customsearch/v1"
+        let params : [String:AnyObject] = [
+            "cx":"014471330025575907481:wg54zrvhcla",
+            "q":"swift"
+        ]
+        Alamofire.request(.GET, URL, parameters: params).responseSwiftyJSON { response in
+            print("###Success: \(response.result.isSuccess)")
+            //now response.result.value is SwiftyJSON.JSON type
+            print("###Value: \(response.result.value)")
+            print("==== START ====")
+            print(response.result.value?.dictionaryValue)
+            print("====  END  ====")
+        }
     }
     
 }

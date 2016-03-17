@@ -154,9 +154,9 @@
 			isa = PBXGroup;
 			children = (
 				C8A4A05C1C981B7D004E055D /* Model */,
-				C8A4A05F1C981B8E004E055D /* Other */,
-				C8A4A05E1C981B88004E055D /* View Controllers */,
 				C8A4A05D1C981B81004E055D /* Views */,
+				C8A4A05E1C981B88004E055D /* View Controllers */,
+				C8A4A05F1C981B8E004E055D /* Other */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
