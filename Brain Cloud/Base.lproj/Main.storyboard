@@ -17,18 +17,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-s0-djh" customClass="CanvasView" customModule="Brain_Cloud" customModuleProvider="target">
-                                <rect key="frame" x="180" y="180" width="240" height="240"/>
-                                <color key="backgroundColor" white="0.89999997620000005" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-NT-UPH" userLabel="Canvas Container Scroll View">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-s0-djh" customClass="CanvasView" customModule="Brain_Cloud" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                        <color key="backgroundColor" white="0.89999997620000005" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1000" id="uqw-5z-gAf"/>
+                                            <constraint firstAttribute="width" constant="1000" id="zgD-sM-3HZ"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="J3r-M1-7CH" appends="YES" id="GOg-Sr-GNA"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="uqw-5z-gAf"/>
-                                    <constraint firstAttribute="width" constant="240" id="zgD-sM-3HZ"/>
+                                    <constraint firstItem="Seg-s0-djh" firstAttribute="leading" secondItem="XIK-NT-UPH" secondAttribute="leading" id="3dP-Qg-DfS"/>
+                                    <constraint firstAttribute="bottom" secondItem="Seg-s0-djh" secondAttribute="bottom" id="KrS-9u-Lxs"/>
+                                    <constraint firstAttribute="trailing" secondItem="Seg-s0-djh" secondAttribute="trailing" id="Rdc-Dx-yOO"/>
+                                    <constraint firstItem="Seg-s0-djh" firstAttribute="top" secondItem="XIK-NT-UPH" secondAttribute="top" id="h8R-sl-G4f"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="J3r-M1-7CH" appends="YES" id="GOg-Sr-GNA"/>
-                                </connections>
-                            </view>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajh-70-6nT">
                                 <rect key="frame" x="236" y="540" width="128" height="30"/>
                                 <color key="backgroundColor" red="0.98575067520000004" green="0.0" blue="0.36709693069999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -44,14 +55,17 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="XIK-NT-UPH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="C2N-5N-tJc"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ajh-70-6nT" secondAttribute="bottom" constant="30" id="LYo-Uh-Dai"/>
-                            <constraint firstItem="Seg-s0-djh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lhw-Bg-sJs"/>
-                            <constraint firstItem="Seg-s0-djh" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="PQE-7w-2Cq"/>
+                            <constraint firstAttribute="trailing" secondItem="XIK-NT-UPH" secondAttribute="trailing" id="O16-wP-U3R"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XIK-NT-UPH" secondAttribute="bottom" id="Qb0-4r-CVq"/>
                             <constraint firstItem="ajh-70-6nT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aP4-SU-p7G"/>
+                            <constraint firstItem="XIK-NT-UPH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="goy-eX-qAv"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="canvasView" destination="Seg-s0-djh" id="CDu-GF-A2y"/>
+                        <outlet property="containerScrollView" destination="XIK-NT-UPH" id="AUs-cl-Wsg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

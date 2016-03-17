@@ -10,8 +10,10 @@ import UIKit
 
 class CanvasView: UIView {
 
-    var canvasBoard : CanvasBoard = CanvasBoard(size: CanvasBoard.Size.Small)
+    var canvasBoard : CanvasBoard = CanvasBoard(size: CanvasBoard.Size.Large)
 
+    var possibleViews : [PossiblePlaceView] = []
+    
     var fieldsSize : CGSize {
         return CGSize(width: self.bounds.width / CGFloat(canvasBoard.size.rawValue), height: self.bounds.height / CGFloat(canvasBoard.size.rawValue))
     }
@@ -66,6 +68,46 @@ class CanvasView: UIView {
         let position = Position(row: posy, col: posx)
         
         return self.canvasBoard[position]
+    }
+    
+    subscript(position: Position) -> CGPoint {
+        return CGPoint(x: CGFloat(position.col) * self.fieldsSize.width, y: CGFloat(position.row) * self.fieldsSize.height)
+    }
+    
+    subscript(size: Place.Size) -> CGSize {
+        return CGSize(width: CGFloat(size.rawValue) * self.fieldsSize.width, height: CGFloat(size.rawValue) * self.fieldsSize.height)
+    }
+    
+}
+
+extension CanvasView {
+    
+    func newPossiblePlaceView() -> PossiblePlaceView {
+        return NSBundle.mainBundle().loadNibNamed("PossiblePlaceView", owner: self, options: nil).first! as! PossiblePlaceView
+    }
+    
+    func clearPossibleViews() {
+        self.possibleViews.forEach{ $0.removeFromSuperview() } // TODO: animated
+        self.possibleViews = []
+    }
+    
+    func addPossibleViewForPlace(place: PossiblePlace) {
+        let view = self.newPossiblePlaceView()
+        view.placeOnCanvas(self, possiblePlace: place)
+        self.possibleViews.append(view)
+    }
+}
+
+extension CanvasView {
+    
+    var enclosingRect : CGRect {
+        var rect = CGRect.zero
+        
+        rect.origin = self[self.canvasBoard.topLeft()]
+        let bt = self[self.canvasBoard.bottomRight()]
+        rect.size = CGSize(width: bt.x - rect.origin.x + self.fieldsSize.width, height: bt.y - rect.origin.y + self.fieldsSize.height)
+        
+        return rect
     }
     
 }

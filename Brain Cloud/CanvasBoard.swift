@@ -15,6 +15,8 @@ class CanvasBoard {
     var permutation = 0
     var savedOutline : [Field] = []
     
+    var bounds : (left:Position,right:Position,top:Position,bottom:Position)!
+    
     init(size: Size){
         self.size = size
         self.fields = Array(count: size.rawValue, repeatedValue: Array(count: size.rawValue, repeatedValue: Field(position: Position.zero)))
@@ -48,6 +50,7 @@ class CanvasBoard {
         let centralPosition = Position(row: (size.rawValue-1) / 2, col: (size.rawValue-1) / 2)
         if let field = self[centralPosition] where field.isEmpty {
             field.content = .Outline
+            self.bounds = (left: field.position,right: field.position,top: field.position,bottom: field.position)
         }
     }
     
@@ -93,12 +96,39 @@ extension CanvasBoard {
         // Recreate outline
         self.outline = self.savedOutline
         
+        // Restore enclosing bounds
+        let topLeft = Position.zero
+        let bottomRight = Position(row: self.size.rawValue, col: self.size.rawValue)
+        self.bounds = (left: bottomRight,right: topLeft,top: bottomRight,bottom: topLeft)
+        
+        self.outline.map{ $0.position }.forEach { position in
+            if position.col < self.bounds.left.col {
+                self.bounds.left = position
+            }
+            if position.col > self.bounds.right.col {
+                self.bounds.right = position
+            }
+            if position.row < self.bounds.top.row {
+                self.bounds.top = position
+            }
+            if position.row > self.bounds.bottom.row {
+                self.bounds.bottom = position
+            }
+        }
+        
         // Set initial if needed
         if self.outline.count == 0 {
             self.setInitialOutline()
         }
     }
     
+    func topLeft() -> Position {
+        return Position(row: self.bounds.top.row, col: self.bounds.left.col)
+    }
+    
+    func bottomRight() -> Position {
+        return Position(row: self.bounds.bottom.row, col: self.bounds.right.col)
+    }
 }
 
 // MARK: - Canvas - fields clear, possibilities generation
@@ -112,16 +142,21 @@ extension CanvasBoard {
         }
     }
     
-    func iteratePossibles(size: Place.Size) {
+    func iteratePossibles(size: Place.Size) -> [PossiblePlace] {
         self.restoreOutline()
+        
+        var possibles : [PossiblePlace] = []
         
         for field in self.outline {
             if let place = PossiblePlace(position: field.position, size: size, canvas: self, permutation: permutation) {
                 place.place()
+                possibles.append(place)
             }
         }
         
         permutation++
+        
+        return possibles
     }
 
 }

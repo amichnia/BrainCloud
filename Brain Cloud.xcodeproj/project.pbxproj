@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C86901861C9AE730009A60A8 /* PossiblePlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C86901851C9AE730009A60A8 /* PossiblePlaceView.xib */; };
+		C86901881C9AE93C009A60A8 /* PossiblePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86901871C9AE93C009A60A8 /* PossiblePlaceView.swift */; };
 		C8A4A0471C981B6C004E055D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0461C981B6C004E055D /* AppDelegate.swift */; };
 		C8A4A0491C981B6C004E055D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0481C981B6C004E055D /* ViewController.swift */; };
 		C8A4A04C1C981B6C004E055D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8A4A04A1C981B6C004E055D /* Main.storyboard */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C86901851C9AE730009A60A8 /* PossiblePlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PossiblePlaceView.xib; sourceTree = "<group>"; };
+		C86901871C9AE93C009A60A8 /* PossiblePlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PossiblePlaceView.swift; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* Brain Cloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brain Cloud.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8A4A0461C981B6C004E055D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8A4A0481C981B6C004E055D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +53,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C86901811C9AE6CE009A60A8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C86901841C9AE6E5009A60A8 /* XIBs */,
+				C86901831C9AE6E0009A60A8 /* Storyboards */,
+				C8A4A0501C981B6C004E055D /* Assets.xcassets */,
+				C8A4A04D1C981B6C004E055D /* Brain_Cloud.xcdatamodeld */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		C86901821C9AE6D4009A60A8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C8A4A0551C981B6C004E055D /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C86901831C9AE6E0009A60A8 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				C8A4A04A1C981B6C004E055D /* Main.storyboard */,
+				C8A4A0521C981B6C004E055D /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		C86901841C9AE6E5009A60A8 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				C86901851C9AE730009A60A8 /* PossiblePlaceView.xib */,
+			);
+			name = XIBs;
+			sourceTree = "<group>";
+		};
 		C8A4A03A1C981B6C004E055D = {
 			isa = PBXGroup;
 			children = (
@@ -69,13 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				C8A4A05B1C981B78004E055D /* Classes */,
-				C8A4A0461C981B6C004E055D /* AppDelegate.swift */,
-				C8A4A0481C981B6C004E055D /* ViewController.swift */,
-				C8A4A04A1C981B6C004E055D /* Main.storyboard */,
-				C8A4A0501C981B6C004E055D /* Assets.xcassets */,
-				C8A4A0521C981B6C004E055D /* LaunchScreen.storyboard */,
-				C8A4A0551C981B6C004E055D /* Info.plist */,
-				C8A4A04D1C981B6C004E055D /* Brain_Cloud.xcdatamodeld */,
+				C86901811C9AE6CE009A60A8 /* Resources */,
+				C86901821C9AE6D4009A60A8 /* Supporting Files */,
 			);
 			path = "Brain Cloud";
 			sourceTree = "<group>";
@@ -106,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				C8A4A0621C99676A004E055D /* CanvasView.swift */,
+				C86901871C9AE93C009A60A8 /* PossiblePlaceView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -113,6 +149,7 @@
 		C8A4A05E1C981B88004E055D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C8A4A0481C981B6C004E055D /* ViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -120,6 +157,7 @@
 		C8A4A05F1C981B8E004E055D /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				C8A4A0461C981B6C004E055D /* AppDelegate.swift */,
 				C8A4A06A1C99895C004E055D /* CommonExtensions.swift */,
 			);
 			name = Other;
@@ -186,6 +224,7 @@
 				C8A4A0541C981B6C004E055D /* LaunchScreen.storyboard in Resources */,
 				C8A4A0511C981B6C004E055D /* Assets.xcassets in Resources */,
 				C8A4A04C1C981B6C004E055D /* Main.storyboard in Resources */,
+				C86901861C9AE730009A60A8 /* PossiblePlaceView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +244,7 @@
 				C8A4A04F1C981B6C004E055D /* Brain_Cloud.xcdatamodeld in Sources */,
 				C8A4A06B1C99895C004E055D /* CommonExtensions.swift in Sources */,
 				C8A4A0471C981B6C004E055D /* AppDelegate.swift in Sources */,
+				C86901881C9AE93C009A60A8 /* PossiblePlaceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
