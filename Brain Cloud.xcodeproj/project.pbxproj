@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BFDF9A6145E1A2B4BE8EB699 /* Pods_Brain_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A41F5C64F265593A660F74C /* Pods_Brain_Cloud.framework */; };
 		C86901861C9AE730009A60A8 /* PossiblePlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C86901851C9AE730009A60A8 /* PossiblePlaceView.xib */; };
 		C86901881C9AE93C009A60A8 /* PossiblePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86901871C9AE93C009A60A8 /* PossiblePlaceView.swift */; };
 		C8A4A0471C981B6C004E055D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0461C981B6C004E055D /* AppDelegate.swift */; };
@@ -24,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0CDD14D8F8539737D61F41B3 /* Pods-Brain Cloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brain Cloud.release.xcconfig"; path = "Pods/Target Support Files/Pods-Brain Cloud/Pods-Brain Cloud.release.xcconfig"; sourceTree = "<group>"; };
+		2A41F5C64F265593A660F74C /* Pods_Brain_Cloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Brain_Cloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF413E813A7188D6AFFCFE87 /* Pods-Brain Cloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Brain Cloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Brain Cloud/Pods-Brain Cloud.debug.xcconfig"; sourceTree = "<group>"; };
 		C86901851C9AE730009A60A8 /* PossiblePlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PossiblePlaceView.xib; sourceTree = "<group>"; };
 		C86901871C9AE93C009A60A8 /* PossiblePlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PossiblePlaceView.swift; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* Brain Cloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brain Cloud.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,21 +51,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFDF9A6145E1A2B4BE8EB699 /* Pods_Brain_Cloud.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7493D99371A43512DBFF49BD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A41F5C64F265593A660F74C /* Pods_Brain_Cloud.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		91C65E4EE0D5E62E6F8AB86B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BF413E813A7188D6AFFCFE87 /* Pods-Brain Cloud.debug.xcconfig */,
+				0CDD14D8F8539737D61F41B3 /* Pods-Brain Cloud.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C86901811C9AE6CE009A60A8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C86901841C9AE6E5009A60A8 /* XIBs */,
 				C86901831C9AE6E0009A60A8 /* Storyboards */,
+				C86901841C9AE6E5009A60A8 /* XIBs */,
 				C8A4A0501C981B6C004E055D /* Assets.xcassets */,
 				C8A4A04D1C981B6C004E055D /* Brain_Cloud.xcdatamodeld */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		C86901821C9AE6D4009A60A8 /* Supporting Files */ = {
@@ -69,16 +91,16 @@
 			children = (
 				C8A4A0551C981B6C004E055D /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		C86901831C9AE6E0009A60A8 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				C8A4A04A1C981B6C004E055D /* Main.storyboard */,
 				C8A4A0521C981B6C004E055D /* LaunchScreen.storyboard */,
+				C8A4A04A1C981B6C004E055D /* Main.storyboard */,
 			);
-			name = Storyboards;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		C86901841C9AE6E5009A60A8 /* XIBs */ = {
@@ -86,13 +108,15 @@
 			children = (
 				C86901851C9AE730009A60A8 /* PossiblePlaceView.xib */,
 			);
-			name = XIBs;
+			path = XIBs;
 			sourceTree = "<group>";
 		};
 		C8A4A03A1C981B6C004E055D = {
 			isa = PBXGroup;
 			children = (
 				C8A4A0451C981B6C004E055D /* Brain Cloud */,
+				7493D99371A43512DBFF49BD /* Frameworks */,
+				91C65E4EE0D5E62E6F8AB86B /* Pods */,
 				C8A4A0441C981B6C004E055D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -119,22 +143,22 @@
 			isa = PBXGroup;
 			children = (
 				C8A4A05C1C981B7D004E055D /* Model */,
-				C8A4A05D1C981B81004E055D /* Views */,
-				C8A4A05E1C981B88004E055D /* View Controllers */,
 				C8A4A05F1C981B8E004E055D /* Other */,
+				C8A4A05E1C981B88004E055D /* View Controllers */,
+				C8A4A05D1C981B81004E055D /* Views */,
 			);
-			name = Classes;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		C8A4A05C1C981B7D004E055D /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				C8A4A0601C981BCB004E055D /* CanvasBoard.swift */,
+				C8A4A0681C998937004E055D /* Field.swift */,
 				C8A4A0641C99887E004E055D /* Place.swift */,
 				C8A4A0661C99891A004E055D /* Position.swift */,
-				C8A4A0681C998937004E055D /* Field.swift */,
 			);
-			name = Model;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C8A4A05D1C981B81004E055D /* Views */ = {
@@ -143,7 +167,7 @@
 				C8A4A0621C99676A004E055D /* CanvasView.swift */,
 				C86901871C9AE93C009A60A8 /* PossiblePlaceView.swift */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		C8A4A05E1C981B88004E055D /* View Controllers */ = {
@@ -151,7 +175,7 @@
 			children = (
 				C8A4A0481C981B6C004E055D /* ViewController.swift */,
 			);
-			name = "View Controllers";
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		C8A4A05F1C981B8E004E055D /* Other */ = {
@@ -160,7 +184,7 @@
 				C8A4A0461C981B6C004E055D /* AppDelegate.swift */,
 				C8A4A06A1C99895C004E055D /* CommonExtensions.swift */,
 			);
-			name = Other;
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,9 +194,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C8A4A0581C981B6C004E055D /* Build configuration list for PBXNativeTarget "Brain Cloud" */;
 			buildPhases = (
+				531A1FAE7121CB990E8D0C6C /* Check Pods Manifest.lock */,
 				C8A4A03F1C981B6C004E055D /* Sources */,
 				C8A4A0401C981B6C004E055D /* Frameworks */,
 				C8A4A0411C981B6C004E055D /* Resources */,
+				8A7973D372291C359C03D2FD /* Embed Pods Frameworks */,
+				51F92253816D982015B3EB7D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -230,6 +257,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		51F92253816D982015B3EB7D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Brain Cloud/Pods-Brain Cloud-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		531A1FAE7121CB990E8D0C6C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8A7973D372291C359C03D2FD /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Brain Cloud/Pods-Brain Cloud-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C8A4A03F1C981B6C004E055D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -257,6 +332,7 @@
 				C8A4A04B1C981B6C004E055D /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		C8A4A0521C981B6C004E055D /* LaunchScreen.storyboard */ = {
@@ -265,6 +341,7 @@
 				C8A4A0531C981B6C004E055D /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -353,9 +430,10 @@
 		};
 		C8A4A0591C981B6C004E055D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF413E813A7188D6AFFCFE87 /* Pods-Brain Cloud.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "Brain Cloud/Info.plist";
+				INFOPLIST_FILE = "Brain Cloud/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "amichnia.Brain-Cloud";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -364,9 +442,10 @@
 		};
 		C8A4A05A1C981B6C004E055D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CDD14D8F8539737D61F41B3 /* Pods-Brain Cloud.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "Brain Cloud/Info.plist";
+				INFOPLIST_FILE = "Brain Cloud/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "amichnia.Brain-Cloud";
 				PRODUCT_NAME = "$(TARGET_NAME)";

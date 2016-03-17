@@ -1,0 +1,19 @@
+PODS:
+  - AMKSlidingTableViewCell (1.0.1)
+  - ASIACheckmarkView (1.0.1)
+  - LTMorphingLabel (0.1.1)
+  - MMSProfileImagePicker (1.0.5)
+
+DEPENDENCIES:
+  - AMKSlidingTableViewCell
+  - ASIACheckmarkView
+  - LTMorphingLabel
+  - MMSProfileImagePicker
+
+SPEC CHECKSUMS:
+  AMKSlidingTableViewCell: 4f7f9278ef72297a716a8429ca04a49432943259
+  ASIACheckmarkView: c1f7f6ed8738906d4a842c04417fc8f76a3953b3
+  LTMorphingLabel: dfc40f43a0dcf81867b1f29431f34e861a5f1b35
+  MMSProfileImagePicker: fc4d82c1a94b9e385eae3fa112f0de16abdf99d0
+
+COCOAPODS: 0.39.0
