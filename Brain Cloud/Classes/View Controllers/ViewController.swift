@@ -42,7 +42,10 @@ class ViewController: UIViewController {
         
         if case Field.Content.Possible(place: let place) = field.content {
             print("POSSIBLE! - Occupying")
-            place.occupy()
+            // TODO: Use current skill
+            if let occupied = place.occupy(Skill.skill) {
+                self.canvasView.addOccupiedPlace(occupied)
+            }
             self.didIterate(self)
             self.canvasView.setNeedsDisplay()
         }

@@ -18,49 +18,6 @@ class CanvasView: UIView {
         return CGSize(width: self.bounds.width / CGFloat(canvasBoard.size.rawValue), height: self.bounds.height / CGFloat(canvasBoard.size.rawValue))
     }
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
-        
-        let ctx = UIGraphicsGetCurrentContext()
-        // BGR
-        CGContextSetFillColorWithColor(ctx, UIColor.whiteColor().CGColor)
-        CGContextSetStrokeColorWithColor(ctx, UIColor.blackColor().CGColor)
-        CGContextSetLineWidth(ctx, 1)
-        CGContextFillRect(ctx, rect)
-        
-        // FIELDS
-        var y : CGFloat = 0
-        for row in self.canvasBoard.fields {
-            var x : CGFloat = 0
-            
-            for field in row {
-                var color = UIColor.whiteColor()
-                
-                switch field.content {
-                case .Border:
-                    color = UIColor.blackColor()
-                case .Impossible:
-                    color = UIColor.redColor()
-                case .Possible(place: let place):
-                    color = place.color
-                case .Occupied(place: _):
-                    color = UIColor.greenColor()
-                case .Outline:
-                    color = UIColor.lightGrayColor()
-                case .Empty:
-                    break
-                }
-                CGContextSetFillColorWithColor(ctx, color.CGColor)
-                CGContextFillRect(ctx, CGRect(origin: CGPoint(x: x, y: y), size: self.fieldsSize))
-                CGContextStrokeRect(ctx, CGRect(origin: CGPoint(x: x, y: y), size: self.fieldsSize))
-                
-                x += self.fieldsSize.width
-            }
-            
-            y += self.fieldsSize.height
-        }
-    }
-    
     subscript(point: CGPoint) -> Field? {
         let posx = Int(point.x / self.fieldsSize.width)
         let posy = Int(point.y / self.fieldsSize.height)
@@ -86,6 +43,10 @@ extension CanvasView {
         return NSBundle.mainBundle().loadNibNamed("PossiblePlaceView", owner: self, options: nil).first! as! PossiblePlaceView
     }
     
+    func newOccupiedPlaceView() -> OccupiedPlaceView {
+        return NSBundle.mainBundle().loadNibNamed("OccupiedPlaceView", owner: self, options: nil).first! as! OccupiedPlaceView
+    }
+    
     func clearPossibleViews() {
         self.possibleViews.forEach{ $0.removeFromSuperview() } // TODO: animated
         self.possibleViews = []
@@ -96,8 +57,14 @@ extension CanvasView {
         view.placeOnCanvas(self, possiblePlace: place)
         self.possibleViews.append(view)
     }
+    
+    func addOccupiedPlace(place: OccupiedPlace) {
+        let view = self.newOccupiedPlaceView()
+        view.placeOnCanvas(self, occupiedPlace: place)
+    }
 }
 
+// MARK: - Enclosing rect
 extension CanvasView {
     
     var enclosingRect : CGRect {
@@ -111,3 +78,51 @@ extension CanvasView {
     }
     
 }
+
+// MARK: - Custom drawing
+//extension CanvasView {
+//    
+//    override func drawRect(rect: CGRect) {
+//        super.drawRect(rect)
+//        
+//        let ctx = UIGraphicsGetCurrentContext()
+//        // BGR
+//        CGContextSetFillColorWithColor(ctx, UIColor.whiteColor().CGColor)
+//        CGContextSetStrokeColorWithColor(ctx, UIColor.blackColor().CGColor)
+//        CGContextSetLineWidth(ctx, 1)
+//        CGContextFillRect(ctx, rect)
+//        
+//        // FIELDS
+//        var y : CGFloat = 0
+//        for row in self.canvasBoard.fields {
+//            var x : CGFloat = 0
+//            
+//            for field in row {
+//                var color = UIColor.whiteColor()
+//                
+//                switch field.content {
+//                case .Border:
+//                    color = UIColor.blackColor()
+//                case .Impossible:
+//                    color = UIColor.redColor()
+//                case .Possible(place: let place):
+//                    color = place.color
+//                case .Occupied(place: _):
+//                    color = UIColor.greenColor()
+//                case .Outline:
+//                    color = UIColor.lightGrayColor()
+//                case .Empty:
+//                    break
+//                }
+//                CGContextSetFillColorWithColor(ctx, color.CGColor)
+//                CGContextFillRect(ctx, CGRect(origin: CGPoint(x: x, y: y), size: self.fieldsSize))
+//                CGContextStrokeRect(ctx, CGRect(origin: CGPoint(x: x, y: y), size: self.fieldsSize))
+//                
+//                x += self.fieldsSize.width
+//            }
+//            
+//            y += self.fieldsSize.height
+//        }
+//    }
+//    
+//}

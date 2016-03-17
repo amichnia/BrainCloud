@@ -71,18 +71,20 @@ class PossiblePlace : Place {
         self.canvas.savedOutline = self.canvas.outline
     }
     
-    func occupy() -> OccupiedPlace? {
-        return OccupiedPlace(possiblePlace: self)
+    func occupy(skill: Skill) -> OccupiedPlace? {
+        return OccupiedPlace(possiblePlace: self, skill: skill)
     }
 }
 
 class OccupiedPlace : Place {
+    var skill : Skill
     var position : Position
     var canvas : CanvasBoard
     
-    init(possiblePlace: PossiblePlace){
+    init(possiblePlace: PossiblePlace, skill: Skill){
         self.position = possiblePlace.position
         self.canvas = possiblePlace.canvas
+        self.skill = skill
         
         super.init(size: possiblePlace.size)
         

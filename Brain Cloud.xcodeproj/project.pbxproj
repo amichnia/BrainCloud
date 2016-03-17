@@ -22,6 +22,11 @@
 		C8A4A0671C99891A004E055D /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0661C99891A004E055D /* Position.swift */; };
 		C8A4A0691C998937004E055D /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0681C998937004E055D /* Field.swift */; };
 		C8A4A06B1C99895C004E055D /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A06A1C99895C004E055D /* CommonExtensions.swift */; };
+		FE0C720D1C9B23B100A7E3E9 /* SkillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0C720C1C9B23B100A7E3E9 /* SkillsTableViewController.swift */; };
+		FED6DABD1C9B2E4700C95867 /* AddSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED6DABC1C9B2E4700C95867 /* AddSkillViewController.swift */; };
+		FED6DABF1C9B36A500C95867 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED6DABE1C9B36A500C95867 /* Skill.swift */; };
+		FED6DAC11C9B3C4B00C95867 /* SkillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED6DAC01C9B3C4B00C95867 /* SkillTableViewCell.swift */; };
+		FED6DAC31C9B56D800C95867 /* OccupiedPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FED6DAC21C9B56D800C95867 /* OccupiedPlaceView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +49,11 @@
 		C8A4A0661C99891A004E055D /* Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		C8A4A0681C998937004E055D /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		C8A4A06A1C99895C004E055D /* CommonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
+		FE0C720C1C9B23B100A7E3E9 /* SkillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsTableViewController.swift; sourceTree = "<group>"; };
+		FED6DABC1C9B2E4700C95867 /* AddSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillViewController.swift; sourceTree = "<group>"; };
+		FED6DABE1C9B36A500C95867 /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
+		FED6DAC01C9B3C4B00C95867 /* SkillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillTableViewCell.swift; sourceTree = "<group>"; };
+		FED6DAC21C9B56D800C95867 /* OccupiedPlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OccupiedPlaceView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				C86901851C9AE730009A60A8 /* PossiblePlaceView.xib */,
+				FED6DAC21C9B56D800C95867 /* OccupiedPlaceView.xib */,
 			);
 			path = XIBs;
 			sourceTree = "<group>";
@@ -157,6 +168,7 @@
 				C8A4A0681C998937004E055D /* Field.swift */,
 				C8A4A0641C99887E004E055D /* Place.swift */,
 				C8A4A0661C99891A004E055D /* Position.swift */,
+				FED6DABE1C9B36A500C95867 /* Skill.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -166,6 +178,7 @@
 			children = (
 				C8A4A0621C99676A004E055D /* CanvasView.swift */,
 				C86901871C9AE93C009A60A8 /* PossiblePlaceView.swift */,
+				FED6DAC01C9B3C4B00C95867 /* SkillTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -174,6 +187,8 @@
 			isa = PBXGroup;
 			children = (
 				C8A4A0481C981B6C004E055D /* ViewController.swift */,
+				FE0C720C1C9B23B100A7E3E9 /* SkillsTableViewController.swift */,
+				FED6DABC1C9B2E4700C95867 /* AddSkillViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -250,6 +265,7 @@
 			files = (
 				C8A4A0541C981B6C004E055D /* LaunchScreen.storyboard in Resources */,
 				C8A4A0511C981B6C004E055D /* Assets.xcassets in Resources */,
+				FED6DAC31C9B56D800C95867 /* OccupiedPlaceView.xib in Resources */,
 				C8A4A04C1C981B6C004E055D /* Main.storyboard in Resources */,
 				C86901861C9AE730009A60A8 /* PossiblePlaceView.xib in Resources */,
 			);
@@ -311,10 +327,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8A4A0671C99891A004E055D /* Position.swift in Sources */,
+				FED6DABF1C9B36A500C95867 /* Skill.swift in Sources */,
 				C8A4A0611C981BCB004E055D /* CanvasBoard.swift in Sources */,
+				FED6DABD1C9B2E4700C95867 /* AddSkillViewController.swift in Sources */,
 				C8A4A0691C998937004E055D /* Field.swift in Sources */,
+				FE0C720D1C9B23B100A7E3E9 /* SkillsTableViewController.swift in Sources */,
 				C8A4A0491C981B6C004E055D /* ViewController.swift in Sources */,
 				C8A4A0631C99676A004E055D /* CanvasView.swift in Sources */,
+				FED6DAC11C9B3C4B00C95867 /* SkillTableViewCell.swift in Sources */,
 				C8A4A0651C99887E004E055D /* Place.swift in Sources */,
 				C8A4A04F1C981B6C004E055D /* Brain_Cloud.xcdatamodeld in Sources */,
 				C8A4A06B1C99895C004E055D /* CommonExtensions.swift in Sources */,
