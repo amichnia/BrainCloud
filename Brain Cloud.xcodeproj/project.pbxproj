@@ -237,6 +237,7 @@
 				TargetAttributes = {
 					C8A4A0421C981B6C004E055D = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4RH8T97BYZ;
 					};
 				};
 			};
@@ -453,9 +454,10 @@
 			baseConfigurationReference = BF413E813A7188D6AFFCFE87 /* Pods-Brain Cloud.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Brain Cloud/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "amichnia.Brain-Cloud";
+				PRODUCT_BUNDLE_IDENTIFIER = com.amichnia.skillcloud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -465,9 +467,10 @@
 			baseConfigurationReference = 0CDD14D8F8539737D61F41B3 /* Pods-Brain Cloud.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Brain Cloud/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "amichnia.Brain-Cloud";
+				PRODUCT_BUNDLE_IDENTIFIER = com.amichnia.skillcloud;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
