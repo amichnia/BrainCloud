@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import AlamofireSwiftyJSON
+import PromiseKit
 
 class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
 
@@ -26,16 +27,15 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
 
         // Do any additional setup after loading the view.
     }
-
+    
     // MARK: - Actions
     @IBAction func changeImage(sender: AnyObject) {
         let picker = UIImagePickerController()
-        
-        picker.delegate = self
         picker.allowsEditing = false
         picker.sourceType = .PhotoLibrary
-        
-        self.presentViewController(picker, animated: true, completion: nil)
+        self.promiseViewController(picker).then { (image : UIImage) in
+            self.skillImage.image = image
+        }
     }
     
     @IBAction func cancelAction(sender: AnyObject) {
@@ -99,20 +99,6 @@ extension AddSkillViewController : UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         self.isEditingText = false
-    }
-    
-}
-
-// MARK: - Image Picker Controller Delegate
-extension AddSkillViewController : UIImagePickerControllerDelegate {
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        self.skillImage.image = image
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        
     }
     
 }

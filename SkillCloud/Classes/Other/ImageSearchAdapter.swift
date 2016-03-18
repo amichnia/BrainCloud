@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import AlamofireSwiftyJSON
+import PromiseKit
 
 enum ImagesAPI {
     
