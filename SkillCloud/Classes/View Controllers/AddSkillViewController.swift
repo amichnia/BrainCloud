@@ -1,6 +1,6 @@
 //
 //  AddSkillViewController.swift
-//  Brain Cloud
+//  SkillCloud
 //
 //  Created by Andrzej Michnia on 17.03.2016.
 //  Copyright © 2016 amichnia. All rights reserved.

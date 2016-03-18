@@ -1,0 +1,521 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1196D8B794C7B7603F03DA94 /* Pods_SkillCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD530781AB9B8F017F80F09A /* Pods_SkillCloud.framework */; };
+		BFDF9A6145E1A2B4BE8EB699 /* Pods_SkillCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A41F5C64F265593A660F74C /* Pods_SkillCloud.framework */; };
+		FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */; };
+		FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEB1C9CA1240006D9EE /* Field.swift */; };
+		FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEC1C9CA1240006D9EE /* Place.swift */; };
+		FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAED1C9CA1240006D9EE /* Position.swift */; };
+		FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEE1C9CA1240006D9EE /* Skill.swift */; };
+		FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */; };
+		FE31DB0F1C9CA1240006D9EE /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */; };
+		FE31DB101C9CA1240006D9EE /* ImageSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF21C9CA1240006D9EE /* ImageSearchAdapter.swift */; };
+		FE31DB111C9CA1240006D9EE /* AddSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */; };
+		FE31DB121C9CA1240006D9EE /* SkillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */; };
+		FE31DB131C9CA1240006D9EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF61C9CA1240006D9EE /* ViewController.swift */; };
+		FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF81C9CA1240006D9EE /* CanvasView.swift */; };
+		FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */; };
+		FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */; };
+		FE31DB171C9CA1240006D9EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE31DAFC1C9CA1240006D9EE /* Assets.xcassets */; };
+		FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB001C9CA1240006D9EE /* LaunchScreen.storyboard */; };
+		FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB021C9CA1240006D9EE /* Main.storyboard */; };
+		FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */; };
+		FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */; };
+		FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE31DB1E1C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0CDD14D8F8539737D61F41B3 /* Pods-SkillCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.release.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.release.xcconfig"; sourceTree = "<group>"; };
+		2A41F5C64F265593A660F74C /* Pods_SkillCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkillCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF413E813A7188D6AFFCFE87 /* Pods-SkillCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.debug.xcconfig"; sourceTree = "<group>"; };
+		C8A4A0431C981B6C004E055D /* SkillCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD530781AB9B8F017F80F09A /* Pods_SkillCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkillCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasBoard.swift; sourceTree = "<group>"; };
+		FE31DAEB1C9CA1240006D9EE /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		FE31DAEC1C9CA1240006D9EE /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		FE31DAED1C9CA1240006D9EE /* Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
+		FE31DAEE1C9CA1240006D9EE /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
+		FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
+		FE31DAF21C9CA1240006D9EE /* ImageSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSearchAdapter.swift; sourceTree = "<group>"; };
+		FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillViewController.swift; sourceTree = "<group>"; };
+		FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsTableViewController.swift; sourceTree = "<group>"; };
+		FE31DAF61C9CA1240006D9EE /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FE31DAF81C9CA1240006D9EE /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PossiblePlaceView.swift; sourceTree = "<group>"; };
+		FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillTableViewCell.swift; sourceTree = "<group>"; };
+		FE31DAFC1C9CA1240006D9EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE31DB011C9CA1240006D9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FE31DB031C9CA1240006D9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OccupiedPlaceView.xib; sourceTree = "<group>"; };
+		FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PossiblePlaceView.xib; sourceTree = "<group>"; };
+		FE31DB081C9CA1240006D9EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillCloud.xcdatamodel; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C8A4A0401C981B6C004E055D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFDF9A6145E1A2B4BE8EB699 /* Pods_SkillCloud.framework in Frameworks */,
+				1196D8B794C7B7603F03DA94 /* Pods_SkillCloud.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7493D99371A43512DBFF49BD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2A41F5C64F265593A660F74C /* Pods_SkillCloud.framework */,
+				CD530781AB9B8F017F80F09A /* Pods_SkillCloud.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		91C65E4EE0D5E62E6F8AB86B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BF413E813A7188D6AFFCFE87 /* Pods-SkillCloud.debug.xcconfig */,
+				0CDD14D8F8539737D61F41B3 /* Pods-SkillCloud.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C8A4A03A1C981B6C004E055D = {
+			isa = PBXGroup;
+			children = (
+				FE31DAE71C9CA1240006D9EE /* SkillCloud */,
+				7493D99371A43512DBFF49BD /* Frameworks */,
+				91C65E4EE0D5E62E6F8AB86B /* Pods */,
+				C8A4A0441C981B6C004E055D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C8A4A0441C981B6C004E055D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C8A4A0431C981B6C004E055D /* SkillCloud.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE31DAE71C9CA1240006D9EE /* SkillCloud */ = {
+			isa = PBXGroup;
+			children = (
+				FE31DAE81C9CA1240006D9EE /* Classes */,
+				FE31DAFB1C9CA1240006D9EE /* Resources */,
+				FE31DB071C9CA1240006D9EE /* Supporting Files */,
+			);
+			path = SkillCloud;
+			sourceTree = "<group>";
+		};
+		FE31DAE81C9CA1240006D9EE /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FE31DAE91C9CA1240006D9EE /* Model */,
+				FE31DAF71C9CA1240006D9EE /* Views */,
+				FE31DAF31C9CA1240006D9EE /* View Controllers */,
+				FE31DAEF1C9CA1240006D9EE /* Other */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		FE31DAE91C9CA1240006D9EE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */,
+				FE31DAEB1C9CA1240006D9EE /* Field.swift */,
+				FE31DAEC1C9CA1240006D9EE /* Place.swift */,
+				FE31DAED1C9CA1240006D9EE /* Position.swift */,
+				FE31DAEE1C9CA1240006D9EE /* Skill.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FE31DAEF1C9CA1240006D9EE /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */,
+				FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */,
+				FE31DAF21C9CA1240006D9EE /* ImageSearchAdapter.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		FE31DAF31C9CA1240006D9EE /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */,
+				FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */,
+				FE31DAF61C9CA1240006D9EE /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		FE31DAF71C9CA1240006D9EE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FE31DAF81C9CA1240006D9EE /* CanvasView.swift */,
+				FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */,
+				FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FE31DAFB1C9CA1240006D9EE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FE31DAFC1C9CA1240006D9EE /* Assets.xcassets */,
+				FE31DAFF1C9CA1240006D9EE /* Storyboards */,
+				FE31DB041C9CA1240006D9EE /* XIBs */,
+				FE31DB1E1C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FE31DAFF1C9CA1240006D9EE /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				FE31DB001C9CA1240006D9EE /* LaunchScreen.storyboard */,
+				FE31DB021C9CA1240006D9EE /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FE31DB041C9CA1240006D9EE /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */,
+				FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */,
+			);
+			path = XIBs;
+			sourceTree = "<group>";
+		};
+		FE31DB071C9CA1240006D9EE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FE31DB081C9CA1240006D9EE /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C8A4A0421C981B6C004E055D /* SkillCloud */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C8A4A0581C981B6C004E055D /* Build configuration list for PBXNativeTarget "SkillCloud" */;
+			buildPhases = (
+				531A1FAE7121CB990E8D0C6C /* Check Pods Manifest.lock */,
+				C8A4A03F1C981B6C004E055D /* Sources */,
+				C8A4A0401C981B6C004E055D /* Frameworks */,
+				C8A4A0411C981B6C004E055D /* Resources */,
+				8A7973D372291C359C03D2FD /* Embed Pods Frameworks */,
+				51F92253816D982015B3EB7D /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SkillCloud;
+			productName = SkillCloud;
+			productReference = C8A4A0431C981B6C004E055D /* SkillCloud.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C8A4A03B1C981B6C004E055D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = amichnia;
+				TargetAttributes = {
+					C8A4A0421C981B6C004E055D = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4RH8T97BYZ;
+					};
+				};
+			};
+			buildConfigurationList = C8A4A03E1C981B6C004E055D /* Build configuration list for PBXProject "SkillCloud" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C8A4A03A1C981B6C004E055D;
+			productRefGroup = C8A4A0441C981B6C004E055D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C8A4A0421C981B6C004E055D /* SkillCloud */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C8A4A0411C981B6C004E055D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */,
+				FE31DB171C9CA1240006D9EE /* Assets.xcassets in Resources */,
+				FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */,
+				FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */,
+				FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		51F92253816D982015B3EB7D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		531A1FAE7121CB990E8D0C6C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8A7973D372291C359C03D2FD /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C8A4A03F1C981B6C004E055D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */,
+				FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */,
+				FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */,
+				FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */,
+				FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */,
+				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
+				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,
+				FE31DB121C9CA1240006D9EE /* SkillsTableViewController.swift in Sources */,
+				FE31DB131C9CA1240006D9EE /* ViewController.swift in Sources */,
+				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
+				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,
+				FE31DB111C9CA1240006D9EE /* AddSkillViewController.swift in Sources */,
+				FE31DB101C9CA1240006D9EE /* ImageSearchAdapter.swift in Sources */,
+				FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */,
+				FE31DB0F1C9CA1240006D9EE /* CommonExtensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FE31DB001C9CA1240006D9EE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE31DB011C9CA1240006D9EE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FE31DB021C9CA1240006D9EE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE31DB031C9CA1240006D9EE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C8A4A0561C981B6C004E055D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C8A4A0571C981B6C004E055D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C8A4A0591C981B6C004E055D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF413E813A7188D6AFFCFE87 /* Pods-SkillCloud.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "SkillCloud/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.amichnia.skillcloud;
+				PRODUCT_NAME = SkillCloud;
+			};
+			name = Debug;
+		};
+		C8A4A05A1C981B6C004E055D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CDD14D8F8539737D61F41B3 /* Pods-SkillCloud.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "SkillCloud/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.amichnia.skillcloud;
+				PRODUCT_NAME = SkillCloud;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C8A4A03E1C981B6C004E055D /* Build configuration list for PBXProject "SkillCloud" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C8A4A0561C981B6C004E055D /* Debug */,
+				C8A4A0571C981B6C004E055D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C8A4A0581C981B6C004E055D /* Build configuration list for PBXNativeTarget "SkillCloud" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C8A4A0591C981B6C004E055D /* Debug */,
+				C8A4A05A1C981B6C004E055D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FE31DB1E1C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */,
+			);
+			currentVersion = FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */;
+			path = SkillCloud.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = C8A4A03B1C981B6C004E055D /* Project object */;
+}

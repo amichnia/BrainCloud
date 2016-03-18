@@ -1,6 +1,6 @@
 //
 //  Place.swift
-//  Brain Cloud
+//  SkillCloud
 //
 //  Created by Andrzej Michnia on 16/03/16.
 //  Copyright © 2016 amichnia. All rights reserved.

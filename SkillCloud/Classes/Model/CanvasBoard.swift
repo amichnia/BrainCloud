@@ -1,6 +1,6 @@
 //
 //  CanvasBoard.swift
-//  Brain Cloud
+//  SkillCloud
 //
 //  Created by Andrzej Michnia on 15/03/16.
 //  Copyright © 2016 amichnia. All rights reserved.
