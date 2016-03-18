@@ -22,6 +22,7 @@
 		C8A4A0671C99891A004E055D /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0661C99891A004E055D /* Position.swift */; };
 		C8A4A0691C998937004E055D /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A0681C998937004E055D /* Field.swift */; };
 		C8A4A06B1C99895C004E055D /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A4A06A1C99895C004E055D /* CommonExtensions.swift */; };
+		C8A7F0751C9BE43A000D084F /* ImageSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7F0741C9BE43A000D084F /* ImageSearchAdapter.swift */; };
 		FE0C720D1C9B23B100A7E3E9 /* SkillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0C720C1C9B23B100A7E3E9 /* SkillsTableViewController.swift */; };
 		FED6DABD1C9B2E4700C95867 /* AddSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED6DABC1C9B2E4700C95867 /* AddSkillViewController.swift */; };
 		FED6DABF1C9B36A500C95867 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED6DABE1C9B36A500C95867 /* Skill.swift */; };
@@ -49,6 +50,7 @@
 		C8A4A0661C99891A004E055D /* Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		C8A4A0681C998937004E055D /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		C8A4A06A1C99895C004E055D /* CommonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
+		C8A7F0741C9BE43A000D084F /* ImageSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSearchAdapter.swift; sourceTree = "<group>"; };
 		FE0C720C1C9B23B100A7E3E9 /* SkillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsTableViewController.swift; sourceTree = "<group>"; };
 		FED6DABC1C9B2E4700C95867 /* AddSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillViewController.swift; sourceTree = "<group>"; };
 		FED6DABE1C9B36A500C95867 /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				C8A4A0461C981B6C004E055D /* AppDelegate.swift */,
 				C8A4A06A1C99895C004E055D /* CommonExtensions.swift */,
+				C8A7F0741C9BE43A000D084F /* ImageSearchAdapter.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				FE0C720D1C9B23B100A7E3E9 /* SkillsTableViewController.swift in Sources */,
 				C8A4A0491C981B6C004E055D /* ViewController.swift in Sources */,
 				C8A4A0631C99676A004E055D /* CanvasView.swift in Sources */,
+				C8A7F0751C9BE43A000D084F /* ImageSearchAdapter.swift in Sources */,
 				FED6DAC11C9B3C4B00C95867 /* SkillTableViewCell.swift in Sources */,
 				C8A4A0651C99887E004E055D /* Place.swift in Sources */,
 				C8A4A04F1C981B6C004E055D /* Brain_Cloud.xcdatamodeld in Sources */,
