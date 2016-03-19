@@ -87,6 +87,81 @@ class DataManager: NSObject {
 
 extension DataManager {
     
+    static func getAll<T:CoreDataEntity>(entity: T.Type, fromContext ctx: NSManagedObjectContext? = nil) throws -> [T] {
+        return try getAll(entity, withPredicate: nil, fromContext: ctx)
+    }
     
+    static func getAll<T:CoreDataEntity>(entity: T.Type, withPredicate predicate: NSPredicate?, fromContext ctx: NSManagedObjectContext? = nil) throws -> [T] {
+        let fetchRequest = NSFetchRequest(entityName: entity.entityName)
+        fetchRequest.predicate = predicate
+        return try (ctx ?? self.managedObjectContext).executeFetchRequest(fetchRequest).map{ $0 as! T }
+    }
+
+    static func fetchAll<T:CoreDataEntity>(entity: T.Type, fromContext ctx: NSManagedObjectContext? = nil) -> Promise<[T]> {
+        return self.fetchAll(entity, withPredicate: nil, fromContext: ctx)
+    }
     
+    static func fetchAll<T:CoreDataEntity>(entity: T.Type, withPredicate predicate: NSPredicate?, fromContext ctx: NSManagedObjectContext? = nil) -> Promise<[T]> {
+        return Promise(resolvers: { (fulfill, reject) -> Void in
+            let context = ctx ?? DataManager.managedObjectContext
+            
+            context.performBlock{
+                do {
+                    let result = try DataManager.getAll(entity, withPredicate: predicate, fromContext: context)
+                    fulfill(result)
+                }
+                catch {
+                    reject(error)
+                }
+            }
+        })
+    }
+
+}
+
+extension DataManager {
+    
+    static func insertEntity<T:CoreDataEntity>(entity: T.Type, model: DTOModel, intoContext ctx: NSManagedObjectContext? = nil) -> T? {
+        return T(model: model, inContext: ctx ?? self.managedObjectContext)
+    }
+    
+    static func promiseEntity<T:CoreDataEntity>(entity: T.Type, model: DTOModel, intoContext ctx: NSManagedObjectContext? = nil) -> Promise<T> {
+        return Promise(resolvers: { (fulfill, reject) -> Void in
+            if let entity = T(model: model, inContext: ctx ?? self.managedObjectContext) {
+                fulfill(entity)
+            }
+            else {
+                reject(DataError.FailedToInsertEntity)
+            }
+        })
+    }
+    
+}
+
+/**
+ *  Base CoreDataEntity protocol
+ */
+protocol CoreDataEntity {
+    
+    static var entityName : String { get }
+    
+    init?(model: DTOModel, inContext ctx: NSManagedObjectContext)
+    
+}
+
+// MARK: - Default implementations for all CoreDataEntities
+extension CoreDataEntity {
+    
+    static func fetchAll() -> Promise<[Self]>{
+        return DataManager.fetchAll(self)
+    }
+    
+    static func promiseToInsert(model: DTOModel) -> Promise<Self> {
+        return DataManager.promiseEntity(self, model: model)
+    }
+    
+}
+
+enum DataError : ErrorType {
+    case FailedToInsertEntity
 }

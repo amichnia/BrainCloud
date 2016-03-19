@@ -9,15 +9,16 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-import UIKit
+import Foundation
 import CoreData
+import UIKit
 
 extension SkillEntity {
 
-    @NSManaged var name: String?
     @NSManaged var desc: String?
     @NSManaged var experienceValue: Int16
     @NSManaged var image: UIImage?
+    @NSManaged var name: String?
     @NSManaged var originalImage: UIImage?
 
 }

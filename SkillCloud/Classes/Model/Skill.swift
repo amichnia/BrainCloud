@@ -37,8 +37,10 @@ class Skill {
 
 protocol ExperienceConvertible {
     
-    var experience : Skill.Experience { get set }
+    var experience : Skill.Experience { get }
     
 }
 
 extension Skill : ExperienceConvertible { }
+
+extension Skill : DTOModel { }
