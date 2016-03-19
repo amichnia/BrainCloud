@@ -65,8 +65,7 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
         switch identifier {
         case BackToListSegueIdentifier:
             if let skill = self.skill {
-                (segue.destinationViewController as? SkillsTableViewController)?.skills.append(skill)
-                (segue.destinationViewController as? SkillsTableViewController)?.tableView.reloadData()
+                (segue.destinationViewController as? SkillsTableViewController)?.addSkill(skill)
             }
         default:
             break

@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import PromiseKit
 
+let ProjectMOMDName = "SkillCloud"
+
 class DataManager: NSObject {
     
     // MARK: - Singleton
@@ -26,10 +28,9 @@ class DataManager: NSObject {
     static var managedObjectModel: NSManagedObjectModel { return DataManager.sharedManager.managedObjectModel }
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = NSBundle.mainBundle().URLForResource("SkillCloud", withExtension: "momd")!
+        let modelURL = NSBundle.mainBundle().URLForResource(ProjectMOMDName, withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
-    
     
     static var persistentStoreCoordinator: NSPersistentStoreCoordinator { return DataManager.sharedManager.persistentStoreCoordinator }
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
@@ -68,21 +69,12 @@ class DataManager: NSObject {
     
     // MARK: - Core Data Saving support
     
-    func saveContext () {
+    static func saveRootContext() throws {
         if managedObjectContext.hasChanges {
-            do {
-                try managedObjectContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                abort()
-            }
+            try managedObjectContext.save()
         }
     }
 
-    
 }
 
 extension DataManager {
@@ -133,6 +125,9 @@ extension DataManager {
             else {
                 reject(DataError.FailedToInsertEntity)
             }
+        }).then({ (entity: T) -> T in
+            try DataManager.saveRootContext()
+            return entity
         })
     }
     
@@ -161,6 +156,8 @@ extension CoreDataEntity {
     }
     
 }
+
+// MARK: - DataError enum
 
 enum DataError : ErrorType {
     case FailedToInsertEntity
