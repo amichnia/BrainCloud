@@ -34,3 +34,13 @@ class Skill {
     static var skill : Skill { return Skill(title: "Empty skill", image: UIImage(named: "skill_obj")!, experience: Skill.Experience.Intermediate) }
     
 }
+
+protocol ExperienceConvertible {
+    
+    var experience : Skill.Experience { get }
+    
+}
+
+extension Skill : ExperienceConvertible { }
+
+extension Skill : DTOModel { }

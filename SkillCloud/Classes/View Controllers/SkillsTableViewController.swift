@@ -8,6 +8,7 @@
 
 import UIKit
 import AMKSlidingTableViewCell
+import PromiseKit
 
 let AddSkillPopoverSegueIdentifier = "AddSkillPopover"
 let BackToListSegueIdentifier = "BackToList"
@@ -23,12 +24,25 @@ class SkillsTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        SkillEntity.fetchAll().then { (entities: [SkillEntity]) -> ()  in
+            self.skills = entities.map{ $0.skill }
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.tableView.reloadData()
+    }
+    
+    // MARK: - Action
+    func addSkill(skill: Skill) {
+        SkillEntity.promiseToInsert(skill).then { (entity) -> () in
+            self.skills.append(skill)
+            self.tableView.reloadData()
+        }.error { error in
+            print(error)
+        }
     }
     
     // MARK: - Navigation
