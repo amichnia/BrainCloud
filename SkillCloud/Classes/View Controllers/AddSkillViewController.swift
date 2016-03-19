@@ -72,6 +72,7 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
             break
         }
     }
+    
 }
 
 extension AddSkillViewController : UITextFieldDelegate {
