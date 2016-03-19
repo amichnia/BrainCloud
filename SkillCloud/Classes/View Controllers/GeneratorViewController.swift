@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GeneratorViewController.swift
 //  SkillCloud
 //
 //  Created by Andrzej Michnia on 15/03/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GeneratorViewController: UIViewController {
 
     @IBOutlet weak var canvasView: CanvasView!
     @IBOutlet weak var containerScrollView: UIScrollView!
@@ -23,8 +23,6 @@ class ViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        print(self.canvasView.enclosingRect)
-        
         self.didIterate(self)
     }
 
@@ -38,10 +36,7 @@ class ViewController: UIViewController {
             return
         }
         
-        print("\(field.position)")
-        
         if case Field.Content.Possible(place: let place) = field.content {
-            print("POSSIBLE! - Occupying")
             // TODO: Use current skill
             if let occupied = place.occupy(Skill.skill) {
                 self.canvasView.addOccupiedPlace(occupied)
@@ -60,7 +55,6 @@ class ViewController: UIViewController {
             self.canvasView.addPossibleViewForPlace($0)
         }
         
-        print(self.canvasView.enclosingRect)
         self.fitRectInScroll(self.canvasView.enclosingRect)
         
         self.canvasView.setNeedsDisplay()
@@ -68,7 +62,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController {
+extension GeneratorViewController {
     
     func fitRectInScroll(rect: CGRect) {
         // 1. Set offset for center
@@ -92,10 +86,9 @@ extension ViewController {
         }
     }
 
-    
 }
 
-extension ViewController : UIScrollViewDelegate {
+extension GeneratorViewController : UIScrollViewDelegate {
     
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return self.canvasView

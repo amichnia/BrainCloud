@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rxB-Dj-wDY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rxB-Dj-wDY">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Generator View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Brain_Cloud" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="GeneratorViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,13 +20,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="brain1" translatesAutoresizingMaskIntoConstraints="NO" id="oEb-1o-3EQ">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="448"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-NT-UPH" userLabel="Canvas Container Scroll View">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-s0-djh" customClass="CanvasView" customModule="Brain_Cloud" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-s0-djh" customClass="CanvasView" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
@@ -47,31 +47,43 @@
                                     <constraint firstItem="Seg-s0-djh" firstAttribute="top" secondItem="XIK-NT-UPH" secondAttribute="top" id="h8R-sl-G4f"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajh-70-6nT">
-                                <rect key="frame" x="236" y="540" width="128" height="30"/>
-                                <color key="backgroundColor" red="0.98575067520000004" green="0.0" blue="0.36709693069999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kKw-ih-vQz">
+                                <rect key="frame" x="0.0" y="512" width="600" height="88"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Kzl-Ao-oXe"/>
-                                    <constraint firstAttribute="width" constant="128" id="ZPs-h2-CYR"/>
+                                    <constraint firstAttribute="height" constant="88" id="YHK-IO-Tsi"/>
                                 </constraints>
-                                <state key="normal" title="Iterate"/>
-                                <connections>
-                                    <action selector="didIterate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yUd-Sj-W40"/>
-                                </connections>
-                            </button>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YdK-Qt-7Dv">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XeQ-B2-fjR">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oEb-1o-3EQ" secondAttribute="bottom" id="67E-l7-tTG"/>
                             <constraint firstItem="XIK-NT-UPH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="C2N-5N-tJc"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kKw-ih-vQz" secondAttribute="bottom" id="FX4-Qx-ekv"/>
                             <constraint firstItem="oEb-1o-3EQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="KDu-ad-Pft"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ajh-70-6nT" secondAttribute="bottom" constant="30" id="LYo-Uh-Dai"/>
                             <constraint firstAttribute="trailing" secondItem="XIK-NT-UPH" secondAttribute="trailing" id="O16-wP-U3R"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="XIK-NT-UPH" secondAttribute="bottom" id="Qb0-4r-CVq"/>
                             <constraint firstItem="oEb-1o-3EQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="TIX-Kk-RrA"/>
-                            <constraint firstItem="ajh-70-6nT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aP4-SU-p7G"/>
+                            <constraint firstItem="kKw-ih-vQz" firstAttribute="top" secondItem="oEb-1o-3EQ" secondAttribute="bottom" id="VZR-Qx-LBB"/>
                             <constraint firstItem="XIK-NT-UPH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="goy-eX-qAv"/>
+                            <constraint firstItem="kKw-ih-vQz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lvl-AD-a9m"/>
                             <constraint firstAttribute="trailing" secondItem="oEb-1o-3EQ" secondAttribute="trailing" id="oTy-li-tT0"/>
+                            <constraint firstAttribute="trailing" secondItem="kKw-ih-vQz" secondAttribute="trailing" id="uHh-z7-c7g"/>
+                            <constraint firstItem="kKw-ih-vQz" firstAttribute="top" secondItem="XIK-NT-UPH" secondAttribute="bottom" id="zdO-u4-PLf"/>
                         </constraints>
                     </view>
                     <connections>
@@ -91,7 +103,7 @@
         <!--Skills Table View Controller-->
         <scene sceneID="FeE-hf-k2z">
             <objects>
-                <viewController id="2io-mV-wqN" customClass="SkillsTableViewController" customModule="Brain_Cloud" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2io-mV-wqN" customClass="SkillsTableViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0zn-1q-DcT"/>
                         <viewControllerLayoutGuide type="bottom" id="0As-dy-dLR"/>
@@ -104,7 +116,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ForegroundCell" rowHeight="78" id="oee-q0-PxR" customClass="SkillTableViewCell" customModule="Brain_Cloud" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ForegroundCell" rowHeight="78" id="oee-q0-PxR" customClass="SkillTableViewCell" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="600" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oee-q0-PxR" id="krp-WW-wAg">
@@ -213,9 +225,6 @@
                                                 <constraint firstItem="YUM-kQ-8dz" firstAttribute="centerX" secondItem="99X-A9-vDS" secondAttribute="centerX" id="Zgm-2Q-KXs"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="L98-vG-hfn" kind="show" id="uAi-ZK-tz1"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SkillCell" rowHeight="78" id="gEc-ic-Onx" customClass="MKSlidingTableViewCell">
                                         <rect key="frame" x="0.0" y="248" width="600" height="78"/>
@@ -339,123 +348,10 @@
             </objects>
             <point key="canvasLocation" x="827" y="1127"/>
         </scene>
-        <!--Add skill-->
-        <scene sceneID="DoT-x0-Tie">
-            <objects>
-                <viewController id="L98-vG-hfn" customClass="AddSkillViewController" customModule="Brain_Cloud" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0vb-3o-LcL"/>
-                        <viewControllerLayoutGuide type="bottom" id="N7Z-6B-K20"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="VJC-PT-uHX">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEw-EL-XGh">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="GX4-Gh-yDV"/>
-                                    <barButtonItem style="plain" id="HgE-jr-eb9">
-                                        <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="bZp-TS-f3T">
-                                            <rect key="frame" x="116" y="7" width="367" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <segments>
-                                                <segment title="Beginner"/>
-                                                <segment title="Intermediate"/>
-                                                <segment title="Pro"/>
-                                                <segment title="Expert"/>
-                                            </segments>
-                                        </segmentedControl>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="d4S-rl-ZIE"/>
-                                </items>
-                            </toolbar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skill name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xzE-Oz-CJc">
-                                <rect key="frame" x="20" y="226" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nY0-q6-8nN">
-                                <rect key="frame" x="0.0" y="64" width="600" height="154"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zSa-1v-mNO">
-                                        <rect key="frame" x="236" y="13" width="128" height="128"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="zSa-1v-mNO" secondAttribute="height" multiplier="1:1" id="cYW-aT-5ob"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y7d-kO-sgN">
-                                        <rect key="frame" x="372" y="111" width="99" height="30"/>
-                                        <state key="normal" title="Change Image"/>
-                                        <connections>
-                                            <action selector="changeImage:" destination="L98-vG-hfn" eventType="touchUpInside" id="cgj-fK-QEQ"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.96895045229999999" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="zSa-1v-mNO" firstAttribute="top" secondItem="nY0-q6-8nN" secondAttribute="top" constant="13" id="7zI-uN-rlN"/>
-                                    <constraint firstItem="zSa-1v-mNO" firstAttribute="centerY" secondItem="nY0-q6-8nN" secondAttribute="centerY" id="HM9-3l-2L0"/>
-                                    <constraint firstItem="y7d-kO-sgN" firstAttribute="bottom" secondItem="zSa-1v-mNO" secondAttribute="bottom" id="SnI-Dn-9Gz"/>
-                                    <constraint firstAttribute="bottom" secondItem="zSa-1v-mNO" secondAttribute="bottom" constant="13" id="fr4-6k-T2g"/>
-                                    <constraint firstAttribute="height" constant="154" id="i5X-nE-dtn"/>
-                                    <constraint firstItem="y7d-kO-sgN" firstAttribute="leading" secondItem="zSa-1v-mNO" secondAttribute="trailing" constant="8" id="oha-3d-982"/>
-                                    <constraint firstItem="zSa-1v-mNO" firstAttribute="centerX" secondItem="nY0-q6-8nN" secondAttribute="centerX" id="t8X-xO-uXp"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="xzE-Oz-CJc" firstAttribute="leading" secondItem="VJC-PT-uHX" secondAttribute="leadingMargin" id="1dK-o4-BIM"/>
-                            <constraint firstAttribute="trailing" secondItem="eEw-EL-XGh" secondAttribute="trailing" id="BAb-ik-Ybs"/>
-                            <constraint firstAttribute="trailing" secondItem="nY0-q6-8nN" secondAttribute="trailing" id="Lro-mH-8D3"/>
-                            <constraint firstItem="eEw-EL-XGh" firstAttribute="leading" secondItem="VJC-PT-uHX" secondAttribute="leading" id="TEr-2E-Vnu"/>
-                            <constraint firstItem="nY0-q6-8nN" firstAttribute="leading" secondItem="VJC-PT-uHX" secondAttribute="leading" id="VGM-bv-mAK"/>
-                            <constraint firstItem="nY0-q6-8nN" firstAttribute="top" secondItem="0vb-3o-LcL" secondAttribute="bottom" id="XcE-9Y-AEA"/>
-                            <constraint firstItem="N7Z-6B-K20" firstAttribute="top" secondItem="eEw-EL-XGh" secondAttribute="bottom" id="c92-Er-LwD"/>
-                            <constraint firstItem="xzE-Oz-CJc" firstAttribute="top" secondItem="nY0-q6-8nN" secondAttribute="bottom" constant="8" id="qkd-o9-6EM"/>
-                            <constraint firstItem="xzE-Oz-CJc" firstAttribute="trailing" secondItem="VJC-PT-uHX" secondAttribute="trailingMargin" id="rdT-yp-fVo"/>
-                        </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="EDB-SI-gqg" appends="YES" id="U8z-4C-Lcp"/>
-                        </connections>
-                    </view>
-                    <navigationItem key="navigationItem" title="Add skill" id="6zT-S4-7qL">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="save" id="qHz-sj-y3Y">
-                                <connections>
-                                    <action selector="saveAction:" destination="L98-vG-hfn" id="rLY-bP-Z1F"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="cancel" id="I3T-Gy-cSb">
-                                <connections>
-                                    <action selector="cancelAction:" destination="L98-vG-hfn" id="ltt-tY-m1A"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="experienceSelect" destination="bZp-TS-f3T" id="xge-E6-2WL"/>
-                        <outlet property="skillImage" destination="zSa-1v-mNO" id="ODd-kW-v4Z"/>
-                        <outlet property="skillNameField" destination="xzE-Oz-CJc" id="vG4-kI-Tdo"/>
-                        <segue destination="80t-jG-e1R" kind="unwind" identifier="BackToList" unwindAction="unwindToSkillsTableViewController:" id="wwe-r9-f40"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="M3g-bf-YcH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="80t-jG-e1R" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="EDB-SI-gqg">
-                    <connections>
-                        <action selector="dismissKeyboardAction:" destination="L98-vG-hfn" id="a76-ov-Wgv"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="827" y="395"/>
-        </scene>
         <!--Add Skill View Controller-->
         <scene sceneID="gih-lo-IVQ">
             <objects>
-                <viewController id="IL4-V1-2QB" customClass="AddSkillViewController" customModule="Brain_Cloud" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="IL4-V1-2QB" customClass="AddSkillViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j0f-Q9-XEg"/>
                         <viewControllerLayoutGuide type="bottom" id="05t-xB-I9t"/>

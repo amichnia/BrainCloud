@@ -19,7 +19,7 @@
 		FE31DB101C9CA1240006D9EE /* ImageSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF21C9CA1240006D9EE /* ImageSearchAdapter.swift */; };
 		FE31DB111C9CA1240006D9EE /* AddSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */; };
 		FE31DB121C9CA1240006D9EE /* SkillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */; };
-		FE31DB131C9CA1240006D9EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF61C9CA1240006D9EE /* ViewController.swift */; };
+		FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */; };
 		FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF81C9CA1240006D9EE /* CanvasView.swift */; };
 		FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */; };
 		FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */; };
@@ -32,7 +32,24 @@
 		FE766D361C9D80010079CA29 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D351C9D80010079CA29 /* DataManager.swift */; };
 		FE766D411C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */; };
 		FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D401C9D82780079CA29 /* SkillEntity.swift */; };
+		FEAFD1241C9DAEE700E94633 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */; };
+		FEAFD1251C9DB27A00E94633 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */; };
+		FEAFD1261C9DB27A00E94633 /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FEAFD1271C9DB27A00E94633 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FEAFD1261C9DB27A00E94633 /* CocoaLumberjack.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0CDD14D8F8539737D61F41B3 /* Pods-SkillCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.release.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.release.xcconfig"; sourceTree = "<group>"; };
@@ -50,7 +67,7 @@
 		FE31DAF21C9CA1240006D9EE /* ImageSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSearchAdapter.swift; sourceTree = "<group>"; };
 		FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillViewController.swift; sourceTree = "<group>"; };
 		FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsTableViewController.swift; sourceTree = "<group>"; };
-		FE31DAF61C9CA1240006D9EE /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorViewController.swift; sourceTree = "<group>"; };
 		FE31DAF81C9CA1240006D9EE /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PossiblePlaceView.swift; sourceTree = "<group>"; };
 		FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillTableViewCell.swift; sourceTree = "<group>"; };
@@ -64,6 +81,8 @@
 		FE766D351C9D80010079CA29 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkillEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FE766D401C9D82780079CA29 /* SkillEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillEntity.swift; sourceTree = "<group>"; };
+		FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
+		FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +92,7 @@
 			files = (
 				BFDF9A6145E1A2B4BE8EB699 /* Pods_SkillCloud.framework in Frameworks */,
 				1196D8B794C7B7603F03DA94 /* Pods_SkillCloud.framework in Frameworks */,
+				FEAFD1251C9DB27A00E94633 /* CocoaLumberjack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +102,7 @@
 		7493D99371A43512DBFF49BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */,
 				2A41F5C64F265593A660F74C /* Pods_SkillCloud.framework */,
 				CD530781AB9B8F017F80F09A /* Pods_SkillCloud.framework */,
 			);
@@ -155,6 +176,7 @@
 				FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */,
 				FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */,
 				FE31DAF21C9CA1240006D9EE /* ImageSearchAdapter.swift */,
+				FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -164,7 +186,7 @@
 			children = (
 				FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */,
 				FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */,
-				FE31DAF61C9CA1240006D9EE /* ViewController.swift */,
+				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -247,6 +269,7 @@
 				C8A4A0411C981B6C004E055D /* Resources */,
 				8A7973D372291C359C03D2FD /* Embed Pods Frameworks */,
 				51F92253816D982015B3EB7D /* Copy Pods Resources */,
+				FEAFD1271C9DB27A00E94633 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -370,12 +393,13 @@
 				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
 				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,
 				FE31DB121C9CA1240006D9EE /* SkillsTableViewController.swift in Sources */,
-				FE31DB131C9CA1240006D9EE /* ViewController.swift in Sources */,
+				FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,
 				FE31DB111C9CA1240006D9EE /* AddSkillViewController.swift in Sources */,
 				FE31DB101C9CA1240006D9EE /* ImageSearchAdapter.swift in Sources */,
 				FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */,
+				FEAFD1241C9DAEE700E94633 /* CocoaLumberjack.swift in Sources */,
 				FE31DB0F1C9CA1240006D9EE /* CommonExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

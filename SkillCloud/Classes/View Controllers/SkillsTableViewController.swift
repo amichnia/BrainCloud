@@ -41,7 +41,8 @@ class SkillsTableViewController: UIViewController {
             self.skills.append(skill)
             self.tableView.reloadData()
         }.error { error in
-            print(error)
+            // TODO: Handle error
+            DDLogError("Error: \(error)")
         }
     }
     
