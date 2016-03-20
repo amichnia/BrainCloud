@@ -15,6 +15,8 @@ class Skill {
     var image : UIImage
     var experience : Experience
     
+    var checkCount = 0
+    
     init(title: String, image: UIImage, experience: Skill.Experience, description: String? = nil) {
         self.title = title
         self.image = image
@@ -28,10 +30,6 @@ class Skill {
         case Professional
         case Expert
     }
-    
-    // MARK: - Develop // FIXME: Remove after develop finished
-    
-    static var skill : Skill { return Skill(title: "Empty skill", image: UIImage(named: "skill_obj")!, experience: Skill.Experience.Intermediate) }
     
 }
 

@@ -51,7 +51,7 @@ class OccupiedPlaceView: UIView {
         self.frame = CGRect(origin: canvas[self.place.position], size: canvas[self.place.size])
         
         self.imageView.image = self.place.skill.image
-        self.container.layer.borderColor = UIColor.whiteColor().CGColor // TODO: use global settings
+        self.container.layer.borderColor = canvas.tintColor.CGColor
         
         self.canvas.addSubview(self)
     }

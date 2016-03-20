@@ -7,7 +7,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Generator View Controller-->
+        <!--Generator-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="GeneratorViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
@@ -24,12 +24,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-NT-UPH" userLabel="Canvas Container Scroll View">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-NT-UPH" userLabel="Canvas Container Scroll View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-s0-djh" customClass="CanvasView" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1000" id="uqw-5z-gAf"/>
@@ -49,29 +50,80 @@
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kKw-ih-vQz">
                                 <rect key="frame" x="0.0" y="512" width="600" height="88"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="YHK-IO-Tsi"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YdK-Qt-7Dv">
-                                    <size key="itemSize" width="50" height="50"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="YdK-Qt-7Dv">
+                                    <size key="itemSize" width="88" height="88"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XeQ-B2-fjR">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SkillCell" id="XeQ-B2-fjR" customClass="SkillCollectionViewCell" customModule="SkillCloud" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RiD-tQ-UGP" userLabel="Container">
+                                                    <rect key="frame" x="12" y="2" width="64" height="64"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skill_obj" translatesAutoresizingMaskIntoConstraints="NO" id="JWW-2w-XHf">
+                                                            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="JWW-2w-XHf" firstAttribute="top" secondItem="RiD-tQ-UGP" secondAttribute="top" id="3bU-WB-Gfi"/>
+                                                        <constraint firstAttribute="trailing" secondItem="JWW-2w-XHf" secondAttribute="trailing" id="Mui-Pb-4yb"/>
+                                                        <constraint firstAttribute="width" secondItem="RiD-tQ-UGP" secondAttribute="height" multiplier="1:1" id="SKY-6a-mZD"/>
+                                                        <constraint firstAttribute="bottom" secondItem="JWW-2w-XHf" secondAttribute="bottom" id="WbN-ZE-QS0"/>
+                                                        <constraint firstItem="JWW-2w-XHf" firstAttribute="leading" secondItem="RiD-tQ-UGP" secondAttribute="leading" id="f4L-1L-gIp"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                            <integer key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skill Name label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TUv-vr-tk8">
+                                                    <rect key="frame" x="5" y="66" width="78" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="TUv-vr-tk8" firstAttribute="leading" secondItem="XeQ-B2-fjR" secondAttribute="leading" constant="5" id="2ru-Sd-feE"/>
+                                            <constraint firstItem="TUv-vr-tk8" firstAttribute="top" secondItem="RiD-tQ-UGP" secondAttribute="bottom" id="3Vk-ow-ea4"/>
+                                            <constraint firstItem="RiD-tQ-UGP" firstAttribute="leading" secondItem="XeQ-B2-fjR" secondAttribute="leading" constant="12" id="5ET-9b-h6b"/>
+                                            <constraint firstAttribute="trailing" secondItem="TUv-vr-tk8" secondAttribute="trailing" constant="5" id="Xqy-Hq-K98"/>
+                                            <constraint firstAttribute="bottom" secondItem="TUv-vr-tk8" secondAttribute="bottom" id="eY0-7a-P4U"/>
+                                            <constraint firstItem="RiD-tQ-UGP" firstAttribute="top" secondItem="XeQ-B2-fjR" secondAttribute="top" constant="2" id="hXu-ah-F2x"/>
+                                            <constraint firstAttribute="trailing" secondItem="RiD-tQ-UGP" secondAttribute="trailing" constant="12" id="sxH-Dw-dFc"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="JWW-2w-XHf" id="nyq-e8-Z6S"/>
+                                            <outlet property="nameLabel" destination="TUv-vr-tk8" id="4o6-cM-V41"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="7Ux-8v-VPW"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Vye-WM-DUC"/>
+                                </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="XIK-NT-UPH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="C2N-5N-tJc"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kKw-ih-vQz" secondAttribute="bottom" id="FX4-Qx-ekv"/>
@@ -86,6 +138,13 @@
                             <constraint firstItem="kKw-ih-vQz" firstAttribute="top" secondItem="XIK-NT-UPH" secondAttribute="bottom" id="zdO-u4-PLf"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Generator" id="hJb-05-lby">
+                        <barButtonItem key="rightBarButtonItem" title="Preview" id="PLv-Ui-bIa">
+                            <connections>
+                                <action selector="previewAction:" destination="BYZ-38-t0r" id="uHT-7c-Tfx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="canvasView" destination="Seg-s0-djh" id="CDu-GF-A2y"/>
                         <outlet property="containerScrollView" destination="XIK-NT-UPH" id="AUs-cl-Wsg"/>
@@ -314,7 +373,7 @@
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="9N7-iv-z8W"/>
                                     <barButtonItem systemItem="compose" id="g6t-3b-oyH">
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="Qvx-cR-u4Y"/>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="ShowGenerator" id="Qvx-cR-u4Y"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="H64-iL-wwO"/>
@@ -574,6 +633,7 @@
     </scenes>
     <resources>
         <image name="brain1" width="670" height="601"/>
+        <image name="skill_obj" width="72" height="72"/>
         <image name="skill_swift" width="154" height="150"/>
     </resources>
 </document>

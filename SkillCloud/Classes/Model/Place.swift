@@ -151,3 +151,20 @@ extension Place.Size {
     }
     
 }
+
+extension Place.Size {
+    
+    init(exp: Skill.Experience) {
+        switch exp {
+        case .Beginner:
+            self = .Tiny
+        case .Intermediate:
+            self = .Small
+        case .Professional:
+            self = .Medium
+        case .Expert:
+            self = .Large
+        }
+    }
+    
+}
