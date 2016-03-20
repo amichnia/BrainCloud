@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Generator-->
@@ -21,7 +22,7 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flat_brain_background" translatesAutoresizingMaskIntoConstraints="NO" id="oEb-1o-3EQ">
                                 <rect key="frame" x="0.0" y="64" width="600" height="448"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flat_brain_foreground" translatesAutoresizingMaskIntoConstraints="NO" id="GJz-Ww-m38">
@@ -29,6 +30,13 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.19607843137254902" green="0.44705882352941179" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
+                            <view alpha="0.050000000000000003" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sha-JT-nEn" userLabel="BalanceView">
+                                <rect key="frame" x="45" y="87" width="510" height="344"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Sha-JT-nEn" secondAttribute="height" multiplier="255:172" id="bYQ-Zc-gCN"/>
+                                </constraints>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-NT-UPH" userLabel="Canvas Container Scroll View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
                                 <subviews>
@@ -139,8 +147,11 @@
                             <constraint firstItem="oEb-1o-3EQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="KDu-ad-Pft"/>
                             <constraint firstItem="GJz-Ww-m38" firstAttribute="leading" secondItem="oEb-1o-3EQ" secondAttribute="leading" id="KYr-o1-ue5"/>
                             <constraint firstAttribute="trailing" secondItem="XIK-NT-UPH" secondAttribute="trailing" id="O16-wP-U3R"/>
+                            <constraint firstItem="Sha-JT-nEn" firstAttribute="centerY" secondItem="GJz-Ww-m38" secondAttribute="centerY" multiplier="0.9" id="Q5E-TV-Epe"/>
+                            <constraint firstItem="Sha-JT-nEn" firstAttribute="centerX" secondItem="GJz-Ww-m38" secondAttribute="centerX" id="SSe-Cg-R9X"/>
                             <constraint firstItem="oEb-1o-3EQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="TIX-Kk-RrA"/>
                             <constraint firstItem="kKw-ih-vQz" firstAttribute="top" secondItem="oEb-1o-3EQ" secondAttribute="bottom" id="VZR-Qx-LBB"/>
+                            <constraint firstItem="Sha-JT-nEn" firstAttribute="width" secondItem="GJz-Ww-m38" secondAttribute="width" multiplier="0.85" id="YvG-Rc-lKb"/>
                             <constraint firstItem="XIK-NT-UPH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="goy-eX-qAv"/>
                             <constraint firstItem="kKw-ih-vQz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lvl-AD-a9m"/>
                             <constraint firstAttribute="trailing" secondItem="oEb-1o-3EQ" secondAttribute="trailing" id="oTy-li-tT0"/>
@@ -156,6 +167,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="balanceView" destination="Sha-JT-nEn" id="BrB-fZ-iH1"/>
                         <outlet property="canvasView" destination="Seg-s0-djh" id="CDu-GF-A2y"/>
                         <outlet property="containerScrollView" destination="XIK-NT-UPH" id="AUs-cl-Wsg"/>
                     </connections>

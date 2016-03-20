@@ -14,6 +14,7 @@ class GeneratorViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var canvasView: CanvasView!
+    @IBOutlet weak var balanceView: UIView!
     @IBOutlet weak var containerScrollView: UIScrollView!
     
     // MARK: - Properties
@@ -54,7 +55,7 @@ class GeneratorViewController: UIViewController {
     @IBAction func previewAction(sender: UIBarButtonItem) {
         self.canvasView.clearPossibleViews()
         
-        let fitRect = CGRectInset(self.canvasView.enclosingRect, -self.canvasView.fieldsSize.width * 2, -self.canvasView.fieldsSize.height * 2)
+        let fitRect = self.canvasView.enclosingRect//CGRectInset(self.canvasView.enclosingRect, -self.canvasView.fieldsSize.width * 2, -self.canvasView.fieldsSize.height * 2)
         self.fitRectInScroll(fitRect)
     }
     
@@ -139,7 +140,31 @@ class GeneratorViewController: UIViewController {
             self.canvasView.addPossibleViewForPlace($0)
         }
         
-        let fitRect = CGRectInset(self.canvasView.enclosingRect, -self.canvasView.fieldsSize.width * 2, -self.canvasView.fieldsSize.height * 2)
+        let fitRect = self.canvasView.enclosingRect//CGRectInset(self.canvasView.enclosingRect, -self.canvasView.fieldsSize.width * 2, -self.canvasView.fieldsSize.height * 2)
+        
+        self.fitRectInScroll(fitRect)
+        
+        self.canvasView.setNeedsDisplay()
+    }
+    
+    /**
+     Find best for current iteration on place on canvas
+     */
+    func balance() {
+        guard let skill = self.selectedSkill ?? self.skills.first else {
+            return
+        }
+        
+        
+        let possibles = self.canvasView.canvasBoard.iteratePossibles(Place.Size(exp: skill.experience))
+        
+        self.canvasView.clearPossibleViews()
+        
+        possibles.forEach {
+            self.canvasView.addPossibleViewForPlace($0)
+        }
+        
+        let fitRect = self.canvasView.enclosingRect//CGRectInset(self.canvasView.enclosingRect, -self.canvasView.fieldsSize.width * 2, -self.canvasView.fieldsSize.height * 2)
         
         self.fitRectInScroll(fitRect)
         
@@ -198,18 +223,15 @@ extension GeneratorViewController : UICollectionViewDelegate {
 extension GeneratorViewController {
     
     func fitRectInScroll(rect: CGRect) {
-        // 1. Set offset for center
         let center = rect.centerOfMass
-        let bounds = self.containerScrollView.bounds
+        let bounds = self.balanceView.bounds
         
-        
-        // 2. set scale
         let scale = min(1,min(bounds.width/rect.width,bounds.height/rect.height))
-        
-        let offset = CGPoint(x: (center.x * scale - bounds.width/2) , y: (center.y * scale - bounds.height/2))
-
+        let offset = CGPoint(x: (center.x * scale - self.balanceView.center.x) , y: (center.y * scale - self.balanceView.center.y))
+//        let bounds = self.containerScrollView.bounds
 //        
-//        self.containerScrollView.setContentOffset(offset, animated: true)
+//        let scale = min(1,min(bounds.width/rect.width,bounds.height/rect.height))
+//        let offset = CGPoint(x: (center.x * scale - bounds.width/2) , y: (center.y * scale - bounds.height/2))
         
         UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             self.containerScrollView.zoomScale = scale
