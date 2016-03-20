@@ -27,8 +27,17 @@ class Field {
     }
     
     func addToOutlineIfPossible() {
-        if case Content.Empty = self.content {
+        if self.isEmpty {
             self.content = .Outline
+        }
+    }
+    
+    func removeFromOutlineIfPossible(place: OccupiedPlace) {
+        switch self.content {
+        case .Occupied(place: let occupiedPlace) where !(occupiedPlace === place):
+            break
+        default:
+            self.content = .Empty
         }
     }
     

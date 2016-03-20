@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="brain1" translatesAutoresizingMaskIntoConstraints="NO" id="oEb-1o-3EQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="brain-flat" translatesAutoresizingMaskIntoConstraints="NO" id="oEb-1o-3EQ">
                                 <rect key="frame" x="0.0" y="64" width="600" height="448"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -30,7 +30,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-s0-djh" customClass="CanvasView" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="tintColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="tintColor" red="0.33333333333333331" green="0.63529411764705879" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1000" id="uqw-5z-gAf"/>
@@ -38,6 +38,7 @@
                                         </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="J3r-M1-7CH" appends="YES" id="GOg-Sr-GNA"/>
+                                            <outletCollection property="gestureRecognizers" destination="ity-t1-9ej" appends="YES" id="HO2-6J-n6O"/>
                                         </connections>
                                     </view>
                                 </subviews>
@@ -156,6 +157,11 @@
                         <action selector="didTap:" destination="BYZ-38-t0r" id="bY7-qx-iDu"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="ity-t1-9ej">
+                    <connections>
+                        <action selector="dragAction:" destination="BYZ-38-t0r" id="GeK-8u-Nzl"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="827" y="1971"/>
         </scene>
@@ -632,7 +638,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="brain1" width="670" height="601"/>
+        <image name="brain-flat" width="240" height="240"/>
         <image name="skill_obj" width="72" height="72"/>
         <image name="skill_swift" width="154" height="150"/>
     </resources>

@@ -21,6 +21,13 @@ class GeneratorViewController: UIViewController {
     var skills : [Skill] = []
     var selectedSkill : Skill?
     
+    var currentPlace : OccupiedPlaceView?
+    var possiblePlace : PossiblePlaceView!
+    var dragFieldOffset : Position = Position.zero
+    var dragOffset = CGPoint.zero
+    var dragPossiblePlace : PossiblePlaceView!
+    var dragStartLocation : CGPoint = CGPoint.zero
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +54,8 @@ class GeneratorViewController: UIViewController {
     @IBAction func previewAction(sender: UIBarButtonItem) {
         self.canvasView.clearPossibleViews()
         
-        self.fitRectInScroll(self.canvasView.enclosingRect)
+        let fitRect = CGRectInset(self.canvasView.enclosingRect, -self.canvasView.fieldsSize.width * 2, -self.canvasView.fieldsSize.height * 2)
+        self.fitRectInScroll(fitRect)
     }
     
     @IBAction func didTap(sender: UITapGestureRecognizer) {
@@ -57,13 +65,66 @@ class GeneratorViewController: UIViewController {
         
         if case Field.Content.Possible(place: let place) = field.content {
             if let occupied = place.occupy(skill) {
-                self.canvasView.addOccupiedPlace(occupied)
+                self.currentPlace = self.canvasView.addOccupiedPlace(occupied)
             }
             self.iterate()
             self.canvasView.setNeedsDisplay()
         }
     }
-
+    
+    @IBAction func dragAction(sender: UIPanGestureRecognizer) {
+        let locationInCanvas = sender.locationInView(self.canvasView)
+        
+        guard let field = self.canvasView[locationInCanvas], current = self.currentPlace else {
+            return
+        }
+        
+        
+        switch sender.state {
+        case .Began:
+            self.canvasView.clearPossibleViews()
+            self.dragFieldOffset = field.position - current.place.position
+            self.dragStartLocation = locationInCanvas
+            self.dragOffset = CGPoint(x: locationInCanvas.x - current.frame.origin.x, y: locationInCanvas.y - current.frame.origin.y)
+            self.possiblePlace = self.canvasView.newPossiblePlaceView()
+            self.possiblePlace.placeOnCanvas(self.canvasView, position: current.place.position, size: current.place.size)
+        case .Changed:
+            let translation = sender.translationInView(self.canvasView)
+            current.frame.origin = CGPoint(x: self.dragStartLocation.x + translation.x - self.dragOffset.x, y: self.dragStartLocation.y + translation.y - self.dragOffset.y)
+            
+            let offset = field.position - self.possiblePlace.position - self.dragFieldOffset
+            
+            guard offset != Position.zero else {
+                return
+            }
+            
+            let offsetX = Position(row: offset.row, col: 0)
+            let offsetY = Position(row: 0, col: offset.col)
+            
+            if self.possiblePlace.checkOffset(offset, withPlace: current.place) {
+                let position = self.possiblePlace.position + offset
+                self.possiblePlace.placeOnCanvas(self.canvasView, position: position, size: current.place.size)
+            }
+            else if self.possiblePlace.checkOffset(offsetX, withPlace: current.place) {
+                let position = self.possiblePlace.position + offsetX
+                self.possiblePlace.placeOnCanvas(self.canvasView, position: position, size: current.place.size)
+            }
+            else if self.possiblePlace.checkOffset(offsetY, withPlace: current.place) {
+                let position = self.possiblePlace.position + offsetY
+                self.possiblePlace.placeOnCanvas(self.canvasView, position: position, size: current.place.size)
+            }
+        case .Ended:
+            let offset = self.possiblePlace.position - current.place.position
+            current.removeFromSuperview()
+            current.place.moveByOffset(offset)
+            current.placeOnCanvas(self.canvasView, occupiedPlace: current.place)
+            self.possiblePlace.removeFromSuperview()
+            self.possiblePlace = nil
+        default:
+            break
+        }
+    }
+    
     func iterate() {
         guard let skill = self.selectedSkill ?? self.skills.first else {
             return
@@ -78,7 +139,9 @@ class GeneratorViewController: UIViewController {
             self.canvasView.addPossibleViewForPlace($0)
         }
         
-        self.fitRectInScroll(self.canvasView.enclosingRect)
+        let fitRect = CGRectInset(self.canvasView.enclosingRect, -self.canvasView.fieldsSize.width * 2, -self.canvasView.fieldsSize.height * 2)
+        
+        self.fitRectInScroll(fitRect)
         
         self.canvasView.setNeedsDisplay()
     }

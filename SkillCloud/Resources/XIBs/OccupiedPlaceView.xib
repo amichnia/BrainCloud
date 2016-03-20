@@ -12,35 +12,35 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lVV-k2-qv7" userLabel="Container">
-                    <rect key="frame" x="4" y="4" width="92" height="92"/>
+                    <rect key="frame" x="2" y="2" width="96" height="96"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EI9-9u-qv9">
-                            <rect key="frame" x="0.0" y="0.0" width="92" height="92"/>
+                            <rect key="frame" x="-2" y="-2" width="100" height="100"/>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="EI9-9u-qv9" secondAttribute="trailing" id="2Zi-Ox-qeQ"/>
-                        <constraint firstAttribute="bottom" secondItem="EI9-9u-qv9" secondAttribute="bottom" id="3wj-YC-yN0"/>
-                        <constraint firstItem="EI9-9u-qv9" firstAttribute="top" secondItem="lVV-k2-qv7" secondAttribute="top" id="BkJ-dz-GjY"/>
-                        <constraint firstItem="EI9-9u-qv9" firstAttribute="leading" secondItem="lVV-k2-qv7" secondAttribute="leading" id="Vbi-u6-fyd"/>
+                        <constraint firstAttribute="trailing" secondItem="EI9-9u-qv9" secondAttribute="trailing" constant="-2" id="2Zi-Ox-qeQ"/>
+                        <constraint firstAttribute="bottom" secondItem="EI9-9u-qv9" secondAttribute="bottom" constant="-2" id="3wj-YC-yN0"/>
+                        <constraint firstItem="EI9-9u-qv9" firstAttribute="top" secondItem="lVV-k2-qv7" secondAttribute="top" constant="-2" id="BkJ-dz-GjY"/>
+                        <constraint firstItem="EI9-9u-qv9" firstAttribute="leading" secondItem="lVV-k2-qv7" secondAttribute="leading" constant="-2" id="Vbi-u6-fyd"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="16"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                            <integer key="value" value="2"/>
+                            <integer key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="lVV-k2-qv7" secondAttribute="bottom" constant="4" id="Abv-4J-GDe"/>
-                <constraint firstAttribute="trailing" secondItem="lVV-k2-qv7" secondAttribute="trailing" constant="4" id="bMi-Qq-q1H"/>
-                <constraint firstItem="lVV-k2-qv7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="hdq-sK-CAP"/>
-                <constraint firstItem="lVV-k2-qv7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="naQ-0i-fuN"/>
+                <constraint firstAttribute="bottom" secondItem="lVV-k2-qv7" secondAttribute="bottom" constant="2" id="Abv-4J-GDe"/>
+                <constraint firstAttribute="trailing" secondItem="lVV-k2-qv7" secondAttribute="trailing" constant="2" id="bMi-Qq-q1H"/>
+                <constraint firstItem="lVV-k2-qv7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="2" id="hdq-sK-CAP"/>
+                <constraint firstItem="lVV-k2-qv7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="naQ-0i-fuN"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
