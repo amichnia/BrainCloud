@@ -19,10 +19,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="brain-flat" translatesAutoresizingMaskIntoConstraints="NO" id="oEb-1o-3EQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flat_brain_background" translatesAutoresizingMaskIntoConstraints="NO" id="oEb-1o-3EQ">
                                 <rect key="frame" x="0.0" y="64" width="600" height="448"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" name="selectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flat_brain_foreground" translatesAutoresizingMaskIntoConstraints="NO" id="GJz-Ww-m38">
+                                <rect key="frame" x="0.0" y="64" width="600" height="448"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.19607843137254902" green="0.44705882352941179" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-NT-UPH" userLabel="Canvas Container Scroll View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
@@ -96,7 +101,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skill Name label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TUv-vr-tk8">
                                                     <rect key="frame" x="5" y="66" width="78" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -126,9 +131,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="GJz-Ww-m38" firstAttribute="bottom" secondItem="oEb-1o-3EQ" secondAttribute="bottom" id="4xQ-HT-nMd"/>
+                            <constraint firstItem="GJz-Ww-m38" firstAttribute="trailing" secondItem="oEb-1o-3EQ" secondAttribute="trailing" id="A5D-af-pPb"/>
                             <constraint firstItem="XIK-NT-UPH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="C2N-5N-tJc"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kKw-ih-vQz" secondAttribute="bottom" id="FX4-Qx-ekv"/>
+                            <constraint firstItem="GJz-Ww-m38" firstAttribute="top" secondItem="oEb-1o-3EQ" secondAttribute="top" id="Gca-cf-M5w"/>
                             <constraint firstItem="oEb-1o-3EQ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="KDu-ad-Pft"/>
+                            <constraint firstItem="GJz-Ww-m38" firstAttribute="leading" secondItem="oEb-1o-3EQ" secondAttribute="leading" id="KYr-o1-ue5"/>
                             <constraint firstAttribute="trailing" secondItem="XIK-NT-UPH" secondAttribute="trailing" id="O16-wP-U3R"/>
                             <constraint firstItem="oEb-1o-3EQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="TIX-Kk-RrA"/>
                             <constraint firstItem="kKw-ih-vQz" firstAttribute="top" secondItem="oEb-1o-3EQ" secondAttribute="bottom" id="VZR-Qx-LBB"/>
@@ -160,6 +169,7 @@
                 <panGestureRecognizer minimumNumberOfTouches="1" id="ity-t1-9ej">
                     <connections>
                         <action selector="dragAction:" destination="BYZ-38-t0r" id="GeK-8u-Nzl"/>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="6tg-1R-U8Z"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>
@@ -638,7 +648,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="brain-flat" width="240" height="240"/>
+        <image name="flat_brain_background" width="465" height="364"/>
+        <image name="flat_brain_foreground" width="465" height="364"/>
         <image name="skill_obj" width="72" height="72"/>
         <image name="skill_swift" width="154" height="150"/>
     </resources>

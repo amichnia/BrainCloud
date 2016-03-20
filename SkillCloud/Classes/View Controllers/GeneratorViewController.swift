@@ -65,7 +65,7 @@ class GeneratorViewController: UIViewController {
         
         if case Field.Content.Possible(place: let place) = field.content {
             if let occupied = place.occupy(skill) {
-                self.currentPlace = self.canvasView.addOccupiedPlace(occupied)
+                self.canvasView.addOccupiedPlace(occupied)
             }
             self.iterate()
             self.canvasView.setNeedsDisplay()
@@ -144,6 +144,22 @@ class GeneratorViewController: UIViewController {
         self.fitRectInScroll(fitRect)
         
         self.canvasView.setNeedsDisplay()
+    }
+    
+}
+
+extension GeneratorViewController : UIGestureRecognizerDelegate {
+    
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let locationInCanvas = gestureRecognizer.locationInView(self.canvasView)
+        
+        if let field = self.canvasView[locationInCanvas], place = field.occupiedPlace?.view {
+            self.currentPlace = place
+            return true
+        }
+        else {
+            return false
+        }
     }
     
 }

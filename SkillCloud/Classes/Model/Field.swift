@@ -54,6 +54,15 @@ class Field {
         return self.canvas?[self.position.down]
     }
     
+    var occupiedPlace: OccupiedPlace? {
+        switch self.content {
+        case .Occupied(place: let place):
+            return place
+        default:
+            return nil
+        }
+    }
+    
     enum Content {
         case Empty
         case Impossible

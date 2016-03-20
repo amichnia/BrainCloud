@@ -95,6 +95,7 @@ class OccupiedPlaceView: UIView {
     // MARK: - Actions
     func placeOnCanvas(canvas: CanvasView, occupiedPlace: OccupiedPlace) {
         self.place = occupiedPlace
+        self.place.view = self
         self.canvas = canvas
         self.frame = CGRect(origin: canvas[self.place.position], size: canvas[self.place.size])
         

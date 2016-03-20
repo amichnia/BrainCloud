@@ -80,6 +80,8 @@ class OccupiedPlace : Place {
     var position : Position
     var canvas : CanvasBoard
     
+    weak var view: OccupiedPlaceView? // TODO: refactor
+    
     init(possiblePlace: PossiblePlace, skill: Skill){
         self.position = possiblePlace.position
         self.canvas = possiblePlace.canvas
