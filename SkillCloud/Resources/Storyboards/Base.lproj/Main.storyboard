@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rxB-Dj-wDY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IHA-15-xhl">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -21,24 +21,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flat_brain_background" translatesAutoresizingMaskIntoConstraints="NO" id="oEb-1o-3EQ">
-                                <rect key="frame" x="0.0" y="64" width="600" height="448"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="360"/>
                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flat_brain_foreground" translatesAutoresizingMaskIntoConstraints="NO" id="GJz-Ww-m38">
-                                <rect key="frame" x="0.0" y="64" width="600" height="448"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="360"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.19607843137254902" green="0.44705882352941179" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <view alpha="0.050000000000000003" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sha-JT-nEn" userLabel="BalanceView">
-                                <rect key="frame" x="45" y="87" width="510" height="344"/>
+                            <view alpha="0.050000000000000003" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sha-JT-nEn" userLabel="BalanceView">
+                                <rect key="frame" x="45" y="49" width="510" height="344"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Sha-JT-nEn" secondAttribute="height" multiplier="255:172" id="bYQ-Zc-gCN"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-NT-UPH" userLabel="Canvas Container Scroll View">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="512"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="424"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Seg-s0-djh" customClass="CanvasView" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -63,10 +63,10 @@
                                 </constraints>
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kKw-ih-vQz">
-                                <rect key="frame" x="0.0" y="512" width="600" height="88"/>
+                                <rect key="frame" x="0.0" y="424" width="600" height="176"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="88" id="YHK-IO-Tsi"/>
+                                    <constraint firstAttribute="height" constant="176" id="YHK-IO-Tsi"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="YdK-Qt-7Dv">
                                     <size key="itemSize" width="88" height="88"/>
@@ -642,6 +642,79 @@
             </objects>
             <point key="canvasLocation" x="1610" y="395"/>
         </scene>
+        <!--Test View Controller-->
+        <scene sceneID="qAr-zz-Ejk">
+            <objects>
+                <viewController id="IHA-15-xhl" customClass="TestViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c0l-4L-cfk"/>
+                        <viewControllerLayoutGuide type="bottom" id="vwM-3x-yzm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c0t-uu-Q4m">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skill cloud brain" translatesAutoresizingMaskIntoConstraints="NO" id="G0a-bz-cHu">
+                                <rect key="frame" x="0.0" y="19" width="600" height="562"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="G0a-bz-cHu" secondAttribute="height" multiplier="305:286" id="0PQ-s2-GXo"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bC-ma-7yq" customClass="TestView" customModule="SkillCloud" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="19" width="600" height="562"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Jt-xq-Sbt">
+                                        <rect key="frame" x="189" y="243" width="240" height="128"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Cq1-5a-OGk" appends="YES" id="Yov-Sl-Nar"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsY-lp-g0W">
+                                <rect key="frame" x="505" y="548" width="95" height="52"/>
+                                <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="IFp-9F-88O"/>
+                                    <constraint firstAttribute="width" constant="95" id="YYy-9q-dae"/>
+                                </constraints>
+                                <state key="normal" title="SAVE"/>
+                                <connections>
+                                    <action selector="saveAction:" destination="IHA-15-xhl" eventType="touchUpInside" id="8JZ-FR-eql"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0bC-ma-7yq" firstAttribute="top" secondItem="G0a-bz-cHu" secondAttribute="top" id="0Ic-dF-XdJ"/>
+                            <constraint firstItem="0bC-ma-7yq" firstAttribute="leading" secondItem="G0a-bz-cHu" secondAttribute="leading" id="AXl-1t-oZS"/>
+                            <constraint firstItem="0bC-ma-7yq" firstAttribute="bottom" secondItem="G0a-bz-cHu" secondAttribute="bottom" id="Cb8-OX-0Ea"/>
+                            <constraint firstItem="G0a-bz-cHu" firstAttribute="centerY" secondItem="c0t-uu-Q4m" secondAttribute="centerY" id="QM7-Ze-x16"/>
+                            <constraint firstItem="0bC-ma-7yq" firstAttribute="trailing" secondItem="G0a-bz-cHu" secondAttribute="trailing" id="aui-XZ-5vu"/>
+                            <constraint firstItem="G0a-bz-cHu" firstAttribute="width" secondItem="c0t-uu-Q4m" secondAttribute="width" id="gZH-le-fMm"/>
+                            <constraint firstItem="G0a-bz-cHu" firstAttribute="centerX" secondItem="c0t-uu-Q4m" secondAttribute="centerX" id="hLe-q3-5Td"/>
+                            <constraint firstAttribute="trailing" secondItem="NsY-lp-g0W" secondAttribute="trailing" id="jLM-71-w30"/>
+                            <constraint firstItem="vwM-3x-yzm" firstAttribute="top" secondItem="NsY-lp-g0W" secondAttribute="bottom" id="rr1-uU-GQx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tapRecognizer" destination="Cq1-5a-OGk" id="oKt-i3-cqD"/>
+                        <outlet property="testView" destination="0bC-ma-7yq" id="fQn-JU-0SY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xMw-da-HkH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Cq1-5a-OGk">
+                    <connections>
+                        <action selector="didTap:" destination="IHA-15-xhl" id="Q45-Xf-8gW"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="8" y="330"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="SWI-bd-5hr">
             <objects>
@@ -662,6 +735,7 @@
     <resources>
         <image name="flat_brain_background" width="465" height="364"/>
         <image name="flat_brain_foreground" width="465" height="364"/>
+        <image name="skill cloud brain" width="305" height="286"/>
         <image name="skill_obj" width="72" height="72"/>
         <image name="skill_swift" width="154" height="150"/>
     </resources>

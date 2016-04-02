@@ -18,7 +18,7 @@ class DataManager: NSObject {
     static var sharedManager : DataManager = DataManager()
     
     // MARK: - Core Data stack properties
-    static var mpplicationDocumentsDirectory: NSURL { return DataManager.sharedManager.applicationDocumentsDirectory }
+    static var applicationDocumentsDirectory: NSURL { return DataManager.sharedManager.applicationDocumentsDirectory }
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "amichnia.SkillCloud" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
