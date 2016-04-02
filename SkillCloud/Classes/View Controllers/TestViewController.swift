@@ -7,32 +7,133 @@
 //
 
 import UIKit
+import SpriteKit
 
 class TestViewController: UIViewController {
 
     // MARK: - Outlets
-    @IBOutlet weak var testView: TestView!
-    @IBOutlet var tapRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var skView: SKView!
+    @IBOutlet weak var imageView: UIImageView!
     
     // MARK: - Properties
+    var nodes : [Node] = []
+    var scene : GameScene!
     
     // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+//        self.nodes = try! self.loadNodes()
+        self.nodes = try! self.loadNodesFromBundle()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        Node.rectSize = self.testView.bounds.size
+        Node.rectSize = self.skView.bounds.size
+        Node.color = self.skView.tintColor
+        
+        self.prepareScene(self.skView, size: self.skView.bounds.size)
+    }
+    
+    // MARK: - COnfiguration
+    func prepareScene(skView: SKView, size: CGSize){
+        if let scene = GameScene(fileNamed:"GameScene") {
+            scene.nodes = self.nodes
+            
+            // Configure the view.
+            skView.showsFPS = true
+            skView.showsNodeCount = true
+            skView.showsPhysics = true
+            
+            /* Sprite Kit applies additional optimizations to improve rendering performance */
+            skView.ignoresSiblingOrder = true
+            
+            /* Set the scale mode to scale to fit the window */
+            scene.scaleMode = .Fill
+            
+            skView.presentScene(scene)
+            
+            self.scene = scene
+            self.skView.allowsTransparency = true
+        }
     }
     
     // MARK: - Actions
-    @IBAction func didTap(sender: UITapGestureRecognizer) {
-        let node = Node(point: sender.locationInView(self.testView), scale: 1)
-//        self.testView.nodes.append(node)
-        self.testView.addNode(node)
-        
-        self.testView.setNeedsDisplay()
+    @IBAction func showHideAction(sender: UISegmentedControl) {
+        self.imageView.hidden = sender.selectedSegmentIndex == 1
     }
-
+    
     @IBAction func saveAction(sender: AnyObject) {
-        self.testView.saveNodes()
+        self.saveNodes(self.scene.getNodes())
     }
+    
+    func saveNodes(nodes: [Node]) {
+        let array = NSArray(array: nodes.map(){ return $0.dictRepresentation() } )
+        
+        let filename = "nodes.json"
+        let url = DataManager.applicationDocumentsDirectory.URLByAppendingPathComponent(filename)
+        
+        print("Saving to: \(url)\n")
+        
+        if let stream = NSOutputStream(URL: url, append: false) {
+            stream.open()
+            var error : NSError? = nil
+            NSJSONSerialization.writeJSONObject(array, toStream: stream, options: NSJSONWritingOptions.PrettyPrinted, error: &error)
+            
+            stream.close()
+            
+            if let _ = error {
+                print("ERROR: \(error)\n")
+            }
+            else {
+                print("Done. \n")
+            }
+        }
+        else {
+            print("ERROR: cant create output stream\n")
+        }
+    }
+    
+    func loadNodesFromBundle() throws -> [Node] {
+        guard let url = NSBundle.mainBundle().URLForResource("all_base_nodes", withExtension: "json"), data = NSData(contentsOfURL: url) else {
+            throw SCError.InvalidBundleResourceUrl
+        }
+        
+        let array = ((try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)) as! NSArray) as! [NSDictionary]
+        
+        return array.map{
+            let scale = $0["s"] as! Int
+            let point = CGPoint(x: $0["x"] as! CGFloat, y: $0["y"] as! CGFloat)
+            let node =  Node(point: point, scale: scale, id: $0["id"] as! Int, connected: $0["connected"] as! [Int])
+            return node
+        }
+    }
+    
+    func loadNodes() throws -> [Node] {
+        let filename = "nodes.json"
+        let url = DataManager.applicationDocumentsDirectory.URLByAppendingPathComponent(filename)
+        
+        guard let stream = NSInputStream(URL: url) else {
+            throw SCError.CreateStreamError
+        }
+        
+        stream.open()
+        
+        let array = (try! NSJSONSerialization.JSONObjectWithStream(stream, options: NSJSONReadingOptions.AllowFragments) as! NSArray) as! [NSDictionary]
+        
+        stream.close()
+        
+        return array.map{
+            let scale = $0["s"] as! Int
+            let point = CGPoint(x: $0["x"] as! CGFloat, y: $0["y"] as! CGFloat)
+            let node =  Node(point: point, scale: scale, id: $0["id"] as! Int, connected: $0["connected"] as! [Int])
+            return node
+        }
+    }
+}
+
+enum SCError : ErrorType {
+    case CreateStreamError
+    case InvalidBundleResourceUrl
 }

@@ -56,7 +56,7 @@ public func resetDefaultDebugLevel() {
 }
 
 @available(*, deprecated, message="Use one of the DDLog*() functions if appropriate or call _DDLogMessage()")
-public func SwiftLogMacro(isAsynchronous: Bool, level: DDLogLevel, flag flg: DDLogFlag, context: Int = 0, file: StaticString = __FILE__, function: StaticString = __FUNCTION__, line: UInt = __LINE__, tag: AnyObject? = nil, @autoclosure string: () -> String) {
+public func SwiftLogMacro(isAsynchronous: Bool, level: DDLogLevel, flag flg: DDLogFlag, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: AnyObject? = nil, @autoclosure string: () -> String) {
     _DDLogMessage(string, level: level, flag: flg, context: context, file: file, function: function, line: line, tag: tag, asynchronous: isAsynchronous)
 }
 
@@ -68,30 +68,30 @@ public func _DDLogMessage(@autoclosure message: () -> String, level: DDLogLevel,
     }
 }
 
-public func DDLogDebug(@autoclosure message: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = __FILE__, function: StaticString = __FUNCTION__, line: UInt = __LINE__, tag: AnyObject? = nil, asynchronous async: Bool = true) {
+public func DDLogDebug(@autoclosure message: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: AnyObject? = nil, asynchronous async: Bool = true) {
     _DDLogMessage(message, level: level, flag: .Debug, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async)
 }
 
-public func DDLogInfo(@autoclosure message: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = __FILE__, function: StaticString = __FUNCTION__, line: UInt = __LINE__, tag: AnyObject? = nil, asynchronous async: Bool = true) {
+public func DDLogInfo(@autoclosure message: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: AnyObject? = nil, asynchronous async: Bool = true) {
     _DDLogMessage(message, level: level, flag: .Info, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async)
 }
 
-public func DDLogWarn(@autoclosure message: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = __FILE__, function: StaticString = __FUNCTION__, line: UInt = __LINE__, tag: AnyObject? = nil, asynchronous async: Bool = true) {
+public func DDLogWarn(@autoclosure message: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: AnyObject? = nil, asynchronous async: Bool = true) {
     _DDLogMessage(message, level: level, flag: .Warning, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async)
 }
 
-public func DDLogVerbose(@autoclosure message: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = __FILE__, function: StaticString = __FUNCTION__, line: UInt = __LINE__, tag: AnyObject? = nil, asynchronous async: Bool = true) {
+public func DDLogVerbose(@autoclosure message: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: AnyObject? = nil, asynchronous async: Bool = true) {
     _DDLogMessage(message, level: level, flag: .Verbose, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async)
 }
 
-public func DDLogError(@autoclosure message: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = __FILE__, function: StaticString = __FUNCTION__, line: UInt = __LINE__, tag: AnyObject? = nil, asynchronous async: Bool = false) {
+public func DDLogError(@autoclosure message: () -> String, level: DDLogLevel = defaultDebugLevel, context: Int = 0, file: StaticString = #file, function: StaticString = #function, line: UInt = #line, tag: AnyObject? = nil, asynchronous async: Bool = false) {
     _DDLogMessage(message, level: level, flag: .Error, context: context, file: file, function: function, line: line, tag: tag, asynchronous: async)
 }
 
 /// Returns a String of the current filename, without full path or extension.
 ///
 /// Analogous to the C preprocessor macro `THIS_FILE`.
-public func CurrentFileName(fileName: StaticString = __FILE__) -> String {
+public func CurrentFileName(fileName: StaticString = #file) -> String {
     var str = fileName.stringValue
     if let idx = str.rangeOfString("/", options: .BackwardsSearch)?.endIndex {
         str = str.substringFromIndex(idx)

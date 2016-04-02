@@ -654,26 +654,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skill cloud brain" translatesAutoresizingMaskIntoConstraints="NO" id="G0a-bz-cHu">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skill cloud brain" translatesAutoresizingMaskIntoConstraints="NO" id="G0a-bz-cHu">
                                 <rect key="frame" x="0.0" y="19" width="600" height="562"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="G0a-bz-cHu" secondAttribute="height" multiplier="305:286" id="0PQ-s2-GXo"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bC-ma-7yq" customClass="TestView" customModule="SkillCloud" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Jt-xq-Sbt" userLabel="SKView" customClass="SKView">
                                 <rect key="frame" x="0.0" y="19" width="600" height="562"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Jt-xq-Sbt">
-                                        <rect key="frame" x="189" y="243" width="240" height="128"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Cq1-5a-OGk" appends="YES" id="Yov-Sl-Nar"/>
-                                </connections>
+                                <color key="tintColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsY-lp-g0W">
                                 <rect key="frame" x="505" y="548" width="95" height="52"/>
@@ -687,31 +678,41 @@
                                     <action selector="saveAction:" destination="IHA-15-xhl" eventType="touchUpInside" id="8JZ-FR-eql"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BEh-gs-OF6">
+                                <rect key="frame" x="48" y="552" width="160" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="TxJ-wN-pII"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Show"/>
+                                    <segment title="Hide"/>
+                                </segments>
+                                <connections>
+                                    <action selector="showHideAction:" destination="IHA-15-xhl" eventType="valueChanged" id="7Sz-La-s2w"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0bC-ma-7yq" firstAttribute="top" secondItem="G0a-bz-cHu" secondAttribute="top" id="0Ic-dF-XdJ"/>
-                            <constraint firstItem="0bC-ma-7yq" firstAttribute="leading" secondItem="G0a-bz-cHu" secondAttribute="leading" id="AXl-1t-oZS"/>
-                            <constraint firstItem="0bC-ma-7yq" firstAttribute="bottom" secondItem="G0a-bz-cHu" secondAttribute="bottom" id="Cb8-OX-0Ea"/>
+                            <constraint firstItem="1Jt-xq-Sbt" firstAttribute="trailing" secondItem="G0a-bz-cHu" secondAttribute="trailing" id="3BL-M6-JIc"/>
+                            <constraint firstItem="BEh-gs-OF6" firstAttribute="leading" secondItem="c0t-uu-Q4m" secondAttribute="leadingMargin" constant="28" id="PEM-JF-TxS"/>
                             <constraint firstItem="G0a-bz-cHu" firstAttribute="centerY" secondItem="c0t-uu-Q4m" secondAttribute="centerY" id="QM7-Ze-x16"/>
-                            <constraint firstItem="0bC-ma-7yq" firstAttribute="trailing" secondItem="G0a-bz-cHu" secondAttribute="trailing" id="aui-XZ-5vu"/>
+                            <constraint firstItem="vwM-3x-yzm" firstAttribute="top" secondItem="BEh-gs-OF6" secondAttribute="bottom" constant="20" id="Srk-Th-FeL"/>
+                            <constraint firstItem="1Jt-xq-Sbt" firstAttribute="bottom" secondItem="G0a-bz-cHu" secondAttribute="bottom" id="cHP-Eb-kXu"/>
+                            <constraint firstItem="1Jt-xq-Sbt" firstAttribute="top" secondItem="G0a-bz-cHu" secondAttribute="top" id="cdo-nk-G52"/>
                             <constraint firstItem="G0a-bz-cHu" firstAttribute="width" secondItem="c0t-uu-Q4m" secondAttribute="width" id="gZH-le-fMm"/>
                             <constraint firstItem="G0a-bz-cHu" firstAttribute="centerX" secondItem="c0t-uu-Q4m" secondAttribute="centerX" id="hLe-q3-5Td"/>
                             <constraint firstAttribute="trailing" secondItem="NsY-lp-g0W" secondAttribute="trailing" id="jLM-71-w30"/>
+                            <constraint firstItem="1Jt-xq-Sbt" firstAttribute="leading" secondItem="G0a-bz-cHu" secondAttribute="leading" id="mrd-aB-RDn"/>
                             <constraint firstItem="vwM-3x-yzm" firstAttribute="top" secondItem="NsY-lp-g0W" secondAttribute="bottom" id="rr1-uU-GQx"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tapRecognizer" destination="Cq1-5a-OGk" id="oKt-i3-cqD"/>
-                        <outlet property="testView" destination="0bC-ma-7yq" id="fQn-JU-0SY"/>
+                        <outlet property="imageView" destination="G0a-bz-cHu" id="A1P-LS-Kqy"/>
+                        <outlet property="skView" destination="1Jt-xq-Sbt" id="A6K-pP-gN9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMw-da-HkH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Cq1-5a-OGk">
-                    <connections>
-                        <action selector="didTap:" destination="IHA-15-xhl" id="Q45-Xf-8gW"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="8" y="330"/>
         </scene>
