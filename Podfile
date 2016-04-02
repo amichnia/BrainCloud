@@ -9,6 +9,7 @@ pod "ASIACheckmarkView"
 pod "LTMorphingLabel"
 pod "PromiseKit"
 pod "PromiseKit/AssetsLibrary"
+pod 'SpriteKit-Spring'
 
 end
 

@@ -13,6 +13,9 @@ class BrainNode: SKShapeNode {
 
     var node: Node!
     var connected : Set<BrainNode> = Set()
+    var lines : [BrainNode:SKShapeNode] = [:]
+    
+    var lastPosition : CGPoint = CGPointZero
     
     // Actions
     func connectNode(node: BrainNode) {
@@ -24,7 +27,7 @@ class BrainNode: SKShapeNode {
         self.node.connectNode(node.node)
         
         // Add child line node
-        self.addLineToPoint(node.position)
+        self.addLineToNode(node)
     }
     
     func disconnectNode(node: BrainNode) {
@@ -33,7 +36,8 @@ class BrainNode: SKShapeNode {
     }
     
     func isConnectedTo(node: BrainNode) -> Bool {
-        return self.node.isConnectedTo(node.node)
+        return self.lines[node] != nil || node.lines[self] != nil
+//        return self.node.isConnectedTo(node.node)
     }
 
     // Initialization
@@ -51,19 +55,28 @@ class BrainNode: SKShapeNode {
     }
     
     // Adding lines
-    func addLineToPoint(point: CGPoint) {
-        let offset = CGPoint(x: point.x - self.position.x, y: point.y - self.position.y)
-        let path = CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, 0, 0)
-        CGPathAddLineToPoint(path, nil, offset.x, offset.y)
-        
-        let line = SKShapeNode(path: path)
+    func addLineToNode(node: BrainNode) {
+        let line = SKShapeNode(path: self.pathToPoint(node.position))
         line.strokeColor = Node.color
         line.zPosition = self.zPosition - 1
         line.lineWidth = 1
         line.antialiased = true
         
+        self.lines[node] = line
         self.addChild(line)
     }
+ 
+    func pathToPoint(point: CGPoint) -> CGPath {
+        let offset = CGPoint(x: point.x - self.position.x, y: point.y - self.position.y)
+        let path = CGPathCreateMutable()
+        CGPathMoveToPoint(path, nil, 0, 0)
+        CGPathAddLineToPoint(path, nil, offset.x, offset.y)
+        return path
+    }
     
+    func updateLines() {
+        self.connected.forEach {
+            self.lines[$0]?.path = self.pathToPoint($0.position)
+        }
+    }
 }

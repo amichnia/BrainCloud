@@ -8,6 +8,7 @@
 
 import Foundation
 import SpriteKit
+import SpriteKit_Spring
 
 class GameScene: SKScene {
     
@@ -46,11 +47,11 @@ class GameScene: SKScene {
             brainNode.physicsBody = SKPhysicsBody(circleOfRadius: brainNode.node.radius + 2)
         }
         
-//        for node in allNodes {
-//            for i in node.node.connected {
-//                node.addLineToPoint(allNodes[i-1].position) // id's start from 1
-//            }
-//        }
+        allNodes.forEach{ node in
+            node.node.connected.forEach{ i in
+                node.connectNode(allNodes[i-1])
+            }
+        }
     }
     
     func getNodes() -> [Node] {
@@ -73,7 +74,7 @@ class GameScene: SKScene {
             shapeNode.xScale = 0
             shapeNode.yScale = 0
             
-            let action = SKAction.scaleTo(1, duration: 0.2)
+            let action = SKAction.scaleTo(1, duration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 5)
             shapeNode.runAction(action)
             
             self.addChild(shapeNode)
@@ -119,7 +120,9 @@ class GameScene: SKScene {
     
     // MARK: - Main run loop
     override func update(currentTime: CFTimeInterval) {
-        
+        allNodes.forEach{
+            $0.updateLines()
+        }
     }
     
 }
