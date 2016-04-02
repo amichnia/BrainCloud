@@ -70,6 +70,12 @@ class GameScene: SKScene {
             shapeNode.fillColor = UIColor.redColor()
             shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: 30)
             
+            shapeNode.xScale = 0
+            shapeNode.yScale = 0
+            
+            let action = SKAction.scaleTo(1, duration: 0.2)
+            shapeNode.runAction(action)
+            
             self.addChild(shapeNode)
 //            let touchedNode = self.nodeAtPoint(location)
 //            if touchedNode != self, let shapeNode = touchedNode as? BrainNode {
