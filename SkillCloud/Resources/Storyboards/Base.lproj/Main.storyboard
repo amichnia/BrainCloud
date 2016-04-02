@@ -679,13 +679,15 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BEh-gs-OF6">
-                                <rect key="frame" x="48" y="552" width="160" height="29"/>
+                                <rect key="frame" x="48" y="552" width="180" height="29"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="TxJ-wN-pII"/>
+                                    <constraint firstAttribute="width" constant="180" id="TxJ-wN-pII"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="Show"/>
-                                    <segment title="Hide"/>
+                                    <segment title="beg"/>
+                                    <segment title="int"/>
+                                    <segment title="pro"/>
+                                    <segment title="exp"/>
                                 </segments>
                                 <connections>
                                     <action selector="showHideAction:" destination="IHA-15-xhl" eventType="valueChanged" id="7Sz-La-s2w"/>

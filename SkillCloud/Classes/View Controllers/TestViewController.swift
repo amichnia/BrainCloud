@@ -23,8 +23,8 @@ class TestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.nodes = try! self.loadNodes()
-        self.nodes = try! self.loadNodesFromBundle()
+        self.nodes = try! self.loadNodes()
+//        self.nodes = try! self.loadNodesFromBundle()
     }
     
     override func viewDidLayoutSubviews() {
@@ -61,7 +61,20 @@ class TestViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func showHideAction(sender: UISegmentedControl) {
-        self.imageView.hidden = sender.selectedSegmentIndex == 1
+//        self.imageView.hidden = sender.selectedSegmentIndex == 1
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            GameScene.radius = 10
+        case 1:
+            GameScene.radius = 15
+        case 2:
+            GameScene.radius = 20
+        case 3:
+            GameScene.radius = 25
+        default:
+            break
+        }
     }
     
     @IBAction func saveAction(sender: AnyObject) {
@@ -127,7 +140,8 @@ class TestViewController: UIViewController {
         return array.map{
             let scale = $0["s"] as! Int
             let point = CGPoint(x: $0["x"] as! CGFloat, y: $0["y"] as! CGFloat)
-            let node =  Node(point: point, scale: scale, id: $0["id"] as! Int, connected: $0["connected"] as! [Int])
+            var node =  Node(point: point, scale: scale, id: $0["id"] as! Int, connected: $0["connected"] as! [Int])
+            node.convex = $0["convex"] as! Bool
             return node
         }
     }

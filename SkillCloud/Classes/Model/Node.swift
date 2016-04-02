@@ -19,6 +19,7 @@ struct Node {
     var point : CGPoint
     var scale : Int = 1
     var id : Int = 0
+    var convex : Bool = false
     
     var connected : Set<Int> = Set()
     
@@ -71,6 +72,7 @@ struct Node {
             "x":Float(point.x),
             "y":Float(point.y),
             "s":Float(scale),
+            "convex":self.convex,
             "connected":Array(self.connected)
         ]
         return NSDictionary(dictionary: dict)

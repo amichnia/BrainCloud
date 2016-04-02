@@ -17,6 +17,7 @@ class BrainNode: SKShapeNode {
     
     var orginalJoint: SKPhysicsJointSpring?
     var ghostJoint: SKPhysicsJointFixed?
+    var isGhost: Bool = false
     
     // Actions
     func connectNode(node: BrainNode) {
@@ -38,7 +39,6 @@ class BrainNode: SKShapeNode {
     
     func isConnectedTo(node: BrainNode) -> Bool {
         return self.lines[node] != nil || node.lines[self] != nil
-//        return self.node.isConnectedTo(node.node)
     }
 
     // Initialization

@@ -20,8 +20,8 @@ class GameScene: SKScene {
     }
     
     // Def
-    let radius: CGFloat = 25
-    let colliderRadius: CGFloat = 26.5
+    static var radius: CGFloat = 25
+    static var colliderRadius: CGFloat { return radius + 1 }
     
     // MARK: - Properties
     var nodes: [Node]!
@@ -55,12 +55,15 @@ class GameScene: SKScene {
             allNodesContainer.addChild(brainNode)
             allNodes.append(brainNode)
             
+            brainNode.name = "node"
+            
             brainNode.physicsBody = SKPhysicsBody(circleOfRadius: brainNode.node.radius + 2)
             brainNode.physicsBody?.linearDamping = 25
             brainNode.physicsBody?.angularDamping = 25
             brainNode.physicsBody?.categoryBitMask = CollisionMask.Default
             brainNode.physicsBody?.collisionBitMask = CollisionMask.Default
             brainNode.physicsBody?.contactTestBitMask = CollisionMask.Default
+            brainNode.physicsBody?.density = node.convex ? 20 : 1
             
             // Spring joint to current position
             let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: brainNode.physicsBody!, anchorA: brainNode.position, anchorB: brainNode.position)
@@ -88,13 +91,20 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.locationInNode(self)
             
-            let shapeNode = BrainNode(circleOfRadius: radius)
+            let touchedNode = self.nodeAtPoint(location)
             
+            if let name = touchedNode.name where name == "skill" && location.distanceTo(touchedNode.position) < GameScene.radius {
+                return
+            }
+            
+            let shapeNode = BrainNode(circleOfRadius: GameScene.radius)
+            
+            shapeNode.name = "skill"
             shapeNode.position = location
             shapeNode.fillColor = Node.color // UIColor.redColor()
             shapeNode.strokeColor = Node.color // UIColor.redColor()
             
-            shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: colliderRadius)
+            shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: GameScene.colliderRadius)
             shapeNode.physicsBody?.categoryBitMask = CollisionMask.Default
             shapeNode.physicsBody?.collisionBitMask = CollisionMask.Default
             shapeNode.physicsBody?.contactTestBitMask = CollisionMask.Default
@@ -104,7 +114,7 @@ class GameScene: SKScene {
             
             
             let snaps = allNodes.filter{
-                return hypot(location.x - $0.position.x, location.y - $0.position.y) < radius
+                return hypot(location.x - $0.position.x, location.y - $0.position.y) < GameScene.radius && !$0.node.convex && !$0.isGhost
             }
             
             snaps.forEach{ node in
@@ -119,6 +129,7 @@ class GameScene: SKScene {
                 node.runAction(action){
                     let joint = SKPhysicsJointFixed.jointWithBodyA(node.physicsBody!, bodyB: shapeNode.physicsBody!, anchor: shapeNode.position)
                     node.ghostJoint = joint
+                    node.isGhost = true
                     self.physicsWorld.addJoint(node.ghostJoint!)
                 }
             }
@@ -127,20 +138,23 @@ class GameScene: SKScene {
             shapeNode.runAction(action)
             
             self.addChild(shapeNode)
+            
 //            let touchedNode = self.nodeAtPoint(location)
 //            if touchedNode != self, let shapeNode = touchedNode as? BrainNode {
 //                shapeNode.strokeColor = UIColor.orangeColor()
 //                print("node: \(shapeNode.node.id)")
 //                
-//                switch fromNode {
-//                case .None:
-//                    fromNode = shapeNode
-//                case .Some(_):
-//                    fromNode!.connectNode(shapeNode)
-//                    shapeNode.strokeColor = shapeNode.fillColor
-//                    fromNode!.strokeColor = fromNode!.fillColor
-//                    fromNode = nil
-//                }
+//                shapeNode.node.convex = true
+//                
+////                switch fromNode {
+////                case .None:
+////                    fromNode = shapeNode
+////                case .Some(_):
+////                    fromNode!.connectNode(shapeNode)
+////                    shapeNode.strokeColor = shapeNode.fillColor
+////                    fromNode!.strokeColor = fromNode!.fillColor
+////                    fromNode = nil
+////                }
 //            }
         }
     }
@@ -172,6 +186,14 @@ class GameScene: SKScene {
         allNodes.forEach{
             $0.updateLines()
         }
+    }
+    
+}
+
+extension CGPoint {
+    
+    func distanceTo(p: CGPoint) -> CGFloat {
+        return hypot(self.x - p.x, self.y - p.y)
     }
     
 }
