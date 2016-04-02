@@ -15,7 +15,8 @@ class BrainNode: SKShapeNode {
     var connected : Set<BrainNode> = Set()
     var lines : [BrainNode:SKShapeNode] = [:]
     
-    var lastPosition : CGPoint = CGPointZero
+    var orginalJoint: SKPhysicsJointSpring?
+    var ghostJoint: SKPhysicsJointFixed?
     
     // Actions
     func connectNode(node: BrainNode) {
@@ -63,14 +64,14 @@ class BrainNode: SKShapeNode {
         line.antialiased = true
         
         self.lines[node] = line
-        self.addChild(line)
+        self.parent?.addChild(line)
     }
  
     func pathToPoint(point: CGPoint) -> CGPath {
-        let offset = CGPoint(x: point.x - self.position.x, y: point.y - self.position.y)
+//        let offset = CGPoint(x: point.x - self.position.x, y: point.y - self.position.y)
         let path = CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, 0, 0)
-        CGPathAddLineToPoint(path, nil, offset.x, offset.y)
+        CGPathMoveToPoint(path, nil, self.position.x, self.position.y)
+        CGPathAddLineToPoint(path, nil, point.x, point.y)
         return path
     }
     

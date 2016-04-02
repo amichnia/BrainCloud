@@ -12,6 +12,17 @@ import SpriteKit_Spring
 
 class GameScene: SKScene {
     
+    // MARK: - Collision Masks
+    struct CollisionMask {
+        static let None: UInt32 = 0x0
+        static let Default: UInt32 = 0x1 << 0
+        static let Ghost: UInt32 = 0x1 << 1
+    }
+    
+    // Def
+    let radius: CGFloat = 25
+    let colliderRadius: CGFloat = 26.5
+    
     // MARK: - Properties
     var nodes: [Node]!
     var allNodesContainer: SKNode!
@@ -45,6 +56,18 @@ class GameScene: SKScene {
             allNodes.append(brainNode)
             
             brainNode.physicsBody = SKPhysicsBody(circleOfRadius: brainNode.node.radius + 2)
+            brainNode.physicsBody?.linearDamping = 25
+            brainNode.physicsBody?.angularDamping = 25
+            brainNode.physicsBody?.categoryBitMask = CollisionMask.Default
+            brainNode.physicsBody?.collisionBitMask = CollisionMask.Default
+            brainNode.physicsBody?.contactTestBitMask = CollisionMask.Default
+            
+            // Spring joint to current position
+            let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: brainNode.physicsBody!, anchorA: brainNode.position, anchorB: brainNode.position)
+            joint.frequency = 20
+            joint.damping = 10
+            brainNode.orginalJoint = joint
+            self.physicsWorld.addJoint(joint)
         }
         
         allNodes.forEach{ node in
@@ -65,16 +88,42 @@ class GameScene: SKScene {
         for touch in touches {
             let location = touch.locationInNode(self)
             
-            let shapeNode = SKShapeNode(circleOfRadius: 25)
+            let shapeNode = BrainNode(circleOfRadius: radius)
             
             shapeNode.position = location
-            shapeNode.fillColor = UIColor.redColor()
-            shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: 30)
+            shapeNode.fillColor = Node.color // UIColor.redColor()
+            shapeNode.strokeColor = Node.color // UIColor.redColor()
+            
+            shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: colliderRadius)
+            shapeNode.physicsBody?.categoryBitMask = CollisionMask.Default
+            shapeNode.physicsBody?.collisionBitMask = CollisionMask.Default
+            shapeNode.physicsBody?.contactTestBitMask = CollisionMask.Default
             
             shapeNode.xScale = 0
             shapeNode.yScale = 0
             
-            let action = SKAction.scaleTo(1, duration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 5)
+            
+            let snaps = allNodes.filter{
+                return hypot(location.x - $0.position.x, location.y - $0.position.y) < radius
+            }
+            
+            snaps.forEach{ node in
+                node.physicsBody?.categoryBitMask = CollisionMask.Ghost
+                node.physicsBody?.collisionBitMask = CollisionMask.None
+                
+                if let _ = node.orginalJoint {
+                    self.physicsWorld.removeJoint(node.orginalJoint!)
+                }
+                
+                let action = SKAction.moveTo(location, duration: 0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0)
+                node.runAction(action){
+                    let joint = SKPhysicsJointFixed.jointWithBodyA(node.physicsBody!, bodyB: shapeNode.physicsBody!, anchor: shapeNode.position)
+                    node.ghostJoint = joint
+                    self.physicsWorld.addJoint(node.ghostJoint!)
+                }
+            }
+            
+            let action = SKAction.scaleTo(1, duration: 1, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
             shapeNode.runAction(action)
             
             self.addChild(shapeNode)

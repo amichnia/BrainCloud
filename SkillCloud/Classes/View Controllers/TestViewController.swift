@@ -44,7 +44,7 @@ class TestViewController: UIViewController {
             // Configure the view.
             skView.showsFPS = true
             skView.showsNodeCount = true
-            skView.showsPhysics = true
+//            skView.showsPhysics = true
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
