@@ -14,6 +14,7 @@ class CanvasBoard {
     let size : CanvasBoard.Size
     var permutation = 0
     var savedOutline : [Field] = []
+    var occupiedPlaces : [OccupiedPlace] = []
     
     var bounds : (left:Position,right:Position,top:Position,bottom:Position)!
     
@@ -87,6 +88,14 @@ extension CanvasBoard {
                     field.content = .Outline
                 }
             }
+        }
+    }
+    
+    func resetOutline() {
+        self.clearPossibles()
+        
+        self.occupiedPlaces.forEach { place in
+            place.generateOutline()
         }
     }
     

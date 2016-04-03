@@ -58,9 +58,10 @@ extension CanvasView {
         self.possibleViews.append(view)
     }
     
-    func addOccupiedPlace(place: OccupiedPlace) {
+    func addOccupiedPlace(place: OccupiedPlace) -> OccupiedPlaceView {
         let view = self.newOccupiedPlaceView()
         view.placeOnCanvas(self, occupiedPlace: place)
+        return view
     }
 }
 
@@ -87,7 +88,7 @@ extension CanvasView {
 //        
 //        let ctx = UIGraphicsGetCurrentContext()
 //        // BGR
-//        CGContextSetFillColorWithColor(ctx, UIColor.whiteColor().CGColor)
+//        CGContextSetFillColorWithColor(ctx, UIColor.whiteColor().colorWithAlphaComponent(0.5).CGColor)
 //        CGContextSetStrokeColorWithColor(ctx, UIColor.blackColor().CGColor)
 //        CGContextSetLineWidth(ctx, 1)
 //        CGContextFillRect(ctx, rect)
@@ -98,19 +99,19 @@ extension CanvasView {
 //            var x : CGFloat = 0
 //            
 //            for field in row {
-//                var color = UIColor.whiteColor()
+//                var color = UIColor.whiteColor().colorWithAlphaComponent(0.5)
 //                
 //                switch field.content {
 //                case .Border:
-//                    color = UIColor.blackColor()
+//                    color = UIColor.blackColor().colorWithAlphaComponent(0.5)
 //                case .Impossible:
-//                    color = UIColor.redColor()
+//                    color = UIColor.redColor().colorWithAlphaComponent(0.5)
 //                case .Possible(place: let place):
-//                    color = place.color
+//                    color = place.color.colorWithAlphaComponent(0.5)
 //                case .Occupied(place: _):
-//                    color = UIColor.greenColor()
+//                    color = UIColor.greenColor().colorWithAlphaComponent(0.5)
 //                case .Outline:
-//                    color = UIColor.lightGrayColor()
+//                    color = UIColor.lightGrayColor().colorWithAlphaComponent(0.5)
 //                case .Empty:
 //                    break
 //                }

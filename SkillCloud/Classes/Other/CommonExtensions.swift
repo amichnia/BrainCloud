@@ -30,6 +30,7 @@ extension Array {
     }
 }
 
+// MARK: - Color
 extension UIColor {
     
     convenience init(rgba: (CGFloat,CGFloat,CGFloat,CGFloat)) {
@@ -44,6 +45,25 @@ extension UIColor {
         color.1 += CGFloat(random()%40 - 20)
         
         return UIColor(rgba: color)
+    }
+    
+}
+
+// MARK: - Rect center
+extension CGRect : HasCenterOfMass {
+    var centerOfMass : CGPoint {
+        return CGPoint(x: self.origin.x + self.width / 2, y: self.origin.y + self.height/2)
+    }
+}
+protocol HasCenterOfMass {
+    var centerOfMass : CGPoint { get }
+}
+
+// MARK: - Array indexPath shorthand
+extension Array {
+    
+    subscript(indexPath: NSIndexPath) -> Element {
+        return self[indexPath.row]
     }
     
 }

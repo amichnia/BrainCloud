@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		1196D8B794C7B7603F03DA94 /* Pods_SkillCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD530781AB9B8F017F80F09A /* Pods_SkillCloud.framework */; };
 		BFDF9A6145E1A2B4BE8EB699 /* Pods_SkillCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A41F5C64F265593A660F74C /* Pods_SkillCloud.framework */; };
+		FE0522B21CAEEF8000315468 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B11CAEEF8000315468 /* TestViewController.swift */; };
+		FE0522B41CAEF0B400315468 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B31CAEF0B400315468 /* TestView.swift */; };
+		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
+		FE0522DB1CAFE5CC00315468 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE0522DA1CAFE5CC00315468 /* GameScene.sks */; };
+		FE0522DD1CAFE69500315468 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DC1CAFE69500315468 /* GameScene.swift */; };
+		FE0522E01CB0157800315468 /* BrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DF1CB0157800315468 /* BrainNode.swift */; };
+		FE0522E21CB01BBF00315468 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522E11CB01BBF00315468 /* Node.swift */; };
+		FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */ = {isa = PBXBuildFile; fileRef = FE0522E51CB02D6600315468 /* all_base_nodes.json */; };
+		FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */; };
 		FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */; };
 		FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEB1C9CA1240006D9EE /* Field.swift */; };
 		FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEC1C9CA1240006D9EE /* Place.swift */; };
@@ -57,6 +66,15 @@
 		BF413E813A7188D6AFFCFE87 /* Pods-SkillCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.debug.xcconfig"; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* SkillCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD530781AB9B8F017F80F09A /* Pods_SkillCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkillCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE0522B11CAEEF8000315468 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		FE0522B31CAEF0B400315468 /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		FE0522DA1CAFE5CC00315468 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		FE0522DC1CAFE69500315468 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		FE0522DF1CB0157800315468 /* BrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainNode.swift; sourceTree = "<group>"; };
+		FE0522E11CB01BBF00315468 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		FE0522E51CB02D6600315468 /* all_base_nodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = all_base_nodes.json; sourceTree = "<group>"; };
+		FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
 		FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasBoard.swift; sourceTree = "<group>"; };
 		FE31DAEB1C9CA1240006D9EE /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		FE31DAEC1C9CA1240006D9EE /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -90,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */,
 				BFDF9A6145E1A2B4BE8EB699 /* Pods_SkillCloud.framework in Frameworks */,
 				1196D8B794C7B7603F03DA94 /* Pods_SkillCloud.framework in Frameworks */,
 				FEAFD1251C9DB27A00E94633 /* CocoaLumberjack.framework in Frameworks */,
@@ -102,6 +121,7 @@
 		7493D99371A43512DBFF49BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FE0522D71CAFE46600315468 /* SpriteKit.framework */,
 				FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */,
 				2A41F5C64F265593A660F74C /* Pods_SkillCloud.framework */,
 				CD530781AB9B8F017F80F09A /* Pods_SkillCloud.framework */,
@@ -136,6 +156,32 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		FE0522D91CAFE58400315468 /* SpriteKit */ = {
+			isa = PBXGroup;
+			children = (
+				FE0522DE1CB0155A00315468 /* Nodes */,
+				FE0522DA1CAFE5CC00315468 /* GameScene.sks */,
+				FE0522DC1CAFE69500315468 /* GameScene.swift */,
+			);
+			path = SpriteKit;
+			sourceTree = "<group>";
+		};
+		FE0522DE1CB0155A00315468 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				FE0522DF1CB0157800315468 /* BrainNode.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		FE0522E41CB02D6600315468 /* Patterns */ = {
+			isa = PBXGroup;
+			children = (
+				FE0522E51CB02D6600315468 /* all_base_nodes.json */,
+			);
+			path = Patterns;
+			sourceTree = "<group>";
+		};
 		FE31DAE71C9CA1240006D9EE /* SkillCloud */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +212,7 @@
 				FE31DAEC1C9CA1240006D9EE /* Place.swift */,
 				FE31DAED1C9CA1240006D9EE /* Position.swift */,
 				FE31DAEE1C9CA1240006D9EE /* Skill.swift */,
+				FE0522E11CB01BBF00315468 /* Node.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -173,6 +220,7 @@
 		FE31DAEF1C9CA1240006D9EE /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				FE0522D91CAFE58400315468 /* SpriteKit */,
 				FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */,
 				FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */,
 				FE31DAF21C9CA1240006D9EE /* ImageSearchAdapter.swift */,
@@ -187,6 +235,7 @@
 				FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */,
 				FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */,
 				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
+				FE0522B11CAEEF8000315468 /* TestViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -197,6 +246,8 @@
 				FE31DAF81C9CA1240006D9EE /* CanvasView.swift */,
 				FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */,
 				FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */,
+				FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */,
+				FE0522B31CAEF0B400315468 /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				FE31DAFC1C9CA1240006D9EE /* Assets.xcassets */,
+				FE0522E41CB02D6600315468 /* Patterns */,
 				FE31DAFF1C9CA1240006D9EE /* Storyboards */,
 				FE31DB041C9CA1240006D9EE /* XIBs */,
 				FE31DB1E1C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld */,
@@ -322,7 +374,9 @@
 				FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */,
 				FE31DB171C9CA1240006D9EE /* Assets.xcassets in Resources */,
 				FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */,
+				FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */,
 				FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */,
+				FE0522DB1CAFE5CC00315468 /* GameScene.sks in Resources */,
 				FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,19 +437,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */,
+				FE0522E21CB01BBF00315468 /* Node.swift in Sources */,
 				FE766D361C9D80010079CA29 /* DataManager.swift in Sources */,
+				FE0522B41CAEF0B400315468 /* TestView.swift in Sources */,
 				FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */,
+				FE0522E01CB0157800315468 /* BrainNode.swift in Sources */,
 				FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */,
 				FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */,
 				FE766D411C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift in Sources */,
 				FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */,
+				FE0522B21CAEEF8000315468 /* TestViewController.swift in Sources */,
 				FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */,
 				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
 				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,
+				FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */,
 				FE31DB121C9CA1240006D9EE /* SkillsTableViewController.swift in Sources */,
 				FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,
+				FE0522DD1CAFE69500315468 /* GameScene.swift in Sources */,
 				FE31DB111C9CA1240006D9EE /* AddSkillViewController.swift in Sources */,
 				FE31DB101C9CA1240006D9EE /* ImageSearchAdapter.swift in Sources */,
 				FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */,

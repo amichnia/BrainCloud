@@ -27,8 +27,17 @@ class Field {
     }
     
     func addToOutlineIfPossible() {
-        if case Content.Empty = self.content {
+        if self.isEmpty {
             self.content = .Outline
+        }
+    }
+    
+    func removeFromOutlineIfPossible(place: OccupiedPlace) {
+        switch self.content {
+        case .Occupied(place: let occupiedPlace) where !(occupiedPlace === place):
+            break
+        default:
+            self.content = .Empty
         }
     }
     
@@ -43,6 +52,15 @@ class Field {
     }
     var down : Field? {
         return self.canvas?[self.position.down]
+    }
+    
+    var occupiedPlace: OccupiedPlace? {
+        switch self.content {
+        case .Occupied(place: let place):
+            return place
+        default:
+            return nil
+        }
     }
     
     enum Content {

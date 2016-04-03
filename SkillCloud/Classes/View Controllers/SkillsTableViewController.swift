@@ -11,6 +11,7 @@ import AMKSlidingTableViewCell
 import PromiseKit
 
 let AddSkillPopoverSegueIdentifier = "AddSkillPopover"
+let ShowGeneratorSegueIdentifier = "ShowGenerator"
 let BackToListSegueIdentifier = "BackToList"
 
 class SkillsTableViewController: UIViewController {
@@ -61,6 +62,8 @@ class SkillsTableViewController: UIViewController {
                 popoverViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
                 popoverViewController.popoverPresentationController!.delegate = self
             }
+        case ShowGeneratorSegueIdentifier:
+            (segue.destinationViewController as? GeneratorViewController)?.skills = self.skills
         default:
             break
         }
