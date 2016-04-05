@@ -26,6 +26,14 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        ImagesAPI.Search(query: "swift", page: 1)
+        .promiseImages()
+        .then { page in
+            DDLogInfo("Search image returned \(page.images?.count ?? 0) results")
+        }
+        .error { error in
+            DDLogError("Search returned error: \(error)")
+        }
     }
     
     // MARK: - Actions
@@ -44,7 +52,7 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBAction func saveAction(sender: AnyObject) {
-        self.testSearch()
+//        self.testSearch()
         
         if let image = self.skillImage.image, name = self.skillNameField.text, experience = Skill.Experience(rawValue: self.experienceSelect.selectedSegmentIndex) where name.characters.count > 0 {
             self.skill = Skill(title: name, image: image, experience: experience)
@@ -106,20 +114,20 @@ extension AddSkillViewController : UITextFieldDelegate {
 // MARK: - Networking test
 extension AddSkillViewController {
     
-    func testSearch() {
-        let URL = "https://www.googleapis.com/customsearch/v1"
-        let params : [String:AnyObject] = [
-            "cx":"014471330025575907481:wg54zrvhcla",
-            "q":"swift"
-        ]
-        Alamofire.request(.GET, URL, parameters: params).responseSwiftyJSON { response in
-            print("###Success: \(response.result.isSuccess)")
-            //now response.result.value is SwiftyJSON.JSON type
-            print("###Value: \(response.result.value)")
-            print("==== START ====")
-            print(response.result.value?.dictionaryValue)
-            print("====  END  ====")
-        }
-    }
+//    func testSearch() {
+//        let URL = "https://www.googleapis.com/customsearch/v1"
+//        let params : [String:AnyObject] = [
+//            "cx":"014471330025575907481:wg54zrvhcla",
+//            "q":"swift"
+//        ]
+//        Alamofire.request(.GET, URL, parameters: params).responseSwiftyJSON { response in
+//            print("###Success: \(response.result.isSuccess)")
+//            //now response.result.value is SwiftyJSON.JSON type
+//            print("###Value: \(response.result.value)")
+//            print("==== START ====")
+//            print(response.result.value?.dictionaryValue)
+//            print("====  END  ====")
+//        }
+//    }
     
 }
