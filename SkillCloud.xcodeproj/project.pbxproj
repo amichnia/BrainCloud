@@ -26,7 +26,7 @@
 		FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEE1C9CA1240006D9EE /* Skill.swift */; };
 		FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */; };
 		FE31DB0F1C9CA1240006D9EE /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */; };
-		FE31DB101C9CA1240006D9EE /* ImageSearchAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF21C9CA1240006D9EE /* ImageSearchAdapter.swift */; };
+		FE31DB101C9CA1240006D9EE /* ImagesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */; };
 		FE31DB111C9CA1240006D9EE /* AddSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */; };
 		FE31DB121C9CA1240006D9EE /* SkillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */; };
 		FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */; };
@@ -84,7 +84,7 @@
 		FE31DAEE1C9CA1240006D9EE /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
 		FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
-		FE31DAF21C9CA1240006D9EE /* ImageSearchAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSearchAdapter.swift; sourceTree = "<group>"; };
+		FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
 		FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillViewController.swift; sourceTree = "<group>"; };
 		FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsTableViewController.swift; sourceTree = "<group>"; };
 		FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorViewController.swift; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 				FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */,
 				FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */,
 				C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */,
-				FE31DAF21C9CA1240006D9EE /* ImageSearchAdapter.swift */,
+				FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */,
 				FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */,
 			);
 			path = Other;
@@ -461,7 +461,7 @@
 				FE0522DD1CAFE69500315468 /* GameScene.swift in Sources */,
 				FE31DB111C9CA1240006D9EE /* AddSkillViewController.swift in Sources */,
 				C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */,
-				FE31DB101C9CA1240006D9EE /* ImageSearchAdapter.swift in Sources */,
+				FE31DB101C9CA1240006D9EE /* ImagesAPI.swift in Sources */,
 				FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */,
 				FEAFD1241C9DAEE700E94633 /* CocoaLumberjack.swift in Sources */,
 				FE31DB0F1C9CA1240006D9EE /* CommonExtensions.swift in Sources */,

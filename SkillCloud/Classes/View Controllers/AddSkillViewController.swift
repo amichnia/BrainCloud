@@ -12,28 +12,30 @@ import SwiftyJSON
 import AlamofireSwiftyJSON
 import PromiseKit
 
-class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
+class AddSkillViewController: UIViewController, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var skillImage: UIImageView!
     @IBOutlet weak var skillImageSelectButton: UIButton!
     @IBOutlet weak var experienceSelect: UISegmentedControl!
     @IBOutlet weak var skillNameField: UITextField!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var skill : Skill?
     var isEditingText : Bool = false
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        ImagesAPI.Search(query: "swift", page: 1)
-        .promiseImages()
-        .then { page in
-            DDLogInfo("Search image returned \(page.images?.count ?? 0) results")
-        }
-        .error { error in
-            DDLogError("Search returned error: \(error)")
-        }
+//        ImagesAPI.Search(query: "swift", page: 1)
+//        .promiseImages()
+//        .then { page in
+//            DDLogInfo("Search image returned \(page.images?.count ?? 0) results")
+//        }
+//        .error { error in
+//            DDLogError("Search returned error: \(error)")
+//        }
     }
     
     // MARK: - Actions
@@ -111,23 +113,202 @@ extension AddSkillViewController : UITextFieldDelegate {
     
 }
 
-// MARK: - Networking test
-extension AddSkillViewController {
-    
-//    func testSearch() {
-//        let URL = "https://www.googleapis.com/customsearch/v1"
-//        let params : [String:AnyObject] = [
-//            "cx":"014471330025575907481:wg54zrvhcla",
-//            "q":"swift"
-//        ]
-//        Alamofire.request(.GET, URL, parameters: params).responseSwiftyJSON { response in
-//            print("###Success: \(response.result.isSuccess)")
-//            //now response.result.value is SwiftyJSON.JSON type
-//            print("###Value: \(response.result.value)")
-//            print("==== START ====")
-//            print(response.result.value?.dictionaryValue)
-//            print("====  END  ====")
+//extension AddSkillViewController : UIViewControllerTransitioningDelegate {
+//    
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        
+//        self.modalPresentationStyle = .Custom
+//        self.transitioningDelegate = self
+//    }
+//    
+//    
+//    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+//        
+//        if presented == self {
+//            return CustomPresentationController(presentedViewController: presented, presentingViewController: presenting)
+//        }
+//        
+//        return nil
+//    }
+//    
+//    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        
+//        if presented == self {
+//            return CustomPresentationAnimationController(isPresenting: true)
+//        }
+//        else {
+//            return nil
 //        }
 //    }
-    
-}
+//    
+//    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        
+//        if dismissed == self {
+//            return CustomPresentationAnimationController(isPresenting: false)
+//        }
+//        else {
+//            return nil
+//        }
+//    }
+//    
+//}
+//
+//class CustomPresentationController: UIPresentationController {
+//    
+//    lazy var dimmingView :UIView = {
+//        let view = UIView(frame: self.containerView!.bounds)
+//        view.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)
+//        view.alpha = 0.0
+//        return view
+//    }()
+//    
+//    override func presentationTransitionWillBegin() {
+//        
+//        guard
+//            let containerView = containerView,
+//            let presentedView = presentedView()
+//            else {
+//                return
+//        }
+//        
+//        // Add the dimming view and the presented view to the heirarchy
+//        dimmingView.frame = containerView.bounds
+//        containerView.addSubview(dimmingView)
+//        containerView.addSubview(presentedView)
+//        
+//        // Fade in the dimming view alongside the transition
+//        if let transitionCoordinator = self.presentingViewController.transitionCoordinator() {
+//            transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+//                self.dimmingView.alpha = 1.0
+//                }, completion:nil)
+//        }
+//    }
+//    
+//    override func presentationTransitionDidEnd(completed: Bool)  {
+//        // If the presentation didn't complete, remove the dimming view
+//        if !completed {
+//            self.dimmingView.removeFromSuperview()
+//        }
+//    }
+//    
+//    override func dismissalTransitionWillBegin()  {
+//        // Fade out the dimming view alongside the transition
+//        if let transitionCoordinator = self.presentingViewController.transitionCoordinator() {
+//            transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+//                self.dimmingView.alpha  = 0.0
+//                }, completion:nil)
+//        }
+//    }
+//    
+//    override func dismissalTransitionDidEnd(completed: Bool) {
+//        // If the dismissal completed, remove the dimming view
+//        if completed {
+//            self.dimmingView.removeFromSuperview()
+//        }
+//    }
+//    
+//    override func frameOfPresentedViewInContainerView() -> CGRect {
+//        
+//        guard
+//            let containerView = containerView
+//            else {
+//                return CGRect()
+//        }
+//        
+//        // We don't want the presented view to fill the whole container view, so inset it's frame
+//        var frame = containerView.bounds;
+//        frame = CGRectInset(frame, 50.0, 50.0)
+//        
+//        return frame
+//    }
+//    
+//    
+//    // ---- UIContentContainer protocol methods
+//    
+//    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator transitionCoordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransitionToSize(size, withTransitionCoordinator: transitionCoordinator)
+//        
+//        guard
+//            let containerView = containerView
+//            else {
+//                return
+//        }
+//        
+//        transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+//            self.dimmingView.frame = containerView.bounds
+//            }, completion:nil)
+//    }
+//}
+//
+//class CustomPresentationAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
+//    
+//    let isPresenting :Bool
+//    let duration :NSTimeInterval = 0.5
+//    
+//    init(isPresenting: Bool) {
+//        self.isPresenting = isPresenting
+//        
+//        super.init()
+//    }
+//    
+//    
+//    // ---- UIViewControllerAnimatedTransitioning methods
+//    
+//    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+//        return self.duration
+//    }
+//    
+//    func animateTransition(transitionContext: UIViewControllerContextTransitioning)  {
+//        if isPresenting {
+//            animatePresentationWithTransitionContext(transitionContext)
+//        }
+//        else {
+//            animateDismissalWithTransitionContext(transitionContext)
+//        }
+//    }
+//    
+//    
+//    // ---- Helper methods
+//    
+//    func animatePresentationWithTransitionContext(transitionContext: UIViewControllerContextTransitioning) {
+//        
+//        guard
+//            let presentedController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey),
+//            let presentedControllerView = transitionContext.viewForKey(UITransitionContextToViewKey),
+//            let containerView = transitionContext.containerView()
+//            else {
+//                return
+//        }
+//        
+//        // Position the presented view off the top of the container view
+//        presentedControllerView.frame = transitionContext.finalFrameForViewController(presentedController)
+//        presentedControllerView.center.y -= containerView.bounds.size.height
+//        
+//        containerView.addSubview(presentedControllerView)
+//        
+//        // Animate the presented view to it's final position
+//        UIView.animateWithDuration(self.duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .AllowUserInteraction, animations: {
+//            presentedControllerView.center.y += containerView.bounds.size.height
+//            }, completion: {(completed: Bool) -> Void in
+//                transitionContext.completeTransition(completed)
+//        })
+//    }
+//    
+//    func animateDismissalWithTransitionContext(transitionContext: UIViewControllerContextTransitioning) {
+//        
+//        guard
+//            let presentedControllerView = transitionContext.viewForKey(UITransitionContextFromViewKey),
+//            let containerView = transitionContext.containerView()
+//            else {
+//                return
+//        }
+//        
+//        // Animate the presented view off the bottom of the view
+//        UIView.animateWithDuration(self.duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .AllowUserInteraction, animations: {
+//            presentedControllerView.center.y += containerView.bounds.size.height
+//            }, completion: {(completed: Bool) -> Void in
+//                transitionContext.completeTransition(completed)
+//        })
+//    }
+//}

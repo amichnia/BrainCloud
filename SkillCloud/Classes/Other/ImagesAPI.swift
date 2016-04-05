@@ -22,25 +22,6 @@ enum ImagesAPI {
     static let apiVersion : String = "v1"
     
     case Search(query: String, page: Int)
-    
-//    func testSearch() {
-//        let URL = "https://www.googleapis.com/customsearch/v1"
-//        let params : [String:AnyObject] = [
-//            "cx" : ImagesAPI.CustomSearchEngineIdentifier,
-//            "key" : ImagesAPI.APIKey,
-//            "searchType" : "image",
-//            "q":"swift"
-//        ]
-//        
-//        Alamofire.request(.GET, URL, parameters: params).responseSwiftyJSON { response in
-//            print("###Success: \(response.result.isSuccess)")
-//            //now response.result.value is SwiftyJSON.JSON type
-//            print("###Value: \(response.result.value)")
-//            print("==== START ====")
-//            print(response.result.value?.dictionaryValue)
-//            print("====  END  ====")
-//        }
-//    }
  
     struct Key {
         static let EngineIdentifier = "cx"
