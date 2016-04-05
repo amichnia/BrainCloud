@@ -12,7 +12,7 @@ import SwiftyJSON
 import AlamofireSwiftyJSON
 import PromiseKit
 
-class AddSkillViewController: UIViewController, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class AddSkillViewController: UIViewController, UINavigationControllerDelegate, UICollectionViewDelegate {
 
     @IBOutlet weak var skillImage: UIImageView!
     @IBOutlet weak var skillImageSelectButton: UIButton!

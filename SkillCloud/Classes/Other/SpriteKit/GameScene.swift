@@ -10,6 +10,10 @@ import Foundation
 import SpriteKit
 import SpriteKit_Spring
 
+protocol SkillsProvider {
+    var skillToAdd : Skill { get }
+}
+
 class GameScene: SKScene {
     
     // MARK: - Collision Masks
@@ -24,6 +28,7 @@ class GameScene: SKScene {
     static var colliderRadius: CGFloat { return radius + 1 }
     
     // MARK: - Properties
+    var skillsProvider : SkillsProvider?
     var nodes: [Node]!
     var allNodesContainer: SKNode!
     var allNodes: [BrainNode] = []
@@ -88,6 +93,10 @@ class GameScene: SKScene {
     var fromNode : BrainNode?
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard let skill = self.skillsProvider?.skillToAdd else {
+            return
+        }
+        
         for touch in touches {
             let location = touch.locationInNode(self)
             
@@ -98,6 +107,15 @@ class GameScene: SKScene {
             }
             
             let shapeNode = BrainNode(circleOfRadius: GameScene.radius)
+            
+            let shapeNode2 = SKShapeNode(circleOfRadius: GameScene.radius - 1)
+            let shapeNode3 = SKShapeNode(circleOfRadius: GameScene.radius - 1)
+            shapeNode2.strokeColor = Node.color
+            shapeNode2.fillColor = Node.color
+            
+            shapeNode3.strokeColor = Node.color
+            shapeNode3.lineWidth = 3
+            shapeNode3.fillColor = UIColor.clearColor()
             
             shapeNode.name = "skill"
             shapeNode.position = location
@@ -112,6 +130,19 @@ class GameScene: SKScene {
             shapeNode.xScale = 0
             shapeNode.yScale = 0
             
+            let cropNode = SKCropNode()
+            
+            let texture = SKTexture(image: skill.image)
+            let spriteNode = SKSpriteNode(texture: texture, size: CGSize(width: GameScene.radius * 2 - 2, height: GameScene.radius * 2 - 2))
+            
+            spriteNode.zPosition = shapeNode.zPosition + 2
+            shapeNode3.zPosition = spriteNode.zPosition + 1
+            
+            
+            shapeNode.addChild(cropNode)
+            cropNode.maskNode = shapeNode2
+            cropNode.addChild(spriteNode)
+            shapeNode.addChild(shapeNode3)
             
             let snaps = allNodes.filter{
                 return hypot(location.x - $0.position.x, location.y - $0.position.y) < GameScene.radius && !$0.node.convex && !$0.isGhost
@@ -138,24 +169,6 @@ class GameScene: SKScene {
             shapeNode.runAction(action)
             
             self.addChild(shapeNode)
-            
-//            let touchedNode = self.nodeAtPoint(location)
-//            if touchedNode != self, let shapeNode = touchedNode as? BrainNode {
-//                shapeNode.strokeColor = UIColor.orangeColor()
-//                print("node: \(shapeNode.node.id)")
-//                
-//                shapeNode.node.convex = true
-//                
-////                switch fromNode {
-////                case .None:
-////                    fromNode = shapeNode
-////                case .Some(_):
-////                    fromNode!.connectNode(shapeNode)
-////                    shapeNode.strokeColor = shapeNode.fillColor
-////                    fromNode!.strokeColor = fromNode!.fillColor
-////                    fromNode = nil
-////                }
-//            }
         }
     }
 

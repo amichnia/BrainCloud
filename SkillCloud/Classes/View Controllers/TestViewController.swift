@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class TestViewController: UIViewController {
+class TestViewController: UIViewController, SkillsProvider {
 
     // MARK: - Outlets
     @IBOutlet weak var skView: SKView!
@@ -18,6 +18,8 @@ class TestViewController: UIViewController {
     // MARK: - Properties
     var nodes : [Node] = []
     var scene : GameScene!
+    
+    var skillToAdd : Skill = Skill(title: "Swift", image: UIImage(named: "skill_swift")!, experience: Skill.Experience.Expert)
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -55,23 +57,26 @@ class TestViewController: UIViewController {
             skView.presentScene(scene)
             
             self.scene = scene
+            self.scene.skillsProvider = self
             self.skView.allowsTransparency = true
         }
     }
     
     // MARK: - Actions
     @IBAction func showHideAction(sender: UISegmentedControl) {
-//        self.imageView.hidden = sender.selectedSegmentIndex == 1
-        
         switch sender.selectedSegmentIndex {
         case 0:
             GameScene.radius = 10
+            skillToAdd.experience = Skill.Experience.Beginner
         case 1:
             GameScene.radius = 15
+            skillToAdd.experience = Skill.Experience.Intermediate
         case 2:
             GameScene.radius = 20
+            skillToAdd.experience = Skill.Experience.Professional
         case 3:
             GameScene.radius = 25
+            skillToAdd.experience = Skill.Experience.Expert
         default:
             break
         }
