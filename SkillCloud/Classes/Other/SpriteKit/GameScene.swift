@@ -138,9 +138,13 @@ class GameScene: SKScene {
             spriteNode.zPosition = shapeNode.zPosition + 2
             shapeNode3.zPosition = spriteNode.zPosition + 1
             
+            shapeNode2.position = CGPointZero
+            cropNode.position = CGPointZero
+            spriteNode.position = CGPointZero
+            shapeNode3.position = CGPointZero
             
-            shapeNode.addChild(cropNode)
             cropNode.maskNode = shapeNode2
+            shapeNode.addChild(cropNode)
             cropNode.addChild(spriteNode)
             shapeNode.addChild(shapeNode3)
             

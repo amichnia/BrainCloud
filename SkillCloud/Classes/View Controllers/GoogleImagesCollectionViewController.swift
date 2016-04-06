@@ -8,14 +8,16 @@
 
 import UIKit
 
-class GoogleImagesCollectionViewController: UICollectionViewController {
+class GoogleImagesCollectionViewController: UIViewController {
 
     // MARK: - Outlets
+    @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
     var searchTerm : String = "swift icon"
     var lastPage : GoogleImagePage?
     var images: [GoogleImage] = []
+    var selectedIndexPath : NSIndexPath?
     var isFetching = false
     
     // MARK: - Lifecycle
@@ -23,10 +25,6 @@ class GoogleImagesCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         self.fetchNextPage()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
     }
     
     // MARK: - Actions
@@ -44,6 +42,7 @@ class GoogleImagesCollectionViewController: UICollectionViewController {
             }
             .always {
                 self.isFetching = false
+                self.scrollViewDidScroll(self.collectionView as UIScrollView)
             }
             return
         }
@@ -54,45 +53,68 @@ class GoogleImagesCollectionViewController: UICollectionViewController {
         }
         .always {
             self.isFetching = false
+            self.scrollViewDidScroll(self.collectionView as UIScrollView)
         }
     }
 
     func addPage(page: GoogleImagePage) {
         self.lastPage = page
+        let indexPaths = (0..<page.images.count).map{
+            return NSIndexPath(forItem: self.images.count + $0, inSection: 0)
+        }
         self.images += page.images
-        self.collectionView?.reloadData()
+        self.collectionView?.insertItemsAtIndexPaths(indexPaths)
     }
+    
 }
 
 // MARK: - UICollectionViewDataSource
-extension GoogleImagesCollectionViewController {
+extension GoogleImagesCollectionViewController : UICollectionViewDataSource, UICollectionViewDelegate {
     
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.images.count
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(GoogleImageCellIdentifier, forIndexPath: indexPath) as! GoogleImageCollectionViewCell
         
         cell.configureWithGoogleImage(self.images[indexPath.row])
+        if let selectedIndexPath = self.selectedIndexPath where cell.selected != (indexPath == selectedIndexPath) {
+            cell.selected = (indexPath == selectedIndexPath)
+        }
         
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
+        self.selectedIndexPath = nil
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.selectedIndexPath = indexPath
+    }
+    
+    func collectionView(collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: floor(self.collectionView.bounds.width/3), height: floor(self.collectionView.bounds.width/3))
+    }
 }
 
-extension GoogleImagesCollectionViewController {
+// MARK: - UIScrollViewDelegate
+extension GoogleImagesCollectionViewController : UIScrollViewDelegate {
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
         let delta = scrollView.contentSize.height - (scrollView.contentOffset.y + scrollView.bounds.height)
         
-        if delta < 80 || scrollView.contentSize.height < scrollView.bounds.height {
+        if delta < 180 || scrollView.contentSize.height < scrollView.bounds.height {
             self.fetchNextPage()
         }
     }
     
 }
+

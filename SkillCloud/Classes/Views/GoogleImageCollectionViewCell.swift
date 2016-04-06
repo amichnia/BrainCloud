@@ -21,10 +21,17 @@ class GoogleImageCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     var googleImage : GoogleImage?
     
+    override var selected : Bool {
+        didSet {
+            self.checkmark.animateTo(self.selected)
+        }
+    }
+    
     // MARK: - Lifecycle
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        self.checkmark.animateTo(false)
         self.imageView.image = nil
         self.spinner.stopAnimating()
         self.googleImage = nil
@@ -49,7 +56,8 @@ class GoogleImageCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Actions
     @IBAction func selectAction(sender: ASIACheckmarkView) {
-        sender.animateTo(!sender.boolValue)
+//        sender.animateTo(!sender.boolValue)
+//        self.selected = !self.selected
     }
     
     
