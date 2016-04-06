@@ -57,36 +57,3 @@ extension ImagesAPI : AnyAPI {
     
 }
 
-
-class GoogleImagePage : JSONMappable {
-    
-    var images : [GoogleImage]?
- 
-    required init?(json: JSON){
-        guard let items = json["items"].array else {
-            return nil
-        }
-        
-        self.images = items.mapExisting{ return GoogleImage(json: $0) }
-    }
-}
-
-class GoogleImage : JSONMappable {
-    
-    var imageUrl : String!
-    var thumbnailUrl : String!
-    var mime : String!
-    
-    var image : UIImage?
-    var thumbnail : UIImage?
-    
-    required init?(json: JSON){
-        guard let link = json["link"].string, thumbnailLink = json["image"]["thumbnailLink"].string else {
-            return nil
-        }
-        
-        self.imageUrl = link
-        self.thumbnailUrl = thumbnailLink
-    }
-    
-}

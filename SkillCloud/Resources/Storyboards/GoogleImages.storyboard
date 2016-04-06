@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Apd-Ne-Itn">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Google Images Collection View Controller-->
+        <scene sceneID="tzv-rf-3FC">
+            <objects>
+                <collectionViewController id="Apd-Ne-Itn" customClass="GoogleImagesCollectionViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="YHi-bh-Ctb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.92026845639999999" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eFM-r3-dK2">
+                            <size key="itemSize" width="124" height="124"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GoogleImageCell" id="mLU-nY-sSf" customClass="GoogleImageCollectionViewCell" customModule="SkillCloud" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dhD-nL-l7f">
+                                            <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
+                                        </imageView>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goP-mF-Ep9" customClass="ASIACheckmarkView" customModule="ASIACheckmarkView">
+                                            <rect key="frame" x="70" y="70" width="46" height="46"/>
+                                            <color key="backgroundColor" white="0.38498846479999999" alpha="0.40000000000000002" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="46" id="GmT-Eg-XWm"/>
+                                                <constraint firstAttribute="height" constant="46" id="qUo-0b-ZR9"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="lineColorForTrue">
+                                                    <color key="value" red="0.50196081400000003" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="checkmarkFill">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="crossFill">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isGood" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="lineColorForFalse">
+                                                    <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="rectFill">
+                                                    <real key="value" value="0.69999999999999996"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="23"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="selectAction:" destination="mLU-nY-sSf" eventType="touchUpInside" id="TUj-5O-rSG"/>
+                                            </connections>
+                                        </button>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="z2m-AH-krn">
+                                            <rect key="frame" x="52" y="52" width="20" height="20"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="z2m-AH-krn" firstAttribute="centerX" secondItem="mLU-nY-sSf" secondAttribute="centerX" id="0dW-yd-nyd"/>
+                                    <constraint firstItem="dhD-nL-l7f" firstAttribute="leading" secondItem="mLU-nY-sSf" secondAttribute="leading" id="7fL-th-Gei"/>
+                                    <constraint firstItem="z2m-AH-krn" firstAttribute="centerY" secondItem="mLU-nY-sSf" secondAttribute="centerY" id="FBf-T9-KgQ"/>
+                                    <constraint firstItem="dhD-nL-l7f" firstAttribute="top" secondItem="mLU-nY-sSf" secondAttribute="top" id="Gc2-dI-7cp"/>
+                                    <constraint firstItem="goP-mF-Ep9" firstAttribute="bottom" secondItem="mLU-nY-sSf" secondAttribute="bottomMargin" id="I7n-Ta-3xf"/>
+                                    <constraint firstAttribute="bottom" secondItem="dhD-nL-l7f" secondAttribute="bottom" id="UsC-eM-e8d"/>
+                                    <constraint firstItem="goP-mF-Ep9" firstAttribute="trailing" secondItem="mLU-nY-sSf" secondAttribute="trailingMargin" id="doX-Wy-hzC"/>
+                                    <constraint firstAttribute="trailing" secondItem="dhD-nL-l7f" secondAttribute="trailing" id="y6Q-DC-byW"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="checkmark" destination="goP-mF-Ep9" id="5Pr-Fd-2cw"/>
+                                    <outlet property="imageView" destination="dhD-nL-l7f" id="FiV-29-vnd"/>
+                                    <outlet property="spinner" destination="z2m-AH-krn" id="fKG-kQ-Rno"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Apd-Ne-Itn" id="V4e-sh-knq"/>
+                            <outlet property="delegate" destination="Apd-Ne-Itn" id="BBN-is-z4t"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ftc-Lu-Si1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="716" y="-273"/>
+        </scene>
+    </scenes>
+</document>
