@@ -105,7 +105,11 @@
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="vvU-ME-swH"/>
-                                    <barButtonItem title="OK" id="0Wk-n7-4Q3"/>
+                                    <barButtonItem title="OK" id="0Wk-n7-4Q3">
+                                        <connections>
+                                            <action selector="confirmImageSelection:" destination="szC-jp-m5j" id="oUX-bW-mcA"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TsE-Qq-CQn">
@@ -132,6 +136,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Pfd-Ef-2jC" id="45T-dd-zwD"/>
+                        <outlet property="confirmActionButton" destination="0Wk-n7-4Q3" id="fLx-zG-mps"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pmo-mu-04B" userLabel="First Responder" sceneMemberID="firstResponder"/>

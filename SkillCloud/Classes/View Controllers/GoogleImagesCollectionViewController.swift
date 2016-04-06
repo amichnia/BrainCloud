@@ -7,17 +7,22 @@
 //
 
 import UIKit
+import PromiseKit
 
 class GoogleImagesCollectionViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var confirmActionButton: UIBarButtonItem!
     
     // MARK: - Properties
+    var fullfillHandler: ((GoogleImage)->())?
+    var rejectHandler: ((ErrorType)->())?
     var searchTerm : String = "swift icon"
     var lastPage : GoogleImagePage?
     var images: [GoogleImage] = []
     var selectedIndexPath : NSIndexPath?
+    var selectedImage : GoogleImage?
     var isFetching = false
     
     // MARK: - Lifecycle
@@ -66,6 +71,20 @@ class GoogleImagesCollectionViewController: UIViewController {
         self.collectionView?.insertItemsAtIndexPaths(indexPaths)
     }
     
+    @IBAction func confirmImageSelection(sender: AnyObject) {
+        if let image = self.selectedImage {
+            self.fullfillHandler?(image)
+        }
+        else {
+            self.rejectHandler?(ImageSelectError.NoImageSelected)
+        }
+    }
+    
+}
+
+enum ImageSelectError : ErrorType {
+    case NoImageSelected
+    case CannotCreateSelectionView
 }
 
 // MARK: - UICollectionViewDataSource
@@ -118,3 +137,20 @@ extension GoogleImagesCollectionViewController : UIScrollViewDelegate {
     
 }
 
+extension UIViewController {
+    
+    func promiseGoogleImageForSearchTerm(term: String) throws -> Promise<GoogleImage> {
+        guard let selectViewController = UIStoryboard(name: "GoogleImages", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as? GoogleImagesCollectionViewController else {
+            throw ImageSelectError.CannotCreateSelectionView
+        }
+        
+        return Promise<GoogleImage>(resolvers: { (fulfill, reject) in
+            selectViewController.searchTerm = term
+            selectViewController.fullfillHandler = fulfill
+            selectViewController.rejectHandler = reject
+            
+            self.presentViewController(selectViewController, animated: true, completion: nil)
+        })
+    }
+    
+}
