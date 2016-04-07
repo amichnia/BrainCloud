@@ -29,6 +29,7 @@ class GoogleImagesCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.confirmActionButton.title = NSLocalizedString("Cancel", comment: "Cancel")
         self.fetchNextPage()
     }
     
@@ -72,11 +73,13 @@ class GoogleImagesCollectionViewController: UIViewController {
     }
     
     @IBAction func confirmImageSelection(sender: AnyObject) {
-        if let image = self.selectedImage {
-            self.fullfillHandler?(image)
-        }
-        else {
-            self.rejectHandler?(ImageSelectError.NoImageSelected)
+        self.presentingViewController?.dismissViewControllerAnimated(true) {
+            if let image = self.selectedImage {
+                self.fullfillHandler?(image)
+            }
+            else {
+                self.rejectHandler?(ImageSelectError.NoImageSelected)
+            }
         }
     }
     
@@ -111,10 +114,14 @@ extension GoogleImagesCollectionViewController : UICollectionViewDataSource, UIC
     
     func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
         self.selectedIndexPath = nil
+        self.selectedImage = nil
+        self.confirmActionButton.title = NSLocalizedString("Cancel", comment: "Cancel")
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.selectedIndexPath = indexPath
+        self.selectedImage = self.images[indexPath.row]
+        self.confirmActionButton.title = NSLocalizedString("OK", comment: "OK")
     }
     
     func collectionView(collectionView: UICollectionView,

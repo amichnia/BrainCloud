@@ -27,15 +27,6 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-//        ImagesAPI.Search(query: "swift", page: 1)
-//        .promiseImages()
-//        .then { page in
-//            DDLogInfo("Search image returned \(page.images?.count ?? 0) results")
-//        }
-//        .error { error in
-//            DDLogError("Search returned error: \(error)")
-//        }
     }
     
     // MARK: - Actions
@@ -45,6 +36,12 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate, 
         picker.sourceType = .PhotoLibrary
         self.promiseViewController(picker).then { (image : UIImage) in
             self.skillImage.image = image
+        }
+    }
+    
+    @IBAction func selectImageAction(sender: AnyObject) {
+        try! self.promiseGoogleImageForSearchTerm("\(self.skillNameField.text)").then{ (image) -> Void in
+            print(image.imageUrl)
         }
     }
     
