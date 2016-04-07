@@ -53,14 +53,14 @@ class GoogleImagesCollectionViewController: UIViewController {
             return
         }
         
-        page.promiseNextPage?
-        .then { [weak self] page -> Void in
-            self?.addPage(page)
-        }
-        .always {
-            self.isFetching = false
-            self.scrollViewDidScroll(self.collectionView as UIScrollView)
-        }
+//        page.promiseNextPage?
+//        .then { [weak self] page -> Void in
+//            self?.addPage(page)
+//        }
+//        .always {
+//            self.isFetching = false
+//            self.scrollViewDidScroll(self.collectionView as UIScrollView)
+//        }
     }
 
     func addPage(page: GoogleImagePage) {
