@@ -49,6 +49,7 @@
 		FEAFD1241C9DAEE700E94633 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */; };
 		FEAFD1251C9DB27A00E94633 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */; };
 		FEAFD1261C9DB27A00E94633 /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FEB88E721CB6CE8700EED249 /* AddSkillGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB88E711CB6CE8700EED249 /* AddSkillGraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -111,6 +112,7 @@
 		FE766D401C9D82780079CA29 /* SkillEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillEntity.swift; sourceTree = "<group>"; };
 		FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
+		FEB88E711CB6CE8700EED249 /* AddSkillGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillGraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +264,7 @@
 				FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */,
 				FE0522B31CAEF0B400315468 /* TestView.swift */,
 				C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */,
+				FEB88E711CB6CE8700EED249 /* AddSkillGraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -471,6 +474,7 @@
 				FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */,
 				FE31DB121C9CA1240006D9EE /* SkillsTableViewController.swift in Sources */,
 				FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */,
+				FEB88E721CB6CE8700EED249 /* AddSkillGraphView.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,
 				FE0522DD1CAFE69500315468 /* GameScene.swift in Sources */,

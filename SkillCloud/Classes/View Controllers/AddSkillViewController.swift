@@ -17,32 +17,58 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
     // MARK: - Outlets
     @IBOutlet weak var skillImageContainer: UIView!
     @IBOutlet weak var skillImage: UIImageView!
-    @IBOutlet weak var skillImageSelectButton: UIButton!
     @IBOutlet weak var skillNameField: UITextField!
     @IBOutlet weak var imageSpinner: UIActivityIndicatorView!
     
-    // Skills
-    @IBOutlet weak var beginner: UIButton!
-    @IBOutlet weak var intermediate: UIButton!
-    @IBOutlet weak var professional: UIButton!
-    @IBOutlet weak var expert: UIButton!
+    // View
+    @IBOutlet weak var containerBottom: NSLayoutConstraint!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var graphView: AddSkillGraphView!
     
+    // Skills
+    @IBOutlet weak var beginner: NodeButton!
+    @IBOutlet weak var intermediate: NodeButton!
+    @IBOutlet weak var professional: NodeButton!
+    @IBOutlet weak var expert: NodeButton!
+    
+    // Images buttons
+    @IBOutlet weak var skillImageAddButton: NodeButton!
+    @IBOutlet weak var changeButton: NodeButton!
+    @IBOutlet weak var editButton: NodeButton!
+    @IBOutlet weak var removeButton: NodeButton!
+    
+    
+    // MARK: - Properties
     var skill : Skill?
+    var image: UIImage?
     var experience : Skill.Experience = Skill.Experience.Intermediate
     var isEditingText : Bool = true
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        
+        self.graphView.centralNode  = self.skillImageContainer
+        
+        self.graphView.beginner     = self.beginner
+        self.graphView.intermediate = self.intermediate
+        self.graphView.expert       = self.expert
+        self.graphView.professional = self.professional
+        
+        self.graphView.skillImageAddButton  = self.skillImageAddButton
+        self.graphView.changeButton         = self.changeButton
+        self.graphView.editButton           = self.editButton
+        self.graphView.removeButton         = self.removeButton
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if self.isEditingText {
-            self.skillNameField.becomeFirstResponder()
-        }
+        self.graphView.showAllSkills()
+        self.reloadImageActions()
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -59,6 +85,7 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        self.graphView.setNeedsDisplay()
         self.skillImage.layer.cornerRadius = self.skillImage.bounds.width / 2
         self.skillImageContainer.layer.cornerRadius = self.skillImageContainer.bounds.width / 2
     }
@@ -112,6 +139,14 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     // MARK: - Configuration
+    func reloadImageActions() {
+        if let _ = self.image {
+            self.graphView.showImageActions()
+        }
+        else {
+            self.graphView.hideImageActions()
+        }
+    }
     
     func selectGoogleImage() {
         
@@ -121,8 +156,10 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
             return image.promiseImage()
         }
         .then{ image -> Void in
+            self.image = image
             self.skillImage.image = image
             self.imageSpinner.stopAnimating()
+            self.reloadImageActions()
         }
         .error{ error in
             DDLogError("\(error)")
@@ -147,6 +184,50 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
     
 }
 
+extension AddSkillViewController {
+    
+    func keyboardWillShow(notification: NSNotification){
+        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        let curve =  UIViewAnimationCurve.init(rawValue: notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! Int)!
+        let frameHeight = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().height
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+
+        self.containerBottom.constant = frameHeight
+        self.view.layoutIfNeeded()
+        self.containerView.setNeedsDisplay()
+        
+        UIView.commitAnimations()
+        
+        UIView.animateWithDuration(duration) {
+            self.containerView.setNeedsDisplay()
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification){
+        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        let curve =  UIViewAnimationCurve.init(rawValue: notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! Int)!
+        let frameHeight : CGFloat = 0
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+        
+        self.containerBottom.constant = frameHeight
+        self.view.layoutIfNeeded()
+        self.containerView.setNeedsDisplay()
+        
+        UIView.commitAnimations()
+        
+        UIView.animateWithDuration(duration) {
+            self.containerView.setNeedsDisplay()
+        }
+    }
+    
+}
+
 extension AddSkillViewController : UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -154,13 +235,10 @@ extension AddSkillViewController : UITextFieldDelegate {
             let newString = (text as NSString).stringByReplacingCharactersInRange(range, withString: string)
             if newString.characters.count >= 1 {
                 self.skillImage.alpha = 1.0
-                self.skillImageSelectButton.enabled = true
                 // TODO: add animations
-                // TODO: trigger google images search here
             }
             else {
                 self.skillImage.alpha = 0.5
-                self.skillImageSelectButton.enabled = false
             }
         }
         return true
