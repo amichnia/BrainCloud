@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,21 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-logo-image" translatesAutoresizingMaskIntoConstraints="NO" id="zW1-gU-aS5">
-                                <rect key="frame" x="130" y="130" width="341" height="341"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="zW1-gU-aS5" secondAttribute="height" multiplier="1:1" id="OID-Gv-8Fg"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-logo-image" translatesAutoresizingMaskIntoConstraints="NO" id="zW1-gU-aS5">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zW1-gU-aS5" secondAttribute="bottom" constant="40" id="AiP-5C-7Bp"/>
-                            <constraint firstItem="zW1-gU-aS5" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="DM2-Pf-Eh5"/>
-                            <constraint firstItem="zW1-gU-aS5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="40" id="HNS-LR-cly"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zW1-gU-aS5" secondAttribute="trailing" constant="40" id="kHb-lU-JJW"/>
-                            <constraint firstItem="zW1-gU-aS5" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="kqq-Fb-VHV"/>
-                            <constraint firstItem="zW1-gU-aS5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="40" id="qrM-hC-CBc"/>
+                            <constraint firstItem="zW1-gU-aS5" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="-20" id="44i-2s-JIp"/>
+                            <constraint firstItem="zW1-gU-aS5" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="cH1-I6-OyB"/>
+                            <constraint firstAttribute="trailing" secondItem="zW1-gU-aS5" secondAttribute="trailing" id="fIf-Hq-3X5"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="zW1-gU-aS5" secondAttribute="bottom" id="tCe-b3-Zlv"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -42,6 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch-logo-image" width="341" height="341"/>
+        <image name="launch-logo-image" width="76" height="76"/>
     </resources>
 </document>
