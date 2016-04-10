@@ -49,7 +49,7 @@ class TestViewController: UIViewController, SkillsProvider {
 //            skView.showsPhysics = true
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
-//            skView.ignoresSiblingOrder = true
+            skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .Fill

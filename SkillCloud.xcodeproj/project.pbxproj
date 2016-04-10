@@ -37,7 +37,6 @@
 		FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF81C9CA1240006D9EE /* CanvasView.swift */; };
 		FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */; };
 		FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */; };
-		FE31DB171C9CA1240006D9EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE31DAFC1C9CA1240006D9EE /* Assets.xcassets */; };
 		FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB001C9CA1240006D9EE /* LaunchScreen.storyboard */; };
 		FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB021C9CA1240006D9EE /* Main.storyboard */; };
 		FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */; };
@@ -49,6 +48,8 @@
 		FEAFD1241C9DAEE700E94633 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */; };
 		FEAFD1251C9DB27A00E94633 /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */; };
 		FEAFD1261C9DB27A00E94633 /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FEB88E721CB6CE8700EED249 /* AddSkillGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB88E711CB6CE8700EED249 /* AddSkillGraphView.swift */; };
+		FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB88E731CB6FD8500EED249 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -99,7 +100,6 @@
 		FE31DAF81C9CA1240006D9EE /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PossiblePlaceView.swift; sourceTree = "<group>"; };
 		FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillTableViewCell.swift; sourceTree = "<group>"; };
-		FE31DAFC1C9CA1240006D9EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE31DB011C9CA1240006D9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE31DB031C9CA1240006D9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OccupiedPlaceView.xib; sourceTree = "<group>"; };
@@ -111,6 +111,8 @@
 		FE766D401C9D82780079CA29 /* SkillEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillEntity.swift; sourceTree = "<group>"; };
 		FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Carthage/Build/iOS/CocoaLumberjack.framework; sourceTree = "<group>"; };
 		FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
+		FEB88E711CB6CE8700EED249 /* AddSkillGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillGraphView.swift; sourceTree = "<group>"; };
+		FEB88E731CB6FD8500EED249 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +264,7 @@
 				FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */,
 				FE0522B31CAEF0B400315468 /* TestView.swift */,
 				C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */,
+				FEB88E711CB6CE8700EED249 /* AddSkillGraphView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,7 +272,7 @@
 		FE31DAFB1C9CA1240006D9EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FE31DAFC1C9CA1240006D9EE /* Assets.xcassets */,
+				FEB88E731CB6FD8500EED249 /* Assets.xcassets */,
 				FE0522E41CB02D6600315468 /* Patterns */,
 				FE31DAFF1C9CA1240006D9EE /* Storyboards */,
 				FE31DB041C9CA1240006D9EE /* XIBs */,
@@ -388,11 +391,11 @@
 			files = (
 				FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */,
 				C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */,
-				FE31DB171C9CA1240006D9EE /* Assets.xcassets in Resources */,
 				FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */,
 				FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */,
 				FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */,
 				FE0522DB1CAFE5CC00315468 /* GameScene.sks in Resources */,
+				FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */,
 				FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -471,6 +474,7 @@
 				FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */,
 				FE31DB121C9CA1240006D9EE /* SkillsTableViewController.swift in Sources */,
 				FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */,
+				FEB88E721CB6CE8700EED249 /* AddSkillGraphView.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,
 				FE0522DD1CAFE69500315468 /* GameScene.swift in Sources */,

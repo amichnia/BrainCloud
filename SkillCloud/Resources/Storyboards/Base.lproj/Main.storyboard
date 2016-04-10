@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wNk-oj-hdM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Zhu-Ph-jdQ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -435,14 +435,6 @@
             </objects>
             <point key="canvasLocation" x="827" y="1127"/>
         </scene>
-        <!--GoogleImages-->
-        <scene sceneID="ykm-o6-feD">
-            <objects>
-                <viewControllerPlaceholder storyboardName="GoogleImages" id="ZUv-i1-9hi" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PVB-aH-Yj2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="362.5" y="47"/>
-        </scene>
         <!--Add Skill View Controller-->
         <scene sceneID="gih-lo-IVQ">
             <objects>
@@ -659,6 +651,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
+                    <connections>
+                        <segue destination="pCN-UC-zYF" kind="relationship" relationship="rootViewController" id="vAq-hY-bqP"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UH6-me-cCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -673,116 +668,261 @@
                         <viewControllerLayoutGuide type="bottom" id="NXR-xa-CG5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="X3H-42-CjV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DTM-TZ-O83">
-                                <rect key="frame" x="0.0" y="64" width="320" height="82"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODo-zC-n3K" userLabel="Container">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skill name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="21Z-mQ-DYX">
-                                        <rect key="frame" x="8" y="8" width="304" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="L10-Q4-aP7">
-                                        <rect key="frame" x="8" y="46" width="304" height="29"/>
-                                        <segments>
-                                            <segment title="Beg"/>
-                                            <segment title="Int"/>
-                                            <segment title="Pro"/>
-                                            <segment title="Exp"/>
-                                        </segments>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </segmentedControl>
-                                </subviews>
-                                <color key="backgroundColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="L10-Q4-aP7" secondAttribute="trailing" constant="8" id="P7m-rT-pLv"/>
-                                    <constraint firstItem="21Z-mQ-DYX" firstAttribute="leading" secondItem="DTM-TZ-O83" secondAttribute="leading" constant="8" id="gU8-Q2-8i0"/>
-                                    <constraint firstItem="L10-Q4-aP7" firstAttribute="leading" secondItem="DTM-TZ-O83" secondAttribute="leading" constant="8" id="k1Z-Fb-oBY"/>
-                                    <constraint firstItem="L10-Q4-aP7" firstAttribute="top" secondItem="21Z-mQ-DYX" secondAttribute="bottom" constant="8" id="oVX-7X-dT1"/>
-                                    <constraint firstAttribute="bottom" secondItem="L10-Q4-aP7" secondAttribute="bottom" constant="8" id="prh-I5-P4M"/>
-                                    <constraint firstItem="21Z-mQ-DYX" firstAttribute="top" secondItem="DTM-TZ-O83" secondAttribute="top" constant="8" id="vL4-vb-sNi"/>
-                                    <constraint firstAttribute="trailing" secondItem="21Z-mQ-DYX" secondAttribute="trailing" constant="8" id="w9i-xq-6w0"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rzy-Zq-Q3e">
-                                <rect key="frame" x="0.0" y="146" width="320" height="107"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TtC-qx-lNm">
-                                        <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLQ-gw-cbN" customClass="AddSkillGraphView" customModule="SkillCloud" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="54" width="375" height="375"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="qLQ-gw-cbN" secondAttribute="height" multiplier="1:1" id="5cG-IX-yg1"/>
+                                        </constraints>
+                                    </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TtC-qx-lNm" userLabel="Skill Image Container">
+                                        <rect key="frame" x="126" y="180" width="123" height="123"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skill_swift" translatesAutoresizingMaskIntoConstraints="NO" id="JVi-5b-Fzc">
-                                                <rect key="frame" x="27" y="27" width="53" height="53"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="JVi-5b-Fzc">
+                                                <rect key="frame" x="8" y="8" width="107" height="107"/>
+                                                <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="8"/>
+                                                        <integer key="value" value="45"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FoM-mK-x4U">
+                                                <rect key="frame" x="52" y="51" width="20" height="20"/>
+                                            </activityIndicatorView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.90064197779999999" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="JVi-5b-Fzc" firstAttribute="width" secondItem="TtC-qx-lNm" secondAttribute="width" multiplier="0.5" id="Qwk-iF-EtO"/>
-                                            <constraint firstItem="JVi-5b-Fzc" firstAttribute="height" secondItem="TtC-qx-lNm" secondAttribute="height" multiplier="0.5" id="aSM-Dr-IG2"/>
-                                            <constraint firstItem="JVi-5b-Fzc" firstAttribute="centerY" secondItem="TtC-qx-lNm" secondAttribute="centerY" id="c0K-6k-Zmv"/>
-                                            <constraint firstItem="JVi-5b-Fzc" firstAttribute="centerX" secondItem="TtC-qx-lNm" secondAttribute="centerX" id="isL-PA-Mbb"/>
-                                            <constraint firstAttribute="width" secondItem="TtC-qx-lNm" secondAttribute="height" multiplier="1:1" id="xvX-UR-f9u"/>
+                                            <constraint firstAttribute="trailing" secondItem="JVi-5b-Fzc" secondAttribute="trailing" constant="8" id="1V4-SV-BzQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="JVi-5b-Fzc" secondAttribute="bottom" constant="8" id="Guw-Yn-akr"/>
+                                            <constraint firstItem="JVi-5b-Fzc" firstAttribute="leading" secondItem="TtC-qx-lNm" secondAttribute="leading" constant="8" id="e4X-aF-qzk"/>
+                                            <constraint firstItem="FoM-mK-x4U" firstAttribute="centerY" secondItem="TtC-qx-lNm" secondAttribute="centerY" id="fxR-Nk-6Tu"/>
+                                            <constraint firstAttribute="width" secondItem="TtC-qx-lNm" secondAttribute="height" multiplier="1:1" id="lwX-GX-oHY"/>
+                                            <constraint firstItem="FoM-mK-x4U" firstAttribute="centerX" secondItem="TtC-qx-lNm" secondAttribute="centerX" id="qPm-Vy-hyI"/>
+                                            <constraint firstItem="JVi-5b-Fzc" firstAttribute="top" secondItem="TtC-qx-lNm" secondAttribute="top" constant="8" id="rY9-Y8-LCO"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="53"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVT-iH-F8X">
-                                        <rect key="frame" x="115" y="20" width="197" height="30"/>
-                                        <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Select local image"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPu-qe-AKw" userLabel="Beginner" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                        <rect key="frame" x="60" y="172" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="gjn-1q-gcg"/>
+                                            <constraint firstAttribute="width" constant="60" id="iX3-tJ-ayt"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="contentEdgeInsets" minX="9" minY="9" maxX="9" maxY="9"/>
+                                        <state key="normal" image="icon-skill-level-placeholder">
+                                            <color key="titleColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
-                                            <action selector="selectImageAction:" destination="wNk-oj-hdM" eventType="touchUpInside" id="wnN-wt-8jr"/>
+                                            <action selector="selectSkillLevel:" destination="wNk-oj-hdM" eventType="touchUpInside" id="aXn-u3-Ynu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yD0-9o-9WZ">
-                                        <rect key="frame" x="115" y="58" width="197" height="30"/>
-                                        <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Edit image"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1B-fH-qI7" userLabel="Intermediate" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                        <rect key="frame" x="54" y="252" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="Cnx-wC-LcT"/>
+                                            <constraint firstAttribute="height" constant="60" id="jIi-aM-26R"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="contentEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>
+                                        <state key="normal" image="icon-skill-level-placeholder">
+                                            <color key="titleColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectSkillLevel:" destination="wNk-oj-hdM" eventType="touchUpInside" id="unR-yV-Ce6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTY-hr-izW" userLabel="Professional" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                        <rect key="frame" x="119" y="314" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="Nsp-BS-P9c"/>
+                                            <constraint firstAttribute="height" constant="60" id="gO6-M2-PPN"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                                        <state key="normal" image="icon-skill-level-placeholder">
+                                            <color key="titleColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectSkillLevel:" destination="wNk-oj-hdM" eventType="touchUpInside" id="HJq-h6-daP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NtB-Aj-ymw" userLabel="Expert" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                        <rect key="frame" x="212" y="312" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="48x-3U-R8g"/>
+                                            <constraint firstAttribute="height" constant="60" id="XbM-2O-eVH"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="icon-skill-level-placeholder">
+                                            <color key="titleColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="selectSkillLevel:" destination="wNk-oj-hdM" eventType="touchUpInside" id="MPd-VC-Wa1"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skill name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="21Z-mQ-DYX">
+                                        <rect key="frame" x="8" y="565" width="359" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9M-z1-OuT" userLabel="change" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                        <rect key="frame" x="205" y="119" width="44" height="44"/>
+                                        <color key="backgroundColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="078-2L-kNx"/>
+                                            <constraint firstAttribute="height" constant="44" id="1st-Np-T7V"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        <state key="normal" image="ic-change">
+                                            <color key="titleColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Q6-R7-BLG" userLabel="edit" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                        <rect key="frame" x="264" y="119" width="44" height="44"/>
+                                        <color key="backgroundColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Qo4-6a-IJt"/>
+                                            <constraint firstAttribute="width" constant="44" id="Rx1-Yy-tc9"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        <state key="normal" image="ic-edit">
+                                            <color key="titleColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAT-q5-Y4o" userLabel="remove" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                        <rect key="frame" x="323" y="119" width="44" height="44"/>
+                                        <color key="backgroundColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="1ox-xL-9GD"/>
+                                            <constraint firstAttribute="width" constant="44" id="JOT-BV-azf"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.66477394099999998" green="0.0" blue="0.044192716479999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        <state key="normal" image="ic-remove">
+                                            <color key="titleColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="22"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGo-zo-2Cj" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                        <rect key="frame" x="258" y="164" width="56" height="56"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="56" id="e6W-x0-94M"/>
+                                            <constraint firstAttribute="width" constant="56" id="eZO-uK-Ydd"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.17254901960784313" green="0.55294117647058827" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                                        <state key="normal" image="icon-plus"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="28"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="selectImageAction:" destination="wNk-oj-hdM" eventType="touchUpInside" id="hrg-XL-rTV"/>
+                                        </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="TtC-qx-lNm" firstAttribute="leading" secondItem="Rzy-Zq-Q3e" secondAttribute="leading" id="1Rk-yL-LRG"/>
-                                    <constraint firstItem="SVT-iH-F8X" firstAttribute="trailing" secondItem="yD0-9o-9WZ" secondAttribute="trailing" id="28r-Ds-3N3"/>
-                                    <constraint firstAttribute="bottom" secondItem="TtC-qx-lNm" secondAttribute="bottom" id="8lF-vb-Dls"/>
-                                    <constraint firstItem="SVT-iH-F8X" firstAttribute="leading" secondItem="TtC-qx-lNm" secondAttribute="trailing" constant="8" symbolic="YES" id="MTk-b5-LN8"/>
-                                    <constraint firstItem="SVT-iH-F8X" firstAttribute="trailing" secondItem="Rzy-Zq-Q3e" secondAttribute="trailingMargin" id="Oeo-BL-Y9c"/>
-                                    <constraint firstAttribute="width" secondItem="Rzy-Zq-Q3e" secondAttribute="height" multiplier="320:107" id="PK4-R5-NqX"/>
-                                    <constraint firstItem="SVT-iH-F8X" firstAttribute="top" secondItem="Rzy-Zq-Q3e" secondAttribute="top" constant="20" id="YnE-vg-uLv"/>
-                                    <constraint firstItem="SVT-iH-F8X" firstAttribute="leading" secondItem="yD0-9o-9WZ" secondAttribute="leading" id="aWs-q8-hZa"/>
-                                    <constraint firstItem="TtC-qx-lNm" firstAttribute="top" secondItem="Rzy-Zq-Q3e" secondAttribute="top" id="x9s-mw-mJy"/>
-                                    <constraint firstItem="yD0-9o-9WZ" firstAttribute="top" secondItem="SVT-iH-F8X" secondAttribute="bottom" constant="8" symbolic="YES" id="xpn-Gm-Gea"/>
+                                    <constraint firstAttribute="trailing" secondItem="QAT-q5-Y4o" secondAttribute="trailing" constant="8" id="0xc-ib-ZnG"/>
+                                    <constraint firstItem="QAT-q5-Y4o" firstAttribute="leading" secondItem="0Q6-R7-BLG" secondAttribute="trailing" constant="15" id="4ob-Lf-3q1"/>
+                                    <constraint firstItem="WPu-qe-AKw" firstAttribute="centerX" secondItem="TtC-qx-lNm" secondAttribute="centerX" constant="-98" id="5Pq-Tu-vE5"/>
+                                    <constraint firstItem="VGo-zo-2Cj" firstAttribute="top" secondItem="0Q6-R7-BLG" secondAttribute="bottom" constant="1" id="6ke-wl-m5e"/>
+                                    <constraint firstItem="TtC-qx-lNm" firstAttribute="centerX" secondItem="ODo-zC-n3K" secondAttribute="centerX" id="7LZ-k7-1j1"/>
+                                    <constraint firstAttribute="trailing" secondItem="21Z-mQ-DYX" secondAttribute="trailing" constant="8" id="DZo-lV-tPp"/>
+                                    <constraint firstItem="QAT-q5-Y4o" firstAttribute="top" secondItem="0Q6-R7-BLG" secondAttribute="top" id="EVo-JR-thK"/>
+                                    <constraint firstItem="UTY-hr-izW" firstAttribute="centerX" secondItem="TtC-qx-lNm" secondAttribute="centerX" constant="-39" id="FaF-4K-cgm"/>
+                                    <constraint firstItem="0Q6-R7-BLG" firstAttribute="leading" secondItem="v9M-z1-OuT" secondAttribute="trailing" constant="15" id="KUb-AC-Y2H"/>
+                                    <constraint firstItem="NtB-Aj-ymw" firstAttribute="centerY" secondItem="TtC-qx-lNm" secondAttribute="centerY" constant="101" id="Lbq-fG-6MR"/>
+                                    <constraint firstItem="O1B-fH-qI7" firstAttribute="centerX" secondItem="TtC-qx-lNm" secondAttribute="centerX" constant="-104" id="MaV-Sx-gor"/>
+                                    <constraint firstItem="NtB-Aj-ymw" firstAttribute="centerX" secondItem="TtC-qx-lNm" secondAttribute="centerX" constant="54" id="OdW-8z-S0K"/>
+                                    <constraint firstItem="O1B-fH-qI7" firstAttribute="centerY" secondItem="TtC-qx-lNm" secondAttribute="centerY" constant="41" id="PsP-En-eSq"/>
+                                    <constraint firstItem="TtC-qx-lNm" firstAttribute="width" secondItem="ODo-zC-n3K" secondAttribute="width" multiplier="0.33" id="R4e-S9-kNl"/>
+                                    <constraint firstItem="0Q6-R7-BLG" firstAttribute="top" secondItem="v9M-z1-OuT" secondAttribute="top" id="ZV1-j7-fI8"/>
+                                    <constraint firstAttribute="bottom" secondItem="21Z-mQ-DYX" secondAttribute="bottom" constant="8" id="a6O-5V-yDf"/>
+                                    <constraint firstItem="WPu-qe-AKw" firstAttribute="centerY" secondItem="TtC-qx-lNm" secondAttribute="centerY" constant="-39" id="bRd-OU-0dU"/>
+                                    <constraint firstItem="TtC-qx-lNm" firstAttribute="top" secondItem="v9M-z1-OuT" secondAttribute="bottom" constant="17" id="ebA-ys-2IG"/>
+                                    <constraint firstItem="UTY-hr-izW" firstAttribute="centerY" secondItem="TtC-qx-lNm" secondAttribute="centerY" constant="103" id="hl5-g6-3wV"/>
+                                    <constraint firstItem="21Z-mQ-DYX" firstAttribute="leading" secondItem="ODo-zC-n3K" secondAttribute="leading" constant="8" id="jCV-xp-7Zt"/>
+                                    <constraint firstItem="VGo-zo-2Cj" firstAttribute="centerX" secondItem="0Q6-R7-BLG" secondAttribute="centerX" id="kbb-To-4UE"/>
+                                    <constraint firstItem="qLQ-gw-cbN" firstAttribute="centerY" secondItem="TtC-qx-lNm" secondAttribute="centerY" id="mYZ-or-40o"/>
+                                    <constraint firstItem="qLQ-gw-cbN" firstAttribute="centerX" secondItem="TtC-qx-lNm" secondAttribute="centerX" id="n94-gm-tKT"/>
+                                    <constraint firstItem="TtC-qx-lNm" firstAttribute="centerY" secondItem="ODo-zC-n3K" secondAttribute="centerY" multiplier="0.8" id="w0P-SJ-rM4"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.92156862750000001" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="DTM-TZ-O83" firstAttribute="top" secondItem="oiX-vH-dEQ" secondAttribute="bottom" id="10s-z5-eYf"/>
-                            <constraint firstItem="Rzy-Zq-Q3e" firstAttribute="top" secondItem="DTM-TZ-O83" secondAttribute="bottom" id="F3S-lA-nFq"/>
-                            <constraint firstAttribute="trailing" secondItem="Rzy-Zq-Q3e" secondAttribute="trailing" id="Vxy-6L-iEs"/>
-                            <constraint firstItem="Rzy-Zq-Q3e" firstAttribute="leading" secondItem="X3H-42-CjV" secondAttribute="leading" id="tNh-WQ-EKt"/>
-                            <constraint firstItem="DTM-TZ-O83" firstAttribute="leading" secondItem="X3H-42-CjV" secondAttribute="leading" id="vD5-LY-Ppr"/>
-                            <constraint firstAttribute="trailing" secondItem="DTM-TZ-O83" secondAttribute="trailing" id="wbB-Wn-v5O"/>
+                            <constraint firstItem="qLQ-gw-cbN" firstAttribute="width" secondItem="X3H-42-CjV" secondAttribute="width" id="2Cl-lB-sCV"/>
+                            <constraint firstAttribute="trailing" secondItem="ODo-zC-n3K" secondAttribute="trailing" id="544-69-zCV"/>
+                            <constraint firstItem="NXR-xa-CG5" firstAttribute="top" secondItem="ODo-zC-n3K" secondAttribute="bottom" id="65Q-Gx-4yQ"/>
+                            <constraint firstItem="ODo-zC-n3K" firstAttribute="top" secondItem="oiX-vH-dEQ" secondAttribute="bottom" id="Kud-6y-Ano"/>
+                            <constraint firstItem="ODo-zC-n3K" firstAttribute="leading" secondItem="X3H-42-CjV" secondAttribute="leading" id="bDK-uf-Tha"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="jYW-Be-UW2" appends="YES" id="WQe-nA-6bU"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Add new Skill" id="o9b-E1-zPe">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="x5B-bu-pjR"/>
                     </navigationItem>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="experienceSelect" destination="L10-Q4-aP7" id="UGw-0T-Yoz"/>
+                        <outlet property="beginner" destination="WPu-qe-AKw" id="Mvu-Kf-CuD"/>
+                        <outlet property="changeButton" destination="v9M-z1-OuT" id="dzD-Tg-SDd"/>
+                        <outlet property="containerBottom" destination="65Q-Gx-4yQ" id="8Z3-5I-Kgj"/>
+                        <outlet property="containerView" destination="ODo-zC-n3K" id="aye-bv-sar"/>
+                        <outlet property="editButton" destination="0Q6-R7-BLG" id="MM2-Za-Q7W"/>
+                        <outlet property="expert" destination="NtB-Aj-ymw" id="mEW-wx-oml"/>
+                        <outlet property="graphView" destination="qLQ-gw-cbN" id="L07-1w-fIB"/>
+                        <outlet property="imageSpinner" destination="FoM-mK-x4U" id="hjM-UR-LsP"/>
+                        <outlet property="intermediate" destination="O1B-fH-qI7" id="BAV-E5-ab1"/>
+                        <outlet property="professional" destination="UTY-hr-izW" id="qjE-ZM-qzP"/>
+                        <outlet property="removeButton" destination="QAT-q5-Y4o" id="Dju-Bc-MA3"/>
                         <outlet property="skillImage" destination="JVi-5b-Fzc" id="J3N-29-caX"/>
-                        <outlet property="skillImageSelectButton" destination="SVT-iH-F8X" id="z07-qW-n5M"/>
+                        <outlet property="skillImageAddButton" destination="VGo-zo-2Cj" id="AuP-wy-A4g"/>
+                        <outlet property="skillImageContainer" destination="TtC-qx-lNm" id="tgB-vV-fSu"/>
                         <outlet property="skillNameField" destination="21Z-mQ-DYX" id="PXa-Zp-3g0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lA2-Cf-nQJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jYW-Be-UW2">
+                    <connections>
+                        <action selector="dismissKeyboardAction:" destination="wNk-oj-hdM" id="Riu-qa-Pcu"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2841" y="317"/>
+            <point key="canvasLocation" x="2840.5" y="316.5"/>
         </scene>
         <!--Test View Controller-->
         <scene sceneID="qAr-zz-Ejk">
@@ -816,9 +956,6 @@
                                     <constraint firstAttribute="width" constant="95" id="YYy-9q-dae"/>
                                 </constraints>
                                 <state key="normal" title="img"/>
-                                <connections>
-                                    <segue destination="ZUv-i1-9hi" kind="presentation" id="fy8-vM-Cc0"/>
-                                </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="BEh-gs-OF6">
                                 <rect key="frame" x="48" y="552" width="180" height="29"/>
@@ -873,19 +1010,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwT-Ne-wZY">
-                                <rect key="frame" x="121" y="147" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="32" y="148" width="121" height="55"/>
+                                <state key="normal" title="ADD"/>
                                 <connections>
-                                    <segue destination="ZUv-i1-9hi" kind="presentation" id="GS8-tQ-4Mb"/>
+                                    <segue destination="wNk-oj-hdM" kind="show" id="h4R-KN-HvU"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="lre-nl-LZE"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4IR-MY-hFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-944" y="144"/>
+            <point key="canvasLocation" x="2250" y="333"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SWI-bd-5hr">
@@ -907,11 +1045,14 @@
     <resources>
         <image name="flat_brain_background" width="465" height="364"/>
         <image name="flat_brain_foreground" width="465" height="364"/>
+        <image name="ic-change" width="64" height="64"/>
+        <image name="ic-edit" width="64" height="64"/>
+        <image name="ic-remove" width="64" height="64"/>
+        <image name="icon-placeholder" width="128" height="128"/>
+        <image name="icon-plus" width="64" height="64"/>
+        <image name="icon-skill-level-placeholder" width="66" height="66"/>
         <image name="skill cloud brain" width="305" height="286"/>
         <image name="skill_obj" width="72" height="72"/>
         <image name="skill_swift" width="154" height="150"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="GS8-tQ-4Mb"/>
-    </inferredMetricsTieBreakers>
 </document>

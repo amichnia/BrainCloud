@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (3.3.0)
+  - Alamofire (3.3.1)
   - AlamofireSwiftyJSON (0.1.0):
     - Alamofire (~> 3.1)
     - SwiftyJSON (~> 2.3)
@@ -13,19 +13,19 @@ PODS:
     - OMGHTTPURLRQ/FormURLEncode
     - OMGHTTPURLRQ/UserAgent
   - OMGHTTPURLRQ/UserAgent (3.1.1)
-  - PromiseKit (3.1.0):
-    - PromiseKit/Foundation (= 3.1.0)
-    - PromiseKit/QuartzCore (= 3.1.0)
-    - PromiseKit/UIKit (= 3.1.0)
-  - PromiseKit/AssetsLibrary (3.1.0):
+  - PromiseKit (3.1.1):
+    - PromiseKit/Foundation (= 3.1.1)
+    - PromiseKit/QuartzCore (= 3.1.1)
+    - PromiseKit/UIKit (= 3.1.1)
+  - PromiseKit/AssetsLibrary (3.1.1):
     - PromiseKit/UIKit
-  - PromiseKit/CorePromise (3.1.0)
-  - PromiseKit/Foundation (3.1.0):
+  - PromiseKit/CorePromise (3.1.1)
+  - PromiseKit/Foundation (3.1.1):
     - OMGHTTPURLRQ (~> 3.1.0)
     - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (3.1.0):
+  - PromiseKit/QuartzCore (3.1.1):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (3.1.0):
+  - PromiseKit/UIKit (3.1.1):
     - PromiseKit/CorePromise
   - SpriteKit-Spring (1.0.1)
   - SwiftyJSON (2.3.2)
@@ -40,13 +40,13 @@ DEPENDENCIES:
   - SpriteKit-Spring
 
 SPEC CHECKSUMS:
-  Alamofire: 9054db4a1b1ca9e363223183e01cea380159a27c
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   AlamofireSwiftyJSON: 171e4fa7d09a1d20d05797d0253a36f4241adf3a
   AMKSlidingTableViewCell: 4f7f9278ef72297a716a8429ca04a49432943259
   ASIACheckmarkView: 701ef0d4b618134bae36cc01f8cdabca12c6117d
   LTMorphingLabel: 490aa8e079f9247c7f3130f7d4b1be1d66677377
   OMGHTTPURLRQ: 633f98ee745aeda02345935a52eec1784cddb589
-  PromiseKit: 7ed2a3fc5217695305a55a8c47cb3a17ff5fde0d
+  PromiseKit: 4e8127c22a9b29d1b44958ab2ec762ea6115cbfb
   SpriteKit-Spring: 51d289157e085eb629992ea8281f3bde60b589e9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 

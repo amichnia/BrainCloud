@@ -12,24 +12,101 @@ import SwiftyJSON
 import AlamofireSwiftyJSON
 import PromiseKit
 
-class AddSkillViewController: UIViewController, UINavigationControllerDelegate, UICollectionViewDelegate {
+class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
 
+    // MARK: - Outlets
+    @IBOutlet weak var skillImageContainer: UIView!
     @IBOutlet weak var skillImage: UIImageView!
-    @IBOutlet weak var skillImageSelectButton: UIButton!
-    @IBOutlet weak var experienceSelect: UISegmentedControl!
     @IBOutlet weak var skillNameField: UITextField!
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var imageSpinner: UIActivityIndicatorView!
     
+    // View
+    @IBOutlet weak var containerBottom: NSLayoutConstraint!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var graphView: AddSkillGraphView!
+    
+    // Skills
+    @IBOutlet weak var beginner: NodeButton!
+    @IBOutlet weak var intermediate: NodeButton!
+    @IBOutlet weak var professional: NodeButton!
+    @IBOutlet weak var expert: NodeButton!
+    
+    // Images buttons
+    @IBOutlet weak var skillImageAddButton: NodeButton!
+    @IBOutlet weak var changeButton: NodeButton!
+    @IBOutlet weak var editButton: NodeButton!
+    @IBOutlet weak var removeButton: NodeButton!
+    
+    
+    // MARK: - Properties
     var skill : Skill?
-    var isEditingText : Bool = false
+    var image: UIImage?
+    var experience : Skill.Experience = Skill.Experience.Intermediate
+    var isEditingText : Bool = true
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        
+        self.graphView.centralNode  = self.skillImageContainer
+        
+        self.graphView.beginner     = self.beginner
+        self.graphView.intermediate = self.intermediate
+        self.graphView.expert       = self.expert
+        self.graphView.professional = self.professional
+        
+        self.graphView.skillImageAddButton  = self.skillImageAddButton
+        self.graphView.changeButton         = self.changeButton
+        self.graphView.editButton           = self.editButton
+        self.graphView.removeButton         = self.removeButton
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.graphView.showAllSkills()
+        self.reloadImageActions()
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        coordinator.animateAlongsideTransition({ _ in
+            
+        }) { _ in
+            self.skillImage.layer.cornerRadius = self.skillImage.bounds.width / 2
+            self.skillImageContainer.layer.cornerRadius = self.skillImageContainer.bounds.width / 2
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.graphView.setNeedsDisplay()
+        self.skillImage.layer.cornerRadius = self.skillImage.bounds.width / 2
+        self.skillImageContainer.layer.cornerRadius = self.skillImageContainer.bounds.width / 2
     }
     
     // MARK: - Actions
+    
+    @IBAction func selectSkillLevel(sender: UIButton) {
+        switch sender {
+        case beginner:
+            self.experience = Skill.Experience.Beginner
+        case intermediate:
+            self.experience = Skill.Experience.Intermediate
+        case professional:
+            self.experience = Skill.Experience.Professional
+        case expert:
+            self.experience = Skill.Experience.Expert
+        default:
+            break
+        }
+    }
+    
     @IBAction func changeImage(sender: AnyObject) {
         let picker = UIImagePickerController()
         picker.allowsEditing = false
@@ -40,9 +117,9 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     @IBAction func selectImageAction(sender: AnyObject) {
-        try! self.promiseGoogleImageForSearchTerm("\(self.skillNameField.text)").then{ (image) -> Void in
-            print(image.imageUrl)
-        }
+        self.dismissKeyboardAction(self)
+        
+        self.selectGoogleImage()
     }
     
     @IBAction func cancelAction(sender: AnyObject) {
@@ -51,16 +128,42 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate, 
     }
     
     @IBAction func saveAction(sender: AnyObject) {
-//        self.testSearch()
-        
-        if let image = self.skillImage.image, name = self.skillNameField.text, experience = Skill.Experience(rawValue: self.experienceSelect.selectedSegmentIndex) where name.characters.count > 0 {
-            self.skill = Skill(title: name, image: image, experience: experience)
+        if let image = self.skillImage.image, name = self.skillNameField.text where name.characters.count > 0 {
+            self.skill = Skill(title: name, image: image, experience: self.experience)
             self.performSegueWithIdentifier(BackToListSegueIdentifier, sender: self)
         }
     }
     
     @IBAction func dismissKeyboardAction(sender: AnyObject) {
         self.skillNameField.resignFirstResponder()
+    }
+    
+    // MARK: - Configuration
+    func reloadImageActions() {
+        if let _ = self.image {
+            self.graphView.showImageActions()
+        }
+        else {
+            self.graphView.hideImageActions()
+        }
+    }
+    
+    func selectGoogleImage() {
+        
+        try! self.promiseGoogleImageForSearchTerm("\(self.skillNameField.text)").then{ (image) -> Promise<UIImage> in
+            print(image.imageUrl)
+            self.imageSpinner.startAnimating()
+            return image.promiseImage()
+        }
+        .then{ image -> Void in
+            self.image = image
+            self.skillImage.image = image
+            self.imageSpinner.stopAnimating()
+            self.reloadImageActions()
+        }
+        .error{ error in
+            DDLogError("\(error)")
+        }
     }
     
     // MARK: - Navigation
@@ -81,6 +184,50 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate, 
     
 }
 
+extension AddSkillViewController {
+    
+    func keyboardWillShow(notification: NSNotification){
+        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        let curve =  UIViewAnimationCurve.init(rawValue: notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! Int)!
+        let frameHeight = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().height
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+
+        self.containerBottom.constant = frameHeight
+        self.view.layoutIfNeeded()
+        self.containerView.setNeedsDisplay()
+        
+        UIView.commitAnimations()
+        
+        UIView.animateWithDuration(duration) {
+            self.containerView.setNeedsDisplay()
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification){
+        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        let curve =  UIViewAnimationCurve.init(rawValue: notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! Int)!
+        let frameHeight : CGFloat = 0
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+        
+        self.containerBottom.constant = frameHeight
+        self.view.layoutIfNeeded()
+        self.containerView.setNeedsDisplay()
+        
+        UIView.commitAnimations()
+        
+        UIView.animateWithDuration(duration) {
+            self.containerView.setNeedsDisplay()
+        }
+    }
+    
+}
+
 extension AddSkillViewController : UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -88,13 +235,10 @@ extension AddSkillViewController : UITextFieldDelegate {
             let newString = (text as NSString).stringByReplacingCharactersInRange(range, withString: string)
             if newString.characters.count >= 1 {
                 self.skillImage.alpha = 1.0
-                self.skillImageSelectButton.enabled = true
                 // TODO: add animations
-                // TODO: trigger google images search here
             }
             else {
                 self.skillImage.alpha = 0.5
-                self.skillImageSelectButton.enabled = false
             }
         }
         return true
@@ -109,203 +253,3 @@ extension AddSkillViewController : UITextFieldDelegate {
     }
     
 }
-
-//extension AddSkillViewController : UIViewControllerTransitioningDelegate {
-//    
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        
-//        self.modalPresentationStyle = .Custom
-//        self.transitioningDelegate = self
-//    }
-//    
-//    
-//    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
-//        
-//        if presented == self {
-//            return CustomPresentationController(presentedViewController: presented, presentingViewController: presenting)
-//        }
-//        
-//        return nil
-//    }
-//    
-//    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        
-//        if presented == self {
-//            return CustomPresentationAnimationController(isPresenting: true)
-//        }
-//        else {
-//            return nil
-//        }
-//    }
-//    
-//    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        
-//        if dismissed == self {
-//            return CustomPresentationAnimationController(isPresenting: false)
-//        }
-//        else {
-//            return nil
-//        }
-//    }
-//    
-//}
-//
-//class CustomPresentationController: UIPresentationController {
-//    
-//    lazy var dimmingView :UIView = {
-//        let view = UIView(frame: self.containerView!.bounds)
-//        view.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.5)
-//        view.alpha = 0.0
-//        return view
-//    }()
-//    
-//    override func presentationTransitionWillBegin() {
-//        
-//        guard
-//            let containerView = containerView,
-//            let presentedView = presentedView()
-//            else {
-//                return
-//        }
-//        
-//        // Add the dimming view and the presented view to the heirarchy
-//        dimmingView.frame = containerView.bounds
-//        containerView.addSubview(dimmingView)
-//        containerView.addSubview(presentedView)
-//        
-//        // Fade in the dimming view alongside the transition
-//        if let transitionCoordinator = self.presentingViewController.transitionCoordinator() {
-//            transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-//                self.dimmingView.alpha = 1.0
-//                }, completion:nil)
-//        }
-//    }
-//    
-//    override func presentationTransitionDidEnd(completed: Bool)  {
-//        // If the presentation didn't complete, remove the dimming view
-//        if !completed {
-//            self.dimmingView.removeFromSuperview()
-//        }
-//    }
-//    
-//    override func dismissalTransitionWillBegin()  {
-//        // Fade out the dimming view alongside the transition
-//        if let transitionCoordinator = self.presentingViewController.transitionCoordinator() {
-//            transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-//                self.dimmingView.alpha  = 0.0
-//                }, completion:nil)
-//        }
-//    }
-//    
-//    override func dismissalTransitionDidEnd(completed: Bool) {
-//        // If the dismissal completed, remove the dimming view
-//        if completed {
-//            self.dimmingView.removeFromSuperview()
-//        }
-//    }
-//    
-//    override func frameOfPresentedViewInContainerView() -> CGRect {
-//        
-//        guard
-//            let containerView = containerView
-//            else {
-//                return CGRect()
-//        }
-//        
-//        // We don't want the presented view to fill the whole container view, so inset it's frame
-//        var frame = containerView.bounds;
-//        frame = CGRectInset(frame, 50.0, 50.0)
-//        
-//        return frame
-//    }
-//    
-//    
-//    // ---- UIContentContainer protocol methods
-//    
-//    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator transitionCoordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransitionToSize(size, withTransitionCoordinator: transitionCoordinator)
-//        
-//        guard
-//            let containerView = containerView
-//            else {
-//                return
-//        }
-//        
-//        transitionCoordinator.animateAlongsideTransition({(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
-//            self.dimmingView.frame = containerView.bounds
-//            }, completion:nil)
-//    }
-//}
-//
-//class CustomPresentationAnimationController: NSObject, UIViewControllerAnimatedTransitioning {
-//    
-//    let isPresenting :Bool
-//    let duration :NSTimeInterval = 0.5
-//    
-//    init(isPresenting: Bool) {
-//        self.isPresenting = isPresenting
-//        
-//        super.init()
-//    }
-//    
-//    
-//    // ---- UIViewControllerAnimatedTransitioning methods
-//    
-//    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-//        return self.duration
-//    }
-//    
-//    func animateTransition(transitionContext: UIViewControllerContextTransitioning)  {
-//        if isPresenting {
-//            animatePresentationWithTransitionContext(transitionContext)
-//        }
-//        else {
-//            animateDismissalWithTransitionContext(transitionContext)
-//        }
-//    }
-//    
-//    
-//    // ---- Helper methods
-//    
-//    func animatePresentationWithTransitionContext(transitionContext: UIViewControllerContextTransitioning) {
-//        
-//        guard
-//            let presentedController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey),
-//            let presentedControllerView = transitionContext.viewForKey(UITransitionContextToViewKey),
-//            let containerView = transitionContext.containerView()
-//            else {
-//                return
-//        }
-//        
-//        // Position the presented view off the top of the container view
-//        presentedControllerView.frame = transitionContext.finalFrameForViewController(presentedController)
-//        presentedControllerView.center.y -= containerView.bounds.size.height
-//        
-//        containerView.addSubview(presentedControllerView)
-//        
-//        // Animate the presented view to it's final position
-//        UIView.animateWithDuration(self.duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .AllowUserInteraction, animations: {
-//            presentedControllerView.center.y += containerView.bounds.size.height
-//            }, completion: {(completed: Bool) -> Void in
-//                transitionContext.completeTransition(completed)
-//        })
-//    }
-//    
-//    func animateDismissalWithTransitionContext(transitionContext: UIViewControllerContextTransitioning) {
-//        
-//        guard
-//            let presentedControllerView = transitionContext.viewForKey(UITransitionContextFromViewKey),
-//            let containerView = transitionContext.containerView()
-//            else {
-//                return
-//        }
-//        
-//        // Animate the presented view off the bottom of the view
-//        UIView.animateWithDuration(self.duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .AllowUserInteraction, animations: {
-//            presentedControllerView.center.y += containerView.bounds.size.height
-//            }, completion: {(completed: Bool) -> Void in
-//                transitionContext.completeTransition(completed)
-//        })
-//    }
-//}
