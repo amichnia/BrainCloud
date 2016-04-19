@@ -671,17 +671,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ODo-zC-n3K" userLabel="Container">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ODo-zC-n3K" userLabel="Container">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qLQ-gw-cbN" customClass="AddSkillGraphView" customModule="SkillCloud" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qLQ-gw-cbN" customClass="AddSkillGraphView" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="54" width="375" height="375"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="qLQ-gw-cbN" secondAttribute="height" multiplier="1:1" id="5cG-IX-yg1"/>
                                         </constraints>
                                     </view>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TtC-qx-lNm" userLabel="Skill Image Container">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TtC-qx-lNm" userLabel="Skill Image Container">
                                         <rect key="frame" x="126" y="180" width="123" height="123"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="JVi-5b-Fzc">
@@ -713,7 +713,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPu-qe-AKw" userLabel="Beginner" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WPu-qe-AKw" userLabel="Beginner" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="60" y="172" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="gjn-1q-gcg"/>
@@ -728,7 +728,7 @@
                                             <action selector="selectSkillLevel:" destination="wNk-oj-hdM" eventType="touchUpInside" id="aXn-u3-Ynu"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1B-fH-qI7" userLabel="Intermediate" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1B-fH-qI7" userLabel="Intermediate" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="54" y="252" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="Cnx-wC-LcT"/>
@@ -743,7 +743,7 @@
                                             <action selector="selectSkillLevel:" destination="wNk-oj-hdM" eventType="touchUpInside" id="unR-yV-Ce6"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTY-hr-izW" userLabel="Professional" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTY-hr-izW" userLabel="Professional" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="119" y="314" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="Nsp-BS-P9c"/>
@@ -758,7 +758,7 @@
                                             <action selector="selectSkillLevel:" destination="wNk-oj-hdM" eventType="touchUpInside" id="HJq-h6-daP"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NtB-Aj-ymw" userLabel="Expert" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NtB-Aj-ymw" userLabel="Expert" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="212" y="312" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="48x-3U-R8g"/>
@@ -772,12 +772,12 @@
                                             <action selector="selectSkillLevel:" destination="wNk-oj-hdM" eventType="touchUpInside" id="MPd-VC-Wa1"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skill name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="21Z-mQ-DYX">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skill name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="21Z-mQ-DYX">
                                         <rect key="frame" x="8" y="565" width="359" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9M-z1-OuT" userLabel="change" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9M-z1-OuT" userLabel="change" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="205" y="119" width="44" height="44"/>
                                         <color key="backgroundColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -795,7 +795,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Q6-R7-BLG" userLabel="edit" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Q6-R7-BLG" userLabel="edit" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="264" y="119" width="44" height="44"/>
                                         <color key="backgroundColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -813,7 +813,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAT-q5-Y4o" userLabel="remove" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAT-q5-Y4o" userLabel="remove" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="323" y="119" width="44" height="44"/>
                                         <color key="backgroundColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -831,7 +831,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGo-zo-2Cj" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGo-zo-2Cj" customClass="NodeButton" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="258" y="164" width="56" height="56"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1000,7 +1000,7 @@
         <!--View Controller-->
         <scene sceneID="Gbs-sc-fAI">
             <objects>
-                <viewController id="pCN-UC-zYF" sceneMemberID="viewController">
+                <viewController id="pCN-UC-zYF" customClass="ViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mf3-3T-Dmp"/>
                         <viewControllerLayoutGuide type="bottom" id="oES-FP-QvA"/>
@@ -1009,20 +1009,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwT-Ne-wZY">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwT-Ne-wZY">
                                 <rect key="frame" x="32" y="148" width="121" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="PIE-Nv-aVp"/>
+                                    <constraint firstAttribute="width" constant="121" id="jjZ-yP-1E1"/>
+                                </constraints>
                                 <state key="normal" title="Generator"/>
                                 <connections>
                                     <segue destination="IHA-15-xhl" kind="show" id="rjW-sg-bN5"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smoke.png" translatesAutoresizingMaskIntoConstraints="NO" id="Wzb-J3-PHn">
+                                <rect key="frame" x="222" y="148" width="96" height="92"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="jzM-fT-4WX"/>
+                                    <constraint firstAttribute="height" constant="92" id="xXD-BJ-L8H"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flat_brain_background" translatesAutoresizingMaskIntoConstraints="NO" id="Kci-gC-Wbh">
+                                <rect key="frame" x="44" y="315" width="189" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="189" id="y9Y-dN-kza"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oES-FP-QvA" firstAttribute="top" secondItem="Kci-gC-Wbh" secondAttribute="bottom" constant="123" id="23d-vu-l2k"/>
+                            <constraint firstItem="cwT-Ne-wZY" firstAttribute="leading" secondItem="64Z-ln-ds6" secondAttribute="leadingMargin" constant="12" id="46I-u7-Gg9"/>
+                            <constraint firstItem="Kci-gC-Wbh" firstAttribute="top" secondItem="Wzb-J3-PHn" secondAttribute="bottom" constant="75" id="Nfn-oa-kmZ"/>
+                            <constraint firstItem="cwT-Ne-wZY" firstAttribute="top" secondItem="Wzb-J3-PHn" secondAttribute="top" id="Pkx-UV-q5r"/>
+                            <constraint firstItem="cwT-Ne-wZY" firstAttribute="top" secondItem="mf3-3T-Dmp" secondAttribute="bottom" constant="84" id="T4t-za-H5p"/>
+                            <constraint firstItem="Kci-gC-Wbh" firstAttribute="leading" secondItem="64Z-ln-ds6" secondAttribute="leadingMargin" constant="24" id="taK-B2-7f8"/>
+                            <constraint firstItem="Wzb-J3-PHn" firstAttribute="leading" secondItem="cwT-Ne-wZY" secondAttribute="trailing" constant="69" id="yEc-QA-BsN"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lre-nl-LZE">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8sK-6T-TWO">
                             <connections>
-                                <segue destination="okh-c3-2CT" kind="presentation" animates="NO" id="GoQ-Bo-qhN"/>
+                                <action selector="showAddSkillViewController:" destination="pCN-UC-zYF" id="FWU-IX-lv9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1034,7 +1060,7 @@
         <!--Add View Controller-->
         <scene sceneID="xjn-P4-X33">
             <objects>
-                <viewController id="okh-c3-2CT" customClass="AddViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddSkillViewController" id="okh-c3-2CT" customClass="AddViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DyJ-a7-gfs"/>
                         <viewControllerLayoutGuide type="bottom" id="pH8-1G-496"/>
@@ -1045,28 +1071,34 @@
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scP-WP-Zad" userLabel="SKView" customClass="SKView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34p-6X-yEt">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="60" width="600" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="cancel" id="Uia-gh-JlY">
                                         <connections>
                                             <segue destination="NvF-Zk-hnV" kind="unwind" unwindAction="unwindToPreviousViewController:" id="NuC-IQ-z1H"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="tLb-l7-gW1"/>
+                                    <barButtonItem title="Anim" id="WMk-pZ-lth">
+                                        <connections>
+                                            <action selector="animate:" destination="okh-c3-2CT" id="juO-gH-G06"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="pH8-1G-496" firstAttribute="top" secondItem="scP-WP-Zad" secondAttribute="bottom" id="80a-mN-XNq"/>
                             <constraint firstAttribute="trailing" secondItem="34p-6X-yEt" secondAttribute="trailing" id="I0m-Dg-LuM"/>
                             <constraint firstAttribute="trailing" secondItem="scP-WP-Zad" secondAttribute="trailing" id="ON7-iv-csp"/>
                             <constraint firstItem="scP-WP-Zad" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="OfO-Lw-JBE"/>
                             <constraint firstItem="scP-WP-Zad" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="topMargin" id="QrD-VY-ASZ"/>
-                            <constraint firstItem="34p-6X-yEt" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="top" id="YoO-Rk-mqc"/>
+                            <constraint firstItem="34p-6X-yEt" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="top" constant="60" id="YoO-Rk-mqc"/>
                             <constraint firstItem="34p-6X-yEt" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="xg8-IH-F4t"/>
                         </constraints>
                     </view>
@@ -1097,6 +1129,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Smoke.png" width="32" height="32"/>
         <image name="flat_brain_background" width="465" height="364"/>
         <image name="flat_brain_foreground" width="465" height="364"/>
         <image name="ic-change" width="64" height="64"/>

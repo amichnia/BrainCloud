@@ -37,7 +37,7 @@ class AddViewController: UIViewController {
             skView.showsFPS = true
             skView.showsNodeCount = true
             skView.backgroundColor = UIColor.whiteColor()
-            skView.showsPhysics = true
+//            skView.showsPhysics = true
             
             scene.size = skView.bounds.size
             
@@ -56,6 +56,17 @@ class AddViewController: UIViewController {
     }
     
     // MARK: - Actions
+    var shown = false
+    @IBAction func animate(sender: AnyObject?) {
+        if !shown {
+            self.scene.animateShow()
+            shown = true
+        }
+        else {
+            self.scene.animateHide()
+            shown = false
+        }
+    }
     
     // MARK: - Navigation
 

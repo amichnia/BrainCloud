@@ -29,6 +29,19 @@ class Skill {
         case Intermediate
         case Professional
         case Expert
+        
+        var image: UIImage? {
+            switch self {
+            case .Beginner:
+                return UIImage(named: "icon-skill-beginner")
+            case .Intermediate:
+                return UIImage(named: "icon-skill-intermediate")
+            case .Professional:
+                return UIImage(named: "icon-skill-professional")
+            case .Expert:
+                return UIImage(named: "icon-skill-expert")
+            }
+        }
     }
     
 }
