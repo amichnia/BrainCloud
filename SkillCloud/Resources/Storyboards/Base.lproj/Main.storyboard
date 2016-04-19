@@ -922,7 +922,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2840.5" y="316.5"/>
+            <point key="canvasLocation" x="1233.5" y="1213.5"/>
         </scene>
         <!--Test View Controller-->
         <scene sceneID="qAr-zz-Ejk">
@@ -945,7 +945,7 @@
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Jt-xq-Sbt" userLabel="SKView" customClass="SKView">
                                 <rect key="frame" x="0.0" y="19" width="600" height="562"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsY-lp-g0W">
@@ -995,7 +995,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMw-da-HkH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-118" y="265"/>
+            <point key="canvasLocation" x="2250" y="1049"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Gbs-sc-fAI">
@@ -1011,19 +1011,73 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwT-Ne-wZY">
                                 <rect key="frame" x="32" y="148" width="121" height="55"/>
-                                <state key="normal" title="ADD"/>
+                                <state key="normal" title="Generator"/>
                                 <connections>
-                                    <segue destination="wNk-oj-hdM" kind="show" id="h4R-KN-HvU"/>
+                                    <segue destination="IHA-15-xhl" kind="show" id="rjW-sg-bN5"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="lre-nl-LZE"/>
+                    <navigationItem key="navigationItem" id="lre-nl-LZE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="8sK-6T-TWO">
+                            <connections>
+                                <segue destination="okh-c3-2CT" kind="presentation" animates="NO" id="GoQ-Bo-qhN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4IR-MY-hFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2250" y="333"/>
+        </scene>
+        <!--Add View Controller-->
+        <scene sceneID="xjn-P4-X33">
+            <objects>
+                <viewController id="okh-c3-2CT" customClass="AddViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DyJ-a7-gfs"/>
+                        <viewControllerLayoutGuide type="bottom" id="pH8-1G-496"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Hkk-qf-1PL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scP-WP-Zad" userLabel="SKView" customClass="SKView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34p-6X-yEt">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem systemItem="cancel" id="Uia-gh-JlY">
+                                        <connections>
+                                            <segue destination="NvF-Zk-hnV" kind="unwind" unwindAction="unwindToPreviousViewController:" id="NuC-IQ-z1H"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pH8-1G-496" firstAttribute="top" secondItem="scP-WP-Zad" secondAttribute="bottom" id="80a-mN-XNq"/>
+                            <constraint firstAttribute="trailing" secondItem="34p-6X-yEt" secondAttribute="trailing" id="I0m-Dg-LuM"/>
+                            <constraint firstAttribute="trailing" secondItem="scP-WP-Zad" secondAttribute="trailing" id="ON7-iv-csp"/>
+                            <constraint firstItem="scP-WP-Zad" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="OfO-Lw-JBE"/>
+                            <constraint firstItem="scP-WP-Zad" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="topMargin" id="QrD-VY-ASZ"/>
+                            <constraint firstItem="34p-6X-yEt" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="top" id="YoO-Rk-mqc"/>
+                            <constraint firstItem="34p-6X-yEt" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="xg8-IH-F4t"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="skView" destination="scP-WP-Zad" id="YaD-We-4SW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z8c-Eo-wGn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="NvF-Zk-hnV" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3082" y="333"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SWI-bd-5hr">

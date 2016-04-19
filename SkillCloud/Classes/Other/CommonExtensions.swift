@@ -91,3 +91,10 @@ extension Array {
         }
     }
 }
+
+// MARK: - Default unwind segue for back
+extension UIViewController {
+    
+    @IBAction func unwindToPreviousViewController(unwindSegue: UIStoryboardSegue) { }
+    
+}

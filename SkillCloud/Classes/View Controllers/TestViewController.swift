@@ -38,7 +38,7 @@ class TestViewController: UIViewController, SkillsProvider {
         self.prepareScene(self.skView, size: self.skView.bounds.size)
     }
     
-    // MARK: - COnfiguration
+    // MARK: - Configuration
     func prepareScene(skView: SKView, size: CGSize){
         if let scene = GameScene(fileNamed:"GameScene") {
             scene.nodes = self.nodes
@@ -46,6 +46,7 @@ class TestViewController: UIViewController, SkillsProvider {
             // Configure the view.
             skView.showsFPS = true
             skView.showsNodeCount = true
+            skView.backgroundColor = UIColor.whiteColor()
 //            skView.showsPhysics = true
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
@@ -58,7 +59,7 @@ class TestViewController: UIViewController, SkillsProvider {
             
             self.scene = scene
             self.scene.skillsProvider = self
-//            self.skView.allowsTransparency = true
+            self.skView.allowsTransparency = true
         }
     }
     
