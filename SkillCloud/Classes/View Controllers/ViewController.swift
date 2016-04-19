@@ -17,20 +17,12 @@ class ViewController: UIViewController {
     // MARK: - Lifecycle
     
     // MARK: - Actions
-    @IBAction func showAddSkillViewController(sender: AnyObject?) {
+    @IBAction func showAddSkillViewController(sender: UIBarButtonItem?) {
         guard let addViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
             return
         }
         
-        self.addChildViewController(addViewController)
-        addViewController.view.frame = self.view.bounds
-        self.view.addSubview(addViewController.view)
-        addViewController.didMoveToParentViewController(self)
-        
-        
-        // ttt
-//        let snapshotView = self.view.snapshotViewAfterScreenUpdates(true)
-//        addViewController.view.insertSubview(, belowSubview: addViewController.skView)
+        addViewController.showFromViewController(self, fromPoint: CGPoint(x: self.view.bounds.width - 20, y: self.view.bounds.height - 20))
     }
     
     // MARK: - Navigation

@@ -1012,37 +1012,28 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwT-Ne-wZY">
                                 <rect key="frame" x="32" y="148" width="121" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="PIE-Nv-aVp"/>
-                                    <constraint firstAttribute="width" constant="121" id="jjZ-yP-1E1"/>
+                                    <constraint firstAttribute="width" constant="121" id="EX3-hX-AHy"/>
+                                    <constraint firstAttribute="height" constant="55" id="S0S-ud-6fB"/>
                                 </constraints>
                                 <state key="normal" title="Generator"/>
                                 <connections>
                                     <segue destination="IHA-15-xhl" kind="show" id="rjW-sg-bN5"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Smoke.png" translatesAutoresizingMaskIntoConstraints="NO" id="Wzb-J3-PHn">
-                                <rect key="frame" x="222" y="148" width="96" height="92"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="96" id="jzM-fT-4WX"/>
-                                    <constraint firstAttribute="height" constant="92" id="xXD-BJ-L8H"/>
-                                </constraints>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flat_brain_background" translatesAutoresizingMaskIntoConstraints="NO" id="Kci-gC-Wbh">
                                 <rect key="frame" x="44" y="315" width="189" height="162"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="189" id="y9Y-dN-kza"/>
+                                    <constraint firstAttribute="width" constant="189" id="Qch-uH-n5Q"/>
+                                    <constraint firstAttribute="height" constant="162" id="YN3-Kx-bpx"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oES-FP-QvA" firstAttribute="top" secondItem="Kci-gC-Wbh" secondAttribute="bottom" constant="123" id="23d-vu-l2k"/>
-                            <constraint firstItem="cwT-Ne-wZY" firstAttribute="leading" secondItem="64Z-ln-ds6" secondAttribute="leadingMargin" constant="12" id="46I-u7-Gg9"/>
-                            <constraint firstItem="Kci-gC-Wbh" firstAttribute="top" secondItem="Wzb-J3-PHn" secondAttribute="bottom" constant="75" id="Nfn-oa-kmZ"/>
-                            <constraint firstItem="cwT-Ne-wZY" firstAttribute="top" secondItem="Wzb-J3-PHn" secondAttribute="top" id="Pkx-UV-q5r"/>
-                            <constraint firstItem="cwT-Ne-wZY" firstAttribute="top" secondItem="mf3-3T-Dmp" secondAttribute="bottom" constant="84" id="T4t-za-H5p"/>
-                            <constraint firstItem="Kci-gC-Wbh" firstAttribute="leading" secondItem="64Z-ln-ds6" secondAttribute="leadingMargin" constant="24" id="taK-B2-7f8"/>
-                            <constraint firstItem="Wzb-J3-PHn" firstAttribute="leading" secondItem="cwT-Ne-wZY" secondAttribute="trailing" constant="69" id="yEc-QA-BsN"/>
+                            <constraint firstItem="cwT-Ne-wZY" firstAttribute="leading" secondItem="64Z-ln-ds6" secondAttribute="leadingMargin" constant="12" id="4l3-xC-kiA"/>
+                            <constraint firstItem="Kci-gC-Wbh" firstAttribute="leading" secondItem="64Z-ln-ds6" secondAttribute="leadingMargin" constant="24" id="aBd-9Z-BfK"/>
+                            <constraint firstItem="oES-FP-QvA" firstAttribute="top" secondItem="Kci-gC-Wbh" secondAttribute="bottom" constant="123" id="r6g-K5-ZIT"/>
+                            <constraint firstItem="cwT-Ne-wZY" firstAttribute="top" secondItem="mf3-3T-Dmp" secondAttribute="bottom" constant="84" id="zam-Db-TFA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lre-nl-LZE">
@@ -1069,45 +1060,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UfW-6I-deg">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="HMv-qn-5ad">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scP-WP-Zad" userLabel="SKView" customClass="SKView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34p-6X-yEt">
-                                <rect key="frame" x="0.0" y="60" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <barButtonItem systemItem="cancel" id="Uia-gh-JlY">
                                         <connections>
-                                            <segue destination="NvF-Zk-hnV" kind="unwind" unwindAction="unwindToPreviousViewController:" id="NuC-IQ-z1H"/>
+                                            <action selector="hide:" destination="okh-c3-2CT" id="ndU-O9-sA6"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="tLb-l7-gW1"/>
-                                    <barButtonItem title="Anim" id="WMk-pZ-lth">
-                                        <connections>
-                                            <action selector="animate:" destination="okh-c3-2CT" id="juO-gH-G06"/>
-                                        </connections>
-                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="UfW-6I-deg" secondAttribute="trailing" id="3dn-9P-IsJ"/>
                             <constraint firstItem="pH8-1G-496" firstAttribute="top" secondItem="scP-WP-Zad" secondAttribute="bottom" id="80a-mN-XNq"/>
                             <constraint firstAttribute="trailing" secondItem="34p-6X-yEt" secondAttribute="trailing" id="I0m-Dg-LuM"/>
                             <constraint firstAttribute="trailing" secondItem="scP-WP-Zad" secondAttribute="trailing" id="ON7-iv-csp"/>
                             <constraint firstItem="scP-WP-Zad" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="OfO-Lw-JBE"/>
                             <constraint firstItem="scP-WP-Zad" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="topMargin" id="QrD-VY-ASZ"/>
-                            <constraint firstItem="34p-6X-yEt" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="top" constant="60" id="YoO-Rk-mqc"/>
+                            <constraint firstItem="34p-6X-yEt" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="top" constant="20" id="YoO-Rk-mqc"/>
+                            <constraint firstItem="UfW-6I-deg" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="top" id="i2D-ke-Mfr"/>
+                            <constraint firstItem="UfW-6I-deg" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="og8-8c-j4W"/>
+                            <constraint firstItem="pH8-1G-496" firstAttribute="top" secondItem="UfW-6I-deg" secondAttribute="bottom" id="rQp-iL-1OI"/>
                             <constraint firstItem="34p-6X-yEt" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="xg8-IH-F4t"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="blurView" destination="UfW-6I-deg" id="T65-vE-8zS"/>
                         <outlet property="skView" destination="scP-WP-Zad" id="YaD-We-4SW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8c-Eo-wGn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="NvF-Zk-hnV" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3082" y="333"/>
         </scene>
@@ -1129,7 +1127,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Smoke.png" width="32" height="32"/>
         <image name="flat_brain_background" width="465" height="364"/>
         <image name="flat_brain_foreground" width="465" height="364"/>
         <image name="ic-change" width="64" height="64"/>

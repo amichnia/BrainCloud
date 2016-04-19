@@ -41,9 +41,9 @@ class LevelNode: SKNode {
         node.physicsBody = SKPhysicsBody(circleOfRadius: node.radius)
         node.physicsBody?.linearDamping = 10
         node.physicsBody?.angularDamping = 25
-        node.physicsBody?.categoryBitMask = GameScene.CollisionMask.Default
-        node.physicsBody?.collisionBitMask = GameScene.CollisionMask.Default
-        node.physicsBody?.contactTestBitMask = GameScene.CollisionMask.Default
+        node.physicsBody?.categoryBitMask = GameScene.CollisionMask.Ghost
+        node.physicsBody?.collisionBitMask = GameScene.CollisionMask.Ghost
+        node.physicsBody?.contactTestBitMask = GameScene.CollisionMask.Ghost
         
         let shape = SKShapeNode(circleOfRadius: node.radius)
         shape.fillColor = UIColor.whiteColor()
@@ -57,10 +57,10 @@ class LevelNode: SKNode {
         return node
     }
     
-    func animateShow(duration: NSTimeInterval = 0.7){
+    func animateShow(duration: NSTimeInterval = 1){
         self.hidden =  false
         
-        let scaleAction = SKAction.scaleTo(1, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
+        let scaleAction = SKAction.scaleTo(1, duration: duration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         self.runAction(scaleAction)
     }
     

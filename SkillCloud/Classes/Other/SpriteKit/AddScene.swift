@@ -55,14 +55,19 @@ class AddScene: SKScene {
         }
     }
     
-    func animateShow(){
+    func animateShow(point: CGPoint? = nil){
+        if let _ = point {
+            self.addNode?.startPosition = point!
+            self.addNode?.position = point!
+        }
         self.addNode?.animateShow(1)
          self.skillNodes.forEach {
             $0.animateShow()
         }
     }
     
-    func animateHide(completion: (()->())? = nil){
+    func animateHide(point: CGPoint, completion: (()->())? = nil){
+        self.addNode?.startPosition = point
         self.addNode?.animateHide(1)
         self.skillNodes.forEach {
             $0.animateHide()
@@ -114,7 +119,7 @@ class AddScene: SKScene {
         self.skillNodes[index] = bnode
         
         let joint = SKPhysicsJointSpring.jointWithBodyA(node.physicsBody!, bodyB: bnode.physicsBody!, anchorA: node.position, anchorB: bnode.position)
-        joint.frequency = 70
+        joint.frequency = 100
         joint.damping = 40
         self.physicsWorld.addJoint(joint)
     }

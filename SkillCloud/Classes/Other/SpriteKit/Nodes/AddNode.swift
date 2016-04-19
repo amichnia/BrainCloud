@@ -137,10 +137,8 @@ class AddNode: SKNode {
     
     func addAnchorAtPosition(position: CGPoint) -> SKNode {
         //        let anchor = SKNode()
-        let anchor = SKShapeNode(circleOfRadius: 10)
+        let anchor = SKNode()
         anchor.position = position
-        anchor.fillColor = self.tintColor
-        anchor.strokeColor = self.tintColor
         
         self.addChild(anchor)
         return anchor

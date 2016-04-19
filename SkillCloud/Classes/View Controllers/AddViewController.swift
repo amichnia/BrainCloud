@@ -13,20 +13,33 @@ class AddViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var skView: SKView!
+    @IBOutlet weak var blurView: UIVisualEffectView!
     
     // MARK: - Properties
     var scene : AddScene!
+    var snapshotTop : UIView?
+    var point = CGPoint.zero
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.skView.hidden = true
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         self.prepareScene(self.skView, size: self.skView.bounds.size)
+        
+        self.animateShow(point)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.skView.paused = true
+        self.scene = nil
     }
     
     // MARK: - Configuration
@@ -37,7 +50,6 @@ class AddViewController: UIViewController {
             skView.showsFPS = true
             skView.showsNodeCount = true
             skView.backgroundColor = UIColor.whiteColor()
-//            skView.showsPhysics = true
             
             scene.size = skView.bounds.size
             
@@ -56,16 +68,54 @@ class AddViewController: UIViewController {
     }
     
     // MARK: - Actions
-    var shown = false
-    @IBAction func animate(sender: AnyObject?) {
-        if !shown {
-            self.scene.animateShow()
-            shown = true
+    @IBAction func hide(sender: AnyObject?){
+        self.hideAddViewController(nil)
+    }
+    
+    func showFromViewController(parent: UIViewController, fromPoint point: CGPoint) {
+        // Bars
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
+        
+        let snapshot = parent.view.snapshotViewAfterScreenUpdates(false)
+        let snapshotTop = parent.view.snapshotViewAfterScreenUpdates(false)
+        snapshot.frame = parent.view.bounds
+        snapshotTop.frame = parent.view.bounds
+        self.snapshotTop = snapshotTop
+        self.view.insertSubview(snapshot, atIndex: 0)
+        self.view.insertSubview(snapshotTop, aboveSubview: self.blurView)
+        self.point = point
+        
+        parent.presentViewController(self, animated: false) {
+            UIView.animateWithDuration(0.5, animations: { 
+                snapshotTop.alpha = 0
+            }, completion: { (_) in
+                snapshotTop.hidden = true
+            })
         }
-        else {
-            self.scene.animateHide()
-            shown = false
+    }
+    
+    func hideAddViewController(point: CGPoint?) {
+        // Bars
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
+        
+        self.point = point ?? self.point
+        self.snapshotTop?.hidden = false
+        
+        self.scene.animateHide(self.point){
+            self.scene.paused = true
         }
+        
+        UIView.animateWithDuration(1.1, animations: {
+            self.snapshotTop?.alpha = 1
+        }, completion: { (_) in
+            self.dismissViewControllerAnimated(false, completion: nil)
+        })
+    }
+    
+    func animateShow(point: CGPoint? = nil){
+        self.skView.paused = false
+        self.skView.hidden = false
+        self.scene.animateShow(point)
     }
     
     // MARK: - Navigation
