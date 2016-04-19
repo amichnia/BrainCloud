@@ -11,8 +11,8 @@ import SpriteKit
 import SpriteKit_Spring
 
 class AddNode: SKNode {
-    
     // defaults
+    let anchorsDistanceFactor: CGFloat = 0.9
     static let lineWidth: CGFloat = 3
     static let imageInset: CGFloat = 2
     
@@ -87,9 +87,14 @@ class AddNode: SKNode {
         
         node.configureLevelAnchors()
         
+        node.name = "ImageNode"
+        node.spriteNode.name = "ImageNode"
+        node.shapeNode.name = "ImageNode"
+        
         return node
     }
     
+    // Actions
     func animateShow(duration: NSTimeInterval = 1){
         self.hidden = false
         
@@ -110,7 +115,13 @@ class AddNode: SKNode {
         self.runAction(moveAction)
     }
     
-    let anchorsDistanceFactor: CGFloat = 1
+    func updatePosition(offset: CGPoint, duration: NSTimeInterval){
+        let location = CGPoint(x: (self.finalPosition?.x ?? 0) + offset.x, y: (self.finalPosition?.y ?? 0) + offset.y)
+        let action = SKAction.moveTo(location, duration: duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0)
+        self.runAction(action)
+    }
+    // Helpers
+    
     func configureLevelAnchors() {
         let rotor = SKNode()
         let pointer = SKNode()
@@ -144,7 +155,6 @@ class AddNode: SKNode {
         return anchor
     }
     
-    // Helpers
     subscript(level: Skill.Experience) -> SKNode? {
         switch level {
         case .Beginner where self.skillAnchors.count > 0:

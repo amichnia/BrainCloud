@@ -176,28 +176,6 @@ class GameScene: SKScene {
         }
     }
 
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        for touch in touches {
-//            let location = touch.locationInNode(self)
-//            
-//            let touchedNode = self.nodeAtPoint(location)
-//            if touchedNode != self, let shapeNode = touchedNode as? BrainNode {
-//                shapeNode.strokeColor = UIColor.orangeColor()
-//                print("node: \(shapeNode.node.id)")
-//                
-//                switch fromNode {
-//                case .None:
-//                    fromNode = shapeNode
-//                case .Some(_):
-//                    fromNode!.connectNode(shapeNode)
-//                    shapeNode.strokeColor = shapeNode.fillColor
-//                    fromNode!.strokeColor = fromNode!.fillColor
-//                    fromNode = nil
-//                }
-//            }
-//        }
-//    }
-    
     // MARK: - Main run loop
     override func update(currentTime: CFTimeInterval) {
         allNodes.forEach{

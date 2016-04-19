@@ -14,7 +14,7 @@ class AddScene: SKScene {
 
     // MARK: - Properties
     var tintColor: UIColor = UIColor.blueColor()
-    
+    var controller: AddViewController?
     var addNode: AddNode?
     
     // MARK: - Lifecycle
@@ -66,12 +66,16 @@ class AddScene: SKScene {
         }
     }
     
-    func animateHide(point: CGPoint, completion: (()->())? = nil){
+    func animateHide(point: CGPoint, completion: (()->())? = nil) {
         self.addNode?.startPosition = point
         self.addNode?.animateHide(1)
         self.skillNodes.forEach {
             $0.animateHide()
         }
+    }
+    
+    func updatePosition(offset: CGPoint, duration: NSTimeInterval) {
+        self.addNode?.updatePosition(offset, duration: duration)
     }
     
     // MARK: - Helpers
@@ -153,6 +157,41 @@ class AddScene: SKScene {
             self.skillNodes.forEach{
                 $0.zRotation = 0
             }
+        }
+    }
+    
+}
+
+// MARK: - Touches support
+extension AddScene {
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        
+        let location = touch.locationInNode(self)
+        let touchedNode = self.nodeAtPoint(location)
+        
+        if touchedNode == self {
+            self.controller?.hideKeyboard(nil)
+        }
+        else if let node = touchedNode.parent, name = node.name {
+            switch name {
+            case "ImageNode":
+                self.controller?.selectImage()
+            case "LevelNode":
+                if let levelNode = (touchedNode as? LevelNode) ?? (touchedNode.parent as? LevelNode) {
+                    self.skillNodes.forEach{
+                        $0.selected = false
+                    }
+                    levelNode.selected = true
+                    self.controller?.selectedLevel(levelNode.level)
+                }
+            default:
+                break
+            }
+            
         }
     }
     

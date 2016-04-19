@@ -14,25 +14,42 @@ class AddViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var skView: SKView!
     @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var skillNameField: UITextField!
+    @IBOutlet weak var containerBottom: NSLayoutConstraint!
+    @IBOutlet weak var containerView: UIView!
     
     // MARK: - Properties
+    var firstLayout = true
     var scene : AddScene!
     var snapshotTop : UIView?
     var point = CGPoint.zero
+    var skill : Skill?
+    var image: UIImage?
+    var experience : Skill.Experience = Skill.Experience.Intermediate
+    var isEditingText : Bool = true
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.skView.hidden = true
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.prepareScene(self.skView, size: self.skView.bounds.size)
+        self.prepareScene(self.skView, size: self.view.bounds.size)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        self.animateShow(point)
+        if firstLayout {
+            firstLayout = false
+            self.animateShow(point)
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -44,8 +61,8 @@ class AddViewController: UIViewController {
     
     // MARK: - Configuration
     func prepareScene(skView: SKView, size: CGSize){
-        if let scene = AddScene(fileNamed:"AddScene") {
-            
+        if self.scene == nil, let scene = AddScene(fileNamed:"AddScene") {
+            skView.bounds = self.view.bounds
             // Configure the view.
             skView.showsFPS = true
             skView.showsNodeCount = true
@@ -62,14 +79,29 @@ class AddViewController: UIViewController {
             
             skView.presentScene(scene)
             
+            scene.controller = self
+            
             self.scene = scene
             self.skView.allowsTransparency = true
         }
     }
     
     // MARK: - Actions
+    @IBAction func hideKeyboard(sender: AnyObject?) {
+        self.skillNameField.resignFirstResponder()
+    }
+    
     @IBAction func hide(sender: AnyObject?){
+        self.hideKeyboard(self)
         self.hideAddViewController(nil)
+    }
+    
+    func selectImage() {
+        
+    }
+    
+    func selectedLevel(level: Skill.Experience){
+        
     }
     
     func showFromViewController(parent: UIViewController, fromPoint point: CGPoint) {
@@ -120,4 +152,53 @@ class AddViewController: UIViewController {
     
     // MARK: - Navigation
 
+}
+
+
+extension AddViewController {
+    
+    func keyboardWillShow(notification: NSNotification){
+        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        let curve =  UIViewAnimationCurve.init(rawValue: notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! Int)!
+        let frameHeight = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().height
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+        
+        self.containerBottom.constant = frameHeight
+        self.view.layoutIfNeeded()
+        self.containerView.setNeedsDisplay()
+        
+        UIView.commitAnimations()
+        
+//        self.scene.updatePosition(CGPoint(x: 0, y: frameHeight * (2/3)), duration: duration)
+        
+        UIView.animateWithDuration(duration) {
+            self.containerView.setNeedsDisplay()
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification){
+        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+        let curve =  UIViewAnimationCurve.init(rawValue: notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! Int)!
+        let frameHeight : CGFloat = 0
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+        
+        self.scene.updatePosition(CGPoint(x: 0, y: 0), duration: duration)
+        
+        self.containerBottom.constant = frameHeight
+        self.view.layoutIfNeeded()
+        self.containerView.setNeedsDisplay()
+        
+        UIView.commitAnimations()
+        
+        UIView.animateWithDuration(duration) {
+            self.containerView.setNeedsDisplay()
+        }
+    }
+    
 }

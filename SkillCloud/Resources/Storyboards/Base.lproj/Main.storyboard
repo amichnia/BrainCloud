@@ -1068,41 +1068,66 @@
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scP-WP-Zad" userLabel="SKView" customClass="SKView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wka-0C-nzg">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scP-WP-Zad" userLabel="SKView" customClass="SKView">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vj3-Tx-pxa">
+                                        <rect key="frame" x="8" y="556" width="584" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="du7-8U-qaY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Vj3-Tx-pxa" firstAttribute="leading" secondItem="wka-0C-nzg" secondAttribute="leading" constant="8" id="OmU-oE-Qt1"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vj3-Tx-pxa" secondAttribute="trailing" constant="8" id="Tdw-2A-4BO"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vj3-Tx-pxa" secondAttribute="bottom" constant="8" id="Y2e-TG-80A"/>
+                                    <constraint firstAttribute="trailing" secondItem="scP-WP-Zad" secondAttribute="trailing" id="Z2v-y4-7lb"/>
+                                    <constraint firstItem="scP-WP-Zad" firstAttribute="leading" secondItem="wka-0C-nzg" secondAttribute="leading" id="k1R-rB-YbN"/>
+                                    <constraint firstItem="scP-WP-Zad" firstAttribute="centerY" secondItem="wka-0C-nzg" secondAttribute="centerY" id="pvV-5g-t6x"/>
+                                </constraints>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34p-6X-yEt">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
-                                <items>
-                                    <barButtonItem systemItem="cancel" id="Uia-gh-JlY">
-                                        <connections>
-                                            <action selector="hide:" destination="okh-c3-2CT" id="ndU-O9-sA6"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="tLb-l7-gW1"/>
-                                </items>
-                            </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAE-jC-2q0">
+                                <rect key="frame" x="20" y="20" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="AwC-hM-QFj"/>
+                                    <constraint firstAttribute="width" constant="44" id="f5b-HN-kV0"/>
+                                </constraints>
+                                <state key="normal" title="X"/>
+                                <connections>
+                                    <action selector="hide:" destination="okh-c3-2CT" eventType="touchUpInside" id="chp-LR-zRE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="UfW-6I-deg" secondAttribute="trailing" id="3dn-9P-IsJ"/>
-                            <constraint firstItem="pH8-1G-496" firstAttribute="top" secondItem="scP-WP-Zad" secondAttribute="bottom" id="80a-mN-XNq"/>
-                            <constraint firstAttribute="trailing" secondItem="34p-6X-yEt" secondAttribute="trailing" id="I0m-Dg-LuM"/>
-                            <constraint firstAttribute="trailing" secondItem="scP-WP-Zad" secondAttribute="trailing" id="ON7-iv-csp"/>
-                            <constraint firstItem="scP-WP-Zad" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="OfO-Lw-JBE"/>
-                            <constraint firstItem="scP-WP-Zad" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="topMargin" id="QrD-VY-ASZ"/>
-                            <constraint firstItem="34p-6X-yEt" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="top" constant="20" id="YoO-Rk-mqc"/>
+                            <constraint firstItem="wka-0C-nzg" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="75b-Oe-S7D"/>
+                            <constraint firstItem="pH8-1G-496" firstAttribute="top" secondItem="wka-0C-nzg" secondAttribute="bottom" id="LSm-8j-oqs"/>
+                            <constraint firstAttribute="trailing" secondItem="wka-0C-nzg" secondAttribute="trailing" id="d7J-PX-PgC"/>
+                            <constraint firstItem="qAE-jC-2q0" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leadingMargin" id="dKt-l5-tof"/>
                             <constraint firstItem="UfW-6I-deg" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="top" id="i2D-ke-Mfr"/>
+                            <constraint firstItem="wka-0C-nzg" firstAttribute="top" secondItem="Hkk-qf-1PL" secondAttribute="top" id="jHe-Kf-srj"/>
+                            <constraint firstItem="qAE-jC-2q0" firstAttribute="top" secondItem="DyJ-a7-gfs" secondAttribute="bottom" id="njg-ud-IAa"/>
                             <constraint firstItem="UfW-6I-deg" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="og8-8c-j4W"/>
                             <constraint firstItem="pH8-1G-496" firstAttribute="top" secondItem="UfW-6I-deg" secondAttribute="bottom" id="rQp-iL-1OI"/>
-                            <constraint firstItem="34p-6X-yEt" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="xg8-IH-F4t"/>
+                            <constraint firstItem="scP-WP-Zad" firstAttribute="height" secondItem="Hkk-qf-1PL" secondAttribute="height" id="zLg-iK-awg"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="blurView" destination="UfW-6I-deg" id="T65-vE-8zS"/>
+                        <outlet property="containerBottom" destination="LSm-8j-oqs" id="sBN-Q4-z2N"/>
+                        <outlet property="containerView" destination="wka-0C-nzg" id="owN-6W-eEd"/>
                         <outlet property="skView" destination="scP-WP-Zad" id="YaD-We-4SW"/>
+                        <outlet property="skillNameField" destination="Vj3-Tx-pxa" id="mAI-gH-pgz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8c-Eo-wGn" userLabel="First Responder" sceneMemberID="firstResponder"/>

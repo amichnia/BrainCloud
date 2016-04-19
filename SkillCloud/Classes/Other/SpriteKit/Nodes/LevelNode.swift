@@ -12,18 +12,29 @@ import SpriteKit_Spring
 
 class LevelNode: SKNode {
     
-    static let begFactor: CGFloat = 0.2
-    static let intFactor: CGFloat = 0.3
-    static let proFactor: CGFloat = 0.4
+    static let begFactor: CGFloat = 0.38
+    static let intFactor: CGFloat = 0.41
+    static let proFactor: CGFloat = 0.45
     static let expFactor: CGFloat = 0.5
     
     var level : Skill.Experience = .Beginner
     var radius: CGFloat!
     var joint: SKPhysicsJoint?
+    var tintColor : UIColor?
+    var shape : SKShapeNode?
+    
+    var selected : Bool = false {
+        didSet {
+            if let shape = self.shape, color = self.tintColor {
+                shape.strokeColor = self.selected ? UIColor.orangeColor() : color
+            }
+        }
+    }
     
     static func nodeWith(radius: CGFloat, level: Skill.Experience, tint: UIColor) -> LevelNode {
         let node = LevelNode()
         
+        node.tintColor = tint
         node.level = level
         node.radius = {
             switch level {
@@ -48,11 +59,16 @@ class LevelNode: SKNode {
         let shape = SKShapeNode(circleOfRadius: node.radius)
         shape.fillColor = UIColor.whiteColor()
         shape.strokeColor = tint
+        node.shape = shape
         node.addChild(shape)
         
         let texture = SKTexture(image: level.image!)
         let sprite = SKSpriteNode(texture: texture, size: CGSize(width: 2 * node.radius, height: 2 * node.radius))
         node.addChild(sprite)
+        
+        
+        node.name = "LevelNode"
+        shape.name = "LevelNode"
         
         return node
     }
