@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import PromiseKit
 
 // MARK: - Array shifting
 extension Array {
@@ -90,4 +90,70 @@ extension Array {
             }
         }
     }
+}
+
+// MARK: - Default unwind segue for back
+extension UIViewController {
+    
+    @IBAction func unwindToPreviousViewController(unwindSegue: UIStoryboardSegue) { }
+    
+}
+
+// MARK: - Promise decisions
+extension UIViewController {
+    
+    func promiseSelection<T>(type: T.Type, cancellable: Bool, options: [(String,(() -> Promise<T>))]) -> Promise<T> {
+        let selection = Promise<Promise<T>> { (fulfill, reject) in
+            guard options.count > 0 else {
+                reject(CommonError.NotEnoughData)
+                return
+            }
+            
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            
+            options.forEach{ (title, promise) in
+                let action = UIAlertAction(title: title, style: .Default) { (_) in
+                    fulfill(promise())
+                }
+                
+                alertController.addAction(action)
+            }
+            
+            if cancellable {
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .Destructive){ (_) in
+                    reject(CommonError.UserCancelled)
+                }
+                
+                alertController.addAction(cancelAction)
+            }
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        return selection.then { (promise) -> Promise<T> in
+            return promise
+        }
+    }
+    
+}
+
+// MARK: - Image selection
+extension UIViewController {
+    
+    func selectPickerImage(source: UIImagePickerControllerSourceType) -> Promise<UIImage> {
+        let picker = UIImagePickerController()
+        picker.sourceType = source
+        picker.allowsEditing = true
+        return self.promiseViewController(picker, animated: true, completion: nil).then { (data: NSData) -> UIImage in
+            return UIImage(data: data) ?? UIImage()
+        }
+    }
+    
+}
+
+// MARK: Common Error
+enum CommonError : ErrorType {
+    case UnknownError
+    case NotEnoughData
+    case UserCancelled
 }
