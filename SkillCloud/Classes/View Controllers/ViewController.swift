@@ -32,16 +32,26 @@ class ViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func showAddSkillViewController(sender: UIBarButtonItem?) {
-        guard let addViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
-            return
+        let point = CGPoint(x: self.view.bounds.width - 20, y: self.view.bounds.height - 20)
+        
+        try! AddViewController.promiseNewSkillWith(self, point: point, preparedScene: self.preparedScene)
+        .then { (skill) -> Void in
+            print(skill)
+        }
+        .error { error in
+            print("Error: \(error)")
         }
         
-        if let scene = self.preparedScene {
-            scene.paused = true
-            addViewController.scene = scene
-            self.preparedScene = nil
-        }
-        addViewController.showFromViewController(self, fromPoint: CGPoint(x: self.view.bounds.width - 20, y: self.view.bounds.height - 20))
+//        guard let addViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
+//            return
+//        }
+//        
+//        if let scene = self.preparedScene {
+//            scene.paused = true
+//            addViewController.scene = scene
+//            self.preparedScene = nil
+//        }
+//        addViewController.showFromViewController(self, fromPoint: CGPoint(x: self.view.bounds.width - 20, y: self.view.bounds.height - 20))
     }
     
     // MARK: - Navigation

@@ -160,4 +160,11 @@ extension UIViewController {
         })
     }
     
+    func selectGoogleImage(query: String) -> Promise<UIImage> {
+        return try! self.promiseGoogleImageForSearchTerm(query).then{ (image) -> Promise<UIImage> in
+            print(image.imageUrl)
+            return image.promiseImage()
+        }
+    }
+    
 }

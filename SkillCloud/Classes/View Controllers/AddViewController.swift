@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 import PromiseKit
+import AssetsLibrary
 
 class AddViewController: UIViewController {
 
@@ -20,13 +21,24 @@ class AddViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     
     // MARK: - Properties
+    var fulfill : ((Skill)->Void)!
+    var reject : ((ErrorType)->Void)!
+    
+    lazy var promise: Promise<Skill> = {
+        return Promise<Skill> { (fulfill, reject) in
+            self.fulfill = fulfill
+            self.reject = reject
+        }
+    }()
+    
+    var cancelled = false
     var firstLayout = true
     var scene : AddScene!
     var snapshotTop : UIView?
     var point = CGPoint.zero
     var skill : Skill?
     var image: UIImage?
-    var experience : Skill.Experience = Skill.Experience.Intermediate
+    var experience : Skill.Experience?
     var isEditingText : Bool = true
     var skillBottomDefaultValue : CGFloat = 0;
     
@@ -59,6 +71,10 @@ class AddViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         self.skView.paused = true
+        
+        if self.isBeingDismissed() {
+            self.tryFulfill()
+        }
     }
     
     // MARK: - Configuration
@@ -93,13 +109,23 @@ class AddViewController: UIViewController {
         self.skillNameField.resignFirstResponder()
     }
     
-    @IBAction func hide(sender: AnyObject?){
+    @IBAction func doneAction(sender: AnyObject?) {
+        self.hideKeyboard(self)
+        self.hideAddViewController(nil)
+    }
+    
+    @IBAction func cancelAction(sender: AnyObject?) {
+        self.cancelled = true
         self.hideKeyboard(self)
         self.hideAddViewController(nil)
     }
     
     func selectImage() {
-        self.selectGoogleImage()
+        self.promiseSelection(UIImage.self, cancellable: true, options: [
+            (NSLocalizedString("Take photo", comment: "Take photo"), { self.selectPickerImage(.Camera) }),
+            (NSLocalizedString("Photo Library", comment: "Photo Library"), { self.selectPickerImage(.PhotoLibrary) }),
+            (NSLocalizedString("Google Images", comment: "Google Images"), { self.selectGoogleImage("\(self.skillNameField.text)") })
+        ])
         .then{ image -> Void in
             self.image = image
             // Handle thumbnail of image -> rect
@@ -112,9 +138,22 @@ class AddViewController: UIViewController {
     }
     
     func selectedLevel(level: Skill.Experience){
-        
+        self.experience = level
     }
-    
+
+    // MARK: - Promise handling
+    func tryFulfill() {
+        guard let image = self.image, name = self.skillNameField.text, experience = self.experience where !self.cancelled && name.characters.count > 0 else {
+            self.reject(CommonError.UserCancelled)
+            return
+        }
+        
+        let skill = Skill(title: name, image: image, experience: experience)
+
+        self.fulfill(skill)
+    }
+
+    // MARK: - Helpers
     func showFromViewController(parent: UIViewController, fromPoint point: CGPoint) {
         let snapshot = parent.view.window!.snapshotViewAfterScreenUpdates(false)
         let snapshotTop = parent.view.window!.snapshotViewAfterScreenUpdates(false)
@@ -206,11 +245,19 @@ extension AddViewController {
 
 extension AddViewController {
     
-    func selectGoogleImage() -> Promise<UIImage> {
-        return try! self.promiseGoogleImageForSearchTerm("\(self.skillNameField.text)").then{ (image) -> Promise<UIImage> in
-            print(image.imageUrl)
-            return image.promiseImage()
+    static func promiseNewSkillWith(sender: UIViewController, point: CGPoint, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
+        guard let addViewController = sender.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
+            throw CommonError.UnknownError
         }
+        
+        if let scene = preparedScene {
+            scene.paused = true
+            addViewController.scene = scene
+        }
+        addViewController.showFromViewController(sender, fromPoint: point)
+        
+        return addViewController.promise
     }
     
 }
+
