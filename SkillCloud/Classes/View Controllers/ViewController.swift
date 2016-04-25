@@ -13,8 +13,22 @@ class ViewController: UIViewController {
     // MARK: - Outlets
     
     // MARK: - Properties
+    var preparedScene : AddScene?
     
     // MARK: - Lifecycle
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let scene = AddScene(fileNamed:"AddScene") {
+            self.preparedScene = scene
+            scene.size = self.view.bounds.size
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+    }
     
     // MARK: - Actions
     @IBAction func showAddSkillViewController(sender: UIBarButtonItem?) {
@@ -22,6 +36,11 @@ class ViewController: UIViewController {
             return
         }
         
+        if let scene = self.preparedScene {
+            scene.paused = true
+            addViewController.scene = scene
+            self.preparedScene = nil
+        }
         addViewController.showFromViewController(self, fromPoint: CGPoint(x: self.view.bounds.width - 20, y: self.view.bounds.height - 20))
     }
     

@@ -27,6 +27,7 @@ class AddViewController: UIViewController {
     var image: UIImage?
     var experience : Skill.Experience = Skill.Experience.Intermediate
     var isEditingText : Bool = true
+    var skillBottomDefaultValue : CGFloat = 0;
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -48,7 +49,8 @@ class AddViewController: UIViewController {
         
         if firstLayout {
             firstLayout = false
-            self.animateShow(point)
+            self.scene.paused = false
+            self.animateShow(0.7, point: point)
         }
     }
     
@@ -56,34 +58,35 @@ class AddViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         self.skView.paused = true
+        self.scene.controller = nil
         self.scene = nil
     }
     
     // MARK: - Configuration
     func prepareScene(skView: SKView, size: CGSize){
         if self.scene == nil, let scene = AddScene(fileNamed:"AddScene") {
-            skView.bounds = self.view.bounds
-            // Configure the view.
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            skView.backgroundColor = UIColor.whiteColor()
-            
-            scene.size = skView.bounds.size
-            
-            /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
-            
-            /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .Fill
-            scene.tintColor = skView.tintColor
-            
-            skView.presentScene(scene)
-            
-            scene.controller = self
-            
             self.scene = scene
-            self.skView.allowsTransparency = true
         }
+        
+        skView.bounds = self.view.bounds
+        skView.showsFPS = true
+        skView.showsNodeCount = true
+        skView.backgroundColor = UIColor.whiteColor()
+        
+        self.scene.size = skView.bounds.size
+        
+        /* Sprite Kit applies additional optimizations to improve rendering performance */
+        skView.ignoresSiblingOrder = true
+        
+        /* Set the scale mode to scale to fit the window */
+        self.scene.scaleMode = .Fill
+        self.scene.tintColor = skView.tintColor
+        
+        skView.presentScene(self.scene)
+        
+        self.scene.controller = self
+        
+        self.skView.allowsTransparency = true
     }
     
     // MARK: - Actions
@@ -105,11 +108,8 @@ class AddViewController: UIViewController {
     }
     
     func showFromViewController(parent: UIViewController, fromPoint point: CGPoint) {
-        // Bars
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.Slide)
-        
-        let snapshot = parent.view.snapshotViewAfterScreenUpdates(false)
-        let snapshotTop = parent.view.snapshotViewAfterScreenUpdates(false)
+        let snapshot = parent.view.window!.snapshotViewAfterScreenUpdates(false)
+        let snapshotTop = parent.view.window!.snapshotViewAfterScreenUpdates(false)
         snapshot.frame = parent.view.bounds
         snapshotTop.frame = parent.view.bounds
         self.snapshotTop = snapshotTop
@@ -118,36 +118,33 @@ class AddViewController: UIViewController {
         self.point = point
         
         parent.presentViewController(self, animated: false) {
-            UIView.animateWithDuration(0.5, animations: { 
+            UIView.animateWithDuration( 0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                 snapshotTop.alpha = 0
+                self.skillNameField.alpha = 1
             }, completion: { (_) in
                 snapshotTop.hidden = true
             })
-        }
+       }
     }
     
     func hideAddViewController(point: CGPoint?) {
-        // Bars
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Slide)
-        
         self.point = point ?? self.point
         self.snapshotTop?.hidden = false
-        
-        self.scene.animateHide(self.point){
+        self.scene.animateHide(0.7,point: self.point){
             self.scene.paused = true
+            self.dismissViewControllerAnimated(false, completion: nil)
         }
         
-        UIView.animateWithDuration(1.1, animations: {
+        UIView.animateWithDuration(0.7, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             self.snapshotTop?.alpha = 1
-        }, completion: { (_) in
-            self.dismissViewControllerAnimated(false, completion: nil)
-        })
+            self.skillNameField.alpha = 0
+        }, completion: nil)
     }
     
-    func animateShow(point: CGPoint? = nil){
+    func animateShow(duration: NSTimeInterval, point: CGPoint? = nil){
         self.skView.paused = false
         self.skView.hidden = false
-        self.scene.animateShow(point)
+        self.scene.animateShow(duration, point: point)
     }
     
     // MARK: - Navigation
@@ -172,8 +169,6 @@ extension AddViewController {
         
         UIView.commitAnimations()
         
-//        self.scene.updatePosition(CGPoint(x: 0, y: frameHeight * (2/3)), duration: duration)
-        
         UIView.animateWithDuration(duration) {
             self.containerView.setNeedsDisplay()
         }
@@ -187,8 +182,6 @@ extension AddViewController {
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(duration)
         UIView.setAnimationCurve(curve)
-        
-        self.scene.updatePosition(CGPoint(x: 0, y: 0), duration: duration)
         
         self.containerBottom.constant = frameHeight
         self.view.layoutIfNeeded()

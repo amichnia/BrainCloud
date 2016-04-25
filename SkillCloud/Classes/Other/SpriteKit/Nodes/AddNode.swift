@@ -95,31 +95,28 @@ class AddNode: SKNode {
     }
     
     // Actions
-    func animateShow(duration: NSTimeInterval = 1){
+    func animateShow(duration: NSTimeInterval = 1, completion: (()->())? = nil){
         self.hidden = false
-        
         let scaleAction = SKAction.scaleTo(1, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         let moveAction = SKAction.moveTo(self.finalPosition!, duration: duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0)
         
-        self.runAction(scaleAction)
-        self.runAction(moveAction)
-    }
-    
-    func animateHide(duration: NSTimeInterval = 1){
-        let scaleAction = SKAction.scaleTo(0, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-        let moveAction = SKAction.moveTo(self.startPosition!, duration: duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0)
-        
         self.runAction(scaleAction){
-            self.hidden = true
+            completion?()
         }
         self.runAction(moveAction)
     }
     
-    func updatePosition(offset: CGPoint, duration: NSTimeInterval){
-        let location = CGPoint(x: (self.finalPosition?.x ?? 0) + offset.x, y: (self.finalPosition?.y ?? 0) + offset.y)
-        let action = SKAction.moveTo(location, duration: duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0)
-        self.runAction(action)
+    func animateHide(duration: NSTimeInterval = 1, completion: (()->())? = nil){
+        let scaleAction = SKAction.scaleTo(0, duration: duration * 0.8, delay: 0.01, usingSpringWithDamping: 1, initialSpringVelocity: 0)
+        let moveAction = SKAction.moveTo(self.startPosition!, duration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0)
+        
+        self.runAction(scaleAction){
+            self.hidden = true
+            completion?()
+        }
+        self.runAction(moveAction)
     }
+    
     // Helpers
     
     func configureLevelAnchors() {
@@ -147,7 +144,6 @@ class AddNode: SKNode {
     }
     
     func addAnchorAtPosition(position: CGPoint) -> SKNode {
-        //        let anchor = SKNode()
         let anchor = SKNode()
         anchor.position = position
         

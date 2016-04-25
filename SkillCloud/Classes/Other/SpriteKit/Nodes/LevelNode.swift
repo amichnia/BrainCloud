@@ -19,8 +19,8 @@ class LevelNode: SKNode {
     
     var level : Skill.Experience = .Beginner
     var radius: CGFloat!
-    var joint: SKPhysicsJoint?
     var tintColor : UIColor?
+    var targetPosition : CGPoint = CGPoint.zero
     var shape : SKShapeNode?
     
     var selected : Bool = false {
@@ -49,13 +49,6 @@ class LevelNode: SKNode {
             }
             }()
         
-        node.physicsBody = SKPhysicsBody(circleOfRadius: node.radius)
-        node.physicsBody?.linearDamping = 10
-        node.physicsBody?.angularDamping = 25
-        node.physicsBody?.categoryBitMask = GameScene.CollisionMask.Ghost
-        node.physicsBody?.collisionBitMask = GameScene.CollisionMask.Ghost
-        node.physicsBody?.contactTestBitMask = GameScene.CollisionMask.Ghost
-        
         let shape = SKShapeNode(circleOfRadius: node.radius)
         shape.fillColor = UIColor.whiteColor()
         shape.strokeColor = tint
@@ -66,7 +59,6 @@ class LevelNode: SKNode {
         let sprite = SKSpriteNode(texture: texture, size: CGSize(width: 2 * node.radius, height: 2 * node.radius))
         node.addChild(sprite)
         
-        
         node.name = "LevelNode"
         shape.name = "LevelNode"
         
@@ -75,16 +67,19 @@ class LevelNode: SKNode {
     
     func animateShow(duration: NSTimeInterval = 1){
         self.hidden =  false
-        
         let scaleAction = SKAction.scaleTo(1, duration: duration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
+        let moveAction = SKAction.moveTo(self.targetPosition, duration: duration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         self.runAction(scaleAction)
+        self.runAction(moveAction)
     }
     
     func animateHide(duration: NSTimeInterval = 0.7){
         let scaleAction = SKAction.scaleTo(0, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
+        let moveAction = SKAction.moveTo(CGPoint.zero, duration: duration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         self.runAction(scaleAction) { 
             self.hidden =  true
         }
+        self.runAction(moveAction)
     }
     
 }

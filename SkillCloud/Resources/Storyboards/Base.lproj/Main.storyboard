@@ -1008,33 +1008,7 @@
                     <view key="view" contentMode="scaleToFill" id="64Z-ln-ds6">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwT-Ne-wZY">
-                                <rect key="frame" x="32" y="148" width="121" height="55"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="121" id="EX3-hX-AHy"/>
-                                    <constraint firstAttribute="height" constant="55" id="S0S-ud-6fB"/>
-                                </constraints>
-                                <state key="normal" title="Generator"/>
-                                <connections>
-                                    <segue destination="IHA-15-xhl" kind="show" id="rjW-sg-bN5"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flat_brain_background" translatesAutoresizingMaskIntoConstraints="NO" id="Kci-gC-Wbh">
-                                <rect key="frame" x="44" y="315" width="189" height="162"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="189" id="Qch-uH-n5Q"/>
-                                    <constraint firstAttribute="height" constant="162" id="YN3-Kx-bpx"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="cwT-Ne-wZY" firstAttribute="leading" secondItem="64Z-ln-ds6" secondAttribute="leadingMargin" constant="12" id="4l3-xC-kiA"/>
-                            <constraint firstItem="Kci-gC-Wbh" firstAttribute="leading" secondItem="64Z-ln-ds6" secondAttribute="leadingMargin" constant="24" id="aBd-9Z-BfK"/>
-                            <constraint firstItem="oES-FP-QvA" firstAttribute="top" secondItem="Kci-gC-Wbh" secondAttribute="bottom" constant="123" id="r6g-K5-ZIT"/>
-                            <constraint firstItem="cwT-Ne-wZY" firstAttribute="top" secondItem="mf3-3T-Dmp" secondAttribute="bottom" constant="84" id="zam-Db-TFA"/>
-                        </constraints>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="lre-nl-LZE">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8sK-6T-TWO">
@@ -1078,6 +1052,7 @@
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vj3-Tx-pxa">
                                         <rect key="frame" x="8" y="556" width="584" height="36"/>
+                                        <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="du7-8U-qaY"/>
                                         </constraints>
