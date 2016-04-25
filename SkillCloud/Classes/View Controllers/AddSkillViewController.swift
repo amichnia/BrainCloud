@@ -149,7 +149,6 @@ class AddSkillViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     func selectGoogleImage() {
-        
         try! self.promiseGoogleImageForSearchTerm("\(self.skillNameField.text)").then{ (image) -> Promise<UIImage> in
             print(image.imageUrl)
             self.imageSpinner.startAnimating()

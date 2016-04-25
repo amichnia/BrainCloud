@@ -24,6 +24,10 @@ class AddNode: SKNode {
             }
             
             self.texture = SKTexture(image: image)
+            
+            if self.spriteNode != nil {
+                self.spriteNode.texture = self.texture
+            }
         }
     }
     var texture: SKTexture!
@@ -65,6 +69,7 @@ class AddNode: SKNode {
         
         node.shapeNode = SKShapeNode(circleOfRadius: radius)
         node.spriteNode = SKSpriteNode(texture: node.texture, size: node.size)
+        
         node.cropNode = SKCropNode()
         node.maskNode = SKShapeNode(circleOfRadius: radius - imageInset)
         node.topNode = SKShapeNode(circleOfRadius: radius - imageInset)

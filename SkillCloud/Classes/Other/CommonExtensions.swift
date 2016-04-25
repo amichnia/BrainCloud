@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import PromiseKit
 
 // MARK: - Array shifting
 extension Array {
@@ -96,5 +96,12 @@ extension Array {
 extension UIViewController {
     
     @IBAction func unwindToPreviousViewController(unwindSegue: UIStoryboardSegue) { }
+    
+}
+
+// MARK: - Promise decisions
+extension UIViewController {
+    
+    
     
 }

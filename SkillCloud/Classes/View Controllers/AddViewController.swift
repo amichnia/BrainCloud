@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import PromiseKit
 
 class AddViewController: UIViewController {
 
@@ -49,7 +50,7 @@ class AddViewController: UIViewController {
         
         if firstLayout {
             firstLayout = false
-            self.scene.paused = false
+            self.skView.paused = false
             self.animateShow(0.7, point: point)
         }
     }
@@ -58,8 +59,6 @@ class AddViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         self.skView.paused = true
-        self.scene.controller = nil
-        self.scene = nil
     }
     
     // MARK: - Configuration
@@ -100,7 +99,16 @@ class AddViewController: UIViewController {
     }
     
     func selectImage() {
-        
+        self.selectGoogleImage()
+        .then{ image -> Void in
+            self.image = image
+            // Handle thumbnail of image -> rect
+            self.scene.addNode?.image = image
+            //            self.reloadImageActions()
+        }
+        .error{ error in
+            DDLogError("\(error)")
+        }
     }
     
     func selectedLevel(level: Skill.Experience){
@@ -151,7 +159,7 @@ class AddViewController: UIViewController {
 
 }
 
-
+// MARK: - Keyboard handling
 extension AddViewController {
     
     func keyboardWillShow(notification: NSNotification){
@@ -191,6 +199,17 @@ extension AddViewController {
         
         UIView.animateWithDuration(duration) {
             self.containerView.setNeedsDisplay()
+        }
+    }
+    
+}
+
+extension AddViewController {
+    
+    func selectGoogleImage() -> Promise<UIImage> {
+        return try! self.promiseGoogleImageForSearchTerm("\(self.skillNameField.text)").then{ (image) -> Promise<UIImage> in
+            print(image.imageUrl)
+            return image.promiseImage()
         }
     }
     
