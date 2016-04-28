@@ -8,8 +8,6 @@
 
 import UIKit
 
-let SkillCellIdentifier = "SkillCell"
-
 class GeneratorViewController: UIViewController {
 
     // MARK: - Outlets

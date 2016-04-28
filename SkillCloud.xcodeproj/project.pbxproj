@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1196D8B794C7B7603F03DA94 /* Pods_SkillCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD530781AB9B8F017F80F09A /* Pods_SkillCloud.framework */; };
 		BFDF9A6145E1A2B4BE8EB699 /* Pods_SkillCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A41F5C64F265593A660F74C /* Pods_SkillCloud.framework */; };
 		C80A918F1CB5206800529F0B /* GoogleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */; };
 		C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A91901CB5208200529F0B /* GoogleImage.swift */; };
 		C863048E1CC6417E002C068C /* AddNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863048D1CC6417E002C068C /* AddNode.swift */; };
 		C86304901CC6419C002C068C /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863048F1CC6419C002C068C /* LevelNode.swift */; };
-		C86304921CC646B1002C068C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86304911CC646B1002C068C /* ViewController.swift */; };
+		C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86304911CC646B1002C068C /* SkillsViewController.swift */; };
 		C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */; };
 		C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C88EB4871CB50580002B9592 /* GoogleImages.storyboard */; };
 		C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D231CC5017A009CDBFA /* AddViewController.swift */; };
@@ -37,8 +36,6 @@
 		FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */; };
 		FE31DB0F1C9CA1240006D9EE /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */; };
 		FE31DB101C9CA1240006D9EE /* ImagesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */; };
-		FE31DB111C9CA1240006D9EE /* AddSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */; };
-		FE31DB121C9CA1240006D9EE /* SkillsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */; };
 		FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */; };
 		FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF81C9CA1240006D9EE /* CanvasView.swift */; };
 		FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */; };
@@ -80,7 +77,7 @@
 		C80A91901CB5208200529F0B /* GoogleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImage.swift; sourceTree = "<group>"; };
 		C863048D1CC6417E002C068C /* AddNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNode.swift; sourceTree = "<group>"; };
 		C863048F1CC6419C002C068C /* LevelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelNode.swift; sourceTree = "<group>"; };
-		C86304911CC646B1002C068C /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImagesCollectionViewController.swift; sourceTree = "<group>"; };
 		C88EB4871CB50580002B9592 /* GoogleImages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoogleImages.storyboard; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* SkillCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,8 +103,6 @@
 		FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
 		FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
-		FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillViewController.swift; sourceTree = "<group>"; };
-		FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsTableViewController.swift; sourceTree = "<group>"; };
 		FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorViewController.swift; sourceTree = "<group>"; };
 		FE31DAF81C9CA1240006D9EE /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PossiblePlaceView.swift; sourceTree = "<group>"; };
@@ -134,7 +129,6 @@
 			files = (
 				FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */,
 				BFDF9A6145E1A2B4BE8EB699 /* Pods_SkillCloud.framework in Frameworks */,
-				1196D8B794C7B7603F03DA94 /* Pods_SkillCloud.framework in Frameworks */,
 				FEAFD1251C9DB27A00E94633 /* CocoaLumberjack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,13 +256,11 @@
 		FE31DAF31C9CA1240006D9EE /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FE31DAF41C9CA1240006D9EE /* AddSkillViewController.swift */,
-				FE31DAF51C9CA1240006D9EE /* SkillsTableViewController.swift */,
+				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
 				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
 				FE0522B11CAEEF8000315468 /* TestViewController.swift */,
-				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
+				C86304911CC646B1002C068C /* SkillsViewController.swift */,
 				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
-				C86304911CC646B1002C068C /* ViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -375,7 +367,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = amichnia;
 				TargetAttributes = {
 					C8A4A0421C981B6C004E055D = {
@@ -492,17 +484,15 @@
 				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,
 				C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */,
 				FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */,
-				FE31DB121C9CA1240006D9EE /* SkillsTableViewController.swift in Sources */,
 				C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */,
 				FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */,
 				FEB88E721CB6CE8700EED249 /* AddSkillGraphView.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,
 				C86304901CC6419C002C068C /* LevelNode.swift in Sources */,
-				C86304921CC646B1002C068C /* ViewController.swift in Sources */,
+				C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */,
 				C863048E1CC6417E002C068C /* AddNode.swift in Sources */,
 				FE0522DD1CAFE69500315468 /* GameScene.swift in Sources */,
-				FE31DB111C9CA1240006D9EE /* AddSkillViewController.swift in Sources */,
 				C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */,
 				FE31DB101C9CA1240006D9EE /* ImagesAPI.swift in Sources */,
 				FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */,

@@ -10,8 +10,23 @@ import UIKit
 
 class SkillCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
+    // MARK: - Properties
+    var indexPath: NSIndexPath!
+    var column: Int {
+        return self.indexPath.row % 3
+    }
+    
+    // MARK: - Configuration
+    func configureWithSkill(skill: Skill, atIndexPath indexPath: NSIndexPath) {
+        self.indexPath = indexPath
+        self.nameLabel.text = skill.title
+        self.imageView.image = skill.image
+        self.imageView.clipsToBounds = true
+        self.imageView.layer.cornerRadius = self.imageView.bounds.width/2
+    }
     
 }
