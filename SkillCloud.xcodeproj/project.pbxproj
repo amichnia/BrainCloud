@@ -19,7 +19,7 @@
 		C8DF6D261CC5033F009CDBFA /* AddScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D251CC5033F009CDBFA /* AddScene.swift */; };
 		C8DF6D281CC503A0009CDBFA /* AddScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C8DF6D271CC503A0009CDBFA /* AddScene.sks */; };
 		C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */; };
-		FE0522B21CAEEF8000315468 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B11CAEEF8000315468 /* TestViewController.swift */; };
+		FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B11CAEEF8000315468 /* CloudViewController.swift */; };
 		FE0522B41CAEF0B400315468 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B31CAEF0B400315468 /* TestView.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
 		FE0522DB1CAFE5CC00315468 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE0522DA1CAFE5CC00315468 /* GameScene.sks */; };
@@ -86,7 +86,7 @@
 		C8DF6D271CC503A0009CDBFA /* AddScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AddScene.sks; sourceTree = "<group>"; };
 		C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAPI.swift; sourceTree = "<group>"; };
 		CD530781AB9B8F017F80F09A /* Pods_SkillCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkillCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FE0522B11CAEEF8000315468 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		FE0522B11CAEEF8000315468 /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
 		FE0522B31CAEF0B400315468 /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		FE0522DA1CAFE5CC00315468 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -258,7 +258,7 @@
 			children = (
 				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
 				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
-				FE0522B11CAEEF8000315468 /* TestViewController.swift */,
+				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
 				C86304911CC646B1002C068C /* SkillsViewController.swift */,
 				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
 			);
@@ -478,7 +478,7 @@
 				FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */,
 				FE766D411C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift in Sources */,
 				FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */,
-				FE0522B21CAEEF8000315468 /* TestViewController.swift in Sources */,
+				FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */,
 				FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */,
 				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
 				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,

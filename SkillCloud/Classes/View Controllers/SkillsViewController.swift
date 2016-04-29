@@ -29,9 +29,6 @@ class SkillsViewController: UIViewController {
             self.skills = entities.mapExisting{ $0.skill }
             self.skills += self.skills // TODO: Remove later
             self.collectionView.reloadData()
-            self.collectionView.visibleCells().forEach {
-                self.configureColorFor($0 as! SkillCollectionViewCell)
-            }
         }
         .error { error in
             print("Error: \(error)")
@@ -91,10 +88,11 @@ class SkillsViewController: UIViewController {
     ]
     
     func configureColorFor(cell: SkillCollectionViewCell) {
-        let offset = self.collectionView.convertPoint(cell.frame.origin, toView: self.collectionView)
-        var offsetY = offset.y - (self.collectionView.bounds.width / 3)
-        offsetY = max(0, min(self.collectionView.bounds.height, offsetY))
-        let factor = offsetY / self.collectionView.bounds.height;
+        var offset = cell.frame.origin
+        offset.y -= self.collectionView.contentOffset.y
+        offset.y = max(0, min(self.collectionView.bounds.height, offset.y))
+        
+        let factor = offset.y / self.collectionView.bounds.height;
         
         let topColor = self.colors[cell.column].0
         let botColor = self.colors[cell.column].1
@@ -114,19 +112,29 @@ extension SkillsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.skills.count + 1
+        let cells = self.skills.count + 1
+        return cells + ((3 - cells % 3) % 3)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard indexPath.row < self.skills.count else {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AddSkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
-            cell.indexPath = indexPath
-            return cell
-        }
-        
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
-        cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
-    
+        let cell : SkillCollectionViewCell = {
+            if indexPath.row == self.skills.count {
+                let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AddSkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                cell.configureAsAddCell(indexPath)
+                return cell
+            }
+            else if indexPath.row > self.skills.count {
+                let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                cell.indexPath = indexPath
+                return cell
+            }
+            else {
+                let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
+                return cell
+            }
+        }()
+        self.configureColorFor(cell)
         return cell
     }
     

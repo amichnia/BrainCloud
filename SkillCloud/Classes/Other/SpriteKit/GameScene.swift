@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 import SpriteKit_Spring
 
-protocol SkillsProvider {
+protocol SkillsProvider: class {
     var skillToAdd : Skill { get }
 }
 
@@ -28,17 +28,17 @@ class GameScene: SKScene {
     static var colliderRadius: CGFloat { return radius + 1 }
     
     // MARK: - Properties
-    var skillsProvider : SkillsProvider?
+    weak var skillsProvider : SkillsProvider?
     var nodes: [Node]!
     var allNodesContainer: SKNode!
     var allNodes: [BrainNode] = []
     
     // MARK: - Lifecycle
     override func didMoveToView(view: SKView) {
-        self.backgroundColor = UIColor.clearColor()
+        super.didMoveToView(view)
         
+        self.backgroundColor = view.backgroundColor!
         Node.rectSize = self.frame.size
-//        Node.factor *= 0.8
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         
@@ -106,6 +106,8 @@ class GameScene: SKScene {
                 return
             }
             
+            self.paused = false
+            
             let shapeNode = BrainNode(circleOfRadius: GameScene.radius)
             
             let shapeNode2 = SKShapeNode(circleOfRadius: GameScene.radius - 1)
@@ -170,7 +172,9 @@ class GameScene: SKScene {
             }
             
             let action = SKAction.scaleTo(1, duration: 1, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-            shapeNode.runAction(action)
+            shapeNode.runAction(action) {
+                self.paused = true
+            }
             
             self.addChild(shapeNode)
         }
