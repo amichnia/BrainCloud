@@ -106,10 +106,8 @@ class GameScene: SKScene {
                 return
             }
             
-            self.paused = false
-            
-            let shapeNode = BrainNode(circleOfRadius: GameScene.radius)
-            
+            let shapeNode = SKNode();
+            shapeNode.zPosition = 1028;
             let shapeNode2 = SKShapeNode(circleOfRadius: GameScene.radius - 1)
             let shapeNode3 = SKShapeNode(circleOfRadius: GameScene.radius - 1)
             shapeNode2.strokeColor = Node.color
@@ -121,8 +119,6 @@ class GameScene: SKScene {
             
             shapeNode.name = "skill"
             shapeNode.position = location
-            shapeNode.fillColor = Node.color // UIColor.redColor()
-            shapeNode.strokeColor = Node.color // UIColor.redColor()
             
             shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: GameScene.colliderRadius)
             shapeNode.physicsBody?.categoryBitMask = CollisionMask.Default
@@ -172,9 +168,7 @@ class GameScene: SKScene {
             }
             
             let action = SKAction.scaleTo(1, duration: 1, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-            shapeNode.runAction(action) {
-                self.paused = true
-            }
+            shapeNode.runAction(action)
             
             self.addChild(shapeNode)
         }
