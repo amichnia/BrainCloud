@@ -126,6 +126,7 @@ extension CloudViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.skillToAdd = self.skills[indexPath.row]
+        GameScene.radius = self.skillToAdd.experience.radius
     }
     
 }

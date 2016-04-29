@@ -42,6 +42,19 @@ class Skill {
                 return UIImage(named: "icon-skill-expert")
             }
         }
+        
+        var radius: CGFloat {
+            switch self {
+            case .Beginner:
+                return 10
+            case .Intermediate:
+                return 15
+            case .Professional:
+                return 20
+            case .Expert:
+                return 25
+            }
+        }
     }
     
 }

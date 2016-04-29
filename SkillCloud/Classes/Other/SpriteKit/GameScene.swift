@@ -125,6 +125,8 @@ class GameScene: SKScene {
             shapeNode.physicsBody?.collisionBitMask = CollisionMask.Default
             shapeNode.physicsBody?.contactTestBitMask = CollisionMask.Default
             
+            shapeNode.constraints = [SKConstraint.zRotation(SKRange(value: 0, variance: 0))];
+            
             shapeNode.xScale = 0
             shapeNode.yScale = 0
             
