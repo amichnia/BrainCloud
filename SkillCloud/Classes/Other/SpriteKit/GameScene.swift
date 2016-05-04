@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 import SpriteKit_Spring
 
-protocol SkillsProvider {
+protocol SkillsProvider: class {
     var skillToAdd : Skill { get }
 }
 
@@ -28,17 +28,17 @@ class GameScene: SKScene {
     static var colliderRadius: CGFloat { return radius + 1 }
     
     // MARK: - Properties
-    var skillsProvider : SkillsProvider?
+    weak var skillsProvider : SkillsProvider?
     var nodes: [Node]!
     var allNodesContainer: SKNode!
     var allNodes: [BrainNode] = []
     
     // MARK: - Lifecycle
     override func didMoveToView(view: SKView) {
-        self.backgroundColor = UIColor.clearColor()
+        super.didMoveToView(view)
         
+        self.backgroundColor = view.backgroundColor!
         Node.rectSize = self.frame.size
-//        Node.factor *= 0.8
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         
@@ -106,8 +106,8 @@ class GameScene: SKScene {
                 return
             }
             
-            let shapeNode = BrainNode(circleOfRadius: GameScene.radius)
-            
+            let shapeNode = SKNode();
+            shapeNode.zPosition = 1028;
             let shapeNode2 = SKShapeNode(circleOfRadius: GameScene.radius - 1)
             let shapeNode3 = SKShapeNode(circleOfRadius: GameScene.radius - 1)
             shapeNode2.strokeColor = Node.color
@@ -119,13 +119,13 @@ class GameScene: SKScene {
             
             shapeNode.name = "skill"
             shapeNode.position = location
-            shapeNode.fillColor = Node.color // UIColor.redColor()
-            shapeNode.strokeColor = Node.color // UIColor.redColor()
             
             shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: GameScene.colliderRadius)
             shapeNode.physicsBody?.categoryBitMask = CollisionMask.Default
             shapeNode.physicsBody?.collisionBitMask = CollisionMask.Default
             shapeNode.physicsBody?.contactTestBitMask = CollisionMask.Default
+            
+            shapeNode.constraints = [SKConstraint.zRotation(SKRange(value: 0, variance: 0))];
             
             shapeNode.xScale = 0
             shapeNode.yScale = 0

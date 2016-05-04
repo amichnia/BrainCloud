@@ -163,7 +163,7 @@ extension CanvasBoard {
             }
         }
         
-        permutation++
+        permutation += 1
         
         return possibles
     }

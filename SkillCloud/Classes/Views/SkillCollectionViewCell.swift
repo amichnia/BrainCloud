@@ -20,7 +20,21 @@ class SkillCollectionViewCell: UICollectionViewCell {
         return self.indexPath.row % 3
     }
     
+    // MARK: - Lifecycle
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.imageView.image = nil
+        self.nameLabel.text = nil
+    }
+    
     // MARK: - Configuration
+    func configureAsAddCell(indexPath: NSIndexPath){
+        self.indexPath = indexPath
+        self.imageView.image = UIImage(named: "icon-plus")
+        self.nameLabel.text = NSLocalizedString("Add new", comment: "Add new")
+    }
+    
     func configureWithSkill(skill: Skill, atIndexPath indexPath: NSIndexPath) {
         self.indexPath = indexPath
         self.nameLabel.text = skill.title

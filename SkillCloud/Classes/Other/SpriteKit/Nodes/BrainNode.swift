@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class BrainNode: SKShapeNode {
+class BrainNode: SKSpriteNode {
 
     var node: Node!
     var connected : Set<BrainNode> = Set()
@@ -43,14 +43,14 @@ class BrainNode: SKShapeNode {
 
     // Initialization
     static func nodeWithNode(node: Node) -> BrainNode {
-        let shapeNode = BrainNode(circleOfRadius: node.radius)
+        let shapeNode = BrainNode(texture: SKTexture(imageNamed: "sprite-node"), size: CGSize(width: 2 * node.radius, height: 2 * node.radius)) //BrainNode(circleOfRadius: node.radius)
         
         shapeNode.node = node
         shapeNode.position = node.skPosition
-        shapeNode.fillColor = Node.color
-        shapeNode.strokeColor = shapeNode.fillColor
-        shapeNode.lineWidth = 1
-        shapeNode.antialiased = true
+//        shapeNode.fillColor = Node.color
+//        shapeNode.strokeColor = shapeNode.fillColor
+//        shapeNode.lineWidth = 1
+//        shapeNode.antialiased = true
         
         return shapeNode
     }
