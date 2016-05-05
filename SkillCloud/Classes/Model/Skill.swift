@@ -12,8 +12,13 @@ class Skill {
     
     var title : String
     var description : String?
-    var image : UIImage
+    var image : UIImage // cropped image
     var experience : Experience
+    
+    // Prepared images
+    var circleImage: UIImage?
+    var thumbnailImage: UIImage?
+    var thumbnailCircleImage: UIImage?
     
     var checkCount = 0
     

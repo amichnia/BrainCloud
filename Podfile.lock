@@ -27,6 +27,7 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (3.1.1):
     - PromiseKit/CorePromise
+  - RSKImageCropper (1.5.1)
   - SpriteKit-Spring (1.0.1)
   - SwiftyJSON (2.3.2)
 
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - LTMorphingLabel
   - PromiseKit
   - PromiseKit/AssetsLibrary
+  - RSKImageCropper
   - SpriteKit-Spring
 
 SPEC CHECKSUMS:
@@ -47,6 +49,7 @@ SPEC CHECKSUMS:
   LTMorphingLabel: 490aa8e079f9247c7f3130f7d4b1be1d66677377
   OMGHTTPURLRQ: 633f98ee745aeda02345935a52eec1784cddb589
   PromiseKit: 4e8127c22a9b29d1b44958ab2ec762ea6115cbfb
+  RSKImageCropper: edd65fedb3734332818deb139906d6b7f54b8a44
   SpriteKit-Spring: 51d289157e085eb629992ea8281f3bde60b589e9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 

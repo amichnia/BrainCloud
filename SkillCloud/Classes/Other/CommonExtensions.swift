@@ -137,20 +137,6 @@ extension UIViewController {
     
 }
 
-// MARK: - Image selection
-extension UIViewController {
-    
-    func selectPickerImage(source: UIImagePickerControllerSourceType) -> Promise<UIImage> {
-        let picker = UIImagePickerController()
-        picker.sourceType = source
-        picker.allowsEditing = true
-        return self.promiseViewController(picker, animated: true, completion: nil).then { (data: NSData) -> UIImage in
-            return UIImage(data: data) ?? UIImage()
-        }
-    }
-    
-}
-
 // MARK: Common Error
 enum CommonError : ErrorType {
     case UnknownError

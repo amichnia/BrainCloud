@@ -10,6 +10,17 @@ import UIKit
 import SpriteKit
 import PromiseKit
 import AssetsLibrary
+import RSKImageCropper
+
+class PromiseHandler<T> {
+    let fulfill : ((T)->Void)
+    let reject : ((ErrorType)->Void)
+    
+    init(fulfill: ((T)->Void), reject: ((ErrorType)->Void)) {
+        self.fulfill = fulfill
+        self.reject = reject
+    }
+}
 
 class AddViewController: UIViewController {
 
@@ -41,6 +52,8 @@ class AddViewController: UIViewController {
     var experience : Skill.Experience?
     var isEditingText : Bool = true
     var skillBottomDefaultValue : CGFloat = 0;
+    
+    private var imageCropPromiseHandler: PromiseHandler<UIImage>?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -126,11 +139,12 @@ class AddViewController: UIViewController {
             (NSLocalizedString("Photo Library", comment: "Photo Library"), { self.selectPickerImage(.PhotoLibrary) }),
             (NSLocalizedString("Google Images", comment: "Google Images"), { self.selectGoogleImage("\(self.skillNameField.text)") })
         ])
-        .then{ image -> Void in
+        .then{ image -> Promise<UIImage> in
+            return self.promiseCroppedImage(image)
+        }
+        .then { image -> Void in
             self.image = image
-            // Handle thumbnail of image -> rect
             self.scene.addNode?.image = image
-            //            self.reloadImageActions()
         }
         .error{ error in
             DDLogError("\(error)")
@@ -257,6 +271,49 @@ extension AddViewController {
         addViewController.showFromViewController(sender, fromPoint: point)
         
         return addViewController.promise
+    }
+    
+}
+
+
+// MARK: - Image selection
+extension AddViewController {
+    
+    func selectPickerImage(source: UIImagePickerControllerSourceType) -> Promise<UIImage> {
+        let picker = UIImagePickerController()
+        picker.sourceType = source
+        picker.allowsEditing = false
+        return self.promiseViewController(picker)
+    }
+    
+}
+
+extension AddViewController : RSKImageCropViewControllerDelegate {
+    
+    func promiseCroppedImage(image: UIImage) -> Promise<UIImage> {
+        return Promise<UIImage> { (fulfill, reject) in
+            self.imageCropPromiseHandler = PromiseHandler<UIImage>(fulfill: fulfill, reject: reject)
+            
+            let cropViewController = RSKImageCropViewController(image: image, cropMode: RSKImageCropMode.Circle)
+            cropViewController.delegate = self
+            cropViewController.avoidEmptySpaceAroundImage = true
+            cropViewController.rotationEnabled = false
+            self.presentViewController(cropViewController, animated: true, completion: nil)
+        }
+    }
+    
+    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController) {
+        self.dismissViewControllerAnimated(true) {
+            self.imageCropPromiseHandler?.reject(CommonError.UserCancelled)
+            self.imageCropPromiseHandler = nil
+        }
+    }
+    
+    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
+        self.dismissViewControllerAnimated(true) {
+            self.imageCropPromiseHandler?.fulfill(croppedImage)
+            self.imageCropPromiseHandler = nil
+        }
     }
     
 }
