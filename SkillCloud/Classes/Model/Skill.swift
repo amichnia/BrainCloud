@@ -74,4 +74,8 @@ protocol ExperienceConvertible {
 
 extension Skill : ExperienceConvertible { }
 
-extension Skill : DTOModel { }
+extension Skill : DTOModel {
+
+    var uniqueIdentifierValue: String { return self.title }
+
+}

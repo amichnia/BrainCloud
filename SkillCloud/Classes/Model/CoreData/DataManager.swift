@@ -108,7 +108,20 @@ extension DataManager {
             }
         })
     }
-
+    
+    static func fetchFirst<T:CoreDataEntity>(entity: T.Type, withPredicate predicate: NSPredicate?, fromContext ctx: NSManagedObjectContext? = nil) -> Promise<T> {
+        return self.fetchAll(entity, withPredicate: predicate, fromContext: ctx).then { values -> T in
+            guard let result = values.first else {
+                throw DataError.EntityDoesNotExist
+            }
+            return result
+        }
+    }
+    
+    static func fetchEntity<T:CoreDataEntity>(entity: T.Type, withIdentifier identifier: String, fromContext ctx: NSManagedObjectContext? = nil) -> Promise<T> {
+        let predicate = NSPredicate(format: "\(entity.uniqueIdentifier) = %@", identifier)
+        return self.fetchFirst(entity, withPredicate: predicate, fromContext: ctx)
+    }
 }
 
 extension DataManager {
@@ -118,17 +131,28 @@ extension DataManager {
     }
     
     static func promiseEntity<T:CoreDataEntity>(entity: T.Type, model: DTOModel, intoContext ctx: NSManagedObjectContext? = nil) -> Promise<T> {
-        return Promise(resolvers: { (fulfill, reject) -> Void in
-            if let entity = T(model: model, inContext: ctx ?? self.managedObjectContext) {
-                fulfill(entity)
+        return DataManager.fetchEntity(entity, withIdentifier: model.uniqueIdentifierValue, fromContext: ctx)
+        .then{ (entity) -> T in
+            entity.setValuesFromModel(model)
+            return entity
+        }
+        .recover { (error: ErrorType) -> T in
+            if case DataError.EntityDoesNotExist = error {
+                if let entity = T(model: model, inContext: ctx ?? self.managedObjectContext) {
+                    return entity
+                }
+                else {
+                    throw DataError.FailedToInsertEntity
+                }
             }
             else {
-                reject(DataError.FailedToInsertEntity)
+                throw DataError.FailedToInsertEntity
             }
-        }).then({ (entity: T) -> T in
+        }
+        .then{ (entity: T) -> T in
             try DataManager.saveRootContext()
             return entity
-        })
+        }
     }
     
 }
@@ -139,8 +163,10 @@ extension DataManager {
 protocol CoreDataEntity {
     
     static var entityName : String { get }
+    static var uniqueIdentifier : String { get }
     
     init?(model: DTOModel, inContext ctx: NSManagedObjectContext)
+    func setValuesFromModel(model: DTOModel)
     
 }
 
@@ -155,10 +181,15 @@ extension CoreDataEntity {
         return DataManager.promiseEntity(self, model: model)
     }
     
+    static func promiseToUpdate(model: DTOModel) -> Promise<Self> {
+        return DataManager.promiseEntity(self, model: model)
+    }
+    
 }
 
 // MARK: - DataError enum
 
 enum DataError : ErrorType {
     case FailedToInsertEntity
+    case EntityDoesNotExist
 }

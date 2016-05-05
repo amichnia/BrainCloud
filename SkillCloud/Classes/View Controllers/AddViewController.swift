@@ -67,17 +67,19 @@ class AddViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        self.prepareScene(self.skView, size: self.view.bounds.size)
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
         if firstLayout {
+            self.prepareScene(self.skView, size: self.view.bounds.size)
             firstLayout = false
-            self.skView.paused = false
             self.animateShow(0.7, point: point)
         }
+        
+        self.skView.paused = false
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -115,6 +117,16 @@ class AddViewController: UIViewController {
         self.scene.controller = self
         
         self.skView.allowsTransparency = true
+        
+        if let skill = self.skill {
+            self.image = skill.image
+            self.scene.addNode?.image = skill.image
+            self.experience = skill.experience
+            self.scene.skillNodes[skill.experience.rawValue].selected = true
+            self.skillNameField.text = skill.title
+            self.skillNameField.userInteractionEnabled = false
+            // TODO: Show delete button
+        }
     }
     
     // MARK: - Actions
@@ -191,6 +203,7 @@ class AddViewController: UIViewController {
     func hideAddViewController(point: CGPoint?) {
         self.point = point ?? self.point
         self.snapshotTop?.hidden = false
+        self.scene.paused = false
         self.scene.animateHide(0.7,point: self.point){
             self.scene.paused = true
             self.dismissViewControllerAnimated(false, completion: nil)
@@ -265,9 +278,25 @@ extension AddViewController {
         }
         
         if let scene = preparedScene {
-            scene.paused = true
+//            scene.paused = true
             addViewController.scene = scene
         }
+        addViewController.showFromViewController(sender, fromPoint: point)
+        
+        return addViewController.promise
+    }
+    
+    static func promiseChangeSkillWith(sender: UIViewController, point: CGPoint, skill: Skill, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
+        guard let addViewController = sender.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
+            throw CommonError.UnknownError
+        }
+        
+        if let scene = preparedScene {
+//            scene.paused = true
+            addViewController.scene = scene
+        }
+        
+        addViewController.skill = skill
         addViewController.showFromViewController(sender, fromPoint: point)
         
         return addViewController.promise

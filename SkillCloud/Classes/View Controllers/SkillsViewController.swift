@@ -27,7 +27,6 @@ class SkillsViewController: UIViewController {
         SkillEntity.fetchAll()
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
-            self.skills += self.skills // TODO: Remove later
             self.collectionView.reloadData()
         }
         .error { error in
@@ -66,17 +65,37 @@ class SkillsViewController: UIViewController {
         self.addSkillFromPoint(point)
     }
     
+    func changeSkillActionFromCell(cell: UICollectionViewCell, withSkill skill: Skill) {
+        var point = cell.bounds.centerOfMass
+        point.x += cell.frame.origin.x
+        point.y = self.view.bounds.height - (cell.frame.origin.y - self.collectionView.contentOffset.y) - point.y
+        
+        self.changeSkillFromPoint(point, withSkill: skill)
+    }
+    
     func addSkillFromPoint(point: CGPoint){
         try! AddViewController.promiseNewSkillWith(self, point: point, preparedScene: self.preparedScene)
-            .then(SkillEntity.promiseToInsert).asVoid()
-            .then(SkillEntity.fetchAll)
-            .then { entities -> Void in
-                self.skills = entities.mapExisting{ $0.skill }
-                self.skills += self.skills // TODO: Remove later
-                self.collectionView.reloadData()
-            }
-            .error { error in
-                print("Error: \(error)")
+        .then(SkillEntity.promiseToInsert).asVoid()
+        .then(SkillEntity.fetchAll)
+        .then { entities -> Void in
+            self.skills = entities.mapExisting{ $0.skill }
+            self.collectionView.reloadData()
+        }
+        .error { error in
+            print("Error: \(error)")
+        }
+    }
+    
+    func changeSkillFromPoint(point: CGPoint, withSkill skill: Skill) {
+        try! AddViewController.promiseChangeSkillWith(self, point: point, skill: skill, preparedScene: self.preparedScene)
+        .then(SkillEntity.promiseToInsert).asVoid()
+        .then(SkillEntity.fetchAll)
+        .then { entities -> Void in
+            self.skills = entities.mapExisting{ $0.skill }
+            self.collectionView.reloadData()
+        }
+        .error { error in
+            print("Error: \(error)")
         }
     }
     
@@ -135,6 +154,7 @@ extension SkillsViewController: UICollectionViewDataSource {
             }
         }()
         self.configureColorFor(cell)
+        cell.setNeedsLayout()
         return cell
     }
     
@@ -144,7 +164,12 @@ extension SkillsViewController: UICollectionViewDataSource {
 extension SkillsViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        guard indexPath.row < self.skills.count else {
+        if indexPath.row < self.skills.count {
+            let cell = self.collectionView(self.collectionView, cellForItemAtIndexPath: indexPath)
+            self.changeSkillActionFromCell(cell, withSkill: self.skills[indexPath.row])
+            return
+        }
+        if indexPath.row == self.skills.count {
             let cell = self.collectionView(self.collectionView, cellForItemAtIndexPath: indexPath)
             self.addSkillActionFromCell(cell)
             return
