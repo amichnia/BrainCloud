@@ -17,7 +17,9 @@ class Skill {
     
     // Prepared images
     var circleImage: UIImage?
-    var thumbnailImage: UIImage?
+    lazy var thumbnailImage: UIImage = {
+        return self.image.RBSquareImageTo(CGSize(width: 122, height: 122))
+    }()
     var thumbnailCircleImage: UIImage?
     
     var checkCount = 0

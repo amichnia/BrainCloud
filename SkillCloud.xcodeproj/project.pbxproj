@@ -10,6 +10,7 @@
 		BFDF9A6145E1A2B4BE8EB699 /* Pods_SkillCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A41F5C64F265593A660F74C /* Pods_SkillCloud.framework */; };
 		C80A918F1CB5206800529F0B /* GoogleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */; };
 		C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A91901CB5208200529F0B /* GoogleImage.swift */; };
+		C83585C51CDB46150003E538 /* RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83585C41CDB46150003E538 /* RBResizer.swift */; };
 		C863048E1CC6417E002C068C /* AddNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863048D1CC6417E002C068C /* AddNode.swift */; };
 		C86304901CC6419C002C068C /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863048F1CC6419C002C068C /* LevelNode.swift */; };
 		C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86304911CC646B1002C068C /* SkillsViewController.swift */; };
@@ -75,6 +76,7 @@
 		BF413E813A7188D6AFFCFE87 /* Pods-SkillCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.debug.xcconfig"; sourceTree = "<group>"; };
 		C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		C80A91901CB5208200529F0B /* GoogleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImage.swift; sourceTree = "<group>"; };
+		C83585C41CDB46150003E538 /* RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizer.swift; sourceTree = "<group>"; };
 		C863048D1CC6417E002C068C /* AddNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNode.swift; sourceTree = "<group>"; };
 		C863048F1CC6419C002C068C /* LevelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelNode.swift; sourceTree = "<group>"; };
 		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */,
 				FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */,
 				FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */,
+				C83585C41CDB46150003E538 /* RBResizer.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -480,6 +483,7 @@
 				FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */,
 				FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */,
 				FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */,
+				C83585C51CDB46150003E538 /* RBResizer.swift in Sources */,
 				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
 				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,
 				C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */,
