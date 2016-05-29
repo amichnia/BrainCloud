@@ -270,6 +270,7 @@ extension AddViewController {
     
 }
 
+// MARK: - Skill promises
 extension AddViewController {
     
     static func promiseNewSkillWith(sender: UIViewController, point: CGPoint, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
@@ -278,7 +279,6 @@ extension AddViewController {
         }
         
         if let scene = preparedScene {
-//            scene.paused = true
             addViewController.scene = scene
         }
         addViewController.showFromViewController(sender, fromPoint: point)
@@ -292,7 +292,6 @@ extension AddViewController {
         }
         
         if let scene = preparedScene {
-//            scene.paused = true
             addViewController.scene = scene
         }
         
@@ -303,7 +302,6 @@ extension AddViewController {
     }
     
 }
-
 
 // MARK: - Image selection
 extension AddViewController {
@@ -317,13 +315,17 @@ extension AddViewController {
     
 }
 
+let minimumCroppableSIze: CGFloat = 640
 extension AddViewController : RSKImageCropViewControllerDelegate {
+    
     
     func promiseCroppedImage(image: UIImage) -> Promise<UIImage> {
         return Promise<UIImage> { (fulfill, reject) in
             self.imageCropPromiseHandler = PromiseHandler<UIImage>(fulfill: fulfill, reject: reject)
             
-            let cropViewController = RSKImageCropViewController(image: image, cropMode: RSKImageCropMode.Circle)
+            let iconImage = image.size.width < minimumCroppableSIze ? UIImage.RBResizeImage(image, targetSize: CGSize(width: image.size.width * (minimumCroppableSIze / image.size.width), height: image.size.height * (minimumCroppableSIze / image.size.width))) : image
+            
+            let cropViewController = RSKImageCropViewController(image: iconImage, cropMode: RSKImageCropMode.Circle)
             cropViewController.delegate = self
             cropViewController.avoidEmptySpaceAroundImage = true
             cropViewController.rotationEnabled = false
