@@ -13,6 +13,7 @@ import PromiseKit
 class SkillEntity: NSManagedObject, CoreDataEntity {
 
     static var entityName = "SkillEntity"
+    static var uniqueIdentifier = "name"
     
     convenience required init?(model: DTOModel, inContext ctx: NSManagedObjectContext) {
         guard let entityDescription = NSEntityDescription.entityForName(SkillEntity.entityName, inManagedObjectContext: ctx) where model is Skill else {
@@ -20,14 +21,16 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
         }
         self.init(entity: entityDescription, insertIntoManagedObjectContext: DataManager.managedObjectContext)
         
-        self.setValuesFromSkill(model as! Skill)
+        self.setValuesFromModel(model)
     }
     
-    func setValuesFromSkill(skill: Skill) {
-        self.name = skill.title
-        self.desc = skill.description
-        self.image = skill.image
-        self.experienceValue = Int16(skill.experience.rawValue)
+    func setValuesFromModel(model: DTOModel) {
+        if let skill = model as? Skill {
+            self.name = skill.title
+            self.desc = skill.description
+            self.image = skill.image
+            self.experienceValue = Int16(skill.experience.rawValue)
+        }
     }
     
 }
@@ -42,5 +45,7 @@ extension SkillEntity {
 }
 
 protocol DTOModel {
+    
+    var uniqueIdentifierValue: String { get }
     
 }

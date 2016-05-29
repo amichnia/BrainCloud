@@ -25,7 +25,7 @@ class SkillCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         self.imageView.image = nil
-        self.nameLabel.text = nil
+        self.nameLabel.text = ""
     }
     
     // MARK: - Configuration
@@ -38,8 +38,10 @@ class SkillCollectionViewCell: UICollectionViewCell {
     func configureWithSkill(skill: Skill, atIndexPath indexPath: NSIndexPath) {
         self.indexPath = indexPath
         self.nameLabel.text = skill.title
-        self.imageView.image = skill.image
+        self.imageView.image = skill.thumbnailImage
         self.imageView.clipsToBounds = true
+        
+        self.layoutIfNeeded()
         self.imageView.layer.cornerRadius = self.imageView.bounds.width/2
     }
     

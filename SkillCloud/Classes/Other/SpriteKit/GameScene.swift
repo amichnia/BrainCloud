@@ -132,7 +132,7 @@ class GameScene: SKScene {
             
             let cropNode = SKCropNode()
             
-            let texture = SKTexture(image: skill.image)
+            let texture = SKTexture(image: skill.thumbnailImage)
             let spriteNode = SKSpriteNode(texture: texture, size: CGSize(width: GameScene.radius * 2 - 2, height: GameScene.radius * 2 - 2))
             
             spriteNode.zPosition = shapeNode.zPosition + 2
