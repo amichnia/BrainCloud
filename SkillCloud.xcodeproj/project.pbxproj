@@ -54,6 +54,8 @@
 		FEAFD1261C9DB27A00E94633 /* CocoaLumberjack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FEAFD1211C9DAD1200E94633 /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FEB88E721CB6CE8700EED249 /* AddSkillGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB88E711CB6CE8700EED249 /* AddSkillGraphView.swift */; };
 		FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB88E731CB6FD8500EED249 /* Assets.xcassets */; };
+		FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */; };
+		FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -122,6 +124,8 @@
 		FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
 		FEB88E711CB6CE8700EED249 /* AddSkillGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillGraphView.swift; sourceTree = "<group>"; };
 		FEB88E731CB6FD8500EED249 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudExportViewController.swift; sourceTree = "<group>"; };
+		FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsAndDefines.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +253,7 @@
 				FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */,
 				FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */,
 				C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */,
+				FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */,
 				FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */,
 				FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */,
 				C83585C41CDB46150003E538 /* RBResizer.swift */,
@@ -264,6 +269,7 @@
 				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
 				C86304911CC646B1002C068C /* SkillsViewController.swift */,
 				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
+				FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -483,6 +489,7 @@
 				FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */,
 				FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */,
 				FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */,
+				FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */,
 				C83585C51CDB46150003E538 /* RBResizer.swift in Sources */,
 				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
 				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,
@@ -490,6 +497,7 @@
 				FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */,
 				C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */,
 				FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */,
+				FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */,
 				FEB88E721CB6CE8700EED249 /* AddSkillGraphView.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,

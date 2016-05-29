@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2t6-Cf-HCf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2t6-Cf-HCf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -185,7 +185,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2259" y="1799"/>
+            <point key="canvasLocation" x="2332" y="1766"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="2H0-3b-1jo">
@@ -258,7 +258,7 @@
                                     <constraint firstAttribute="height" constant="169" id="OoD-oH-P79"/>
                                     <constraint firstAttribute="width" constant="182" id="ZbE-H2-fyR"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Cloud generator"/>
                                 <connections>
                                     <segue destination="IHA-15-xhl" kind="show" id="cFx-Mu-gKM"/>
                                 </connections>
@@ -288,31 +288,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MBI-o2-RC0">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MBI-o2-RC0" userLabel="Cloud Section">
                                 <rect key="frame" x="0.0" y="64" width="600" height="327"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Jt-xq-Sbt" userLabel="SKView" customClass="SKView">
-                                        <rect key="frame" x="114" y="1" width="372" height="326"/>
-                                        <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="tintColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" minimumZoomScale="0.0" maximumZoomScale="2" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AqA-cq-ohe">
+                                        <rect key="frame" x="123" y="9" width="354" height="310"/>
+                                        <subviews>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Jt-xq-Sbt" userLabel="SKView" customClass="SKView">
+                                                <rect key="frame" x="0.0" y="0.0" width="1600" height="1400"/>
+                                                <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="tintColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1400" id="79F-zR-Kc0"/>
+                                                    <constraint firstAttribute="width" constant="1600" id="NBE-IB-Ig5"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="1Jt-xq-Sbt" secondAttribute="height" multiplier="8:7" id="V15-Dk-Qhw"/>
+                                            <constraint firstAttribute="bottom" secondItem="1Jt-xq-Sbt" secondAttribute="bottom" id="S70-6r-u5g"/>
+                                            <constraint firstItem="1Jt-xq-Sbt" firstAttribute="top" secondItem="AqA-cq-ohe" secondAttribute="top" id="WEF-pX-spq"/>
+                                            <constraint firstAttribute="width" secondItem="AqA-cq-ohe" secondAttribute="height" multiplier="8:7" id="YfJ-Xe-v1B"/>
+                                            <constraint firstAttribute="trailing" secondItem="1Jt-xq-Sbt" secondAttribute="trailing" id="cM9-En-oeA"/>
+                                            <constraint firstItem="1Jt-xq-Sbt" firstAttribute="leading" secondItem="AqA-cq-ohe" secondAttribute="leading" id="xKW-6a-6rr"/>
                                         </constraints>
-                                    </view>
+                                        <connections>
+                                            <outlet property="delegate" destination="IHA-15-xhl" id="ghB-m3-2az"/>
+                                        </connections>
+                                    </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="1Jt-xq-Sbt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MBI-o2-RC0" secondAttribute="leading" id="6QF-f5-dgf"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Jt-xq-Sbt" secondAttribute="trailing" id="AJU-sD-Pkr"/>
-                                    <constraint firstItem="1Jt-xq-Sbt" firstAttribute="width" secondItem="MBI-o2-RC0" secondAttribute="width" priority="750" id="H5Y-mZ-fig"/>
-                                    <constraint firstItem="1Jt-xq-Sbt" firstAttribute="centerY" secondItem="MBI-o2-RC0" secondAttribute="centerY" id="W8T-Ag-esn"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="1Jt-xq-Sbt" secondAttribute="bottom" id="Xlu-7A-UIx"/>
-                                    <constraint firstItem="1Jt-xq-Sbt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MBI-o2-RC0" secondAttribute="top" id="nur-P4-0d1"/>
-                                    <constraint firstItem="1Jt-xq-Sbt" firstAttribute="height" secondItem="MBI-o2-RC0" secondAttribute="height" priority="750" id="u44-Jo-8bD"/>
-                                    <constraint firstItem="1Jt-xq-Sbt" firstAttribute="centerX" secondItem="MBI-o2-RC0" secondAttribute="centerX" id="xLc-3n-sio"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AqA-cq-ohe" secondAttribute="trailing" constant="8" id="63l-uE-DnU"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AqA-cq-ohe" secondAttribute="bottom" constant="8" id="MVy-II-het"/>
+                                    <constraint firstItem="AqA-cq-ohe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MBI-o2-RC0" secondAttribute="leading" constant="8" id="QV8-LF-EZg"/>
+                                    <constraint firstAttribute="trailing" secondItem="AqA-cq-ohe" secondAttribute="trailing" priority="750" constant="8" id="T8M-r5-1sf"/>
+                                    <constraint firstItem="AqA-cq-ohe" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MBI-o2-RC0" secondAttribute="top" constant="8" id="YIA-sd-oPN"/>
+                                    <constraint firstAttribute="bottom" secondItem="AqA-cq-ohe" secondAttribute="bottom" priority="750" constant="8" id="gLW-NA-n9C"/>
+                                    <constraint firstItem="AqA-cq-ohe" firstAttribute="top" secondItem="MBI-o2-RC0" secondAttribute="top" priority="750" constant="8" id="id7-pP-avb"/>
+                                    <constraint firstItem="AqA-cq-ohe" firstAttribute="centerY" secondItem="MBI-o2-RC0" secondAttribute="centerY" id="ktS-d4-S6h"/>
+                                    <constraint firstItem="AqA-cq-ohe" firstAttribute="leading" secondItem="MBI-o2-RC0" secondAttribute="leading" priority="750" constant="8" id="ur4-mQ-pIs"/>
+                                    <constraint firstItem="AqA-cq-ohe" firstAttribute="centerX" secondItem="MBI-o2-RC0" secondAttribute="centerX" id="vj1-7b-mc6"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RC6-AS-OqT">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RC6-AS-OqT" userLabel="Skills List">
                                 <rect key="frame" x="0.0" y="391" width="600" height="160"/>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96470588235294119" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -415,15 +433,64 @@
                             <constraint firstItem="MBI-o2-RC0" firstAttribute="leading" secondItem="c0t-uu-Q4m" secondAttribute="leading" id="mNL-wd-mOj"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Mbf-dF-3Z0"/>
+                    <navigationItem key="navigationItem" id="Mbf-dF-3Z0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="wXQ-4d-8AE">
+                            <connections>
+                                <action selector="exportAction:" destination="IHA-15-xhl" id="vBy-Me-6N2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="RC6-AS-OqT" id="zFJ-tR-8xb"/>
+                        <outlet property="scrollView" destination="AqA-cq-ohe" id="8Kj-NC-cas"/>
                         <outlet property="skView" destination="1Jt-xq-Sbt" id="djh-xY-30y"/>
+                        <segue destination="oei-F6-g8F" kind="show" identifier="ShowExportView" id="XPp-ft-3jk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMw-da-HkH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3164" y="85"/>
+        </scene>
+        <!--Export Controller-->
+        <scene sceneID="Dv9-Hb-jnX">
+            <objects>
+                <viewController id="oei-F6-g8F" userLabel="Export Controller" customClass="CloudExportViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="q1V-7a-H2P"/>
+                        <viewControllerLayoutGuide type="bottom" id="fFj-JJ-Re0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="COf-DK-zEq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7xM-xb-EkU">
+                                <rect key="frame" x="20" y="72" width="560" height="471"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fFj-JJ-Re0" firstAttribute="top" secondItem="7xM-xb-EkU" secondAttribute="bottom" constant="8" id="0BB-7W-gOX"/>
+                            <constraint firstItem="7xM-xb-EkU" firstAttribute="top" secondItem="q1V-7a-H2P" secondAttribute="bottom" constant="8" id="3J6-2i-DPJ"/>
+                            <constraint firstItem="7xM-xb-EkU" firstAttribute="leading" secondItem="COf-DK-zEq" secondAttribute="leadingMargin" id="84a-S5-sQj"/>
+                            <constraint firstItem="7xM-xb-EkU" firstAttribute="trailing" secondItem="COf-DK-zEq" secondAttribute="trailingMargin" id="t9T-7Q-1Hx"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Export" id="RgT-Gr-WQL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="OPF-hO-eBi">
+                            <connections>
+                                <action selector="saveAction:" destination="oei-F6-g8F" id="Xve-gT-gUQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="7xM-xb-EkU" id="qJA-gH-hjd"/>
+                        <outlet property="saveButton" destination="OPF-hO-eBi" id="hHz-ej-Mh3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t3u-fD-ucu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3939" y="85"/>
         </scene>
         <!--Skills View Controller-->
         <scene sceneID="Gbs-sc-fAI">
