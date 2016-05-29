@@ -97,7 +97,7 @@ class GameScene: SKScene {
             return
         }
         
-        for touch in touches {
+        if let touch = touches.first {
             let location = touch.locationInNode(self)
             
             let touchedNode = self.nodeAtPoint(location)
@@ -106,74 +106,80 @@ class GameScene: SKScene {
                 return
             }
             
-            let shapeNode = SKNode();
-            shapeNode.zPosition = 1028;
-            let shapeNode2 = SKShapeNode(circleOfRadius: GameScene.radius - 1)
-            let shapeNode3 = SKShapeNode(circleOfRadius: GameScene.radius - 1)
-            shapeNode2.strokeColor = Node.color
-            shapeNode2.fillColor = Node.color
-            
-            shapeNode3.strokeColor = Node.color
-            shapeNode3.lineWidth = 3
-            shapeNode3.fillColor = UIColor.clearColor()
-            
-            shapeNode.name = "skill"
-            shapeNode.position = location
-            
-            shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: GameScene.colliderRadius)
-            shapeNode.physicsBody?.categoryBitMask = CollisionMask.Default
-            shapeNode.physicsBody?.collisionBitMask = CollisionMask.Default
-            shapeNode.physicsBody?.contactTestBitMask = CollisionMask.Default
-            
-            shapeNode.constraints = [SKConstraint.zRotation(SKRange(value: 0, variance: 0))];
-            
-            shapeNode.xScale = 0
-            shapeNode.yScale = 0
-            
-            let cropNode = SKCropNode()
-            
-            let texture = SKTexture(image: skill.thumbnailImage)
-            let spriteNode = SKSpriteNode(texture: texture, size: CGSize(width: GameScene.radius * 2 - 2, height: GameScene.radius * 2 - 2))
-            
-            spriteNode.zPosition = shapeNode.zPosition + 2
-            shapeNode3.zPosition = spriteNode.zPosition + 1
-            
-            shapeNode2.position = CGPointZero
-            cropNode.position = CGPointZero
-            spriteNode.position = CGPointZero
-            shapeNode3.position = CGPointZero
-            
-            cropNode.maskNode = shapeNode2
-            shapeNode.addChild(cropNode)
-            cropNode.addChild(spriteNode)
-            shapeNode.addChild(shapeNode3)
-            
-            let snaps = allNodes.filter{
-                return hypot(location.x - $0.position.x, location.y - $0.position.y) < GameScene.radius && !$0.node.convex && !$0.isGhost
-            }
-            
-            snaps.forEach{ node in
-                node.physicsBody?.categoryBitMask = CollisionMask.Ghost
-                node.physicsBody?.collisionBitMask = CollisionMask.None
-                
-                if let _ = node.orginalJoint {
-                    self.physicsWorld.removeJoint(node.orginalJoint!)
-                }
-                
-                let action = SKAction.moveTo(location, duration: 0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0)
-                node.runAction(action){
-                    let joint = SKPhysicsJointFixed.jointWithBodyA(node.physicsBody!, bodyB: shapeNode.physicsBody!, anchor: shapeNode.position)
-                    node.ghostJoint = joint
-                    node.isGhost = true
-                    self.physicsWorld.addJoint(node.ghostJoint!)
-                }
-            }
+            let skillNode = self.addSkillNodeAt(location, withSkill: skill)
             
             let action = SKAction.scaleTo(1, duration: 1, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-            shapeNode.runAction(action)
+            skillNode.runAction(action)
             
-            self.addChild(shapeNode)
+            self.addChild(skillNode)
         }
+    }
+    
+    func addSkillNodeAt(location: CGPoint, withSkill skill: Skill) -> SKNode {
+        let shapeNode = SKNode();
+        shapeNode.zPosition = 1028;
+        let shapeNode2 = SKShapeNode(circleOfRadius: GameScene.radius - 1 / Node.scaleFactor)
+        let shapeNode3 = SKShapeNode(circleOfRadius: GameScene.radius - 1 / Node.scaleFactor)
+        shapeNode2.strokeColor = Node.color
+        shapeNode2.fillColor = Node.color
+        
+        shapeNode3.strokeColor = Node.color
+        shapeNode3.lineWidth = 3 / Node.scaleFactor
+        shapeNode3.fillColor = UIColor.clearColor()
+        
+        shapeNode.name = "skill"
+        shapeNode.position = location
+        
+        shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: GameScene.colliderRadius)
+        shapeNode.physicsBody?.categoryBitMask = CollisionMask.Default
+        shapeNode.physicsBody?.collisionBitMask = CollisionMask.Default
+        shapeNode.physicsBody?.contactTestBitMask = CollisionMask.Default
+        
+        shapeNode.constraints = [SKConstraint.zRotation(SKRange(value: 0, variance: 0))];
+        
+        shapeNode.xScale = 0
+        shapeNode.yScale = 0
+        
+        let cropNode = SKCropNode()
+        
+        let texture = SKTexture(image: skill.thumbnailImage)
+        let spriteNode = SKSpriteNode(texture: texture, size: CGSize(width: GameScene.radius * 2 - 2 / Node.scaleFactor, height: GameScene.radius * 2 - 2 / Node.scaleFactor))
+        
+        spriteNode.zPosition = shapeNode.zPosition + 2
+        shapeNode3.zPosition = spriteNode.zPosition + 1
+        
+        shapeNode2.position = CGPointZero
+        cropNode.position = CGPointZero
+        spriteNode.position = CGPointZero
+        shapeNode3.position = CGPointZero
+        
+        cropNode.maskNode = shapeNode2
+        shapeNode.addChild(cropNode)
+        cropNode.addChild(spriteNode)
+        shapeNode.addChild(shapeNode3)
+        
+        let snaps = allNodes.filter{
+            return hypot(location.x - $0.position.x, location.y - $0.position.y) < GameScene.radius * 1.1 && !$0.node.convex && !$0.isGhost
+        }
+        
+        snaps.forEach{ node in
+            node.physicsBody?.categoryBitMask = CollisionMask.Ghost
+            node.physicsBody?.collisionBitMask = CollisionMask.None
+            
+            if let _ = node.orginalJoint {
+                self.physicsWorld.removeJoint(node.orginalJoint!)
+            }
+            
+            let action = SKAction.moveTo(location, duration: 0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0)
+            node.runAction(action){
+                let joint = SKPhysicsJointFixed.jointWithBodyA(node.physicsBody!, bodyB: shapeNode.physicsBody!, anchor: shapeNode.position)
+                node.ghostJoint = joint
+                node.isGhost = true
+                self.physicsWorld.addJoint(node.ghostJoint!)
+            }
+        }
+        
+        return shapeNode
     }
 
     // MARK: - Main run loop

@@ -60,7 +60,7 @@ class BrainNode: SKSpriteNode {
         let line = SKShapeNode(path: self.pathToPoint(node.position))
         line.strokeColor = Node.color
         line.zPosition = self.zPosition - 1
-        line.lineWidth = 1
+        line.lineWidth = 1 / Node.scaleFactor
         line.antialiased = true
         
         self.lines[node] = line

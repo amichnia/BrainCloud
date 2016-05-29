@@ -315,7 +315,6 @@ extension AddViewController {
     
 }
 
-let minimumCroppableSIze: CGFloat = 640
 extension AddViewController : RSKImageCropViewControllerDelegate {
     
     
@@ -323,7 +322,7 @@ extension AddViewController : RSKImageCropViewControllerDelegate {
         return Promise<UIImage> { (fulfill, reject) in
             self.imageCropPromiseHandler = PromiseHandler<UIImage>(fulfill: fulfill, reject: reject)
             
-            let iconImage = image.size.width < minimumCroppableSIze ? UIImage.RBResizeImage(image, targetSize: CGSize(width: image.size.width * (minimumCroppableSIze / image.size.width), height: image.size.height * (minimumCroppableSIze / image.size.width))) : image
+            let iconImage = image.size.width < Defined.Skill.MinimumCroppableSize ? UIImage.RBResizeImage(image, targetSize: CGSize(width: image.size.width * (Defined.Skill.MinimumCroppableSize / image.size.width), height: image.size.height * (Defined.Skill.MinimumCroppableSize / image.size.width))) : image
             
             let cropViewController = RSKImageCropViewController(image: iconImage, cropMode: RSKImageCropMode.Circle)
             cropViewController.delegate = self

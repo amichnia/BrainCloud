@@ -12,17 +12,20 @@ import SpriteKit
 let SkillLightCellIdentifier = "SkillLightCell"
 let SkillLighterCellIdentifier = "SkillLighterCell"
 
+let ShowExportViewSegueIdentifier = "ShowExportView"
+
 class CloudViewController: UIViewController, SkillsProvider {
 
     // MARK: - Outlets
     @IBOutlet weak var skView: SKView!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // MARK: - Properties
     let pattern = [SkillLightCellIdentifier,SkillLighterCellIdentifier,SkillLighterCellIdentifier,SkillLightCellIdentifier]
     var skills : [Skill] = []
     var scene : GameScene!
-    
+    var cloudImage: UIImage?
     
     var skillToAdd : Skill = Skill(title: "Swift", image: UIImage(named: "skill_swift")!, experience: Skill.Experience.Expert)
     
@@ -33,7 +36,6 @@ class CloudViewController: UIViewController, SkillsProvider {
         SkillEntity.fetchAll()
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
-            self.skills += self.skills // TODO: Remove later
             self.collectionView.reloadData()
         }
         .error { error in
@@ -46,8 +48,13 @@ class CloudViewController: UIViewController, SkillsProvider {
         
         Node.rectSize = self.skView.bounds.size
         Node.color = self.skView.tintColor
+        Node.scaleFactor = self.scrollView.bounds.width / self.skView.bounds.width
         
-        print(self.skView.bounds.size)
+        self.scrollView.minimumZoomScale = Node.scaleFactor
+        self.scrollView.maximumZoomScale = Node.scaleFactor
+        self.scrollView.zoomScale = Node.scaleFactor
+        self.scrollView.contentOffset = CGPoint.zero
+        
         self.prepareSceneIfNeeded(self.skView, size: self.skView.bounds.size)
     }
     
@@ -64,20 +71,20 @@ class CloudViewController: UIViewController, SkillsProvider {
             scene.nodes = try! self.loadNodesFromBundle()
             
             // Configure the view.
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            skView.showsDrawCount = true
+//            skView.showsFPS = true
+//            skView.showsNodeCount = true
+//            skView.showsDrawCount = true
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFit
-            
-            skView.presentScene(scene)
+            scene.scaleMode = .ResizeFill
             
             self.scene = scene
             self.scene.skillsProvider = self
+            
+            skView.presentScene(scene)
         }
     }
     
@@ -96,6 +103,41 @@ class CloudViewController: UIViewController, SkillsProvider {
             node.convex = $0["convex"] as! Bool
             return node
         }
+    }
+    
+    @IBAction func exportAction(sender: AnyObject) {
+        self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
+        self.performSegueWithIdentifier(ShowExportViewSegueIdentifier, sender: self)
+    }
+    
+    func captureCloudWithSize(size: CGSize) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 2.0)
+        self.skView.drawViewHierarchyInRect(CGRect(origin: CGPoint.zero, size: size), afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
+    // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard let identifier = segue.identifier else {
+            return
+        }
+        
+        switch identifier {
+        case ShowExportViewSegueIdentifier:
+            (segue.destinationViewController as? CloudExportViewController)?.image = self.cloudImage
+        default:
+            break
+        }
+    }
+    
+}
+
+extension CloudViewController: UIScrollViewDelegate {
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.skView
     }
     
 }
@@ -126,7 +168,7 @@ extension CloudViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.skillToAdd = self.skills[indexPath.row]
-        GameScene.radius = self.skillToAdd.experience.radius
+        GameScene.radius = self.skillToAdd.experience.radius / Node.scaleFactor
     }
     
 }
