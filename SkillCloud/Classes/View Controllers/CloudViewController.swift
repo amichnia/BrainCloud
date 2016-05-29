@@ -77,6 +77,8 @@ class CloudViewController: UIViewController, SkillsProvider {
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
+            skView.backgroundColor = UIColor.clearColor()
+            skView.allowsTransparency = true
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .ResizeFill
@@ -112,9 +114,12 @@ class CloudViewController: UIViewController, SkillsProvider {
     
     func captureCloudWithSize(size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 2.0)
+        
         self.skView.drawViewHierarchyInRect(CGRect(origin: CGPoint.zero, size: size), afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext()
+        
         UIGraphicsEndImageContext()
+        
         return image
     }
     

@@ -130,7 +130,7 @@ class GameScene: SKScene {
         shapeNode.name = "skill"
         shapeNode.position = location
         
-        shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: GameScene.colliderRadius)
+        shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: GameScene.colliderRadius + (1.5 / Node.scaleFactor))
         shapeNode.physicsBody?.categoryBitMask = CollisionMask.Default
         shapeNode.physicsBody?.collisionBitMask = CollisionMask.Default
         shapeNode.physicsBody?.contactTestBitMask = CollisionMask.Default

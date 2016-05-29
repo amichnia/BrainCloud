@@ -12,7 +12,7 @@ struct Node {
     // Static
     static var color:       UIColor = UIColor.blueColor()
     static var lastId:      Int     = 0
-    static var factor:      CGFloat { return 2 / self.scaleFactor }
+    static var factor:      CGFloat { return 1.75 / self.scaleFactor }
     static var rectSize:    CGSize  = CGSize(width: 100, height: 100)
     static var scaleFactor: CGFloat = 1.0
     
