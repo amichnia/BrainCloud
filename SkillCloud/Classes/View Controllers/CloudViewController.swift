@@ -124,16 +124,17 @@ class CloudViewController: UIViewController, SkillsProvider {
     }
     
     @IBAction func saveCloud(sender: AnyObject) {
-        if let testNode = self.scene.allNodes.first {
-            print("\(testNode.node.id): \(testNode.node)")
-            
-            DataManager.promiseEntity(BrainNodeEntity.self, model: testNode)
-            .then { (entity) -> Void in
-                DDLogInfo("Added test node?")
-            }
-            .error { error in
-                DDLogError("Error: \(error)")
-            }
+        do { try DataManager.deleteEntity(GraphCloudEntity.self, withIdentifier: self.scene.uniqueIdentifierValue) }
+        catch {
+            DDLogError("Error: \(error)")
+        }
+        
+        DataManager.promiseEntity(GraphCloudEntity.self, model: self.scene)
+        .then { (cloudEntity) -> Void in
+            DDLogInfo("Saved Cloud:\n\(cloudEntity)")
+        }
+        .error { error in
+            DDLogError("Error saving cloud: \(error)")
         }
     }
     

@@ -10,8 +10,30 @@ import Foundation
 import CoreData
 
 
-class SkillNodeEntity: BaseNodeEntity {
+class SkillNodeEntity: BaseNodeEntity, CoreDataEntity {
 
-// Insert code here to add functionality to your managed object subclass
+    static var entityName = "SkillNodeEntity"
+    static var uniqueIdentifier = "nodeId"
+    
+    convenience required init?(model: DTOModel, inContext ctx: NSManagedObjectContext) {
+        guard let entityDescription = NSEntityDescription.entityForName(SkillNodeEntity.entityName, inManagedObjectContext: ctx) where model is SkillNode else {
+            return nil
+        }
+        self.init(entity: entityDescription, insertIntoManagedObjectContext: ctx)
+        
+        self.setValuesFromModel(model)
+    }
+    
+    func setValuesFromModel(model: DTOModel) {
+        if let node = model as? SkillNode {
+            self.nodeId = node.uniqueIdentifierValue
+            self.positionRelative = NSValue(CGPoint: node.position )
+            self.scale = Int16(node.skill.experience.radius)
+            
+            self.skillName = node.skill.title
+            self.skillImage = node.skill.image
+            self.skillExperienceValue = Int16(node.skill.experience.rawValue)
+        }
+    }
 
 }

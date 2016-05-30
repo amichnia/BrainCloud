@@ -19,7 +19,7 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
         guard let entityDescription = NSEntityDescription.entityForName(SkillEntity.entityName, inManagedObjectContext: ctx) where model is Skill else {
             return nil
         }
-        self.init(entity: entityDescription, insertIntoManagedObjectContext: DataManager.managedObjectContext)
+        self.init(entity: entityDescription, insertIntoManagedObjectContext: ctx)
         
         self.setValuesFromModel(model)
     }

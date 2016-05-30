@@ -128,6 +128,26 @@ extension DataManager {
 // MARK: - Inserting entities
 extension DataManager {
     
+    static func updateEntity<T:CoreDataEntity>(entity: T.Type, model: DTOModel, intoContext ctx: NSManagedObjectContext? = nil) -> T? {
+        do {
+            if let existingEntity = try DataManager.getAll(entity, fromContext: ctx).first {
+                existingEntity.setValuesFromModel(model)
+                return existingEntity
+            }
+            else {
+                throw DataError.EntityDoesNotExist
+            }
+        }
+        catch {
+            if case DataError.EntityDoesNotExist = error {
+                return T(model: model, inContext: ctx ?? self.managedObjectContext)
+            }
+            else {
+                return nil
+            }
+        }
+    }
+    
     static func insertEntity<T:CoreDataEntity>(entity: T.Type, model: DTOModel, intoContext ctx: NSManagedObjectContext? = nil) -> T? {
         return T(model: model, inContext: ctx ?? self.managedObjectContext)
     }
@@ -159,6 +179,16 @@ extension DataManager {
     
 }
 
+extension DataManager {
+    
+    static func deleteEntity<T:CoreDataEntity>(entity: T.Type, withIdentifier identifier: String, intoContext ctx: NSManagedObjectContext? = nil) throws {
+        let predicate = NSPredicate(format: "\(entity.uniqueIdentifier) = %@", identifier)
+        if let existingEntity = try DataManager.getAll(entity, withPredicate: predicate, fromContext: ctx).first as? NSManagedObject {
+            (ctx ?? DataManager.managedObjectContext).deleteObject(existingEntity)
+        }
+    }
+    
+}
 
 protocol DTOModel {
     

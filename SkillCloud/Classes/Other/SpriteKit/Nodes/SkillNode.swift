@@ -9,11 +9,20 @@
 import UIKit
 import SpriteKit
 
-class SkillNode: SKNode {
+class SkillNode: SKNode, DTOModel {
     
+    // MARK: - Properties
+    var uniqueIdentifierValue: String { return "\(self.cloudIdentifier)_skill_\(self.nodeId)" }
+    var cloudIdentifier = "cloud"
+    var nodeId: Int = 0
+    var skill: Skill!
+    
+    
+    // MARK: - Initialisation
     static func nodeWithSkill(skill: Skill, andLocation location: CGPoint) -> SkillNode {
         // Whole skill node container
         let skillNode = SkillNode();
+        skillNode.skill = skill
         skillNode.zPosition = 1028;
         skillNode.name = "skill"
         skillNode.position = location
@@ -64,6 +73,18 @@ class SkillNode: SKNode {
         skillNode.addChild(foregroundShapeNode)
         
         return skillNode
+    }
+    
+}
+
+extension SkillNode {
+    
+    var relativePosition: CGPoint {
+        return self.relativePositionWith(self.position)
+    }
+    
+    func relativePositionWith(skPosition: CGPoint) -> CGPoint {
+        return CGPoint(x: skPosition.x / Node.rectSize.width, y: (Node.rectSize.height - skPosition.y) / Node.rectSize.height)
     }
     
 }

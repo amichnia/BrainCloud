@@ -14,7 +14,7 @@ protocol SkillsProvider: class {
     var skillToAdd : Skill { get }
 }
 
-class CloudGraphScene: SKScene {
+class CloudGraphScene: SKScene, DTOModel {
     
     // Defined
     static var radius: CGFloat = 25 // Current node radius for selected skill
@@ -26,6 +26,10 @@ class CloudGraphScene: SKScene {
     var allNodesContainer: SKNode!
     var allNodes: [BrainNode] = []
     var skillNodes: [SkillNode] = []
+    
+    // MARK: - DTOModel
+    var uniqueIdentifierValue: String { return self.cloudIdentifier }
+    var cloudIdentifier = "cloud"
     
     // MARK: - Lifecycle
     override func didMoveToView(view: SKView) {
@@ -51,6 +55,7 @@ class CloudGraphScene: SKScene {
         
         for node in nodes {
             let brainNode = BrainNode.nodeWithNode(node)
+            brainNode.cloudIdentifier = self.cloudIdentifier
             allNodesContainer.addChild(brainNode)
             allNodes.append(brainNode)
             
@@ -107,15 +112,18 @@ class CloudGraphScene: SKScene {
             let action = SKAction.scaleTo(1, duration: 1, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
             skillNode.runAction(action)
             
-            // Add skill node to saved
-            self.skillNodes.append(skillNode)
-            
             self.addChild(skillNode)
         }
     }
     
     func addSkillNodeAt(location: CGPoint, withSkill skill: Skill) -> SkillNode {
         let skillNode = SkillNode.nodeWithSkill(skill, andLocation: location)
+        
+        // Add skill node to saved
+        skillNode.cloudIdentifier = self.cloudIdentifier
+        skillNode.nodeId = (self.skillNodes.last?.nodeId ?? 0) + 1
+        // Add skill node to array
+        self.skillNodes.append(skillNode)
         
         // Combine nodes in "area" into one place (implosion)
         let nodesInArea = allNodes.filter{
@@ -143,6 +151,9 @@ class CloudGraphScene: SKScene {
                 node.isGhost = true // Does not collide
                 self.physicsWorld.addJoint(node.ghostJoint!)
             }
+            
+            // Save info to what node is it pinned
+            node.pinnedSkillNode = skillNode
         }
         
         return skillNode
