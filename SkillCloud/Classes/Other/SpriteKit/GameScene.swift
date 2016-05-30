@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  CloudGraphScene.swift
 //  SkillCloud
 //
 //  Created by Andrzej Michnia on 02.04.2016.
@@ -14,7 +14,7 @@ protocol SkillsProvider: class {
     var skillToAdd : Skill { get }
 }
 
-class GameScene: SKScene {
+class CloudGraphScene: SKScene {
     
     // Defined
     static var radius: CGFloat = 25 // Current node radius for selected skill
@@ -25,6 +25,7 @@ class GameScene: SKScene {
     var nodes: [Node]!
     var allNodesContainer: SKNode!
     var allNodes: [BrainNode] = []
+    var skillNodes: [SkillNode] = []
     
     // MARK: - Lifecycle
     override func didMoveToView(view: SKView) {
@@ -95,25 +96,30 @@ class GameScene: SKScene {
             
             let touchedNode = self.nodeAtPoint(location)
             
-            if let name = touchedNode.name where name == "skill" && location.distanceTo(touchedNode.position) < GameScene.radius {
+            if let name = touchedNode.name where name == "skill" && location.distanceTo(touchedNode.position) < CloudGraphScene.radius {
                 return
             }
             
+            // Create new skill
             let skillNode = self.addSkillNodeAt(location, withSkill: skill)
             
+            // Skill node scale action
             let action = SKAction.scaleTo(1, duration: 1, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
             skillNode.runAction(action)
+            
+            // Add skill node to saved
+            self.skillNodes.append(skillNode)
             
             self.addChild(skillNode)
         }
     }
     
-    func addSkillNodeAt(location: CGPoint, withSkill skill: Skill) -> SKNode {
+    func addSkillNodeAt(location: CGPoint, withSkill skill: Skill) -> SkillNode {
         let skillNode = SkillNode.nodeWithSkill(skill, andLocation: location)
         
         // Combine nodes in "area" into one place (implosion)
         let nodesInArea = allNodes.filter{
-            return hypot(location.x - $0.position.x, location.y - $0.position.y) < GameScene.radius * 1.1 && !$0.node.convex && !$0.isGhost
+            return hypot(location.x - $0.position.x, location.y - $0.position.y) < CloudGraphScene.radius * 1.1 && !$0.node.convex && !$0.isGhost
         }
         
         // Foreach node in area - move it under Skill node, and remove its joints

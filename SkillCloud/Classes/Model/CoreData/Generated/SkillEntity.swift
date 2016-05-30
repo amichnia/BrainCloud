@@ -43,9 +43,3 @@ extension SkillEntity {
     }
     
 }
-
-protocol DTOModel {
-    
-    var uniqueIdentifierValue: String { get }
-    
-}

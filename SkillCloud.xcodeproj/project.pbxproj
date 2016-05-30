@@ -32,7 +32,7 @@
 		FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B11CAEEF8000315468 /* CloudViewController.swift */; };
 		FE0522B41CAEF0B400315468 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B31CAEF0B400315468 /* TestView.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
-		FE0522DB1CAFE5CC00315468 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE0522DA1CAFE5CC00315468 /* GameScene.sks */; };
+		FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */; };
 		FE0522DD1CAFE69500315468 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DC1CAFE69500315468 /* GameScene.swift */; };
 		FE0522E01CB0157800315468 /* BrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DF1CB0157800315468 /* BrainNode.swift */; };
 		FE0522E21CB01BBF00315468 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522E11CB01BBF00315468 /* Node.swift */; };
@@ -111,7 +111,7 @@
 		FE0522B11CAEEF8000315468 /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
 		FE0522B31CAEF0B400315468 /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		FE0522DA1CAFE5CC00315468 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
 		FE0522DC1CAFE69500315468 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		FE0522DF1CB0157800315468 /* BrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainNode.swift; sourceTree = "<group>"; };
 		FE0522E11CB01BBF00315468 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 			children = (
 				FE0522DE1CB0155A00315468 /* Nodes */,
 				C8DF6D271CC503A0009CDBFA /* AddScene.sks */,
-				FE0522DA1CAFE5CC00315468 /* GameScene.sks */,
+				FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */,
 				C8DF6D251CC5033F009CDBFA /* AddScene.swift */,
 				FE0522DC1CAFE69500315468 /* GameScene.swift */,
 			);
@@ -408,7 +408,7 @@
 				TargetAttributes = {
 					C8A4A0421C981B6C004E055D = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 4RH8T97BYZ;
+						DevelopmentTeam = 36CHZQXF4C;
 					};
 				};
 			};
@@ -441,7 +441,7 @@
 				FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */,
 				FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */,
 				FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */,
-				FE0522DB1CAFE5CC00315468 /* GameScene.sks in Resources */,
+				FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */,
 				FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */,
 				FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */,
 			);

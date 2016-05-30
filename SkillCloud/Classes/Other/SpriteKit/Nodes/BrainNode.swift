@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 /// Main cloud node in graph
-class BrainNode: SKSpriteNode {
+class BrainNode: SKSpriteNode, DTOModel {
 
     var node: Node!
     var connected : Set<BrainNode> = Set()
@@ -19,6 +19,11 @@ class BrainNode: SKSpriteNode {
     var orginalJoint: SKPhysicsJointSpring?
     var ghostJoint: SKPhysicsJointFixed?
     var isGhost: Bool = false
+    
+    // DTO values
+    var uniqueIdentifierValue: String { return "\(self.cloudIdentifier)_\(self.node.id)" }
+    var cloudIdentifier = "cloud"
+    var pinnedSkillNode: SkillNode?
     
     // Actions
     func connectNode(node: BrainNode) {

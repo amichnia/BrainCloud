@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
     <entity name="BaseNodeEntity" representedClassName=".BaseNodeEntity" syncable="YES">
-        <attribute name="nodeId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="nodeId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="positionRelative" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="scale" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>

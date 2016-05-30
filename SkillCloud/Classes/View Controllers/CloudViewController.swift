@@ -24,7 +24,7 @@ class CloudViewController: UIViewController, SkillsProvider {
     // MARK: - Properties
     let pattern = [SkillLightCellIdentifier,SkillLighterCellIdentifier,SkillLighterCellIdentifier,SkillLightCellIdentifier]
     var skills : [Skill] = []
-    var scene : GameScene!
+    var scene : CloudGraphScene!
     var cloudImage: UIImage?
     
     var skillToAdd : Skill = Skill(title: "Swift", image: UIImage(named: "skill_swift")!, experience: Skill.Experience.Expert)
@@ -67,7 +67,7 @@ class CloudViewController: UIViewController, SkillsProvider {
     
     // MARK: - Configuration
     func prepareSceneIfNeeded(skView: SKView, size: CGSize){
-        if let scene = GameScene(fileNamed:"GameScene") where self.scene == nil {
+        if let scene = CloudGraphScene(fileNamed:"CloudGraphScene") where self.scene == nil {
             scene.nodes = try! self.loadNodesFromBundle()
             
             // Configure the view.
@@ -123,6 +123,20 @@ class CloudViewController: UIViewController, SkillsProvider {
         return image
     }
     
+    @IBAction func saveCloud(sender: AnyObject) {
+        if let testNode = self.scene.allNodes.first {
+            print("\(testNode.node.id): \(testNode.node)")
+            
+            DataManager.promiseEntity(BrainNodeEntity.self, model: testNode)
+            .then { (entity) -> Void in
+                DDLogInfo("Added test node?")
+            }
+            .error { error in
+                DDLogError("Error: \(error)")
+            }
+        }
+    }
+    
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let identifier = segue.identifier else {
@@ -173,7 +187,7 @@ extension CloudViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.skillToAdd = self.skills[indexPath.row]
-        GameScene.radius = self.skillToAdd.experience.radius / Node.scaleFactor
+        CloudGraphScene.radius = self.skillToAdd.experience.radius / Node.scaleFactor
     }
     
 }

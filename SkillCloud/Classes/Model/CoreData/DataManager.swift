@@ -77,6 +77,7 @@ class DataManager: NSObject {
 
 }
 
+// MARK: - Getting and fetching entities
 extension DataManager {
     
     static func getAll<T:CoreDataEntity>(entity: T.Type, fromContext ctx: NSManagedObjectContext? = nil) throws -> [T] {
@@ -124,6 +125,7 @@ extension DataManager {
     }
 }
 
+// MARK: - Inserting entities
 extension DataManager {
     
     static func insertEntity<T:CoreDataEntity>(entity: T.Type, model: DTOModel, intoContext ctx: NSManagedObjectContext? = nil) -> T? {
@@ -157,10 +159,17 @@ extension DataManager {
     
 }
 
+
+protocol DTOModel {
+    
+    var uniqueIdentifierValue: String { get }
+    
+}
+
 /**
  *  Base CoreDataEntity protocol
  */
-protocol CoreDataEntity {
+protocol CoreDataEntity : class {
     
     static var entityName : String { get }
     static var uniqueIdentifier : String { get }

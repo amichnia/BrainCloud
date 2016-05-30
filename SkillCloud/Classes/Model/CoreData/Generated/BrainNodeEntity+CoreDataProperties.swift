@@ -16,7 +16,7 @@ extension BrainNodeEntity {
 
     @NSManaged var isConvex: Bool
     @NSManaged var connectedTo: Array<Int>?
-    @NSManaged var pinnedSkillNode: NSManagedObject?
+    @NSManaged var pinnedSkillNode: SkillNodeEntity?
     @NSManaged var cloud: GraphCloudEntity?
 
 }

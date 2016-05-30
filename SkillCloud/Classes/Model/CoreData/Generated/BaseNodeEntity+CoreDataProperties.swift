@@ -15,7 +15,7 @@ import CoreData
 extension BaseNodeEntity {
 
     @NSManaged var positionRelative: NSValue?
-    @NSManaged var nodeId: Int32
+    @NSManaged var nodeId: String?
     @NSManaged var scale: Int16
 
 }
