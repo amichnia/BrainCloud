@@ -16,13 +16,6 @@ protocol SkillsProvider: class {
 
 class GameScene: SKScene {
     
-    // MARK: - Collision Masks
-    struct CollisionMask {
-        static let None: UInt32 = 0x0
-        static let Default: UInt32 = 0x1 << 0
-        static let Ghost: UInt32 = 0x1 << 1
-    }
-    
     // Def
     static var radius: CGFloat = 25
     static var colliderRadius: CGFloat { return radius + 1 }
@@ -65,9 +58,9 @@ class GameScene: SKScene {
             brainNode.physicsBody = SKPhysicsBody(circleOfRadius: brainNode.node.radius + 2)
             brainNode.physicsBody?.linearDamping = 25
             brainNode.physicsBody?.angularDamping = 25
-            brainNode.physicsBody?.categoryBitMask = CollisionMask.Default
-            brainNode.physicsBody?.collisionBitMask = CollisionMask.Default
-            brainNode.physicsBody?.contactTestBitMask = CollisionMask.Default
+            brainNode.physicsBody?.categoryBitMask = Defined.CollisionMask.Default
+            brainNode.physicsBody?.collisionBitMask = Defined.CollisionMask.Default
+            brainNode.physicsBody?.contactTestBitMask = Defined.CollisionMask.Default
             brainNode.physicsBody?.density = node.convex ? 20 : 1
             
             // Spring joint to current position
@@ -116,70 +109,37 @@ class GameScene: SKScene {
     }
     
     func addSkillNodeAt(location: CGPoint, withSkill skill: Skill) -> SKNode {
-        let shapeNode = SKNode();
-        shapeNode.zPosition = 1028;
-        let shapeNode2 = SKShapeNode(circleOfRadius: GameScene.radius - 1 / Node.scaleFactor)
-        let shapeNode3 = SKShapeNode(circleOfRadius: GameScene.radius - 1 / Node.scaleFactor)
-        shapeNode2.strokeColor = Node.color
-        shapeNode2.fillColor = Node.color
+        let skillNode = SkillNode.nodeWithSkill(skill, andLocation: location)
         
-        shapeNode3.strokeColor = Node.color
-        shapeNode3.lineWidth = 3 / Node.scaleFactor
-        shapeNode3.fillColor = UIColor.clearColor()
-        
-        shapeNode.name = "skill"
-        shapeNode.position = location
-        
-        shapeNode.physicsBody = SKPhysicsBody(circleOfRadius: GameScene.colliderRadius + (1.5 / Node.scaleFactor))
-        shapeNode.physicsBody?.categoryBitMask = CollisionMask.Default
-        shapeNode.physicsBody?.collisionBitMask = CollisionMask.Default
-        shapeNode.physicsBody?.contactTestBitMask = CollisionMask.Default
-        
-        shapeNode.constraints = [SKConstraint.zRotation(SKRange(value: 0, variance: 0))];
-        
-        shapeNode.xScale = 0
-        shapeNode.yScale = 0
-        
-        let cropNode = SKCropNode()
-        
-        let texture = SKTexture(image: skill.thumbnailImage)
-        let spriteNode = SKSpriteNode(texture: texture, size: CGSize(width: GameScene.radius * 2 - 2 / Node.scaleFactor, height: GameScene.radius * 2 - 2 / Node.scaleFactor))
-        
-        spriteNode.zPosition = shapeNode.zPosition + 2
-        shapeNode3.zPosition = spriteNode.zPosition + 1
-        
-        shapeNode2.position = CGPointZero
-        cropNode.position = CGPointZero
-        spriteNode.position = CGPointZero
-        shapeNode3.position = CGPointZero
-        
-        cropNode.maskNode = shapeNode2
-        shapeNode.addChild(cropNode)
-        cropNode.addChild(spriteNode)
-        shapeNode.addChild(shapeNode3)
-        
-        let snaps = allNodes.filter{
+        // Combine nodes in "area" into one place (implosion)
+        let nodesInArea = allNodes.filter{
             return hypot(location.x - $0.position.x, location.y - $0.position.y) < GameScene.radius * 1.1 && !$0.node.convex && !$0.isGhost
         }
         
-        snaps.forEach{ node in
-            node.physicsBody?.categoryBitMask = CollisionMask.Ghost
-            node.physicsBody?.collisionBitMask = CollisionMask.None
+        // Foreach node in area - move it under Skill node, and remove its joints
+        nodesInArea.forEach{ node in
+            // Set colliders masks as 'non collidable'
+            node.physicsBody?.categoryBitMask = Defined.CollisionMask.Ghost
+            node.physicsBody?.collisionBitMask = Defined.CollisionMask.None
             
+            // Remove node original spring joint
             if let _ = node.orginalJoint {
                 self.physicsWorld.removeJoint(node.orginalJoint!)
             }
             
+            // Move node into position
             let action = SKAction.moveTo(location, duration: 0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0)
+            
             node.runAction(action){
-                let joint = SKPhysicsJointFixed.jointWithBodyA(node.physicsBody!, bodyB: shapeNode.physicsBody!, anchor: shapeNode.position)
+                // Pin node position with skill node position
+                let joint = SKPhysicsJointFixed.jointWithBodyA(node.physicsBody!, bodyB: skillNode.physicsBody!, anchor: skillNode.position)
                 node.ghostJoint = joint
-                node.isGhost = true
+                node.isGhost = true // Does not collide
                 self.physicsWorld.addJoint(node.ghostJoint!)
             }
         }
         
-        return shapeNode
+        return skillNode
     }
 
     // MARK: - Main run loop

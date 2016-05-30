@@ -21,4 +21,10 @@ struct Defined {
     struct Skill {
         static let MinimumCroppableSize:        CGFloat     = 640
     }
+    // MARK: - Collision Masks
+    struct CollisionMask {
+        static let None: UInt32 = 0x0
+        static let Default: UInt32 = 0x1 << 0
+        static let Ghost: UInt32 = 0x1 << 1
+    }
 }

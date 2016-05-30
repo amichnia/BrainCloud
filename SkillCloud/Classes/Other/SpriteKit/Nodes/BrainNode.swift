@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 
+/// Main cloud node in graph
 class BrainNode: SKSpriteNode {
 
     var node: Node!
@@ -76,4 +77,5 @@ class BrainNode: SKSpriteNode {
             self.lines[$0]?.path = self.pathToPoint($0.position)
         }
     }
+    
 }
