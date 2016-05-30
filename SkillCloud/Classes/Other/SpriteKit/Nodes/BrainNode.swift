@@ -43,16 +43,12 @@ class BrainNode: SKSpriteNode {
 
     // Initialization
     static func nodeWithNode(node: Node) -> BrainNode {
-        let shapeNode = BrainNode(texture: SKTexture(imageNamed: "sprite-node"), size: CGSize(width: 2 * node.radius, height: 2 * node.radius)) //BrainNode(circleOfRadius: node.radius)
+        let brainNode = BrainNode(texture: SKTexture(imageNamed: "sprite-node"), size: CGSize(width: 2 * node.radius, height: 2 * node.radius))
         
-        shapeNode.node = node
-        shapeNode.position = node.skPosition
-//        shapeNode.fillColor = Node.color
-//        shapeNode.strokeColor = shapeNode.fillColor
-//        shapeNode.lineWidth = 1
-//        shapeNode.antialiased = true
+        brainNode.node = node
+        brainNode.position = node.skPosition
         
-        return shapeNode
+        return brainNode
     }
     
     // Adding lines
