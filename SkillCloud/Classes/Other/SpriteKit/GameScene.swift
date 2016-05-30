@@ -16,8 +16,8 @@ protocol SkillsProvider: class {
 
 class GameScene: SKScene {
     
-    // Def
-    static var radius: CGFloat = 25
+    // Defined
+    static var radius: CGFloat = 25 // Current node radius for selected skill
     static var colliderRadius: CGFloat { return radius + 1 }
     
     // MARK: - Properties
