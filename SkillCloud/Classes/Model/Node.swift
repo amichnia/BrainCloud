@@ -71,6 +71,7 @@ extension Node {
         
         if let idString = nodeId.characters.split("_").map(String.init).last, id = Int(idString ?? ""), connected = brainNodeEntity.connectedTo?.sort() {
             self.init(point: point, scale: scale, id: id, connected: connected)
+            self.convex = brainNodeEntity.isConvex
             return
         }
         

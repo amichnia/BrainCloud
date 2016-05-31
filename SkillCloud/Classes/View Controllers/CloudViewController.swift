@@ -49,7 +49,8 @@ class CloudViewController: UIViewController, SkillsProvider {
         
         Node.rectSize = self.skView.bounds.size
         Node.color = self.skView.tintColor
-        Node.scaleFactor = self.scrollView.bounds.width / self.skView.bounds.width
+        Node.scaleFactor = 0.19 //self.scrollView.bounds.width / self.skView.bounds.width // FIXME: !IMportant - resolve scale factors
+        print(Node.scaleFactor)
         
         self.scrollView.minimumZoomScale = Node.scaleFactor
         self.scrollView.maximumZoomScale = Node.scaleFactor
@@ -80,17 +81,13 @@ class CloudViewController: UIViewController, SkillsProvider {
             self.scene = scene
             self.scene.skillsProvider = self
             if let cloud = self.cloudEntity {
-                cloud.promisePerform{ () -> Void in
-                    scene.configureWithCloud(cloud)
-                }
-                .then{ () -> Void in
-                    skView.presentScene(scene)
-                }
+                scene.cloudEntity = cloud
             }
             else {
                 scene.nodes = try! self.loadNodesFromBundle()
-                skView.presentScene(scene)
             }
+            
+            skView.presentScene(scene)
         }
     }
     

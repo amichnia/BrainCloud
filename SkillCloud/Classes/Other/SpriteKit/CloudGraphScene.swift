@@ -26,6 +26,7 @@ class CloudGraphScene: SKScene, DTOModel {
     var allNodesContainer: SKNode!
     var allNodes: [BrainNode] = []
     var skillNodes: [SkillNode] = []
+    var cloudEntity: GraphCloudEntity?
     
     // MARK: - DTOModel
     var uniqueIdentifierValue: String { return self.cloudIdentifier }
@@ -42,6 +43,9 @@ class CloudGraphScene: SKScene, DTOModel {
         
         if self.nodes != nil {
             self.addNodes(self.nodes)
+        }
+        else if let cloud = self.cloudEntity {
+            self.configureWithCloud(cloud)
         }
     }
     
@@ -91,12 +95,17 @@ class CloudGraphScene: SKScene, DTOModel {
     }
     
     func configureWithCloud(cloud: GraphCloudEntity) {
+        // Container
         if allNodesContainer == nil {
             allNodesContainer = SKNode()
             allNodesContainer.position = CGPoint.zero
             self.addChild(allNodesContainer)
         }
         
+        // Saved skill nodes
+        var savedSkillNodes: [String:SkillNode] = [:]
+        
+        // Brain Nodes
         let brainNodes: [BrainNodeEntity] = cloud.brainNodes?.map({ return ($0 as! BrainNodeEntity) }) ?? []
         for brainNodeEntity in brainNodes {
             guard let brainNode = BrainNode.nodeWithEntity(brainNodeEntity) else {
@@ -117,23 +126,63 @@ class CloudGraphScene: SKScene, DTOModel {
             brainNode.physicsBody?.contactTestBitMask = Defined.CollisionMask.Default
             brainNode.physicsBody?.density = brainNodeEntity.isConvex ? 20 : 1
             
-            // Spring joint to current position
-            let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: brainNode.physicsBody!, anchorA: brainNode.position, anchorB: brainNode.position)
-            joint.frequency = 20
-            joint.damping = 10
-            brainNode.orginalJoint = joint
-            self.physicsWorld.addJoint(joint)
-            
-            print(allNodes.count)
+            if let pinnedSkillEntity = brainNodeEntity.pinnedSkillNode {
+                guard let pinnedId = pinnedSkillEntity.nodeId else {
+                    continue
+                }
+                
+                guard let skillNode = savedSkillNodes[pinnedId] ?? SkillNode.nodeWithEntity(pinnedSkillEntity) else {
+                    continue
+                }
+                
+                // Save for later use
+                savedSkillNodes[pinnedId] = skillNode
+                
+                // Set colliders masks as 'non collidable'
+                brainNode.physicsBody?.categoryBitMask = Defined.CollisionMask.Ghost
+                brainNode.physicsBody?.collisionBitMask = Defined.CollisionMask.None
+                
+                // Remove node original spring joint
+                if let _ = brainNode.orginalJoint {
+                    self.physicsWorld.removeJoint(brainNode.orginalJoint!)
+                }
+                // Pin to node
+                brainNode.position = skillNode.position
+                brainNode.pinnedSkillNode = skillNode
+                // Pin node position with skill node position
+                let joint = SKPhysicsJointFixed.jointWithBodyA(brainNode.physicsBody!, bodyB: skillNode.physicsBody!, anchor: skillNode.position)
+                brainNode.ghostJoint = joint
+                brainNode.isGhost = true // Does not collide
+                
+                // Add skill node to saved
+                skillNode.cloudIdentifier = self.cloudIdentifier
+                // Add skill node to array
+                self.skillNodes.append(skillNode)
+                
+                if skillNode.parent == nil {
+                    self.addChild(skillNode)
+                }
+                
+                self.physicsWorld.addJoint(joint)
+            }
+            else {
+                // Spring joint to current position
+                let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: brainNode.physicsBody!, anchorA: brainNode.position, anchorB: brainNode.position)
+                joint.frequency = 20
+                joint.damping = 10
+                brainNode.orginalJoint = joint
+                self.physicsWorld.addJoint(joint)
+            }
         }
         
         allNodes.sortInPlace { $0.node.id < $1.node.id }
-        
         allNodes.forEach{ node in
             node.node.connected.forEach{ i in
                 node.connectNode(allNodes[i-1])
             }
         }
+        
+        self.skillNodes = savedSkillNodes.values.sort{ $0.nodeId < $1.nodeId }
     }
     
     // MARK: - Actions

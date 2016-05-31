@@ -98,13 +98,19 @@ extension SkillNode {
         
         // Whole skill node container
         let skillNode = SkillNode();
-        skillNode.skill = nil // TODO: check skill
+        
+        let nodeId = (entity.nodeId ?? "")
+        skillNode.nodeId = Int(nodeId.characters.split("_").map(String.init).last!) ?? 0
+        skillNode.cloudIdentifier = entity.cloud?.cloudId ?? ""
+        
+        // Base stuff
+        skillNode.skill = skill
         skillNode.zPosition = 1028;
         skillNode.name = "skill"
         skillNode.position = entity.relativePositionValue
         
         // Physics
-        skillNode.physicsBody = SKPhysicsBody(circleOfRadius: CloudGraphScene.colliderRadius + (1.5 / Node.scaleFactor))
+        skillNode.physicsBody = SKPhysicsBody(circleOfRadius: (radius + 2.5) / Node.scaleFactor)
         skillNode.physicsBody?.categoryBitMask      = Defined.CollisionMask.Default
         skillNode.physicsBody?.collisionBitMask     = Defined.CollisionMask.Default
         skillNode.physicsBody?.contactTestBitMask   = Defined.CollisionMask.Default
@@ -113,11 +119,11 @@ extension SkillNode {
         skillNode.constraints = [SKConstraint.zRotation(SKRange(value: 0, variance: 0))];
         
         // Initial scale
-        skillNode.xScale = 0
-        skillNode.yScale = 0
+        skillNode.xScale = 1
+        skillNode.yScale = 1
         
         // Mask shape - circular mask for skill image
-        let maskShapeNode = SKShapeNode(circleOfRadius: radius - 1 / Node.scaleFactor)
+        let maskShapeNode = SKShapeNode(circleOfRadius: (radius - 1) / Node.scaleFactor)
         maskShapeNode.strokeColor = Node.color
         maskShapeNode.fillColor = Node.color
         maskShapeNode.position = CGPointZero
@@ -125,13 +131,13 @@ extension SkillNode {
         
         // Skill image sprite node
         let skillImageTexture = SKTexture(image: skill.image) // TODO: verify
-        let skillImageSize = CGSize(width: radius * 2 - 2 / Node.scaleFactor, height: radius * 2 - 2 / Node.scaleFactor)
+        let skillImageSize = CGSize(width: (radius * 2 - 2) / Node.scaleFactor, height: (radius * 2 - 2) / Node.scaleFactor)
         let skillImageNode = SKSpriteNode(texture: skillImageTexture, size: skillImageSize)
         skillImageNode.position = CGPointZero
         skillImageNode.zPosition = skillNode.zPosition + 2
         
         // Foreground bordered circle - placed on top of image to provide "antialiasing"
-        let foregroundShapeNode = SKShapeNode(circleOfRadius: radius - 1 / Node.scaleFactor)
+        let foregroundShapeNode = SKShapeNode(circleOfRadius: (radius - 1) / Node.scaleFactor)
         foregroundShapeNode.strokeColor = Node.color
         foregroundShapeNode.lineWidth = 3 / Node.scaleFactor
         foregroundShapeNode.fillColor = UIColor.clearColor()
