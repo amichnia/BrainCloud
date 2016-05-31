@@ -16,6 +16,7 @@
 		C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86304911CC646B1002C068C /* SkillsViewController.swift */; };
 		C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */; };
 		C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C88EB4871CB50580002B9592 /* GoogleImages.storyboard */; };
+		C8A36F461CFDA3DE002C7FC4 /* CloudsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A36F451CFDA3DE002C7FC4 /* CloudsListViewController.swift */; };
 		C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D231CC5017A009CDBFA /* AddViewController.swift */; };
 		C8DF6D261CC5033F009CDBFA /* AddScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D251CC5033F009CDBFA /* AddScene.swift */; };
 		C8DF6D281CC503A0009CDBFA /* AddScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C8DF6D271CC503A0009CDBFA /* AddScene.sks */; };
@@ -93,6 +94,7 @@
 		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImagesCollectionViewController.swift; sourceTree = "<group>"; };
 		C88EB4871CB50580002B9592 /* GoogleImages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoogleImages.storyboard; sourceTree = "<group>"; };
+		C8A36F451CFDA3DE002C7FC4 /* CloudsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudsListViewController.swift; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* SkillCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8DF6D231CC5017A009CDBFA /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		C8DF6D251CC5033F009CDBFA /* AddScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScene.swift; sourceTree = "<group>"; };
@@ -284,11 +286,12 @@
 			isa = PBXGroup;
 			children = (
 				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
-				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
 				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
+				C8A36F451CFDA3DE002C7FC4 /* CloudsListViewController.swift */,
 				C86304911CC646B1002C068C /* SkillsViewController.swift */,
 				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
 				FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */,
+				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				C86304901CC6419C002C068C /* LevelNode.swift in Sources */,
 				C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */,
 				C863048E1CC6417E002C068C /* AddNode.swift in Sources */,
+				C8A36F461CFDA3DE002C7FC4 /* CloudsListViewController.swift in Sources */,
 				FE0522DD1CAFE69500315468 /* CloudGraphScene.swift in Sources */,
 				C8F55CAF1CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift in Sources */,
 				C8F55CB61CFC323000208F88 /* SkillNodeEntity.swift in Sources */,

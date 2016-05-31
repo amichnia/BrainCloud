@@ -26,6 +26,7 @@ class CloudViewController: UIViewController, SkillsProvider {
     var skills : [Skill] = []
     var scene : CloudGraphScene!
     var cloudImage: UIImage?
+    var cloudEntity: GraphCloudEntity?
     
     var skillToAdd : Skill = Skill(title: "Swift", image: UIImage(named: "skill_swift")!, experience: Skill.Experience.Expert)
     
@@ -68,13 +69,6 @@ class CloudViewController: UIViewController, SkillsProvider {
     // MARK: - Configuration
     func prepareSceneIfNeeded(skView: SKView, size: CGSize){
         if let scene = CloudGraphScene(fileNamed:"CloudGraphScene") where self.scene == nil {
-            scene.nodes = try! self.loadNodesFromBundle()
-            
-            // Configure the view.
-//            skView.showsFPS = true
-//            skView.showsNodeCount = true
-//            skView.showsDrawCount = true
-            
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
             skView.backgroundColor = UIColor.clearColor()
@@ -85,8 +79,18 @@ class CloudViewController: UIViewController, SkillsProvider {
             
             self.scene = scene
             self.scene.skillsProvider = self
-            
-            skView.presentScene(scene)
+            if let cloud = self.cloudEntity {
+                cloud.promisePerform{ () -> Void in
+                    scene.configureWithCloud(cloud)
+                }
+                .then{ () -> Void in
+                    skView.presentScene(scene)
+                }
+            }
+            else {
+                scene.nodes = try! self.loadNodesFromBundle()
+                skView.presentScene(scene)
+            }
         }
     }
     

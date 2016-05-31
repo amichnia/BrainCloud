@@ -61,6 +61,24 @@ struct Node {
     
 }
 
+// MARK: - Node with entity
+extension Node {
+    
+    init?(brainNodeEntity: BrainNodeEntity) {
+        let point = brainNodeEntity.relativePositionValue
+        let scale = Int(brainNodeEntity.scale)
+        let nodeId = brainNodeEntity.nodeId ?? ""
+        
+        if let idString = nodeId.characters.split("_").map(String.init).last, id = Int(idString ?? ""), connected = brainNodeEntity.connectedTo?.sort() {
+            self.init(point: point, scale: scale, id: id, connected: connected)
+            return
+        }
+        
+        return nil
+    }
+    
+}
+
 // MARK: - SpriteKit position
 extension Node {
     

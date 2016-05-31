@@ -84,3 +84,15 @@ class BrainNode: SKSpriteNode, DTOModel {
     }
     
 }
+
+extension BrainNode {
+    
+    static func nodeWithEntity(entity: BrainNodeEntity) -> BrainNode? {
+        if let node = Node(brainNodeEntity: entity) {
+            return BrainNode.nodeWithNode(node)
+        }
+        
+        return nil
+    }
+    
+}

@@ -40,7 +40,9 @@ class CloudGraphScene: SKScene, DTOModel {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         
-        self.addNodes(self.nodes)
+        if self.nodes != nil {
+            self.addNodes(self.nodes)
+        }
     }
     
     // MARK: - Configuration
@@ -86,6 +88,52 @@ class CloudGraphScene: SKScene, DTOModel {
     
     func getNodes() -> [Node] {
         return self.allNodes.map{ $0.node }
+    }
+    
+    func configureWithCloud(cloud: GraphCloudEntity) {
+        if allNodesContainer == nil {
+            allNodesContainer = SKNode()
+            allNodesContainer.position = CGPoint.zero
+            self.addChild(allNodesContainer)
+        }
+        
+        let brainNodes: [BrainNodeEntity] = cloud.brainNodes?.map({ return ($0 as! BrainNodeEntity) }) ?? []
+        for brainNodeEntity in brainNodes {
+            guard let brainNode = BrainNode.nodeWithEntity(brainNodeEntity) else {
+                continue
+            }
+            
+            brainNode.cloudIdentifier = self.cloudIdentifier
+            allNodesContainer.addChild(brainNode)
+            allNodes.append(brainNode)
+            
+            brainNode.name = "node"
+            
+            brainNode.physicsBody = SKPhysicsBody(circleOfRadius: brainNode.node.radius + 2)
+            brainNode.physicsBody?.linearDamping = 25
+            brainNode.physicsBody?.angularDamping = 25
+            brainNode.physicsBody?.categoryBitMask = Defined.CollisionMask.Default
+            brainNode.physicsBody?.collisionBitMask = Defined.CollisionMask.Default
+            brainNode.physicsBody?.contactTestBitMask = Defined.CollisionMask.Default
+            brainNode.physicsBody?.density = brainNodeEntity.isConvex ? 20 : 1
+            
+            // Spring joint to current position
+            let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: brainNode.physicsBody!, anchorA: brainNode.position, anchorB: brainNode.position)
+            joint.frequency = 20
+            joint.damping = 10
+            brainNode.orginalJoint = joint
+            self.physicsWorld.addJoint(joint)
+            
+            print(allNodes.count)
+        }
+        
+        allNodes.sortInPlace { $0.node.id < $1.node.id }
+        
+        allNodes.forEach{ node in
+            node.node.connected.forEach{ i in
+                node.connectNode(allNodes[i-1])
+            }
+        }
     }
     
     // MARK: - Actions
