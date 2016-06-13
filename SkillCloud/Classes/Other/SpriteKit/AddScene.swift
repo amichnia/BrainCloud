@@ -12,6 +12,8 @@ import SpriteKit_Spring
 
 class AddScene: SKScene {
 
+    static var startRect: CGRect?
+    
     // MARK: - Properties
     var tintColor: UIColor = UIColor.blueColor()
     weak var controller: AddViewController?
@@ -45,9 +47,14 @@ class AddScene: SKScene {
         self.setupSkillNode(Skill.Experience.Expert)
         
         // Scale add image
-        self.addNode?.xScale = 0
-        self.addNode?.yScale = 0
+        self.addNode?.xScale = 0.5
+        self.addNode?.yScale = 0.5
         self.addNode?.hidden = true
+        
+        if let rect = AddScene.startRect {
+            let center = rect.centerOfMass
+            self.childNodeWithName("fromNode")?.position = self.convertPointFromView(center)
+        }
     }
     
     func animateShow(duration: NSTimeInterval, point: CGPoint? = nil){

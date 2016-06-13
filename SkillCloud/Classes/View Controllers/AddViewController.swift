@@ -67,6 +67,16 @@ class AddViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        self.skView.allowsTransparency = true
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if firstLayout {
+            self.prepareScene(self.skView, size: self.view.bounds.size)
+        }
         
     }
     

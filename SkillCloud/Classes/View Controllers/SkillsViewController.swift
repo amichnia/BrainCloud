@@ -17,7 +17,7 @@ class SkillsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
-    var skillsOffset = 12
+    var skillsOffset = 18
     var skills : [Skill] = []
     var preparedScene : AddScene?
     
@@ -59,6 +59,8 @@ class SkillsViewController: UIViewController {
     @IBAction func addSkillAction(sender: UIBarButtonItem?) {
         let point = CGPoint(x: self.view.bounds.width - 20, y: self.view.bounds.height - 20)
         
+        AddScene.startRect = sender?.customView?.frame
+        
         self.addSkillFromPoint(point)
     }
     
@@ -67,6 +69,12 @@ class SkillsViewController: UIViewController {
         point.x += cell.frame.origin.x
         point.y = self.view.bounds.height - (cell.frame.origin.y - self.collectionView.contentOffset.y) - point.y
         
+        if let skillCell = cell as? SkillCollectionViewCell {
+            let imgfrm = skillCell.imageView.frame
+            let rect = CGRect(origin: CGPoint(x: imgfrm.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y), size: imgfrm.size)
+            AddScene.startRect = rect
+        }
+        
         self.addSkillFromPoint(point)
     }
     
@@ -74,6 +82,12 @@ class SkillsViewController: UIViewController {
         var point = cell.bounds.centerOfMass
         point.x += cell.frame.origin.x
         point.y = self.view.bounds.height - (cell.frame.origin.y - self.collectionView.contentOffset.y) - point.y
+        
+        if let skillCell = cell as? SkillCollectionViewCell {
+            let imgfrm = skillCell.imageView.frame
+            let rect = CGRect(origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y), size: imgfrm.size)
+            AddScene.startRect = rect
+        }
         
         self.changeSkillFromPoint(point, withSkill: skill)
     }
