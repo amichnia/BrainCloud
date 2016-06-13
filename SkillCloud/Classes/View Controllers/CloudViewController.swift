@@ -24,8 +24,9 @@ class CloudViewController: UIViewController, SkillsProvider {
     // MARK: - Properties
     let pattern = [SkillLightCellIdentifier,SkillLighterCellIdentifier,SkillLighterCellIdentifier,SkillLightCellIdentifier]
     var skills : [Skill] = []
-    var scene : GameScene!
+    var scene : CloudGraphScene!
     var cloudImage: UIImage?
+    var cloudEntity: GraphCloudEntity?
     
     var skillToAdd : Skill = Skill(title: "Swift", image: UIImage(named: "skill_swift")!, experience: Skill.Experience.Expert)
     
@@ -48,7 +49,8 @@ class CloudViewController: UIViewController, SkillsProvider {
         
         Node.rectSize = self.skView.bounds.size
         Node.color = self.skView.tintColor
-        Node.scaleFactor = self.scrollView.bounds.width / self.skView.bounds.width
+        Node.scaleFactor = 0.19 //self.scrollView.bounds.width / self.skView.bounds.width // FIXME: !IMportant - resolve scale factors
+        print(Node.scaleFactor)
         
         self.scrollView.minimumZoomScale = Node.scaleFactor
         self.scrollView.maximumZoomScale = Node.scaleFactor
@@ -67,14 +69,7 @@ class CloudViewController: UIViewController, SkillsProvider {
     
     // MARK: - Configuration
     func prepareSceneIfNeeded(skView: SKView, size: CGSize){
-        if let scene = GameScene(fileNamed:"GameScene") where self.scene == nil {
-            scene.nodes = try! self.loadNodesFromBundle()
-            
-            // Configure the view.
-//            skView.showsFPS = true
-//            skView.showsNodeCount = true
-//            skView.showsDrawCount = true
-            
+        if let scene = CloudGraphScene(fileNamed:"CloudGraphScene") where self.scene == nil {
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
             skView.backgroundColor = UIColor.clearColor()
@@ -85,6 +80,12 @@ class CloudViewController: UIViewController, SkillsProvider {
             
             self.scene = scene
             self.scene.skillsProvider = self
+            if let cloud = self.cloudEntity {
+                scene.cloudEntity = cloud
+            }
+            else {
+                scene.nodes = try! self.loadNodesFromBundle()
+            }
             
             skView.presentScene(scene)
         }
@@ -121,6 +122,21 @@ class CloudViewController: UIViewController, SkillsProvider {
         UIGraphicsEndImageContext()
         
         return image
+    }
+    
+    @IBAction func saveCloud(sender: AnyObject) {
+        do { try DataManager.deleteEntity(GraphCloudEntity.self, withIdentifier: self.scene.uniqueIdentifierValue) }
+        catch {
+            DDLogError("Error: \(error)")
+        }
+        
+        DataManager.promiseEntity(GraphCloudEntity.self, model: self.scene)
+        .then { (cloudEntity) -> Void in
+            DDLogInfo("Saved Cloud:\n\(cloudEntity)")
+        }
+        .error { error in
+            DDLogError("Error saving cloud: \(error)")
+        }
     }
     
     // MARK: - Navigation
@@ -173,7 +189,7 @@ extension CloudViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.skillToAdd = self.skills[indexPath.row]
-        GameScene.radius = self.skillToAdd.experience.radius / Node.scaleFactor
+        CloudGraphScene.radius = self.skillToAdd.experience.radius / Node.scaleFactor
     }
     
 }

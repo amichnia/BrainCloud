@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2t6-Cf-HCf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2t6-Cf-HCf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Generator-->
@@ -240,10 +241,10 @@
             </objects>
             <point key="canvasLocation" x="1582" y="85"/>
         </scene>
-        <!--View Controller-->
+        <!--Clouds List View Controller-->
         <scene sceneID="S7h-xW-bwh">
             <objects>
-                <viewController id="UyP-RK-aoj" sceneMemberID="viewController">
+                <viewController id="UyP-RK-aoj" customClass="CloudsListViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Wsf-S7-w1l"/>
                         <viewControllerLayoutGuide type="bottom" id="wDl-Z0-xHE"/>
@@ -252,25 +253,60 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hy6-wq-QpE">
-                                <rect key="frame" x="209" y="215" width="182" height="169"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="169" id="OoD-oH-P79"/>
-                                    <constraint firstAttribute="width" constant="182" id="ZbE-H2-fyR"/>
-                                </constraints>
-                                <state key="normal" title="Cloud generator"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="djs-r1-l3K">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CloudCell" textLabel="4Bb-YI-PyL" detailTextLabel="Lhr-qD-tnE" style="IBUITableViewCellStyleValue1" id="F6m-9C-5Q5">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F6m-9C-5Q5" id="150-6g-AV4">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Cloud id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Bb-YI-PyL">
+                                                    <rect key="frame" x="15" y="12" width="60" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="date" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lhr-qD-tnE">
+                                                    <rect key="frame" x="552" y="12" width="33" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
-                                    <segue destination="IHA-15-xhl" kind="show" id="cFx-Mu-gKM"/>
+                                    <outlet property="dataSource" destination="UyP-RK-aoj" id="fah-IH-e58"/>
+                                    <outlet property="delegate" destination="UyP-RK-aoj" id="MOT-Jo-pLd"/>
                                 </connections>
-                            </button>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hy6-wq-QpE" firstAttribute="centerY" secondItem="JfW-CS-eMW" secondAttribute="centerY" id="P8C-96-A8b"/>
-                            <constraint firstItem="hy6-wq-QpE" firstAttribute="centerX" secondItem="JfW-CS-eMW" secondAttribute="centerX" id="oP3-1z-JO9"/>
+                            <constraint firstItem="djs-r1-l3K" firstAttribute="top" secondItem="JfW-CS-eMW" secondAttribute="top" id="IPV-gN-0Rn"/>
+                            <constraint firstAttribute="trailing" secondItem="djs-r1-l3K" secondAttribute="trailing" id="beh-i4-YvI"/>
+                            <constraint firstAttribute="bottom" secondItem="djs-r1-l3K" secondAttribute="bottom" id="cif-30-yJX"/>
+                            <constraint firstItem="djs-r1-l3K" firstAttribute="leading" secondItem="JfW-CS-eMW" secondAttribute="leading" id="vLF-DP-odW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="z8s-Ik-gRy"/>
+                    <navigationItem key="navigationItem" id="z8s-Ik-gRy">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2HW-3S-liV">
+                            <connections>
+                                <action selector="addCloudAction:" destination="UyP-RK-aoj" id="g9R-Fh-jxl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="djs-r1-l3K" id="BJY-c0-DQP"/>
+                        <segue destination="IHA-15-xhl" kind="show" identifier="ShowCloudView" id="zDW-pC-fax"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Td9-zM-VnA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -434,11 +470,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Mbf-dF-3Z0">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="wXQ-4d-8AE">
-                            <connections>
-                                <action selector="exportAction:" destination="IHA-15-xhl" id="vBy-Me-6N2"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="action" id="wXQ-4d-8AE">
+                                <connections>
+                                    <action selector="exportAction:" destination="IHA-15-xhl" id="vBy-Me-6N2"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="save" id="6Hj-sj-KS7">
+                                <connections>
+                                    <action selector="saveCloud:" destination="IHA-15-xhl" id="bQy-oh-s91"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="RC6-AS-OqT" id="zFJ-tR-8xb"/>

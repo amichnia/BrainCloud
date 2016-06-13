@@ -9,7 +9,8 @@
 import UIKit
 
 struct Node {
-    // Static
+    
+    // Static properties
     static var color:       UIColor = UIColor.blueColor()
     static var lastId:      Int     = 0
     static var factor:      CGFloat { return 1.75 / self.scaleFactor }
@@ -17,18 +18,17 @@ struct Node {
     static var scaleFactor: CGFloat = 1.0
     
     // Properties
-    var point : CGPoint
-    var scale : Int = 1
-    var id : Int = 0
-    var convex : Bool = false
+    var point:      CGPoint
+    var scale:      Int         = 1
+    var id:         Int         = 0
+    var convex:     Bool        = false
+    var connected:  Set<Int>    = Set()
     
-    var connected : Set<Int> = Set()
-    
-    // Computed
-    var radius : CGFloat { return CGFloat(self.scale) * Node.factor }
-    var minRadius : CGFloat { return max(self.radius,CGFloat(1.25) * Node.factor) }
-    var frame : CGRect { return  CGRectInset(CGRect(origin: self.point, size: CGSize.zero), -radius, -radius) }
-    var rel : CGPoint { return CGPoint(x: point.x / Node.rectSize.width, y: point.y / Node.rectSize.height) }
+    // Computed properties
+    var radius:     CGFloat { return CGFloat(self.scale) * Node.factor }
+    var minRadius:  CGFloat { return max(self.radius,CGFloat(1.25) * Node.factor) }
+    var frame:      CGRect  { return CGRectInset(CGRect(origin: self.point, size: CGSize.zero), -radius, -radius) }
+    var rel:        CGPoint { return CGPoint(x: point.x / Node.rectSize.width, y: point.y / Node.rectSize.height) }
     
     // Initializers
     init(point: CGPoint, scale: Int, id: Int) {
@@ -54,11 +54,54 @@ struct Node {
         self.connected.remove(node.id)
     }
     
+    // Custom accessors
     func isConnectedTo(node: Node) -> Bool {
         return self.connected.contains(node.id) || node.connected.contains(self.id)
     }
     
-    // Helpers
+}
+
+// MARK: - Node with entity
+extension Node {
+    
+    init?(brainNodeEntity: BrainNodeEntity) {
+        let point = brainNodeEntity.relativePositionValue
+        let scale = Int(brainNodeEntity.scale)
+        let nodeId = brainNodeEntity.nodeId ?? ""
+        
+        if let idString = nodeId.characters.split("_").map(String.init).last, id = Int(idString ?? ""), connected = brainNodeEntity.connectedTo?.sort() {
+            self.init(point: point, scale: scale, id: id, connected: connected)
+            self.convex = brainNodeEntity.isConvex
+            return
+        }
+        
+        return nil
+    }
+    
+}
+
+// MARK: - SpriteKit position
+extension Node {
+    
+    /// Absolute position in SpriteKit container of Node.rectSize size
+    var skPosition: CGPoint { return CGPoint(x: self.point.x * Node.rectSize.width, y: Node.rectSize.height - self.point.y * Node.rectSize.height) }
+    
+    /**
+     Returns relative position in Node.rectSize container
+     
+     - parameter skPosition: Node current position in skView scene
+     
+     - returns: Position relative to container
+     */
+    func relativePositionWith(skPosition: CGPoint) -> CGPoint {
+        return CGPoint(x: skPosition.x / Node.rectSize.width, y: (Node.rectSize.height - skPosition.y) / Node.rectSize.height)
+    }
+    
+}
+
+// MARK: - Helpers
+extension Node {
+    
     func drawInContext(ctx: CGContextRef) {
         CGContextFillEllipseInRect(ctx,self.frame)
     }
@@ -82,10 +125,5 @@ struct Node {
     func isNodeWithin(node: Node) -> Bool {
         return CGRectContainsPoint(CGRectInset(self.frame, -minRadius, -minRadius), node.point)
     }
-}
-
-extension Node {
-    
-    var skPosition : CGPoint { return CGPoint(x: self.point.x * Node.rectSize.width, y: Node.rectSize.height - self.point.y * Node.rectSize.height) }
     
 }

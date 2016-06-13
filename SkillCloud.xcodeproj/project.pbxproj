@@ -16,15 +16,25 @@
 		C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86304911CC646B1002C068C /* SkillsViewController.swift */; };
 		C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */; };
 		C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C88EB4871CB50580002B9592 /* GoogleImages.storyboard */; };
+		C8A36F461CFDA3DE002C7FC4 /* CloudsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A36F451CFDA3DE002C7FC4 /* CloudsListViewController.swift */; };
 		C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D231CC5017A009CDBFA /* AddViewController.swift */; };
 		C8DF6D261CC5033F009CDBFA /* AddScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D251CC5033F009CDBFA /* AddScene.swift */; };
 		C8DF6D281CC503A0009CDBFA /* AddScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C8DF6D271CC503A0009CDBFA /* AddScene.sks */; };
+		C8F55CA61CFC264300208F88 /* SkillNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA51CFC264300208F88 /* SkillNode.swift */; };
+		C8F55CAF1CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA71CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift */; };
+		C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */; };
+		C8F55CB11CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */; };
+		C8F55CB21CFC323000208F88 /* GraphCloudEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */; };
+		C8F55CB31CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAB1CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift */; };
+		C8F55CB41CFC323000208F88 /* BrainNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAC1CFC323000208F88 /* BrainNodeEntity.swift */; };
+		C8F55CB51CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */; };
+		C8F55CB61CFC323000208F88 /* SkillNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */; };
 		C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */; };
 		FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B11CAEEF8000315468 /* CloudViewController.swift */; };
 		FE0522B41CAEF0B400315468 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B31CAEF0B400315468 /* TestView.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
-		FE0522DB1CAFE5CC00315468 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE0522DA1CAFE5CC00315468 /* GameScene.sks */; };
-		FE0522DD1CAFE69500315468 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DC1CAFE69500315468 /* GameScene.swift */; };
+		FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */; };
+		FE0522DD1CAFE69500315468 /* CloudGraphScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */; };
 		FE0522E01CB0157800315468 /* BrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DF1CB0157800315468 /* BrainNode.swift */; };
 		FE0522E21CB01BBF00315468 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522E11CB01BBF00315468 /* Node.swift */; };
 		FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */ = {isa = PBXBuildFile; fileRef = FE0522E51CB02D6600315468 /* all_base_nodes.json */; };
@@ -84,17 +94,27 @@
 		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImagesCollectionViewController.swift; sourceTree = "<group>"; };
 		C88EB4871CB50580002B9592 /* GoogleImages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoogleImages.storyboard; sourceTree = "<group>"; };
+		C8A36F451CFDA3DE002C7FC4 /* CloudsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudsListViewController.swift; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* SkillCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8DF6D231CC5017A009CDBFA /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		C8DF6D251CC5033F009CDBFA /* AddScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScene.swift; sourceTree = "<group>"; };
 		C8DF6D271CC503A0009CDBFA /* AddScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AddScene.sks; sourceTree = "<group>"; };
+		C8F55CA51CFC264300208F88 /* SkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillNode.swift; sourceTree = "<group>"; };
+		C8F55CA71CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNodeEntity.swift; sourceTree = "<group>"; };
+		C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GraphCloudEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCloudEntity.swift; sourceTree = "<group>"; };
+		C8F55CAB1CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BrainNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C8F55CAC1CFC323000208F88 /* BrainNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainNodeEntity.swift; sourceTree = "<group>"; };
+		C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkillNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillNodeEntity.swift; sourceTree = "<group>"; };
 		C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAPI.swift; sourceTree = "<group>"; };
 		CD530781AB9B8F017F80F09A /* Pods_SkillCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkillCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE0522B11CAEEF8000315468 /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
 		FE0522B31CAEF0B400315468 /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		FE0522DA1CAFE5CC00315468 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		FE0522DC1CAFE69500315468 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
+		FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudGraphScene.swift; sourceTree = "<group>"; };
 		FE0522DF1CB0157800315468 /* BrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainNode.swift; sourceTree = "<group>"; };
 		FE0522E11CB01BBF00315468 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		FE0522E51CB02D6600315468 /* all_base_nodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = all_base_nodes.json; sourceTree = "<group>"; };
@@ -185,9 +205,9 @@
 			children = (
 				FE0522DE1CB0155A00315468 /* Nodes */,
 				C8DF6D271CC503A0009CDBFA /* AddScene.sks */,
-				FE0522DA1CAFE5CC00315468 /* GameScene.sks */,
+				FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */,
 				C8DF6D251CC5033F009CDBFA /* AddScene.swift */,
-				FE0522DC1CAFE69500315468 /* GameScene.swift */,
+				FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */,
 			);
 			path = SpriteKit;
 			sourceTree = "<group>";
@@ -196,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				FE0522DF1CB0157800315468 /* BrainNode.swift */,
+				C8F55CA51CFC264300208F88 /* SkillNode.swift */,
 				C863048D1CC6417E002C068C /* AddNode.swift */,
 				C863048F1CC6419C002C068C /* LevelNode.swift */,
 			);
@@ -265,11 +286,12 @@
 			isa = PBXGroup;
 			children = (
 				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
-				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
 				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
+				C8A36F451CFDA3DE002C7FC4 /* CloudsListViewController.swift */,
 				C86304911CC646B1002C068C /* SkillsViewController.swift */,
 				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
 				FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */,
+				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -339,6 +361,14 @@
 		FE766D341C9D7FDD0079CA29 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				C8F55CA71CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift */,
+				C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */,
+				C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */,
+				C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */,
+				C8F55CAB1CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift */,
+				C8F55CAC1CFC323000208F88 /* BrainNodeEntity.swift */,
+				C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */,
+				C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */,
 				FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */,
 				FE766D401C9D82780079CA29 /* SkillEntity.swift */,
 			);
@@ -381,7 +411,7 @@
 				TargetAttributes = {
 					C8A4A0421C981B6C004E055D = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 4RH8T97BYZ;
+						DevelopmentTeam = 36CHZQXF4C;
 					};
 				};
 			};
@@ -414,7 +444,7 @@
 				FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */,
 				FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */,
 				FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */,
-				FE0522DB1CAFE5CC00315468 /* GameScene.sks in Resources */,
+				FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */,
 				FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */,
 				FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */,
 			);
@@ -482,19 +512,26 @@
 				FE766D361C9D80010079CA29 /* DataManager.swift in Sources */,
 				FE0522B41CAEF0B400315468 /* TestView.swift in Sources */,
 				FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */,
+				C8F55CB31CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift in Sources */,
 				FE0522E01CB0157800315468 /* BrainNode.swift in Sources */,
 				FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */,
 				FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */,
 				FE766D411C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift in Sources */,
 				FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */,
 				FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */,
+				C8F55CB11CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift in Sources */,
+				C8F55CB41CFC323000208F88 /* BrainNodeEntity.swift in Sources */,
 				FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */,
 				FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */,
+				C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */,
 				C83585C51CDB46150003E538 /* RBResizer.swift in Sources */,
+				C8F55CA61CFC264300208F88 /* SkillNode.swift in Sources */,
 				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
 				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,
 				C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */,
+				C8F55CB51CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift in Sources */,
 				FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */,
+				C8F55CB21CFC323000208F88 /* GraphCloudEntity.swift in Sources */,
 				C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */,
 				FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */,
 				FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */,
@@ -504,7 +541,10 @@
 				C86304901CC6419C002C068C /* LevelNode.swift in Sources */,
 				C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */,
 				C863048E1CC6417E002C068C /* AddNode.swift in Sources */,
-				FE0522DD1CAFE69500315468 /* GameScene.swift in Sources */,
+				C8A36F461CFDA3DE002C7FC4 /* CloudsListViewController.swift in Sources */,
+				FE0522DD1CAFE69500315468 /* CloudGraphScene.swift in Sources */,
+				C8F55CAF1CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift in Sources */,
+				C8F55CB61CFC323000208F88 /* SkillNodeEntity.swift in Sources */,
 				C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */,
 				FE31DB101C9CA1240006D9EE /* ImagesAPI.swift in Sources */,
 				FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */,

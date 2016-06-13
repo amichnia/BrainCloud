@@ -9,7 +9,8 @@
 import UIKit
 import SpriteKit
 
-class BrainNode: SKSpriteNode {
+/// Main cloud node in graph
+class BrainNode: SKSpriteNode, DTOModel {
 
     var node: Node!
     var connected : Set<BrainNode> = Set()
@@ -18,6 +19,11 @@ class BrainNode: SKSpriteNode {
     var orginalJoint: SKPhysicsJointSpring?
     var ghostJoint: SKPhysicsJointFixed?
     var isGhost: Bool = false
+    
+    // DTO values
+    var uniqueIdentifierValue: String { return "\(self.cloudIdentifier)_\(self.node.id)" }
+    var cloudIdentifier = "cloud"
+    var pinnedSkillNode: SkillNode?
     
     // Actions
     func connectNode(node: BrainNode) {
@@ -43,16 +49,12 @@ class BrainNode: SKSpriteNode {
 
     // Initialization
     static func nodeWithNode(node: Node) -> BrainNode {
-        let shapeNode = BrainNode(texture: SKTexture(imageNamed: "sprite-node"), size: CGSize(width: 2 * node.radius, height: 2 * node.radius)) //BrainNode(circleOfRadius: node.radius)
+        let brainNode = BrainNode(texture: SKTexture(imageNamed: "sprite-node"), size: CGSize(width: 2 * node.radius, height: 2 * node.radius))
         
-        shapeNode.node = node
-        shapeNode.position = node.skPosition
-//        shapeNode.fillColor = Node.color
-//        shapeNode.strokeColor = shapeNode.fillColor
-//        shapeNode.lineWidth = 1
-//        shapeNode.antialiased = true
+        brainNode.node = node
+        brainNode.position = node.skPosition
         
-        return shapeNode
+        return brainNode
     }
     
     // Adding lines
@@ -80,4 +82,17 @@ class BrainNode: SKSpriteNode {
             self.lines[$0]?.path = self.pathToPoint($0.position)
         }
     }
+    
+}
+
+extension BrainNode {
+    
+    static func nodeWithEntity(entity: BrainNodeEntity) -> BrainNode? {
+        if let node = Node(brainNodeEntity: entity) {
+            return BrainNode.nodeWithNode(node)
+        }
+        
+        return nil
+    }
+    
 }

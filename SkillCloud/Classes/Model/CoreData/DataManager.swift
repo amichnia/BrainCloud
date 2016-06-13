@@ -77,7 +77,13 @@ class DataManager: NSObject {
 
 }
 
+// MARK: - Getting and fetching entities
 extension DataManager {
+    
+    static func getFirst<T:CoreDataEntity>(entity: T.Type, withIdentifier identifier: String, fromContext ctx: NSManagedObjectContext? = nil) throws -> T? {
+        let predicate = NSPredicate(format: "\(entity.uniqueIdentifier) = %@", identifier)
+        return try self.getAll(entity, withPredicate: predicate, fromContext: ctx).first
+    }
     
     static func getAll<T:CoreDataEntity>(entity: T.Type, fromContext ctx: NSManagedObjectContext? = nil) throws -> [T] {
         return try getAll(entity, withPredicate: nil, fromContext: ctx)
@@ -88,7 +94,7 @@ extension DataManager {
         fetchRequest.predicate = predicate
         return try (ctx ?? self.managedObjectContext).executeFetchRequest(fetchRequest).map{ $0 as! T }
     }
-
+    
     static func fetchAll<T:CoreDataEntity>(entity: T.Type, fromContext ctx: NSManagedObjectContext? = nil) -> Promise<[T]> {
         return self.fetchAll(entity, withPredicate: nil, fromContext: ctx)
     }
@@ -124,7 +130,28 @@ extension DataManager {
     }
 }
 
+// MARK: - Inserting entities
 extension DataManager {
+    
+    static func updateEntity<T:CoreDataEntity>(entity: T.Type, model: DTOModel, intoContext ctx: NSManagedObjectContext? = nil) -> T? {
+        do {
+            if let existingEntity = try DataManager.getFirst(entity, withIdentifier: model.uniqueIdentifierValue, fromContext: ctx) {
+                existingEntity.setValuesFromModel(model)
+                return existingEntity
+            }
+            else {
+                throw DataError.EntityDoesNotExist
+            }
+        }
+        catch {
+            if case DataError.EntityDoesNotExist = error {
+                return T(model: model, inContext: ctx ?? self.managedObjectContext)
+            }
+            else {
+                return nil
+            }
+        }
+    }
     
     static func insertEntity<T:CoreDataEntity>(entity: T.Type, model: DTOModel, intoContext ctx: NSManagedObjectContext? = nil) -> T? {
         return T(model: model, inContext: ctx ?? self.managedObjectContext)
@@ -157,10 +184,27 @@ extension DataManager {
     
 }
 
+extension DataManager {
+    
+    static func deleteEntity<T:CoreDataEntity>(entity: T.Type, withIdentifier identifier: String, intoContext ctx: NSManagedObjectContext? = nil) throws {
+        let predicate = NSPredicate(format: "\(entity.uniqueIdentifier) = %@", identifier)
+        if let existingEntity = try DataManager.getAll(entity, withPredicate: predicate, fromContext: ctx).first as? NSManagedObject {
+            (ctx ?? DataManager.managedObjectContext).deleteObject(existingEntity)
+        }
+    }
+    
+}
+
+protocol DTOModel {
+    
+    var uniqueIdentifierValue: String { get }
+    
+}
+
 /**
  *  Base CoreDataEntity protocol
  */
-protocol CoreDataEntity {
+protocol CoreDataEntity : class {
     
     static var entityName : String { get }
     static var uniqueIdentifier : String { get }
@@ -183,6 +227,20 @@ extension CoreDataEntity {
     
     static func promiseToUpdate(model: DTOModel) -> Promise<Self> {
         return DataManager.promiseEntity(self, model: model)
+    }
+    
+}
+
+// MARK: - Executing promises
+extension NSManagedObject {
+    
+    func promisePerform<T>(block: ()->T) -> Promise<T> {
+        return Promise<T> { (fulfill, reject) in
+            self.managedObjectContext?.performBlock{
+                let result = block()
+                fulfill(result)
+            }
+        }
     }
     
 }

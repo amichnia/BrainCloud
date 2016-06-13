@@ -19,7 +19,7 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
         guard let entityDescription = NSEntityDescription.entityForName(SkillEntity.entityName, inManagedObjectContext: ctx) where model is Skill else {
             return nil
         }
-        self.init(entity: entityDescription, insertIntoManagedObjectContext: DataManager.managedObjectContext)
+        self.init(entity: entityDescription, insertIntoManagedObjectContext: ctx)
         
         self.setValuesFromModel(model)
     }
@@ -41,11 +41,5 @@ extension SkillEntity {
     var skill : Skill {
         return Skill(title: self.name!, image: self.image!, experience: Skill.Experience(rawValue: Int(self.experienceValue))!, description: self.description)
     }
-    
-}
-
-protocol DTOModel {
-    
-    var uniqueIdentifierValue: String { get }
     
 }
