@@ -17,6 +17,7 @@ class SkillsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
+    var skillsOffset = 12
     var skills : [Skill] = []
     var preparedScene : AddScene?
     
@@ -48,6 +49,10 @@ class SkillsViewController: UIViewController {
         
         let width = ceil(self.view.bounds.width/3)
         (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = CGSize(width: width, height: width)
+        
+        let sectionHeight = CGFloat((self.skillsOffset + self.skillsOffset % 3) / 3) * width
+        
+        self.collectionView.contentInset = UIEdgeInsets(top: -sectionHeight, left: 0, bottom: -sectionHeight, right: 0)
     }
     
     // MARK: - Actions
@@ -127,28 +132,44 @@ class SkillsViewController: UIViewController {
 extension SkillsViewController: UICollectionViewDataSource {
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return 3
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard section == 1 else {
+            return self.skillsOffset
+        }
+        
         let cells = self.skills.count + 1
         return cells + ((3 - cells % 3) % 3)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        guard indexPath.section == 1 else {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+            cell.indexPath = indexPath
+            cell.prepareForReuse()
+            self.configureColorFor(cell)
+            cell.setNeedsLayout()
+            return cell
+        }
+        
         let cell : SkillCollectionViewCell = {
             if indexPath.row == self.skills.count {
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AddSkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                cell.prepareForReuse()
                 cell.configureAsAddCell(indexPath)
                 return cell
             }
             else if indexPath.row > self.skills.count {
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                cell.prepareForReuse()
                 cell.indexPath = indexPath
                 return cell
             }
             else {
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                cell.prepareForReuse()
                 cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
                 return cell
             }
@@ -164,6 +185,10 @@ extension SkillsViewController: UICollectionViewDataSource {
 extension SkillsViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard indexPath.section == 1 else {
+            return
+        }
+        
         if indexPath.row < self.skills.count {
             let cell = self.collectionView(self.collectionView, cellForItemAtIndexPath: indexPath)
             self.changeSkillActionFromCell(cell, withSkill: self.skills[indexPath.row])

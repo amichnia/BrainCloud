@@ -11,7 +11,7 @@ import SpriteKit
 import SpriteKit_Spring
 
 protocol SkillsProvider: class {
-    var skillToAdd : Skill { get }
+    var skillToAdd : Skill? { get }
 }
 
 class CloudGraphScene: SKScene, DTOModel {

@@ -285,12 +285,12 @@
 		FE31DAF31C9CA1240006D9EE /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
-				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
-				C8A36F451CFDA3DE002C7FC4 /* CloudsListViewController.swift */,
 				C86304911CC646B1002C068C /* SkillsViewController.swift */,
 				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
+				C8A36F451CFDA3DE002C7FC4 /* CloudsListViewController.swift */,
+				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
 				FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */,
+				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
 				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
 			);
 			path = "View Controllers";
@@ -411,7 +411,7 @@
 				TargetAttributes = {
 					C8A4A0421C981B6C004E055D = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 36CHZQXF4C;
+						DevelopmentTeam = 4RH8T97BYZ;
 					};
 				};
 			};
