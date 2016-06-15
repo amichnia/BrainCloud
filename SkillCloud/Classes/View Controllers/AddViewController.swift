@@ -155,8 +155,18 @@ class AddViewController: UIViewController {
         self.hideAddViewController(nil)
     }
     
-    func selectImage() {
-        self.promiseSelection(UIImage.self, cancellable: true, options: [
+    @IBAction func settingsAction(sender: AnyObject?) {
+        self.hideKeyboard(self)
+        
+        self.promiseSelection(Void.self, cancellable: true, options: [
+            (NSLocalizedString("Change Image", comment: "Change Image"),{ self.selectImage().asVoid() }),
+            (NSLocalizedString("Remove skill", comment: "Remove skill"),{ self.removeSkill() })
+        ])
+    }
+
+    
+    func selectImage() -> Promise<UIImage> {
+        return self.promiseSelection(UIImage.self, cancellable: true, options: [
             (NSLocalizedString("Take photo", comment: "Take photo"), { self.selectPickerImage(.Camera) }),
             (NSLocalizedString("Photo Library", comment: "Photo Library"), { self.selectPickerImage(.PhotoLibrary) }),
             (NSLocalizedString("Google Images", comment: "Google Images"), { self.selectGoogleImage("\(self.skillNameField.text)") })
@@ -164,12 +174,16 @@ class AddViewController: UIViewController {
         .then{ image -> Promise<UIImage> in
             return self.promiseCroppedImage(image)
         }
-        .then { image -> Void in
+        .then { image -> UIImage in
             self.image = image
             self.scene.addNode.image = image
+            return image
         }
-        .error{ error in
-            DDLogError("\(error)")
+    }
+    
+    func removeSkill() -> Promise<Void> {
+        return Promise<Void> { (fulfill, reject) in
+            
         }
     }
     

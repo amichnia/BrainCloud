@@ -68,7 +68,7 @@ class SkillsViewController: UIViewController {
         
         if let skillCell = cell as? SkillCollectionViewCell {
             let imgfrm = skillCell.imageView.frame
-            let rect = CGRect(origin: CGPoint(x: imgfrm.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y), size: imgfrm.size)
+            let rect = CGRect(origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y), size: imgfrm.size)
             
             try! self.promiseAddSkillWith(rect)
         }
