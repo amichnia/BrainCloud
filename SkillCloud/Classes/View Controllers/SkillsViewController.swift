@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import MRProgress
 
 let AddSkillCellIdentifier = "AddSkillCell"
 let SkillCellIdentifier = "SkillCell"
@@ -26,10 +27,14 @@ class SkillsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
         SkillEntity.fetchAll()
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
+        }
+        .always {
+            MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
         }
         .error { error in
             print("Error: \(error)")

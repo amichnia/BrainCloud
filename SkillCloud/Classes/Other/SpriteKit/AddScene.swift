@@ -59,7 +59,7 @@ class AddScene: SKScene {
     func animateShow(duration: NSTimeInterval, rect: CGRect? = nil){
         self.addNode.startFrame = rect == nil ? self.addNode.startFrame : self.convertRectFromView(rect!)
         let size = CGSize(width: self.size.width * 0.42, height: self.size.width * 0.42)
-        self.addNode.finalFrame = CGRect(origin: self.frame.centerOfMass - CGPoint(x: size.width/2, y: size.width/2), size: size)
+        self.addNode.finalFrame = CGRect(origin: self.frame.centerOfMass - CGPoint(x: size.width/2, y: size.width/4), size: size)
         self.addNode.position = self.addNode.startFrame.centerOfMass
         self.addNode.animateShow(duration)
         

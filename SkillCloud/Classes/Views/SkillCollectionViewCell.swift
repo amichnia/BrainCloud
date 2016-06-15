@@ -38,11 +38,9 @@ class SkillCollectionViewCell: UICollectionViewCell {
     func configureWithSkill(skill: Skill, atIndexPath indexPath: NSIndexPath) {
         self.indexPath = indexPath
         self.nameLabel.text = skill.title
-        self.imageView.image = skill.thumbnailImage
-        self.imageView.clipsToBounds = true
+        self.imageView.image = skill.circleImage
         
         self.layoutIfNeeded()
-        self.imageView.layer.cornerRadius = self.imageView.bounds.width/2
     }
     
 }

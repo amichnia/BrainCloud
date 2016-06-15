@@ -16,7 +16,9 @@ class Skill {
     var experience : Experience
     
     // Prepared images
-    var circleImage: UIImage?
+    lazy var circleImage: UIImage? = {
+        return self.thumbnailImage.RBCircleImage()
+    }()
     lazy var thumbnailImage: UIImage = {
         return self.image.RBSquareImageTo(CGSize(width: 122, height: 122))
     }()
