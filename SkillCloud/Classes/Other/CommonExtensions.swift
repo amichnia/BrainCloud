@@ -143,3 +143,20 @@ enum CommonError : ErrorType {
     case NotEnoughData
     case UserCancelled
 }
+
+prefix func -(lhs: CGPoint) -> CGPoint {
+    return CGPoint(x: -lhs.x, y: -lhs.y)
+}
+func +(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+    return CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+}
+func -(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+    return lhs + -rhs
+}
+func +=(inout lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+    lhs = lhs + rhs
+    return lhs
+}
+func -=(inout lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+    return lhs += -rhs
+}

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 let AddSkillCellIdentifier = "AddSkillCell"
 let SkillCellIdentifier = "SkillCell"
@@ -56,12 +57,8 @@ class SkillsViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @IBAction func addSkillAction(sender: UIBarButtonItem?) {
-        let point = CGPoint(x: self.view.bounds.width - 20, y: self.view.bounds.height - 20)
-        
-        AddScene.startRect = sender?.customView?.frame
-        
-        self.addSkillFromPoint(point)
+    @IBAction func addSkillAction(sender: UIView) {
+        try! self.promiseAddSkillWith(self.view.convertRect(sender.bounds, fromView: sender))
     }
     
     func addSkillActionFromCell(cell: UICollectionViewCell) {
@@ -72,10 +69,12 @@ class SkillsViewController: UIViewController {
         if let skillCell = cell as? SkillCollectionViewCell {
             let imgfrm = skillCell.imageView.frame
             let rect = CGRect(origin: CGPoint(x: imgfrm.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y), size: imgfrm.size)
-            AddScene.startRect = rect
+            
+            try! self.promiseAddSkillWith(rect)
         }
-        
-        self.addSkillFromPoint(point)
+        else {
+            try! self.promiseAddSkillWith(nil)
+        }
     }
     
     func changeSkillActionFromCell(cell: UICollectionViewCell, withSkill skill: Skill) {
@@ -86,35 +85,31 @@ class SkillsViewController: UIViewController {
         if let skillCell = cell as? SkillCollectionViewCell {
             let imgfrm = skillCell.imageView.frame
             let rect = CGRect(origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y), size: imgfrm.size)
-            AddScene.startRect = rect
+            
+            try! self.promiseChangeSkillWith(rect, withSkill: skill)
         }
-        
-        self.changeSkillFromPoint(point, withSkill: skill)
+        else {
+            try! self.promiseChangeSkillWith(nil, withSkill: skill)
+        }
     }
     
-    func addSkillFromPoint(point: CGPoint){
-        try! AddViewController.promiseNewSkillWith(self, point: point, preparedScene: self.preparedScene)
+    func promiseAddSkillWith(rect: CGRect?) throws {
+        try AddViewController.promiseNewSkillWith(self, rect: rect, preparedScene: self.preparedScene)
         .then(SkillEntity.promiseToInsert).asVoid()
         .then(SkillEntity.fetchAll)
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
         }
-        .error { error in
-            print("Error: \(error)")
-        }
     }
     
-    func changeSkillFromPoint(point: CGPoint, withSkill skill: Skill) {
-        try! AddViewController.promiseChangeSkillWith(self, point: point, skill: skill, preparedScene: self.preparedScene)
+    func promiseChangeSkillWith(rect: CGRect?, withSkill skill: Skill) throws {
+        try AddViewController.promiseChangeSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
         .then(SkillEntity.promiseToInsert).asVoid()
         .then(SkillEntity.fetchAll)
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
-        }
-        .error { error in
-            print("Error: \(error)")
         }
     }
     

@@ -55,14 +55,21 @@ class AddNode: SKNode {
         }
     }
     
-    var startPosition : CGPoint?
-    var finalPosition : CGPoint?
+    var startFrame: CGRect = CGRect.zero 
+    var finalFrame: CGRect = CGRect.zero
+    
+    var startScale: CGFloat {
+        return self.size.width != 0 ? self.startFrame.width / self.size.width : 0
+    }
+    var finalScale: CGFloat {
+        return self.size.width != 0 ? self.finalFrame.size.width / self.size.width : 0
+    }
     
     var skillAnchors : [SKNode] = []
     
-    static func nodeWithStartPosition(start: CGPoint, finalPosition final: CGPoint, image: UIImage?, tint: UIColor, size: CGSize, z: CGFloat = 5) -> AddNode {
+    static func nodeWithStartFrame(start: CGRect, finalFrame final: CGRect, image: UIImage?, tint: UIColor, z: CGFloat = 5) -> AddNode {
         let node = AddNode()
-        node.size = size
+        node.size = final.size
         node.image = image  // generates texture
         
         let radius = node.size.width/2
@@ -77,7 +84,7 @@ class AddNode: SKNode {
         node.addChild(node.shapeNode)
         node.addChild(node.cropNode)
         node.cropNode.maskNode = node.maskNode
-        node.spriteNode.size = size
+        node.spriteNode.size = final.size
         node.cropNode.addChild(node.spriteNode)
         node.addChild(node.topNode)
         node.topNode.lineWidth = AddNode.lineWidth
@@ -85,10 +92,10 @@ class AddNode: SKNode {
         node.tintColor = tint
         node.zPosition = z
         
-        node.startPosition = start
-        node.finalPosition = final
+        node.startFrame = start
+        node.finalFrame = final
         
-        node.position = start
+        node.position = start.centerOfMass
         
         node.configureLevelAnchors()
         
@@ -102,8 +109,10 @@ class AddNode: SKNode {
     // Actions
     func animateShow(duration: NSTimeInterval = 1, completion: (()->())? = nil){
         self.hidden = false
-        let scaleAction = SKAction.scaleTo(1, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-        let moveAction = SKAction.moveTo(self.finalPosition!, duration: duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0)
+        self.xScale = self.startScale
+        self.yScale = self.startScale
+        let scaleAction = SKAction.scaleTo(self.finalScale, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
+        let moveAction = SKAction.moveTo(self.finalFrame.centerOfMass, duration: duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0)
         
         self.runAction(scaleAction){
             completion?()
@@ -112,8 +121,8 @@ class AddNode: SKNode {
     }
     
     func animateHide(duration: NSTimeInterval = 1, completion: (()->())? = nil){
-        let scaleAction = SKAction.scaleTo(0, duration: duration * 0.8, delay: 0.01, usingSpringWithDamping: 1, initialSpringVelocity: 0)
-        let moveAction = SKAction.moveTo(self.startPosition!, duration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0)
+        let scaleAction = SKAction.scaleTo(self.startScale, duration: duration * 0.8, delay: 0.01, usingSpringWithDamping: 1, initialSpringVelocity: 0)
+        let moveAction = SKAction.moveTo(self.startFrame.centerOfMass, duration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0)
         
         self.runAction(scaleAction){
             self.hidden = true

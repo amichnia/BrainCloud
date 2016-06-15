@@ -12,18 +12,21 @@ import SpriteKit_Spring
 
 class AddScene: SKScene {
 
-    static var startRect: CGRect?
-    
     // MARK: - Properties
     var tintColor: UIColor = UIColor.blueColor()
     weak var controller: AddViewController?
-    var addNode: AddNode?
+    lazy var addNode: AddNode = {
+        return self.prepareNode()
+    }()
     
     // MARK: - Lifecycle
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.clearColor()
         
-        self.prepare()
+        self.setupSkillNode(Skill.Experience.Beginner)
+        self.setupSkillNode(Skill.Experience.Intermediate)
+        self.setupSkillNode(Skill.Experience.Professional)
+        self.setupSkillNode(Skill.Experience.Expert)
     }
     
     var skillAnchors : [SKNode] = Array<SKNode>(count: 4, repeatedValue: SKNode())
@@ -31,46 +34,44 @@ class AddScene: SKScene {
     var skills : [Skill.Experience] = [.Beginner,.Intermediate,.Professional,.Expert]
     
     // MARK: - Actions
-    func prepare() {
-        let start = CGPoint(x: 30, y: 80)
+    func prepareNode() -> AddNode {
+        let start = CGRect(origin: CGPoint(x: 30, y: 80), size: CGSize(width: 40, height: 40))
+        let final = CGRect(origin: self.frame.centerOfMass, size: CGSize(width: 200, height: 200))
         
-        guard self.addNode == nil else {
-            return
-        }
-        
-        self.addNode = AddNode.nodeWithStartPosition(start, finalPosition: self.frame.centerOfMass, image: nil, tint: self.tintColor, size: CGSize(width: 124, height: 124))
-        self.addChild(self.addNode!)
-        
-        self.setupSkillNode(Skill.Experience.Beginner)
-        self.setupSkillNode(Skill.Experience.Intermediate)
-        self.setupSkillNode(Skill.Experience.Professional)
-        self.setupSkillNode(Skill.Experience.Expert)
+        let node = AddNode.nodeWithStartFrame(start, finalFrame: final, image: nil, tint: self.tintColor)
         
         // Scale add image
-        self.addNode?.xScale = 0.5
-        self.addNode?.yScale = 0.5
-        self.addNode?.hidden = true
+        node.xScale = node.startScale
+        node.yScale = node.startScale
+        node.hidden = true
         
-        if let rect = AddScene.startRect {
-            let center = rect.centerOfMass
-            self.childNodeWithName("fromNode")?.position = self.convertPointFromView(center)
-        }
+        self.addChild(node)
+        
+        return node
     }
     
-    func animateShow(duration: NSTimeInterval, point: CGPoint? = nil){
-        if let _ = point {
-            self.addNode?.startPosition = point!
-            self.addNode?.position = point!
-        }
-        self.addNode?.animateShow(duration)
+    /**
+     Animates showing node from given rect - in View space
+     
+     - parameter duration: duration
+     - parameter rect:     start frame in view coordinate space
+     */
+    func animateShow(duration: NSTimeInterval, rect: CGRect? = nil){
+        self.addNode.startFrame = rect == nil ? self.addNode.startFrame : self.convertRectFromView(rect!)
+        let size = CGSize(width: self.size.width / 3, height: self.size.width / 3)
+        self.addNode.finalFrame = CGRect(origin: self.frame.centerOfMass - CGPoint(x: size.width/2, y: size.width/2), size: size)
+        self.addNode.position = self.addNode.startFrame.centerOfMass
+        self.addNode.animateShow(duration)
+        
         self.skillNodes.forEach {
             $0.animateShow(duration)
         }
     }
     
-    func animateHide(duration: NSTimeInterval, point: CGPoint, completion: (()->())? = nil) {
-        self.addNode?.startPosition = point
-        self.addNode?.animateHide(duration, completion: completion)
+    func animateHide(duration: NSTimeInterval, rect: CGRect?, completion: (()->())? = nil) {
+        self.addNode.startFrame = rect == nil ? self.addNode.startFrame : self.convertRectFromView(rect!)
+        self.addNode.animateHide(duration, completion: completion)
+        
         self.skillNodes.forEach {
             $0.animateHide(duration * 0.9)
         }
@@ -78,7 +79,7 @@ class AddScene: SKScene {
     
     // MARK: - Helpers
     func setupSkillNode(level: Skill.Experience) {
-        guard let anchor = self.addNode?[level] else {
+        guard let anchor = self.addNode[level] else {
             return
         }
         
@@ -97,11 +98,7 @@ class AddScene: SKScene {
         
         self.skillAnchors[index] = anchor
         
-        guard let width = self.addNode?.size.width else {
-            return
-        }
-        
-        let radius = width / 2
+        let radius = self.addNode.size.width / 2
         
         let bnode = LevelNode.nodeWith(radius, level: level, tint: self.tintColor)
         bnode.zPosition = 100
@@ -109,7 +106,7 @@ class AddScene: SKScene {
         bnode.xScale = 0
         bnode.yScale = 0
         bnode.hidden = true
-        self.addNode?.addChild(bnode)
+        self.addNode.addChild(bnode)
         self.skillNodes[index] = bnode
     }
     
@@ -165,3 +162,22 @@ extension AddScene {
     
 }
 
+extension SKScene {
+    
+    func convertRectFromView(rect: CGRect) -> CGRect {
+        var origin = self.convertPointFromView(rect.origin)
+        
+        guard rect.size != CGSize.zero else {
+            return CGRect(origin: origin, size: CGSize.zero)
+        }
+        
+        let temporarySize = self.convertPointFromView(CGPoint(x: rect.size.width, y: rect.size.height))
+        let factor = temporarySize.x / rect.size.width
+        
+        let size = CGSize(width: rect.size.width * factor, height: rect.size.height * factor)
+        origin.y -= size.height
+        
+        return CGRect(origin: origin, size: size)
+    }
+    
+}

@@ -46,7 +46,7 @@ class AddViewController: UIViewController {
     var firstLayout = true
     var scene : AddScene!
     var snapshotTop : UIView?
-    var point = CGPoint.zero
+    var originRect: CGRect?
     var skill : Skill?
     var image: UIImage?
     var experience : Skill.Experience?
@@ -86,7 +86,7 @@ class AddViewController: UIViewController {
         if firstLayout {
             self.prepareScene(self.skView, size: self.view.bounds.size)
             firstLayout = false
-            self.animateShow(0.7, point: point)
+            self.animateShow(0.7)
         }
         
         self.skView.paused = false
@@ -130,7 +130,7 @@ class AddViewController: UIViewController {
         
         if let skill = self.skill {
             self.image = skill.image
-            self.scene.addNode?.image = skill.image
+            self.scene.addNode.image = skill.image
             self.experience = skill.experience
             self.scene.skillNodes[skill.experience.rawValue].selected = true
             self.skillNameField.text = skill.title
@@ -166,7 +166,7 @@ class AddViewController: UIViewController {
         }
         .then { image -> Void in
             self.image = image
-            self.scene.addNode?.image = image
+            self.scene.addNode.image = image
         }
         .error{ error in
             DDLogError("\(error)")
@@ -190,7 +190,7 @@ class AddViewController: UIViewController {
     }
 
     // MARK: - Helpers
-    func showFromViewController(parent: UIViewController, fromPoint point: CGPoint) {
+    func showFromViewController(parent: UIViewController, withOriginRect rect: CGRect?) {
         let snapshot = parent.view.window!.snapshotViewAfterScreenUpdates(false)
         let snapshotTop = parent.view.window!.snapshotViewAfterScreenUpdates(false)
         snapshot.frame = parent.view.bounds
@@ -198,7 +198,7 @@ class AddViewController: UIViewController {
         self.snapshotTop = snapshotTop
         self.view.insertSubview(snapshot, atIndex: 0)
         self.view.insertSubview(snapshotTop, aboveSubview: self.blurView)
-        self.point = point
+        self.originRect = rect ?? self.originRect
         
         parent.presentViewController(self, animated: false) {
             UIView.animateWithDuration( 0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
@@ -210,11 +210,11 @@ class AddViewController: UIViewController {
        }
     }
     
-    func hideAddViewController(point: CGPoint?) {
-        self.point = point ?? self.point
+    func hideAddViewController(rect: CGRect?) {
+        self.originRect = rect ?? self.originRect
         self.snapshotTop?.hidden = false
         self.scene.paused = false
-        self.scene.animateHide(0.7,point: self.point){
+        self.scene.animateHide(0.7, rect: self.originRect){
             self.scene.paused = true
             self.dismissViewControllerAnimated(false, completion: nil)
         }
@@ -225,10 +225,11 @@ class AddViewController: UIViewController {
         }, completion: nil)
     }
     
-    func animateShow(duration: NSTimeInterval, point: CGPoint? = nil){
+    func animateShow(duration: NSTimeInterval, fromRect rect: CGRect? = nil){
+        self.originRect = rect ?? self.originRect
         self.skView.paused = false
         self.skView.hidden = false
-        self.scene.animateShow(duration, point: point)
+        self.scene.animateShow(duration, rect: self.originRect)
     }
     
     // MARK: - Navigation
@@ -283,7 +284,7 @@ extension AddViewController {
 // MARK: - Skill promises
 extension AddViewController {
     
-    static func promiseNewSkillWith(sender: UIViewController, point: CGPoint, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
+    static func promiseNewSkillWith(sender: UIViewController, rect: CGRect?, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
         guard let addViewController = sender.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
             throw CommonError.UnknownError
         }
@@ -291,12 +292,12 @@ extension AddViewController {
         if let scene = preparedScene {
             addViewController.scene = scene
         }
-        addViewController.showFromViewController(sender, fromPoint: point)
+        addViewController.showFromViewController(sender, withOriginRect: rect)
         
         return addViewController.promise
     }
     
-    static func promiseChangeSkillWith(sender: UIViewController, point: CGPoint, skill: Skill, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
+    static func promiseChangeSkillWith(sender: UIViewController, rect: CGRect?, skill: Skill, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
         guard let addViewController = sender.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
             throw CommonError.UnknownError
         }
@@ -306,7 +307,7 @@ extension AddViewController {
         }
         
         addViewController.skill = skill
-        addViewController.showFromViewController(sender, fromPoint: point)
+        addViewController.showFromViewController(sender, withOriginRect: rect)
         
         return addViewController.promise
     }

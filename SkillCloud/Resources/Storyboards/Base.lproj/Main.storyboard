@@ -21,18 +21,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="flat_brain_background" translatesAutoresizingMaskIntoConstraints="NO" id="oEb-1o-3EQ">
-                                <rect key="frame" x="0.0" y="64" width="600" height="360"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flat_brain_background" translatesAutoresizingMaskIntoConstraints="NO" id="oEb-1o-3EQ">
+                                <rect key="frame" x="0.0" y="20" width="600" height="404"/>
                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="flat_brain_foreground" translatesAutoresizingMaskIntoConstraints="NO" id="GJz-Ww-m38">
-                                <rect key="frame" x="0.0" y="64" width="600" height="360"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flat_brain_foreground" translatesAutoresizingMaskIntoConstraints="NO" id="GJz-Ww-m38">
+                                <rect key="frame" x="0.0" y="20" width="600" height="404"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.19607843137254902" green="0.44705882352941179" blue="0.53725490196078429" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <view alpha="0.050000000000000003" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sha-JT-nEn" userLabel="BalanceView">
-                                <rect key="frame" x="45" y="49" width="510" height="344"/>
+                            <view alpha="0.050000000000000003" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sha-JT-nEn" userLabel="BalanceView">
+                                <rect key="frame" x="45" y="28" width="510" height="344"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Sha-JT-nEn" secondAttribute="height" multiplier="255:172" id="bYQ-Zc-gCN"/>
@@ -297,10 +297,28 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="z8s-Ik-gRy">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2HW-3S-liV">
-                            <connections>
-                                <action selector="addCloudAction:" destination="UyP-RK-aoj" id="g9R-Fh-jxl"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="rE0-Ok-0xf">
+                            <view key="customView" contentMode="scaleToFill" id="IoZ-nI-z43">
+                                <rect key="frame" x="547" y="5" width="33" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRZ-9u-2D0">
+                                        <rect key="frame" x="0.0" y="0.0" width="33" height="33"/>
+                                        <state key="normal" title="Button" image="icon-plus"/>
+                                        <connections>
+                                            <action selector="addCloudAction:" destination="UyP-RK-aoj" eventType="touchUpInside" id="uAL-Qs-WKZ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="aRZ-9u-2D0" secondAttribute="bottom" id="0Fv-Zf-wFc"/>
+                                    <constraint firstItem="aRZ-9u-2D0" firstAttribute="leading" secondItem="IoZ-nI-z43" secondAttribute="leading" id="CNw-GH-SO5"/>
+                                    <constraint firstAttribute="trailing" secondItem="aRZ-9u-2D0" secondAttribute="trailing" id="UWS-8o-SrH"/>
+                                    <constraint firstItem="aRZ-9u-2D0" firstAttribute="top" secondItem="IoZ-nI-z43" secondAttribute="top" id="lYn-Dl-DQe"/>
+                                </constraints>
+                            </view>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -548,7 +566,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ued-bx-u9k">
-                                <rect key="frame" x="0.0" y="64" width="601" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="601" height="492"/>
                                 <color key="backgroundColor" red="0.27058823529411763" green="0.29803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Cr1-oE-ZYt">
                                     <size key="itemSize" width="106" height="106"/>
@@ -645,13 +663,34 @@
                             <constraint firstItem="Ued-bx-u9k" firstAttribute="leading" secondItem="64Z-ln-ds6" secondAttribute="leading" id="vtq-KD-SzE"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="lre-nl-LZE">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="8sK-6T-TWO">
-                            <connections>
-                                <action selector="addSkillAction:" destination="pCN-UC-zYF" id="cBt-1r-znI"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Lec-am-Xto">
+                            <view key="customView" contentMode="scaleToFill" id="ymy-6g-tOa">
+                                <rect key="frame" x="547" y="5" width="33" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAW-uR-g1L">
+                                        <rect key="frame" x="0.0" y="0.0" width="33" height="33"/>
+                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Button" image="icon-plus"/>
+                                        <connections>
+                                            <action selector="addSkillAction:" destination="pCN-UC-zYF" eventType="touchUpInside" id="2Ey-5e-n3Z"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="hAW-uR-g1L" secondAttribute="bottom" id="G7t-M9-1Fq"/>
+                                    <constraint firstItem="hAW-uR-g1L" firstAttribute="leading" secondItem="ymy-6g-tOa" secondAttribute="leading" id="GhE-NK-koX"/>
+                                    <constraint firstAttribute="trailing" secondItem="hAW-uR-g1L" secondAttribute="trailing" id="fJO-ce-kst"/>
+                                    <constraint firstItem="hAW-uR-g1L" firstAttribute="top" secondItem="ymy-6g-tOa" secondAttribute="top" id="x8M-n8-bu5"/>
+                                </constraints>
+                            </view>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="Ued-bx-u9k" id="lhE-eo-zKs"/>
                     </connections>
@@ -678,7 +717,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <blurEffect style="extraLight"/>
+                                <blurEffect style="dark"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wka-0C-nzg">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
