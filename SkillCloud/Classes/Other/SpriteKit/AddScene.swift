@@ -54,6 +54,7 @@ class AddScene: SKScene {
         self[Skill.Experience.Expert]?.outline.alpha = 0
         self[Skill.Experience.Expert]?.addLineNode()
         self[Skill.Experience.Expert]?.experience = Skill.Experience.Expert
+        self[Skill.Experience.Expert]?.prepareRocket()
         
         self.skillNode.setSkill(resolvedSkill)
         

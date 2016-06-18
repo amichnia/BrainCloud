@@ -212,13 +212,15 @@ extension SkillsViewController: UICollectionViewDelegate {
             return
         }
         
-        if indexPath.row < self.skills.count {
-            let cell = self.collectionView(self.collectionView, cellForItemAtIndexPath: indexPath)
+        if indexPath.row < self.skills.count, let cell = self.collectionView.visibleCells().filter({
+            $0 is SkillCollectionViewCell ? ($0 as! SkillCollectionViewCell).indexPath.row == indexPath.row : false
+        }).first {
             self.changeSkillActionFromCell(cell, withSkill: self.skills[indexPath.row])
             return
         }
-        if indexPath.row == self.skills.count {
-            let cell = self.collectionView(self.collectionView, cellForItemAtIndexPath: indexPath)
+        if indexPath.row == self.skills.count , let cell = self.collectionView.visibleCells().filter({
+            $0 is SkillCollectionViewCell ? ($0 as! SkillCollectionViewCell).indexPath.row == indexPath.row : false
+        }).first {
             self.addSkillActionFromCell(cell)
             return
         }
