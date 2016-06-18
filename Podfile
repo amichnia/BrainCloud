@@ -11,6 +11,7 @@ pod "PromiseKit"
 pod "PromiseKit/AssetsLibrary"
 pod 'SpriteKit-Spring'
 pod 'RSKImageCropper'
+pod 'MRProgress'
 
 end
 

@@ -11,7 +11,7 @@ import SpriteKit
 import SpriteKit_Spring
 
 protocol SkillsProvider: class {
-    var skillToAdd : Skill { get }
+    var skillToAdd : Skill? { get }
 }
 
 class CloudGraphScene: SKScene, DTOModel {
@@ -30,6 +30,7 @@ class CloudGraphScene: SKScene, DTOModel {
     
     // MARK: - DTOModel
     var uniqueIdentifierValue: String { return self.cloudIdentifier }
+    var previousUniqueIdentifier: String?
     var cloudIdentifier = "cloud"
     
     // MARK: - Lifecycle

@@ -14,9 +14,12 @@ class Skill {
     var description : String?
     var image : UIImage // cropped image
     var experience : Experience
+    var previousUniqueIdentifier: String?
     
     // Prepared images
-    var circleImage: UIImage?
+    lazy var circleImage: UIImage? = {
+        return self.thumbnailImage.RBCircleImage()
+    }()
     lazy var thumbnailImage: UIImage = {
         return self.image.RBSquareImageTo(CGSize(width: 122, height: 122))
     }()
@@ -77,5 +80,5 @@ extension Skill : ExperienceConvertible { }
 extension Skill : DTOModel {
 
     var uniqueIdentifierValue: String { return self.title }
-
+    
 }

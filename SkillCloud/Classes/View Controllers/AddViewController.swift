@@ -30,6 +30,9 @@ class AddViewController: UIViewController {
     @IBOutlet weak var skillNameField: UITextField!
     @IBOutlet weak var containerBottom: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var menuContainer: UIView!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var menuContainerTopConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
     var fulfill : ((Skill)->Void)!
@@ -43,10 +46,11 @@ class AddViewController: UIViewController {
     }()
     
     var cancelled = false
+    var deleted = false
     var firstLayout = true
     var scene : AddScene!
     var snapshotTop : UIView?
-    var point = CGPoint.zero
+    var originRect: CGRect?
     var skill : Skill?
     var image: UIImage?
     var experience : Skill.Experience?
@@ -67,7 +71,18 @@ class AddViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        self.skView.allowsTransparency = true
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
+        if firstLayout {
+            self.prepareScene(self.skView, size: self.view.bounds.size)
+            self.menuContainerTopConstraint.constant = -100
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -76,7 +91,7 @@ class AddViewController: UIViewController {
         if firstLayout {
             self.prepareScene(self.skView, size: self.view.bounds.size)
             firstLayout = false
-            self.animateShow(0.7, point: point)
+            self.animateShow(0.7)
         }
         
         self.skView.paused = false
@@ -99,8 +114,8 @@ class AddViewController: UIViewController {
         }
         
         skView.bounds = self.view.bounds
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+//        skView.showsFPS = true
+//        skView.showsNodeCount = true
         skView.backgroundColor = UIColor.whiteColor()
         
         self.scene.size = skView.bounds.size
@@ -110,7 +125,6 @@ class AddViewController: UIViewController {
         
         /* Set the scale mode to scale to fit the window */
         self.scene.scaleMode = .Fill
-        self.scene.tintColor = skView.tintColor
         
         skView.presentScene(self.scene)
         
@@ -120,13 +134,11 @@ class AddViewController: UIViewController {
         
         if let skill = self.skill {
             self.image = skill.image
-            self.scene.addNode?.image = skill.image
             self.experience = skill.experience
-            self.scene.skillNodes[skill.experience.rawValue].selected = true
             self.skillNameField.text = skill.title
-            self.skillNameField.userInteractionEnabled = false
-            // TODO: Show delete button
         }
+        
+        self.scene.skill = skill
     }
     
     // MARK: - Actions
@@ -145,8 +157,21 @@ class AddViewController: UIViewController {
         self.hideAddViewController(nil)
     }
     
-    func selectImage() {
-        self.promiseSelection(UIImage.self, cancellable: true, options: [
+    @IBAction func settingsAction(sender: AnyObject?) {
+        self.hideKeyboard(self)
+        
+        self.promiseSelection(Void.self, cancellable: true, options: [
+            (NSLocalizedString("Change Image", comment: "Change Image"),{ self.selectImage().then{ image -> Void in self.scene.setSkillImage(image) } }),
+            (NSLocalizedString("Remove skill", comment: "Remove skill"),{ self.removeSkill().then{ _ -> Void in
+                self.hideKeyboard(self)
+                self.hideAddViewController(nil)
+            }})
+        ])
+    }
+
+    
+    func selectImage() -> Promise<UIImage> {
+        return self.promiseSelection(UIImage.self, cancellable: true, options: [
             (NSLocalizedString("Take photo", comment: "Take photo"), { self.selectPickerImage(.Camera) }),
             (NSLocalizedString("Photo Library", comment: "Photo Library"), { self.selectPickerImage(.PhotoLibrary) }),
             (NSLocalizedString("Google Images", comment: "Google Images"), { self.selectGoogleImage("\(self.skillNameField.text)") })
@@ -154,33 +179,60 @@ class AddViewController: UIViewController {
         .then{ image -> Promise<UIImage> in
             return self.promiseCroppedImage(image)
         }
-        .then { image -> Void in
+        .then { image -> UIImage in
             self.image = image
-            self.scene.addNode?.image = image
+            
+            self.doneButton.enabled = self.canBeFulfilled()
+            
+            return image
         }
-        .error{ error in
-            DDLogError("\(error)")
-        }
+    }
+    
+    func removeSkill() -> Promise<Void> {
+        return Promise<Void>(resolvers: { (fulfill, reject) in
+            self.deleted = true
+            fulfill()
+        })
     }
     
     func selectedLevel(level: Skill.Experience){
         self.experience = level
+        
+        self.doneButton.enabled = self.canBeFulfilled()
     }
 
     // MARK: - Promise handling
+    func canBeFulfilled() -> Bool {
+        if let _ = self.image, name = self.skillNameField.text, _ = self.experience where name.characters.count > 0  {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
     func tryFulfill() {
+        guard !self.deleted else {
+            self.reject(CommonError.EntityDelete)
+            return
+        }
+        
         guard let image = self.image, name = self.skillNameField.text, experience = self.experience where !self.cancelled && name.characters.count > 0 else {
             self.reject(CommonError.UserCancelled)
             return
         }
         
         let skill = Skill(title: name, image: image, experience: experience)
+        
+        if let previousSkill = self.skill {
+            skill.previousUniqueIdentifier = previousSkill.uniqueIdentifierValue
+        }
 
         self.fulfill(skill)
     }
 
     // MARK: - Helpers
-    func showFromViewController(parent: UIViewController, fromPoint point: CGPoint) {
+    func showFromViewController(parent: UIViewController, withOriginRect rect: CGRect?) {
         let snapshot = parent.view.window!.snapshotViewAfterScreenUpdates(false)
         let snapshotTop = parent.view.window!.snapshotViewAfterScreenUpdates(false)
         snapshot.frame = parent.view.bounds
@@ -188,41 +240,74 @@ class AddViewController: UIViewController {
         self.snapshotTop = snapshotTop
         self.view.insertSubview(snapshot, atIndex: 0)
         self.view.insertSubview(snapshotTop, aboveSubview: self.blurView)
-        self.point = point
+        self.originRect = rect ?? self.originRect
+        self.skillNameField.alpha = 0
+        self.doneButton.alpha = 0
         
         parent.presentViewController(self, animated: false) {
             UIView.animateWithDuration( 0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                 snapshotTop.alpha = 0
                 self.skillNameField.alpha = 1
+                self.doneButton.alpha = 1
             }, completion: { (_) in
                 snapshotTop.hidden = true
             })
        }
     }
     
-    func hideAddViewController(point: CGPoint?) {
-        self.point = point ?? self.point
+    func hideAddViewController(rect: CGRect?) {
+        self.originRect = rect ?? self.originRect
         self.snapshotTop?.hidden = false
         self.scene.paused = false
-        self.scene.animateHide(0.7,point: self.point){
+        self.scene.animateHide(0.7, rect: self.originRect){
             self.scene.paused = true
             self.dismissViewControllerAnimated(false, completion: nil)
         }
         
+        self.view.layoutIfNeeded()
+        self.menuContainerTopConstraint.constant = -100
+        
         UIView.animateWithDuration(0.7, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             self.snapshotTop?.alpha = 1
             self.skillNameField.alpha = 0
+            self.doneButton.alpha = 0
+            self.view.layoutIfNeeded()
         }, completion: nil)
     }
     
-    func animateShow(duration: NSTimeInterval, point: CGPoint? = nil){
+    func animateShow(duration: NSTimeInterval, fromRect rect: CGRect? = nil){
+        self.originRect = rect ?? self.originRect
         self.skView.paused = false
         self.skView.hidden = false
-        self.scene.animateShow(duration, point: point)
+        self.scene.animateShow(duration, rect: self.originRect)
+        
+        self.view.layoutIfNeeded()
+        self.menuContainerTopConstraint.constant = 0
+        
+        UIView.animateWithDuration(duration) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     // MARK: - Navigation
 
+}
+
+extension AddViewController: UITextFieldDelegate {
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        self.doneButton.enabled = self.canBeFulfilled()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        self.doneButton.enabled = self.canBeFulfilled()
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        self.doneButton.enabled = self.canBeFulfilled()
+    }
+    
 }
 
 // MARK: - Keyboard handling
@@ -273,7 +358,7 @@ extension AddViewController {
 // MARK: - Skill promises
 extension AddViewController {
     
-    static func promiseNewSkillWith(sender: UIViewController, point: CGPoint, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
+    static func promiseNewSkillWith(sender: UIViewController, rect: CGRect?, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
         guard let addViewController = sender.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
             throw CommonError.UnknownError
         }
@@ -281,12 +366,12 @@ extension AddViewController {
         if let scene = preparedScene {
             addViewController.scene = scene
         }
-        addViewController.showFromViewController(sender, fromPoint: point)
+        addViewController.showFromViewController(sender, withOriginRect: rect)
         
         return addViewController.promise
     }
     
-    static func promiseChangeSkillWith(sender: UIViewController, point: CGPoint, skill: Skill, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
+    static func promiseChangeSkillWith(sender: UIViewController, rect: CGRect?, skill: Skill, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
         guard let addViewController = sender.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
             throw CommonError.UnknownError
         }
@@ -296,7 +381,7 @@ extension AddViewController {
         }
         
         addViewController.skill = skill
-        addViewController.showFromViewController(sender, fromPoint: point)
+        addViewController.showFromViewController(sender, withOriginRect: rect)
         
         return addViewController.promise
     }

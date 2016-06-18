@@ -22,6 +22,7 @@ class BrainNode: SKSpriteNode, DTOModel {
     
     // DTO values
     var uniqueIdentifierValue: String { return "\(self.cloudIdentifier)_\(self.node.id)" }
+    var previousUniqueIdentifier: String?
     var cloudIdentifier = "cloud"
     var pinnedSkillNode: SkillNode?
     

@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import SpriteKit
 
 // MARK: - Array shifting
 extension Array {
@@ -48,6 +49,28 @@ extension UIColor {
     }
     
 }
+
+extension UIColor {
+    
+    static var SkillCloudTurquoise:     UIColor { return UIColor(netHex: 0x68b5af) }
+    static var SkillCloudVeryVeryLight: UIColor { return UIColor(netHex: 0xecebe8) }
+    
+}
+
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(netHex:Int) {
+        self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
+    }
+}
+
 
 // MARK: - Rect center
 extension CGRect : HasCenterOfMass {
@@ -142,4 +165,60 @@ enum CommonError : ErrorType {
     case UnknownError
     case NotEnoughData
     case UserCancelled
+    case OperationFailed
+    case EntityDelete
+}
+
+// MARK: - Sprite Kit interactive nodes
+protocol NonInteractiveNode: class {
+    var interactionNode: SKNode? { get }
+}
+
+extension NonInteractiveNode where Self : SKNode {
+    var interactionNode: SKNode? {
+        return self is InteractiveNode ? self : self.parent?.interactionNode
+    }
+}
+
+protocol InteractiveNode: NonInteractiveNode { }
+
+extension InteractiveNode where Self : SKNode {
+    var interactionNode: SKNode? {
+        return self
+    }
+}
+
+extension SKNode: NonInteractiveNode {}
+
+// MARK: - CGPoint adding and substracting
+prefix func -(lhs: CGPoint) -> CGPoint {
+    return CGPoint(x: -lhs.x, y: -lhs.y)
+}
+func +(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+    return CGPoint(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+}
+func -(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+    return lhs + -rhs
+}
+func +=(inout lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+    lhs = lhs + rhs
+    return lhs
+}
+func -=(inout lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+    return lhs += -rhs
+}
+
+public func CGSizeInset(size: CGSize, _ dx: CGFloat, _ dy: CGFloat) -> CGSize {
+    return CGSize(width: size.width - dx, height: size.height - dy)
+}
+
+// MARK: - Custom operators
+infix operator ?= {
+associativity none
+precedence 130
+}
+public func ?=<T,U>(inout lhs: T, rhs: U?) {
+    if let value = rhs {
+        lhs = (value as! T)
+    }
 }

@@ -13,112 +13,92 @@ import SpriteKit_Spring
 class AddScene: SKScene {
 
     // MARK: - Properties
-    var tintColor: UIColor = UIColor.blueColor()
+    var skill: Skill?
     weak var controller: AddViewController?
-    var addNode: AddNode?
+    lazy var skillNode: EditSkillNode = {
+        return (self.childNodeWithName("Skill") as? EditSkillNode) ?? EditSkillNode()
+    }()
+    weak var selectedNode: ExperienceSelectNode?
     
     // MARK: - Lifecycle
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.clearColor()
         
-        self.prepare()
+        self.prepareWith()
     }
-    
-    var skillAnchors : [SKNode] = Array<SKNode>(count: 4, repeatedValue: SKNode())
-    var skillNodes : [LevelNode] = Array<LevelNode>(count: 4, repeatedValue: LevelNode())
-    var skills : [Skill.Experience] = [.Beginner,.Intermediate,.Professional,.Expert]
     
     // MARK: - Actions
-    func prepare() {
-        let start = CGPoint(x: 30, y: 80)
+    func prepareWith(skill: Skill? = nil) {
+        let resolvedSkill = skill ?? self.skill
         
-        guard self.addNode == nil else {
-            return
+        // Configure Skill node
+        let start = CGRect(origin: CGPoint(x: 30, y: 80), size: CGSize(width: 40, height: 40))
+        let final = CGRect(origin: self.frame.centerOfMass, size: CGSize(width: 200, height: 200))
+        
+        self.skillNode.startFrame = start
+        self.skillNode.finalFrame = final
+        self.skillNode.position = self.skillNode.startFrame.centerOfMass
+
+        self[Skill.Experience.Beginner]?.outline.alpha = 0
+        self[Skill.Experience.Beginner]?.addLineNode()
+        self[Skill.Experience.Beginner]?.experience = Skill.Experience.Beginner
+        
+        self[Skill.Experience.Intermediate]?.outline.alpha = 0
+        self[Skill.Experience.Intermediate]?.addLineNode()
+        self[Skill.Experience.Intermediate]?.experience = Skill.Experience.Intermediate
+        
+        self[Skill.Experience.Professional]?.outline.alpha = 0
+        self[Skill.Experience.Professional]?.addLineNode()
+        self[Skill.Experience.Professional]?.experience = Skill.Experience.Professional
+        
+        self[Skill.Experience.Expert]?.outline.alpha = 0
+        self[Skill.Experience.Expert]?.addLineNode()
+        self[Skill.Experience.Expert]?.experience = Skill.Experience.Expert
+        
+        self.skillNode.setSkill(resolvedSkill)
+        
+        if let exp = resolvedSkill?.experience {
+            self.selectedNode = self[exp]
         }
-        
-        self.addNode = AddNode.nodeWithStartPosition(start, finalPosition: self.frame.centerOfMass, image: nil, tint: self.tintColor, size: CGSize(width: 124, height: 124))
-        self.addChild(self.addNode!)
-        
-        self.setupSkillNode(Skill.Experience.Beginner)
-        self.setupSkillNode(Skill.Experience.Intermediate)
-        self.setupSkillNode(Skill.Experience.Professional)
-        self.setupSkillNode(Skill.Experience.Expert)
-        
-        // Scale add image
-        self.addNode?.xScale = 0
-        self.addNode?.yScale = 0
-        self.addNode?.hidden = true
     }
     
-    func animateShow(duration: NSTimeInterval, point: CGPoint? = nil){
-        if let _ = point {
-            self.addNode?.startPosition = point!
-            self.addNode?.position = point!
-        }
-        self.addNode?.animateShow(duration)
-        self.skillNodes.forEach {
-            $0.animateShow(duration)
-        }
+    /**
+     Animates showing node from given rect - in View space
+     
+     - parameter duration: duration
+     - parameter rect:     start frame in view coordinate space
+     */
+    func animateShow(duration: NSTimeInterval, rect: CGRect? = nil){
+        let size = CGSize(width: self.size.width * 0.5, height: self.size.width * 0.5)
+        self.skillNode.startFrame ?= self.convertRectFromView(rect)
+        self.skillNode.finalFrame = CGRect(origin: self.frame.centerOfMass - CGPoint(x: size.width/2 - (size.width / 8), y: size.width/4), size: size)
+        self.skillNode.position = self.skillNode.startFrame.centerOfMass
+        
+        self.skillNode.animateShow(duration)
+        self[Skill.Experience.Beginner]?.animateShow()
+        self[Skill.Experience.Intermediate]?.animateShow()
+        self[Skill.Experience.Professional]?.animateShow()
+        self[Skill.Experience.Expert]?.animateShow()
     }
     
-    func animateHide(duration: NSTimeInterval, point: CGPoint, completion: (()->())? = nil) {
-        self.addNode?.startPosition = point
-        self.addNode?.animateHide(duration, completion: completion)
-        self.skillNodes.forEach {
-            $0.animateHide(duration * 0.9)
-        }
+    func animateHide(duration: NSTimeInterval, rect: CGRect?, completion: (()->())? = nil) {
+        self.skillNode.startFrame ?= self.convertRectFromView(rect)
+        
+        self.skillNode.animateHide(duration, completion: completion)
+        self[Skill.Experience.Beginner]?.animateHide()
+        self[Skill.Experience.Intermediate]?.animateHide()
+        self[Skill.Experience.Professional]?.animateHide()
+        self[Skill.Experience.Expert]?.animateHide()
+    }
+    
+    func setSkillImage(image: UIImage?) {
+        self.skillNode.setSkillImage(image)
     }
     
     // MARK: - Helpers
-    func setupSkillNode(level: Skill.Experience) {
-        guard let anchor = self.addNode?[level] else {
-            return
-        }
-        
-        let index : Int = {
-            switch level {
-            case .Beginner:
-                return 0
-            case .Intermediate:
-                return 1
-            case .Professional:
-                return 2
-            case .Expert:
-                return 3
-            }
-        }()
-        
-        self.skillAnchors[index] = anchor
-        
-        guard let width = self.addNode?.size.width else {
-            return
-        }
-        
-        let radius = width / 2
-        
-        let bnode = LevelNode.nodeWith(radius, level: level, tint: self.tintColor)
-        bnode.zPosition = 100
-        bnode.targetPosition = anchor.position
-        bnode.xScale = 0
-        bnode.yScale = 0
-        bnode.hidden = true
-        self.addNode?.addChild(bnode)
-        self.skillNodes[index] = bnode
-    }
     
-    subscript(level: Skill.Experience) -> SKNode? {
-        switch level {
-        case .Beginner where self.skillAnchors.count > 0:
-            return self.skillAnchors[0]
-        case .Intermediate where self.skillAnchors.count > 1:
-            return self.skillAnchors[1]
-        case .Professional where self.skillAnchors.count > 2:
-            return self.skillAnchors[2]
-        case .Expert where self.skillAnchors.count > 3:
-            return self.skillAnchors[3]
-        default:
-            return nil
-        }
+    subscript(level: Skill.Experience) -> ExperienceSelectNode? {
+        return self.skillNode[level]
     }
     
 }
@@ -132,29 +112,53 @@ extension AddScene {
         }
         
         let location = touch.locationInNode(self)
-        let touchedNode = self.nodeAtPoint(location)
+        let touchedNode = self.nodeAtPoint(location).interactionNode ?? self
         
-        if touchedNode == self {
-            self.controller?.hideKeyboard(nil)
-        }
-        else if let node = touchedNode.parent, name = node.name {
-            switch name {
-            case "ImageNode":
-                self.controller?.selectImage()
-            case "LevelNode":
-                if let levelNode = (touchedNode as? LevelNode) ?? (touchedNode.parent as? LevelNode) {
-                    self.skillNodes.forEach{
-                        $0.selected = false
-                    }
-                    levelNode.selected = true
-                    self.controller?.selectedLevel(levelNode.level)
-                }
-            default:
-                break
+        if touchedNode == self.skillNode.imageSelect {
+            self.controller?.selectImage()
+            .then { image -> Void in
+                self.setSkillImage(image)
             }
-            
         }
+        else if touchedNode.name?.hasPrefix("Experience") ?? false {
+            self.selectedNode?.setSelected(false)
+            
+            if let experienceNode = touchedNode as? ExperienceSelectNode {
+                self.selectedNode = experienceNode
+                experienceNode.setSelected(true)
+                self.controller?.selectedLevel(experienceNode.experience)
+            }
+        }
+        else {
+            print(touchedNode.name)
+            print(touchedNode)
+        }
+        
+        self.controller?.hideKeyboard(nil)
     }
     
 }
 
+extension SKScene {
+    
+    func convertRectFromView(rect: CGRect?) -> CGRect? {
+        guard let rect = rect else {
+            return nil
+        }
+        
+        var origin = self.convertPointFromView(rect.origin)
+        
+        guard rect.size != CGSize.zero else {
+            return CGRect(origin: origin, size: CGSize.zero)
+        }
+        
+        let temporarySize = self.convertPointFromView(CGPoint(x: rect.size.width, y: rect.size.height))
+        let factor = temporarySize.x / rect.size.width
+        
+        let size = CGSize(width: rect.size.width * factor, height: rect.size.height * factor)
+        origin.y -= size.height
+        
+        return CGRect(origin: origin, size: size)
+    }
+    
+}

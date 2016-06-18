@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import PromiseKit
+import MRProgress
 
 let AddSkillCellIdentifier = "AddSkillCell"
 let SkillCellIdentifier = "SkillCell"
@@ -17,6 +19,7 @@ class SkillsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Properties
+    var skillsOffset = 18
     var skills : [Skill] = []
     var preparedScene : AddScene?
     
@@ -24,10 +27,14 @@ class SkillsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
         SkillEntity.fetchAll()
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
+        }
+        .always {
+            MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
         }
         .error { error in
             print("Error: \(error)")
@@ -48,54 +55,75 @@ class SkillsViewController: UIViewController {
         
         let width = ceil(self.view.bounds.width/3)
         (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = CGSize(width: width, height: width)
+        
+        let sectionHeight = CGFloat((self.skillsOffset + self.skillsOffset % 3) / 3) * width
+        
+        self.collectionView.contentInset = UIEdgeInsets(top: -sectionHeight, left: 0, bottom: -sectionHeight, right: 0)
     }
     
     // MARK: - Actions
-    @IBAction func addSkillAction(sender: UIBarButtonItem?) {
-        let point = CGPoint(x: self.view.bounds.width - 20, y: self.view.bounds.height - 20)
-        
-        self.addSkillFromPoint(point)
+    @IBAction func addSkillAction(sender: UIView) {
+        try! self.promiseAddSkillWith(self.view.convertRect(sender.bounds, fromView: sender))
     }
     
     func addSkillActionFromCell(cell: UICollectionViewCell) {
-        var point = cell.bounds.centerOfMass
-        point.x += cell.frame.origin.x
-        point.y = self.view.bounds.height - (cell.frame.origin.y - self.collectionView.contentOffset.y) - point.y
-        
-        self.addSkillFromPoint(point)
+        if let skillCell = cell as? SkillCollectionViewCell {
+            let rect = self.frameForCell(skillCell)
+            try! self.promiseAddSkillWith(rect)
+        }
+        else {
+            try! self.promiseAddSkillWith(nil)
+        }
     }
     
     func changeSkillActionFromCell(cell: UICollectionViewCell, withSkill skill: Skill) {
-        var point = cell.bounds.centerOfMass
-        point.x += cell.frame.origin.x
-        point.y = self.view.bounds.height - (cell.frame.origin.y - self.collectionView.contentOffset.y) - point.y
-        
-        self.changeSkillFromPoint(point, withSkill: skill)
+        if let skillCell = cell as? SkillCollectionViewCell {
+            let rect = self.frameForCell(skillCell)
+            try! self.promiseChangeSkillWith(rect, withSkill: skill)
+        }
+        else {
+            try! self.promiseChangeSkillWith(nil, withSkill: skill)
+        }
     }
     
-    func addSkillFromPoint(point: CGPoint){
-        try! AddViewController.promiseNewSkillWith(self, point: point, preparedScene: self.preparedScene)
+    func frameForCell(cell: SkillCollectionViewCell) -> CGRect {
+        cell.layoutSubviews()
+        let imgfrm = cell.imageView.frame
+        let rect = CGRect(
+            origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y),
+            size: imgfrm.size
+        )
+        return rect
+    }
+    
+    func promiseAddSkillWith(rect: CGRect?) throws {
+        try AddViewController.promiseNewSkillWith(self, rect: rect, preparedScene: self.preparedScene)
         .then(SkillEntity.promiseToInsert).asVoid()
         .then(SkillEntity.fetchAll)
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
         }
-        .error { error in
-            print("Error: \(error)")
-        }
     }
     
-    func changeSkillFromPoint(point: CGPoint, withSkill skill: Skill) {
-        try! AddViewController.promiseChangeSkillWith(self, point: point, skill: skill, preparedScene: self.preparedScene)
-        .then(SkillEntity.promiseToInsert).asVoid()
+    func promiseChangeSkillWith(rect: CGRect?, withSkill skill: Skill) throws {
+        try AddViewController.promiseChangeSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
+        .then(SkillEntity.promiseToUpdate).asVoid()
+        .recover { error -> Promise<Void> in
+            if case CommonError.EntityDelete = error {
+                return SkillEntity.promiseToDelete(skill)
+            }
+            else {
+                return Promise<Void>() { _,reject in reject(error) }
+            }
+        }
         .then(SkillEntity.fetchAll)
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
         }
         .error { error in
-            print("Error: \(error)")
+            DDLogError("\(error)")
         }
     }
     
@@ -127,28 +155,44 @@ class SkillsViewController: UIViewController {
 extension SkillsViewController: UICollectionViewDataSource {
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return 3
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard section == 1 else {
+            return self.skillsOffset
+        }
+        
         let cells = self.skills.count + 1
         return cells + ((3 - cells % 3) % 3)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        guard indexPath.section == 1 else {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+            cell.indexPath = indexPath
+            cell.prepareForReuse()
+            self.configureColorFor(cell)
+            cell.setNeedsLayout()
+            return cell
+        }
+        
         let cell : SkillCollectionViewCell = {
             if indexPath.row == self.skills.count {
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AddSkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                cell.prepareForReuse()
                 cell.configureAsAddCell(indexPath)
                 return cell
             }
             else if indexPath.row > self.skills.count {
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                cell.prepareForReuse()
                 cell.indexPath = indexPath
                 return cell
             }
             else {
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                cell.prepareForReuse()
                 cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
                 return cell
             }
@@ -164,6 +208,10 @@ extension SkillsViewController: UICollectionViewDataSource {
 extension SkillsViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard indexPath.section == 1 else {
+            return
+        }
+        
         if indexPath.row < self.skills.count {
             let cell = self.collectionView(self.collectionView, cellForItemAtIndexPath: indexPath)
             self.changeSkillActionFromCell(cell, withSkill: self.skills[indexPath.row])

@@ -18,6 +18,31 @@ extension UIImage {
         return UIImage.RBSquareImage(self)
     }
     
+    func RBCircleImage() -> UIImage {
+        let image = self.RBSquareImage()
+        
+        UIGraphicsBeginImageContextWithOptions(image.size, true, image.scale)
+        // draw your path here
+        let ctx = UIGraphicsGetCurrentContext()
+        CGContextSetFillColorWithColor(ctx, UIColor.whiteColor().CGColor)
+        CGContextFillRect(ctx, CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        CGContextSetFillColorWithColor(ctx, UIColor.blackColor().CGColor)
+        CGContextFillEllipseInRect(ctx, CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        
+        let maskImage = UIGraphicsGetImageFromCurrentImageContext().CGImage
+        UIGraphicsEndImageContext()
+        
+        let maskImageRef = CGImageMaskCreate(CGImageGetWidth(maskImage),
+                                             CGImageGetHeight(maskImage),
+                                             CGImageGetBitsPerComponent(maskImage),
+                                             CGImageGetBitsPerPixel(maskImage),
+                                             CGImageGetBytesPerRow(maskImage),
+                                             CGImageGetDataProvider(maskImage), nil, true)
+        
+        let imageRef = CGImageCreateWithMask(image.CGImage, maskImageRef)
+        return UIImage(CGImage: imageRef ?? maskImage!, scale: UIScreen.mainScreen().scale, orientation: image.imageOrientation)
+    }
+    
     func RBResizeImage(targetSize: CGSize) -> UIImage {
         return UIImage.RBResizeImage(self, targetSize: targetSize)
     }
@@ -41,7 +66,7 @@ extension UIImage {
         let posY = (originalHeight - edge) / 2.0
         
         let cropSquare = CGRectMake(posX, posY, edge, edge)
-        
+
         let imageRef = CGImageCreateWithImageInRect(image.CGImage, cropSquare);
         return UIImage(CGImage: imageRef!, scale: UIScreen.mainScreen().scale, orientation: image.imageOrientation)
     }
@@ -71,5 +96,7 @@ extension UIImage {
         
         return newImage
     }
+    
+    
     
 }

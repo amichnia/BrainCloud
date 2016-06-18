@@ -31,18 +31,16 @@ class SkillCollectionViewCell: UICollectionViewCell {
     // MARK: - Configuration
     func configureAsAddCell(indexPath: NSIndexPath){
         self.indexPath = indexPath
-        self.imageView.image = UIImage(named: "icon-plus")
+        self.imageView.image = UIImage(named: "ic-add")
         self.nameLabel.text = NSLocalizedString("Add new", comment: "Add new")
     }
     
     func configureWithSkill(skill: Skill, atIndexPath indexPath: NSIndexPath) {
         self.indexPath = indexPath
         self.nameLabel.text = skill.title
-        self.imageView.image = skill.thumbnailImage
-        self.imageView.clipsToBounds = true
+        self.imageView.image = skill.circleImage
         
         self.layoutIfNeeded()
-        self.imageView.layer.cornerRadius = self.imageView.bounds.width/2
     }
     
 }

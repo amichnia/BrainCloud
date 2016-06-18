@@ -28,7 +28,7 @@ class CloudViewController: UIViewController, SkillsProvider {
     var cloudImage: UIImage?
     var cloudEntity: GraphCloudEntity?
     
-    var skillToAdd : Skill = Skill(title: "Swift", image: UIImage(named: "skill_swift")!, experience: Skill.Experience.Expert)
+    var skillToAdd : Skill?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -189,7 +189,7 @@ extension CloudViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.skillToAdd = self.skills[indexPath.row]
-        CloudGraphScene.radius = self.skillToAdd.experience.radius / Node.scaleFactor
+        CloudGraphScene.radius = self.skillToAdd!.experience.radius / Node.scaleFactor
     }
     
 }
