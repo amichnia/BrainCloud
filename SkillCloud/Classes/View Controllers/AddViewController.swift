@@ -175,7 +175,6 @@ class AddViewController: UIViewController {
         }
         .then { image -> UIImage in
             self.image = image
-//            self.scene.addNode.image = image
             return image
         }
     }

@@ -18,6 +18,7 @@ class AddScene: SKScene {
     lazy var skillNode: EditSkillNode = {
         return (self.childNodeWithName("Skill") as? EditSkillNode) ?? EditSkillNode()
     }()
+    weak var selectedNode: ExperienceSelectNode?
     
     // MARK: - Lifecycle
     override func didMoveToView(view: SKView) {
@@ -38,14 +39,21 @@ class AddScene: SKScene {
         self.skillNode.finalFrame = final
         self.skillNode.position = self.skillNode.startFrame.centerOfMass
 
-        self[Skill.Experience.Beginner]?.outline.hidden = true
+        self[Skill.Experience.Beginner]?.outline.alpha = 0
         self[Skill.Experience.Beginner]?.addLineNode()
-        self[Skill.Experience.Intermediate]?.outline.hidden = true
+        self[Skill.Experience.Beginner]?.experience = Skill.Experience.Beginner
+        
+        self[Skill.Experience.Intermediate]?.outline.alpha = 0
         self[Skill.Experience.Intermediate]?.addLineNode()
-        self[Skill.Experience.Professional]?.outline.hidden = true
+        self[Skill.Experience.Intermediate]?.experience = Skill.Experience.Intermediate
+        
+        self[Skill.Experience.Professional]?.outline.alpha = 0
         self[Skill.Experience.Professional]?.addLineNode()
-        self[Skill.Experience.Expert]?.outline.hidden = true
+        self[Skill.Experience.Professional]?.experience = Skill.Experience.Professional
+        
+        self[Skill.Experience.Expert]?.outline.alpha = 0
         self[Skill.Experience.Expert]?.addLineNode()
+        self[Skill.Experience.Expert]?.experience = Skill.Experience.Expert
         
         self.skillNode.setSkill(resolvedSkill)
     }
@@ -96,28 +104,29 @@ extension AddScene {
         }
         
         let location = touch.locationInNode(self)
-        let touchedNode = self.nodeAtPoint(location)
+        let touchedNode = self.nodeAtPoint(location).interactionNode ?? self
         
-        if touchedNode == self {
-            self.controller?.hideKeyboard(nil)
-        }
-        else if let node = touchedNode.parent, name = node.name {
-            switch name {
-            case "ImageNode":
-                self.controller?.selectImage()
-            case "LevelNode":
-                if let levelNode = (touchedNode as? LevelNode) ?? (touchedNode.parent as? LevelNode) {
-//                    self.skillNodes.forEach{
-//                        $0.selected = false
-//                    }
-                    levelNode.selected = true
-                    self.controller?.selectedLevel(levelNode.level)
-                }
-            default:
-                break
+        if touchedNode == self.skillNode.imageSelect {
+            self.controller?.selectImage()
+            .then { image -> Void in
+                self.skillNode.imageNode
             }
-            
         }
+        else if touchedNode.name?.hasPrefix("Experience") ?? false {
+            self.selectedNode?.setSelected(false)
+            
+            if let experienceNode = touchedNode as? ExperienceSelectNode {
+                self.selectedNode = experienceNode
+                experienceNode.setSelected(true)
+                self.controller?.selectedLevel(experienceNode.experience)
+            }
+        }
+        else {
+            print(touchedNode.name)
+            print(touchedNode)
+        }
+        
+        self.controller?.hideKeyboard(nil)
     }
     
 }
@@ -145,3 +154,23 @@ extension SKScene {
     }
     
 }
+
+protocol NonInteractiveNode: class {
+    var interactionNode: SKNode? { get }
+}
+
+extension NonInteractiveNode where Self : SKNode {
+    var interactionNode: SKNode? {
+        return self is InteractiveNode ? self : self.parent?.interactionNode
+    }
+}
+
+protocol InteractiveNode: NonInteractiveNode { }
+
+extension InteractiveNode where Self : SKNode {
+    var interactionNode: SKNode? {
+        return self
+    }
+}
+
+extension SKNode: NonInteractiveNode {}

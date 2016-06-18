@@ -28,6 +28,7 @@ class EditSkillNode: SKSpriteNode {
             self.yScale = newValue
         }
     }
+    private var savedStartScale: CGFloat = 1
     private var startScale: CGFloat {
         return self.size.width != 0 ? self.startFrame.width / (self.size.width / self.mainScale) : self.mainScale
     }
@@ -58,13 +59,22 @@ class EditSkillNode: SKSpriteNode {
             self.imageNode?.zPosition = self.zPosition + 2
         }
         
-        let skillTexture = skill != nil ? SKTexture(image: skill!.image) : SKTexture(imageNamed: "icon-placeholder")
+        self.setSkillImage(skill?.image)
+        
+        if let exp = skill?.experience {
+            self[exp]?.setSelected(true)
+        }
+    }
+    
+    func setSkillImage(image: UIImage?) {
+        let skillTexture = image != nil ? SKTexture(image: image!) : SKTexture(imageNamed: "icon-placeholder")
         self.imageNode?.texture = skillTexture
     }
     
     func animateShow(duration: NSTimeInterval = 1, completion: (()->())? = nil){
         self.hidden = false
         self.mainScale = self.startScale
+        self.savedStartScale = self.mainScale
         self.outline.alpha = 0
         
         let scaleAction = SKAction.scaleTo(self.finalScale, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
@@ -87,7 +97,7 @@ class EditSkillNode: SKSpriteNode {
     }
     
     func animateHide(duration: NSTimeInterval = 1, completion: (()->())? = nil){
-        let scaleAction = SKAction.scaleTo(self.startScale, duration: duration * 0.8, delay: 0.01, usingSpringWithDamping: 1, initialSpringVelocity: 0)
+        let scaleAction = SKAction.scaleTo(self.savedStartScale, duration: duration * 0.8, delay: 0.01, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.2)
         let moveAction = SKAction.moveTo(self.startFrame.centerOfMass, duration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0)
         let outlineAlphaAction = SKAction.fadeOutWithDuration(duration * 0.7)
         
@@ -123,8 +133,9 @@ class EditSkillNode: SKSpriteNode {
     
 }
 
-class ExperienceSelectNode: SKSpriteNode {
+class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
     
+    var experience : Skill.Experience = .Beginner
     var tintColor: UIColor = UIColor.SkillCloudVeryVeryLight {
         didSet {
             self.line?.strokeColor = self.tintColor
@@ -170,6 +181,23 @@ class ExperienceSelectNode: SKSpriteNode {
         self.runAction(moveAction)
     }
     
+    func setSelected(selected: Bool) {
+        let duration = 0.4
+        
+        if selected {
+            self.outline.runAction(SKAction.fadeInWithDuration(duration))
+            UIView.animateWithDuration(duration) {
+                self.line?.strokeColor = UIColor.SkillCloudTurquoise
+            }
+        }
+        else {
+            self.outline.runAction(SKAction.fadeOutWithDuration(duration))
+            UIView.animateWithDuration(duration) {
+                self.line?.strokeColor = UIColor.SkillCloudVeryVeryLight
+            }
+        }
+    }
+    
     // Helpers
     func addLineNode() {
         let path = CGPathCreateMutable()
@@ -191,7 +219,7 @@ class ExperienceSelectNode: SKSpriteNode {
     
 }
 
-class ImageSelectNode: SKSpriteNode {
+class ImageSelectNode: SKSpriteNode, InteractiveNode {
     
     lazy var outline: SKSpriteNode = {
         return (self.childNodeWithName("Outline") as? SKSpriteNode) ?? SKSpriteNode()
