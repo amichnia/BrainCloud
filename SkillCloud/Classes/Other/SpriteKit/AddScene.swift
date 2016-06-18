@@ -39,9 +39,13 @@ class AddScene: SKScene {
         self.skillNode.position = self.skillNode.startFrame.centerOfMass
 
         self[Skill.Experience.Beginner]?.outline.hidden = true
+        self[Skill.Experience.Beginner]?.addLineNode()
         self[Skill.Experience.Intermediate]?.outline.hidden = true
+        self[Skill.Experience.Intermediate]?.addLineNode()
         self[Skill.Experience.Professional]?.outline.hidden = true
+        self[Skill.Experience.Professional]?.addLineNode()
         self[Skill.Experience.Expert]?.outline.hidden = true
+        self[Skill.Experience.Expert]?.addLineNode()
         
         self.skillNode.setSkill(resolvedSkill)
     }
