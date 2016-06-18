@@ -30,6 +30,8 @@ class AddViewController: UIViewController {
     @IBOutlet weak var skillNameField: UITextField!
     @IBOutlet weak var containerBottom: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var menuContainer: UIView!
+    @IBOutlet weak var menuContainerTopConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
     var fulfill : ((Skill)->Void)!
@@ -76,8 +78,10 @@ class AddViewController: UIViewController {
         
         if firstLayout {
             self.prepareScene(self.skView, size: self.view.bounds.size)
+            self.menuContainerTopConstraint.constant = -100
+            self.view.setNeedsLayout()
+            self.view.layoutIfNeeded()
         }
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -230,9 +234,13 @@ class AddViewController: UIViewController {
             self.dismissViewControllerAnimated(false, completion: nil)
         }
         
+        self.view.layoutIfNeeded()
+        self.menuContainerTopConstraint.constant = -100
+        
         UIView.animateWithDuration(0.7, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             self.snapshotTop?.alpha = 1
             self.skillNameField.alpha = 0
+            self.view.layoutIfNeeded()
         }, completion: nil)
     }
     
@@ -241,6 +249,13 @@ class AddViewController: UIViewController {
         self.skView.paused = false
         self.skView.hidden = false
         self.scene.animateShow(duration, rect: self.originRect)
+        
+        self.view.layoutIfNeeded()
+        self.menuContainerTopConstraint.constant = 0
+        
+        UIView.animateWithDuration(duration) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     // MARK: - Navigation
