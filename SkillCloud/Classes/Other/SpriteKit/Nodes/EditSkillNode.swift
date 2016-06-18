@@ -37,7 +37,15 @@ class EditSkillNode: SKSpriteNode {
     }
     
     lazy var outline: SKSpriteNode = {
-        return (self.childNodeWithName("Outline") as? SKSpriteNode) ?? SKSpriteNode()
+        let old = (self.childNodeWithName("Outline") as? SKSpriteNode) ?? SKSpriteNode()
+        let new = SKShapeNode(circleOfRadius: old.size.width / 2)
+        new.strokeColor = UIColor.SkillCloudTurquoise
+        new.fillColor = UIColor.clearColor()
+        new.lineWidth = 5
+        if let tex = self.scene?.view?.textureFromNode(new) {
+            old.texture = tex
+        }
+        return old
     }()
     lazy var imageSelect: ImageSelectNode = {
         return (self.childNodeWithName("AddImage") as? ImageSelectNode) ?? ImageSelectNode()
@@ -48,8 +56,10 @@ class EditSkillNode: SKSpriteNode {
         self.skill = skill
         
         if self.imageNode == nil {
+            let inset = (15.0 / 159.0) * self.size.width * 2
+            
             self.imageCropNode = SKCropNode()
-            self.maskNode = SKSpriteNode(texture: self.texture, color: self.color, size: CGSizeInset(self.size, 10, 10))
+            self.maskNode = SKSpriteNode(texture: self.texture, color: self.color, size: CGSizeInset(self.outline.size, -inset - 2, -inset - 2))
             self.imageCropNode?.maskNode = self.maskNode
             self.imageNode = SKSpriteNode(texture: self.texture, color: self.color, size: self.size)
             self.imageCropNode?.addChild(self.imageNode!)
@@ -57,6 +67,9 @@ class EditSkillNode: SKSpriteNode {
             
             self.imageCropNode?.zPosition = self.zPosition + 1
             self.imageNode?.zPosition = self.zPosition + 2
+            self.outline.zPosition = self.zPosition + 3
+            
+            self.outline.size = CGSizeInset(self.outline.size, -inset/2 + 2, -inset/2 + 2)
         }
         
         self.setSkillImage(skill?.image)
@@ -139,6 +152,7 @@ class ImageSelectNode: SKSpriteNode, InteractiveNode {
         return (self.childNodeWithName("Outline") as? SKSpriteNode) ?? SKSpriteNode()
     }()
     
+    private var savedScale: CGFloat = 1
     var mainScale: CGFloat {
         get {
             return self.xScale
@@ -151,7 +165,7 @@ class ImageSelectNode: SKSpriteNode, InteractiveNode {
     
     var targetPosition: CGPoint = CGPoint.zero
     
-    func animateShow(duration: NSTimeInterval = 1){
+    func animateShow(duration: NSTimeInterval = 1) {
         self.targetPosition = self.position
         self.position = CGPoint.zero
         
@@ -160,6 +174,7 @@ class ImageSelectNode: SKSpriteNode, InteractiveNode {
         }
         
         self.mainScale = (parentSprite.size.width / parentSprite.xScale) / self.size.width
+        self.savedScale = self.mainScale
         
         self.hidden =  false
         self.outline.alpha = 0
@@ -173,12 +188,8 @@ class ImageSelectNode: SKSpriteNode, InteractiveNode {
         self.outline.runAction(outlineAlphaAction)
     }
     
-    func animateHide(duration: NSTimeInterval = 0.7){
-        guard let parentSprite = self.parent as? SKSpriteNode else {
-            return
-        }
-        
-        let scaleAction = SKAction.scaleTo(parentSprite.size.width / self.size.width, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
+    func animateHide(duration: NSTimeInterval = 0.7) {
+        let scaleAction = SKAction.scaleTo(self.savedScale, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         let moveAction = SKAction.moveTo(CGPoint.zero, duration: duration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         let outlineAlphaAction = SKAction.fadeOutWithDuration(duration * 0.7)
         

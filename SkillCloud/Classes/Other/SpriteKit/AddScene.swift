@@ -56,6 +56,10 @@ class AddScene: SKScene {
         self[Skill.Experience.Expert]?.experience = Skill.Experience.Expert
         
         self.skillNode.setSkill(resolvedSkill)
+        
+        if let exp = resolvedSkill?.experience {
+            self.selectedNode = self[exp]
+        }
     }
     
     /**
