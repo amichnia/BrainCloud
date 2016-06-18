@@ -87,6 +87,10 @@ class AddScene: SKScene {
         self[Skill.Experience.Expert]?.animateHide()
     }
     
+    func setSkillImage(image: UIImage?) {
+        self.skillNode.setSkillImage(image)
+    }
+    
     // MARK: - Helpers
     
     subscript(level: Skill.Experience) -> ExperienceSelectNode? {
@@ -109,7 +113,7 @@ extension AddScene {
         if touchedNode == self.skillNode.imageSelect {
             self.controller?.selectImage()
             .then { image -> Void in
-                self.skillNode.imageNode
+                self.setSkillImage(image)
             }
         }
         else if touchedNode.name?.hasPrefix("Experience") ?? false {
@@ -154,23 +158,3 @@ extension SKScene {
     }
     
 }
-
-protocol NonInteractiveNode: class {
-    var interactionNode: SKNode? { get }
-}
-
-extension NonInteractiveNode where Self : SKNode {
-    var interactionNode: SKNode? {
-        return self is InteractiveNode ? self : self.parent?.interactionNode
-    }
-}
-
-protocol InteractiveNode: NonInteractiveNode { }
-
-extension InteractiveNode where Self : SKNode {
-    var interactionNode: SKNode? {
-        return self
-    }
-}
-
-extension SKNode: NonInteractiveNode {}

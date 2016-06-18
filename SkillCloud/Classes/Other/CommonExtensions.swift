@@ -8,6 +8,7 @@
 
 import UIKit
 import PromiseKit
+import SpriteKit
 
 // MARK: - Array shifting
 extension Array {
@@ -165,6 +166,27 @@ enum CommonError : ErrorType {
     case NotEnoughData
     case UserCancelled
 }
+
+// MARK: - Sprite Kit interactive nodes
+protocol NonInteractiveNode: class {
+    var interactionNode: SKNode? { get }
+}
+
+extension NonInteractiveNode where Self : SKNode {
+    var interactionNode: SKNode? {
+        return self is InteractiveNode ? self : self.parent?.interactionNode
+    }
+}
+
+protocol InteractiveNode: NonInteractiveNode { }
+
+extension InteractiveNode where Self : SKNode {
+    var interactionNode: SKNode? {
+        return self
+    }
+}
+
+extension SKNode: NonInteractiveNode {}
 
 // MARK: - CGPoint adding and substracting
 prefix func -(lhs: CGPoint) -> CGPoint {

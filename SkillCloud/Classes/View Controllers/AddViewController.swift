@@ -129,13 +129,12 @@ class AddViewController: UIViewController {
         
         if let skill = self.skill {
             self.image = skill.image
-//            self.scene.addNode.image = skill.image
             self.experience = skill.experience
-//            self.scene.skillNodes[skill.experience.rawValue].selected = true
             self.skillNameField.text = skill.title
             self.skillNameField.userInteractionEnabled = false
-            // TODO: Show delete button
         }
+        
+        self.scene.skill = skill
     }
     
     // MARK: - Actions
