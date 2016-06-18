@@ -31,6 +31,7 @@ class AddViewController: UIViewController {
     @IBOutlet weak var containerBottom: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var menuContainer: UIView!
+    @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var menuContainerTopConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
@@ -45,6 +46,7 @@ class AddViewController: UIViewController {
     }()
     
     var cancelled = false
+    var deleted = false
     var firstLayout = true
     var scene : AddScene!
     var snapshotTop : UIView?
@@ -70,7 +72,6 @@ class AddViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         self.skView.allowsTransparency = true
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -113,8 +114,8 @@ class AddViewController: UIViewController {
         }
         
         skView.bounds = self.view.bounds
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+//        skView.showsFPS = true
+//        skView.showsNodeCount = true
         skView.backgroundColor = UIColor.whiteColor()
         
         self.scene.size = skView.bounds.size
@@ -135,7 +136,6 @@ class AddViewController: UIViewController {
             self.image = skill.image
             self.experience = skill.experience
             self.skillNameField.text = skill.title
-            self.skillNameField.userInteractionEnabled = false
         }
         
         self.scene.skill = skill
@@ -161,8 +161,11 @@ class AddViewController: UIViewController {
         self.hideKeyboard(self)
         
         self.promiseSelection(Void.self, cancellable: true, options: [
-            (NSLocalizedString("Change Image", comment: "Change Image"),{ self.selectImage().asVoid() }),
-            (NSLocalizedString("Remove skill", comment: "Remove skill"),{ self.removeSkill() })
+            (NSLocalizedString("Change Image", comment: "Change Image"),{ self.selectImage().then{ image -> Void in self.scene.setSkillImage(image) } }),
+            (NSLocalizedString("Remove skill", comment: "Remove skill"),{ self.removeSkill().then{ _ -> Void in
+                self.hideKeyboard(self)
+                self.hideAddViewController(nil)
+            }})
         ])
     }
 
@@ -178,28 +181,52 @@ class AddViewController: UIViewController {
         }
         .then { image -> UIImage in
             self.image = image
+            
+            self.doneButton.enabled = self.canBeFulfilled()
+            
             return image
         }
     }
     
     func removeSkill() -> Promise<Void> {
-        return Promise<Void> { (fulfill, reject) in
-            
-        }
+        return Promise<Void>(resolvers: { (fulfill, reject) in
+            self.deleted = true
+            fulfill()
+        })
     }
     
     func selectedLevel(level: Skill.Experience){
         self.experience = level
+        
+        self.doneButton.enabled = self.canBeFulfilled()
     }
 
     // MARK: - Promise handling
+    func canBeFulfilled() -> Bool {
+        if let _ = self.image, name = self.skillNameField.text, _ = self.experience where name.characters.count > 0  {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
     func tryFulfill() {
+        guard !self.deleted else {
+            self.reject(CommonError.EntityDelete)
+            return
+        }
+        
         guard let image = self.image, name = self.skillNameField.text, experience = self.experience where !self.cancelled && name.characters.count > 0 else {
             self.reject(CommonError.UserCancelled)
             return
         }
         
         let skill = Skill(title: name, image: image, experience: experience)
+        
+        if let previousSkill = self.skill {
+            skill.previousUniqueIdentifier = previousSkill.uniqueIdentifierValue
+        }
 
         self.fulfill(skill)
     }
@@ -214,11 +241,14 @@ class AddViewController: UIViewController {
         self.view.insertSubview(snapshot, atIndex: 0)
         self.view.insertSubview(snapshotTop, aboveSubview: self.blurView)
         self.originRect = rect ?? self.originRect
+        self.skillNameField.alpha = 0
+        self.doneButton.alpha = 0
         
         parent.presentViewController(self, animated: false) {
             UIView.animateWithDuration( 0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
                 snapshotTop.alpha = 0
                 self.skillNameField.alpha = 1
+                self.doneButton.alpha = 1
             }, completion: { (_) in
                 snapshotTop.hidden = true
             })
@@ -240,6 +270,7 @@ class AddViewController: UIViewController {
         UIView.animateWithDuration(0.7, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
             self.snapshotTop?.alpha = 1
             self.skillNameField.alpha = 0
+            self.doneButton.alpha = 0
             self.view.layoutIfNeeded()
         }, completion: nil)
     }
@@ -260,6 +291,23 @@ class AddViewController: UIViewController {
     
     // MARK: - Navigation
 
+}
+
+extension AddViewController: UITextFieldDelegate {
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        self.doneButton.enabled = self.canBeFulfilled()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        self.doneButton.enabled = self.canBeFulfilled()
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        self.doneButton.enabled = self.canBeFulfilled()
+    }
+    
 }
 
 // MARK: - Keyboard handling

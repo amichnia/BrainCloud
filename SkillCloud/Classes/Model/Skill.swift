@@ -14,6 +14,7 @@ class Skill {
     var description : String?
     var image : UIImage // cropped image
     var experience : Experience
+    var previousUniqueIdentifier: String?
     
     // Prepared images
     lazy var circleImage: UIImage? = {
@@ -79,5 +80,5 @@ extension Skill : ExperienceConvertible { }
 extension Skill : DTOModel {
 
     var uniqueIdentifierValue: String { return self.title }
-
+    
 }

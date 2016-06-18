@@ -795,6 +795,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="okh-c3-2CT" id="kto-4A-oHM"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -866,6 +869,7 @@
                         <outlet property="blurView" destination="UfW-6I-deg" id="T65-vE-8zS"/>
                         <outlet property="containerBottom" destination="LSm-8j-oqs" id="sBN-Q4-z2N"/>
                         <outlet property="containerView" destination="wka-0C-nzg" id="owN-6W-eEd"/>
+                        <outlet property="doneButton" destination="eH3-0u-poB" id="f4d-W2-lDD"/>
                         <outlet property="menuContainer" destination="thY-Yu-Nzd" id="6HH-X2-azg"/>
                         <outlet property="menuContainerTopConstraint" destination="Igz-nT-Uaa" id="IPa-vV-dQd"/>
                         <outlet property="skView" destination="scP-WP-Zad" id="YaD-We-4SW"/>
@@ -875,7 +879,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8c-Eo-wGn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="up" id="N3J-yv-GhM">
                     <connections>
-                        <action selector="cancelAction:" destination="okh-c3-2CT" id="OCj-rG-PK0"/>
+                        <action selector="doneAction:" destination="okh-c3-2CT" id="rqk-DH-eoi"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>

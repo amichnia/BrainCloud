@@ -108,11 +108,22 @@ class SkillsViewController: UIViewController {
     
     func promiseChangeSkillWith(rect: CGRect?, withSkill skill: Skill) throws {
         try AddViewController.promiseChangeSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
-        .then(SkillEntity.promiseToInsert).asVoid()
+        .then(SkillEntity.promiseToUpdate).asVoid()
+        .recover { error -> Promise<Void> in
+            if case CommonError.EntityDelete = error {
+                return SkillEntity.promiseToDelete(skill)
+            }
+            else {
+                return Promise<Void>() { _,reject in reject(error) }
+            }
+        }
         .then(SkillEntity.fetchAll)
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
+        }
+        .error { error in
+            DDLogError("\(error)")
         }
     }
     

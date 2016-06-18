@@ -165,6 +165,8 @@ enum CommonError : ErrorType {
     case UnknownError
     case NotEnoughData
     case UserCancelled
+    case OperationFailed
+    case EntityDelete
 }
 
 // MARK: - Sprite Kit interactive nodes

@@ -128,6 +128,7 @@ extension DataManager {
         let predicate = NSPredicate(format: "\(entity.uniqueIdentifier) = %@", identifier)
         return self.fetchFirst(entity, withPredicate: predicate, fromContext: ctx)
     }
+
 }
 
 // MARK: - Inserting entities
@@ -182,11 +183,51 @@ extension DataManager {
         }
     }
     
+    static func promiseUpdateEntity<T:CoreDataEntity>(entity: T.Type, model: DTOModel, intoContext ctx: NSManagedObjectContext? = nil) -> Promise<T> {
+        return DataManager.fetchEntity(entity, withIdentifier: model.previousUniqueIdentifier ?? model.uniqueIdentifierValue, fromContext: ctx)
+        .then{ (entity) -> T in
+            entity.setValuesFromModel(model)
+            return entity
+        }
+        .recover { (error: ErrorType) -> T in
+            if case DataError.EntityDoesNotExist = error {
+                if let entity = T(model: model, inContext: ctx ?? self.managedObjectContext) {
+                    return entity
+                }
+                else {
+                    throw DataError.FailedToInsertEntity
+                }
+            }
+            else {
+                throw DataError.FailedToInsertEntity
+            }
+        }
+        .then{ (entity: T) -> T in
+            try DataManager.saveRootContext()
+            return entity
+        }
+    }
+    
+    static func promiseDeleteEntity<T:CoreDataEntity>(entity: T.Type, model: DTOModel, fromContext ctx: NSManagedObjectContext? = nil) -> Promise<Void> {
+        return Promise<Void>() { (fulfill, reject) in
+            do {
+                try self.deleteEntity(entity, withIdentifier: model.uniqueIdentifierValue, fromContext: ctx)
+                fulfill()
+            }
+            catch {
+                reject(error)
+            }
+        }
+        .then {
+            try DataManager.saveRootContext()
+        }
+    }
+    
 }
 
 extension DataManager {
     
-    static func deleteEntity<T:CoreDataEntity>(entity: T.Type, withIdentifier identifier: String, intoContext ctx: NSManagedObjectContext? = nil) throws {
+    static func deleteEntity<T:CoreDataEntity>(entity: T.Type, withIdentifier identifier: String, fromContext ctx: NSManagedObjectContext? = nil) throws {
         let predicate = NSPredicate(format: "\(entity.uniqueIdentifier) = %@", identifier)
         if let existingEntity = try DataManager.getAll(entity, withPredicate: predicate, fromContext: ctx).first as? NSManagedObject {
             (ctx ?? DataManager.managedObjectContext).deleteObject(existingEntity)
@@ -197,6 +238,7 @@ extension DataManager {
 
 protocol DTOModel {
     
+    var previousUniqueIdentifier: String? { get }
     var uniqueIdentifierValue: String { get }
     
 }
@@ -226,7 +268,11 @@ extension CoreDataEntity {
     }
     
     static func promiseToUpdate(model: DTOModel) -> Promise<Self> {
-        return DataManager.promiseEntity(self, model: model)
+        return DataManager.promiseUpdateEntity(self, model: model)
+    }
+    
+    static func promiseToDelete(model: DTOModel) -> Promise<Void> {
+        return DataManager.promiseDeleteEntity(self, model: model)
     }
     
 }

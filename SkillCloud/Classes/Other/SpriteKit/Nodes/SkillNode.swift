@@ -13,6 +13,7 @@ class SkillNode: SKNode, DTOModel {
     
     // MARK: - Properties
     var uniqueIdentifierValue: String { return "\(self.cloudIdentifier)_skill_\(self.nodeId)" }
+    var previousUniqueIdentifier: String?
     var cloudIdentifier = "cloud"
     var nodeId: Int = 0
     var skill: Skill!

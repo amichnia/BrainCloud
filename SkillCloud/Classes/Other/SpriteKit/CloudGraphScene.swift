@@ -30,6 +30,7 @@ class CloudGraphScene: SKScene, DTOModel {
     
     // MARK: - DTOModel
     var uniqueIdentifierValue: String { return self.cloudIdentifier }
+    var previousUniqueIdentifier: String?
     var cloudIdentifier = "cloud"
     
     // MARK: - Lifecycle
