@@ -144,6 +144,7 @@ enum CommonError : ErrorType {
     case UserCancelled
 }
 
+// MARK: - CGPoint adding and substracting
 prefix func -(lhs: CGPoint) -> CGPoint {
     return CGPoint(x: -lhs.x, y: -lhs.y)
 }
@@ -159,4 +160,19 @@ func +=(inout lhs: CGPoint, rhs: CGPoint) -> CGPoint {
 }
 func -=(inout lhs: CGPoint, rhs: CGPoint) -> CGPoint {
     return lhs += -rhs
+}
+
+public func CGSizeInset(size: CGSize, _ dx: CGFloat, _ dy: CGFloat) -> CGSize {
+    return CGSize(width: size.width - dx, height: size.height - dy)
+}
+
+// MARK: - Custom operators
+infix operator ?= {
+associativity none
+precedence 130
+}
+public func ?=<T,U>(inout lhs: T, rhs: U?) {
+    if let value = rhs {
+        lhs = (value as! T)
+    }
 }

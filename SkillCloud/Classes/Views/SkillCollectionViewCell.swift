@@ -31,7 +31,7 @@ class SkillCollectionViewCell: UICollectionViewCell {
     // MARK: - Configuration
     func configureAsAddCell(indexPath: NSIndexPath){
         self.indexPath = indexPath
-        self.imageView.image = UIImage(named: "icon-plus")
+        self.imageView.image = UIImage(named: "ic-add")
         self.nameLabel.text = NSLocalizedString("Add new", comment: "Add new")
     }
     

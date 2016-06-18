@@ -120,7 +120,6 @@ class AddViewController: UIViewController {
         
         /* Set the scale mode to scale to fit the window */
         self.scene.scaleMode = .Fill
-        self.scene.tintColor = skView.tintColor
         
         skView.presentScene(self.scene)
         
@@ -130,9 +129,9 @@ class AddViewController: UIViewController {
         
         if let skill = self.skill {
             self.image = skill.image
-            self.scene.addNode.image = skill.image
+//            self.scene.addNode.image = skill.image
             self.experience = skill.experience
-            self.scene.skillNodes[skill.experience.rawValue].selected = true
+//            self.scene.skillNodes[skill.experience.rawValue].selected = true
             self.skillNameField.text = skill.title
             self.skillNameField.userInteractionEnabled = false
             // TODO: Show delete button
@@ -176,7 +175,7 @@ class AddViewController: UIViewController {
         }
         .then { image -> UIImage in
             self.image = image
-            self.scene.addNode.image = image
+//            self.scene.addNode.image = image
             return image
         }
     }

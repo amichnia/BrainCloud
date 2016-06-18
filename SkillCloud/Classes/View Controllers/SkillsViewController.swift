@@ -67,14 +67,8 @@ class SkillsViewController: UIViewController {
     }
     
     func addSkillActionFromCell(cell: UICollectionViewCell) {
-        var point = cell.bounds.centerOfMass
-        point.x += cell.frame.origin.x
-        point.y = self.view.bounds.height - (cell.frame.origin.y - self.collectionView.contentOffset.y) - point.y
-        
         if let skillCell = cell as? SkillCollectionViewCell {
-            let imgfrm = skillCell.imageView.frame
-            let rect = CGRect(origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y), size: imgfrm.size)
-            
+            let rect = self.frameForCell(skillCell)
             try! self.promiseAddSkillWith(rect)
         }
         else {
@@ -83,19 +77,23 @@ class SkillsViewController: UIViewController {
     }
     
     func changeSkillActionFromCell(cell: UICollectionViewCell, withSkill skill: Skill) {
-        var point = cell.bounds.centerOfMass
-        point.x += cell.frame.origin.x
-        point.y = self.view.bounds.height - (cell.frame.origin.y - self.collectionView.contentOffset.y) - point.y
-        
         if let skillCell = cell as? SkillCollectionViewCell {
-            let imgfrm = skillCell.imageView.frame
-            let rect = CGRect(origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y), size: imgfrm.size)
-            
+            let rect = self.frameForCell(skillCell)
             try! self.promiseChangeSkillWith(rect, withSkill: skill)
         }
         else {
             try! self.promiseChangeSkillWith(nil, withSkill: skill)
         }
+    }
+    
+    func frameForCell(cell: SkillCollectionViewCell) -> CGRect {
+        cell.layoutSubviews()
+        let imgfrm = cell.imageView.frame
+        let rect = CGRect(
+            origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y),
+            size: imgfrm.size
+        )
+        return rect
     }
     
     func promiseAddSkillWith(rect: CGRect?) throws {

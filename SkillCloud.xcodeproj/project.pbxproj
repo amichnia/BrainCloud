@@ -11,7 +11,7 @@
 		C80A918F1CB5206800529F0B /* GoogleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */; };
 		C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A91901CB5208200529F0B /* GoogleImage.swift */; };
 		C83585C51CDB46150003E538 /* RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83585C41CDB46150003E538 /* RBResizer.swift */; };
-		C863048E1CC6417E002C068C /* AddNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863048D1CC6417E002C068C /* AddNode.swift */; };
+		C863048E1CC6417E002C068C /* EditSkillNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863048D1CC6417E002C068C /* EditSkillNode.swift */; };
 		C86304901CC6419C002C068C /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863048F1CC6419C002C068C /* LevelNode.swift */; };
 		C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86304911CC646B1002C068C /* SkillsViewController.swift */; };
 		C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */; };
@@ -89,7 +89,7 @@
 		C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		C80A91901CB5208200529F0B /* GoogleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImage.swift; sourceTree = "<group>"; };
 		C83585C41CDB46150003E538 /* RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizer.swift; sourceTree = "<group>"; };
-		C863048D1CC6417E002C068C /* AddNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNode.swift; sourceTree = "<group>"; };
+		C863048D1CC6417E002C068C /* EditSkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSkillNode.swift; sourceTree = "<group>"; };
 		C863048F1CC6419C002C068C /* LevelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelNode.swift; sourceTree = "<group>"; };
 		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImagesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 			children = (
 				FE0522DF1CB0157800315468 /* BrainNode.swift */,
 				C8F55CA51CFC264300208F88 /* SkillNode.swift */,
-				C863048D1CC6417E002C068C /* AddNode.swift */,
+				C863048D1CC6417E002C068C /* EditSkillNode.swift */,
 				C863048F1CC6419C002C068C /* LevelNode.swift */,
 			);
 			path = Nodes;
@@ -411,7 +411,7 @@
 				TargetAttributes = {
 					C8A4A0421C981B6C004E055D = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 4RH8T97BYZ;
+						DevelopmentTeam = YYAKJ5SR76;
 					};
 				};
 			};
@@ -540,7 +540,7 @@
 				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,
 				C86304901CC6419C002C068C /* LevelNode.swift in Sources */,
 				C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */,
-				C863048E1CC6417E002C068C /* AddNode.swift in Sources */,
+				C863048E1CC6417E002C068C /* EditSkillNode.swift in Sources */,
 				C8A36F461CFDA3DE002C7FC4 /* CloudsListViewController.swift in Sources */,
 				FE0522DD1CAFE69500315468 /* CloudGraphScene.swift in Sources */,
 				C8F55CAF1CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift in Sources */,
@@ -663,6 +663,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -670,8 +671,9 @@
 				INFOPLIST_FILE = "SkillCloud/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.amichnia.skillcloud;
+				PRODUCT_BUNDLE_IDENTIFIER = com.girappe.skillcloud;
 				PRODUCT_NAME = SkillCloud;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -681,6 +683,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -688,8 +691,9 @@
 				INFOPLIST_FILE = "SkillCloud/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.amichnia.skillcloud;
+				PRODUCT_BUNDLE_IDENTIFIER = com.girappe.skillcloud;
 				PRODUCT_NAME = SkillCloud;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
