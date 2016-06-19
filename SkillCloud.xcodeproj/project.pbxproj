@@ -38,6 +38,7 @@
 		FE0522E21CB01BBF00315468 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522E11CB01BBF00315468 /* Node.swift */; };
 		FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */ = {isa = PBXBuildFile; fileRef = FE0522E51CB02D6600315468 /* all_base_nodes.json */; };
 		FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */; };
+		FE2E6BE81D16982900B86D8A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2E6BE71D16982900B86D8A /* CloudKit.framework */; };
 		FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */; };
 		FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEB1C9CA1240006D9EE /* Field.swift */; };
 		FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEC1C9CA1240006D9EE /* Place.swift */; };
@@ -114,6 +115,8 @@
 		FE0522E11CB01BBF00315468 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		FE0522E51CB02D6600315468 /* all_base_nodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = all_base_nodes.json; sourceTree = "<group>"; };
 		FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
+		FE2E6BE61D16963600B86D8A /* SkillCloud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SkillCloud.entitlements; sourceTree = "<group>"; };
+		FE2E6BE71D16982900B86D8A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasBoard.swift; sourceTree = "<group>"; };
 		FE31DAEB1C9CA1240006D9EE /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		FE31DAEC1C9CA1240006D9EE /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE2E6BE81D16982900B86D8A /* CloudKit.framework in Frameworks */,
 				FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */,
 				0EBD292BB6568C34F93754EC /* Pods_SkillCloud.framework in Frameworks */,
 			);
@@ -168,6 +172,7 @@
 		7493D99371A43512DBFF49BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FE2E6BE71D16982900B86D8A /* CloudKit.framework */,
 				FE0522D71CAFE46600315468 /* SpriteKit.framework */,
 				0973088A39C9FDA46F42FEC2 /* Pods_SkillCloud.framework */,
 			);
@@ -226,6 +231,7 @@
 		FE31DAE71C9CA1240006D9EE /* SkillCloud */ = {
 			isa = PBXGroup;
 			children = (
+				FE2E6BE61D16963600B86D8A /* SkillCloud.entitlements */,
 				FE31DAE81C9CA1240006D9EE /* Classes */,
 				FE31DAFB1C9CA1240006D9EE /* Resources */,
 				FE31DB071C9CA1240006D9EE /* Supporting Files */,
@@ -404,6 +410,11 @@
 					C8A4A0421C981B6C004E055D = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = YYAKJ5SR76;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -654,6 +665,7 @@
 			baseConfigurationReference = 475C05D26AD5AF1583C89837 /* Pods-SkillCloud.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SkillCloud/SkillCloud.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -674,6 +686,7 @@
 			baseConfigurationReference = 1712187C40B694294151165F /* Pods-SkillCloud.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SkillCloud/SkillCloud.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
