@@ -38,6 +38,8 @@
 		FE0522E21CB01BBF00315468 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522E11CB01BBF00315468 /* Node.swift */; };
 		FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */ = {isa = PBXBuildFile; fileRef = FE0522E51CB02D6600315468 /* all_base_nodes.json */; };
 		FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */; };
+		FE2151451D1F3435005BC8B1 /* CloudContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2151441D1F3435005BC8B1 /* CloudContainer.swift */; };
+		FE2151471D1F3509005BC8B1 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2151461D1F3509005BC8B1 /* UserInfo.swift */; };
 		FE2E6BE81D16982900B86D8A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2E6BE71D16982900B86D8A /* CloudKit.framework */; };
 		FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */; };
 		FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEB1C9CA1240006D9EE /* Field.swift */; };
@@ -115,6 +117,8 @@
 		FE0522E11CB01BBF00315468 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		FE0522E51CB02D6600315468 /* all_base_nodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = all_base_nodes.json; sourceTree = "<group>"; };
 		FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
+		FE2151441D1F3435005BC8B1 /* CloudContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudContainer.swift; sourceTree = "<group>"; };
+		FE2151461D1F3509005BC8B1 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		FE2E6BE61D16963600B86D8A /* SkillCloud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SkillCloud.entitlements; sourceTree = "<group>"; };
 		FE2E6BE71D16982900B86D8A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasBoard.swift; sourceTree = "<group>"; };
@@ -228,6 +232,15 @@
 			path = Patterns;
 			sourceTree = "<group>";
 		};
+		FE2151431D1F3402005BC8B1 /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				FE2151441D1F3435005BC8B1 /* CloudContainer.swift */,
+				FE2151461D1F3509005BC8B1 /* UserInfo.swift */,
+			);
+			path = CloudKit;
+			sourceTree = "<group>";
+		};
 		FE31DAE71C9CA1240006D9EE /* SkillCloud */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +266,7 @@
 		FE31DAE91C9CA1240006D9EE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FE2151431D1F3402005BC8B1 /* CloudKit */,
 				FE766D331C9D7FDD0079CA29 /* CoreData */,
 				FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */,
 				FE31DAEB1C9CA1240006D9EE /* Field.swift */,
@@ -512,11 +526,13 @@
 				FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */,
 				C80A918F1CB5206800529F0B /* GoogleImageCollectionViewCell.swift in Sources */,
 				FE0522E21CB01BBF00315468 /* Node.swift in Sources */,
+				FE2151471D1F3509005BC8B1 /* UserInfo.swift in Sources */,
 				FE766D361C9D80010079CA29 /* DataManager.swift in Sources */,
 				FE0522B41CAEF0B400315468 /* TestView.swift in Sources */,
 				FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */,
 				C8F55CB31CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift in Sources */,
 				FE0522E01CB0157800315468 /* BrainNode.swift in Sources */,
+				FE2151451D1F3435005BC8B1 /* CloudContainer.swift in Sources */,
 				FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */,
 				FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */,
 				FE766D411C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift in Sources */,

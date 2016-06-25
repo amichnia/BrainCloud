@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CloudKit
 
-class Skill {
+class Skill: CKRecordConvertible {
     
     var title : String
     var description : String?
@@ -27,6 +28,7 @@ class Skill {
     
     var checkCount = 0
     
+    // MARK: - Initializers
     init(title: String, image: UIImage, experience: Skill.Experience, description: String? = nil) {
         self.title = title
         self.image = image
@@ -34,7 +36,18 @@ class Skill {
         self.description = description
     }
     
+    required convenience init?(record: CKRecord) {
+        // TODO: Stub implementation - replace
+        self.init(title: "", image: UIImage(), experience: Skill.Experience.Beginner, description: nil)
+    }
+    
+}
+
+// MARK: - Experience
+extension Skill {
+    
     enum Experience : Int {
+        case Any = -1
         case Beginner = 0
         case Intermediate
         case Professional
@@ -50,6 +63,8 @@ class Skill {
                 return UIImage(named: "icon-skill-professional")
             case .Expert:
                 return UIImage(named: "icon-skill-expert")
+            default:
+                return nil
             }
         }
         
@@ -63,10 +78,11 @@ class Skill {
                 return 20
             case .Expert:
                 return 25
+            default:
+                return 0
             }
         }
     }
-    
 }
 
 protocol ExperienceConvertible {
