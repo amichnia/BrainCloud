@@ -66,8 +66,13 @@ class CloudContainer {
         }
     }
     
+    func promiseSelfSkills() -> Promise<[Skill]> {
+        return self.promiseAllSkillsFromDatabase(.Private)
+    }
+    
 }
 
+// MARK: - Skill promise with CKRecord
 extension Skill {
     
     class func promiseWithRecord(record: CKRecord) -> Promise<Skill> {
