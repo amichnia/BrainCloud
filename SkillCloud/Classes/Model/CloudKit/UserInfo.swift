@@ -8,61 +8,72 @@
 
 import Foundation
 import CloudKit
+import PromiseKit
 
 class UserInfo {
+    // MARK: - Properties
+    private let container : CKContainer
+    private var userRecordID : CKRecordID!
+    private var contacts = [AnyObject]()
     
-    let container : CKContainer
-    var userRecordID : CKRecordID!
-    var contacts = [AnyObject]()
-    
+    // MARK: - Initializers
     init (container : CKContainer) {
         self.container = container;
     }
     
-    func loggedInToICloud(completion : (accountStatus : CKAccountStatus, error : NSError!) -> ()) {
+    // MARK: - Public promises
+    func promiseUserID() -> Promise<CKRecordID> {
+        return Promise<CKRecordID>() { fulfill,reject in
+            guard self.userRecordID == nil else {
+                fulfill(self.userRecordID)
+                return
+            }
+            
+            self.container.fetchUserRecordIDWithCompletionHandler() { recordID, error in
+                if let recordID = recordID where error == nil {
+                    self.userRecordID = recordID
+                    fulfill(recordID)
+                }
+                else {
+                    reject(error ?? CloudError.UnknownError)
+                }
+            }
+
+        }
+    }
+    
+    // MARK: - Private
+    private func loggedInToICloud(completion : (accountStatus : CKAccountStatus, error : NSError!) -> ()) {
         //replace this stub
         completion(accountStatus: .CouldNotDetermine, error: nil)
     }
     
-    func userID(completion: (userRecordID: CKRecordID!, error: NSError!)->()) {
-        if self.userRecordID != nil {
-            completion(userRecordID: self.userRecordID, error: nil)
-        }
-        else {
-            self.container.fetchUserRecordIDWithCompletionHandler() {
-                recordID, error in
-                if recordID != nil {
-                    self.userRecordID = recordID
-                }
-                completion(userRecordID: recordID, error: error)
-            }
-        }
-    }
-    
-    func userInfo(recordID: CKRecordID!, completion:(userInfo: CKDiscoveredUserInfo!, error: NSError!)->()) {
+    private func userInfo(recordID: CKRecordID!, completion:(userInfo: CKDiscoveredUserInfo!, error: NSError!)->()) {
         //replace this stub
         completion(userInfo: nil, error: nil)
     }
     
-    func requestDiscoverability(completion: (discoverable: Bool) -> ()) {
+    // TODO: Implement
+    private func requestDiscoverability(completion: (discoverable: Bool) -> ()) {
         //replace this stub
         completion(discoverable: false)
     }
-    
-    func userInfo(completion: (userInfo: CKDiscoveredUserInfo!, error: NSError!)->()) {
+    // TODO: Implement
+    private func userInfo(completion: (userInfo: CKDiscoveredUserInfo!, error: NSError!)->()) {
         self.requestDiscoverability() { discoverable in
-            self.userID() { recordID, error in
-                if error != nil {
-                    completion(userInfo: nil, error: error)
-                } else {
-                    self.userInfo(recordID, completion: completion)
-                }
-            }
+//            self.userID() { recordID, error in
+//                if error != nil {
+//                    completion(userInfo: nil, error: error)
+//                } else {
+//                    self.userInfo(recordID, completion: completion)
+//                }
+//            }
         }
     }
-    
-    func findContacts(completion: (userInfos:[AnyObject]!, error: NSError!)->()) {
+    // TODO: Implement
+    private func findContacts(completion: (userInfos:[AnyObject]!, error: NSError!)->()) {
         completion(userInfos: [CKRecordID](), error: nil)
     }
+    
 }
 

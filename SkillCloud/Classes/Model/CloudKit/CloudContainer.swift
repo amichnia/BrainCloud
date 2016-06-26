@@ -20,18 +20,23 @@ enum DatabaseType {
     case Private
 }
 
+/// Cloud container class - encapsulates CK promises and CK Deserters
 class CloudContainer {
-    
+    // MARK: - Properties
     let container: CKContainer
     let publicDatabase: CKDatabase
     let privateDatabase: CKDatabase
+    let userInfo: UserInfo
     
+    // MARK: - Initializers
     init() {
         self.container = CKContainer.defaultContainer()
         self.publicDatabase = self.container.publicCloudDatabase
         self.privateDatabase = self.container.privateCloudDatabase
+        self.userInfo = UserInfo(container: self.container)
     }
     
+    // MARK: - Private
     private func database(type: DatabaseType) -> CKDatabase {
         switch type {
         case .Private:
@@ -41,6 +46,7 @@ class CloudContainer {
         }
     }
     
+    // MARK: - Public promises
     func promiseAllSkillsFromDatabase(database: DatabaseType) -> Promise<[Skill]> {
         return Promise<[Skill]>() { fulfill, reject in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
@@ -70,6 +76,13 @@ class CloudContainer {
         return self.promiseAllSkillsFromDatabase(.Private)
     }
     
+    func promiseAddSkill(skill: Skill) -> Promise<CKRecordID> {
+        return self.userInfo.promiseUserID()
+        .then { userRecordID -> Promise<CKRecordID> in
+            return skill.promiseAddTo(self.privateDatabase, forUser: userRecordID)
+        }
+    }
+    
 }
 
 // MARK: - Skill promise with CKRecord
@@ -95,4 +108,5 @@ protocol CKRecordConvertible : class {
 enum CloudError: ErrorType {
     case NoData
     case NotMatchingRecordData
+    case UnknownError
 }

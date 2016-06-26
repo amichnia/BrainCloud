@@ -8,6 +8,7 @@
 
 import UIKit
 import CloudKit
+import PromiseKit
 
 class Skill: CKRecordConvertible {
     
@@ -37,11 +38,83 @@ class Skill: CKRecordConvertible {
     }
     
     required convenience init?(record: CKRecord) {
-        // TODO: Stub implementation - replace
-        self.init(title: "", image: UIImage(), experience: Skill.Experience.Beginner, description: nil)
+        guard let
+            title = record.objectForKey(CKKey.Name) as? String,
+            expValue = record.objectForKey(CKKey.Experience) as? Int,
+            experience = Skill.Experience(rawValue: expValue),
+            imageUrl = (record.objectForKey(CKKey.Image) as? CKAsset)?.fileURL,
+            image = UIImage(contentsOfFile: imageUrl.path!)
+        else {
+            return nil
+        }
+        
+        let description = record.objectForKey(CKKey.Description) as? String
+        
+        self.init(title: title, image: image, experience: experience, description: description)
+    }
+    
+    // MARK: - Public promises
+    func promiseAddTo(database: CKDatabase, forUser userRecordId: CKRecordID) -> Promise<CKRecordID> {
+        return Promise<CKRecordID> { fulfill,reject in
+            let record = CKRecord(recordType: RecordType.Skill)
+            record.setObject(self.title, forKey: CKKey.Name)
+            record.setObject(self.experience.rawValue, forKey: CKKey.Experience)
+            
+            var fileUrl: NSURL?
+            if let imageData = UIImageJPEGRepresentation(self.image, 0.9) {
+                fileUrl = self.generateFileURL()
+                try! imageData.writeToURL(fileUrl!, options: .AtomicWrite)
+                let imageAsset = CKAsset(fileURL: fileUrl!)
+                record.setObject(imageAsset, forKey: CKKey.Image)
+            }
+            
+            database.saveRecord(record) { savedRecord,error in
+                // Clear data
+                if let temporaryUrl = fileUrl {
+                    try! NSFileManager.defaultManager().removeItemAtURL(temporaryUrl)
+                }
+                
+                // Process success
+                if let savedRecord = savedRecord where error == nil {
+                    fulfill(savedRecord.recordID)
+                }
+                // Process failure
+                else {
+                    reject(error ?? CloudError.UnknownError)
+                }
+            }
+            
+        }
+    }
+    
+    // MARK: - Static Keys
+    private struct CKKey {
+        static let Name = "name"
+        static let Experience = "experienceValue"
+        static let Image = "image"
+        static let Description = "desc"
     }
     
 }
+
+extension Skill {
+    
+    func generateFileURL() -> NSURL {
+        let fileManager = NSFileManager.defaultManager()
+        let fileArray: NSArray = fileManager.URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)
+        let fileURL = fileArray.lastObject?.URLByAppendingPathComponent(NSUUID().UUIDString).URLByAppendingPathExtension("jpg")
+        
+        if let filePath = (fileArray.lastObject as? NSURL)?.path {
+            if !fileManager.fileExistsAtPath(filePath) {
+                try! fileManager.createDirectoryAtPath(filePath, withIntermediateDirectories: true, attributes: nil)
+            }
+        }
+        
+        return fileURL!
+    }
+    
+}
+
 
 // MARK: - Experience
 extension Skill {
