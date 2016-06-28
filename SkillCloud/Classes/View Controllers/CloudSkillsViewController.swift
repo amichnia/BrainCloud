@@ -105,9 +105,11 @@ class CloudSkillsViewController: UIViewController {
             
             return skill
         }
-        .then(self.cloudContainer.promiseAddSkill)
-        .then { recordId -> Void in
-            print("Added record with ID = \(recordId)")
+        .then { skill -> Promise<Skill> in
+            return skill.promiseSyncTo()
+        }
+        .then { skill -> Void in
+            print("Added record with ID = \(skill.recordID)")
         }
         .always {
             MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)

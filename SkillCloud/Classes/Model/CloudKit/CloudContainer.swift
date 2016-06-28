@@ -71,45 +71,6 @@ class CloudContainer {
         return self.promiseAllSkillsFromDatabase(.Private)
     }
     
-    func promiseAddSkill(skill: Skill) -> Promise<CKRecordID> {
-        return self.userInfo.promiseUserID()
-        .then { userRecordID -> Promise<CKRecordID> in
-            return skill.promiseAddTo(self.privateDatabase, forUser: userRecordID)
-        }
-    }
-    
-    func promiseImageAssetsForSkill(skill: Skill, fromDatabase database: DatabaseType) -> Promise<[ImageAsset]> {
-        return Promise<[ImageAsset]> { fulfill,reject in
-            guard let record = skill.recordRepresentation() else {
-                reject(CloudError.FetchFailed(reason: "No record fetched"))
-                return
-            }
-            
-            skill.clearTemporaryData()
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-                let predicate = NSPredicate(format: "skill = %@", record)
-                let query = CKQuery(recordType: ImageAsset.recordType, predicate: predicate)
-                
-                self.database(database).performQuery(query, inZoneWithID: nil) { records, error in
-                    if let error = error {
-                        reject(error)
-                    }
-                    else if let records = records {
-                        let promises = records.map{ ImageAsset.promiseWithRecord($0) }
-                        
-                        when(promises).then { assets -> Void in
-                            fulfill(assets)
-                        }
-                    }
-                    else {
-                        reject(CloudError.NoData)
-                    }
-                }
-            }
-        }
-    }
-    
 }
 
 enum DatabaseType {
