@@ -222,7 +222,7 @@ class AddViewController: UIViewController {
             return
         }
         
-        let skill = Skill(title: name, image: image, experience: experience)
+        let skill = Skill(title: name, thumbnail: image, experience: experience)
         
         if let previousSkill = self.skill {
             skill.previousUniqueIdentifier = previousSkill.uniqueIdentifierValue

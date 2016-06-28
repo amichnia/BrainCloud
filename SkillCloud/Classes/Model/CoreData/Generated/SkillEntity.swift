@@ -28,8 +28,14 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
         if let skill = model as? Skill {
             self.name = skill.title
             self.desc = skill.description
-            self.image = skill.image
+            self.thumbnail = skill.thumbnail
             self.experienceValue = Int16(skill.experience.rawValue)
+            
+            self.image = skill.image // Asset!!!
+            
+            self.recordID = skill.recordName
+            self.changeTag = skill.recordChangeTag
+            self.modified = skill.modified?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
         }
     }
     
@@ -39,7 +45,13 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
 extension SkillEntity {
     
     var skill : Skill {
-        return Skill(title: self.name!, image: self.image!, experience: Skill.Experience(rawValue: Int(self.experienceValue))!, description: self.description)
+        let skill = Skill(title: self.name!, thumbnail: self.image!, experience: Skill.Experience(rawValue: Int(self.experienceValue))!, description: self.description)
+        
+        skill.recordName = self.recordID
+        skill.recordChangeTag = self.changeTag
+        skill.modified = NSDate(timeIntervalSince1970: self.modified)
+        
+        return skill
     }
     
 }

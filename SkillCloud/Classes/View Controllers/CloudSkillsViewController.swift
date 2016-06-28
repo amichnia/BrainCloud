@@ -28,7 +28,7 @@ class CloudSkillsViewController: UIViewController {
         MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
         self.cloudContainer = CloudContainer()
         
-        self.cloudContainer.promiseAllSkillsFromDatabase(.Private)
+        self.cloudContainer.promiseAllSkillsFromDatabase(.Public)
         .then { skills -> Void in
             self.skills = skills
             self.collectionView.reloadData()

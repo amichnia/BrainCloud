@@ -11,15 +11,6 @@ import UIKit
 import CloudKit
 import PromiseKit
 
-struct RecordType {
-    static let Skill = "Skill"
-}
-
-enum DatabaseType {
-    case Public
-    case Private
-}
-
 /// Cloud container class - encapsulates CK promises and CK Deserters
 class CloudContainer {
     // MARK: - Properties
@@ -51,7 +42,7 @@ class CloudContainer {
         return Promise<[Skill]>() { fulfill, reject in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
                 let predicate = NSPredicate(value: true)
-                let query = CKQuery(recordType: RecordType.Skill, predicate: predicate)
+                let query = CKQuery(recordType: Skill.recordType, predicate: predicate)
                 
                 self.database(database).performQuery(query, inZoneWithID: nil) { records, error in
                     if let error = error {
@@ -83,30 +74,47 @@ class CloudContainer {
         }
     }
     
-}
-
-// MARK: - Skill promise with CKRecord
-extension Skill {
-    
-    class func promiseWithRecord(record: CKRecord) -> Promise<Skill> {
-        return Promise<Skill>() { fulfill, reject in
-            if let skill = Skill(record: record) {
-                fulfill(skill)
+    func promiseImageAssetsForSkill(skill: Skill, fromDatabase database: DatabaseType) -> Promise<[ImageAsset]> {
+        return Promise<[ImageAsset]> { fulfill,reject in
+            guard let record = skill.record else {
+                reject(CloudError.FetchError(reason: "No record fetched"))
+                return
             }
-            else {
-                reject(CloudError.NotMatchingRecordData)
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+                let predicate = NSPredicate(format: "skill = %@", record)
+                let query = CKQuery(recordType: ImageAsset.recordType, predicate: predicate)
+                
+                self.database(database).performQuery(query, inZoneWithID: nil) { records, error in
+                    if let error = error {
+                        reject(error)
+                    }
+                    else if let records = records {
+                        let promises = records.map{ ImageAsset.promiseWithRecord($0) }
+                        
+                        when(promises).then { assets -> Void in
+                            fulfill(assets)
+                        }
+                    }
+                    else {
+                        reject(CloudError.NoData)
+                    }
+                }
             }
         }
     }
     
 }
 
-protocol CKRecordConvertible : class {
-    init?(record: CKRecord)
+enum DatabaseType {
+    case Public
+    case Private
 }
 
 enum CloudError: ErrorType {
     case NoData
+    case WrongAsset
     case NotMatchingRecordData
     case UnknownError
+    case FetchError(reason: String)
 }
