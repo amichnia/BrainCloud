@@ -96,64 +96,6 @@ extension CKRecordConvertible {
     
 }
 
-// MARK: - CKRecord extensions
-extension CKRecord {
-    
-    convenience init(recordConvertible: CKRecordConvertible){
-        if let recordID = recordConvertible.recordID {
-            self.init(recordType: recordConvertible.recordType, recordID: recordID)
-        }
-        else {
-            self.init(recordType: recordConvertible.recordType)
-        }
-    }
-    
-    static func promise(recordConvertible: CKRecordConvertible) -> Promise<CKRecord> {
-        return Promise<CKRecord>() { fulfill,reject in
-            fulfill(CKRecord(recordConvertible: recordConvertible))
-        }
-    }
-    
-}
-
-// MARK: - CKAsset extensions
-extension CKAsset {
-    
-    /**
-     Initializes new CKAsset with given UIImage, as jpg
-     
-     - parameter image: UIImage instance
-     
-     - throws: CloudError.WrongAsset if could not create JPG representation, or NSGileManager errors regarding writing to generated url
-     
-     - returns: Initialized image asset
-     */
-    static func assetWithImage(image: UIImage) throws -> CKAsset {
-        guard let imageData = UIImageJPEGRepresentation(image, 0.9) else {
-            throw CloudError.WrongAsset
-        }
-
-        let fileUrl = generateFileURL("jpg")
-        try imageData.writeToURL(fileUrl, options: .AtomicWrite)
-        let imageAsset = CKAsset(fileURL: fileUrl)
-        
-        return imageAsset
-    }
-    
-    /**
-     Potentially unsafe - call ONLY on self made assets for upload purposes
-     */
-    func clearTemporaryData() {
-        do {
-            try NSFileManager.defaultManager().removeItemAtURL(self.fileURL)
-        }
-        catch {
-            DDLogError("Couldn't clear data after performed upload! Error: \(error)")
-        }
-    }
-    
-}
-
 // MARK: - CKRecordSyncable
 /// Class implementing CKRecordSyncable can be synced via CloudKit
 protocol CKRecordSyncable: CKRecordConvertible, CKRecordMappable {
@@ -182,12 +124,9 @@ extension CKRecordSyncable {
     }
     
     private func promiseSyncTo(database: CKDatabase) -> Promise<CKRecord> {
-        guard let record = self.recordRepresentation() else {
-            return Promise<CKRecord>(error: CloudError.NotMatchingRecordData)
-        }
-        
         // Creating record resulted in creating temporary data at generated file url
-        return database.promiseSaveRecord(record)
+        return self.promiseRecord()
+        .then(database.promiseSaveRecord)
         .always {
             // So assure, that the temporary data will be always cleared
             self.clearTemporaryData()
@@ -215,6 +154,7 @@ extension CKRecordSyncable {
     
 }
 
+// MARK: - CKDatabase extensions
 extension CKDatabase {
     
     /**
@@ -264,6 +204,64 @@ extension CKDatabase {
                     }
                 }
             }
+        }
+    }
+    
+}
+
+// MARK: - CKRecord extensions
+extension CKRecord {
+    
+    convenience init(recordConvertible: CKRecordConvertible){
+        if let recordID = recordConvertible.recordID {
+            self.init(recordType: recordConvertible.recordType, recordID: recordID)
+        }
+        else {
+            self.init(recordType: recordConvertible.recordType)
+        }
+    }
+    
+    static func promise(recordConvertible: CKRecordConvertible) -> Promise<CKRecord> {
+        return Promise<CKRecord>() { fulfill,reject in
+            fulfill(CKRecord(recordConvertible: recordConvertible))
+        }
+    }
+    
+}
+
+// MARK: - CKAsset extensions
+extension CKAsset {
+    
+    /**
+     Initializes new CKAsset with given UIImage, as jpg
+     
+     - parameter image: UIImage instance
+     
+     - throws: CloudError.WrongAsset if could not create JPG representation, or NSGileManager errors regarding writing to generated url
+     
+     - returns: Initialized image asset
+     */
+    static func assetWithImage(image: UIImage) throws -> CKAsset {
+        guard let imageData = UIImageJPEGRepresentation(image, 0.9) else {
+            throw CloudError.WrongAsset
+        }
+        
+        let fileUrl = generateFileURL("jpg")
+        try imageData.writeToURL(fileUrl, options: .AtomicWrite)
+        let imageAsset = CKAsset(fileURL: fileUrl)
+        
+        return imageAsset
+    }
+    
+    /**
+     Potentially unsafe - call ONLY on self made assets for upload purposes
+     */
+    func clearTemporaryData() {
+        do {
+            try NSFileManager.defaultManager().removeItemAtURL(self.fileURL)
+        }
+        catch {
+            DDLogError("Couldn't clear data after performed upload! Error: \(error)")
         }
     }
     
