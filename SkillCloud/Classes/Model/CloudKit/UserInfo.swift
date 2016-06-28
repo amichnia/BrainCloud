@@ -23,12 +23,11 @@ class UserInfo {
     
     // MARK: - Public promises
     func promiseUserID() -> Promise<CKRecordID> {
+        guard self.userRecordID == nil else {
+            return Promise<CKRecordID>(self.userRecordID)
+        }
+        
         return Promise<CKRecordID>() { fulfill,reject in
-            guard self.userRecordID == nil else {
-                fulfill(self.userRecordID)
-                return
-            }
-            
             self.container.fetchUserRecordIDWithCompletionHandler() { recordID, error in
                 if let recordID = recordID where error == nil {
                     self.userRecordID = recordID

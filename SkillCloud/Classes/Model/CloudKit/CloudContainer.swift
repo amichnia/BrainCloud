@@ -13,6 +13,10 @@ import PromiseKit
 
 /// Cloud container class - encapsulates CK promises and CK Deserters
 class CloudContainer {
+    
+    // MARK: - Big bad singleton
+    static var sharedContainer: CloudContainer = CloudContainer()
+    
     // MARK: - Properties
     let container: CKContainer
     let publicDatabase: CKDatabase
@@ -77,7 +81,7 @@ class CloudContainer {
     func promiseImageAssetsForSkill(skill: Skill, fromDatabase database: DatabaseType) -> Promise<[ImageAsset]> {
         return Promise<[ImageAsset]> { fulfill,reject in
             guard let record = skill.recordRepresentation() else {
-                reject(CloudError.FetchError(reason: "No record fetched"))
+                reject(CloudError.FetchFailed(reason: "No record fetched"))
                 return
             }
             
@@ -118,5 +122,8 @@ enum CloudError: ErrorType {
     case WrongAsset
     case NotMatchingRecordData
     case UnknownError
-    case FetchError(reason: String)
+    case FetchFailed(reason: String)
+    case FetchError(code: Int, error: NSError)
+    case SaveFailed(reason: String)
+    case SaveError(code: Int, error: NSError)
 }
