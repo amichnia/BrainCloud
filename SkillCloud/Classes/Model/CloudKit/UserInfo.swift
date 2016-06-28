@@ -22,6 +22,7 @@ class UserInfo {
     }
     
     // MARK: - Public promises
+    // TODO: Move this to Cloud container
     func promiseUserID() -> Promise<CKRecordID> {
         guard self.userRecordID == nil else {
             return Promise<CKRecordID>(self.userRecordID)
