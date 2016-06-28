@@ -45,7 +45,7 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
 extension SkillEntity {
     
     var skill : Skill {
-        let skill = Skill(title: self.name!, thumbnail: self.image!, experience: Skill.Experience(rawValue: Int(self.experienceValue))!, description: self.description)
+        let skill = Skill(title: self.name!, thumbnail: self.thumbnail!, experience: Skill.Experience(rawValue: Int(self.experienceValue))!, description: self.description)
         
         skill.recordName = self.recordID
         skill.recordChangeTag = self.changeTag

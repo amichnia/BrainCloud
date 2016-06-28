@@ -28,7 +28,7 @@ class CloudContainer {
     }
     
     // MARK: - Private
-    private func database(type: DatabaseType) -> CKDatabase {
+    func database(type: DatabaseType) -> CKDatabase {
         switch type {
         case .Private:
             return self.privateDatabase
@@ -76,10 +76,12 @@ class CloudContainer {
     
     func promiseImageAssetsForSkill(skill: Skill, fromDatabase database: DatabaseType) -> Promise<[ImageAsset]> {
         return Promise<[ImageAsset]> { fulfill,reject in
-            guard let record = skill.record else {
+            guard let record = skill.recordRepresentation() else {
                 reject(CloudError.FetchError(reason: "No record fetched"))
                 return
             }
+            
+            skill.clearTemporaryData()
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
                 let predicate = NSPredicate(format: "skill = %@", record)

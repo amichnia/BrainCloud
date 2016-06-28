@@ -10,6 +10,7 @@ import UIKit
 import CloudKit
 import PromiseKit
 
+// MARK: - Skill class definition
 class Skill {
     
     var title: String!
@@ -20,7 +21,7 @@ class Skill {
     var thumbnail: UIImage!
     
     // Cloud Kit only
-    var record: CKRecord?
+    var createdRecord: CKRecord?
     var recordName: String?
     var modified: NSDate?
     var recordChangeTag: String?
@@ -34,9 +35,9 @@ class Skill {
         get {
             return self.thumbnail // TODO: Change to evaluate from propmise of image asset
         }
-        set {
-            // TODO: Valid setter
-        }
+//        set {
+//            // TODO: Valid setter
+//        }
     }
     
     var checkCount = 0
@@ -117,7 +118,6 @@ extension Skill: CKRecordMappable {
         self.recordName = record.recordID.recordName
         self.modified = record.modificationDate
         self.recordChangeTag = record.recordChangeTag
-        self.record = record
         
         return self
     }
@@ -141,7 +141,18 @@ extension Skill: CKRecordConvertible {
             return nil
         }
         
+        self.createdRecord = record    // ???
+        
         return record
+    }
+    
+}
+
+// MARK: - CKRecordSyncable
+extension Skill: CKRecordSyncable {
+    
+    func clearTemporaryData() {
+        (self.createdRecord?.objectForKey(CKKey.Thumbnail) as? CKAsset)?.clearTemporaryData()
     }
     
 }

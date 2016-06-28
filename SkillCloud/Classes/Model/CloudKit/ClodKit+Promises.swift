@@ -32,7 +32,18 @@ extension CKRecordMappable {
     
     typealias T = Self
     
-    static func promiseWithRecord(record: CKRecord) -> Promise<Self> {
+    func promiseMappingWith(record: CKRecord) -> Promise<T> {
+        return Promise<T>() { fulfill, reject in
+            if let object = self.performMappingWith(record) {
+                fulfill(object)
+            }
+            else {
+                reject(CloudError.NotMatchingRecordData)
+            }
+        }
+    }
+    
+    static func promiseWithRecord(record: CKRecord) -> Promise<T> {
         return Promise<T>() { fulfill, reject in
             if let object = T(record: record) {
                 fulfill(object)
@@ -150,10 +161,84 @@ protocol CKRecordSyncable: CKRecordConvertible, CKRecordMappable {
     var recordChangeTag: String? { get set }
     var modified: NSDate? { get set }
     
+    func clearTemporaryData()
+    
 }
 
 extension CKRecordSyncable {
     
+    typealias T = Self
     
+    // Sync record to
+    func promiseSyncTo(db: DatabaseType) -> Promise<Self> {
+        let container = CloudContainer()
+        let database = container.database(db)
+        
+        return container.userInfo.promiseUserID()
+        .then { userRecordID -> Promise<CKRecord> in
+            return self.promiseSyncTo(database, forUser: userRecordID)  // sync to cloud kit
+        }
+        .then { (savedRecord) -> Promise<T> in
+            return self.promiseMappingWith(savedRecord) // Gather source tag
+        }
+    }
+    
+    private func promiseSyncTo(database: CKDatabase, forUser userRecordId: CKRecordID) -> Promise<CKRecord> {
+        return Promise<CKRecord> { fulfill,reject in
+            guard let record = self.recordRepresentation() else {
+                reject(CloudError.NotMatchingRecordData)
+                return
+            }
+            
+            database.saveRecord(record) { savedRecord,error in
+                // Clear temporary data
+                self.clearTemporaryData()
+                
+                // Process success
+                if let savedRecord = savedRecord where error == nil {
+                    fulfill(savedRecord)
+                }
+                // Process failure
+                else {
+                    reject(error ?? CloudError.UnknownError)
+                }
+            }
+            
+        }
+    }
+
+    // Sync record from
+    private func promiseSyncFrom(database: CKDatabase) -> Promise<CKRecord> {
+        return Promise<CKRecord> { fulfill,reject in
+            guard let recordID = self.recordID else {
+                reject(CloudError.NotMatchingRecordData)
+                return
+            }
+            
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+//                let predicate = NSPredicate(value: true)
+//                let query = CKQuery(recordType: Skill.recordType, predicate: predicate)
+//                
+//                self.database(database).performQuery(query, inZoneWithID: nil) { records, error in
+//                    if let error = error {
+//                        reject(error)
+//                    }
+//                    else if let records = records {
+//                        let skillsPromises = records.map{ Skill.promiseWithRecord($0) }
+//                        
+//                        when(skillsPromises).then { skills -> Void in
+//                            fulfill(skills)
+//                        }
+//                    }
+//                    else {
+//                        reject(CloudError.NoData)
+//                    }
+//                }
+//            }
+        }
+    }
+    
+    
+    // Helpers
     
 }
