@@ -72,6 +72,17 @@ extension CKRecordConvertible {
         return String(Self)
     }
     
+    func promiseRecord() -> Promise<CKRecord> {
+        return Promise<CKRecord> { fulfill,reject in
+            if let record = self.recordRepresentation() {
+                fulfill(record)
+            }
+            else {
+                reject(CloudError.NotMatchingRecordData)
+            }
+        }
+    }
+    
 }
 
 // MARK: - CKRecord extensions
@@ -141,3 +152,8 @@ protocol CKRecordSyncable: CKRecordConvertible, CKRecordMappable {
     
 }
 
+extension CKRecordSyncable {
+    
+    
+    
+}
