@@ -41,38 +41,5 @@ class UserInfo {
         }
     }
     
-    // MARK: - Private
-    private func loggedInToICloud(completion : (accountStatus : CKAccountStatus, error : NSError!) -> ()) {
-        //replace this stub
-        completion(accountStatus: .CouldNotDetermine, error: nil)
-    }
-    
-    private func userInfo(recordID: CKRecordID!, completion:(userInfo: CKDiscoveredUserInfo!, error: NSError!)->()) {
-        //replace this stub
-        completion(userInfo: nil, error: nil)
-    }
-    
-    // TODO: Implement
-    private func requestDiscoverability(completion: (discoverable: Bool) -> ()) {
-        //replace this stub
-        completion(discoverable: false)
-    }
-    // TODO: Implement
-    private func userInfo(completion: (userInfo: CKDiscoveredUserInfo!, error: NSError!)->()) {
-        self.requestDiscoverability() { discoverable in
-//            self.userID() { recordID, error in
-//                if error != nil {
-//                    completion(userInfo: nil, error: error)
-//                } else {
-//                    self.userInfo(recordID, completion: completion)
-//                }
-//            }
-        }
-    }
-    // TODO: Implement
-    private func findContacts(completion: (userInfos:[AnyObject]!, error: NSError!)->()) {
-        completion(userInfos: [CKRecordID](), error: nil)
-    }
-    
 }
 
