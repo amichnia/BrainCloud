@@ -32,6 +32,7 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
             self.experienceValue    = Int16(skill.experience.rawValue)
             self.thumbnail          = skill.thumbnail
             self.image              = skill.image
+            self.offline            = skill.offline
             // CloudKit synced
             self.recordID           = skill.recordName
             self.changeTag          = skill.recordChangeTag
@@ -48,6 +49,7 @@ extension SkillEntity {
         let skill = Skill(title: self.name!, thumbnail: self.thumbnail!, experience: Skill.Experience(rawValue: Int(self.experienceValue))!, description: self.desc)
         
         skill.image = self.image
+        skill.offline = self.offline
         
         // CloudKit
         skill.recordName        = self.recordID

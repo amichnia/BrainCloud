@@ -2,7 +2,7 @@
 //  SkillEntity+CoreDataProperties.swift
 //  SkillCloud
 //
-//  Created by Andrzej Michnia on 27/06/16.
+//  Created by Andrzej Michnia on 30/06/16.
 //  Copyright © 2016 amichnia. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -22,5 +22,6 @@ extension SkillEntity {
     @NSManaged var name: String?
     @NSManaged var recordID: String?
     @NSManaged var thumbnail: UIImage?
+    @NSManaged var offline: Bool
 
 }

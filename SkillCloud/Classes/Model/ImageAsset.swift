@@ -14,6 +14,7 @@ class ImageAsset {
     
     var image: UIImage!
     var name: String?
+    var offline: Bool = true
     
     var recordChangeTag: String?
     var modified: NSDate?

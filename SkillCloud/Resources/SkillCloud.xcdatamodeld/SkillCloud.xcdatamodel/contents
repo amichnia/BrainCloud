@@ -25,6 +25,7 @@
         <attribute name="image" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
         <attribute name="modified" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="offline" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
         <attribute name="recordID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
     </entity>
@@ -39,7 +40,7 @@
         <element name="BaseNodeEntity" positionX="-234" positionY="-54" width="128" height="88"/>
         <element name="BrainNodeEntity" positionX="-405" positionY="-62" width="128" height="103"/>
         <element name="GraphCloudEntity" positionX="-582" positionY="102" width="128" height="118"/>
-        <element name="SkillEntity" positionX="-47" positionY="116" width="128" height="163"/>
+        <element name="SkillEntity" positionX="-47" positionY="116" width="128" height="178"/>
         <element name="SkillNodeEntity" positionX="-232" positionY="117" width="128" height="118"/>
     </elements>
 </model>

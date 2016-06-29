@@ -19,6 +19,7 @@ class Skill {
     var previousUniqueIdentifier: String?   // For Core Data
     var thumbnail: UIImage!
     var image: UIImage!
+    var offline: Bool = true
     
     // Cloud Kit only
     var createdRecord: CKRecord?

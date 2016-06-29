@@ -69,6 +69,9 @@
 		FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB88E731CB6FD8500EED249 /* Assets.xcassets */; };
 		FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */; };
 		FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */; };
+		FEE50AA01D2493F70024060D /* CKRecordMappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE50A9F1D2493F70024060D /* CKRecordMappable.swift */; };
+		FEE50AA21D2494100024060D /* CKRecordConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE50AA11D2494100024060D /* CKRecordConvertible.swift */; };
+		FEE50AA41D24941E0024060D /* CKRecordSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE50AA31D24941E0024060D /* CKRecordSyncable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -152,6 +155,9 @@
 		FEB88E731CB6FD8500EED249 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudExportViewController.swift; sourceTree = "<group>"; };
 		FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsAndDefines.swift; sourceTree = "<group>"; };
+		FEE50A9F1D2493F70024060D /* CKRecordMappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRecordMappable.swift; sourceTree = "<group>"; };
+		FEE50AA11D2494100024060D /* CKRecordConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRecordConvertible.swift; sourceTree = "<group>"; };
+		FEE50AA31D24941E0024060D /* CKRecordSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRecordSyncable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +247,9 @@
 			children = (
 				FE2151441D1F3435005BC8B1 /* CloudContainer.swift */,
 				FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */,
+				FEE50A9F1D2493F70024060D /* CKRecordMappable.swift */,
+				FEE50AA11D2494100024060D /* CKRecordConvertible.swift */,
+				FEE50AA31D24941E0024060D /* CKRecordSyncable.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -529,10 +538,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8DF6D261CC5033F009CDBFA /* AddScene.swift in Sources */,
+				FEE50AA01D2493F70024060D /* CKRecordMappable.swift in Sources */,
 				FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */,
 				C80A918F1CB5206800529F0B /* GoogleImageCollectionViewCell.swift in Sources */,
 				FE0522E21CB01BBF00315468 /* Node.swift in Sources */,
 				FE766D361C9D80010079CA29 /* DataManager.swift in Sources */,
+				FEE50AA21D2494100024060D /* CKRecordConvertible.swift in Sources */,
 				FE0522B41CAEF0B400315468 /* TestView.swift in Sources */,
 				FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */,
 				C8F55CB31CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift in Sources */,
@@ -549,6 +560,7 @@
 				FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */,
 				FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */,
 				C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */,
+				FEE50AA41D24941E0024060D /* CKRecordSyncable.swift in Sources */,
 				C83585C51CDB46150003E538 /* RBResizer.swift in Sources */,
 				C8F55CA61CFC264300208F88 /* SkillNode.swift in Sources */,
 				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
