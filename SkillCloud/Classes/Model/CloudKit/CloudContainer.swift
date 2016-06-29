@@ -100,7 +100,9 @@ class CloudContainer {
         return self.promiseUserRecord().then { SyncInfo(userRecord: $0) }
     }
     
-    
+//    func promiseSync() -> Promise<Void> {
+//        
+//    }
     
 }
 
@@ -114,9 +116,14 @@ struct SyncInfo {
         self.skillsCount = (userRecord.objectForKey("skillsCount") as? Int) ?? 0
         self.changeTag = userRecord.recordChangeTag ?? ""
     }
+ 
+    init(userID: String, skillsCount: Int, changeTag: String) {
+        self.userID = userID
+        self.skillsCount = skillsCount
+        self.changeTag = changeTag
+    }
     
 }
-
 
 enum DatabaseType {
     case Public

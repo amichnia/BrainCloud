@@ -92,14 +92,14 @@ class SkillsViewController: UIViewController {
         .then(SkillEntity.promiseToInsert)
         .then { savedEntity -> Promise<Skill> in
             MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
-            return savedEntity.skill.promiseSyncTo(DatabaseType.Private)
+            return savedEntity.skill.promiseInsertTo(DatabaseType.Private)
         }
         .then(SkillEntity.promiseToUpdate)
         .then { _ -> Void in
             // Update sync info by += 1 // TODO: Update Sync info
         }
-        .recover { _ -> Void in
-            print("Fetching anyway")
+        .recover { error -> Void in
+            print("Shit happens: \(error) \nWell - Fetching anyway.")
         }
         .then(SkillEntity.fetchAll)
         .then { entities -> Void in
@@ -116,23 +116,49 @@ class SkillsViewController: UIViewController {
     
     func promiseChangeSkillWith(rect: CGRect?, withSkill skill: Skill) throws {
         try AddViewController.promiseChangeSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
-        .then(SkillEntity.promiseToUpdate).asVoid()
-        .recover { error -> Promise<Void> in
-            if case CommonError.EntityDelete = error {
-                return SkillEntity.promiseToDelete(skill)
-            }
-            else {
-                return Promise<Void>() { _,reject in reject(error) }
-            }
+        .then(SkillEntity.promiseToUpdate)
+        .then { savedEntity -> Promise<Skill> in
+            MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
+            return savedEntity.skill.promiseSyncTo(DatabaseType.Private)
+        }
+        .then(SkillEntity.promiseToUpdate)
+        .then { _ -> Void in
+            // Update sync info by += 1 // TODO: Update Sync info
+        }
+        .recover { error -> Void in
+            // TODO: Cover delete case here
+            print("Shit happens: \(error) \nWell - Fetching anyway.")
         }
         .then(SkillEntity.fetchAll)
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
         }
-        .error { error in
-            DDLogError("\(error)")
+        .always {
+            MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
         }
+        .error { error in
+            print("Error: \(error)")
+        }
+        
+        // Cover deleting
+//        .then(SkillEntity.promiseToUpdate).asVoid()
+//        .recover { error -> Promise<Void> in
+//            if case CommonError.EntityDelete = error {
+//                return SkillEntity.promiseToDelete(skill)
+//            }
+//            else {
+//                return Promise<Void>() { _,reject in reject(error) }
+//            }
+//        }
+//        .then(SkillEntity.fetchAll)
+//        .then { entities -> Void in
+//            self.skills = entities.mapExisting{ $0.skill }
+//            self.collectionView.reloadData()
+//        }
+//        .error { error in
+//            DDLogError("\(error)")
+//        }
     }
     
     // MARK: - Helpers

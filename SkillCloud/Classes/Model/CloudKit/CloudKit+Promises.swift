@@ -113,20 +113,40 @@ extension CKRecordSyncable {
     typealias T = Self
     
     // Sync record to database
+    func promiseInsertTo(db: DatabaseType = .Private) -> Promise<Self> {
+        let container = CloudContainer.sharedContainer
+        let database = container.database(db)
+        
+        return self.promiseInsertTo(database)
+        .then { (savedRecord) -> Promise<T> in
+            return self.promiseMappingWith(savedRecord) // Update values after save - like source tag
+        }
+    }
+    
+    private func promiseInsertTo(database: CKDatabase) -> Promise<CKRecord> {
+        // Creating record resulted in creating temporary data at generated file url
+        return self.promiseRecord()
+        .then(database.promiseSaveRecord)
+        .always {
+            // So assure, that the temporary data will be always cleared
+            self.clearTemporaryData()
+        }
+    }
+    
     func promiseSyncTo(db: DatabaseType = .Private) -> Promise<Self> {
         let container = CloudContainer.sharedContainer
         let database = container.database(db)
         
         return self.promiseSyncTo(database)
-        .then { (savedRecord) -> Promise<T> in
-            return self.promiseMappingWith(savedRecord) // Update values after save - like source tag
+            .then { (savedRecord) -> Promise<T> in
+                return self.promiseMappingWith(savedRecord) // Update values after save - like source tag
         }
     }
     
     private func promiseSyncTo(database: CKDatabase) -> Promise<CKRecord> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecord()
-        .then(database.promiseSaveRecord)
+        .then(database.promiseUpdateRecord)
         .always {
             // So assure, that the temporary data will be always cleared
             self.clearTemporaryData()
@@ -203,6 +223,31 @@ extension CKDatabase {
                         reject(CloudError.SaveFailed(reason: "Unknown error occured"))
                     }
                 }
+            }
+        }
+    }
+    
+    func promiseUpdateRecord(record: CKRecord) -> Promise<CKRecord> {
+        return Promise<CKRecord> { fulfill,reject in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+                let updateRecordOperation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+                
+                updateRecordOperation.savePolicy = .ChangedKeys
+                updateRecordOperation.modifyRecordsCompletionBlock = { savedRecords,_,error in
+                    let savedRecord = savedRecords?.first
+                    
+                    if let savedRecord = savedRecord where error == nil {
+                        fulfill(savedRecord)
+                    }
+                    else if let error = error {
+                        reject(CloudError.SaveError(code: error.code, error: error))
+                    }
+                    else {
+                        reject(CloudError.SaveFailed(reason: "Unknown error occured"))
+                    }
+                }
+                
+                self.addOperation(updateRecordOperation)
             }
         }
     }

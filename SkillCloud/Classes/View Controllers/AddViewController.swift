@@ -227,6 +227,9 @@ class AddViewController: UIViewController {
         
         if let previousSkill = self.skill {
             skill.previousUniqueIdentifier = previousSkill.uniqueIdentifierValue
+            skill.recordName = previousSkill.recordName
+            skill.recordChangeTag = previousSkill.recordChangeTag
+            skill.modified = previousSkill.modified
         }
 
         self.fulfill(skill)
