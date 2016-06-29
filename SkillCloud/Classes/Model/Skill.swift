@@ -13,12 +13,12 @@ import PromiseKit
 // MARK: - Skill class definition
 class Skill {
     
-    var title: String!
-    var description: String?
+    var title: String!                      // Core Data unique identifier
+    var skillDescription: String?
     var experience: Experience!
-    var previousUniqueIdentifier: String?
-    var imageAsset: ImageAsset?
+    var previousUniqueIdentifier: String?   // For Core Data
     var thumbnail: UIImage!
+    var image: UIImage!
     
     // Cloud Kit only
     var createdRecord: CKRecord?
@@ -31,23 +31,12 @@ class Skill {
         return self.thumbnail.RBCircleImage()
     }()
     
-    var image: UIImage! {
-        get {
-            return self.thumbnail // TODO: Change to evaluate from propmise of image asset
-        }
-//        set {
-//            // TODO: Valid setter
-//        }
-    }
-    
-    var checkCount = 0
-    
     // MARK: - Initializers
     init(title: String, thumbnail: UIImage, experience: Skill.Experience, description: String? = nil) {
         self.title = title
         self.thumbnail = thumbnail
         self.experience = experience
-        self.description = description
+        self.skillDescription = description
     }
     
     private init() { }
@@ -60,37 +49,13 @@ class Skill {
         }
     }
     
-    // MARK: - Public CK promises
-    func promiseAddTo(database: CKDatabase, forUser userRecordId: CKRecordID) -> Promise<CKRecordID> {
-        return Promise<CKRecordID> { fulfill,reject in
-            guard let record = self.recordRepresentation() else {
-                reject(CloudError.NotMatchingRecordData)
-                return
-            }
-            
-            database.saveRecord(record) { savedRecord,error in
-                // Clear data
-                (record.objectForKey(CKKey.Thumbnail) as? CKAsset)?.clearTemporaryData()
-                
-                // Process success
-                if let savedRecord = savedRecord where error == nil {
-                    fulfill(savedRecord.recordID)
-                }
-                // Process failure
-                else {
-                    reject(error ?? CloudError.UnknownError)
-                }
-            }
-            
-        }
-    }
-    
     // MARK: - Static Keys
     private struct CKKey {
         static let Name = "name"
         static let Experience = "experienceValue"
         static let Thumbnail = "thumbnail"
         static let Description = "desc"
+        static let Image = "image"
     }
     
 }
@@ -103,8 +68,7 @@ extension Skill: CKRecordMappable {
             title = record.objectForKey(CKKey.Name) as? String,
             expValue = record.objectForKey(CKKey.Experience) as? Int,
             experience = Skill.Experience(rawValue: expValue),
-            imageUrl = (record.objectForKey(CKKey.Thumbnail) as? CKAsset)?.fileURL,
-            image = UIImage(contentsOfFile: imageUrl.path!)
+            thumbnail = record.imageForKey(CKKey.Thumbnail) ?? self.thumbnail
         else {
             return nil
         }
@@ -112,12 +76,14 @@ extension Skill: CKRecordMappable {
         let description = record.objectForKey(CKKey.Description) as? String
         
         self.title = title
-        self.thumbnail = image
+        self.thumbnail = thumbnail
         self.experience = experience
-        self.description = description
+        self.skillDescription = description
         self.recordName = record.recordID.recordName
         self.modified = record.modificationDate
         self.recordChangeTag = record.recordChangeTag
+        
+        self.image = record.imageForKey(CKKey.Image) ?? self.image
         
         return self
     }
@@ -132,16 +98,23 @@ extension Skill: CKRecordConvertible {
         
         record.setObject(self.title, forKey: CKKey.Name)
         record.setObject(self.experience.rawValue, forKey: CKKey.Experience)
-        record.setObject(self.description, forKey: CKKey.Description)
+        record.setObject(self.skillDescription, forKey: CKKey.Description)
         
-        if let image = try? CKAsset.assetWithImage(self.thumbnail) {
-            record.setObject(image, forKey: CKKey.Thumbnail)
+        if let thumbnail = try? CKAsset.assetWithImage(self.thumbnail) {
+            record.setObject(thumbnail, forKey: CKKey.Thumbnail)
         }
         else {
             return nil
         }
         
-        self.createdRecord = record    // ???
+        if let image = try? CKAsset.assetWithImage(self.image) {
+            record.setObject(image, forKey: CKKey.Image)
+        }
+        else {
+            return nil
+        }
+        
+        self.createdRecord = record    // ??? For clearup data
         
         return record
     }
@@ -153,6 +126,7 @@ extension Skill: CKRecordSyncable {
     
     func clearTemporaryData() {
         (self.createdRecord?.objectForKey(CKKey.Thumbnail) as? CKAsset)?.clearTemporaryData()
+        (self.createdRecord?.objectForKey(CKKey.Image) as? CKAsset)?.clearTemporaryData()
     }
     
 }

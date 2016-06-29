@@ -39,7 +39,6 @@
 		FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */ = {isa = PBXBuildFile; fileRef = FE0522E51CB02D6600315468 /* all_base_nodes.json */; };
 		FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */; };
 		FE2151451D1F3435005BC8B1 /* CloudContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2151441D1F3435005BC8B1 /* CloudContainer.swift */; };
-		FE2151471D1F3509005BC8B1 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2151461D1F3509005BC8B1 /* UserInfo.swift */; };
 		FE2E6BE81D16982900B86D8A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2E6BE71D16982900B86D8A /* CloudKit.framework */; };
 		FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */; };
 		FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEB1C9CA1240006D9EE /* Field.swift */; };
@@ -58,7 +57,7 @@
 		FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */; };
 		FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */; };
 		FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE31DB1E1C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld */; };
-		FE60C9E71D22C34C001129C8 /* ClodKit+Promises.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60C9E61D22C34C001129C8 /* ClodKit+Promises.swift */; };
+		FE60C9E71D22C34C001129C8 /* CloudKit+Promises.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */; };
 		FE60C9E91D22C4EE001129C8 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60C9E81D22C4EE001129C8 /* ImageAsset.swift */; };
 		FE6E688E1D1FD4BC00A72022 /* CloudSkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6E688D1D1FD4BC00A72022 /* CloudSkillsViewController.swift */; };
 		FE712CAF1D15CA0B00C954CA /* ExperienceSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE712CAE1D15CA0B00C954CA /* ExperienceSelectNode.swift */; };
@@ -121,7 +120,6 @@
 		FE0522E51CB02D6600315468 /* all_base_nodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = all_base_nodes.json; sourceTree = "<group>"; };
 		FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
 		FE2151441D1F3435005BC8B1 /* CloudContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudContainer.swift; sourceTree = "<group>"; };
-		FE2151461D1F3509005BC8B1 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		FE2E6BE61D16963600B86D8A /* SkillCloud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = SkillCloud.entitlements; path = ../SkillCloud.entitlements; sourceTree = "<group>"; };
 		FE2E6BE71D16982900B86D8A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasBoard.swift; sourceTree = "<group>"; };
@@ -142,7 +140,7 @@
 		FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PossiblePlaceView.xib; sourceTree = "<group>"; };
 		FE31DB081C9CA1240006D9EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillCloud.xcdatamodel; sourceTree = "<group>"; };
-		FE60C9E61D22C34C001129C8 /* ClodKit+Promises.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ClodKit+Promises.swift"; sourceTree = "<group>"; };
+		FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CloudKit+Promises.swift"; sourceTree = "<group>"; };
 		FE60C9E81D22C4EE001129C8 /* ImageAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
 		FE6E688D1D1FD4BC00A72022 /* CloudSkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSkillsViewController.swift; sourceTree = "<group>"; };
 		FE712CAE1D15CA0B00C954CA /* ExperienceSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceSelectNode.swift; sourceTree = "<group>"; };
@@ -242,8 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				FE2151441D1F3435005BC8B1 /* CloudContainer.swift */,
-				FE2151461D1F3509005BC8B1 /* UserInfo.swift */,
-				FE60C9E61D22C34C001129C8 /* ClodKit+Promises.swift */,
+				FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -535,7 +532,6 @@
 				FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */,
 				C80A918F1CB5206800529F0B /* GoogleImageCollectionViewCell.swift in Sources */,
 				FE0522E21CB01BBF00315468 /* Node.swift in Sources */,
-				FE2151471D1F3509005BC8B1 /* UserInfo.swift in Sources */,
 				FE766D361C9D80010079CA29 /* DataManager.swift in Sources */,
 				FE0522B41CAEF0B400315468 /* TestView.swift in Sources */,
 				FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */,
@@ -568,7 +564,7 @@
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,
 				C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */,
-				FE60C9E71D22C34C001129C8 /* ClodKit+Promises.swift in Sources */,
+				FE60C9E71D22C34C001129C8 /* CloudKit+Promises.swift in Sources */,
 				C863048E1CC6417E002C068C /* EditSkillNode.swift in Sources */,
 				C8A36F461CFDA3DE002C7FC4 /* CloudsListViewController.swift in Sources */,
 				FE0522DD1CAFE69500315468 /* CloudGraphScene.swift in Sources */,

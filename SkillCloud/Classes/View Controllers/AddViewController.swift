@@ -168,7 +168,6 @@ class AddViewController: UIViewController {
             }})
         ])
     }
-
     
     func selectImage() -> Promise<UIImage> {
         return self.promiseSelection(UIImage.self, cancellable: true, options: [
@@ -222,7 +221,9 @@ class AddViewController: UIViewController {
             return
         }
         
-        let skill = Skill(title: name, thumbnail: image, experience: experience)
+        let thumbnail = image.RBSquareImageTo(CGSize(width: 140, height: 140))
+        let skill = Skill(title: name, thumbnail: thumbnail, experience: experience)
+        skill.image = image
         
         if let previousSkill = self.skill {
             skill.previousUniqueIdentifier = previousSkill.uniqueIdentifierValue

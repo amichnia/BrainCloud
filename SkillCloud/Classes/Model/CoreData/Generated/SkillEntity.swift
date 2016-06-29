@@ -26,16 +26,16 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
     
     func setValuesFromModel(model: DTOModel) {
         if let skill = model as? Skill {
-            self.name = skill.title
-            self.desc = skill.description
-            self.thumbnail = skill.thumbnail
-            self.experienceValue = Int16(skill.experience.rawValue)
-            
-            self.image = skill.image // Asset!!!
-            
-            self.recordID = skill.recordName
-            self.changeTag = skill.recordChangeTag
-            self.modified = skill.modified?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
+            // Properties
+            self.name               = skill.title
+            self.desc               = skill.skillDescription
+            self.experienceValue    = Int16(skill.experience.rawValue)
+            self.thumbnail          = skill.thumbnail
+            self.image              = skill.image
+            // CloudKit synced
+            self.recordID           = skill.recordName
+            self.changeTag          = skill.recordChangeTag
+            self.modified           = skill.modified?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
         }
     }
     
@@ -45,11 +45,14 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
 extension SkillEntity {
     
     var skill : Skill {
-        let skill = Skill(title: self.name!, thumbnail: self.thumbnail!, experience: Skill.Experience(rawValue: Int(self.experienceValue))!, description: self.description)
+        let skill = Skill(title: self.name!, thumbnail: self.thumbnail!, experience: Skill.Experience(rawValue: Int(self.experienceValue))!, description: self.desc)
         
-        skill.recordName = self.recordID
-        skill.recordChangeTag = self.changeTag
-        skill.modified = NSDate(timeIntervalSince1970: self.modified)
+        skill.image = self.image
+        
+        // CloudKit
+        skill.recordName        = self.recordID
+        skill.recordChangeTag   = self.changeTag
+        skill.modified          = NSDate(timeIntervalSince1970: self.modified)
         
         return skill
     }

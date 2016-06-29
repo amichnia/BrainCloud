@@ -227,6 +227,15 @@ extension CKRecord {
         }
     }
     
+    func imageForKey(key: String) -> UIImage? {
+        if let imageUrl = (self.objectForKey(key) as? CKAsset)?.fileURL, image = UIImage(contentsOfFile: imageUrl.path!) {
+            return image
+        }
+        else {
+            return nil
+        }
+    }
+    
 }
 
 // MARK: - CKAsset extensions

@@ -21,14 +21,16 @@ class CloudContainer {
     let container: CKContainer
     let publicDatabase: CKDatabase
     let privateDatabase: CKDatabase
-    let userInfo: UserInfo
+    
+    // MARK: - Private properties
+    private var userRecordID : CKRecordID!
+    private var contacts = [AnyObject]()
     
     // MARK: - Initializers
     init() {
         self.container = CKContainer.defaultContainer()
         self.publicDatabase = self.container.publicCloudDatabase
         self.privateDatabase = self.container.privateCloudDatabase
-        self.userInfo = UserInfo(container: self.container)
     }
     
     // MARK: - Private
@@ -71,7 +73,50 @@ class CloudContainer {
         return self.promiseAllSkillsFromDatabase(.Private)
     }
     
+    // MARK: - Sync promises
+    func promiseUserID() -> Promise<CKRecordID> {
+        guard self.userRecordID == nil else {
+            return Promise<CKRecordID>(self.userRecordID)
+        }
+        
+        return Promise<CKRecordID>() { fulfill,reject in
+            self.container.fetchUserRecordIDWithCompletionHandler() { recordID, error in
+                if let recordID = recordID where error == nil {
+                    self.userRecordID = recordID
+                    fulfill(recordID)
+                }
+                else {
+                    reject(error ?? CloudError.UnknownError)
+                }
+            }
+        }
+    }
+    
+    func promiseUserRecord() -> Promise<CKRecord> {
+        return self.promiseUserID().then(self.publicDatabase.promiseRecordWithID)
+    }
+    
+    func promiseSyncInfo() -> Promise<SyncInfo> {
+        return self.promiseUserRecord().then { SyncInfo(userRecord: $0) }
+    }
+    
+    
+    
 }
+
+struct SyncInfo {
+    let userID: String
+    let skillsCount: Int
+    let changeTag: String
+    
+    init(userRecord: CKRecord) {
+        self.userID = userRecord.recordID.recordName
+        self.skillsCount = (userRecord.objectForKey("skillsCount") as? Int) ?? 0
+        self.changeTag = userRecord.recordChangeTag ?? ""
+    }
+    
+}
+
 
 enum DatabaseType {
     case Public

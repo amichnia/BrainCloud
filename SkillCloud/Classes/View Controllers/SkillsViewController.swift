@@ -86,23 +86,31 @@ class SkillsViewController: UIViewController {
         }
     }
     
-    func frameForCell(cell: SkillCollectionViewCell) -> CGRect {
-        cell.layoutSubviews()
-        let imgfrm = cell.imageView.frame
-        let rect = CGRect(
-            origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y),
-            size: imgfrm.size
-        )
-        return rect
-    }
-    
+    // MARK: - Promises
     func promiseAddSkillWith(rect: CGRect?) throws {
         try AddViewController.promiseNewSkillWith(self, rect: rect, preparedScene: self.preparedScene)
-        .then(SkillEntity.promiseToInsert).asVoid()
+        .then(SkillEntity.promiseToInsert)
+        .then { savedEntity -> Promise<Skill> in
+            MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
+            return savedEntity.skill.promiseSyncTo(DatabaseType.Private)
+        }
+        .then(SkillEntity.promiseToUpdate)
+        .then { _ -> Void in
+            // Update sync info by += 1 // TODO: Update Sync info
+        }
+        .recover { _ -> Void in
+            print("Fetching anyway")
+        }
         .then(SkillEntity.fetchAll)
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
+        }
+        .always {
+            MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
+        }
+        .error { error in
+            print("Error: \(error)")
         }
     }
     
@@ -145,6 +153,16 @@ class SkillsViewController: UIViewController {
         let botColor = self.colors[cell.column].1
         
         cell.backgroundColor = UIColor.interpolate(topColor, B: botColor, t: factor)
+    }
+    
+    func frameForCell(cell: SkillCollectionViewCell) -> CGRect {
+        cell.layoutSubviews()
+        let imgfrm = cell.imageView.frame
+        let rect = CGRect(
+            origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y),
+            size: imgfrm.size
+        )
+        return rect
     }
     
     // MARK: - Navigation
