@@ -126,7 +126,7 @@ extension CKRecordSyncable {
     private func promiseInsertTo(database: CKDatabase) -> Promise<CKRecord> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecord()
-        .then(database.promiseSaveRecord)
+        .then(database.promiseInsertRecord)
         .always {
             // So assure, that the temporary data will be always cleared
             self.clearTemporaryData()
@@ -138,8 +138,8 @@ extension CKRecordSyncable {
         let database = container.database(db)
         
         return self.promiseSyncTo(database)
-            .then { (savedRecord) -> Promise<T> in
-                return self.promiseMappingWith(savedRecord) // Update values after save - like source tag
+        .then { (savedRecord) -> Promise<T> in
+            return self.promiseMappingWith(savedRecord) // Update values after save - like source tag
         }
     }
     
@@ -174,9 +174,41 @@ extension CKRecordSyncable {
     
 }
 
+// MARK: - Sync multiple records
+extension Array where Element: CKRecordSyncable {
+    
+    typealias T = Element.Type
+    
+    func promiseRecords() -> Promise<[CKRecord]> {
+        return when(self.map { $0.promiseRecord() })
+    }
+    
+    private func promiseInsertTo(database: CKDatabase) -> Promise<[CKRecord]> {
+        // Creating record resulted in creating temporary data at generated file url
+        return self.promiseRecords()
+        .then(database.promiseInsertRecords)
+        .always {
+            // So assure, that the temporary data will be always cleared
+            self.forEach{ $0.clearTemporaryData() }
+        }
+    }
+    
+    private func promiseSyncTo(database: CKDatabase) -> Promise<[CKRecord]> {
+        // Creating record resulted in creating temporary data at generated file url
+        return self.promiseRecords()
+        .then(database.promiseUpdateRecords)
+        .always {
+            // So assure, that the temporary data will be always cleared
+            self.forEach{ $0.clearTemporaryData() }
+        }
+    }
+    
+}
+
 // MARK: - CKDatabase extensions
 extension CKDatabase {
     
+    // Single
     /**
      Promises to fetch single record. Be aware, that this is low prio operation - use wrappers on CKDatabaseFetchOperation instead
      
@@ -203,13 +235,13 @@ extension CKDatabase {
     }
     
     /**
-     Promises to save single record.
+     Promises to insert single record.
      
-     - parameter record: Record to save
+     - parameter record: Record to insert
      
      - returns: Future saved record
      */
-    func promiseSaveRecord(record: CKRecord) -> Promise<CKRecord> {
+    func promiseInsertRecord(record: CKRecord) -> Promise<CKRecord> {
         return Promise<CKRecord> { fulfill,reject in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
                 self.saveRecord(record) { savedRecord,error in
@@ -227,6 +259,13 @@ extension CKDatabase {
         }
     }
     
+    /**
+     Promises to update single existing record.
+     
+     - parameter record: Record to update
+     
+     - returns: Future saved record
+     */
     func promiseUpdateRecord(record: CKRecord) -> Promise<CKRecord> {
         return Promise<CKRecord> { fulfill,reject in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
@@ -248,6 +287,67 @@ extension CKDatabase {
                 }
                 
                 self.addOperation(updateRecordOperation)
+            }
+        }
+    }
+    
+    // Multiple
+    /**
+     Promises to insert several records
+     
+     - parameter records: Records to insert
+     
+     - returns: Future saved records
+     */
+    func promiseInsertRecords(records: [CKRecord]) -> Promise<[CKRecord]> {
+        return Promise<[CKRecord]> { fulfill,reject in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+                let insertRecordsOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+                
+                insertRecordsOperation.savePolicy = .IfServerRecordUnchanged // Only save non existing
+                insertRecordsOperation.modifyRecordsCompletionBlock = { savedRecords,_,error in
+                    if let savedRecords = savedRecords where error == nil {
+                        fulfill(savedRecords)
+                    }
+                    else if let error = error {
+                        reject(CloudError.SaveError(code: error.code, error: error))
+                    }
+                    else {
+                        reject(CloudError.SaveFailed(reason: "Unknown error occured"))
+                    }
+                }
+                
+                self.addOperation(insertRecordsOperation)
+            }
+        }
+    }
+    
+    /**
+     Promisese to update several records. Will insert new records as well.
+     
+     - parameter records: Records to update
+     
+     - returns: Future saved records
+     */
+    func promiseUpdateRecords(records: [CKRecord]) -> Promise<[CKRecord]> {
+        return Promise<[CKRecord]> { fulfill,reject in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+                let updateRecordsOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
+                
+                updateRecordsOperation.savePolicy = .AllKeys // Update all keys
+                updateRecordsOperation.modifyRecordsCompletionBlock = { savedRecords,_,error in
+                    if let savedRecords = savedRecords where error == nil {
+                        fulfill(savedRecords)
+                    }
+                    else if let error = error {
+                        reject(CloudError.SaveError(code: error.code, error: error))
+                    }
+                    else {
+                        reject(CloudError.SaveFailed(reason: "Unknown error occured"))
+                    }
+                }
+                
+                self.addOperation(updateRecordsOperation)
             }
         }
     }
