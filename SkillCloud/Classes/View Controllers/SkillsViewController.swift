@@ -28,9 +28,9 @@ class SkillsViewController: UIViewController {
         super.viewDidLoad()
         
         MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
-        SkillEntity.fetchAll()
-        .then { entities -> Void in
-            self.skills = entities.mapExisting{ $0.skill }
+        Skill.fetchAll()
+        .then { skills -> Void in
+            self.skills = skills
             self.collectionView.reloadData()
         }
         .always {
@@ -101,9 +101,9 @@ class SkillsViewController: UIViewController {
         .recover { error -> Void in
             print("Shit happens: \(error) \nWell - Fetching anyway.")
         }
-        .then(SkillEntity.fetchAll)
-        .then { entities -> Void in
-            self.skills = entities.mapExisting{ $0.skill }
+        .then(Skill.fetchAll)
+        .then { skills -> Void in
+            self.skills = skills
             self.collectionView.reloadData()
         }
         .always {
@@ -129,9 +129,9 @@ class SkillsViewController: UIViewController {
             // TODO: Cover delete case here
             print("Shit happens: \(error) \nWell - Fetching anyway.")
         }
-        .then(SkillEntity.fetchAll)
-        .then { entities -> Void in
-            self.skills = entities.mapExisting{ $0.skill }
+        .then(Skill.fetchAll)
+        .then { skills -> Void in
+            self.skills = skills
             self.collectionView.reloadData()
         }
         .always {

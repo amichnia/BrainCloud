@@ -181,3 +181,24 @@ extension Skill {
     }
 }
 
+extension Skill {
+    
+    class func fetchAllWithPredicate(predicate: NSPredicate) -> Promise<[Skill]> {
+        return SkillEntity.fetchAllWithPredicate(predicate).then { entities -> [Skill] in
+            return entities.map { $0.skill }
+        }
+    }
+    
+    class func fetchAll() -> Promise<[Skill]> {
+        return SkillEntity.fetchAll().then { entities -> [Skill] in
+            return entities.map { $0.skill }
+        }
+    }
+    
+    class func fetchAllUnsynced() -> Promise<[Skill]> {
+        return SkillEntity.fetchAllUnsynced().then { entities -> [Skill] in
+            return entities.map { $0.skill }
+        }
+    }
+    
+}

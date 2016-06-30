@@ -60,3 +60,13 @@ extension SkillEntity {
     }
     
 }
+
+// MARK: - Fetching unsynced
+extension SkillEntity {
+    
+    class func fetchAllUnsynced() -> Promise<[SkillEntity]> {
+        let predicate = NSPredicate(format: "offline == %@", true)
+        return SkillEntity.fetchAllWithPredicate(predicate)
+    }
+    
+}
