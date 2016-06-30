@@ -97,7 +97,16 @@ extension CKRecordSyncable {
         return database.promiseRecordWithID(recordID)
     }
     
-//    private class func promiseAllFrom(database: CKDatabase) -> Promise<CKRecord>
+    static func promiseAll(db: DatabaseType = .Private) -> Promise<[Self]> {
+        let container = CloudContainer.sharedContainer
+        let database = container.database(db)
+        
+        return self.promiseAllFrom(database)
+    }
+    
+    private static func promiseAllFrom(database: CKDatabase) -> Promise<[Self]> {
+        return database.promiseAllWith()
+    }
     
 }
 
