@@ -188,10 +188,10 @@
             </objects>
             <point key="canvasLocation" x="3866" y="1946"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Root Tab Bar View Controller-->
         <scene sceneID="2H0-3b-1jo">
             <objects>
-                <tabBarController id="2t6-Cf-HCf" sceneMemberID="viewController">
+                <tabBarController id="2t6-Cf-HCf" customClass="RootTabBarViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="centered" id="x8O-KY-W0L">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

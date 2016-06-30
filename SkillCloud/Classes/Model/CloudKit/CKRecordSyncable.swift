@@ -34,12 +34,11 @@ extension CKRecordSyncable {
         let database = container.database(db)
         
         return self.promiseInsertTo(database)
-            .then { (savedRecord) -> Promise<T> in
-                return self.promiseMappingWith(savedRecord) // Update values after save - like source tag
-            }
-            .then { object -> T in
-                object.offline = false
-                return object
+        .then { (savedRecord) -> Promise<T> in
+            return self.promiseMappingWith(savedRecord) // Update values after save - like source tag
+        }
+        .then { object -> T in
+            return object
         }
     }
     
@@ -58,22 +57,21 @@ extension CKRecordSyncable {
         let database = container.database(db)
         
         return self.promiseSyncTo(database)
-            .then { (savedRecord) -> Promise<T> in
-                return self.promiseMappingWith(savedRecord) // Update values after save - like source tag
-            }
-            .then { object -> T in
-                object.offline = false
-                return object
+        .then { (savedRecord) -> Promise<T> in
+            return self.promiseMappingWith(savedRecord) // Update values after save - like source tag
+        }
+        .then { object -> T in
+            return object
         }
     }
     
     private func promiseSyncTo(database: CKDatabase) -> Promise<CKRecord> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecord()
-            .then(database.promiseUpdateRecord)
-            .always {
-                // So assure, that the temporary data will be always cleared
-                self.clearTemporaryData()
+        .then(database.promiseUpdateRecord)
+        .always {
+            // So assure, that the temporary data will be always cleared
+            self.clearTemporaryData()
         }
     }
     
@@ -83,12 +81,11 @@ extension CKRecordSyncable {
         let database = container.database(db)
         
         return self.promiseSyncFrom(database)
-            .then { (savedRecord) -> Promise<T> in
-                return self.promiseMappingWith(savedRecord) // Update values with fetched record
-            }
-            .then { object -> T in
-                object.offline = false
-                return object
+        .then { (savedRecord) -> Promise<T> in
+            return self.promiseMappingWith(savedRecord) // Update values with fetched record
+        }
+        .then { object -> T in
+            return object
         }
     }
     
@@ -113,23 +110,30 @@ extension Array where Element: CKRecordSyncable {
         return when(self.map { $0.promiseRecord() })
     }
     
-    private func promiseInsertTo(database: CKDatabase) -> Promise<[CKRecord]> {
+    func promiseInsertTo(database: CKDatabase) -> Promise<[Element]> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecords()
-            .then(database.promiseInsertRecords)
-            .always {
-                // So assure, that the temporary data will be always cleared
-                self.forEach{ $0.clearTemporaryData() }
+        .then(database.promiseInsertRecords)
+        .then { savedRecords -> [Element] in
+            savedRecords.mapExisting { Element(record: $0) }
         }
+        .always {
+            // So assure, that the temporary data will be always cleared
+            self.forEach{ $0.clearTemporaryData() }
+        }
+
     }
     
-    private func promiseSyncTo(database: CKDatabase) -> Promise<[CKRecord]> {
+    func promiseSyncTo(database: CKDatabase) -> Promise<[Element]> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecords()
-            .then(database.promiseUpdateRecords)
-            .always {
-                // So assure, that the temporary data will be always cleared
-                self.forEach{ $0.clearTemporaryData() }
+        .then(database.promiseUpdateRecords)
+        .then { savedRecords -> [Element] in
+            savedRecords.mapExisting { Element(record: $0) }
+        }
+        .always {
+            // So assure, that the temporary data will be always cleared
+            self.forEach{ $0.clearTemporaryData() }
         }
     }
     

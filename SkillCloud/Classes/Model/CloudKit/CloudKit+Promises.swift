@@ -106,6 +106,10 @@ extension CKDatabase {
      - returns: Future saved records
      */
     func promiseInsertRecords(records: [CKRecord]) -> Promise<[CKRecord]> {
+        guard records.count > 0 else {
+            return Promise<[CKRecord]>([])
+        }
+        
         return Promise<[CKRecord]> { fulfill,reject in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
                 let insertRecordsOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
@@ -136,6 +140,10 @@ extension CKDatabase {
      - returns: Future saved records
      */
     func promiseUpdateRecords(records: [CKRecord]) -> Promise<[CKRecord]> {
+        guard records.count > 0 else {
+            return Promise<[CKRecord]>([])
+        }
+        
         return Promise<[CKRecord]> { fulfill,reject in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
                 let updateRecordsOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
@@ -160,6 +168,10 @@ extension CKDatabase {
     
     // Fetching
     func promiseFetchRecords(records: [CKRecord]) -> Promise<[CKRecord]> {
+        guard records.count > 0 else {
+            return Promise<[CKRecord]>([])
+        }
+        
         return self.promiseFetchRecordsWithIDS(records.map{ $0.recordID })
     }
     
@@ -209,27 +221,12 @@ extension CKDatabase {
         }
     }
     
-//    func promiseQueryForRecordsWithQuery(query: CKQuery, limitedToKeys keys: [String]? = nil) -> Promise<[CKRecord]> {
-//        return Promise<[CKRecord]> { fulfill,reject in
-//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-//                
-//                let queryOperation = CKQueryOperation(query: query)
-//                
-//                queryOperation.desiredKeys ?= keys
-//                
-//                var records: [CKRecord] = []
-//                
-//                queryOperation.recordFetchedBlock = {
-//                    records.append($0)
-//                }
-//                
-//                queryOperation.queryCompletionBlock = { cursor,error in
-//                    
-//                }
-//                
-//            }
-//        }
-//    }
+    func promiseAllWith<T:CKRecordSyncable>(predicate: NSPredicate? = nil) -> Promise<[T]> {
+        return self.promiseAllRecordsWith(T.recordType, andPredicate: predicate)
+        .then { records -> [T] in
+            return records.mapExisting{ T(record: $0) }
+        }
+    }
     
 }
 

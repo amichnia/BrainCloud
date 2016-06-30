@@ -11,6 +11,8 @@ import UIKit
 import CloudKit
 import PromiseKit
 
+let DefaultsLastSyncTimestampKey = "kLastSyncTimestamp"
+
 /// Cloud container class - encapsulates CK promises and CK Deserters
 class CloudContainer {
     
@@ -21,6 +23,21 @@ class CloudContainer {
     let container: CKContainer
     let publicDatabase: CKDatabase
     let privateDatabase: CKDatabase
+    
+    var lastSyncDate: NSDate? {
+        get {
+            return NSUserDefaults.standardUserDefaults().objectForKey(DefaultsLastSyncTimestampKey) as? NSDate
+        }
+        set {
+            if newValue == nil {
+                NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsLastSyncTimestampKey)
+            }
+            else {
+                NSUserDefaults.standardUserDefaults().setObject(newValue!, forKey: DefaultsLastSyncTimestampKey)
+            }
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
     
     // MARK: - Private properties
     private var userRecordID : CKRecordID!
@@ -44,6 +61,7 @@ class CloudContainer {
     }
     
     // MARK: - Public promises
+    // TODO: Remove it from there
     func promiseAllSkillsFromDatabase(database: DatabaseType) -> Promise<[Skill]> {
         return Promise<[Skill]>() { fulfill, reject in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
@@ -67,10 +85,6 @@ class CloudContainer {
                 }
             }
         }
-    }
-    
-    func promiseSelfSkills() -> Promise<[Skill]> {
-        return self.promiseAllSkillsFromDatabase(.Private)
     }
     
     // MARK: - Sync promises
@@ -100,9 +114,45 @@ class CloudContainer {
         return self.promiseUserRecord().then { SyncInfo(userRecord: $0) }
     }
     
-//    func promiseSync() -> Promise<Void> {
-//        
-//    }
+    func promiseSync() -> Promise<Void> {
+        return self.promiseSyncTo().then(self.promiseSyncFrom)
+    }
+    
+    func promiseSyncFrom() -> Promise<Void> {
+        let predicate: NSPredicate? = {
+            if let lastSyncDate = self.lastSyncDate {
+                return NSPredicate(format: "modificationDate >= %@", lastSyncDate)
+            }
+            else {
+                return nil
+            }
+        }()
+        
+        let syncDate = NSDate()
+        
+        return self.privateDatabase.promiseAllWith(predicate)
+        .then(on: dispatch_get_main_queue()) { (skills: [Skill]) -> Promise<[SkillEntity]> in
+            return when(skills.map(SkillEntity.promiseToUpdate))
+        }
+        .then { savedEntities -> Void in
+            self.lastSyncDate = syncDate
+            print("Saved \(savedEntities.count) entities")
+        }
+        .asVoid()
+    }
+    
+    func promiseSyncTo() -> Promise<Void> {
+        return Skill.fetchAllUnsynced()
+        .then { skills -> Promise<[Skill]> in
+            return skills.promiseSyncTo(self.privateDatabase)
+        }
+        .then(on: dispatch_get_main_queue()) { updatedSkills -> Promise<[SkillEntity]> in
+            return when(updatedSkills.map(SkillEntity.promiseToUpdate))
+        }
+        .then { savedEntities -> Void in
+            print("Uploaded \(savedEntities.count) entities")
+        }
+    }
     
 }
 

@@ -84,6 +84,8 @@ extension Skill: CKRecordMappable {
         self.modified = record.modificationDate
         self.recordChangeTag = record.recordChangeTag
         
+        self.offline = false
+        
         self.image = record.imageForKey(CKKey.Image) ?? self.image
         
         return self

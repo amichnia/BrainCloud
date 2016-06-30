@@ -29,7 +29,7 @@ class SkillsViewController: UIViewController {
         
         MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
         Skill.fetchAll()
-        .then { skills -> Void in
+        .then(on: dispatch_get_main_queue()) { skills -> Void in
             self.skills = skills
             self.collectionView.reloadData()
         }
@@ -102,7 +102,7 @@ class SkillsViewController: UIViewController {
             print("Shit happens: \(error) \nWell - Fetching anyway.")
         }
         .then(Skill.fetchAll)
-        .then { skills -> Void in
+        .then(on: dispatch_get_main_queue()) { skills -> Void in
             self.skills = skills
             self.collectionView.reloadData()
         }
@@ -130,7 +130,7 @@ class SkillsViewController: UIViewController {
             print("Shit happens: \(error) \nWell - Fetching anyway.")
         }
         .then(Skill.fetchAll)
-        .then { skills -> Void in
+        .then(on: dispatch_get_main_queue()) { skills -> Void in
             self.skills = skills
             self.collectionView.reloadData()
         }
@@ -140,25 +140,6 @@ class SkillsViewController: UIViewController {
         .error { error in
             print("Error: \(error)")
         }
-        
-        // Cover deleting
-//        .then(SkillEntity.promiseToUpdate).asVoid()
-//        .recover { error -> Promise<Void> in
-//            if case CommonError.EntityDelete = error {
-//                return SkillEntity.promiseToDelete(skill)
-//            }
-//            else {
-//                return Promise<Void>() { _,reject in reject(error) }
-//            }
-//        }
-//        .then(SkillEntity.fetchAll)
-//        .then { entities -> Void in
-//            self.skills = entities.mapExisting{ $0.skill }
-//            self.collectionView.reloadData()
-//        }
-//        .error { error in
-//            DDLogError("\(error)")
-//        }
     }
     
     // MARK: - Helpers
