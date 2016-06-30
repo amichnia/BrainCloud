@@ -158,7 +158,83 @@ extension CKDatabase {
         }
     }
     
+    // Fetching
+    func promiseFetchRecords(records: [CKRecord]) -> Promise<[CKRecord]> {
+        return self.promiseFetchRecordsWithIDS(records.map{ $0.recordID })
+    }
+    
+    func promiseFetchRecordsWithIDS(recordIDS: [CKRecordID]) -> Promise<[CKRecord]> {
+        return Promise<[CKRecord]> { fulfill,reject in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+                let fetchOperation = CKFetchRecordsOperation()
+                fetchOperation.recordIDs = recordIDS
+                
+                // TODO: Report progress by NSProgress
+                fetchOperation.fetchRecordsCompletionBlock = { recorsByID,error in
+                    if let savedRecords = recorsByID?.values where error == nil {
+                        fulfill(savedRecords.map({ $0 }))
+                    }
+                    else if let error = error {
+                        reject(CloudError.FetchError(code: error.code, error: error))
+                    }
+                    else {
+                        reject(CloudError.FetchFailed(reason: "Unknown error occured"))
+                    }
+                }
+                
+                self.addOperation(fetchOperation)
+            }
+        }
+    }
+    
+    // Querying
+    func promiseAllRecordsWith(type: String, andPredicate: NSPredicate? = nil) -> Promise<[CKRecord]> {
+        return Promise<[CKRecord]>() { fulfill, reject in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+                let predicate = andPredicate ?? NSPredicate(value: true)
+                let query = CKQuery(recordType: type, predicate: predicate)
+                
+                self.performQuery(query, inZoneWithID: nil) { records, error in
+                    if let savedRecords = records where error == nil {
+                        fulfill(savedRecords)
+                    }
+                    else if let error = error {
+                        reject(CloudError.FetchError(code: error.code, error: error))
+                    }
+                    else {
+                        reject(CloudError.FetchFailed(reason: "Unknown error occured"))
+                    }
+                }
+            }
+        }
+    }
+    
+//    func promiseQueryForRecordsWithQuery(query: CKQuery, limitedToKeys keys: [String]? = nil) -> Promise<[CKRecord]> {
+//        return Promise<[CKRecord]> { fulfill,reject in
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+//                
+//                let queryOperation = CKQueryOperation(query: query)
+//                
+//                queryOperation.desiredKeys ?= keys
+//                
+//                var records: [CKRecord] = []
+//                
+//                queryOperation.recordFetchedBlock = {
+//                    records.append($0)
+//                }
+//                
+//                queryOperation.queryCompletionBlock = { cursor,error in
+//                    
+//                }
+//                
+//            }
+//        }
+//    }
+    
 }
+
+// MARK: - Records batch
+// TODO: Batching results
 
 // MARK: - CKRecord extensions
 extension CKRecord {

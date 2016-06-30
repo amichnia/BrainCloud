@@ -100,6 +100,8 @@ extension CKRecordSyncable {
         return database.promiseRecordWithID(recordID)
     }
     
+//    private class func promiseAllFrom(database: CKDatabase) -> Promise<CKRecord>
+    
 }
 
 // MARK: - Sync multiple records
