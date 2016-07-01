@@ -117,7 +117,6 @@ class SkillsViewController: UIViewController {
         .then(SkillEntity.promiseToUpdate)
         .then { savedEntity -> Promise<Skill> in
             MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
-            
             // Handle update cases:
             if savedEntity.toDelete {
                 return savedEntity.skill.promiseDeleteFrom(.Private)
