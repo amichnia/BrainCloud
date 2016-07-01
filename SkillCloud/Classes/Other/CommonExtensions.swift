@@ -71,6 +71,20 @@ extension UIColor {
     }
 }
 
+// MARK: - Global functions
+func generateFileURL(fileExtension: String = "jpg") -> NSURL {
+    let fileManager = NSFileManager.defaultManager()
+    let fileArray: NSArray = fileManager.URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)
+    let fileURL = fileArray.lastObject?.URLByAppendingPathComponent(NSUUID().UUIDString).URLByAppendingPathExtension(fileExtension)
+    
+    if let filePath = (fileArray.lastObject as? NSURL)?.path {
+        if !fileManager.fileExistsAtPath(filePath) {
+            try! fileManager.createDirectoryAtPath(filePath, withIntermediateDirectories: true, attributes: nil)
+        }
+    }
+    
+    return fileURL!
+}
 
 // MARK: - Rect center
 extension CGRect : HasCenterOfMass {
@@ -166,7 +180,10 @@ enum CommonError : ErrorType {
     case NotEnoughData
     case UserCancelled
     case OperationFailed
-    case EntityDelete
+}
+
+enum CloudSyncChange: ErrorType {
+    case DeleteEntity(CKRecordSyncable?)
 }
 
 // MARK: - Sprite Kit interactive nodes

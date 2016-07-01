@@ -49,7 +49,7 @@ class SkillNode: SKNode, DTOModel {
         maskShapeNode.zPosition = skillNode.zPosition + 1
         
         // Skill image sprite node
-        let skillImageTexture = SKTexture(image: skill.thumbnailImage)
+        let skillImageTexture = SKTexture(image: skill.thumbnail)   // TODO: Verify what image to use for texture
         let skillImageSize = CGSize(width: CloudGraphScene.radius * 2 - 2 / Node.scaleFactor, height: CloudGraphScene.radius * 2 - 2 / Node.scaleFactor)
         let skillImageNode = SKSpriteNode(texture: skillImageTexture, size: skillImageSize)
         skillImageNode.position = CGPointZero
@@ -94,7 +94,7 @@ extension SkillNode {
     
     static func nodeWithEntity(entity: SkillNodeEntity) -> SkillNode? {
         let exp = Skill.Experience(rawValue: Int(entity.skillExperienceValue))!
-        let skill = Skill(title: entity.skillName!, image: entity.skillImage!, experience: exp, description: nil)
+        let skill = Skill(title: entity.skillName!, thumbnail: entity.skillImage!, experience: exp, description: nil)
         let radius = skill.experience.radius
         
         // Whole skill node container

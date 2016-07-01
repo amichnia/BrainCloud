@@ -1,8 +1,8 @@
 //
-//  SkillsViewController.swift
+//  CloudSkillsViewController.swift
 //  SkillCloud
 //
-//  Created by Andrzej Michnia on 19/04/16.
+//  Created by Andrzej Michnia on 26/06/16.
 //  Copyright © 2016 amichnia. All rights reserved.
 //
 
@@ -10,11 +10,8 @@ import UIKit
 import PromiseKit
 import MRProgress
 
-let AddSkillCellIdentifier = "AddSkillCell"
-let SkillCellIdentifier = "SkillCell"
-
-class SkillsViewController: UIViewController {
-
+class CloudSkillsViewController: UIViewController {
+    
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -22,14 +19,17 @@ class SkillsViewController: UIViewController {
     var skillsOffset = 18
     var skills : [Skill] = []
     var preparedScene : AddScene?
+    var cloudContainer: CloudContainer!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
-        Skill.fetchAll()
-        .then(on: dispatch_get_main_queue()) { skills -> Void in
+        self.cloudContainer = CloudContainer()
+        
+        self.cloudContainer.promiseAllSkillsFromDatabase(.Public)
+        .then { skills -> Void in
             self.skills = skills
             self.collectionView.reloadData()
         }
@@ -86,26 +86,34 @@ class SkillsViewController: UIViewController {
         }
     }
     
-    // MARK: - Promises
+    func frameForCell(cell: SkillCollectionViewCell) -> CGRect {
+        cell.layoutSubviews()
+        let imgfrm = cell.imageView.frame
+        let rect = CGRect(
+            origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y),
+            size: imgfrm.size
+        )
+        return rect
+    }
+    
     func promiseAddSkillWith(rect: CGRect?) throws {
         try AddViewController.promiseNewSkillWith(self, rect: rect, preparedScene: self.preparedScene)
-        .then(SkillEntity.promiseToInsert)
-        .then { savedEntity -> Promise<Skill> in
+        .then { skill -> Skill in
+            self.skills.append(skill)
+            
             MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
-            return savedEntity.skill.promiseInsertTo(DatabaseType.Private)
+            
+            return skill
         }
-        .then(SkillEntity.promiseToUpdate)
-        .asVoid()
-        .recover { error -> Void in
-            // Recover for refetching data?
+        .then { skill -> Promise<Skill> in
+            return skill.promiseSyncTo()
         }
-        .then(Skill.fetchAll)
-        .then(on: dispatch_get_main_queue()) { skills -> Void in
-            self.skills = skills
-            self.collectionView.reloadData()
+        .then { skill -> Void in
+            print("Added record with ID = \(skill.recordID)")
         }
         .always {
             MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
+            self.collectionView.reloadData()
         }
         .error { error in
             print("Error: \(error)")
@@ -114,39 +122,6 @@ class SkillsViewController: UIViewController {
     
     func promiseChangeSkillWith(rect: CGRect?, withSkill skill: Skill) throws {
         try AddViewController.promiseChangeSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
-        .then(SkillEntity.promiseToUpdate)
-        .then { savedEntity -> Promise<Skill> in
-            MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
-            // Handle update cases:
-            if savedEntity.toDelete {
-                return savedEntity.skill.promiseDeleteFrom(.Private)
-            }
-            else {
-                return savedEntity.skill.promiseSyncTo(.Private)
-            }
-        }
-        .then { skill -> Promise<Void> in
-            if skill.toDelete {
-                return SkillEntity.promiseToDelete(skill)
-            }
-            else {
-                return SkillEntity.promiseToUpdate(skill).asVoid()
-            }
-        }
-        .recover { error -> Void in
-            // Recover to reload
-        }
-        .then(Skill.fetchAll)
-        .then(on: dispatch_get_main_queue()) { skills -> Void in
-            self.skills = skills
-            self.collectionView.reloadData()
-        }
-        .always {
-            MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
-        }
-        .error { error in
-            print("Error: \(error)")
-        }
     }
     
     // MARK: - Helpers
@@ -169,22 +144,12 @@ class SkillsViewController: UIViewController {
         cell.backgroundColor = UIColor.interpolate(topColor, B: botColor, t: factor)
     }
     
-    func frameForCell(cell: SkillCollectionViewCell) -> CGRect {
-        cell.layoutSubviews()
-        let imgfrm = cell.imageView.frame
-        let rect = CGRect(
-            origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y),
-            size: imgfrm.size
-        )
-        return rect
-    }
-    
     // MARK: - Navigation
-
+    
 }
 
 // MARK: - UICollectionViewDataSource
-extension SkillsViewController: UICollectionViewDataSource {
+extension CloudSkillsViewController: UICollectionViewDataSource {
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 3
@@ -237,7 +202,7 @@ extension SkillsViewController: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegate
-extension SkillsViewController: UICollectionViewDelegate {
+extension CloudSkillsViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         guard indexPath.section == 1 else {
@@ -260,31 +225,12 @@ extension SkillsViewController: UICollectionViewDelegate {
     
 }
 
-extension SkillsViewController: UIScrollViewDelegate {
+extension CloudSkillsViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         self.collectionView.visibleCells().forEach {
             self.configureColorFor($0 as! SkillCollectionViewCell)
         }
-    }
-    
-}
-
-extension UIColor {
-    
-    static func interpolate(A:UIColor, B:UIColor, t: CGFloat) -> UIColor {
-        var Argba : (CGFloat,CGFloat,CGFloat,CGFloat) = (0,0,0,0)
-        var Brgba : (CGFloat,CGFloat,CGFloat,CGFloat) = (0,0,0,0)
-        A.getRed(&Argba.0, green: &Argba.1, blue: &Argba.2, alpha: &Argba.3)
-        B.getRed(&Brgba.0, green: &Brgba.1, blue: &Brgba.2, alpha: &Brgba.3)
-        
-        var rgba : (CGFloat,CGFloat,CGFloat,CGFloat) = (0,0,0,0)
-        rgba.0 = (Argba.0 * (1-t)) + (Brgba.0 * t)
-        rgba.1 = (Argba.1 * (1-t)) + (Brgba.1 * t)
-        rgba.2 = (Argba.2 * (1-t)) + (Brgba.2 * t)
-        rgba.3 = (Argba.3 * (1-t)) + (Brgba.3 * t)
-        
-        return UIColor(rgba: rgba)
     }
     
 }

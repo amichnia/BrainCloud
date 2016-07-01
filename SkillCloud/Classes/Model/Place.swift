@@ -268,6 +268,8 @@ extension Place.Size {
             self = .Medium
         case .Expert:
             self = .Large
+        default:
+            self = .Tiny
         }
     }
     

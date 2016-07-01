@@ -263,6 +263,10 @@ extension CoreDataEntity {
         return DataManager.fetchAll(self)
     }
     
+    static func fetchAllWithPredicate(predicate: NSPredicate) -> Promise<[Self]>{
+        return DataManager.fetchAll(self, withPredicate: predicate)
+    }
+    
     static func promiseToInsert(model: DTOModel) -> Promise<Self> {
         return DataManager.promiseEntity(self, model: model)
     }

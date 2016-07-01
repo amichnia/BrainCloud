@@ -51,7 +51,7 @@ class AddViewController: UIViewController {
     var scene : AddScene!
     var snapshotTop : UIView?
     var originRect: CGRect?
-    var skill : Skill?
+    var skill : Skill?          // If not null - changing skill, not adding
     var image: UIImage?
     var experience : Skill.Experience?
     var isEditingText : Bool = true
@@ -168,7 +168,6 @@ class AddViewController: UIViewController {
             }})
         ])
     }
-
     
     func selectImage() -> Promise<UIImage> {
         return self.promiseSelection(UIImage.self, cancellable: true, options: [
@@ -213,8 +212,15 @@ class AddViewController: UIViewController {
     
     func tryFulfill() {
         guard !self.deleted else {
-            self.reject(CommonError.EntityDelete)
-            return
+            if let skill = self.skill {
+                skill.toDelete = true
+                fulfill(skill)
+                return
+            }
+            else {
+                self.reject(CommonError.UserCancelled)
+                return
+            }
         }
         
         guard let image = self.image, name = self.skillNameField.text, experience = self.experience where !self.cancelled && name.characters.count > 0 else {
@@ -222,13 +228,30 @@ class AddViewController: UIViewController {
             return
         }
         
-        let skill = Skill(title: name, image: image, experience: experience)
+        let thumbnail = image.RBSquareImageTo(CGSize(width: 140, height: 140))
+        let skill = Skill(title: name, thumbnail: thumbnail, experience: experience)
+        skill.image = image
         
+        // If changing
         if let previousSkill = self.skill {
-            skill.previousUniqueIdentifier = previousSkill.uniqueIdentifierValue
+            // If trule something changed
+            if skill.image != previousSkill.image || skill.title != previousSkill.title || skill.experience != previousSkill.experience {
+                skill.previousUniqueIdentifier = previousSkill.uniqueIdentifierValue
+                skill.recordName = previousSkill.recordName
+                skill.recordChangeTag = previousSkill.recordChangeTag
+                skill.modified = previousSkill.modified
+                
+                self.fulfill(skill)
+            }
+            // Otherwise = cancel
+            else {
+                self.reject(CommonError.UserCancelled)
+            }
         }
-
-        self.fulfill(skill)
+        // If adding new
+        else {
+            self.fulfill(skill)
+        }
     }
 
     // MARK: - Helpers

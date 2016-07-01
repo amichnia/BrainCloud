@@ -141,6 +141,8 @@ class EditSkillNode: SKSpriteNode {
             return self.childNodeWithName("Experience.Professional") as? ExperienceSelectNode
         case .Expert:
             return self.childNodeWithName("Experience.Expert") as? ExperienceSelectNode
+        default:
+            return nil
         }
     }
     
