@@ -20,6 +20,7 @@ class Skill {
     var thumbnail: UIImage!
     var image: UIImage!
     var offline: Bool = true
+    var toDelete: Bool = false
     
     // Cloud Kit only
     var createdRecord: CKRecord?
@@ -192,15 +193,26 @@ extension Skill {
     }
     
     class func fetchAll() -> Promise<[Skill]> {
-        return SkillEntity.fetchAll().then { entities -> [Skill] in
-            return entities.map { $0.skill }
-        }
+        return self.fetchAllNotDeleted()
+//        return SkillEntity.fetchAll().then { entities -> [Skill] in
+//            return entities.map { $0.skill }
+//        }
     }
     
     class func fetchAllUnsynced() -> Promise<[Skill]> {
         return SkillEntity.fetchAllUnsynced().then { entities -> [Skill] in
             return entities.map { $0.skill }
         }
+    }
+    
+    class func fetchAllNotDeleted() -> Promise<[Skill]> {
+        let predicate = NSPredicate(format: "toDelete == %@", false)
+        return self.fetchAllWithPredicate(predicate)
+    }
+    
+    class func fetchAllToDelete() -> Promise<[Skill]> {
+        let predicate = NSPredicate(format: "toDelete == %@", true)
+        return self.fetchAllWithPredicate(predicate)
     }
     
 }

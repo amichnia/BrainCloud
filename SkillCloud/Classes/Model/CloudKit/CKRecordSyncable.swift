@@ -45,10 +45,10 @@ extension CKRecordSyncable {
     private func promiseInsertTo(database: CKDatabase) -> Promise<CKRecord> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecord()
-            .then(database.promiseInsertRecord)
-            .always {
-                // So assure, that the temporary data will be always cleared
-                self.clearTemporaryData()
+        .then(database.promiseInsertRecord)
+        .always {
+            // So assure, that the temporary data will be always cleared
+            self.clearTemporaryData()
         }
     }
     
@@ -73,6 +73,21 @@ extension CKRecordSyncable {
             // So assure, that the temporary data will be always cleared
             self.clearTemporaryData()
         }
+    }
+    
+    func promiseDeleteFrom(db: DatabaseType = .Private) -> Promise<Self> {
+        let container = CloudContainer.sharedContainer
+        let database = container.database(db)
+        
+        return self.promiseDeleteFrom(database).then{ return self }
+    }
+    
+    private func promiseDeleteFrom(database: CKDatabase) -> Promise<Void> {
+        guard let recordID = self.recordID else {
+            return Promise<Void>(error: CommonError.NotEnoughData)
+        }
+        
+        return database.promiseDeleteRecord(recordID)
     }
     
     // Sync record from database

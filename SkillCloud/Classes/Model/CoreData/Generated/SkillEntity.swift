@@ -33,6 +33,7 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
             self.thumbnail          = skill.thumbnail
             self.image              = skill.image
             self.offline            = skill.offline
+            self.toDelete           = skill.toDelete
             // CloudKit synced
             self.recordID           = skill.recordName
             self.changeTag          = skill.recordChangeTag
@@ -48,8 +49,9 @@ extension SkillEntity {
     var skill : Skill {
         let skill = Skill(title: self.name!, thumbnail: self.thumbnail!, experience: Skill.Experience(rawValue: Int(self.experienceValue))!, description: self.desc)
         
-        skill.image = self.image
-        skill.offline = self.offline
+        skill.image             = self.image
+        skill.offline           = self.offline
+        skill.toDelete          = self.toDelete
         
         // CloudKit
         skill.recordName        = self.recordID

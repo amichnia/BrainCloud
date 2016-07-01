@@ -180,7 +180,10 @@ enum CommonError : ErrorType {
     case NotEnoughData
     case UserCancelled
     case OperationFailed
-    case EntityDelete
+}
+
+enum CloudSyncChange: ErrorType {
+    case DeleteEntity(CKRecordSyncable?)
 }
 
 // MARK: - Sprite Kit interactive nodes

@@ -97,6 +97,33 @@ extension CKDatabase {
         }
     }
     
+    /**
+     Promises to delete record by ID
+     
+     - parameter recordID: id of record to delete
+     
+     - returns: Future without that record
+     */
+    func promiseDeleteRecord(recordID: CKRecordID) -> Promise<Void> {
+        return Promise<Void> { fulfill,reject in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+                self.deleteRecordWithID(recordID) { deletedID,error in
+                    if error == nil {
+                        fulfill()
+                    }
+                    else {
+                        reject(error ?? CommonError.UnknownError)
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+
+extension CKDatabase {
+    
     // Multiple
     /**
      Promises to insert several records
@@ -167,6 +194,14 @@ extension CKDatabase {
     }
     
     // Fetching
+    
+    /**
+     Promises to fetch new versions of provided records
+     
+     - parameter records: Records to refetch
+     
+     - returns: Future of records
+     */
     func promiseFetchRecords(records: [CKRecord]) -> Promise<[CKRecord]> {
         guard records.count > 0 else {
             return Promise<[CKRecord]>([])
@@ -175,6 +210,13 @@ extension CKDatabase {
         return self.promiseFetchRecordsWithIDS(records.map{ $0.recordID })
     }
     
+    /**
+     Promise to fetch records with given ID's
+     
+     - parameter recordIDS: ID's of records to fetch
+     
+     - returns: Future of records
+     */
     func promiseFetchRecordsWithIDS(recordIDS: [CKRecordID]) -> Promise<[CKRecord]> {
         return Promise<[CKRecord]> { fulfill,reject in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
@@ -200,6 +242,15 @@ extension CKDatabase {
     }
     
     // Querying
+    
+    /**
+     Promises all records, with given record type and matching predicate
+     
+     - parameter type:         Record type
+     - parameter andPredicate: Predicate to match
+     
+     - returns: Future of records
+     */
     func promiseAllRecordsWith(type: String, andPredicate: NSPredicate? = nil) -> Promise<[CKRecord]> {
         return Promise<[CKRecord]>() { fulfill, reject in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
@@ -221,6 +272,13 @@ extension CKDatabase {
         }
     }
     
+    /**
+     Promise all records into syncable instances, that matches given predicate
+     
+     - parameter predicate: Predicate (of any)
+     
+     - returns: Future of syncable instances
+     */
     func promiseAllWith<T:CKRecordSyncable>(predicate: NSPredicate? = nil) -> Promise<[T]> {
         return self.promiseAllRecordsWith(T.recordType, andPredicate: predicate)
         .then { records -> [T] in

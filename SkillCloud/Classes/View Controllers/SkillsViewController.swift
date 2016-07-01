@@ -95,11 +95,9 @@ class SkillsViewController: UIViewController {
             return savedEntity.skill.promiseInsertTo(DatabaseType.Private)
         }
         .then(SkillEntity.promiseToUpdate)
-        .then { _ -> Void in
-            // Update sync info by += 1 // TODO: Update Sync info
-        }
+        .asVoid()
         .recover { error -> Void in
-            print("Shit happens: \(error) \nWell - Fetching anyway.")
+            // Recover for refetching data?
         }
         .then(Skill.fetchAll)
         .then(on: dispatch_get_main_queue()) { skills -> Void in
@@ -119,15 +117,25 @@ class SkillsViewController: UIViewController {
         .then(SkillEntity.promiseToUpdate)
         .then { savedEntity -> Promise<Skill> in
             MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
-            return savedEntity.skill.promiseSyncTo(DatabaseType.Private)
+            
+            // Handle update cases:
+            if savedEntity.toDelete {
+                return savedEntity.skill.promiseDeleteFrom(.Private)
+            }
+            else {
+                return savedEntity.skill.promiseSyncTo(.Private)
+            }
         }
-        .then(SkillEntity.promiseToUpdate)
-        .then { _ -> Void in
-            // Update sync info by += 1 // TODO: Update Sync info
+        .then { skill -> Promise<Void> in
+            if skill.toDelete {
+                return SkillEntity.promiseToDelete(skill)
+            }
+            else {
+                return SkillEntity.promiseToUpdate(skill).asVoid()
+            }
         }
         .recover { error -> Void in
-            // TODO: Cover delete case here
-            print("Shit happens: \(error) \nWell - Fetching anyway.")
+            // Recover to reload
         }
         .then(Skill.fetchAll)
         .then(on: dispatch_get_main_queue()) { skills -> Void in
