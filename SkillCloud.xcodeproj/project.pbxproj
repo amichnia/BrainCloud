@@ -57,6 +57,8 @@
 		FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */; };
 		FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */; };
 		FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE31DB1E1C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld */; };
+		FE32AB101D271CBF0099B8B6 /* CloudSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */; };
+		FE32AB121D271DEF0099B8B6 /* CloudSelectScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE32AB111D271DEF0099B8B6 /* CloudSelectScene.sks */; };
 		FE60C9E71D22C34C001129C8 /* CloudKit+Promises.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */; };
 		FE60C9E91D22C4EE001129C8 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60C9E81D22C4EE001129C8 /* ImageAsset.swift */; };
 		FE6E688E1D1FD4BC00A72022 /* CloudSkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6E688D1D1FD4BC00A72022 /* CloudSkillsViewController.swift */; };
@@ -142,6 +144,8 @@
 		FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PossiblePlaceView.xib; sourceTree = "<group>"; };
 		FE31DB081C9CA1240006D9EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillCloud.xcdatamodel; sourceTree = "<group>"; };
+		FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectionViewController.swift; sourceTree = "<group>"; };
+		FE32AB111D271DEF0099B8B6 /* CloudSelectScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudSelectScene.sks; sourceTree = "<group>"; };
 		FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CloudKit+Promises.swift"; sourceTree = "<group>"; };
 		FE60C9E81D22C4EE001129C8 /* ImageAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
 		FE6E688D1D1FD4BC00A72022 /* CloudSkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSkillsViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +221,7 @@
 				FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */,
 				C8DF6D251CC5033F009CDBFA /* AddScene.swift */,
 				FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */,
+				FE32AB111D271DEF0099B8B6 /* CloudSelectScene.sks */,
 			);
 			path = SpriteKit;
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
 				FE6E688D1D1FD4BC00A72022 /* CloudSkillsViewController.swift */,
 				FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */,
+				FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -471,6 +477,7 @@
 				FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */,
 				C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */,
 				FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */,
+				FE32AB121D271DEF0099B8B6 /* CloudSelectScene.sks in Resources */,
 				FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */,
 				FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */,
 				FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */,
@@ -582,6 +589,7 @@
 				C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */,
 				FE6E688E1D1FD4BC00A72022 /* CloudSkillsViewController.swift in Sources */,
 				FE31DB101C9CA1240006D9EE /* ImagesAPI.swift in Sources */,
+				FE32AB101D271CBF0099B8B6 /* CloudSelectionViewController.swift in Sources */,
 				FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */,
 				C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */,
 				FEAFD1241C9DAEE700E94633 /* CocoaLumberjack.swift in Sources */,
