@@ -95,6 +95,7 @@ extension SkillNode {
     static func nodeWithEntity(entity: SkillNodeEntity) -> SkillNode? {
         let exp = Skill.Experience(rawValue: Int(entity.skillExperienceValue))!
         let skill = Skill(title: entity.skillName!, thumbnail: entity.skillImage!, experience: exp, description: nil)
+        skill.image = entity.skillImage!
         let radius = skill.experience.radius
         
         // Whole skill node container
