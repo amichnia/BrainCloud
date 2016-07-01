@@ -143,15 +143,21 @@ class CloudContainer {
     
     func promiseSyncTo() -> Promise<Void> {
         return Skill.fetchAllUnsynced()
-        .then { skills -> Promise<[Skill]> in
-            return skills.promiseSyncTo(self.privateDatabase)
-        }
-        .then(on: dispatch_get_main_queue()) { updatedSkills -> Promise<[SkillEntity]> in
-            return when(updatedSkills.map(SkillEntity.promiseToUpdate))
+        .then { skills -> Promise<[SkillEntity]> in
+            return when(skills.map{
+                $0.promiseSyncTo().then(SkillEntity.promiseToUpdate)
+            })
         }
         .then { savedEntities -> Void in
             print("Uploaded \(savedEntities.count) entities")
         }
+        .then(Skill.fetchAllToDelete)
+        .then { toDelete -> Promise<Void> in
+            return when(toDelete.map{
+                $0.promiseDeleteFrom().then(SkillEntity.promiseToDelete)
+            })
+        }
+        
     }
     
 }
