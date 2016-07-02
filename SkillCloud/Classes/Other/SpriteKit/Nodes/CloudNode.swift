@@ -24,27 +24,29 @@ class CloudNode: SKSpriteNode {
         return self.childNodeWithName("Number") as? SKLabelNode
     }()
 
-    func sortNumber(){
-        if let sceneSize = self.scene?.size {
-            let center = CGPoint(x: sceneSize.width/2, y: sceneSize.height/2)
-            let offset = center - self.position
-            
-        }
-        else {
-            
-        }
-    }
+    var sortNumber: CGFloat { return self.position.distanceTo(self.scene?.frame.centerOfMass ?? CGPoint.zero) }
     
     // MARK: - Lifecycle
 
     // MARK: - Configuration
-    func configureWithCloudNumber(cloudNumber: Int?) {
-        self.numberNode?.text = cloudNumber != nil ? "\(cloudNumber)" : "+"
+    func configureWithCloudNumber(cloudNumber: Int?, potential: Bool = false) {
+        self.numberNode?.text = cloudNumber != nil ? "\(cloudNumber)" : (potential ? "+" : " ")
         self.empty = cloudNumber != nil
+        self.outlineNode?.hidden = self.empty
         
         // Physics
-        let radius: CGFloat = self.outlineNode?.size.width ?? self.size.width
+        let radius: CGFloat = (self.outlineNode?.size.width ?? self.size.width) / 2
         self.physicsBody = SKPhysicsBody(circleOfRadius: radius)
+        self.physicsBody?.linearDamping = 3
+        self.physicsBody?.angularDamping = 20
+        
+        self.constraints = [SKConstraint.zRotation(SKRange(constantValue: 0))]
+        
+        let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: self.scene!.physicsBody!, anchorA: self.position, anchorB: self.position)
+        joint.damping = 2
+        joint.frequency = 1
+        
+        self.scene?.physicsWorld.addJoint(joint)
     }
     
     // MARK: - Actions
