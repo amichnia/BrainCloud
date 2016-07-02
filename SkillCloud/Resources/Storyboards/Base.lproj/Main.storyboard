@@ -236,7 +236,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="UyP-RK-aoj" kind="relationship" relationship="rootViewController" id="gLi-Oc-sqN"/>
+                        <segue destination="7U3-2C-DpN" kind="relationship" relationship="rootViewController" id="0qj-Gg-x9J"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VAf-q3-IX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -260,7 +260,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CloudCell" textLabel="4Bb-YI-PyL" detailTextLabel="Lhr-qD-tnE" style="IBUITableViewCellStyleValue1" id="F6m-9C-5Q5">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F6m-9C-5Q5" id="150-6g-AV4">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -329,6 +329,43 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Td9-zM-VnA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2344" y="-653"/>
+        </scene>
+        <!--Cloud Selection View Controller-->
+        <scene sceneID="Dnv-8Y-cRE">
+            <objects>
+                <viewController id="7U3-2C-DpN" customClass="CloudSelectionViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C2N-nS-IEW"/>
+                        <viewControllerLayoutGuide type="bottom" id="aIA-Qf-G7B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ou9-Pc-yXI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IVv-iE-t4W" userLabel="SKView" customClass="SKView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IVv-iE-t4W" firstAttribute="top" secondItem="Ou9-Pc-yXI" secondAttribute="top" id="Do2-jh-ukm"/>
+                            <constraint firstAttribute="trailing" secondItem="IVv-iE-t4W" secondAttribute="trailing" id="EV0-pf-gyn"/>
+                            <constraint firstItem="IVv-iE-t4W" firstAttribute="leading" secondItem="Ou9-Pc-yXI" secondAttribute="leading" id="h9F-1d-vev"/>
+                            <constraint firstAttribute="bottom" secondItem="IVv-iE-t4W" secondAttribute="bottom" id="uDq-PK-TzM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="kPs-HT-fw0"/>
+                    <connections>
+                        <outlet property="skView" destination="IVv-iE-t4W" id="iKd-i7-nt6"/>
+                        <segue destination="IHA-15-xhl" kind="show" identifier="ShowCloudView" id="f9A-uc-wwY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d5O-xy-LV0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2332" y="85"/>
         </scene>
@@ -736,7 +773,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <blurEffect style="extraLight"/>
+                                <blurEffect style="dark"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wka-0C-nzg">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -1014,4 +1051,7 @@
         <image name="ic-skill" width="25" height="25"/>
         <image name="skill_obj" width="72" height="72"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="f9A-uc-wwY"/>
+    </inferredMetricsTieBreakers>
 </document>

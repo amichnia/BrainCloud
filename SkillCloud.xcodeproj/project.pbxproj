@@ -66,6 +66,11 @@
 		FE766D361C9D80010079CA29 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D351C9D80010079CA29 /* DataManager.swift */; };
 		FE766D411C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */; };
 		FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D401C9D82780079CA29 /* SkillEntity.swift */; };
+		FE9F6EDE1D283433008B3BC3 /* CloudSelectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EDD1D283433008B3BC3 /* CloudSelectScene.swift */; };
+		FE9F6EE01D2849FD008B3BC3 /* CloudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EDF1D2849FD008B3BC3 /* CloudNode.swift */; };
+		FE9F6EE31D284E9F008B3BC3 /* CGStructures+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EE21D284E9F008B3BC3 /* CGStructures+Convenience.swift */; };
+		FE9F6EE51D284EE3008B3BC3 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EE41D284EE3008B3BC3 /* UIColor+Extensions.swift */; };
+		FE9F6EE71D284F15008B3BC3 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EE61D284F15008B3BC3 /* Array+Extensions.swift */; };
 		FEAFD1241C9DAEE700E94633 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */; };
 		FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB88E731CB6FD8500EED249 /* Assets.xcassets */; };
 		FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */; };
@@ -153,6 +158,11 @@
 		FE766D351C9D80010079CA29 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkillEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FE766D401C9D82780079CA29 /* SkillEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillEntity.swift; sourceTree = "<group>"; };
+		FE9F6EDD1D283433008B3BC3 /* CloudSelectScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectScene.swift; sourceTree = "<group>"; };
+		FE9F6EDF1D2849FD008B3BC3 /* CloudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudNode.swift; sourceTree = "<group>"; };
+		FE9F6EE21D284E9F008B3BC3 /* CGStructures+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGStructures+Convenience.swift"; sourceTree = "<group>"; };
+		FE9F6EE41D284EE3008B3BC3 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		FE9F6EE61D284F15008B3BC3 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
 		FEB88E731CB6FD8500EED249 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudExportViewController.swift; sourceTree = "<group>"; };
@@ -217,11 +227,12 @@
 			isa = PBXGroup;
 			children = (
 				FE0522DE1CB0155A00315468 /* Nodes */,
-				C8DF6D271CC503A0009CDBFA /* AddScene.sks */,
+				FE9F6EDD1D283433008B3BC3 /* CloudSelectScene.swift */,
+				FE32AB111D271DEF0099B8B6 /* CloudSelectScene.sks */,
 				FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */,
+				C8DF6D271CC503A0009CDBFA /* AddScene.sks */,
 				C8DF6D251CC5033F009CDBFA /* AddScene.swift */,
 				FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */,
-				FE32AB111D271DEF0099B8B6 /* CloudSelectScene.sks */,
 			);
 			path = SpriteKit;
 			sourceTree = "<group>";
@@ -233,6 +244,7 @@
 				C8F55CA51CFC264300208F88 /* SkillNode.swift */,
 				C863048D1CC6417E002C068C /* EditSkillNode.swift */,
 				FE712CAE1D15CA0B00C954CA /* ExperienceSelectNode.swift */,
+				FE9F6EDF1D2849FD008B3BC3 /* CloudNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -298,6 +310,7 @@
 		FE31DAEF1C9CA1240006D9EE /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				FE9F6EE11D284E27008B3BC3 /* Categories */,
 				FE0522D91CAFE58400315468 /* SpriteKit */,
 				FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */,
 				FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */,
@@ -403,6 +416,16 @@
 				FE766D401C9D82780079CA29 /* SkillEntity.swift */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		FE9F6EE11D284E27008B3BC3 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				FE9F6EE21D284E9F008B3BC3 /* CGStructures+Convenience.swift */,
+				FE9F6EE41D284EE3008B3BC3 /* UIColor+Extensions.swift */,
+				FE9F6EE61D284F15008B3BC3 /* Array+Extensions.swift */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -551,6 +574,7 @@
 				FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */,
 				C8F55CB31CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift in Sources */,
 				FE0522E01CB0157800315468 /* BrainNode.swift in Sources */,
+				FE9F6EE51D284EE3008B3BC3 /* UIColor+Extensions.swift in Sources */,
 				FE2151451D1F3435005BC8B1 /* CloudContainer.swift in Sources */,
 				FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */,
 				FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */,
@@ -564,16 +588,20 @@
 				FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */,
 				C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */,
 				FEE50AA41D24941E0024060D /* CKRecordSyncable.swift in Sources */,
+				FE9F6EE31D284E9F008B3BC3 /* CGStructures+Convenience.swift in Sources */,
 				C83585C51CDB46150003E538 /* RBResizer.swift in Sources */,
 				C8F55CA61CFC264300208F88 /* SkillNode.swift in Sources */,
 				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
 				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,
 				C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */,
+				FE9F6EDE1D283433008B3BC3 /* CloudSelectScene.swift in Sources */,
+				FE9F6EE71D284F15008B3BC3 /* Array+Extensions.swift in Sources */,
 				C8F55CB51CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift in Sources */,
 				FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */,
 				C8F55CB21CFC323000208F88 /* GraphCloudEntity.swift in Sources */,
 				C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */,
 				FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */,
+				FE9F6EE01D2849FD008B3BC3 /* CloudNode.swift in Sources */,
 				FE1FFCAF1D258B5A00E6F6C6 /* RootTabBarViewController.swift in Sources */,
 				FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,

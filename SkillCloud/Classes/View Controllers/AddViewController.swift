@@ -116,6 +116,7 @@ class AddViewController: UIViewController {
         skView.bounds = self.view.bounds
 //        skView.showsFPS = true
 //        skView.showsNodeCount = true
+        skView.showsPhysics = true
         skView.backgroundColor = UIColor.whiteColor()
         
         self.scene.size = skView.bounds.size

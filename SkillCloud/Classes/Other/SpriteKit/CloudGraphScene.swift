@@ -266,10 +266,3 @@ class CloudGraphScene: SKScene, DTOModel {
     
 }
 
-extension CGPoint {
-    
-    func distanceTo(p: CGPoint) -> CGFloat {
-        return hypot(self.x - p.x, self.y - p.y)
-    }
-    
-}
