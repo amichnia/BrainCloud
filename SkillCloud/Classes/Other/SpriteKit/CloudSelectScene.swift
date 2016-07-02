@@ -44,7 +44,7 @@ class CloudSelectScene: SKScene {
     lazy var allNodes: [CloudNode] = { return self.cloudNodes + self.emptyNodes }()
     
     weak var selectionDelegate: CloudSelectionDelegate?
-    var impulseInterval: CFTimeInterval = 3
+    var impulseInterval: CFTimeInterval = 0.1
     var lastTime: CFTimeInterval = 0
     var deltaTime: CFTimeInterval = 0
     var cloudsNumber = 0
@@ -82,10 +82,6 @@ class CloudSelectScene: SKScene {
         self.cloudNodes[self.cloudsNumber].configureWithCloudNumber(nil, potential: true)
     }
     
-    func applyRandomImpulseTo(body: SKPhysicsBody) {
-        body.applyImpulse(CGVector(dx: 50, dy: 50).randomVector())
-    }
-    
     // MARK: - Touches Handling
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -105,13 +101,12 @@ class CloudSelectScene: SKScene {
         }
     }
     
-    
     // MARK: - Main run loop
     override func update(currentTime: CFTimeInterval) {
         self.deltaTime += (currentTime - self.lastTime)
         
         if self.deltaTime > self.impulseInterval, let body = self.allNodes.randomElement().physicsBody {
-            self.applyRandomImpulseTo(body)
+            body.applyImpulse(CGVector(dx: 3, dy: 3).randomVector())
             self.deltaTime = 0
         }
         
@@ -125,8 +120,6 @@ extension CGVector {
     func randomVector() -> CGVector {
         let randomX = CGFloat(Int(arc4random())) % (2 * self.dx) - self.dx
         let randomY = CGFloat(Int(arc4random())) % (2 * self.dy) - self.dy
-        
-        print("generated: \(randomX) \(randomY)")
         return CGVector(dx: randomX, dy: randomY)
     }
     

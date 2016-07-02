@@ -34,6 +34,7 @@ class CloudNode: SKSpriteNode {
         self.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         self.physicsBody?.linearDamping = 3
         self.physicsBody?.angularDamping = 20
+        self.physicsBody?.mass = 0.3
         
         self.constraints = [SKConstraint.zRotation(SKRange(constantValue: 0))]
         
