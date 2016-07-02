@@ -8,7 +8,6 @@
 
 import UIKit
 
-let ShowCloudViewSegueIdentifier = "ShowCloudView"
 let CloudCellIdentifier = "CloudCell"
 
 class CloudsListViewController: UIViewController {

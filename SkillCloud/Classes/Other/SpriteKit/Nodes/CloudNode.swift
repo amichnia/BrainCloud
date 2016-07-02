@@ -29,12 +29,7 @@ class CloudNode: SKSpriteNode {
     // MARK: - Lifecycle
 
     // MARK: - Configuration
-    func configureWithCloudNumber(cloudNumber: Int?, potential: Bool = false) {
-        self.numberNode?.text = cloudNumber != nil ? "\(cloudNumber)" : (potential ? "+" : " ")
-        self.empty = cloudNumber != nil
-        self.outlineNode?.hidden = self.empty
-        
-        // Physics
+    func configurePhysics() {
         let radius: CGFloat = (self.outlineNode?.size.width ?? self.size.width) / 2
         self.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         self.physicsBody?.linearDamping = 3
@@ -49,6 +44,22 @@ class CloudNode: SKSpriteNode {
         self.scene?.physicsWorld.addJoint(joint)
     }
     
+    func configureWithCloudNumber(cloudNumber: Int?, potential: Bool = false) {
+        self.numberNode?.text = cloudNumber != nil ? " \(cloudNumber! + 1) " : (potential ? "+" : " ")
+        self.empty = (cloudNumber == nil)
+        self.outlineNode?.hidden = self.empty
+        self.associatedCloudNumber = cloudNumber
+        self.cloudNode = !self.empty || potential
+    }
+    
     // MARK: - Actions
+    
+}
+
+extension CloudNode: InteractiveNode {
+    
+    var interactionNode: SKNode? {
+        return self.cloudNode ? self : self.parent?.interactionNode
+    }
     
 }

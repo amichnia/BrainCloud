@@ -88,41 +88,44 @@ class SkillsViewController: UIViewController {
     
     // MARK: - Promises
     func promiseAddSkillWith(rect: CGRect?) throws {
-        try AddViewController.promiseNewSkillWith(self, rect: rect, preparedScene: self.preparedScene)
+        firstly {
+            try AddViewController.promiseNewSkillWith(self, rect: rect, preparedScene: self.preparedScene)
+        }
         .then(SkillEntity.promiseToInsert)
-        .then { savedEntity -> Promise<Skill> in
-            MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
+        .then(on: dispatch_get_main_queue()) { savedEntity -> Promise<Skill> in
+            // Insert new skill
+            self.skills.append(savedEntity.skill)
+            self.collectionView.reloadData()
+            
             return savedEntity.skill.promiseInsertTo(DatabaseType.Private)
         }
-        .then(SkillEntity.promiseToUpdate)
-        .asVoid()
-        .recover { error -> Void in
-            // Recover for refetching data?
-        }
-        .then(Skill.fetchAll)
-        .then(on: dispatch_get_main_queue()) { skills -> Void in
-            self.skills = skills
-            self.collectionView.reloadData()
-        }
-        .always {
-            MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
-        }
+        .then(SkillEntity.promiseToUpdate)  // TODO: Update only offline flag!!!
         .error { error in
             print("Error: \(error)")
         }
     }
     
     func promiseChangeSkillWith(rect: CGRect?, withSkill skill: Skill) throws {
-        try AddViewController.promiseChangeSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
-        .then(SkillEntity.promiseToUpdate)
+        firstly {
+            try AddViewController.promiseChangeSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
+        }
+        .then(SkillEntity.promiseToUpdate)                  // Save change to local storage
         .then { savedEntity -> Promise<Skill> in
-            MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
-            // Handle update cases:
-            if savedEntity.toDelete {
-                return savedEntity.skill.promiseDeleteFrom(.Private)
+            return firstly {                                // Fetch changed
+                Skill.fetchAll()
             }
-            else {
-                return savedEntity.skill.promiseSyncTo(.Private)
+            .then(on: dispatch_get_main_queue()) { skills -> Void in
+                self.skills = skills                        // Reload UI
+                self.collectionView.reloadData()            // Reload UI
+            }
+            .then { _ -> Promise<Skill> in                  // Call and update to CloudKit
+                // Handle update cases:
+                if savedEntity.toDelete {
+                    return savedEntity.skill.promiseDeleteFrom(.Private)
+                }
+                else {
+                    return savedEntity.skill.promiseSyncTo(.Private)
+                }
             }
         }
         .then { skill -> Promise<Void> in
@@ -132,17 +135,6 @@ class SkillsViewController: UIViewController {
             else {
                 return SkillEntity.promiseToUpdate(skill).asVoid()
             }
-        }
-        .recover { error -> Void in
-            // Recover to reload
-        }
-        .then(Skill.fetchAll)
-        .then(on: dispatch_get_main_queue()) { skills -> Void in
-            self.skills = skills
-            self.collectionView.reloadData()
-        }
-        .always {
-            MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
         }
         .error { error in
             print("Error: \(error)")

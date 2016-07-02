@@ -60,6 +60,18 @@ class CloudViewController: UIViewController, SkillsProvider {
         self.prepareSceneIfNeeded(self.skView, size: self.skView.bounds.size)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.scene?.paused = false
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.scene?.paused = true
+    }
+    
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         

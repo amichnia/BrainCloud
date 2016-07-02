@@ -43,9 +43,12 @@ class CloudSelectScene: SKScene {
     }()
     lazy var allNodes: [CloudNode] = { return self.cloudNodes + self.emptyNodes }()
     
+    weak var selectionDelegate: CloudSelectionDelegate?
     var impulseInterval: CFTimeInterval = 3
     var lastTime: CFTimeInterval = 0
     var deltaTime: CFTimeInterval = 0
+    var cloudsNumber = 0
+    var ready: Bool = false
     
     // MARK: - Lifecycle
     override func didMoveToView(view: SKView) {
@@ -55,19 +58,53 @@ class CloudSelectScene: SKScene {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         
-        self.view?.showsPhysics = true
-        self.view?.showsFPS = true
-        self.view?.showsDrawCount = true
-        self.view?.showsNodeCount = true
-        
-        self.cloudNodes.forEach { $0.configureWithCloudNumber(nil) }
-        self.emptyNodes.forEach { $0.configureWithCloudNumber(nil) }
+        self.allNodes.forEach { $0.configurePhysics() }
+        self.updateClouds()
+        self.ready = true
     }
     
     // MARK: - Actions
+    func reloadData(number: Int) {
+        self.cloudsNumber = number
+        
+        if self.ready {
+            self.updateClouds()
+        }
+    }
+    
+    func updateClouds() {
+        self.cloudNodes.forEach { $0.configureWithCloudNumber(nil) }
+        
+        for i in 0..<self.cloudsNumber {
+            self.cloudNodes[i].configureWithCloudNumber(i)
+        }
+        
+        self.cloudNodes[self.cloudsNumber].configureWithCloudNumber(nil, potential: true)
+    }
+    
     func applyRandomImpulseTo(body: SKPhysicsBody) {
         body.applyImpulse(CGVector(dx: 50, dy: 50).randomVector())
     }
+    
+    // MARK: - Touches Handling
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            let location = touch.locationInNode(self)
+            
+            let touchedNode = self.nodeAtPoint(location)
+            
+            if let cloudNode = touchedNode.interactionNode as? CloudNode where cloudNode.cloudNode {
+                if let number = cloudNode.associatedCloudNumber {
+                    self.selectionDelegate?.didSelectCloudWithNumber(number)
+                }
+                else {
+                    self.selectionDelegate?.didSelectToAddNewCloud()
+                }
+            }
+        }
+    }
+    
     
     // MARK: - Main run loop
     override func update(currentTime: CFTimeInterval) {
