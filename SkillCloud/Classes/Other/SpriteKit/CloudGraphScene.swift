@@ -28,6 +28,8 @@ class CloudGraphScene: SKScene, DTOModel {
     var skillNodes: [SkillNode] = []
     var cloudEntity: GraphCloudEntity?
     
+    var shouldUpdateLines: Bool = false
+    
     // MARK: - DTOModel
     var uniqueIdentifierValue: String { return self.cloudIdentifier }
     var previousUniqueIdentifier: String?
@@ -207,8 +209,13 @@ class CloudGraphScene: SKScene, DTOModel {
             let skillNode = self.addSkillNodeAt(location, withSkill: skill)
             
             // Skill node scale action
+            self.shouldUpdateLines = true
             let action = SKAction.scaleTo(1, duration: 1, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-            skillNode.runAction(action)
+            skillNode.runAction(action) {
+                delay(1){
+                    self.shouldUpdateLines = false
+                }
+            }
             
             self.addChild(skillNode)
         }
@@ -242,7 +249,7 @@ class CloudGraphScene: SKScene, DTOModel {
             // Move node into position
             let action = SKAction.moveTo(location, duration: 0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0)
             
-            node.runAction(action){
+            node.runAction(action) {
                 // Pin node position with skill node position
                 let joint = SKPhysicsJointFixed.jointWithBodyA(node.physicsBody!, bodyB: skillNode.physicsBody!, anchor: skillNode.position)
                 node.ghostJoint = joint
@@ -259,11 +266,24 @@ class CloudGraphScene: SKScene, DTOModel {
 
     // MARK: - Main run loop
     override func update(currentTime: CFTimeInterval) {
+        guard self.shouldUpdateLines else {
+            return
+        }
+        
         allNodes.forEach{
             $0.updateLines()
         }
     }
     
+}
+
+func delay(delay:Double, closure:()->()) {
+    dispatch_after(
+        dispatch_time(
+            DISPATCH_TIME_NOW,
+            Int64(delay * Double(NSEC_PER_SEC))
+        ),
+        dispatch_get_main_queue(), closure)
 }
 
 extension CGPoint {

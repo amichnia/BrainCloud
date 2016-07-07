@@ -39,8 +39,11 @@ class SkillCollectionViewCell: UICollectionViewCell {
         self.indexPath = indexPath
         self.nameLabel.text = skill.title
         self.imageView.image = skill.circleImage
-        
-        self.layoutIfNeeded()
+    }
+    
+    func configureEmpty() {
+        self.nameLabel.text = nil
+        self.imageView.image = nil
     }
     
 }

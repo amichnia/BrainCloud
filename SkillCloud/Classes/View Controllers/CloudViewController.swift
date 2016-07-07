@@ -24,6 +24,7 @@ class CloudViewController: UIViewController, SkillsProvider {
     // MARK: - Properties
     let pattern = [SkillLightCellIdentifier,SkillLighterCellIdentifier,SkillLighterCellIdentifier,SkillLightCellIdentifier]
     var skills : [Skill] = []
+    var skillsOffset = 16
     var scene : CloudGraphScene!
     var cloudImage: UIImage?
     var cloudEntity: GraphCloudEntity?
@@ -58,6 +59,16 @@ class CloudViewController: UIViewController, SkillsProvider {
         self.scrollView.contentOffset = CGPoint.zero
         
         self.prepareSceneIfNeeded(self.skView, size: self.skView.bounds.size)
+        
+        
+        let height = ceil(self.collectionView.bounds.height/2)
+        (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = CGSize(width: height, height: height)
+        
+        let sectionWidth = CGFloat((self.skillsOffset + self.skillsOffset % 4) / 2) * height
+        
+        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: -sectionWidth, bottom: 0, right: -sectionWidth)
+        self.collectionView.bounces = true
+        self.collectionView.alwaysBounceHorizontal = true
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -74,6 +85,8 @@ class CloudViewController: UIViewController, SkillsProvider {
             skView.ignoresSiblingOrder = true
             skView.backgroundColor = UIColor.clearColor()
             skView.allowsTransparency = true
+            
+            skView.showsFPS = true
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .ResizeFill
@@ -167,17 +180,28 @@ extension CloudViewController: UIScrollViewDelegate {
 extension CloudViewController: UICollectionViewDataSource {
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return 3
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.skills.count
+        guard section == 1 else {
+            return self.skillsOffset
+        }
+        
+        let cells = self.skills.count
+        return cells + ((4 - cells % 4) % 4)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let identifier = self.pattern[indexPath.row % 4]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! SkillCollectionViewCell
-        cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
+        
+        if indexPath.section == 1 && indexPath.row < self.skills.count {
+            cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
+        }
+        else {
+            cell.configureEmpty()
+        }
         
         return cell
     }
@@ -188,6 +212,10 @@ extension CloudViewController: UICollectionViewDataSource {
 extension CloudViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard indexPath.section == 1 && indexPath.row < self.skills.count else {
+            return
+        }
+        
         self.skillToAdd = self.skills[indexPath.row]
         CloudGraphScene.radius = self.skillToAdd!.experience.radius / Node.scaleFactor
     }
