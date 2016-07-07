@@ -40,19 +40,15 @@ class AddScene: SKScene {
         self.skillNode.position = self.skillNode.startFrame.centerOfMass
 
         self[Skill.Experience.Beginner]?.outline.alpha = 0
-        self[Skill.Experience.Beginner]?.addLineNode()
         self[Skill.Experience.Beginner]?.experience = Skill.Experience.Beginner
         
         self[Skill.Experience.Intermediate]?.outline.alpha = 0
-        self[Skill.Experience.Intermediate]?.addLineNode()
         self[Skill.Experience.Intermediate]?.experience = Skill.Experience.Intermediate
         
         self[Skill.Experience.Professional]?.outline.alpha = 0
-        self[Skill.Experience.Professional]?.addLineNode()
         self[Skill.Experience.Professional]?.experience = Skill.Experience.Professional
         
         self[Skill.Experience.Expert]?.outline.alpha = 0
-        self[Skill.Experience.Expert]?.addLineNode()
         self[Skill.Experience.Expert]?.experience = Skill.Experience.Expert
         self[Skill.Experience.Expert]?.prepareRocket()
         
@@ -70,6 +66,8 @@ class AddScene: SKScene {
      - parameter rect:     start frame in view coordinate space
      */
     func animateShow(duration: NSTimeInterval, rect: CGRect? = nil){
+        self.setAllVisible(true)
+        
         let size = CGSize(width: self.size.width * 0.5, height: self.size.width * 0.5)
         self.skillNode.startFrame ?= self.convertRectFromView(rect)
         self.skillNode.finalFrame = CGRect(origin: self.frame.centerOfMass - CGPoint(x: size.width/2 - (size.width / 8), y: size.width/4), size: size)
@@ -85,7 +83,10 @@ class AddScene: SKScene {
     func animateHide(duration: NSTimeInterval, rect: CGRect?, completion: (()->())? = nil) {
         self.skillNode.startFrame ?= self.convertRectFromView(rect)
         
-        self.skillNode.animateHide(duration, completion: completion)
+        self.skillNode.animateHide(duration) {
+            self.setAllVisible(false)
+            completion?()
+        }
         self[Skill.Experience.Beginner]?.animateHide()
         self[Skill.Experience.Intermediate]?.animateHide()
         self[Skill.Experience.Professional]?.animateHide()
@@ -94,6 +95,12 @@ class AddScene: SKScene {
     
     func setSkillImage(image: UIImage?) {
         self.skillNode.setSkillImage(image)
+    }
+    
+    func setAllVisible(visible: Bool) {
+        self.children.forEach {
+            $0.hidden = !visible
+        }
     }
     
     // MARK: - Helpers
