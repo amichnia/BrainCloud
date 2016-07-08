@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import PromiseKit
 
 let SkillLightCellIdentifier = "SkillLightCell"
 let SkillLighterCellIdentifier = "SkillLighterCell"
@@ -105,10 +106,13 @@ class CloudViewController: UIViewController, SkillsProvider {
             
             self.scene = scene
             self.scene.skillsProvider = self
-            if let cloud = self.cloudEntity {
+            if let cloud = self.cloudEntity, cloudId = cloud.cloudId {
+                scene.cloudIdentifier = cloudId
                 scene.cloudEntity = cloud
             }
             else {
+                scene.cloudIdentifier = NSUUID().UUIDString
+                print(scene.cloudIdentifier)
                 scene.nodes = try! self.loadNodesFromBundle()
             }
             
@@ -150,18 +154,28 @@ class CloudViewController: UIViewController, SkillsProvider {
     }
     
     @IBAction func saveCloud(sender: AnyObject) {
-        do { try DataManager.deleteEntity(GraphCloudEntity.self, withIdentifier: self.scene.uniqueIdentifierValue) }
-        catch {
-            DDLogError("Error: \(error)")
+        firstly { () -> Promise<GraphCloudEntity> in
+            if let _ = self.cloudEntity {
+                return DataManager.promiseUpdateEntity(GraphCloudEntity.self, model: self.scene)
+            }
+            else {
+                return DataManager.promiseEntity(GraphCloudEntity.self, model: self.scene)
+            }
         }
-        
-        DataManager.promiseEntity(GraphCloudEntity.self, model: self.scene)
         .then { (cloudEntity) -> Void in
             DDLogInfo("Saved Cloud:\n\(cloudEntity)")
         }
         .error { error in
             DDLogError("Error saving cloud: \(error)")
         }
+    }
+    
+    func deleteCloud(){
+        // TODO: Delete cloud
+        //        do { try DataManager.deleteEntity(GraphCloudEntity.self, withIdentifier: self.scene.uniqueIdentifierValue) }
+        //        catch {
+        //            DDLogError("Error: \(error)")
+        //        }
     }
     
     // MARK: - Navigation
