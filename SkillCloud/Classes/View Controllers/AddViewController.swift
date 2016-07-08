@@ -389,6 +389,7 @@ extension AddViewController {
         
         if let scene = preparedScene {
             addViewController.scene = scene
+            scene.setAllVisible(false)
         }
         addViewController.showFromViewController(sender, withOriginRect: rect)
         
@@ -402,6 +403,7 @@ extension AddViewController {
         
         if let scene = preparedScene {
             addViewController.scene = scene
+            scene.setAllVisible(false)
         }
         
         addViewController.skill = skill
