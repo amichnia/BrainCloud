@@ -82,23 +82,6 @@ class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
     }
     
     // Helpers
-    func addLineNode() {
-//        let path = CGPathCreateMutable()
-//        
-//        CGPathMoveToPoint(path, nil, 0, 0)
-//        CGPathAddLineToPoint(path, nil, -self.position.x, -self.position.y)
-//        CGPathCloseSubpath(path)
-//        
-//        let lineNode = SKShapeNode(path: path)
-//        lineNode.path = path
-//        lineNode.strokeColor = self.tintColor
-//        lineNode.lineWidth = 5
-//        lineNode.zPosition = self.zPosition - 1
-//        
-//        self.line = lineNode
-//        
-//        self.addChild(lineNode)
-    }
     
 }
 

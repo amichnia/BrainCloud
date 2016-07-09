@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import PromiseKit
 
 let SkillLightCellIdentifier = "SkillLightCell"
 let SkillLighterCellIdentifier = "SkillLighterCell"
@@ -24,6 +25,7 @@ class CloudViewController: UIViewController, SkillsProvider {
     // MARK: - Properties
     let pattern = [SkillLightCellIdentifier,SkillLighterCellIdentifier,SkillLighterCellIdentifier,SkillLightCellIdentifier]
     var skills : [Skill] = []
+    var skillsOffset = 16
     var scene : CloudGraphScene!
     var cloudImage: UIImage?
     var cloudEntity: GraphCloudEntity?
@@ -58,6 +60,28 @@ class CloudViewController: UIViewController, SkillsProvider {
         self.scrollView.contentOffset = CGPoint.zero
         
         self.prepareSceneIfNeeded(self.skView, size: self.skView.bounds.size)
+        
+        
+        let height = ceil(self.collectionView.bounds.height/2)
+        (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = CGSize(width: height, height: height)
+        
+        let sectionWidth = CGFloat((self.skillsOffset + self.skillsOffset % 4) / 2) * height
+        
+        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: -sectionWidth, bottom: 0, right: -sectionWidth)
+        self.collectionView.bounces = true
+        self.collectionView.alwaysBounceHorizontal = true
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.scene?.paused = false
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.scene?.paused = true
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -75,15 +99,20 @@ class CloudViewController: UIViewController, SkillsProvider {
             skView.backgroundColor = UIColor.clearColor()
             skView.allowsTransparency = true
             
+            skView.showsFPS = true
+            
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .ResizeFill
             
             self.scene = scene
             self.scene.skillsProvider = self
-            if let cloud = self.cloudEntity {
+            if let cloud = self.cloudEntity, cloudId = cloud.cloudId {
+                scene.cloudIdentifier = cloudId
                 scene.cloudEntity = cloud
             }
             else {
+                scene.cloudIdentifier = NSUUID().UUIDString
+                print(scene.cloudIdentifier)
                 scene.nodes = try! self.loadNodesFromBundle()
             }
             
@@ -91,7 +120,6 @@ class CloudViewController: UIViewController, SkillsProvider {
         }
     }
     
-    // MARK: - Actions
     func loadNodesFromBundle() throws -> [Node] {
         guard let url = NSBundle.mainBundle().URLForResource("all_base_nodes", withExtension: "json"), data = NSData(contentsOfURL: url) else {
             throw SCError.InvalidBundleResourceUrl
@@ -108,11 +136,62 @@ class CloudViewController: UIViewController, SkillsProvider {
         }
     }
     
-    @IBAction func exportAction(sender: AnyObject) {
-        self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
-        self.performSegueWithIdentifier(ShowExportViewSegueIdentifier, sender: self)
+    // MARK: - Actions
+    @IBAction func saveCloud(sender: AnyObject) {
+        firstly { () -> Promise<GraphCloudEntity> in
+            if let _ = self.cloudEntity {
+                return DataManager.promiseUpdateEntity(GraphCloudEntity.self, model: self.scene)
+            }
+            else {
+                return DataManager.promiseEntity(GraphCloudEntity.self, model: self.scene)
+            }
+        }
+        .then { (cloudEntity) -> Void in
+            DDLogInfo("Saved Cloud:\n\(cloudEntity)")
+        }
+        .error { error in
+            DDLogError("Error saving cloud: \(error)")
+        }
     }
     
+    @IBAction func settingsAction(sender: AnyObject) {
+        // Export
+        // Delete
+        typealias T = ()->()
+        
+        self.promiseSelection(T.self, cancellable: true, options: [
+            (NSLocalizedString("Export", comment: "Export"),.Default,{
+                return self.promiseExportCloud()
+            }),
+            (NSLocalizedString("Delete", comment: "Delete"),.Destructive,{
+                return self.promiseDeleteCloud()
+            })
+        ])
+        .then { closure -> Void in
+            closure()
+        }
+        .error { error in
+            DDLogError("Error: \(error)")
+        }
+    }
+    
+    func promiseExportCloud() -> Promise<()->()> {
+        return Promise<()->()> {
+            self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
+            self.performSegueWithIdentifier(ShowExportViewSegueIdentifier, sender: self)
+        }
+    }
+    
+    func promiseDeleteCloud() -> Promise<()->()> {
+        return firstly {
+            DataManager.promiseDeleteEntity(GraphCloudEntity.self, model: self.scene)
+        }
+        .then { _ -> (()->()) in
+            return { self.performSegueWithIdentifier("UnwindToSelection", sender: nil) }
+        }
+    }
+    
+    // MARK: - Helpers
     func captureCloudWithSize(size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 2.0)
         
@@ -122,21 +201,6 @@ class CloudViewController: UIViewController, SkillsProvider {
         UIGraphicsEndImageContext()
         
         return image
-    }
-    
-    @IBAction func saveCloud(sender: AnyObject) {
-        do { try DataManager.deleteEntity(GraphCloudEntity.self, withIdentifier: self.scene.uniqueIdentifierValue) }
-        catch {
-            DDLogError("Error: \(error)")
-        }
-        
-        DataManager.promiseEntity(GraphCloudEntity.self, model: self.scene)
-        .then { (cloudEntity) -> Void in
-            DDLogInfo("Saved Cloud:\n\(cloudEntity)")
-        }
-        .error { error in
-            DDLogError("Error saving cloud: \(error)")
-        }
     }
     
     // MARK: - Navigation
@@ -167,17 +231,28 @@ extension CloudViewController: UIScrollViewDelegate {
 extension CloudViewController: UICollectionViewDataSource {
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return 3
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.skills.count
+        guard section == 1 else {
+            return self.skillsOffset
+        }
+        
+        let cells = self.skills.count
+        return cells + ((4 - cells % 4) % 4)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let identifier = self.pattern[indexPath.row % 4]
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! SkillCollectionViewCell
-        cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
+        
+        if indexPath.section == 1 && indexPath.row < self.skills.count {
+            cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
+        }
+        else {
+            cell.configureEmpty()
+        }
         
         return cell
     }
@@ -188,6 +263,10 @@ extension CloudViewController: UICollectionViewDataSource {
 extension CloudViewController: UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard indexPath.section == 1 && indexPath.row < self.skills.count else {
+            return
+        }
+        
         self.skillToAdd = self.skills[indexPath.row]
         CloudGraphScene.radius = self.skillToAdd!.experience.radius / Node.scaleFactor
     }

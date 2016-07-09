@@ -10,12 +10,10 @@
 		0EBD292BB6568C34F93754EC /* Pods_SkillCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0973088A39C9FDA46F42FEC2 /* Pods_SkillCloud.framework */; };
 		C80A918F1CB5206800529F0B /* GoogleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */; };
 		C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A91901CB5208200529F0B /* GoogleImage.swift */; };
-		C83585C51CDB46150003E538 /* RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83585C41CDB46150003E538 /* RBResizer.swift */; };
 		C863048E1CC6417E002C068C /* EditSkillNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863048D1CC6417E002C068C /* EditSkillNode.swift */; };
 		C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86304911CC646B1002C068C /* SkillsViewController.swift */; };
 		C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */; };
 		C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C88EB4871CB50580002B9592 /* GoogleImages.storyboard */; };
-		C8A36F461CFDA3DE002C7FC4 /* CloudsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A36F451CFDA3DE002C7FC4 /* CloudsListViewController.swift */; };
 		C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D231CC5017A009CDBFA /* AddViewController.swift */; };
 		C8DF6D261CC5033F009CDBFA /* AddScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D251CC5033F009CDBFA /* AddScene.swift */; };
 		C8DF6D281CC503A0009CDBFA /* AddScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C8DF6D271CC503A0009CDBFA /* AddScene.sks */; };
@@ -30,7 +28,6 @@
 		C8F55CB61CFC323000208F88 /* SkillNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */; };
 		C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */; };
 		FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B11CAEEF8000315468 /* CloudViewController.swift */; };
-		FE0522B41CAEF0B400315468 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B31CAEF0B400315468 /* TestView.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
 		FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */; };
 		FE0522DD1CAFE69500315468 /* CloudGraphScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */; };
@@ -58,6 +55,8 @@
 		FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */; };
 		FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */; };
 		FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE31DB1E1C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld */; };
+		FE32AB101D271CBF0099B8B6 /* CloudSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */; };
+		FE32AB121D271DEF0099B8B6 /* CloudSelectScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE32AB111D271DEF0099B8B6 /* CloudSelectScene.sks */; };
 		FE60C9E71D22C34C001129C8 /* CloudKit+Promises.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */; };
 		FE60C9E91D22C4EE001129C8 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60C9E81D22C4EE001129C8 /* ImageAsset.swift */; };
 		FE6E688E1D1FD4BC00A72022 /* CloudSkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6E688D1D1FD4BC00A72022 /* CloudSkillsViewController.swift */; };
@@ -65,8 +64,13 @@
 		FE766D361C9D80010079CA29 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D351C9D80010079CA29 /* DataManager.swift */; };
 		FE766D411C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */; };
 		FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D401C9D82780079CA29 /* SkillEntity.swift */; };
-		FEAFD1241C9DAEE700E94633 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */; };
-		FEB88E721CB6CE8700EED249 /* AddSkillGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB88E711CB6CE8700EED249 /* AddSkillGraphView.swift */; };
+		FE9F6EDE1D283433008B3BC3 /* CloudSelectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EDD1D283433008B3BC3 /* CloudSelectScene.swift */; };
+		FE9F6EE01D2849FD008B3BC3 /* CloudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EDF1D2849FD008B3BC3 /* CloudNode.swift */; };
+		FE9F6EE31D284E9F008B3BC3 /* CGStructures+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EE21D284E9F008B3BC3 /* CGStructures+Convenience.swift */; };
+		FE9F6EE51D284EE3008B3BC3 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EE41D284EE3008B3BC3 /* UIColor+Extensions.swift */; };
+		FE9F6EE71D284F15008B3BC3 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EE61D284F15008B3BC3 /* Array+Extensions.swift */; };
+		FE9F6EEB1D28500C008B3BC3 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EEA1D28500C008B3BC3 /* CocoaLumberjack.swift */; };
+		FE9F6EED1D285031008B3BC3 /* UIImage+RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EEC1D285031008B3BC3 /* UIImage+RBResizer.swift */; };
 		FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB88E731CB6FD8500EED249 /* Assets.xcassets */; };
 		FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */; };
 		FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */; };
@@ -94,12 +98,10 @@
 		475C05D26AD5AF1583C89837 /* Pods-SkillCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.debug.xcconfig"; sourceTree = "<group>"; };
 		C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		C80A91901CB5208200529F0B /* GoogleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImage.swift; sourceTree = "<group>"; };
-		C83585C41CDB46150003E538 /* RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RBResizer.swift; sourceTree = "<group>"; };
 		C863048D1CC6417E002C068C /* EditSkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSkillNode.swift; sourceTree = "<group>"; };
 		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImagesCollectionViewController.swift; sourceTree = "<group>"; };
 		C88EB4871CB50580002B9592 /* GoogleImages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoogleImages.storyboard; sourceTree = "<group>"; };
-		C8A36F451CFDA3DE002C7FC4 /* CloudsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudsListViewController.swift; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* SkillCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8DF6D231CC5017A009CDBFA /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		C8DF6D251CC5033F009CDBFA /* AddScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScene.swift; sourceTree = "<group>"; };
@@ -115,7 +117,6 @@
 		C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillNodeEntity.swift; sourceTree = "<group>"; };
 		C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAPI.swift; sourceTree = "<group>"; };
 		FE0522B11CAEEF8000315468 /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
-		FE0522B31CAEF0B400315468 /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
 		FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudGraphScene.swift; sourceTree = "<group>"; };
@@ -145,6 +146,8 @@
 		FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PossiblePlaceView.xib; sourceTree = "<group>"; };
 		FE31DB081C9CA1240006D9EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillCloud.xcdatamodel; sourceTree = "<group>"; };
+		FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectionViewController.swift; sourceTree = "<group>"; };
+		FE32AB111D271DEF0099B8B6 /* CloudSelectScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudSelectScene.sks; sourceTree = "<group>"; };
 		FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CloudKit+Promises.swift"; sourceTree = "<group>"; };
 		FE60C9E81D22C4EE001129C8 /* ImageAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
 		FE6E688D1D1FD4BC00A72022 /* CloudSkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSkillsViewController.swift; sourceTree = "<group>"; };
@@ -152,8 +155,13 @@
 		FE766D351C9D80010079CA29 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkillEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FE766D401C9D82780079CA29 /* SkillEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillEntity.swift; sourceTree = "<group>"; };
-		FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
-		FEB88E711CB6CE8700EED249 /* AddSkillGraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSkillGraphView.swift; sourceTree = "<group>"; };
+		FE9F6EDD1D283433008B3BC3 /* CloudSelectScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectScene.swift; sourceTree = "<group>"; };
+		FE9F6EDF1D2849FD008B3BC3 /* CloudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudNode.swift; sourceTree = "<group>"; };
+		FE9F6EE21D284E9F008B3BC3 /* CGStructures+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGStructures+Convenience.swift"; sourceTree = "<group>"; };
+		FE9F6EE41D284EE3008B3BC3 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		FE9F6EE61D284F15008B3BC3 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		FE9F6EEA1D28500C008B3BC3 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
+		FE9F6EEC1D285031008B3BC3 /* UIImage+RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RBResizer.swift"; sourceTree = "<group>"; };
 		FEB88E731CB6FD8500EED249 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudExportViewController.swift; sourceTree = "<group>"; };
 		FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsAndDefines.swift; sourceTree = "<group>"; };
@@ -217,8 +225,10 @@
 			isa = PBXGroup;
 			children = (
 				FE0522DE1CB0155A00315468 /* Nodes */,
-				C8DF6D271CC503A0009CDBFA /* AddScene.sks */,
+				FE9F6EDD1D283433008B3BC3 /* CloudSelectScene.swift */,
+				FE32AB111D271DEF0099B8B6 /* CloudSelectScene.sks */,
 				FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */,
+				C8DF6D271CC503A0009CDBFA /* AddScene.sks */,
 				C8DF6D251CC5033F009CDBFA /* AddScene.swift */,
 				FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */,
 			);
@@ -232,6 +242,7 @@
 				C8F55CA51CFC264300208F88 /* SkillNode.swift */,
 				C863048D1CC6417E002C068C /* EditSkillNode.swift */,
 				FE712CAE1D15CA0B00C954CA /* ExperienceSelectNode.swift */,
+				FE9F6EDF1D2849FD008B3BC3 /* CloudNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -298,13 +309,13 @@
 			isa = PBXGroup;
 			children = (
 				FE0522D91CAFE58400315468 /* SpriteKit */,
+				FE9F6EE11D284E27008B3BC3 /* Categories */,
+				FE9F6EE91D28500C008B3BC3 /* Externals */,
 				FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */,
 				FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */,
 				C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */,
 				FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */,
 				FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */,
-				FEAFD1231C9DAEE700E94633 /* CocoaLumberjack.swift */,
-				C83585C41CDB46150003E538 /* RBResizer.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -314,13 +325,13 @@
 			children = (
 				C86304911CC646B1002C068C /* SkillsViewController.swift */,
 				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
-				C8A36F451CFDA3DE002C7FC4 /* CloudsListViewController.swift */,
 				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
 				FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */,
 				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
 				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
 				FE6E688D1D1FD4BC00A72022 /* CloudSkillsViewController.swift */,
 				FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */,
+				FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -328,13 +339,11 @@
 		FE31DAF71C9CA1240006D9EE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FE31DAF81C9CA1240006D9EE /* CanvasView.swift */,
-				FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */,
 				FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */,
 				FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */,
-				FE0522B31CAEF0B400315468 /* TestView.swift */,
 				C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */,
-				FEB88E711CB6CE8700EED249 /* AddSkillGraphView.swift */,
+				FE31DAF81C9CA1240006D9EE /* CanvasView.swift */,
+				FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -403,6 +412,25 @@
 				FE766D401C9D82780079CA29 /* SkillEntity.swift */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		FE9F6EE11D284E27008B3BC3 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				FE9F6EEC1D285031008B3BC3 /* UIImage+RBResizer.swift */,
+				FE9F6EE21D284E9F008B3BC3 /* CGStructures+Convenience.swift */,
+				FE9F6EE41D284EE3008B3BC3 /* UIColor+Extensions.swift */,
+				FE9F6EE61D284F15008B3BC3 /* Array+Extensions.swift */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		FE9F6EE91D28500C008B3BC3 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				FE9F6EEA1D28500C008B3BC3 /* CocoaLumberjack.swift */,
+			);
+			path = Externals;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -477,6 +505,7 @@
 				FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */,
 				C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */,
 				FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */,
+				FE32AB121D271DEF0099B8B6 /* CloudSelectScene.sks in Resources */,
 				FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */,
 				FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */,
 				FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */,
@@ -547,10 +576,11 @@
 				FE0522E21CB01BBF00315468 /* Node.swift in Sources */,
 				FE766D361C9D80010079CA29 /* DataManager.swift in Sources */,
 				FEE50AA21D2494100024060D /* CKRecordConvertible.swift in Sources */,
-				FE0522B41CAEF0B400315468 /* TestView.swift in Sources */,
 				FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */,
 				C8F55CB31CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift in Sources */,
 				FE0522E01CB0157800315468 /* BrainNode.swift in Sources */,
+				FE9F6EED1D285031008B3BC3 /* UIImage+RBResizer.swift in Sources */,
+				FE9F6EE51D284EE3008B3BC3 /* UIColor+Extensions.swift in Sources */,
 				FE2151451D1F3435005BC8B1 /* CloudContainer.swift in Sources */,
 				FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */,
 				FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */,
@@ -564,35 +594,37 @@
 				FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */,
 				C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */,
 				FEE50AA41D24941E0024060D /* CKRecordSyncable.swift in Sources */,
-				C83585C51CDB46150003E538 /* RBResizer.swift in Sources */,
+				FE9F6EE31D284E9F008B3BC3 /* CGStructures+Convenience.swift in Sources */,
 				C8F55CA61CFC264300208F88 /* SkillNode.swift in Sources */,
 				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
 				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,
 				C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */,
+				FE9F6EDE1D283433008B3BC3 /* CloudSelectScene.swift in Sources */,
+				FE9F6EE71D284F15008B3BC3 /* Array+Extensions.swift in Sources */,
 				C8F55CB51CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift in Sources */,
 				FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */,
 				C8F55CB21CFC323000208F88 /* GraphCloudEntity.swift in Sources */,
 				C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */,
 				FE31DB131C9CA1240006D9EE /* GeneratorViewController.swift in Sources */,
+				FE9F6EE01D2849FD008B3BC3 /* CloudNode.swift in Sources */,
 				FE1FFCAF1D258B5A00E6F6C6 /* RootTabBarViewController.swift in Sources */,
 				FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */,
-				FEB88E721CB6CE8700EED249 /* AddSkillGraphView.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,
 				C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */,
 				FE60C9E71D22C34C001129C8 /* CloudKit+Promises.swift in Sources */,
 				C863048E1CC6417E002C068C /* EditSkillNode.swift in Sources */,
-				C8A36F461CFDA3DE002C7FC4 /* CloudsListViewController.swift in Sources */,
 				FE0522DD1CAFE69500315468 /* CloudGraphScene.swift in Sources */,
+				FE9F6EEB1D28500C008B3BC3 /* CocoaLumberjack.swift in Sources */,
 				C8F55CAF1CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift in Sources */,
 				FE712CAF1D15CA0B00C954CA /* ExperienceSelectNode.swift in Sources */,
 				C8F55CB61CFC323000208F88 /* SkillNodeEntity.swift in Sources */,
 				C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */,
 				FE6E688E1D1FD4BC00A72022 /* CloudSkillsViewController.swift in Sources */,
 				FE31DB101C9CA1240006D9EE /* ImagesAPI.swift in Sources */,
+				FE32AB101D271CBF0099B8B6 /* CloudSelectionViewController.swift in Sources */,
 				FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */,
 				C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */,
-				FEAFD1241C9DAEE700E94633 /* CocoaLumberjack.swift in Sources */,
 				FE31DB0F1C9CA1240006D9EE /* CommonExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

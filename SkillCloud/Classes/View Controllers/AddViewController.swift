@@ -116,6 +116,7 @@ class AddViewController: UIViewController {
         skView.bounds = self.view.bounds
 //        skView.showsFPS = true
 //        skView.showsNodeCount = true
+        skView.showsPhysics = true
         skView.backgroundColor = UIColor.whiteColor()
         
         self.scene.size = skView.bounds.size
@@ -161,8 +162,8 @@ class AddViewController: UIViewController {
         self.hideKeyboard(self)
         
         self.promiseSelection(Void.self, cancellable: true, options: [
-            (NSLocalizedString("Change Image", comment: "Change Image"),{ self.selectImage().then{ image -> Void in self.scene.setSkillImage(image) } }),
-            (NSLocalizedString("Remove skill", comment: "Remove skill"),{ self.removeSkill().then{ _ -> Void in
+            (NSLocalizedString("Change Image", comment: "Change Image"),.Default,{ self.selectImage().then{ image -> Void in self.scene.setSkillImage(image) } }),
+            (NSLocalizedString("Remove skill", comment: "Remove skill"),.Destructive,{ self.removeSkill().then{ _ -> Void in
                 self.hideKeyboard(self)
                 self.hideAddViewController(nil)
             }})
@@ -171,9 +172,9 @@ class AddViewController: UIViewController {
     
     func selectImage() -> Promise<UIImage> {
         return self.promiseSelection(UIImage.self, cancellable: true, options: [
-            (NSLocalizedString("Take photo", comment: "Take photo"), { self.selectPickerImage(.Camera) }),
-            (NSLocalizedString("Photo Library", comment: "Photo Library"), { self.selectPickerImage(.PhotoLibrary) }),
-            (NSLocalizedString("Google Images", comment: "Google Images"), { self.selectGoogleImage("\(self.skillNameField.text)") })
+            (NSLocalizedString("Take photo", comment: "Take photo"),.Default,{ self.selectPickerImage(.Camera) }),
+            (NSLocalizedString("Photo Library", comment: "Photo Library"),.Default, { self.selectPickerImage(.PhotoLibrary) }),
+            (NSLocalizedString("Google Images", comment: "Google Images"),.Default, { self.selectGoogleImage("\(self.skillNameField.text)") })
         ])
         .then{ image -> Promise<UIImage> in
             return self.promiseCroppedImage(image)
@@ -388,6 +389,7 @@ extension AddViewController {
         
         if let scene = preparedScene {
             addViewController.scene = scene
+            scene.setAllVisible(false)
         }
         addViewController.showFromViewController(sender, withOriginRect: rect)
         
@@ -401,6 +403,7 @@ extension AddViewController {
         
         if let scene = preparedScene {
             addViewController.scene = scene
+            scene.setAllVisible(false)
         }
         
         addViewController.skill = skill

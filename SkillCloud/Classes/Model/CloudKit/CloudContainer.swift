@@ -157,7 +157,6 @@ class CloudContainer {
                 $0.promiseDeleteFrom().then(SkillEntity.promiseToDelete)
             })
         }
-        
     }
     
 }
