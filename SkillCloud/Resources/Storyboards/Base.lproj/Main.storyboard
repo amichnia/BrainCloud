@@ -246,7 +246,7 @@
             </objects>
             <point key="canvasLocation" x="1582" y="85"/>
         </scene>
-        <!--Cloud Selection View Controller-->
+        <!--Cloud Graphs-->
         <scene sceneID="Dnv-8Y-cRE">
             <objects>
                 <viewController id="7U3-2C-DpN" customClass="CloudSelectionViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
@@ -273,7 +273,7 @@
                             <constraint firstAttribute="bottom" secondItem="IVv-iE-t4W" secondAttribute="bottom" id="uDq-PK-TzM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="kPs-HT-fw0"/>
+                    <navigationItem key="navigationItem" title="Cloud Graphs" id="kPs-HT-fw0"/>
                     <connections>
                         <outlet property="skView" destination="IVv-iE-t4W" id="iKd-i7-nt6"/>
                         <segue destination="IHA-15-xhl" kind="presentation" identifier="ShowCloudView" id="f9A-uc-wwY"/>
@@ -499,36 +499,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7xM-xb-EkU">
-                                <rect key="frame" x="20" y="72" width="560" height="471"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="4" translatesAutoresizingMaskIntoConstraints="NO" id="lk8-en-HtD">
+                                <rect key="frame" x="0.0" y="20" width="600" height="536"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7xM-xb-EkU">
+                                        <rect key="frame" x="16" y="16" width="568" height="504"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="7xM-xb-EkU" firstAttribute="top" secondItem="lk8-en-HtD" secondAttribute="top" constant="16" id="L2L-16-dWH"/>
+                                    <constraint firstItem="7xM-xb-EkU" firstAttribute="height" secondItem="lk8-en-HtD" secondAttribute="height" constant="-32" id="Yku-H7-hJC"/>
+                                    <constraint firstItem="7xM-xb-EkU" firstAttribute="width" secondItem="lk8-en-HtD" secondAttribute="width" constant="-32" id="dDY-dX-Btq"/>
+                                    <constraint firstItem="7xM-xb-EkU" firstAttribute="leading" secondItem="lk8-en-HtD" secondAttribute="leading" constant="16" id="iWF-9e-15N"/>
+                                    <constraint firstAttribute="bottom" secondItem="7xM-xb-EkU" secondAttribute="bottom" constant="16" id="mvL-gL-I5D"/>
+                                    <constraint firstAttribute="trailing" secondItem="7xM-xb-EkU" secondAttribute="trailing" constant="16" id="vWT-DJ-GaL"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="oei-F6-g8F" id="z9u-a9-VBr"/>
+                                </connections>
+                            </scrollView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wan-d2-Rti">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="IRp-mr-nUc"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="done" id="wEm-6h-bZ1">
+                                        <connections>
+                                            <segue destination="OXL-tr-5I9" kind="unwind" unwindAction="unwindToPreviousViewController:" id="ItH-JE-c02"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="rKo-eA-N1A"/>
+                                    <barButtonItem systemItem="action" id="uld-Gl-ZOn">
+                                        <connections>
+                                            <action selector="exportAction:" destination="oei-F6-g8F" id="Hj9-7O-eBo"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fFj-JJ-Re0" firstAttribute="top" secondItem="7xM-xb-EkU" secondAttribute="bottom" constant="8" id="0BB-7W-gOX"/>
-                            <constraint firstItem="7xM-xb-EkU" firstAttribute="top" secondItem="q1V-7a-H2P" secondAttribute="bottom" constant="8" id="3J6-2i-DPJ"/>
-                            <constraint firstItem="7xM-xb-EkU" firstAttribute="leading" secondItem="COf-DK-zEq" secondAttribute="leadingMargin" id="84a-S5-sQj"/>
-                            <constraint firstItem="7xM-xb-EkU" firstAttribute="trailing" secondItem="COf-DK-zEq" secondAttribute="trailingMargin" id="t9T-7Q-1Hx"/>
+                            <constraint firstItem="fFj-JJ-Re0" firstAttribute="top" secondItem="wan-d2-Rti" secondAttribute="bottom" id="VBQ-h0-Ipm"/>
+                            <constraint firstItem="wan-d2-Rti" firstAttribute="leading" secondItem="COf-DK-zEq" secondAttribute="leading" id="dbf-8O-8Ix"/>
+                            <constraint firstAttribute="trailing" secondItem="wan-d2-Rti" secondAttribute="trailing" id="kWU-01-kQy"/>
+                            <constraint firstAttribute="trailing" secondItem="lk8-en-HtD" secondAttribute="trailing" id="nVb-aS-UUK"/>
+                            <constraint firstItem="lk8-en-HtD" firstAttribute="top" secondItem="q1V-7a-H2P" secondAttribute="bottom" id="vHY-Bd-aLF"/>
+                            <constraint firstItem="wan-d2-Rti" firstAttribute="top" secondItem="lk8-en-HtD" secondAttribute="bottom" id="xQ1-2T-neP"/>
+                            <constraint firstItem="lk8-en-HtD" firstAttribute="leading" secondItem="COf-DK-zEq" secondAttribute="leading" id="yLj-Em-u3S"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Export" id="RgT-Gr-WQL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="OPF-hO-eBi">
-                            <connections>
-                                <action selector="saveAction:" destination="oei-F6-g8F" id="Xve-gT-gUQ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="7xM-xb-EkU" id="qJA-gH-hjd"/>
-                        <outlet property="saveButton" destination="OPF-hO-eBi" id="hHz-ej-Mh3"/>
+                        <outlet property="scrollView" destination="lk8-en-HtD" id="nEB-Jg-diG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t3u-fD-ucu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="OXL-tr-5I9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3939" y="85"/>
         </scene>
-        <!--Skills View Controller-->
+        <!--Skills-->
         <scene sceneID="Gbs-sc-fAI">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="pCN-UC-zYF" customClass="SkillsViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
@@ -639,16 +671,19 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="lre-nl-LZE">
+                    <navigationItem key="navigationItem" title="Skills" id="lre-nl-LZE">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Lec-am-Xto">
                             <view key="customView" contentMode="scaleToFill" id="ymy-6g-tOa">
                                 <rect key="frame" x="547" y="5" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAW-uR-g1L">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAW-uR-g1L">
                                         <rect key="frame" x="0.0" y="0.0" width="33" height="33"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="32"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Button" image="ic-add"/>
+                                        <state key="normal" title="+">
+                                            <color key="titleColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="addSkillAction:" destination="pCN-UC-zYF" eventType="touchUpInside" id="2Ey-5e-n3Z"/>
                                         </connections>
@@ -828,7 +863,7 @@
             </objects>
             <point key="canvasLocation" x="3164" y="803"/>
         </scene>
-        <!--Cloud Skills View Controller-->
+        <!--Explore-->
         <scene sceneID="CkS-lO-0qa">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="Ou9-cP-N5t" customClass="CloudSkillsViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
@@ -939,7 +974,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="oIk-Af-BKW">
+                    <navigationItem key="navigationItem" title="Explore" id="oIk-Af-BKW">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="4RH-rN-zc1">
                             <view key="customView" contentMode="scaleToFill" id="n7U-s4-xTr">
                                 <rect key="frame" x="547" y="5" width="33" height="33"/>

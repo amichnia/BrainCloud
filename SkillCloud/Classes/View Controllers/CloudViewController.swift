@@ -99,7 +99,7 @@ class CloudViewController: UIViewController, SkillsProvider {
             skView.backgroundColor = UIColor.clearColor()
             skView.allowsTransparency = true
             
-            skView.showsFPS = true
+//            skView.showsFPS = true
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .ResizeFill

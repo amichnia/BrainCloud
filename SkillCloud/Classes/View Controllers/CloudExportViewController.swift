@@ -13,6 +13,7 @@ class CloudExportViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     // MARK: - Properties
@@ -32,6 +33,15 @@ class CloudExportViewController: UIViewController {
     }
     
     // MARK: - Actions
+    @IBAction func exportAction(sender: AnyObject) {
+        guard let image = self.image else {
+            return
+        }
+        
+        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        self.presentViewController(activityVC, animated: true, completion: nil)
+    }
+    
     @IBAction func saveAction(sender: AnyObject) {
         guard let image = self.image else {
             return
@@ -49,4 +59,12 @@ class CloudExportViewController: UIViewController {
     
     // MARK: - Navigation
 
+}
+
+extension CloudExportViewController: UIScrollViewDelegate {
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return self.imageView
+    }
+    
 }
