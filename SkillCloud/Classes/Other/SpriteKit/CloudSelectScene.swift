@@ -77,11 +77,13 @@ class CloudSelectScene: SKScene {
         
         for i in 0..<self.cloudsNumber {
             self.cloudNodes[i].configureWithCloudNumber(i)
+            self.cloudNodes[i].configureWithThumbnail(self.selectionDelegate?.thumbnailForCloudWithNumber(i))
         }
         
         // Configure add node if possible
         if self.cloudsNumber < self.cloudNodes.count {
             self.cloudNodes[self.cloudsNumber].configureWithCloudNumber(nil, potential: true)
+            self.cloudNodes[self.cloudsNumber].configureWithThumbnail(nil)
         }
     }
     

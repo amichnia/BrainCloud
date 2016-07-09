@@ -219,7 +219,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="pCN-UC-zYF" kind="relationship" relationship="rootViewController" id="vAq-hY-bqP"/>
@@ -337,7 +336,7 @@
                                     <constraint firstItem="AqA-cq-ohe" firstAttribute="centerX" secondItem="MBI-o2-RC0" secondAttribute="centerX" id="vj1-7b-mc6"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RC6-AS-OqT" userLabel="Skills List">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RC6-AS-OqT" userLabel="Skills List">
                                 <rect key="frame" x="0.0" y="392" width="600" height="160"/>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96470588235294119" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -791,7 +790,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="thY-Yu-Nzd">
-                                <rect key="frame" x="20" y="20" width="560" height="52"/>
+                                <rect key="frame" x="20" y="28" width="560" height="52"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAE-jC-2q0" userLabel="Back">
                                         <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
@@ -831,7 +830,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="UfW-6I-deg" secondAttribute="trailing" id="3dn-9P-IsJ"/>
                             <constraint firstItem="wka-0C-nzg" firstAttribute="leading" secondItem="Hkk-qf-1PL" secondAttribute="leading" id="75b-Oe-S7D"/>
-                            <constraint firstItem="thY-Yu-Nzd" firstAttribute="top" secondItem="DyJ-a7-gfs" secondAttribute="bottom" id="Igz-nT-Uaa"/>
+                            <constraint firstItem="thY-Yu-Nzd" firstAttribute="top" secondItem="DyJ-a7-gfs" secondAttribute="bottom" constant="8" id="Igz-nT-Uaa"/>
                             <constraint firstItem="pH8-1G-496" firstAttribute="top" secondItem="wka-0C-nzg" secondAttribute="bottom" id="LSm-8j-oqs"/>
                             <constraint firstItem="thY-Yu-Nzd" firstAttribute="trailing" secondItem="Hkk-qf-1PL" secondAttribute="trailingMargin" id="Lpm-53-SWm"/>
                             <constraint firstAttribute="trailing" secondItem="wka-0C-nzg" secondAttribute="trailing" id="d7J-PX-PgC"/>

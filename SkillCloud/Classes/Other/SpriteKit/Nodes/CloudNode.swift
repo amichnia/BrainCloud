@@ -20,8 +20,11 @@ class CloudNode: SKSpriteNode {
     lazy var outlineNode: SKSpriteNode? = {
         return self.childNodeWithName("CloudNodeOutline") as? SKSpriteNode
     }()
-    lazy var numberNode: SKLabelNode? = {
+    lazy var plusNode: SKLabelNode? = {
         return self.childNodeWithName("Number") as? SKLabelNode
+    }()
+    lazy var numberNode: SKNode? = {
+        return self.childNodeWithName("NumberNode")
     }()
 
     var sortNumber: CGFloat { return self.position.distanceTo(self.scene?.frame.centerOfMass ?? CGPoint.zero) }
@@ -46,11 +49,37 @@ class CloudNode: SKSpriteNode {
     }
     
     func configureWithCloudNumber(cloudNumber: Int?, potential: Bool = false) {
-        self.numberNode?.text = cloudNumber != nil ? " \(cloudNumber! + 1) " : (potential ? "+" : " ")
+        self.plusNode?.hidden = !potential
+        
+        if let _ = cloudNumber {
+            self.numberNode?.hidden = false
+        }
+        else {
+            self.numberNode?.hidden = true
+        }
+        
         self.empty = (cloudNumber == nil)
         self.outlineNode?.hidden = self.empty && !potential
         self.associatedCloudNumber = cloudNumber
         self.cloudNode = !self.empty || potential
+    }
+    
+    func configureWithThumbnail(thumbnail: UIImage?) {
+        self.childNodeWithName("ThumbnailNode")?.removeFromParent()
+        
+        guard let thumbnail = thumbnail else {
+            return
+        }
+        
+        let texture = SKTexture(image: thumbnail.RBCircleImage())
+        let inset = self.size.width * 0.1
+        let thumbnailNode = SKSpriteNode(texture: texture, size: CGSizeInset(self.size,inset,inset))
+        
+        thumbnailNode.zPosition = (self.plusNode?.zPosition ?? (self.zPosition + 0.2)) - 0.1
+//        thumbnailNode.alpha = 0.8
+        thumbnailNode.name = "ThumbnailNode"
+        
+        self.addChild(thumbnailNode)
     }
     
     // MARK: - Actions

@@ -21,10 +21,12 @@ class RootTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
-        CloudContainer().promiseSync()
+        MRProgressOverlayView.show()
+        firstly {
+            CloudContainer().promiseSync()
+        }
         .always {
-            MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
+            MRProgressOverlayView.hide()
         }
         .error { error in
             print("Error: \(error)")

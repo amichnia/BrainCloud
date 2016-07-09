@@ -140,9 +140,18 @@ extension CloudSelectionViewController: CloudSelectionDelegate {
         self.performSegueWithIdentifier(ShowCloudViewSegueIdentifier, sender: self)
     }
     
+    func thumbnailForCloudWithNumber(number: Int) -> UIImage? {
+        guard 0..<self.clouds.count ~= number else {
+            return nil
+        }
+        
+        return self.clouds[number].thumbnail
+    }
+    
 }
 
 protocol CloudSelectionDelegate: class {
     func didSelectCloudWithNumber(number: Int)
     func didSelectToAddNewCloud()
+    func thumbnailForCloudWithNumber(number: Int) -> UIImage?
 }

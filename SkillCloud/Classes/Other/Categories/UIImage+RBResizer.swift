@@ -47,6 +47,10 @@ extension UIImage {
         return UIImage.RBResizeImage(self, targetSize: targetSize)
     }
     
+    func RBCenterCrop(targetSize: CGSize) -> UIImage {
+        return UIImage.RBCenterCropImage(self, targetSize: targetSize)
+    }
+    
     static func RBSquareImageTo(image: UIImage, size: CGSize) -> UIImage {
         return UIImage.RBResizeImage(RBSquareImage(image), targetSize: size)
     }
@@ -90,6 +94,24 @@ extension UIImage {
         
         // Actually do the resizing to the rect using the ImageContext stuff
         UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.drawInRect(rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
+    static func RBCenterCropImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let x   = (size.width - targetSize.width) / 2
+        let y   = (size.height - targetSize.height) / 2
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRectMake(-x, -y, size.width, size.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(targetSize, false, image.scale)
         image.drawInRect(rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

@@ -71,6 +71,7 @@
 		FE9F6EE71D284F15008B3BC3 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EE61D284F15008B3BC3 /* Array+Extensions.swift */; };
 		FE9F6EEB1D28500C008B3BC3 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EEA1D28500C008B3BC3 /* CocoaLumberjack.swift */; };
 		FE9F6EED1D285031008B3BC3 /* UIImage+RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EEC1D285031008B3BC3 /* UIImage+RBResizer.swift */; };
+		FEB31DA21D31207D00E7C203 /* MRProgress+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB31DA11D31207D00E7C203 /* MRProgress+Show.swift */; };
 		FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB88E731CB6FD8500EED249 /* Assets.xcassets */; };
 		FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */; };
 		FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */; };
@@ -162,6 +163,7 @@
 		FE9F6EE61D284F15008B3BC3 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		FE9F6EEA1D28500C008B3BC3 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
 		FE9F6EEC1D285031008B3BC3 /* UIImage+RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RBResizer.swift"; sourceTree = "<group>"; };
+		FEB31DA11D31207D00E7C203 /* MRProgress+Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MRProgress+Show.swift"; sourceTree = "<group>"; };
 		FEB88E731CB6FD8500EED249 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudExportViewController.swift; sourceTree = "<group>"; };
 		FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsAndDefines.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				FE9F6EE21D284E9F008B3BC3 /* CGStructures+Convenience.swift */,
 				FE9F6EE41D284EE3008B3BC3 /* UIColor+Extensions.swift */,
 				FE9F6EE61D284F15008B3BC3 /* Array+Extensions.swift */,
+				FEB31DA11D31207D00E7C203 /* MRProgress+Show.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				FE0522DD1CAFE69500315468 /* CloudGraphScene.swift in Sources */,
 				FE9F6EEB1D28500C008B3BC3 /* CocoaLumberjack.swift in Sources */,
 				C8F55CAF1CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift in Sources */,
+				FEB31DA21D31207D00E7C203 /* MRProgress+Show.swift in Sources */,
 				FE712CAF1D15CA0B00C954CA /* ExperienceSelectNode.swift in Sources */,
 				C8F55CB61CFC323000208F88 /* SkillNodeEntity.swift in Sources */,
 				C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */,

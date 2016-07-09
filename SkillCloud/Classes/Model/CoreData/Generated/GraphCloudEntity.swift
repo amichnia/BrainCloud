@@ -31,6 +31,7 @@ class GraphCloudEntity: NSManagedObject, CoreDataEntity {
             self.cloudId = cloud.cloudIdentifier
             self.date = NSDate().timeIntervalSince1970
             self.name = cloud.name
+            self.thumbnail = cloud.thumbnail
             
             // Update skill nodes
             for skillNode in cloud.skillNodes {

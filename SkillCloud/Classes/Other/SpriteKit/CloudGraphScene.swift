@@ -27,6 +27,7 @@ class CloudGraphScene: SKScene, DTOModel {
     var allNodes: [BrainNode] = []
     var skillNodes: [SkillNode] = []
     var cloudEntity: GraphCloudEntity?
+    var thumbnail: UIImage?
     
     var shouldUpdateLines: Bool = false
     

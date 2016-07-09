@@ -27,14 +27,16 @@ class SkillsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
-        Skill.fetchAll()
+        MRProgressOverlayView.show()
+        firstly {
+            Skill.fetchAll()
+        }
         .then(on: dispatch_get_main_queue()) { skills -> Void in
             self.skills = skills
             self.collectionView.reloadData()
         }
         .always {
-            MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
+            MRProgressOverlayView.hide()
         }
         .error { error in
             print("Error: \(error)")

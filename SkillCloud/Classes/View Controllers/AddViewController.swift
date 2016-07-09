@@ -306,7 +306,7 @@ class AddViewController: UIViewController {
         self.scene.animateShow(duration, rect: self.originRect)
         
         self.view.layoutIfNeeded()
-        self.menuContainerTopConstraint.constant = 0
+        self.menuContainerTopConstraint.constant = 8
         
         UIView.animateWithDuration(duration) {
             self.view.layoutIfNeeded()
@@ -315,6 +315,11 @@ class AddViewController: UIViewController {
     
     // MARK: - Navigation
 
+    // MARK: - Appearance
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
 }
 
 extension AddViewController: UITextFieldDelegate {

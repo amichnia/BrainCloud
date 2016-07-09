@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 import PromiseKit
+import MRProgress
 
 let SkillLightCellIdentifier = "SkillLightCell"
 let SkillLighterCellIdentifier = "SkillLighterCell"
@@ -138,7 +139,14 @@ class CloudViewController: UIViewController, SkillsProvider {
     
     // MARK: - Actions
     @IBAction func saveCloud(sender: AnyObject) {
-        firstly { () -> Promise<GraphCloudEntity> in
+        MRProgressOverlayView.show()
+        firstly {
+            self.promiseCaptureThumbnail()
+        }
+        .then { thumb -> Promise<GraphCloudEntity> in
+            self.scene.thumbnail = thumb
+            
+            // Decide
             if let _ = self.cloudEntity {
                 return DataManager.promiseUpdateEntity(GraphCloudEntity.self, model: self.scene)
             }
@@ -146,8 +154,13 @@ class CloudViewController: UIViewController, SkillsProvider {
                 return DataManager.promiseEntity(GraphCloudEntity.self, model: self.scene)
             }
         }
-        .then { (cloudEntity) -> Void in
+        .then { cloudEntity -> Void in
+            self.cloudEntity = cloudEntity
+            self.scene.cloudEntity = cloudEntity
             DDLogInfo("Saved Cloud:\n\(cloudEntity)")
+        }
+        .always{
+            MRProgressOverlayView.hide()
         }
         .error { error in
             DDLogError("Error saving cloud: \(error)")
@@ -188,6 +201,14 @@ class CloudViewController: UIViewController, SkillsProvider {
         }
         .then { _ -> (()->()) in
             return { self.performSegueWithIdentifier("UnwindToSelection", sender: nil) }
+        }
+    }
+    
+    func promiseCaptureThumbnail() -> Promise<UIImage> {
+        return Promise<UIImage> { fulfill,reject in
+            let image = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize).RBResizeImage(Defined.Cloud.ThumbnailCaptureSize)
+            let thumbnail = image.RBCenterCrop(Defined.Cloud.ThumbnailDefaultSize)
+            fulfill(thumbnail)
         }
     }
     
@@ -240,7 +261,7 @@ extension CloudViewController: UICollectionViewDataSource {
         }
         
         let cells = self.skills.count
-        return cells + ((4 - cells % 4) % 4)
+        return cells + (cells % 2)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -278,3 +299,7 @@ enum SCError : ErrorType {
     case CreateStreamError
     case InvalidBundleResourceUrl
 }
+
+
+
+

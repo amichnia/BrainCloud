@@ -25,7 +25,8 @@ class CloudSkillsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
+        MRProgressOverlayView.show()
+        
         self.cloudContainer = CloudContainer()
         
         self.cloudContainer.promiseAllSkillsFromDatabase(.Public)
@@ -34,7 +35,7 @@ class CloudSkillsViewController: UIViewController {
             self.collectionView.reloadData()
         }
         .always {
-            MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
+            MRProgressOverlayView.hide()
         }
         .error { error in
             print("Error: \(error)")
@@ -101,7 +102,7 @@ class CloudSkillsViewController: UIViewController {
         .then { skill -> Skill in
             self.skills.append(skill)
             
-            MRProgressOverlayView.showOverlayAddedTo(self.view, animated: true)
+            MRProgressOverlayView.show()
             
             return skill
         }
@@ -112,7 +113,7 @@ class CloudSkillsViewController: UIViewController {
             print("Added record with ID = \(skill.recordID)")
         }
         .always {
-            MRProgressOverlayView.dismissAllOverlaysForView(self.view, animated: true)
+            MRProgressOverlayView.hide()
             self.collectionView.reloadData()
         }
         .error { error in
