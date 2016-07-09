@@ -95,11 +95,11 @@ class CloudSelectionViewController: UIViewController {
         if let scene = CloudSelectScene(fileNamed:"CloudSelectScene") where self.scene == nil {
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
-            skView.allowsTransparency = false
-            skView.backgroundColor = self.view.backgroundColor
+            skView.allowsTransparency = true
+            skView.backgroundColor = UIColor.clearColor()
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFit
+            scene.scaleMode = .AspectFill
             
             scene.selectionDelegate = self
             

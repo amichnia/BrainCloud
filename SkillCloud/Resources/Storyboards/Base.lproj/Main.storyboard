@@ -7,6 +7,14 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Lato-Light.ttf">
+            <string>Lato-Light</string>
+            <string>Lato-Light</string>
+            <string>Lato-Light</string>
+            <string>Lato-Light</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Generator-->
         <scene sceneID="tne-QT-ifu">
@@ -191,9 +199,10 @@
         <scene sceneID="2H0-3b-1jo">
             <objects>
                 <tabBarController id="2t6-Cf-HCf" customClass="RootTabBarViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="centered" id="x8O-KY-W0L">
+                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" itemPositioning="centered" id="x8O-KY-W0L">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
@@ -215,10 +224,11 @@
             <objects>
                 <navigationController id="Zhu-Ph-jdQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Skills" image="ic-skill" id="OYx-iM-PZs"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="BJj-Xo-NXc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="BJj-Xo-NXc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.043137254901960784" green="0.082352941176470587" blue="0.094117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="pCN-UC-zYF" kind="relationship" relationship="rootViewController" id="vAq-hY-bqP"/>
@@ -233,9 +243,10 @@
             <objects>
                 <navigationController id="xc5-dX-RtM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Clouds" image="ic-cloud" id="xUo-VF-0z3"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yEy-e1-2Jf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="yEy-e1-2Jf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="7U3-2C-DpN" kind="relationship" relationship="rootViewController" id="0qj-Gg-x9J"/>
@@ -245,7 +256,7 @@
             </objects>
             <point key="canvasLocation" x="1582" y="85"/>
         </scene>
-        <!--Cloud Graphs-->
+        <!--Cloud Selection View Controller-->
         <scene sceneID="Dnv-8Y-cRE">
             <objects>
                 <viewController id="7U3-2C-DpN" customClass="CloudSelectionViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
@@ -254,17 +265,17 @@
                         <viewControllerLayoutGuide type="bottom" id="aIA-Qf-G7B"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ou9-Pc-yXI">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IVv-iE-t4W" userLabel="SKView" customClass="SKView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="IVv-iE-t4W" firstAttribute="top" secondItem="Ou9-Pc-yXI" secondAttribute="top" id="Do2-jh-ukm"/>
                             <constraint firstAttribute="trailing" secondItem="IVv-iE-t4W" secondAttribute="trailing" id="EV0-pf-gyn"/>
@@ -272,7 +283,28 @@
                             <constraint firstAttribute="bottom" secondItem="IVv-iE-t4W" secondAttribute="bottom" id="uDq-PK-TzM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Cloud Graphs" id="kPs-HT-fw0"/>
+                    <navigationItem key="navigationItem" id="kPs-HT-fw0">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="MLr-Tg-Ymk">
+                            <rect key="frame" x="205" y="6" width="190" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloud Graphs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqR-yP-j4U">
+                                    <rect key="frame" x="6" y="6" width="178" height="21"/>
+                                    <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="18"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="jqR-yP-j4U" secondAttribute="bottom" constant="6" id="2od-Ih-g2M"/>
+                                <constraint firstAttribute="trailing" secondItem="jqR-yP-j4U" secondAttribute="trailing" constant="6" id="ItH-vJ-lWm"/>
+                                <constraint firstItem="jqR-yP-j4U" firstAttribute="top" secondItem="MLr-Tg-Ymk" secondAttribute="top" constant="6" id="WM7-jl-L91"/>
+                                <constraint firstItem="jqR-yP-j4U" firstAttribute="leading" secondItem="MLr-Tg-Ymk" secondAttribute="leading" constant="6" id="jWi-KV-noZ"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <outlet property="skView" destination="IVv-iE-t4W" id="iKd-i7-nt6"/>
                         <segue destination="IHA-15-xhl" kind="presentation" identifier="ShowCloudView" id="f9A-uc-wwY"/>
@@ -559,7 +591,7 @@
             </objects>
             <point key="canvasLocation" x="3939" y="85"/>
         </scene>
-        <!--Skills-->
+        <!--Skills View Controller-->
         <scene sceneID="Gbs-sc-fAI">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="pCN-UC-zYF" customClass="SkillsViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
@@ -568,11 +600,11 @@
                         <viewControllerLayoutGuide type="bottom" id="oES-FP-QvA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="64Z-ln-ds6">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ued-bx-u9k">
-                                <rect key="frame" x="0.0" y="64" width="601" height="492"/>
+                                <rect key="frame" x="0.0" y="0.0" width="601" height="492"/>
                                 <color key="backgroundColor" red="0.27058823529411763" green="0.29803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Cr1-oE-ZYt">
                                     <size key="itemSize" width="106" height="106"/>
@@ -590,7 +622,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CY5-Ji-Vp4">
                                                     <rect key="frame" x="8" y="83" width="90" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -626,7 +658,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Add new" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9di-nH-ja3">
                                                     <rect key="frame" x="8" y="83" width="90" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -670,7 +702,27 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Skills" id="lre-nl-LZE">
+                    <navigationItem key="navigationItem" id="lre-nl-LZE">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="WcX-Cd-sDh">
+                            <rect key="frame" x="205" y="6" width="190" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skills" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXJ-9X-ABB">
+                                    <rect key="frame" x="6" y="6" width="178" height="21"/>
+                                    <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="18"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="DXJ-9X-ABB" secondAttribute="bottom" constant="6" id="TTP-Wj-adz"/>
+                                <constraint firstItem="DXJ-9X-ABB" firstAttribute="leading" secondItem="WcX-Cd-sDh" secondAttribute="leading" constant="6" id="WiR-XC-35h"/>
+                                <constraint firstAttribute="trailing" secondItem="DXJ-9X-ABB" secondAttribute="trailing" constant="6" id="YtS-V8-gwv"/>
+                                <constraint firstItem="DXJ-9X-ABB" firstAttribute="top" secondItem="WcX-Cd-sDh" secondAttribute="top" constant="6" id="hff-pc-aYr"/>
+                            </constraints>
+                        </view>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Lec-am-Xto">
                             <view key="customView" contentMode="scaleToFill" id="ymy-6g-tOa">
                                 <rect key="frame" x="547" y="5" width="33" height="33"/>

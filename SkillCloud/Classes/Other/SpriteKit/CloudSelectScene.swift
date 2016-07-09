@@ -54,7 +54,7 @@ class CloudSelectScene: SKScene {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         
-        self.backgroundColor = view.backgroundColor!
+        self.backgroundColor = UIColor.clearColor()
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
         

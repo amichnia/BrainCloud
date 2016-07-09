@@ -259,8 +259,8 @@ class AddViewController: UIViewController {
     func showFromViewController(parent: UIViewController, withOriginRect rect: CGRect?) {
         let snapshot = parent.view.window!.snapshotViewAfterScreenUpdates(false)
         let snapshotTop = parent.view.window!.snapshotViewAfterScreenUpdates(false)
-        snapshot.frame = parent.view.bounds
-        snapshotTop.frame = parent.view.bounds
+        snapshot.frame = parent.view.window!.bounds
+        snapshotTop.frame = parent.view.window!.bounds
         self.snapshotTop = snapshotTop
         self.view.insertSubview(snapshot, atIndex: 0)
         self.view.insertSubview(snapshotTop, aboveSubview: self.blurView)
