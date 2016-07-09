@@ -183,15 +183,11 @@ class CloudViewController: UIViewController, SkillsProvider {
     }
     
     func promiseDeleteCloud() -> Promise<()->()> {
-        // TODO: Delete cloud
-        return Promise<()->()> { fulfill,reject in
-            do {
-                try DataManager.deleteEntity(GraphCloudEntity.self, withIdentifier: self.scene.uniqueIdentifierValue)
-                fulfill({ self.performSegueWithIdentifier("UnwindToSelection", sender: nil) })
-            }
-            catch {
-                reject(error)
-            }
+        return firstly {
+            DataManager.promiseDeleteEntity(GraphCloudEntity.self, model: self.scene)
+        }
+        .then { _ -> (()->()) in
+            return { self.performSegueWithIdentifier("UnwindToSelection", sender: nil) }
         }
     }
     

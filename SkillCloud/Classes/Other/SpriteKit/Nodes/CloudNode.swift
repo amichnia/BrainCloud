@@ -48,7 +48,7 @@ class CloudNode: SKSpriteNode {
     func configureWithCloudNumber(cloudNumber: Int?, potential: Bool = false) {
         self.numberNode?.text = cloudNumber != nil ? " \(cloudNumber! + 1) " : (potential ? "+" : " ")
         self.empty = (cloudNumber == nil)
-        self.outlineNode?.hidden = self.empty
+        self.outlineNode?.hidden = self.empty && !potential
         self.associatedCloudNumber = cloudNumber
         self.cloudNode = !self.empty || potential
     }
