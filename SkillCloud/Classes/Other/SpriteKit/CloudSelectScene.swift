@@ -79,7 +79,10 @@ class CloudSelectScene: SKScene {
             self.cloudNodes[i].configureWithCloudNumber(i)
         }
         
-        self.cloudNodes[self.cloudsNumber].configureWithCloudNumber(nil, potential: true)
+        // Configure add node if possible
+        if self.cloudsNumber < self.cloudNodes.count {
+            self.cloudNodes[self.cloudsNumber].configureWithCloudNumber(nil, potential: true)
+        }
     }
     
     // MARK: - Touches Handling

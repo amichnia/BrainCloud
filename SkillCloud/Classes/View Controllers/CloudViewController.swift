@@ -120,7 +120,6 @@ class CloudViewController: UIViewController, SkillsProvider {
         }
     }
     
-    // MARK: - Actions
     func loadNodesFromBundle() throws -> [Node] {
         guard let url = NSBundle.mainBundle().URLForResource("all_base_nodes", withExtension: "json"), data = NSData(contentsOfURL: url) else {
             throw SCError.InvalidBundleResourceUrl
@@ -137,22 +136,7 @@ class CloudViewController: UIViewController, SkillsProvider {
         }
     }
     
-    @IBAction func exportAction(sender: AnyObject) {
-        self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
-        self.performSegueWithIdentifier(ShowExportViewSegueIdentifier, sender: self)
-    }
-    
-    func captureCloudWithSize(size: CGSize) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(size, false, 2.0)
-        
-        self.skView.drawViewHierarchyInRect(CGRect(origin: CGPoint.zero, size: size), afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
-        
-        return image
-    }
-    
+    // MARK: - Actions
     @IBAction func saveCloud(sender: AnyObject) {
         firstly { () -> Promise<GraphCloudEntity> in
             if let _ = self.cloudEntity {
@@ -170,12 +154,57 @@ class CloudViewController: UIViewController, SkillsProvider {
         }
     }
     
-    func deleteCloud(){
+    @IBAction func settingsAction(sender: AnyObject) {
+        // Export
+        // Delete
+        typealias T = ()->()
+        
+        self.promiseSelection(T.self, cancellable: true, options: [
+            (NSLocalizedString("Export", comment: "Export"),.Default,{
+                return self.promiseExportCloud()
+            }),
+            (NSLocalizedString("Delete", comment: "Delete"),.Destructive,{
+                return self.promiseDeleteCloud()
+            })
+        ])
+        .then { closure -> Void in
+            closure()
+        }
+        .error { error in
+            DDLogError("Error: \(error)")
+        }
+    }
+    
+    func promiseExportCloud() -> Promise<()->()> {
+        return Promise<()->()> {
+            self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
+            self.performSegueWithIdentifier(ShowExportViewSegueIdentifier, sender: self)
+        }
+    }
+    
+    func promiseDeleteCloud() -> Promise<()->()> {
         // TODO: Delete cloud
-        //        do { try DataManager.deleteEntity(GraphCloudEntity.self, withIdentifier: self.scene.uniqueIdentifierValue) }
-        //        catch {
-        //            DDLogError("Error: \(error)")
-        //        }
+        return Promise<()->()> { fulfill,reject in
+            do {
+                try DataManager.deleteEntity(GraphCloudEntity.self, withIdentifier: self.scene.uniqueIdentifierValue)
+                fulfill({ self.performSegueWithIdentifier("UnwindToSelection", sender: nil) })
+            }
+            catch {
+                reject(error)
+            }
+        }
+    }
+    
+    // MARK: - Helpers
+    func captureCloudWithSize(size: CGSize) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 2.0)
+        
+        self.skView.drawViewHierarchyInRect(CGRect(origin: CGPoint.zero, size: size), afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return image
     }
     
     // MARK: - Navigation

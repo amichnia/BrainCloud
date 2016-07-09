@@ -35,7 +35,7 @@ extension UIViewController {
 // MARK: - Promise decisions
 extension UIViewController {
     
-    func promiseSelection<T>(type: T.Type, cancellable: Bool, options: [(String,(() -> Promise<T>))]) -> Promise<T> {
+    func promiseSelection<T>(type: T.Type, cancellable: Bool, options: [(String,UIAlertActionStyle,(() -> Promise<T>))]) -> Promise<T> {
         let selection = Promise<Promise<T>> { (fulfill, reject) in
             guard options.count > 0 else {
                 reject(CommonError.NotEnoughData)
@@ -44,8 +44,8 @@ extension UIViewController {
             
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             
-            options.forEach{ (title, promise) in
-                let action = UIAlertAction(title: title, style: .Default) { (_) in
+            options.forEach{ (title, style, promise) in
+                let action = UIAlertAction(title: title, style: style) { (_) in
                     fulfill(promise())
                 }
                 
@@ -53,7 +53,7 @@ extension UIViewController {
             }
             
             if cancellable {
-                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .Destructive){ (_) in
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .Default){ (_) in
                     reject(CommonError.UserCancelled)
                 }
                 
