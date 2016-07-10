@@ -17,6 +17,7 @@ class SkillsViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewWidth: NSLayoutConstraint!
     
     // MARK: - Properties
     var skillsOffset = 18
@@ -56,6 +57,13 @@ class SkillsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         let width = ceil(self.view.bounds.width/3)
+        let collectionWidth = 3 * width
+        
+        if self.collectionViewWidth.constant != collectionWidth {
+            self.collectionViewWidth.constant = collectionWidth
+            self.collectionView.setNeedsLayout()
+        }
+        
         (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = CGSize(width: width, height: width)
         
         let sectionHeight = CGFloat((self.skillsOffset + self.skillsOffset % 3) / 3) * width

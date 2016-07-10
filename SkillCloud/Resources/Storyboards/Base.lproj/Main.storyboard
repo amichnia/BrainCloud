@@ -199,15 +199,10 @@
         <scene sceneID="2H0-3b-1jo">
             <objects>
                 <tabBarController id="2t6-Cf-HCf" customClass="RootTabBarViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" itemPositioning="centered" id="x8O-KY-W0L">
+                    <tabBar key="tabBar" contentMode="scaleToFill" barStyle="black" translucent="NO" itemPositioning="fill" id="x8O-KY-W0L">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="xc5-dX-RtM" kind="relationship" relationship="viewControllers" id="WTZ-Wg-ykj"/>
@@ -219,11 +214,11 @@
             </objects>
             <point key="canvasLocation" x="734" y="803"/>
         </scene>
-        <!--Skills-->
+        <!--Navigation Controller-->
         <scene sceneID="Bz5-WD-Jb0">
             <objects>
                 <navigationController id="Zhu-Ph-jdQ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Skills" image="ic-skill" id="OYx-iM-PZs"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon-skills-tabbar" selectedImage="icon-skills-tabbar-selected" id="OYx-iM-PZs"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="BJj-Xo-NXc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -238,11 +233,13 @@
             </objects>
             <point key="canvasLocation" x="1582" y="803"/>
         </scene>
-        <!--Clouds-->
+        <!--Navigation Controller-->
         <scene sceneID="YLj-fE-PAW">
             <objects>
                 <navigationController id="xc5-dX-RtM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Clouds" image="ic-cloud" id="xUo-VF-0z3"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon-cloud-tabbar" selectedImage="icon-cloud-tabbar-selected" id="xUo-VF-0z3">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="yEy-e1-2Jf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -604,8 +601,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ued-bx-u9k">
-                                <rect key="frame" x="0.0" y="0.0" width="601" height="492"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                                 <color key="backgroundColor" red="0.27058823529411763" green="0.29803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="Ui0-kp-ByQ"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Cr1-oE-ZYt">
                                     <size key="itemSize" width="106" height="106"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -627,9 +627,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ldf-ZF-gJK">
-                                                    <rect key="frame" x="24" y="12" width="59" height="59"/>
+                                                    <rect key="frame" x="23" y="11" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Ldf-ZF-gJK" secondAttribute="height" multiplier="1:1" id="Njb-Th-ybQ"/>
+                                                        <constraint firstAttribute="width" constant="60" id="tb8-OS-RD3"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -637,12 +638,11 @@
                                         </view>
                                         <color key="backgroundColor" red="0.40000000000000002" green="0.41960784313725491" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Ldf-ZF-gJK" firstAttribute="top" secondItem="FO0-gS-QsW" secondAttribute="topMargin" constant="4" id="38I-RJ-N8O"/>
+                                            <constraint firstItem="Ldf-ZF-gJK" firstAttribute="centerY" secondItem="FO0-gS-QsW" secondAttribute="centerY" constant="-12" id="7To-YX-aaF"/>
                                             <constraint firstItem="CY5-Ji-Vp4" firstAttribute="leading" secondItem="FO0-gS-QsW" secondAttribute="leadingMargin" id="9p0-cV-Np7"/>
                                             <constraint firstItem="CY5-Ji-Vp4" firstAttribute="bottom" secondItem="FO0-gS-QsW" secondAttribute="bottomMargin" id="HCi-iU-tMa"/>
                                             <constraint firstItem="Ldf-ZF-gJK" firstAttribute="centerX" secondItem="FO0-gS-QsW" secondAttribute="centerX" id="RVh-YY-b8t"/>
                                             <constraint firstItem="CY5-Ji-Vp4" firstAttribute="trailing" secondItem="FO0-gS-QsW" secondAttribute="trailingMargin" id="kli-CZ-LKL"/>
-                                            <constraint firstItem="CY5-Ji-Vp4" firstAttribute="top" secondItem="Ldf-ZF-gJK" secondAttribute="bottom" constant="12" id="sFF-gi-tgL"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="Ldf-ZF-gJK" id="fCk-5v-zCb"/>
@@ -663,9 +663,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-add" translatesAutoresizingMaskIntoConstraints="NO" id="DZG-Ay-1BJ">
-                                                    <rect key="frame" x="24" y="12" width="59" height="59"/>
+                                                    <rect key="frame" x="23" y="11" width="60" height="60"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="AB4-bS-55i"/>
                                                         <constraint firstAttribute="width" secondItem="DZG-Ay-1BJ" secondAttribute="height" multiplier="1:1" id="x3m-Mi-Hj9"/>
                                                     </constraints>
                                                 </imageView>
@@ -676,11 +677,16 @@
                                         <constraints>
                                             <constraint firstItem="9di-nH-ja3" firstAttribute="top" secondItem="DZG-Ay-1BJ" secondAttribute="bottom" constant="12" id="AZT-ek-WJc"/>
                                             <constraint firstItem="9di-nH-ja3" firstAttribute="bottom" secondItem="gFp-zL-kwM" secondAttribute="bottomMargin" id="B21-AF-pzV"/>
+                                            <constraint firstItem="DZG-Ay-1BJ" firstAttribute="centerY" secondItem="gFp-zL-kwM" secondAttribute="centerY" constant="-12" id="Mxm-3F-5TA"/>
                                             <constraint firstItem="DZG-Ay-1BJ" firstAttribute="centerX" secondItem="gFp-zL-kwM" secondAttribute="centerX" id="Ni9-h8-tHF"/>
                                             <constraint firstItem="9di-nH-ja3" firstAttribute="leading" secondItem="gFp-zL-kwM" secondAttribute="leadingMargin" id="Poj-d4-2SX"/>
-                                            <constraint firstItem="DZG-Ay-1BJ" firstAttribute="top" secondItem="gFp-zL-kwM" secondAttribute="topMargin" constant="4" id="V2X-Ex-9Oq"/>
                                             <constraint firstItem="9di-nH-ja3" firstAttribute="trailing" secondItem="gFp-zL-kwM" secondAttribute="trailingMargin" id="eGK-Uz-Czq"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="AZT-ek-WJc"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <outlet property="imageView" destination="DZG-Ay-1BJ" id="sGq-Er-G9T"/>
                                             <outlet property="nameLabel" destination="9di-nH-ja3" id="n8n-Ib-zjT"/>
@@ -700,6 +706,11 @@
                             <constraint firstItem="oES-FP-QvA" firstAttribute="top" secondItem="Ued-bx-u9k" secondAttribute="bottom" id="nDW-2d-tj9"/>
                             <constraint firstItem="Ued-bx-u9k" firstAttribute="leading" secondItem="64Z-ln-ds6" secondAttribute="leading" id="vtq-KD-SzE"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fp9-J8-S6Z"/>
+                            </mask>
+                        </variation>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="lre-nl-LZE">
@@ -754,17 +765,18 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="Ued-bx-u9k" id="lhE-eo-zKs"/>
+                        <outlet property="collectionViewWidth" destination="Ui0-kp-ByQ" id="7Hd-Bh-n3t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4IR-MY-hFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2332" y="803"/>
         </scene>
-        <!--Explore-->
+        <!--Navigation Controller-->
         <scene sceneID="v90-1V-UnE">
             <objects>
                 <navigationController id="vsV-3H-7lg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Explore" image="ic-explore" id="nXB-rt-C2U"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon-explore-tabbar" selectedImage="icon-explore-tabbar-selected" id="nXB-rt-C2U"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="08v-3Y-d7N">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1067,13 +1079,16 @@
         <image name="ic-add" width="46" height="47"/>
         <image name="ic-back" width="60" height="60"/>
         <image name="ic-back-shp" width="40" height="40"/>
-        <image name="ic-cloud" width="25" height="25"/>
-        <image name="ic-explore" width="25" height="25"/>
         <image name="ic-ok" width="60" height="60"/>
         <image name="ic-ok-shp" width="40" height="40"/>
         <image name="ic-settings" width="60" height="60"/>
         <image name="ic-settings-shp" width="40" height="40"/>
-        <image name="ic-skill" width="25" height="25"/>
+        <image name="icon-cloud-tabbar" width="30" height="30"/>
+        <image name="icon-cloud-tabbar-selected" width="30" height="30"/>
+        <image name="icon-explore-tabbar" width="30" height="30"/>
+        <image name="icon-explore-tabbar-selected" width="30" height="30"/>
+        <image name="icon-skills-tabbar" width="30" height="30"/>
+        <image name="icon-skills-tabbar-selected" width="30" height="30"/>
         <image name="skill_obj" width="72" height="72"/>
     </resources>
 </document>
