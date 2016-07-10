@@ -17,6 +17,7 @@ class SkillsViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewWidth: NSLayoutConstraint!
     
     // MARK: - Properties
     var skillsOffset = 18
@@ -56,6 +57,13 @@ class SkillsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         let width = ceil(self.view.bounds.width/3)
+        let collectionWidth = 3 * width
+        
+        if self.collectionViewWidth.constant != collectionWidth {
+            self.collectionViewWidth.constant = collectionWidth
+            self.collectionView.setNeedsLayout()
+        }
+        
         (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = CGSize(width: width, height: width)
         
         let sectionHeight = CGFloat((self.skillsOffset + self.skillsOffset % 3) / 3) * width
@@ -65,7 +73,8 @@ class SkillsViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func addSkillAction(sender: UIView) {
-        try! self.promiseAddSkillWith(self.view.convertRect(sender.bounds, fromView: sender))
+        let rect = self.view.convertRect(sender.bounds, fromView: sender)
+        try! self.promiseAddSkillWith(self.view.convertRect(rect, toView: self.view.window!))
     }
     
     func addSkillActionFromCell(cell: UICollectionViewCell) {
@@ -145,9 +154,9 @@ class SkillsViewController: UIViewController {
     
     // MARK: - Helpers
     let colors = [
-        (UIColor(rgba: (69/255, 76/255, 89/255, 1)), UIColor(rgba: (88/255, 93/255, 102/255, 1))),
-        (UIColor(rgba: (75/255, 81/255, 92/255, 1)), UIColor(rgba: (95/255, 100/255, 107/255, 1))),
-        (UIColor(rgba: (82/255, 87/255, 97/255, 1)), UIColor(rgba: (102/255, 107/255, 113/255, 1)))
+        (UIColor(netHex: 0x0b1518), UIColor(netHex: 0x25444d)),
+        (UIColor(netHex: 0x122125), UIColor(netHex: 0x2b505a)),
+        (UIColor(netHex: 0x182d32), UIColor(netHex: 0x315c68))
     ]
     
     func configureColorFor(cell: SkillCollectionViewCell) {
@@ -170,11 +179,12 @@ class SkillsViewController: UIViewController {
             origin: CGPoint(x: imgfrm.origin.x + cell.frame.origin.x, y: imgfrm.origin.y + cell.frame.origin.y - self.collectionView.contentOffset.y + self.collectionView.frame.origin.y),
             size: imgfrm.size
         )
-        return rect
+        
+        return self.view.convertRect(rect, toView: self.view.window!)
     }
     
     // MARK: - Navigation
-
+    
 }
 
 // MARK: - UICollectionViewDataSource

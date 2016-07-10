@@ -14,21 +14,23 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="zW1-gU-aS5">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-background-image.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="jlU-VO-gmd">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.043137256056070328" green="0.08235294371843338" blue="0.094117648899555206" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="zW1-gU-aS5" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="-20" id="44i-2s-JIp"/>
-                            <constraint firstItem="zW1-gU-aS5" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="cH1-I6-OyB"/>
-                            <constraint firstAttribute="trailing" secondItem="zW1-gU-aS5" secondAttribute="trailing" id="fIf-Hq-3X5"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="zW1-gU-aS5" secondAttribute="bottom" id="tCe-b3-Zlv"/>
+                            <constraint firstAttribute="trailing" secondItem="jlU-VO-gmd" secondAttribute="trailing" id="NpH-vX-HWb"/>
+                            <constraint firstItem="jlU-VO-gmd" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="YcC-zp-H6b"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="jlU-VO-gmd" secondAttribute="bottom" id="etd-0q-NeU"/>
+                            <constraint firstItem="jlU-VO-gmd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="p6K-Jh-lIv"/>
                         </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -36,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch" width="333" height="593"/>
+        <image name="launch-background-image.jpg" width="414" height="736"/>
     </resources>
 </document>
