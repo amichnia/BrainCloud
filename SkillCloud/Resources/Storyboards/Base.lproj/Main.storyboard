@@ -11,8 +11,10 @@
         <mutableArray key="Lato-Light.ttf">
             <string>Lato-Light</string>
             <string>Lato-Light</string>
-            <string>Lato-Light</string>
-            <string>Lato-Light</string>
+        </mutableArray>
+        <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -265,6 +267,9 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-image" translatesAutoresizingMaskIntoConstraints="NO" id="tPM-2Y-im8">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                            </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IVv-iE-t4W" userLabel="SKView" customClass="SKView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -274,9 +279,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="tPM-2Y-im8" firstAttribute="top" secondItem="C2N-nS-IEW" secondAttribute="bottom" id="97r-1d-rwY"/>
                             <constraint firstItem="IVv-iE-t4W" firstAttribute="top" secondItem="Ou9-Pc-yXI" secondAttribute="top" id="Do2-jh-ukm"/>
                             <constraint firstAttribute="trailing" secondItem="IVv-iE-t4W" secondAttribute="trailing" id="EV0-pf-gyn"/>
+                            <constraint firstItem="tPM-2Y-im8" firstAttribute="leading" secondItem="Ou9-Pc-yXI" secondAttribute="leading" id="PfU-YG-Yxg"/>
                             <constraint firstItem="IVv-iE-t4W" firstAttribute="leading" secondItem="Ou9-Pc-yXI" secondAttribute="leading" id="h9F-1d-vev"/>
+                            <constraint firstAttribute="trailing" secondItem="tPM-2Y-im8" secondAttribute="trailing" id="i4T-mU-FcZ"/>
+                            <constraint firstItem="aIA-Qf-G7B" firstAttribute="top" secondItem="tPM-2Y-im8" secondAttribute="bottom" id="oTQ-Nb-JVs"/>
                             <constraint firstAttribute="bottom" secondItem="IVv-iE-t4W" secondAttribute="bottom" id="uDq-PK-TzM"/>
                         </constraints>
                     </view>
@@ -288,7 +297,7 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloud Graphs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqR-yP-j4U">
                                     <rect key="frame" x="6" y="6" width="178" height="21"/>
-                                    <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="18"/>
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -621,13 +630,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CY5-Ji-Vp4">
-                                                    <rect key="frame" x="8" y="83" width="90" height="15"/>
+                                                    <rect key="frame" x="8" y="73" width="90" height="29"/>
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ldf-ZF-gJK">
-                                                    <rect key="frame" x="23" y="11" width="60" height="60"/>
+                                                    <rect key="frame" x="23" y="13" width="60" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Ldf-ZF-gJK" secondAttribute="height" multiplier="1:1" id="Njb-Th-ybQ"/>
                                                         <constraint firstAttribute="width" constant="60" id="tb8-OS-RD3"/>
@@ -638,10 +647,11 @@
                                         </view>
                                         <color key="backgroundColor" red="0.40000000000000002" green="0.41960784313725491" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="Ldf-ZF-gJK" firstAttribute="centerY" secondItem="FO0-gS-QsW" secondAttribute="centerY" constant="-12" id="7To-YX-aaF"/>
+                                            <constraint firstItem="Ldf-ZF-gJK" firstAttribute="centerY" secondItem="FO0-gS-QsW" secondAttribute="centerY" constant="-10" id="7To-YX-aaF"/>
                                             <constraint firstItem="CY5-Ji-Vp4" firstAttribute="leading" secondItem="FO0-gS-QsW" secondAttribute="leadingMargin" id="9p0-cV-Np7"/>
-                                            <constraint firstItem="CY5-Ji-Vp4" firstAttribute="bottom" secondItem="FO0-gS-QsW" secondAttribute="bottomMargin" id="HCi-iU-tMa"/>
+                                            <constraint firstItem="CY5-Ji-Vp4" firstAttribute="top" secondItem="Ldf-ZF-gJK" secondAttribute="bottom" id="Gpn-sx-VKM"/>
                                             <constraint firstItem="Ldf-ZF-gJK" firstAttribute="centerX" secondItem="FO0-gS-QsW" secondAttribute="centerX" id="RVh-YY-b8t"/>
+                                            <constraint firstAttribute="bottom" secondItem="CY5-Ji-Vp4" secondAttribute="bottom" constant="4" id="U6r-0f-fsG"/>
                                             <constraint firstItem="CY5-Ji-Vp4" firstAttribute="trailing" secondItem="FO0-gS-QsW" secondAttribute="trailingMargin" id="kli-CZ-LKL"/>
                                         </constraints>
                                         <connections>
@@ -657,13 +667,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Add new" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9di-nH-ja3">
-                                                    <rect key="frame" x="8" y="83" width="90" height="15"/>
+                                                    <rect key="frame" x="8" y="73" width="90" height="29"/>
                                                     <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-add" translatesAutoresizingMaskIntoConstraints="NO" id="DZG-Ay-1BJ">
-                                                    <rect key="frame" x="23" y="11" width="60" height="60"/>
+                                                    <rect key="frame" x="23" y="13" width="60" height="60"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="AB4-bS-55i"/>
@@ -676,10 +686,11 @@
                                         <color key="backgroundColor" red="0.40000000000000002" green="0.41960784309999999" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="9di-nH-ja3" firstAttribute="top" secondItem="DZG-Ay-1BJ" secondAttribute="bottom" constant="12" id="AZT-ek-WJc"/>
-                                            <constraint firstItem="9di-nH-ja3" firstAttribute="bottom" secondItem="gFp-zL-kwM" secondAttribute="bottomMargin" id="B21-AF-pzV"/>
-                                            <constraint firstItem="DZG-Ay-1BJ" firstAttribute="centerY" secondItem="gFp-zL-kwM" secondAttribute="centerY" constant="-12" id="Mxm-3F-5TA"/>
+                                            <constraint firstItem="DZG-Ay-1BJ" firstAttribute="centerY" secondItem="gFp-zL-kwM" secondAttribute="centerY" constant="-10" id="Mxm-3F-5TA"/>
                                             <constraint firstItem="DZG-Ay-1BJ" firstAttribute="centerX" secondItem="gFp-zL-kwM" secondAttribute="centerX" id="Ni9-h8-tHF"/>
                                             <constraint firstItem="9di-nH-ja3" firstAttribute="leading" secondItem="gFp-zL-kwM" secondAttribute="leadingMargin" id="Poj-d4-2SX"/>
+                                            <constraint firstAttribute="bottom" secondItem="9di-nH-ja3" secondAttribute="bottom" constant="4" id="VG0-7a-o00"/>
+                                            <constraint firstItem="9di-nH-ja3" firstAttribute="top" secondItem="DZG-Ay-1BJ" secondAttribute="bottom" id="WRr-ll-tPs"/>
                                             <constraint firstItem="9di-nH-ja3" firstAttribute="trailing" secondItem="gFp-zL-kwM" secondAttribute="trailingMargin" id="eGK-Uz-Czq"/>
                                         </constraints>
                                         <variation key="default">
@@ -721,7 +732,7 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skills" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXJ-9X-ABB">
                                     <rect key="frame" x="6" y="6" width="178" height="21"/>
-                                    <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="18"/>
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -741,7 +752,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAW-uR-g1L">
                                         <rect key="frame" x="0.0" y="0.0" width="33" height="33"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="32"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="30"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="+">
                                             <color key="titleColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1074,6 +1085,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="background-image" width="414" height="736"/>
         <image name="flat_brain_background" width="465" height="364"/>
         <image name="flat_brain_foreground" width="465" height="364"/>
         <image name="ic-add" width="46" height="47"/>
