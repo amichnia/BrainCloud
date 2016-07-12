@@ -832,35 +832,44 @@
                                             <outletCollection property="gestureRecognizers" destination="N3J-yv-GhM" appends="YES" id="rVL-xe-VqU"/>
                                         </connections>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eH3-0u-poB" userLabel="OK">
-                                        <rect key="frame" x="532" y="488" width="60" height="60"/>
-                                        <state key="normal" image="ic-ok"/>
-                                        <connections>
-                                            <action selector="doneAction:" destination="okh-c3-2CT" eventType="touchUpInside" id="HWm-NE-q4c"/>
-                                        </connections>
-                                    </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter skill name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vj3-Tx-pxa">
-                                        <rect key="frame" x="8" y="556" width="584" height="36"/>
+                                        <rect key="frame" x="8" y="554" width="584" height="38"/>
                                         <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="du7-8U-qaY"/>
+                                            <constraint firstAttribute="height" constant="38" id="du7-8U-qaY"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="19"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="delegate" destination="okh-c3-2CT" id="kto-4A-oHM"/>
                                         </connections>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eH3-0u-poB" userLabel="OK">
+                                        <rect key="frame" x="550" y="550" width="46" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="eH3-0u-poB" secondAttribute="height" multiplier="1:1" id="Mq3-wK-vdM"/>
+                                        </constraints>
+                                        <state key="normal" image="icon-check"/>
+                                        <connections>
+                                            <action selector="doneAction:" destination="okh-c3-2CT" eventType="touchUpInside" id="HWm-NE-q4c"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="eH3-0u-poB" firstAttribute="trailing" secondItem="Vj3-Tx-pxa" secondAttribute="trailing" constant="4" id="Bey-KI-eRF"/>
                                     <constraint firstItem="Vj3-Tx-pxa" firstAttribute="leading" secondItem="wka-0C-nzg" secondAttribute="leading" constant="8" id="OmU-oE-Qt1"/>
+                                    <constraint firstItem="eH3-0u-poB" firstAttribute="top" secondItem="Vj3-Tx-pxa" secondAttribute="top" constant="-4" id="PVw-u1-jZH"/>
                                     <constraint firstAttribute="trailing" secondItem="Vj3-Tx-pxa" secondAttribute="trailing" constant="8" id="Tdw-2A-4BO"/>
+                                    <constraint firstItem="eH3-0u-poB" firstAttribute="bottom" secondItem="Vj3-Tx-pxa" secondAttribute="bottom" constant="4" id="XwQ-62-O8m"/>
                                     <constraint firstAttribute="bottom" secondItem="Vj3-Tx-pxa" secondAttribute="bottom" constant="8" id="Y2e-TG-80A"/>
                                     <constraint firstAttribute="trailing" secondItem="scP-WP-Zad" secondAttribute="trailing" id="Z2v-y4-7lb"/>
-                                    <constraint firstItem="Vj3-Tx-pxa" firstAttribute="top" secondItem="eH3-0u-poB" secondAttribute="bottom" constant="8" id="hLW-7w-3BP"/>
                                     <constraint firstItem="scP-WP-Zad" firstAttribute="leading" secondItem="wka-0C-nzg" secondAttribute="leading" id="k1R-rB-YbN"/>
-                                    <constraint firstAttribute="trailing" secondItem="eH3-0u-poB" secondAttribute="trailing" constant="8" id="kGj-zL-BQk"/>
                                     <constraint firstItem="scP-WP-Zad" firstAttribute="centerY" secondItem="wka-0C-nzg" secondAttribute="centerY" id="pvV-5g-t6x"/>
                                 </constraints>
                             </view>
@@ -873,7 +882,7 @@
                                             <constraint firstAttribute="height" constant="52" id="AwC-hM-QFj"/>
                                             <constraint firstAttribute="width" constant="52" id="f5b-HN-kV0"/>
                                         </constraints>
-                                        <state key="normal" image="ic-back"/>
+                                        <state key="normal" image="icon-x"/>
                                         <connections>
                                             <action selector="cancelAction:" destination="okh-c3-2CT" eventType="touchUpInside" id="cb9-V6-QyO"/>
                                         </connections>
@@ -884,7 +893,7 @@
                                             <constraint firstAttribute="width" constant="52" id="HnS-c8-Lfx"/>
                                             <constraint firstAttribute="height" constant="52" id="q02-qd-zD5"/>
                                         </constraints>
-                                        <state key="normal" image="ic-settings"/>
+                                        <state key="normal" image="icon-setting"/>
                                         <connections>
                                             <action selector="settingsAction:" destination="okh-c3-2CT" eventType="touchUpInside" id="F7N-cL-uti"/>
                                         </connections>
@@ -1008,7 +1017,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-add" translatesAutoresizingMaskIntoConstraints="NO" id="DWi-NE-ehe">
+                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-plus" translatesAutoresizingMaskIntoConstraints="NO" id="DWi-NE-ehe">
                                                     <rect key="frame" x="24" y="12" width="59" height="59"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -1089,18 +1098,19 @@
         <image name="flat_brain_background" width="465" height="364"/>
         <image name="flat_brain_foreground" width="465" height="364"/>
         <image name="ic-add" width="46" height="47"/>
-        <image name="ic-back" width="60" height="60"/>
         <image name="ic-back-shp" width="40" height="40"/>
-        <image name="ic-ok" width="60" height="60"/>
         <image name="ic-ok-shp" width="40" height="40"/>
-        <image name="ic-settings" width="60" height="60"/>
+        <image name="ic-plus" width="32" height="32"/>
         <image name="ic-settings-shp" width="40" height="40"/>
+        <image name="icon-check" width="21" height="21"/>
         <image name="icon-cloud-tabbar" width="30" height="30"/>
         <image name="icon-cloud-tabbar-selected" width="30" height="30"/>
         <image name="icon-explore-tabbar" width="30" height="30"/>
         <image name="icon-explore-tabbar-selected" width="30" height="30"/>
+        <image name="icon-setting" width="32" height="32"/>
         <image name="icon-skills-tabbar" width="30" height="30"/>
         <image name="icon-skills-tabbar-selected" width="30" height="30"/>
+        <image name="icon-x" width="32" height="32"/>
         <image name="skill_obj" width="72" height="72"/>
     </resources>
 </document>
