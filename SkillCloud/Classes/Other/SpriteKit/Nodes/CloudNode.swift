@@ -17,8 +17,16 @@ class CloudNode: SKSpriteNode {
     var empty: Bool = true
     var associatedCloudNumber: Int?
     
-    lazy var outlineNode: SKSpriteNode? = {
-        return self.childNodeWithName("CloudNodeOutline") as? SKSpriteNode
+    lazy var outlineNode: SKSpriteNode = {
+        return (self.childNodeWithName("CloudNodeOutline") as? SKSpriteNode) ?? SKSpriteNode()
+    }()
+    lazy var backgroundNode: SKShapeNode = {
+        let bgr = SKShapeNode(circleOfRadius: self.size.width / 2 - 2)
+        bgr.fillColor = UIColor(white: 0.9, alpha: 0.15)
+        bgr.zPosition = (self.plusNode?.zPosition ?? (self.zPosition + 0.2)) - 0.15
+        bgr.blendMode = SKBlendMode.Screen
+        self.addChild(bgr)
+        return bgr
     }()
     lazy var plusNode: SKLabelNode? = {
         return self.childNodeWithName("Number") as? SKLabelNode
@@ -33,7 +41,7 @@ class CloudNode: SKSpriteNode {
 
     // MARK: - Configuration
     func configurePhysics() {
-        let radius: CGFloat = (self.outlineNode?.size.width ?? self.size.width) / 2
+        let radius: CGFloat = self.size.width / 2
         self.physicsBody = SKPhysicsBody(circleOfRadius: radius)
         self.physicsBody?.linearDamping = 3
         self.physicsBody?.angularDamping = 20
@@ -52,14 +60,16 @@ class CloudNode: SKSpriteNode {
         self.plusNode?.hidden = !potential
         
         if let _ = cloudNumber {
-            self.numberNode?.hidden = false
+            self.numberNode?.hidden = true
+            self.backgroundNode.hidden = false
         }
         else {
             self.numberNode?.hidden = true
+            self.backgroundNode.hidden = true
         }
         
         self.empty = (cloudNumber == nil)
-        self.outlineNode?.hidden = self.empty && !potential
+        self.outlineNode.hidden = self.empty && !potential
         self.associatedCloudNumber = cloudNumber
         self.cloudNode = !self.empty || potential
     }
@@ -76,7 +86,6 @@ class CloudNode: SKSpriteNode {
         let thumbnailNode = SKSpriteNode(texture: texture, size: CGSizeInset(self.size,inset,inset))
         
         thumbnailNode.zPosition = (self.plusNode?.zPosition ?? (self.zPosition + 0.2)) - 0.1
-//        thumbnailNode.alpha = 0.8
         thumbnailNode.name = "ThumbnailNode"
         
         self.addChild(thumbnailNode)

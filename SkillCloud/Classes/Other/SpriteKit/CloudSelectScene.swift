@@ -73,6 +73,10 @@ class CloudSelectScene: SKScene {
     }
     
     func updateClouds() {
+        self.enumerateChildNodesWithName("EmptyNode") { node,_ in
+            node.alpha = 0.5
+        }
+        
         self.cloudNodes.forEach { $0.configureWithCloudNumber(nil) }
         
         for i in 0..<self.cloudsNumber {
