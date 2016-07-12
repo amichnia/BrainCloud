@@ -26,6 +26,11 @@ class CloudSelectScene: SKScene {
             $0.sortNumber < $1.sortNumber
         }
         
+        
+        nodes.forEach {
+            $0.cloudNode = true
+        }
+        
         return nodes
     }()
     lazy var emptyNodes: [CloudNode] = {
@@ -64,9 +69,7 @@ class CloudSelectScene: SKScene {
     }
     
     // MARK: - Actions
-    func reloadData(number: Int) {
-        self.cloudsNumber = number
-        
+    func reloadData() {
         if self.ready {
             self.updateClouds()
         }
@@ -77,17 +80,8 @@ class CloudSelectScene: SKScene {
             node.alpha = 0.5
         }
         
-        self.cloudNodes.forEach { $0.configureWithCloudNumber(nil) }
-        
-        for i in 0..<self.cloudsNumber {
-            self.cloudNodes[i].configureWithCloudNumber(i)
-            self.cloudNodes[i].configureWithThumbnail(self.selectionDelegate?.thumbnailForCloudWithNumber(i))
-        }
-        
-        // Configure add node if possible
-        if self.cloudsNumber < self.cloudNodes.count {
-            self.cloudNodes[self.cloudsNumber].configureWithCloudNumber(nil, potential: true)
-            self.cloudNodes[self.cloudsNumber].configureWithThumbnail(nil)
+        for i in 0..<self.cloudNodes.count {
+            self.cloudNodes[i].configureWithCloud(self.selectionDelegate?.cloudForNumber(i))
         }
     }
     
@@ -100,12 +94,7 @@ class CloudSelectScene: SKScene {
             let touchedNode = self.nodeAtPoint(location)
             
             if let cloudNode = touchedNode.interactionNode as? CloudNode where cloudNode.cloudNode {
-                if let number = cloudNode.associatedCloudNumber {
-                    self.selectionDelegate?.didSelectCloudWithNumber(number)
-                }
-                else {
-                    self.selectionDelegate?.didSelectToAddNewCloud()
-                }
+                self.selectionDelegate?.didSelectCloudWithNumber(self.cloudNodes.indexOf(cloudNode) ?? nil)
             }
         }
     }

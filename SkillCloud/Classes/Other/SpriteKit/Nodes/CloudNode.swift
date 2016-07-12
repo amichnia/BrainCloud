@@ -13,9 +13,8 @@ import SpriteKit_Spring
 class CloudNode: SKSpriteNode {
 
     // MARK: - Properties
+    var slot: Int = 0
     var cloudNode: Bool = false
-    var empty: Bool = true
-    var associatedCloudNumber: Int?
     
     lazy var outlineNode: SKSpriteNode = {
         return (self.childNodeWithName("CloudNodeOutline") as? SKSpriteNode) ?? SKSpriteNode()
@@ -56,39 +55,30 @@ class CloudNode: SKSpriteNode {
         self.scene?.physicsWorld.addJoint(joint)
     }
     
-    func configureWithCloudNumber(cloudNumber: Int?, potential: Bool = false) {
-        self.plusNode?.hidden = !potential
-        
-        if let _ = cloudNumber {
-            self.numberNode?.hidden = true
-            self.backgroundNode.hidden = false
-        }
-        else {
-            self.numberNode?.hidden = true
-            self.backgroundNode.hidden = true
-        }
-        
-        self.empty = (cloudNumber == nil)
-        self.outlineNode.hidden = self.empty && !potential
-        self.associatedCloudNumber = cloudNumber
-        self.cloudNode = !self.empty || potential
-    }
-    
-    func configureWithThumbnail(thumbnail: UIImage?) {
+    func configureWithCloud(cloud: GraphCloudEntity?) {
         self.childNodeWithName("ThumbnailNode")?.removeFromParent()
+        self.numberNode?.hidden = true
         
-        guard let thumbnail = thumbnail else {
+        guard let cloud = cloud else {
+            self.plusNode?.hidden = false
+            self.outlineNode.hidden = true
+            self.backgroundNode.hidden = true
             return
         }
         
-        let texture = SKTexture(image: thumbnail.RBCircleImage())
-        let inset = self.size.width * 0.1
-        let thumbnailNode = SKSpriteNode(texture: texture, size: CGSizeInset(self.size,inset,inset))
+        self.plusNode?.hidden = true
+        self.outlineNode.hidden = false
+        self.backgroundNode.hidden = false
         
-        thumbnailNode.zPosition = (self.plusNode?.zPosition ?? (self.zPosition + 0.2)) - 0.1
-        thumbnailNode.name = "ThumbnailNode"
-        
-        self.addChild(thumbnailNode)
+        if let thumbnail = cloud.thumbnail {
+            let texture = SKTexture(image: thumbnail.RBCircleImage())
+            let inset = self.size.width * 0.1
+            let thumbnailNode = SKSpriteNode(texture: texture, size: CGSizeInset(self.size,inset,inset))
+            thumbnailNode.zPosition = (self.plusNode?.zPosition ?? (self.zPosition + 0.2)) - 0.1
+            thumbnailNode.name = "ThumbnailNode"
+            
+            self.addChild(thumbnailNode)
+        }
     }
     
     // MARK: - Actions

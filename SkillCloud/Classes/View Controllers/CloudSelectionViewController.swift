@@ -19,9 +19,9 @@ class CloudSelectionViewController: UIViewController {
     
     // MARK: - Properties
     var scene : CloudSelectScene?
-    var clouds: [GraphCloudEntity] = []
+    var clouds: [Int:GraphCloudEntity] = [:]
     var selectedCloud: GraphCloudEntity? = nil
-    
+    var selectedSlot: Int = 0
     var fetching: Bool = false
     
     // MARK: - Lifecycle
@@ -33,8 +33,12 @@ class CloudSelectionViewController: UIViewController {
         self.fetching = true
         DataManager.fetchAll(GraphCloudEntity.self)
         .then { entities -> Void in
-            self.clouds = entities
-            self.scene?.reloadData(entities.count)
+            self.clouds = [:]
+            
+            entities.forEach { cloud in
+                self.clouds[Int(cloud.slot)] = cloud
+            }
+            self.scene?.reloadData()
         }
         .always {
             self.fetching = false
@@ -48,15 +52,19 @@ class CloudSelectionViewController: UIViewController {
         super.viewWillAppear(animated)
         
         guard !self.fetching else {
-            self.scene?.reloadData(self.clouds.count)
+            self.scene?.reloadData()
             return
         }
         
         self.fetching = true
         DataManager.fetchAll(GraphCloudEntity.self)
         .then { entities -> Void in
-            self.clouds = entities
-            self.scene?.reloadData(entities.count)
+            self.clouds = [:]
+            
+            entities.forEach { cloud in
+                self.clouds[Int(cloud.slot)] = cloud
+            }
+            self.scene?.reloadData()
         }
         .always {
             self.fetching = false
@@ -119,6 +127,7 @@ class CloudSelectionViewController: UIViewController {
         switch identifier {
         case ShowCloudViewSegueIdentifier:
             (segue.destinationViewController as? CloudViewController)?.cloudEntity = self.selectedCloud
+            (segue.destinationViewController as? CloudViewController)?.slot = self.selectedSlot
             self.selectedCloud = nil
         default:
             break
@@ -131,27 +140,28 @@ class CloudSelectionViewController: UIViewController {
 
 extension CloudSelectionViewController: CloudSelectionDelegate {
     
-    func didSelectCloudWithNumber(number: Int) {
-        self.selectedCloud = self.clouds[number]
-        self.performSegueWithIdentifier(ShowCloudViewSegueIdentifier, sender: self)
-    }
-    
-    func didSelectToAddNewCloud() {
-        self.performSegueWithIdentifier(ShowCloudViewSegueIdentifier, sender: self)
-    }
-    
-    func thumbnailForCloudWithNumber(number: Int) -> UIImage? {
-        guard 0..<self.clouds.count ~= number else {
-            return nil
+    func didSelectCloudWithNumber(number: Int?) {
+        guard let slot = number else {
+            return
         }
         
-        return self.clouds[number].thumbnail
+        self.selectedCloud = self.clouds[slot]
+        self.selectedSlot = slot
+        self.performSegueWithIdentifier(ShowCloudViewSegueIdentifier, sender: self)
+    }
+    
+    func didSelectToAddNewCloud(slot: Int) {
+        self.selectedSlot = slot
+        self.performSegueWithIdentifier(ShowCloudViewSegueIdentifier, sender: self)
+    }
+    
+    func cloudForNumber(number: Int) -> GraphCloudEntity? {
+        return self.clouds[number]
     }
     
 }
 
 protocol CloudSelectionDelegate: class {
-    func didSelectCloudWithNumber(number: Int)
-    func didSelectToAddNewCloud()
-    func thumbnailForCloudWithNumber(number: Int) -> UIImage?
+    func didSelectCloudWithNumber(number: Int?)
+    func cloudForNumber(number: Int) -> GraphCloudEntity?
 }

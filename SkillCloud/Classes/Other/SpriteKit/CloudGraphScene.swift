@@ -21,6 +21,7 @@ class CloudGraphScene: SKScene, DTOModel {
     static var colliderRadius: CGFloat { return radius + 1 }
     
     // MARK: - Properties
+    var slot: Int = 0
     weak var skillsProvider : SkillsProvider?
     var nodes: [Node]!
     var allNodesContainer: SKNode!

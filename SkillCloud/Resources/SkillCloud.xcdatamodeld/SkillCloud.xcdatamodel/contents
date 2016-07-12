@@ -15,6 +15,7 @@
         <attribute name="cloudId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="slot" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Transformable" syncable="YES"/>
         <relationship name="brainNodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BrainNodeEntity" inverseName="cloud" inverseEntity="BrainNodeEntity" syncable="YES"/>
         <relationship name="skillNodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SkillNodeEntity" inverseName="cloud" inverseEntity="SkillNodeEntity" syncable="YES"/>
@@ -41,7 +42,7 @@
     <elements>
         <element name="BaseNodeEntity" positionX="-234" positionY="-54" width="128" height="88"/>
         <element name="BrainNodeEntity" positionX="-405" positionY="-62" width="128" height="103"/>
-        <element name="GraphCloudEntity" positionX="-582" positionY="102" width="128" height="133"/>
+        <element name="GraphCloudEntity" positionX="-582" positionY="102" width="128" height="148"/>
         <element name="SkillEntity" positionX="-47" positionY="116" width="128" height="193"/>
         <element name="SkillNodeEntity" positionX="-232" positionY="117" width="128" height="118"/>
     </elements>

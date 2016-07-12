@@ -30,6 +30,7 @@ class CloudViewController: UIViewController, SkillsProvider {
     var scene : CloudGraphScene!
     var cloudImage: UIImage?
     var cloudEntity: GraphCloudEntity?
+    var slot: Int!
     
     var skillToAdd : Skill?
     
@@ -109,10 +110,12 @@ class CloudViewController: UIViewController, SkillsProvider {
             self.scene.skillsProvider = self
             if let cloud = self.cloudEntity, cloudId = cloud.cloudId {
                 scene.cloudIdentifier = cloudId
+                scene.slot = self.slot
                 scene.cloudEntity = cloud
             }
             else {
                 scene.cloudIdentifier = NSUUID().UUIDString
+                scene.slot = self.slot
                 print(scene.cloudIdentifier)
                 scene.nodes = try! self.loadNodesFromBundle()
             }
