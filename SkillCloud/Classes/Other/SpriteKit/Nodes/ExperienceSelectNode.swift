@@ -11,20 +11,29 @@ import SpriteKit
 class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
     
     var experience : Skill.Experience = .Beginner
-    var tintColor: UIColor = UIColor.SkillCloudVeryVeryLight {
-        didSet {
-            self.line?.strokeColor = self.tintColor
-        }
-    }
-    var line: SKShapeNode?
+    var tintColor: UIColor = UIColor.SkillCloudVeryVeryLight
     
     var rocketPosition: CGPoint = CGPoint.zero
     var ray1position: CGPoint = CGPoint.zero
     var ray2position: CGPoint = CGPoint.zero
     var ray3position: CGPoint = CGPoint.zero
     
-    lazy var outline: SKSpriteNode = {
-        return (self.childNodeWithName("Selected") as? SKSpriteNode) ?? SKSpriteNode()
+    lazy var outline: SKShapeNode = {
+        let node = (self.childNodeWithName("Selected") as? SKSpriteNode) ?? SKSpriteNode()
+        let shape = SKShapeNode(circleOfRadius: node.size.width / 2 - 1)
+        shape.strokeColor = UIColor.SkillCloudTurquoise
+        shape.lineWidth = 4
+        shape.zPosition = node.zPosition
+        node.removeFromParent()
+        self.addChild(shape)
+        return shape
+    }()
+    lazy var background: SKShapeNode = {
+        let node = SKShapeNode(circleOfRadius: self.size.width / 2 - 1)
+        node.fillColor = self.tintColor
+        node.zPosition = self.outline.zPosition - 0.5
+        self.addChild(node)
+        return node
     }()
     
     var mainScale: CGFloat {
@@ -66,16 +75,21 @@ class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
         
         if selected {
             self.outline.runAction(SKAction.fadeInWithDuration(duration))
-            UIView.animateWithDuration(duration) {
-                self.line?.strokeColor = UIColor.SkillCloudTurquoise
-            }
+            self.background.runAction(SKAction.fadeInWithDuration(duration))
         }
         else {
             self.outline.runAction(SKAction.fadeOutWithDuration(duration))
-            UIView.animateWithDuration(duration) {
-                self.line?.strokeColor = UIColor.SkillCloudVeryVeryLight
-            }
+            self.background.runAction(SKAction.fadeOutWithDuration(duration))
         }
+        
+        self.enumerateChildNodesWithName("Star") { star,_ in
+            (star as? SKSpriteNode)?.texture = SKTexture(imageNamed: selected ? "ic-star" : "ic-star-white-outline")
+        }
+        
+        (self.childNodeWithName("Rocket") as? SKSpriteNode)?.texture = SKTexture(imageNamed: selected ? "ic-rocket-outlined" : "ic-rocket-white-outline")
+        self.childNodeWithName("Rocket")?.childNodeWithName("Ray1")?.hidden = !selected
+        self.childNodeWithName("Rocket")?.childNodeWithName("Ray2")?.hidden = !selected
+        self.childNodeWithName("Rocket")?.childNodeWithName("Ray3")?.hidden = !selected
         
         self.animateStarsPulsing(selected)
         self.animateRocket(selected)

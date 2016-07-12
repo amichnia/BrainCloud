@@ -14,8 +14,6 @@ class EditSkillNode: SKSpriteNode {
     
     var skill: Skill?
     var imageNode: SKSpriteNode?
-    var imageCropNode: SKCropNode?
-    var maskNode: SKSpriteNode?
     
     var startFrame: CGRect = CGRect.zero
     var finalFrame: CGRect = CGRect.zero
@@ -37,18 +35,12 @@ class EditSkillNode: SKSpriteNode {
     }
     
     lazy var outline: SKSpriteNode = {
-        let old = (self.childNodeWithName("Outline") as? SKSpriteNode) ?? SKSpriteNode()
-        let new = SKShapeNode(circleOfRadius: old.size.width / 2)
-        new.strokeColor = UIColor.SkillCloudTurquoise
-        new.fillColor = UIColor.clearColor()
-        new.lineWidth = 5
-        if let tex = self.scene?.view?.textureFromNode(new) {
-            old.texture = tex
-        }
-        return old
+        return (self.childNodeWithName("Outline") as? SKSpriteNode) ?? SKSpriteNode()
     }()
     lazy var imageSelect: ImageSelectNode = {
-        return (self.childNodeWithName("AddImage") as? ImageSelectNode) ?? ImageSelectNode()
+        let select = (self.childNodeWithName("AddImage") as? ImageSelectNode) ?? ImageSelectNode()
+        select.configure()
+        return select
     }()
     
     // Actions
@@ -56,23 +48,22 @@ class EditSkillNode: SKSpriteNode {
         self.skill = skill
         
         if self.imageNode == nil {
-            let inset = (15.0 / 159.0) * self.size.width * 2
-            
-            self.imageCropNode = SKCropNode()
-            self.maskNode = SKSpriteNode(texture: self.texture, color: self.color, size: CGSizeInset(self.outline.size, -inset - 2, -inset - 2))
-            self.imageCropNode?.maskNode = self.maskNode
-            self.imageNode = SKSpriteNode(texture: self.texture, color: self.color, size: self.size)
-            self.imageCropNode?.addChild(self.imageNode!)
-            self.addChild(self.imageCropNode!)
-            
-            self.imageCropNode?.zPosition = self.zPosition + 1
-            self.imageNode?.zPosition = self.zPosition + 2
-            self.outline.zPosition = self.zPosition + 3
-            
-            self.outline.size = CGSizeInset(self.outline.size, -inset/2 + 2, -inset/2 + 2)
+            // Image node
+            self.imageNode = SKSpriteNode(texture: nil, color: UIColor.clearColor(), size: CGSizeInset(self.size, 5, 5))
+            self.imageNode?.zPosition = self.zPosition - 1
+            self.addChild(self.imageNode!)
+            // Outline
+            self.outline.zPosition = self.zPosition + 1
         }
         
         self.setSkillImage(skill?.image)
+        
+        [Skill.Experience.Beginner,
+         Skill.Experience.Intermediate,
+         Skill.Experience.Professional,
+         Skill.Experience.Expert].forEach {
+            self[$0]?.setSelected(false)
+        }
         
         if let exp = skill?.experience {
             self[exp]?.setSelected(true)
@@ -80,8 +71,10 @@ class EditSkillNode: SKSpriteNode {
     }
     
     func setSkillImage(image: UIImage?) {
-        let skillTexture = image != nil ? SKTexture(image: image!) : SKTexture(imageNamed: "icon-placeholder")
-        self.imageNode?.texture = skillTexture
+        let configured = (image != nil)
+        self.outline.hidden = !configured
+        self.imageNode?.texture = SKTexture(image: image?.RBCircleImage() ?? UIImage(named: "ic-placeholder-circle")!)
+        self.imageNode?.alpha = configured ? 1.0 : 0.3
     }
     
     func animateShow(duration: NSTimeInterval = 1, completion: (()->())? = nil){
@@ -166,6 +159,13 @@ class ImageSelectNode: SKSpriteNode, InteractiveNode {
     }
     
     var targetPosition: CGPoint = CGPoint.zero
+    
+    func configure() {
+        let bgr = SKShapeNode(circleOfRadius: self.size.width / 2 - 1)
+        bgr.fillColor = self.color
+        bgr.zPosition = self.outline.zPosition - 2
+        self.addChild(bgr)
+    }
     
     func animateShow(duration: NSTimeInterval = 1) {
         self.targetPosition = self.position
