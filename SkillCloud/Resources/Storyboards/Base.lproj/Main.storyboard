@@ -475,21 +475,21 @@
                                     <constraint firstAttribute="height" constant="48" id="Ppo-vr-P5q"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem image="ic-back-shp" id="j8D-7l-DCi" userLabel="Back">
+                                    <barButtonItem image="icon-x-black" id="j8D-7l-DCi" userLabel="Back">
                                         <color key="tintColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="mSM-lT-vwJ" kind="unwind" identifier="UnwindToSelection" unwindAction="unwindToCloudSelection:" id="a2K-Bl-nsU"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Nig-xx-fIl"/>
-                                    <barButtonItem image="ic-settings-shp" id="PfH-hT-wTV" userLabel="Settings">
+                                    <barButtonItem image="icon-setting-black" id="PfH-hT-wTV" userLabel="Settings">
                                         <color key="tintColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="settingsAction:" destination="IHA-15-xhl" id="LMP-BW-r8y"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="yY9-ms-PpN"/>
-                                    <barButtonItem image="ic-ok-shp" id="6Hj-sj-KS7" userLabel="Save">
+                                    <barButtonItem image="icon-check-black" id="6Hj-sj-KS7" userLabel="Save">
                                         <color key="tintColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="saveCloud:" destination="IHA-15-xhl" id="bQy-oh-s91"/>
@@ -1098,19 +1098,19 @@
         <image name="flat_brain_background" width="465" height="364"/>
         <image name="flat_brain_foreground" width="465" height="364"/>
         <image name="ic-add" width="46" height="47"/>
-        <image name="ic-back-shp" width="40" height="40"/>
-        <image name="ic-ok-shp" width="40" height="40"/>
         <image name="ic-plus" width="32" height="32"/>
-        <image name="ic-settings-shp" width="40" height="40"/>
         <image name="icon-check" width="21" height="21"/>
+        <image name="icon-check-black" width="32" height="32"/>
         <image name="icon-cloud-tabbar" width="30" height="30"/>
         <image name="icon-cloud-tabbar-selected" width="30" height="30"/>
         <image name="icon-explore-tabbar" width="30" height="30"/>
         <image name="icon-explore-tabbar-selected" width="30" height="30"/>
         <image name="icon-setting" width="32" height="32"/>
+        <image name="icon-setting-black" width="32" height="32"/>
         <image name="icon-skills-tabbar" width="30" height="30"/>
         <image name="icon-skills-tabbar-selected" width="30" height="30"/>
         <image name="icon-x" width="32" height="32"/>
+        <image name="icon-x-black" width="32" height="32"/>
         <image name="skill_obj" width="72" height="72"/>
     </resources>
 </document>

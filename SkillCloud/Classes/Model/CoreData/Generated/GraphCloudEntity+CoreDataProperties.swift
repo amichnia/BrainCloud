@@ -2,7 +2,7 @@
 //  GraphCloudEntity+CoreDataProperties.swift
 //  SkillCloud
 //
-//  Created by Andrzej Michnia on 09/07/16.
+//  Created by Andrzej Michnia on 12/07/16.
 //  Copyright © 2016 amichnia. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,6 +18,7 @@ extension GraphCloudEntity {
     @NSManaged var date: NSTimeInterval
     @NSManaged var name: String?
     @NSManaged var thumbnail: UIImage?
+    @NSManaged var slot: Int16
     @NSManaged var brainNodes: NSSet?
     @NSManaged var skillNodes: NSSet?
 
