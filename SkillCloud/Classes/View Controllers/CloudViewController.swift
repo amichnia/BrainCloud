@@ -33,6 +33,7 @@ class CloudViewController: UIViewController, SkillsProvider {
     var slot: Int!
     
     var skillToAdd : Skill?
+    var selectedRow: Int = 0
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -42,6 +43,9 @@ class CloudViewController: UIViewController, SkillsProvider {
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
+            let initialIndex = NSIndexPath(forItem: 0, inSection: 1)
+            self.collectionView.selectItemAtIndexPath(initialIndex, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
+            self.collectionView(self.collectionView, didSelectItemAtIndexPath: initialIndex)
         }
         .error { error in
             print("Error: \(error)")
@@ -273,9 +277,13 @@ extension CloudViewController: UICollectionViewDataSource {
         
         if indexPath.section == 1 && indexPath.row < self.skills.count {
             cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
+            if indexPath.row == self.selectedRow {
+                cell.selected = true
+            }
         }
         else {
             cell.configureEmpty()
+            cell.selected = false
         }
         
         return cell
@@ -292,6 +300,7 @@ extension CloudViewController: UICollectionViewDelegate {
         }
         
         self.skillToAdd = self.skills[indexPath.row]
+        self.selectedRow = indexPath.row
         CloudGraphScene.radius = self.skillToAdd!.experience.radius / Node.scaleFactor
     }
     

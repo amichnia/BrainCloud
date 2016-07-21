@@ -12,12 +12,18 @@ class SkillCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var selectedView: UIImageView?
     @IBOutlet weak var nameLabel: UILabel!
     
     // MARK: - Properties
     var indexPath: NSIndexPath!
     var column: Int {
         return self.indexPath.row % 3
+    }
+    override var selected: Bool {
+        didSet {
+            self.selectedView?.hidden = !self.selected
+        }
     }
     
     // MARK: - Lifecycle
