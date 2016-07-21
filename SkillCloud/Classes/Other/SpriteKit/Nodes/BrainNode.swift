@@ -39,6 +39,10 @@ class BrainNode: SKSpriteNode, DTOModel {
         self.addLineToNode(node)
     }
     
+    deinit {
+        print("papa brain node")
+    }
+    
     func disconnectNode(node: BrainNode) {
         self.connected.remove(node)
         self.node.disconnectNode(node.node)

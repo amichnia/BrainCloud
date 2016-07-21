@@ -100,6 +100,8 @@ class CloudViewController: UIViewController, SkillsProvider {
     // MARK: - Configuration
     func prepareSceneIfNeeded(skView: SKView, size: CGSize){
         if let scene = CloudGraphScene(fileNamed:"CloudGraphScene") where self.scene == nil {
+            scene.cloudSceneDelegate = self
+            
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
             skView.backgroundColor = UIColor.clearColor()
@@ -302,6 +304,20 @@ extension CloudViewController: UICollectionViewDelegate {
         self.skillToAdd = self.skills[indexPath.row]
         self.selectedRow = indexPath.row
         CloudGraphScene.radius = self.skillToAdd!.experience.radius / Node.scaleFactor
+    }
+    
+}
+
+extension CloudViewController: CloudSceneDelegate {
+    
+    func didAddSkill() {
+        if var indexPath = self.collectionView.indexPathsForSelectedItems()?.first {
+            self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
+            indexPath = NSIndexPath(forItem: (indexPath.row + 1) % self.skills.count , inSection: indexPath.section)
+            self.collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: .None)
+            self.collectionView(self.collectionView, didSelectItemAtIndexPath: indexPath)
+            self.collectionView.setContentOffset(CGPoint(x:  (80 * CGFloat(self.skillsOffset / 2) + (CGFloat(indexPath.row / 2) * 80)), y: 0), animated: true)
+        }
     }
     
 }

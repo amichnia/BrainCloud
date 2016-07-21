@@ -10,6 +10,12 @@ import Foundation
 import SpriteKit
 import SpriteKit_Spring
 
+protocol CloudSceneDelegate: class {
+    
+    func didAddSkill()
+    
+}
+
 protocol SkillsProvider: class {
     var skillToAdd : Skill? { get }
 }
@@ -23,6 +29,7 @@ class CloudGraphScene: SKScene, DTOModel {
     // MARK: - Properties
     var slot: Int = 0
     weak var skillsProvider : SkillsProvider?
+    weak var cloudSceneDelegate: CloudSceneDelegate?
     var nodes: [Node]!
     var allNodesContainer: SKNode!
     var allNodes: [BrainNode] = []
@@ -52,6 +59,10 @@ class CloudGraphScene: SKScene, DTOModel {
         else if let cloud = self.cloudEntity {
             self.configureWithCloud(cloud)
         }
+    }
+    
+    deinit {
+        print("papa cloud scene")
     }
     
     // MARK: - Configuration
@@ -262,6 +273,8 @@ class CloudGraphScene: SKScene, DTOModel {
             // Save info to what node is it pinned
             node.pinnedSkillNode = skillNode
         }
+        
+        self.cloudSceneDelegate?.didAddSkill()
         
         return skillNode
     }
