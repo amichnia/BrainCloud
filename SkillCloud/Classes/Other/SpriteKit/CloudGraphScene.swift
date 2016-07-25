@@ -62,7 +62,11 @@ class CloudGraphScene: SKScene, DTOModel {
     }
     
     deinit {
-        print("papa cloud scene")
+        // TODO: Workaround for retain problems
+        self.allNodes.forEach {
+            $0.lines = [:]
+            $0.connected = Set()
+        }
     }
     
     // MARK: - Configuration

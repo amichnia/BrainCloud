@@ -27,6 +27,11 @@ class AddScene: SKScene {
         self.prepareWith()
     }
     
+    deinit {
+        self.skill = nil
+        self.skillNode = EditSkillNode()
+    }
+    
     // MARK: - Actions
     func prepareWith(skill: Skill? = nil) {
         let resolvedSkill = skill ?? self.skill
@@ -83,8 +88,8 @@ class AddScene: SKScene {
     func animateHide(duration: NSTimeInterval, rect: CGRect?, completion: (()->())? = nil) {
         self.skillNode.startFrame ?= self.convertRectFromView(rect)
         
-        self.skillNode.animateHide(duration) {
-            self.setAllVisible(false)
+        self.skillNode.animateHide(duration) { [weak self] in
+            self?.setAllVisible(false)
             completion?()
         }
         self[Skill.Experience.Beginner]?.animateHide()

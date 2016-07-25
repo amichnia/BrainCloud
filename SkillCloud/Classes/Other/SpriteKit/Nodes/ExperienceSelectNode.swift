@@ -10,6 +10,7 @@ import SpriteKit
 
 class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
     
+    // MARK: - Properties
     var experience : Skill.Experience = .Beginner
     var tintColor: UIColor = UIColor.SkillCloudVeryVeryLight
     
@@ -48,15 +49,18 @@ class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
     
     var targetPosition: CGPoint = CGPoint.zero
     
-    // Actions
+    // MARK: - Lifecycle
+    
+    // MARK: - Actions
     func animateShow(duration: NSTimeInterval = 1){
         self.targetPosition = self.position
         self.position = CGPoint.zero
         self.mainScale = 0.1
         
+        let targetPosition = self.targetPosition
         self.hidden =  false
         let scaleAction = SKAction.scaleTo(1, duration: duration, delay: 0.1, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-        let moveAction = SKAction.moveTo(self.targetPosition, duration: duration, delay: 0.1, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
+        let moveAction = SKAction.moveTo(targetPosition, duration: duration, delay: 0.1, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         self.runAction(scaleAction)
         self.runAction(moveAction)
     }
@@ -64,8 +68,8 @@ class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
     func animateHide(duration: NSTimeInterval = 0.7){
         let scaleAction = SKAction.scaleTo(0, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         let moveAction = SKAction.moveTo(CGPoint.zero, duration: duration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-        self.runAction(scaleAction) {
-            self.hidden =  true
+        self.runAction(scaleAction) { [weak self] in
+            self?.hidden = true
         }
         self.runAction(moveAction)
     }
@@ -95,10 +99,11 @@ class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
         self.animateRocket(selected)
     }
     
-    // Helpers
+    // MARK: - Helpers
     
 }
 
+// MARK: - Animations
 extension ExperienceSelectNode {
     
     func animateStarsPulsing(animate: Bool) {

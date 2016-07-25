@@ -12,6 +12,7 @@ import SpriteKit_Spring
 
 class EditSkillNode: SKSpriteNode {
     
+    // MARK: - Properties
     var skill: Skill?
     var imageNode: SKSpriteNode?
     
@@ -43,7 +44,9 @@ class EditSkillNode: SKSpriteNode {
         return select
     }()
     
-    // Actions
+    // MARK: - Lifecycle
+    
+    // MARK: - Actions
     func setSkill(skill: Skill?) {
         self.skill = skill
         
@@ -57,12 +60,12 @@ class EditSkillNode: SKSpriteNode {
         }
         
         self.setSkillImage(skill?.image)
-        
+
         [Skill.Experience.Beginner,
          Skill.Experience.Intermediate,
          Skill.Experience.Professional,
-         Skill.Experience.Expert].forEach {
-            self[$0]?.setSelected(false)
+         Skill.Experience.Expert].forEach { [weak self] in
+            self?[$0]?.setSelected(false)
         }
         
         if let exp = skill?.experience {
@@ -107,8 +110,8 @@ class EditSkillNode: SKSpriteNode {
         let moveAction = SKAction.moveTo(self.startFrame.centerOfMass, duration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0)
         let outlineAlphaAction = SKAction.fadeOutWithDuration(duration * 0.7)
         
-        self.runAction(scaleAction){
-            self.hidden = true
+        self.runAction(scaleAction){ [weak self] in
+            self?.hidden = true
             completion?()
         }
         self.runAction(moveAction)
@@ -123,7 +126,7 @@ class EditSkillNode: SKSpriteNode {
         }
     }
     
-    // Helpers
+    // MARK: - Helpers
     subscript(level: Skill.Experience) -> ExperienceSelectNode? {
         switch level {
         case .Beginner:
@@ -195,8 +198,8 @@ class ImageSelectNode: SKSpriteNode, InteractiveNode {
         let moveAction = SKAction.moveTo(CGPoint.zero, duration: duration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         let outlineAlphaAction = SKAction.fadeOutWithDuration(duration * 0.7)
         
-        self.runAction(scaleAction) {
-            self.hidden =  true
+        self.runAction(scaleAction) { [weak self] in
+            self?.hidden =  true
         }
         self.runAction(moveAction)
         self.outline.runAction(outlineAlphaAction)

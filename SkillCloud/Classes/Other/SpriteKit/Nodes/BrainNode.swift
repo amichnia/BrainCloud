@@ -9,6 +9,10 @@
 import UIKit
 import SpriteKit
 
+//class Weak<T:AnyObject>: AnyObject, Hashable {
+//    weak var object: T?
+//}
+
 /// Main cloud node in graph
 class BrainNode: SKSpriteNode, DTOModel {
 
@@ -37,10 +41,6 @@ class BrainNode: SKSpriteNode, DTOModel {
         
         // Add child line node
         self.addLineToNode(node)
-    }
-    
-    deinit {
-        print("papa brain node")
     }
     
     func disconnectNode(node: BrainNode) {
