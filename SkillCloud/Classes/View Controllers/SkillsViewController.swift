@@ -108,6 +108,8 @@ class SkillsViewController: UIViewController {
             self.skills.append(savedEntity.skill)
             self.collectionView.reloadData()
             
+            savedEntity.skill.promiseInsertTo(DatabaseType.Public)  // Help building explore section
+            
             return savedEntity.skill.promiseInsertTo(DatabaseType.Private)
         }
         .then(SkillEntity.promiseToUpdate)  // TODO: Update only offline flag!!!

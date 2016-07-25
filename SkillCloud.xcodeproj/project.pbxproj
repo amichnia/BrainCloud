@@ -11,6 +11,7 @@
 		C80A918F1CB5206800529F0B /* GoogleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */; };
 		C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A91901CB5208200529F0B /* GoogleImage.swift */; };
 		C83BBA9B1D4632BC00431B42 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */; };
+		C83BBA9D1D4649EF00431B42 /* SkillsSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */; };
 		C863048E1CC6417E002C068C /* EditSkillNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863048D1CC6417E002C068C /* EditSkillNode.swift */; };
 		C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86304911CC646B1002C068C /* SkillsViewController.swift */; };
 		C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */; };
@@ -105,6 +106,7 @@
 		C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		C80A91901CB5208200529F0B /* GoogleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImage.swift; sourceTree = "<group>"; };
 		C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsSearchTableViewCell.swift; sourceTree = "<group>"; };
 		C863048D1CC6417E002C068C /* EditSkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSkillNode.swift; sourceTree = "<group>"; };
 		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImagesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */,
+				C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */,
 				FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */,
 				C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */,
 				FE31DAF81C9CA1240006D9EE /* CanvasView.swift */,
@@ -635,6 +638,7 @@
 				C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */,
 				FEE50AA41D24941E0024060D /* CKRecordSyncable.swift in Sources */,
 				FE9F6EE31D284E9F008B3BC3 /* CGStructures+Convenience.swift in Sources */,
+				C83BBA9D1D4649EF00431B42 /* SkillsSearchTableViewCell.swift in Sources */,
 				C8F55CA61CFC264300208F88 /* SkillNode.swift in Sources */,
 				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
 				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,

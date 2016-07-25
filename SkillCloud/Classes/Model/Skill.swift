@@ -194,9 +194,6 @@ extension Skill {
     
     class func fetchAll() -> Promise<[Skill]> {
         return self.fetchAllNotDeleted()
-//        return SkillEntity.fetchAll().then { entities -> [Skill] in
-//            return entities.map { $0.skill }
-//        }
     }
     
     class func fetchAllUnsynced() -> Promise<[Skill]> {

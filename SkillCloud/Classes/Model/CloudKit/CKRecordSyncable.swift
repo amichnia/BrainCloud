@@ -33,7 +33,7 @@ extension CKRecordSyncable {
         let container = CloudContainer.sharedContainer
         let database = container.database(db)
         
-        return self.promiseInsertTo(database)
+        return self.promiseInsertTo(database, type: db)
         .then { (savedRecord) -> Promise<T> in
             return self.promiseMappingWith(savedRecord) // Update values after save - like source tag
         }
@@ -42,9 +42,15 @@ extension CKRecordSyncable {
         }
     }
     
-    private func promiseInsertTo(database: CKDatabase) -> Promise<CKRecord> {
+    private func promiseInsertTo(database: CKDatabase, type: DatabaseType = .Private) -> Promise<CKRecord> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecord()
+        .then{ record -> CKRecord in
+            if type == .Public {
+                record.setObject(0, forKey: "accepted")
+            }
+            return record
+        }
         .then(database.promiseInsertRecord)
         .always {
             // So assure, that the temporary data will be always cleared
@@ -56,7 +62,7 @@ extension CKRecordSyncable {
         let container = CloudContainer.sharedContainer
         let database = container.database(db)
         
-        return self.promiseSyncTo(database)
+        return self.promiseSyncTo(database, type: db)
         .then { (savedRecord) -> Promise<T> in
             return self.promiseMappingWith(savedRecord) // Update values after save - like source tag
         }
@@ -65,9 +71,15 @@ extension CKRecordSyncable {
         }
     }
     
-    private func promiseSyncTo(database: CKDatabase) -> Promise<CKRecord> {
+    private func promiseSyncTo(database: CKDatabase, type: DatabaseType = .Private) -> Promise<CKRecord> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecord()
+        .then{ record -> CKRecord in
+            if type == .Public {
+                record.setObject(0, forKey: "accepted")
+            }
+            return record
+        }
         .then(database.promiseUpdateRecord)
         .always {
             // So assure, that the temporary data will be always cleared

@@ -9,14 +9,14 @@
 import UIKit
 import AMKSlidingTableViewCell
 
-class SkillTableViewCell: MKActionTableViewCell {
+class SkillTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var skillImageView: UIImageView!
     
     func configureForSkill(skill: Skill) {
         self.titleLabel.text = skill.title
-        self.imageView?.image = skill.image
+        self.skillImageView?.image = skill.circleImage
     }
     
 }
