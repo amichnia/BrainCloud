@@ -14,6 +14,8 @@ class SkillTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var skillImageView: UIImageView!
     
+    var indexPath: NSIndexPath!
+    
     func configureForSkill(skill: Skill) {
         self.titleLabel.text = skill.title
         self.skillImageView?.image = skill.circleImage

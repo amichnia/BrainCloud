@@ -87,7 +87,7 @@ extension Skill: CKRecordMappable {
         
         self.offline = false
         
-        self.image = record.imageForKey(CKKey.Image) ?? self.image
+        self.image = record.imageForKey(CKKey.Image) ?? self.image ?? thumbnail
         
         return self
     }

@@ -10,11 +10,9 @@
         <mutableArray key="Lato-Light.ttf">
             <string>Lato-Light</string>
             <string>Lato-Light</string>
-            <string>Lato-Light</string>
-            <string>Lato-Light</string>
-            <string>Lato-Light</string>
         </mutableArray>
         <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
@@ -796,7 +794,7 @@
         <!--Explore View Controller-->
         <scene sceneID="XsW-Kl-526">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ie4-Qi-UIw" customClass="ExploreViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ie4-Qi-UIw" customClass="ExploreViewController" customModule="SkillCloud" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="V13-Zd-L1k"/>
                         <viewControllerLayoutGuide type="bottom" id="cvb-Be-FUh"/>
@@ -811,72 +809,23 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e1B-2A-cD3">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="eBb-zb-jhF">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="171"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skillcloud" translatesAutoresizingMaskIntoConstraints="NO" id="T0M-ud-0oJ">
-                                            <rect key="frame" x="8" y="8" width="60" height="60"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="fcN-d0-jHn"/>
-                                                <constraint firstAttribute="width" secondItem="T0M-ud-0oJ" secondAttribute="height" multiplier="1:1" id="oxC-8S-xgK"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4e-Gr-DlZ">
-                                            <rect key="frame" x="76" y="8" width="516" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="PfL-iU-xsO"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDu-rI-Boz">
-                                            <rect key="frame" x="76" y="46" width="516" height="22"/>
-                                            <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dna-8K-C5d">
-                                            <rect key="frame" x="8" y="76" width="584" height="87"/>
-                                            <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="S4e-Gr-DlZ" firstAttribute="top" secondItem="eBb-zb-jhF" secondAttribute="top" constant="8" id="0W4-D2-F2D"/>
-                                        <constraint firstItem="CDu-rI-Boz" firstAttribute="top" secondItem="S4e-Gr-DlZ" secondAttribute="bottom" constant="8" id="5pG-Vt-gPL"/>
-                                        <constraint firstAttribute="bottom" secondItem="dna-8K-C5d" secondAttribute="bottom" constant="8" id="74x-i9-ZuP"/>
-                                        <constraint firstAttribute="trailing" secondItem="dna-8K-C5d" secondAttribute="trailing" constant="8" id="9qb-9Z-cMd"/>
-                                        <constraint firstItem="CDu-rI-Boz" firstAttribute="leading" secondItem="T0M-ud-0oJ" secondAttribute="trailing" constant="8" id="MXT-Wj-bKu"/>
-                                        <constraint firstItem="T0M-ud-0oJ" firstAttribute="leading" secondItem="eBb-zb-jhF" secondAttribute="leading" constant="8" id="Mc2-7s-3JB"/>
-                                        <constraint firstAttribute="trailing" secondItem="S4e-Gr-DlZ" secondAttribute="trailing" constant="8" id="OPB-bw-I46"/>
-                                        <constraint firstItem="CDu-rI-Boz" firstAttribute="bottom" secondItem="T0M-ud-0oJ" secondAttribute="bottom" id="Ycb-7t-eMq"/>
-                                        <constraint firstAttribute="trailing" secondItem="CDu-rI-Boz" secondAttribute="trailing" constant="8" id="bKf-wv-n4t"/>
-                                        <constraint firstItem="T0M-ud-0oJ" firstAttribute="top" secondItem="eBb-zb-jhF" secondAttribute="top" constant="8" id="baQ-3C-V9G"/>
-                                        <constraint firstItem="dna-8K-C5d" firstAttribute="top" secondItem="CDu-rI-Boz" secondAttribute="bottom" constant="8" id="er0-8u-h7d"/>
-                                        <constraint firstItem="S4e-Gr-DlZ" firstAttribute="leading" secondItem="T0M-ud-0oJ" secondAttribute="trailing" constant="8" id="hpd-tQ-oZS"/>
-                                        <constraint firstItem="dna-8K-C5d" firstAttribute="leading" secondItem="eBb-zb-jhF" secondAttribute="leading" constant="8" id="qB7-Iy-UYa"/>
-                                    </constraints>
-                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SearchSkillsHeader" rowHeight="40" id="8U2-CX-Rrh" customClass="SkillsSearchTableViewCell" customModule="SkillCloud" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="199" width="600" height="40"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8U2-CX-Rrh" id="rpB-Br-XB6">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Search skills" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-ok-JsO">
+                                                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search skills" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-ok-JsO">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="ltj-2C-Vje"/>
                                                     </constraints>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                                                    <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                                 </searchBar>
                                             </subviews>
                                             <constraints>
@@ -892,7 +841,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SkillCell" rowHeight="76" id="Ggu-Op-pvf" customClass="SkillTableViewCell" customModule="SkillCloud" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="239" width="600" height="76"/>
+                                        <rect key="frame" x="0.0" y="68" width="600" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ggu-Op-pvf" id="URd-ke-X1h">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="76"/>
@@ -930,6 +879,35 @@
                                             <outlet property="titleLabel" destination="s78-Ru-ij2" id="ZJT-hX-wKK"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HeaderCell" rowHeight="46" id="lJw-yf-SWY" customClass="SkillTableViewCell" customModule="SkillCloud" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="144" width="600" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lJw-yf-SWY" id="jXj-wO-CFT">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="46"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Skills:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ecj-Ln-bIH">
+                                                    <rect key="frame" x="8" y="8" width="584" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="tSk-A1-yYI"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Ecj-Ln-bIH" secondAttribute="bottom" id="GGE-fc-Z5n"/>
+                                                <constraint firstItem="Ecj-Ln-bIH" firstAttribute="trailing" secondItem="jXj-wO-CFT" secondAttribute="trailingMargin" id="b9T-rz-7g2"/>
+                                                <constraint firstItem="Ecj-Ln-bIH" firstAttribute="top" secondItem="jXj-wO-CFT" secondAttribute="topMargin" id="p1P-XX-BT9"/>
+                                                <constraint firstItem="Ecj-Ln-bIH" firstAttribute="leading" secondItem="jXj-wO-CFT" secondAttribute="leadingMargin" id="rHZ-pC-nl3"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="Ecj-Ln-bIH" id="qmu-ta-Ig5"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="ie4-Qi-UIw" id="bXS-Nd-ek9"/>
@@ -940,12 +918,12 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Eag-0O-7ke" secondAttribute="trailing" id="LpR-lt-0wk"/>
-                            <constraint firstItem="e1B-2A-cD3" firstAttribute="top" secondItem="EYD-CP-VDd" secondAttribute="topMargin" id="NfE-7s-Y8R"/>
+                            <constraint firstItem="cvb-Be-FUh" firstAttribute="top" secondItem="e1B-2A-cD3" secondAttribute="bottom" id="XVm-NW-PfL"/>
                             <constraint firstItem="Eag-0O-7ke" firstAttribute="top" secondItem="V13-Zd-L1k" secondAttribute="bottom" id="equ-m5-rzI"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="e1B-2A-cD3" secondAttribute="bottom" id="hTm-kn-bem"/>
                             <constraint firstItem="e1B-2A-cD3" firstAttribute="leading" secondItem="EYD-CP-VDd" secondAttribute="leading" id="hWH-iX-kHp"/>
                             <constraint firstItem="Eag-0O-7ke" firstAttribute="leading" secondItem="EYD-CP-VDd" secondAttribute="leading" id="oKS-3l-hkJ"/>
                             <constraint firstAttribute="trailing" secondItem="e1B-2A-cD3" secondAttribute="trailing" id="ogW-r1-Z05"/>
+                            <constraint firstItem="e1B-2A-cD3" firstAttribute="top" secondItem="V13-Zd-L1k" secondAttribute="bottom" id="pBQ-OG-XIu"/>
                             <constraint firstItem="cvb-Be-FUh" firstAttribute="top" secondItem="Eag-0O-7ke" secondAttribute="bottom" id="vas-Dq-0ZV"/>
                         </constraints>
                     </view>
@@ -977,6 +955,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="e1B-2A-cD3" id="9Om-sw-OGz"/>
+                        <outlet property="tableViewBottomConstraint" destination="XVm-NW-PfL" id="iP2-nb-qoh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SO1-0L-fEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1000,6 +979,5 @@
         <image name="icon-skills-tabbar-selected" width="30" height="30"/>
         <image name="icon-x" width="32" height="32"/>
         <image name="icon-x-black" width="32" height="32"/>
-        <image name="skillcloud" width="60" height="60"/>
     </resources>
 </document>
