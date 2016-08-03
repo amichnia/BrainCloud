@@ -28,7 +28,11 @@ class SkillsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MRProgressOverlayView.show()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         firstly {
             Skill.fetchAll()
         }
@@ -36,16 +40,9 @@ class SkillsViewController: UIViewController {
             self.skills = skills
             self.collectionView.reloadData()
         }
-        .always {
-            MRProgressOverlayView.hide()
-        }
         .error { error in
             print("Error: \(error)")
         }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
         if let scene = AddScene(fileNamed:"AddScene") {
             self.preparedScene = scene

@@ -16,9 +16,13 @@ class SkillTableViewCell: UITableViewCell {
     
     var indexPath: NSIndexPath!
     
-    func configureForSkill(skill: Skill) {
+    func configureForSkill(skill: Skill, owned: Skill? = nil) {
         self.titleLabel.text = skill.title
         self.skillImageView?.image = skill.circleImage
+        
+        if let owned = owned {
+            self.accessoryType = .Checkmark
+        }
     }
     
 }

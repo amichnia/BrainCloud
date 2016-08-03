@@ -759,6 +759,7 @@
                         <outlet property="doneButton" destination="eH3-0u-poB" id="f4d-W2-lDD"/>
                         <outlet property="menuContainer" destination="thY-Yu-Nzd" id="6HH-X2-azg"/>
                         <outlet property="menuContainerTopConstraint" destination="Igz-nT-Uaa" id="IPa-vV-dQd"/>
+                        <outlet property="settingsButton" destination="qVU-q1-3gx" id="sFu-XW-D3G"/>
                         <outlet property="skView" destination="scP-WP-Zad" id="YaD-We-4SW"/>
                         <outlet property="skillNameField" destination="Vj3-Tx-pxa" id="mAI-gH-pgz"/>
                     </connections>
@@ -817,7 +818,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search skills" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-ok-JsO">
+                                                <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" text="aaa" placeholder="Search skills" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-ok-JsO">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -859,7 +860,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="vaa-bh-J7j"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -874,6 +875,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="skillImageView" destination="n90-pK-qAa" id="AAv-n1-b3O"/>
                                             <outlet property="titleLabel" destination="s78-Ru-ij2" id="ZJT-hX-wKK"/>

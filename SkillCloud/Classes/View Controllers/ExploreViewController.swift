@@ -19,6 +19,9 @@ class ExploreViewController: UIViewController {
     // MARK: - Properties
     var skillsResult: CKPageableResult = CKPageableResult(type: Skill.self, predicate: NSPredicate(format: "accepted = %d", 1), database: .Public)
     var updating: Bool = false
+    var preparedScene : AddScene?
+    
+    var ownedSkills: [Skill] = []
     
     lazy var searchCell: SkillsSearchTableViewCell = {
         return self.tableView.dequeueReusableCellWithIdentifier("SearchSkillsHeader")! as! SkillsSearchTableViewCell
@@ -38,9 +41,41 @@ class ExploreViewController: UIViewController {
         self.skillsResult.desiredKeys = ["name","experienceValue","thumbnail"]
         self.skillsResult.limit = 10
         
-        MRProgressOverlayView.show()
+        self.refetchSelfSkills()
+        self.updateIfNeeded()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.refetchSelfSkills()
+        
+        if let scene = AddScene(fileNamed:"AddScene") {
+            self.preparedScene = scene
+            scene.size = self.view.bounds.size
+        }
+    }
+    
+    // MARK: - Actions
+    func addSkillActionFromCell(cell: UITableViewCell, withSkill skill: Skill) {
+        if let skillCell = cell as? SkillTableViewCell {
+            let rect = self.frameForCell(skillCell)
+            try! self.promiseShowSkillWith(rect, withSkill: skill)
+        }
+        else {
+            try! self.promiseShowSkillWith(nil, withSkill: skill)
+        }
+    }
+    
+    // MARK: - Helpers
+    func updateIfNeeded() {
+        guard !self.updating else {
+            return
+        }
+        
         self.updating = true
         
+        MRProgressOverlayView.show()
         firstly {
             self.skillsResult.promiseNextPage()
         }
@@ -58,18 +93,19 @@ class ExploreViewController: UIViewController {
         }
     }
     
-    // MARK: - Actions
-    func addSkillActionFromCell(cell: UITableViewCell, withSkill skill: Skill) {
-        if let skillCell = cell as? SkillTableViewCell {
-            let rect = self.frameForCell(skillCell)
-            try! self.promiseShowSkillWith(rect, withSkill: skill)
+    func refetchSelfSkills() {
+        firstly {
+            Skill.fetchAll()
         }
-        else {
-            try! self.promiseShowSkillWith(nil, withSkill: skill)
+        .then(on: dispatch_get_main_queue()) { skills -> Void in
+            self.ownedSkills = skills
+            self.tableView.reloadData()
+        }
+        .error { error in
+            print("Error: \(error)")
         }
     }
     
-    // MARK: - Helpers
     func frameForCell(cell: SkillTableViewCell) -> CGRect {
         cell.layoutSubviews()
         let imgfrm = cell.skillImageView.frame
@@ -81,11 +117,10 @@ class ExploreViewController: UIViewController {
         return self.view.convertRect(rect, toView: self.view.window!)
     }
     
-    
     // MARK: - Promises
     func promiseShowSkillWith(rect: CGRect?, withSkill skill: Skill) throws {
         firstly {
-            try AddViewController.promiseChangeSkillWith(self, rect: rect, skill: skill, preparedScene: nil)
+            try AddViewController.promiseSelectSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
         }
         .then(SkillEntity.promiseToUpdate)                  // Save change to local storage
         .error { error in
@@ -111,8 +146,9 @@ extension ExploreViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("SkillCell")! as! SkillTableViewCell
         
         let skill = self.skillsResult.results[indexPath.row]
+        let owned = self.ownedSkills.filter{ $0.title == skill.title }.first
         
-        cell.configureForSkill(skill)
+        cell.configureForSkill(skill, owned: owned)
         cell.indexPath = indexPath
         
         return cell
