@@ -10,6 +10,7 @@
         <mutableArray key="Lato-Light.ttf">
             <string>Lato-Light</string>
             <string>Lato-Light</string>
+            <string>Lato-Light</string>
         </mutableArray>
         <mutableArray key="Lato-Regular.ttf">
             <string>Lato-Regular</string>
@@ -681,7 +682,8 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="eH3-0u-poB" secondAttribute="height" multiplier="1:1" id="Mq3-wK-vdM"/>
                                         </constraints>
-                                        <state key="normal" image="icon-check"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="icon-check-black"/>
                                         <connections>
                                             <action selector="doneAction:" destination="okh-c3-2CT" eventType="touchUpInside" id="HWm-NE-q4c"/>
                                         </connections>
@@ -768,7 +770,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z8c-Eo-wGn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="up" id="N3J-yv-GhM">
                     <connections>
-                        <action selector="doneAction:" destination="okh-c3-2CT" id="rqk-DH-eoi"/>
+                        <action selector="cancelAction:" destination="okh-c3-2CT" id="Out-Mn-YEl"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
@@ -808,7 +810,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-image" translatesAutoresizingMaskIntoConstraints="NO" id="Eag-0O-7ke">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e1B-2A-cD3">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e1B-2A-cD3">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -865,19 +867,30 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Skill Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kav-hm-sR9">
+                                                    <rect key="frame" x="76" y="40" width="516" height="28"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="s78-Ru-ij2" firstAttribute="top" secondItem="URd-ke-X1h" secondAttribute="topMargin" id="AgW-eE-ec2"/>
                                                 <constraint firstItem="n90-pK-qAa" firstAttribute="leading" secondItem="URd-ke-X1h" secondAttribute="leadingMargin" id="COU-te-SyL"/>
+                                                <constraint firstAttribute="bottom" secondItem="kav-hm-sR9" secondAttribute="bottom" constant="8" id="Y5K-Xy-Lec"/>
                                                 <constraint firstAttribute="bottom" secondItem="n90-pK-qAa" secondAttribute="bottom" constant="8" id="bNX-bv-VUQ"/>
                                                 <constraint firstItem="n90-pK-qAa" firstAttribute="top" secondItem="URd-ke-X1h" secondAttribute="topMargin" id="ja6-I9-OzA"/>
+                                                <constraint firstAttribute="trailing" secondItem="kav-hm-sR9" secondAttribute="trailing" constant="8" id="l7I-ti-hoa"/>
                                                 <constraint firstItem="s78-Ru-ij2" firstAttribute="leading" secondItem="n90-pK-qAa" secondAttribute="trailing" constant="8" id="mef-gg-n6p"/>
+                                                <constraint firstItem="kav-hm-sR9" firstAttribute="top" secondItem="s78-Ru-ij2" secondAttribute="bottom" constant="2" id="t1E-4j-Muy"/>
                                                 <constraint firstItem="s78-Ru-ij2" firstAttribute="trailing" secondItem="URd-ke-X1h" secondAttribute="trailingMargin" id="v5l-DG-0Mv"/>
+                                                <constraint firstItem="kav-hm-sR9" firstAttribute="leading" secondItem="n90-pK-qAa" secondAttribute="trailing" constant="8" id="ycT-PU-QGM"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="descriptionLabel" destination="kav-hm-sR9" id="Hzt-Ea-kWf"/>
                                             <outlet property="skillImageView" destination="n90-pK-qAa" id="AAv-n1-b3O"/>
                                             <outlet property="titleLabel" destination="s78-Ru-ij2" id="ZJT-hX-wKK"/>
                                         </connections>
@@ -1025,7 +1038,6 @@
         <image name="background-image" width="414" height="736"/>
         <image name="ic-add" width="46" height="47"/>
         <image name="ic-big-blue-outline" width="300" height="300"/>
-        <image name="icon-check" width="21" height="21"/>
         <image name="icon-check-black" width="32" height="32"/>
         <image name="icon-cloud-tabbar" width="30" height="30"/>
         <image name="icon-cloud-tabbar-selected" width="30" height="30"/>

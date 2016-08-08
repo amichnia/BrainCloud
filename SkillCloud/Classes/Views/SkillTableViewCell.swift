@@ -12,6 +12,7 @@ import AMKSlidingTableViewCell
 class SkillTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var skillImageView: UIImageView!
     
     var indexPath: NSIndexPath!
@@ -19,9 +20,15 @@ class SkillTableViewCell: UITableViewCell {
     func configureForSkill(skill: Skill, owned: Skill? = nil) {
         self.titleLabel.text = skill.title
         self.skillImageView?.image = skill.circleImage
+        self.descriptionLabel.text = skill.skillDescription
         
-        if let owned = owned {
-            self.accessoryType = .Checkmark
+        if let owned = owned, image = owned.experience.image {
+            let experienceImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+            experienceImageView.image = image
+            self.accessoryView = experienceImageView
+        }
+        else {
+            self.accessoryView = nil
         }
     }
     

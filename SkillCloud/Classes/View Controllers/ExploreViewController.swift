@@ -68,15 +68,15 @@ class ExploreViewController: UIViewController {
     }
     
     // MARK: - Helpers
-    func updateIfNeeded() {
+    func updateIfNeeded() -> Promise<Void> {
         guard !self.updating else {
-            return
+            return Promise<Void>()
         }
         
         self.updating = true
         
         MRProgressOverlayView.show()
-        firstly {
+        return firstly {
             self.skillsResult.promiseNextPage()
         }
         .then { [weak self] _ -> Void in
@@ -88,9 +88,7 @@ class ExploreViewController: UIViewController {
             self?.updating = false
             MRProgressOverlayView.hide()
         }
-        .error { error in
-            print("Error: \(error)")
-        }
+        .asVoid()
     }
     
     func refetchSelfSkills() {
@@ -123,6 +121,9 @@ class ExploreViewController: UIViewController {
             try AddViewController.promiseSelectSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
         }
         .then(SkillEntity.promiseToUpdate)                  // Save change to local storage
+        .then { [weak self] _ -> Void in
+            self?.refetchSelfSkills()
+        }
         .error { error in
             print("Error: \(error)")
         }
@@ -132,10 +133,10 @@ class ExploreViewController: UIViewController {
 
 }
 
+// MARK: - UISearchBarDelegate
 extension ExploreViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        print(searchBar.text ?? "")
         let predicate: SkillsPredicate = {
             if let searchText = searchBar.text {
                 return SkillsPredicate.WhenAll([.Accepted,.NameLike(searchText)])
@@ -145,15 +146,22 @@ extension ExploreViewController: UISearchBarDelegate {
             }
         }()
         
+        self.searchCell.searchBar.resignFirstResponder()
         self.skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: predicate, database: .Public)
         self.updateIfNeeded()
+        .error { error in
+            print("Error: \(error)")
+        }
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        print("CANCELLED")
-        
+        self.searchCell.searchBar.resignFirstResponder()
         self.skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: .Accepted, database: .Public)
+        
         self.updateIfNeeded()
+        .error { error in
+                print("Error: \(error)")
+        }
     }
     
 }
@@ -197,6 +205,8 @@ extension ExploreViewController: UITableViewDelegate {
         if let cell = self.tableView.visibleCells.filter({
             $0 is SkillTableViewCell ? ($0 as! SkillTableViewCell).indexPath.row == indexPath.row : false
         }).first {
+            let owned = self.ownedSkills.filter{ $0.title == skill.title }.first
+            skill.experience = owned?.experience
             self.addSkillActionFromCell(cell, withSkill: skill)
         }
     }

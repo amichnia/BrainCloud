@@ -54,7 +54,11 @@ class AddViewController: UIViewController {
     var snapshotTop : UIView?
     var originRect: CGRect?
     var skill : Skill?          // If not null - changing skill, not adding
-    var image: UIImage?
+    var image: UIImage? {
+        didSet {
+            self.doneButton?.enabled = self.canBeFulfilled()
+        }
+    }
     var experience : Skill.Experience?
     var isEditingText : Bool = true
     var skillBottomDefaultValue : CGFloat = 0;
@@ -83,6 +87,15 @@ class AddViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if firstLayout {
+            if self.skill?.experience == nil {
+                self.doneButton.setImage(UIImage(named: "icon-plus"), forState: .Normal)
+            }
+            else {
+                self.doneButton.setImage(UIImage(named: "icon-check-black"), forState: .Normal)
+            }
+            
+            self.doneButton.enabled = self.canBeFulfilled()
+            
             self.prepareScene(self.skView, size: self.view.bounds.size)
             self.menuContainerTopConstraint.constant = -100
             self.view.setNeedsLayout()
