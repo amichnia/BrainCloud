@@ -13,6 +13,7 @@ pod 'SpriteKit-Spring'
 pod 'RSKImageCropper'
 pod 'MRProgress'
 pod 'CocoaLumberjack'
+pod 'DRNSnackBar'
 
 end
 

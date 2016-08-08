@@ -13,6 +13,7 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.3.0):
     - CocoaLumberjack/Default
+  - DRNSnackBar (0.0.1)
   - LTMorphingLabel (0.2.0)
   - MRProgress (0.8.3):
     - MRProgress/ActivityIndicator (= 0.8.3)
@@ -72,6 +73,7 @@ DEPENDENCIES:
   - AMKSlidingTableViewCell
   - ASIACheckmarkView
   - CocoaLumberjack
+  - DRNSnackBar
   - LTMorphingLabel
   - MRProgress
   - PromiseKit
@@ -85,6 +87,7 @@ SPEC CHECKSUMS:
   AMKSlidingTableViewCell: 4f7f9278ef72297a716a8429ca04a49432943259
   ASIACheckmarkView: 701ef0d4b618134bae36cc01f8cdabca12c6117d
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
+  DRNSnackBar: 227cc12275ae405bb62e5c598b920cacc04b3a2d
   LTMorphingLabel: 490aa8e079f9247c7f3130f7d4b1be1d66677377
   MRProgress: 16de7cc9f347e8846797a770db102a323fe7ef09
   OMGHTTPURLRQ: 38316b56d88125c600bcdb16df8329147da2b0ee
@@ -93,6 +96,6 @@ SPEC CHECKSUMS:
   SpriteKit-Spring: 51d289157e085eb629992ea8281f3bde60b589e9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: be2ad18d84698ab7429f61ff41e3291f41ff23f8
+PODFILE CHECKSUM: c4ee74d02445c3c6606ec1977a2bc3ca9a58df91
 
 COCOAPODS: 1.0.1

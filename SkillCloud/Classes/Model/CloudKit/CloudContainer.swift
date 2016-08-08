@@ -61,7 +61,7 @@ class CloudContainer {
     }
     
     // MARK: - Public promises
-    // TODO: Remove it from there
+    // TODO: Remove it from there? Refactoring in v1.1
     func promiseAllSkillsFromDatabase(database: DatabaseType) -> Promise<[Skill]> {
         return Promise<[Skill]>() { fulfill, reject in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
@@ -86,6 +86,32 @@ class CloudContainer {
             }
         }
     }
+    
+    func promiseAllSkillsWithPredicate(predicate: NSPredicate, fromDatabase database: DatabaseType) -> Promise<[Skill]> {
+        return Promise<[Skill]>() { fulfill, reject in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+                let query = CKQuery(recordType: Skill.recordType, predicate: predicate)
+                
+                self.database(database).performQuery(query, inZoneWithID: nil) { records, error in
+                    if let error = error {
+                        reject(error)
+                    }
+                    else if let records = records {
+                        let skillsPromises = records.map{ Skill.promiseWithRecord($0) }
+                        
+                        when(skillsPromises).then { skills -> Void in
+                            fulfill(skills)
+                        }
+                    }
+                    else {
+                        reject(CloudError.NoData)
+                    }
+                }
+            }
+        }
+    }
+    
+    
     
     // MARK: - Sync promises
     func promiseUserID() -> Promise<CKRecordID> {
@@ -156,6 +182,150 @@ class CloudContainer {
             return when(toDelete.map{
                 $0.promiseDeleteFrom().then(SkillEntity.promiseToDelete)
             })
+        }
+    }
+    
+}
+
+class CKPageableResult<T:CKRecordSyncable> {
+    
+    var limit: Int = 10
+    var desiredKeys: [String]?
+    
+    internal private(set) var results: [T] = []
+    internal private(set) var hasNextPage: Bool = true
+    internal private(set) var numberOfFailed: Int = 0
+    
+    private var cursor: CKQueryCursor?
+    private var container: CKContainer
+    private var database: CKDatabase
+    private var predicate: NSPredicate
+    private var query: CKQuery
+    private var currentPromise: Promise<[T]>?
+    private var delta: [T] = []
+    
+    // MARK: - Lifecycle
+    init(type: T.Type, predicate: NSPredicate, database: DatabaseType, limit: Int = 10) {
+        self.container = CKContainer.defaultContainer()
+        self.database = database == .Public ? self.container.publicCloudDatabase : self.container.privateCloudDatabase
+        self.predicate = predicate
+        self.query = CKQuery(recordType: T.self.recordType, predicate: predicate)
+    }
+    
+    convenience init(type: T.Type, skillsPredicate: SkillsPredicate, database: DatabaseType, limit: Int = 10){
+        self.init(type: type, predicate: skillsPredicate.predicate(), database: database, limit: limit)
+    }
+    
+    // MARK: - Public
+    func reload() {
+        self.results = []
+        self.delta = []
+        self.cursor = nil
+        self.currentPromise = nil
+        self.hasNextPage = true
+        self.numberOfFailed = 0
+    }
+    
+    func promiseNextPage() -> Promise<[T]> {
+        guard self.hasNextPage else {
+            return Promise<[T]>(error: CloudError.NoData)
+        }
+        
+        guard self.currentPromise == nil else {
+            return self.currentPromise!
+        }
+        
+        self.delta = []
+        
+        self.currentPromise = Promise<[T]> { fulfill,reject in
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0)) { [weak self] in
+                // Query CloudKit
+                guard let operation = self?.operation() else {
+                    reject(CommonError.OperationFailed)
+                    return
+                }
+                
+                operation.recordFetchedBlock = { record in
+                    if let object = T(record: record) {
+                        self?.results.append(object)
+                        self?.delta.append(object)
+                    }
+                    else {
+                        self?.numberOfFailed += 1
+                    }
+                }
+                
+                operation.queryCompletionBlock = { cursor,error in
+                    if let error = error {
+                        self?.hasNextPage = false
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            reject(CloudError.FetchError(code: error.code, error: error))
+                        }
+                    }
+                    else {
+                        if let cursor = cursor {
+                            self?.cursor = cursor
+                        }
+                        else {
+                            self?.hasNextPage = false
+                        }
+                        
+                        self?.currentPromise = nil
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            fulfill(self?.delta ?? [])
+                        }
+                    }
+                }
+                
+                self?.database.addOperation(operation)
+            }
+        }
+        
+        return self.currentPromise!
+    }
+    
+    private func operation() -> CKQueryOperation {
+        if let cursor = self.cursor {
+            let operation = CKQueryOperation(cursor: cursor)
+            operation.resultsLimit = self.limit
+            operation.desiredKeys ?= self.desiredKeys
+            return operation
+        }
+        else {
+            let operation = CKQueryOperation(query: query)
+            operation.resultsLimit = self.limit
+            operation.desiredKeys ?= self.desiredKeys
+            return operation
+        }
+    }
+    
+}
+
+enum SkillsPredicate {
+    
+    case AnySkill
+    case Accepted
+    case NameLike(String)
+    case WhenAll([SkillsPredicate])
+    case WhenAny([SkillsPredicate])
+    
+    func predicate() -> NSPredicate {
+        switch self {
+        case .AnySkill:
+            return NSPredicate(format: "TRUEPREDICATE")
+        case .Accepted:
+            return NSPredicate(format: "accepted = %d", 1)
+        case .NameLike(let name):
+            return NSPredicate(format: "self contains %@", name)
+        case .WhenAll(let subpredicates):
+            let predicates = subpredicates.map{ $0.predicate() }
+            return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        case .WhenAny(let subpredicates):
+            let predicates = subpredicates.map{ $0.predicate() }
+            return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
         }
     }
     

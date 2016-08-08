@@ -32,6 +32,7 @@ class AddViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var menuContainer: UIView!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var menuContainerTopConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
@@ -45,6 +46,7 @@ class AddViewController: UIViewController {
         }
     }()
     
+    var immutable = false
     var cancelled = false
     var deleted = false
     var firstLayout = true
@@ -52,10 +54,15 @@ class AddViewController: UIViewController {
     var snapshotTop : UIView?
     var originRect: CGRect?
     var skill : Skill?          // If not null - changing skill, not adding
-    var image: UIImage?
+    var image: UIImage? {
+        didSet {
+            self.doneButton?.enabled = self.canBeFulfilled()
+        }
+    }
     var experience : Skill.Experience?
     var isEditingText : Bool = true
     var skillBottomDefaultValue : CGFloat = 0;
+    
     
     private var imageCropPromiseHandler: PromiseHandler<UIImage>?
     
@@ -72,12 +79,23 @@ class AddViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         self.skView.allowsTransparency = true
+        self.settingsButton.hidden = self.immutable
+        self.skillNameField.userInteractionEnabled = !self.immutable
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         if firstLayout {
+            if self.skill?.experience == nil {
+                self.doneButton.setImage(UIImage(named: "icon-plus"), forState: .Normal)
+            }
+            else {
+                self.doneButton.setImage(UIImage(named: "icon-check-black"), forState: .Normal)
+            }
+            
+            self.doneButton.enabled = self.canBeFulfilled()
+            
             self.prepareScene(self.skView, size: self.view.bounds.size)
             self.menuContainerTopConstraint.constant = -100
             self.view.setNeedsLayout()
@@ -411,6 +429,23 @@ extension AddViewController {
             scene.setAllVisible(false)
         }
         
+        addViewController.skill = skill
+        addViewController.showFromViewController(sender, withOriginRect: rect)
+        
+        return addViewController.promise
+    }
+    
+    static func promiseSelectSkillWith(sender: UIViewController, rect: CGRect?, skill: Skill, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
+        guard let addViewController = sender.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
+            throw CommonError.UnknownError
+        }
+        
+        if let scene = preparedScene {
+            addViewController.scene = scene
+            scene.setAllVisible(false)
+        }
+        
+        addViewController.immutable = true
         addViewController.skill = skill
         addViewController.showFromViewController(sender, withOriginRect: rect)
         

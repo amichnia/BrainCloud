@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import SpriteKit
+import DRNSnackBar
 
 // MARK: - Global functions
 func generateFileURL(fileExtension: String = "jpg") -> NSURL {
@@ -66,6 +67,15 @@ extension UIViewController {
         return selection.then { (promise) -> Promise<T> in
             return promise
         }
+    }
+    
+}
+
+// MARK: - Snack bar support
+extension UIViewController {
+    
+    func showSnackBarMessage(message: String){
+        DRNSnackBar.makeText(message).show()
     }
     
 }
