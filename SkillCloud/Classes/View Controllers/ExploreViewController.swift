@@ -122,6 +122,7 @@ class ExploreViewController: UIViewController {
         }
         .then(SkillEntity.promiseToUpdate)                  // Save change to local storage
         .then { [weak self] _ -> Void in
+            self?.showSnackBarMessage(NSLocalizedString("New skill added.", comment: "New skill added."))
             self?.refetchSelfSkills()
         }
         .error { error in

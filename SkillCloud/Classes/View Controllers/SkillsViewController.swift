@@ -110,6 +110,9 @@ class SkillsViewController: UIViewController {
             return savedEntity.skill.promiseInsertTo(DatabaseType.Private)
         }
         .then(SkillEntity.promiseToUpdate)  // TODO: Update only offline flag!!!
+        .then { [weak self] _ -> Void in
+            self?.showSnackBarMessage(NSLocalizedString("New skill added.", comment: "New skill added."))
+        }
         .error { error in
             print("Error: \(error)")
         }
@@ -131,9 +134,11 @@ class SkillsViewController: UIViewController {
             .then { _ -> Promise<Skill> in                  // Call and update to CloudKit
                 // Handle update cases:
                 if savedEntity.toDelete {
+                    self.showSnackBarMessage(NSLocalizedString("Skill deleted!", comment: "Skill deleted!"))
                     return savedEntity.skill.promiseDeleteFrom(.Private)
                 }
                 else {
+                    self.showSnackBarMessage(NSLocalizedString("Skill updated.", comment: "Skill updated."))
                     return savedEntity.skill.promiseSyncTo(.Private)
                 }
             }
@@ -147,7 +152,7 @@ class SkillsViewController: UIViewController {
             }
         }
         .error { error in
-            print("Error: \(error)")
+            DDLogError("Error: \(error)")
         }
     }
     
