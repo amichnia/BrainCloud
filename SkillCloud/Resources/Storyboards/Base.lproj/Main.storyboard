@@ -19,6 +19,7 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -818,7 +819,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" text="aaa" placeholder="Search skills" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-ok-JsO">
+                                                <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Search skills" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4v1-ok-JsO">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -953,6 +954,9 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" title="Info" id="Yig-yb-6MM">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="Qwk-Z5-ybe" kind="show" id="aWE-25-gQq"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -963,6 +967,58 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SO1-0L-fEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2332" y="1597"/>
+        </scene>
+        <!--Info View Controller-->
+        <scene sceneID="Z9e-nk-xRH">
+            <objects>
+                <viewController id="Qwk-Z5-ybe" userLabel="Info View Controller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="P8p-j7-W0n"/>
+                        <viewControllerLayoutGuide type="bottom" id="u89-nI-QfG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8tm-Mz-L3u">
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-image" translatesAutoresizingMaskIntoConstraints="NO" id="0HM-Tm-KCz">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0HM-Tm-KCz" firstAttribute="top" secondItem="P8p-j7-W0n" secondAttribute="bottom" id="39X-2I-pVB"/>
+                            <constraint firstItem="0HM-Tm-KCz" firstAttribute="leading" secondItem="8tm-Mz-L3u" secondAttribute="leading" id="5nD-9P-trT"/>
+                            <constraint firstAttribute="trailing" secondItem="0HM-Tm-KCz" secondAttribute="trailing" id="I0K-Gw-HNb"/>
+                            <constraint firstItem="u89-nI-QfG" firstAttribute="top" secondItem="0HM-Tm-KCz" secondAttribute="bottom" id="zDr-zO-JJw"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="1pP-bO-bPu">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="IFb-PF-xrN">
+                            <rect key="frame" x="223" y="6" width="154" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ZF-JU-JJV">
+                                    <rect key="frame" x="6" y="6" width="140" height="21"/>
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="5ZF-JU-JJV" firstAttribute="top" secondItem="IFb-PF-xrN" secondAttribute="top" constant="6" id="3RQ-Wn-AZs"/>
+                                <constraint firstItem="5ZF-JU-JJV" firstAttribute="leading" secondItem="IFb-PF-xrN" secondAttribute="leading" constant="6" id="5Yc-gK-nLH"/>
+                                <constraint firstAttribute="bottom" secondItem="5ZF-JU-JJV" secondAttribute="bottom" constant="6" id="TCU-Ib-KW9"/>
+                                <constraint firstAttribute="trailing" secondItem="5ZF-JU-JJV" secondAttribute="trailing" constant="8" id="Vrn-NT-C6k"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wnb-SK-C8B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3164" y="1597"/>
         </scene>
     </scenes>
     <resources>

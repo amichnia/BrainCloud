@@ -17,7 +17,7 @@ class ExploreViewController: UIViewController {
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
-    var skillsResult: CKPageableResult = CKPageableResult(type: Skill.self, predicate: NSPredicate(format: "accepted = %d", 1), database: .Public)
+    var skillsResult: CKPageableResult = CKPageableResult(type: Skill.self, skillsPredicate: SkillsPredicate.Accepted, database: .Public)
     var updating: Bool = false
     var preparedScene : AddScene?
     
@@ -132,6 +132,33 @@ class ExploreViewController: UIViewController {
 
 }
 
+extension ExploreViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        print(searchBar.text ?? "")
+        let predicate: SkillsPredicate = {
+            if let searchText = searchBar.text {
+                return SkillsPredicate.WhenAll([.Accepted,.NameLike(searchText)])
+            }
+            else {
+                return SkillsPredicate.Accepted
+            }
+        }()
+        
+        self.skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: predicate, database: .Public)
+        self.updateIfNeeded()
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        print("CANCELLED")
+        
+        self.skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: .Accepted, database: .Public)
+        self.updateIfNeeded()
+    }
+    
+}
+
+// MARK: - UITableViewDataSource
 extension ExploreViewController: UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -156,9 +183,11 @@ extension ExploreViewController: UITableViewDataSource {
     
 }
 
+// MARK: - UITableViewDelegate
 extension ExploreViewController: UITableViewDelegate {
 
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        self.searchCell.searchBar.delegate = self
         return self.searchCell.contentView
     }
     
@@ -174,6 +203,7 @@ extension ExploreViewController: UITableViewDelegate {
     
 }
 
+// MARK: - UIScrollViewDelegate
 extension ExploreViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

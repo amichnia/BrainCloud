@@ -204,6 +204,7 @@ class CKPageableResult<T:CKRecordSyncable> {
     private var currentPromise: Promise<[T]>?
     private var delta: [T] = []
     
+    // MARK: - Lifecycle
     init(type: T.Type, predicate: NSPredicate, database: DatabaseType, limit: Int = 10) {
         self.container = CKContainer.defaultContainer()
         self.database = database == .Public ? self.container.publicCloudDatabase : self.container.privateCloudDatabase
@@ -211,6 +212,11 @@ class CKPageableResult<T:CKRecordSyncable> {
         self.query = CKQuery(recordType: T.self.recordType, predicate: predicate)
     }
     
+    convenience init(type: T.Type, skillsPredicate: SkillsPredicate, database: DatabaseType, limit: Int = 10){
+        self.init(type: type, predicate: skillsPredicate.predicate(), database: database, limit: limit)
+    }
+    
+    // MARK: - Public
     func reload() {
         self.results = []
         self.delta = []
@@ -293,6 +299,33 @@ class CKPageableResult<T:CKRecordSyncable> {
             operation.resultsLimit = self.limit
             operation.desiredKeys ?= self.desiredKeys
             return operation
+        }
+    }
+    
+}
+
+enum SkillsPredicate {
+    
+    case AnySkill
+    case Accepted
+    case NameLike(String)
+    case WhenAll([SkillsPredicate])
+    case WhenAny([SkillsPredicate])
+    
+    func predicate() -> NSPredicate {
+        switch self {
+        case .AnySkill:
+            return NSPredicate(format: "TRUEPREDICATE")
+        case .Accepted:
+            return NSPredicate(format: "accepted = %d", 1)
+        case .NameLike(let name):
+            return NSPredicate(format: "self contains %@", name)
+        case .WhenAll(let subpredicates):
+            let predicates = subpredicates.map{ $0.predicate() }
+            return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        case .WhenAny(let subpredicates):
+            let predicates = subpredicates.map{ $0.predicate() }
+            return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
         }
     }
     
