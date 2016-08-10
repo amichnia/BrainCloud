@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    // MARK: - Lifecycle
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Cocoa Lubmerjack
         DDLog.addLogger(DDTTYLogger.sharedInstance()) // TTY = Xcode console

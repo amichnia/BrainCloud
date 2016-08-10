@@ -38,7 +38,7 @@ class ExploreViewController: UIViewController {
         
         (self.tableView as UIScrollView).delegate = self
         
-        self.skillsResult.desiredKeys = ["name","experienceValue","thumbnail"]
+        self.skillsResult.desiredKeys = ["name","experienceValue","thumbnail","desc"]
         self.skillsResult.limit = 10
         
         self.refetchSelfSkills()
@@ -161,7 +161,7 @@ extension ExploreViewController: UISearchBarDelegate {
         
         self.updateIfNeeded()
         .error { error in
-                print("Error: \(error)")
+            print("Error: \(error)")
         }
     }
     
