@@ -57,7 +57,7 @@ class CloudViewController: UIViewController, SkillsProvider {
         
         Node.rectSize = self.skView.bounds.size
         Node.color = self.skView.tintColor
-        Node.scaleFactor = 0.19 //self.scrollView.bounds.width / self.skView.bounds.width // FIXME: !IMportant - resolve scale factors
+        Node.scaleFactor = self.scrollView.bounds.width / self.skView.bounds.width
         print(Node.scaleFactor)
         
         self.scrollView.minimumZoomScale = Node.scaleFactor
