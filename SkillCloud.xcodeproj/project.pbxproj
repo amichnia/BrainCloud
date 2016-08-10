@@ -12,6 +12,7 @@
 		C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A91901CB5208200529F0B /* GoogleImage.swift */; };
 		C83BBA9B1D4632BC00431B42 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */; };
 		C83BBA9D1D4649EF00431B42 /* SkillsSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */; };
+		C83BF83D1D5B369900FDA60C /* InfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BF83C1D5B369900FDA60C /* InfoTableViewController.swift */; };
 		C863048E1CC6417E002C068C /* EditSkillNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863048D1CC6417E002C068C /* EditSkillNode.swift */; };
 		C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86304911CC646B1002C068C /* SkillsViewController.swift */; };
 		C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */; };
@@ -107,6 +108,7 @@
 		C80A91901CB5208200529F0B /* GoogleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImage.swift; sourceTree = "<group>"; };
 		C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsSearchTableViewCell.swift; sourceTree = "<group>"; };
+		C83BF83C1D5B369900FDA60C /* InfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoTableViewController.swift; sourceTree = "<group>"; };
 		C863048D1CC6417E002C068C /* EditSkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSkillNode.swift; sourceTree = "<group>"; };
 		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImagesCollectionViewController.swift; sourceTree = "<group>"; };
@@ -346,6 +348,7 @@
 				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
 				FE31DAF61C9CA1240006D9EE /* GeneratorViewController.swift */,
 				C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */,
+				C83BF83C1D5B369900FDA60C /* InfoTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */,
 				FE9F6EDE1D283433008B3BC3 /* CloudSelectScene.swift in Sources */,
 				FE9F6EE71D284F15008B3BC3 /* Array+Extensions.swift in Sources */,
+				C83BF83D1D5B369900FDA60C /* InfoTableViewController.swift in Sources */,
 				C8F55CB51CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift in Sources */,
 				FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */,
 				C8F55CB21CFC323000208F88 /* GraphCloudEntity.swift in Sources */,
