@@ -330,14 +330,14 @@
                                             <segue destination="mSM-lT-vwJ" kind="unwind" identifier="UnwindToSelection" unwindAction="unwindToCloudSelection:" id="a2K-Bl-nsU"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Nig-xx-fIl"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="Nig-xx-fIl"/>
                                     <barButtonItem image="icon-setting-black" id="PfH-hT-wTV" userLabel="Settings">
                                         <color key="tintColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="settingsAction:" destination="IHA-15-xhl" id="LMP-BW-r8y"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="yY9-ms-PpN"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="yY9-ms-PpN"/>
                                     <barButtonItem image="icon-check-black" id="6Hj-sj-KS7" userLabel="Save">
                                         <color key="tintColor" red="0.20376615226268768" green="0.6209026575088501" blue="0.75905740261077881" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
@@ -416,7 +416,7 @@
                                             <segue destination="OXL-tr-5I9" kind="unwind" unwindAction="unwindToPreviousViewController:" id="ItH-JE-c02"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="rKo-eA-N1A"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="rKo-eA-N1A"/>
                                     <barButtonItem systemItem="action" id="uld-Gl-ZOn">
                                         <connections>
                                             <action selector="exportAction:" destination="oei-F6-g8F" id="Hj9-7O-eBo"/>
@@ -594,7 +594,7 @@
                                 <constraint firstItem="DXJ-9X-ABB" firstAttribute="top" secondItem="WcX-Cd-sDh" secondAttribute="top" constant="6" id="hff-pc-aYr"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Lec-am-Xto">
+                        <barButtonItem key="rightBarButtonItem" id="Lec-am-Xto">
                             <view key="customView" contentMode="scaleToFill" id="ymy-6g-tOa">
                                 <rect key="frame" x="547" y="5" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
