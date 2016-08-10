@@ -24,6 +24,9 @@
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
+            <string>Lato-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1095,6 +1098,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Y45-0X-umY" id="Us5-AW-7Xj"/>
+                        <segue destination="xVP-1V-hQr" kind="show" id="BQD-6J-XTa"/>
+                        <segue destination="y3p-iS-Wtc" kind="show" id="WSK-zY-GDy"/>
+                        <segue destination="zy3-Tw-buy" kind="show" identifier="ShowLicenses" id="tLY-hT-VXa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjk-Gh-Gwj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1119,6 +1125,260 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3c1-Kk-e9q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1582" y="2365"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="fcM-GT-3iA">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="xVP-1V-hQr" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8MZ-LO-3yZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="sdF-ni-0Dp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="t42-ra-azz">
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-image" translatesAutoresizingMaskIntoConstraints="NO" id="R9r-nx-4Ci">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="R9r-nx-4Ci" firstAttribute="top" secondItem="8MZ-LO-3yZ" secondAttribute="bottom" id="1ww-ne-8wS"/>
+                            <constraint firstItem="R9r-nx-4Ci" firstAttribute="leading" secondItem="t42-ra-azz" secondAttribute="leading" id="AJw-F6-MBb"/>
+                            <constraint firstAttribute="trailing" secondItem="R9r-nx-4Ci" secondAttribute="trailing" id="mAs-oB-SNn"/>
+                            <constraint firstItem="sdF-ni-0Dp" firstAttribute="top" secondItem="R9r-nx-4Ci" secondAttribute="bottom" id="okH-Td-Jxn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="EZL-IB-HTd">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="Ve7-dp-D4r">
+                            <rect key="frame" x="223" y="6" width="154" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTM-6V-a4u">
+                                    <rect key="frame" x="6" y="6" width="140" height="21"/>
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="jTM-6V-a4u" firstAttribute="leading" secondItem="Ve7-dp-D4r" secondAttribute="leading" constant="6" id="3fk-Jb-QWM"/>
+                                <constraint firstAttribute="trailing" secondItem="jTM-6V-a4u" secondAttribute="trailing" constant="8" id="Nes-4Q-tm5"/>
+                                <constraint firstAttribute="bottom" secondItem="jTM-6V-a4u" secondAttribute="bottom" constant="6" id="f3E-qa-5Cs"/>
+                                <constraint firstItem="jTM-6V-a4u" firstAttribute="top" secondItem="Ve7-dp-D4r" secondAttribute="top" constant="6" id="kEN-1Z-ocD"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H4Y-Px-QiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2332" y="3353"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="fS4-lW-drK">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="y3p-iS-Wtc" userLabel="About View Controller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ToV-eF-MRZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="kNu-MF-0n9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PZT-x9-5dS">
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-image" translatesAutoresizingMaskIntoConstraints="NO" id="nfZ-Ie-74H">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kNu-MF-0n9" firstAttribute="top" secondItem="nfZ-Ie-74H" secondAttribute="bottom" id="VZ3-WY-rIc"/>
+                            <constraint firstItem="nfZ-Ie-74H" firstAttribute="leading" secondItem="PZT-x9-5dS" secondAttribute="leading" id="hvh-bA-OfW"/>
+                            <constraint firstItem="nfZ-Ie-74H" firstAttribute="top" secondItem="ToV-eF-MRZ" secondAttribute="bottom" id="mFI-lr-gzJ"/>
+                            <constraint firstAttribute="trailing" secondItem="nfZ-Ie-74H" secondAttribute="trailing" id="nwV-Z8-21X"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="UAl-MW-TGS">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="QBg-fy-Gqx">
+                            <rect key="frame" x="223" y="6" width="154" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L40-nQ-RoH">
+                                    <rect key="frame" x="6" y="6" width="140" height="21"/>
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="L40-nQ-RoH" firstAttribute="top" secondItem="QBg-fy-Gqx" secondAttribute="top" constant="6" id="2c6-rh-LVj"/>
+                                <constraint firstAttribute="trailing" secondItem="L40-nQ-RoH" secondAttribute="trailing" constant="8" id="8TJ-eF-ETE"/>
+                                <constraint firstItem="L40-nQ-RoH" firstAttribute="leading" secondItem="QBg-fy-Gqx" secondAttribute="leading" constant="6" id="PKP-vX-HpP"/>
+                                <constraint firstAttribute="bottom" secondItem="L40-nQ-RoH" secondAttribute="bottom" constant="6" id="cGw-VR-MEe"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="abN-F7-9Og" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3060" y="3353"/>
+        </scene>
+        <!--Licenses View Controller-->
+        <scene sceneID="TGo-qV-f41">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="zy3-Tw-buy" userLabel="Licenses View Controller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tc9-rQ-E9o"/>
+                        <viewControllerLayoutGuide type="bottom" id="yHo-N7-Ern"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MTt-Y7-PME">
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background-image" translatesAutoresizingMaskIntoConstraints="NO" id="jE8-ur-70J">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jMU-mq-LwQ">
+                                <rect key="frame" x="0.0" y="8" width="600" height="479"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Alamofire
+
+Copyright (c) 2014-2016 Alamofire Software Foundation (http://alamofire.org/)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+Alamofire-SwiftyJSON
+
+The MIT License (MIT)
+
+Copyright (c) 2014 SwiftyJSON
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+CocoaLumberjack
+
+Software License Agreement (BSD License)
+
+Copyright (c) 2010-2016, Deusty, LLC
+All rights reserved.
+
+Redistribution and use of this software in source and binary forms,
+with or without modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above
+  copyright notice, this list of conditions and the
+  following disclaimer.
+
+* Neither the name of Deusty nor the names of its
+  contributors may be used to endorse or promote products
+  derived from this software without specific prior
+  written permission of Deusty, LLC.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+DRNSnackBar
+
+DWTFYW License
+
+MRProgress
+
+The MIT License (MIT)
+
+Copyright (c) 2013 Marius Rackwitz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jMU-mq-LwQ" firstAttribute="top" secondItem="tc9-rQ-E9o" secondAttribute="bottom" constant="8" id="0RV-ty-EEI"/>
+                            <constraint firstItem="yHo-N7-Ern" firstAttribute="top" secondItem="jMU-mq-LwQ" secondAttribute="bottom" id="7oF-av-ZXG"/>
+                            <constraint firstItem="jMU-mq-LwQ" firstAttribute="leading" secondItem="MTt-Y7-PME" secondAttribute="leading" id="X2x-Ll-Hhj"/>
+                            <constraint firstAttribute="trailing" secondItem="jMU-mq-LwQ" secondAttribute="trailing" id="nh2-xK-DGh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GaG-fB-omf">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="6ge-wf-pH4">
+                            <rect key="frame" x="223" y="6" width="154" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Licenses" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YkB-UA-hXn">
+                                    <rect key="frame" x="6" y="6" width="140" height="21"/>
+                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="YkB-UA-hXn" firstAttribute="leading" secondItem="6ge-wf-pH4" secondAttribute="leading" constant="6" id="5gY-fk-Xe6"/>
+                                <constraint firstItem="YkB-UA-hXn" firstAttribute="top" secondItem="6ge-wf-pH4" secondAttribute="top" constant="6" id="S1C-gG-FYh"/>
+                                <constraint firstAttribute="trailing" secondItem="YkB-UA-hXn" secondAttribute="trailing" constant="8" id="ocx-80-BfA"/>
+                                <constraint firstAttribute="bottom" secondItem="YkB-UA-hXn" secondAttribute="bottom" constant="6" id="skN-ju-O4a"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="858-Ci-WGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3792" y="3353"/>
         </scene>
     </scenes>
     <resources>

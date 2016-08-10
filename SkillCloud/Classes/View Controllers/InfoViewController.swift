@@ -102,6 +102,19 @@ extension InfoViewController: UITableViewDataSource {
 
 extension InfoViewController: UITableViewDelegate {
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard indexPath.section == 1 else {
+            return
+        }
+        
+        switch InfoMenuItem.allItems[indexPath.row] {
+        case .Licenses:
+            self.performSegueWithIdentifier("ShowLicenses", sender: self)
+        default:
+            break
+        }
+    }
+    
 }
 
 extension InfoViewController: UIScrollViewDelegate {
