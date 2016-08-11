@@ -37,9 +37,7 @@ enum InfoMenuItem {
     case About
     case Licenses
     case Feedback
-    case Rate
-    
-    static var allItems: [InfoMenuItem] = [Help,About,Licenses,Feedback,Rate]
+    case Rate(rated: Bool)
     
     func title() -> String {
         switch self {
@@ -81,8 +79,8 @@ enum InfoMenuItem {
             return UIImage(named: "icon-licenses")
         case .Feedback:
             return UIImage(named: "icon-feedback")
-        case .Rate:
-            return UIImage(named: "icon-rate")
+        case .Rate(let rated):
+            return UIImage(named: rated ? "icon-rated" : "icon-rate")
         }
     }
     

@@ -20,18 +20,24 @@ class InfoViewController: UIViewController {
     // MARK: - Properties
     let menuOffset = 6
     var firstLayout = true
+    var menu: [InfoMenuItem] = []
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.menu = [.Help,.About,.Licenses,.Feedback,.Rate(rated: iRate.sharedInstance().ratedThisVersion)]
         (self.tableView as UIScrollView).delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tableView.visibleCells.forEach(self.configureColorFor)
+        self.tableView.visibleCells.forEach {
+            self.configureColorFor($0)
+        }
+        
+        iRate.sharedInstance().delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -40,7 +46,7 @@ class InfoViewController: UIViewController {
         if self.firstLayout {
             self.firstLayout = false
             
-            let rowHeight: CGFloat = self.tableView.bounds.height / CGFloat(InfoMenuItem.allItems.count)
+            let rowHeight: CGFloat = self.tableView.bounds.height / CGFloat(self.menu.count)
             self.tableView.rowHeight = rowHeight
             self.tableView.layoutIfNeeded()
         }
@@ -86,10 +92,15 @@ class InfoViewController: UIViewController {
         
         let factor = offset.y / self.tableView.bounds.height;
         
-        let topColor = self.colors[1].0
-        let botColor = self.colors[1].1
+        let topColor = self.colors[0].0
+        let botColor = self.colors[0].1
         
         cell.backgroundColor = UIColor.interpolate(topColor, B: botColor, t: factor)
+        
+        let selectedTopColor = self.colors[2].0
+        let selectedBotColor = self.colors[2].1
+        
+        cell.selectedBackgroundView?.backgroundColor = UIColor.interpolate(selectedTopColor, B: selectedBotColor, t: factor)
     }
     
     // MARK: - Navigation
@@ -105,7 +116,7 @@ extension InfoViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 1:
-            return InfoMenuItem.allItems.count
+            return self.menu.count
         default:
             return self.menuOffset
         }
@@ -118,7 +129,9 @@ extension InfoViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell") as! InfoMenuTableViewCell
         
-        cell.configureForItem(InfoMenuItem.allItems[indexPath.row])
+        cell.selectedBackgroundView = UIView()
+        
+        cell.configureForItem(self.menu[indexPath.row])
         
         return cell
     }
@@ -132,16 +145,21 @@ extension InfoViewController: UITableViewDelegate {
             return
         }
         
-        switch InfoMenuItem.allItems[indexPath.row] {
+        switch self.menu[indexPath.row] {
+        case .Help:
+            self.performSegueWithIdentifier("ShowHelp", sender: self)
+        case .About:
+            self.performSegueWithIdentifier("ShowAbout", sender: self)
         case .Licenses:
             self.performSegueWithIdentifier("ShowLicenses", sender: self)
         case .Feedback:
             self.sendFeedback()
         case .Rate:
+            iRate.sharedInstance().useUIAlertControllerIfAvailable = true
             iRate.sharedInstance().promptForRating()
-        default:
-            break
         }
+        
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
 }
@@ -149,7 +167,17 @@ extension InfoViewController: UITableViewDelegate {
 extension InfoViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        self.tableView.visibleCells.forEach(self.configureColorFor)
+        self.tableView.visibleCells.forEach {
+            self.configureColorFor($0)
+        }
+    }
+    
+}
+
+extension InfoViewController: iRateDelegate {
+    
+    func iRateDidPromptForRating() {
+        self.menu = [.Help,.About,.Licenses,.Feedback,.Rate(rated: iRate.sharedInstance().ratedThisVersion)]
     }
     
 }
