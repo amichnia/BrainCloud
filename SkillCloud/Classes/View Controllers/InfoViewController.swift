@@ -107,6 +107,7 @@ class InfoViewController: UIViewController {
 
 }
 
+// MARK: - UITableViewDataSource
 extension InfoViewController: UITableViewDataSource {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -138,6 +139,7 @@ extension InfoViewController: UITableViewDataSource {
     
 }
 
+// MARK: - UITableViewDelegate
 extension InfoViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -155,7 +157,7 @@ extension InfoViewController: UITableViewDelegate {
         case .Feedback:
             self.sendFeedback()
         case .Rate:
-            iRate.sharedInstance().useUIAlertControllerIfAvailable = true
+            iRate.sharedInstance().delegate = self
             iRate.sharedInstance().promptForRating()
         }
         
@@ -164,6 +166,7 @@ extension InfoViewController: UITableViewDelegate {
     
 }
 
+// MARK: - UIScrollViewDelegate
 extension InfoViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -174,10 +177,12 @@ extension InfoViewController: UIScrollViewDelegate {
     
 }
 
+// MARK: - iRateDelegate
 extension InfoViewController: iRateDelegate {
     
-    func iRateDidPromptForRating() {
+    func iRateDidOpenAppStore() {
         self.menu = [.Help,.About,.Licenses,.Feedback,.Rate(rated: iRate.sharedInstance().ratedThisVersion)]
+        self.tableView.reloadData()
     }
     
 }
