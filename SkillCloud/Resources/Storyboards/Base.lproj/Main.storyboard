@@ -1098,8 +1098,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Y45-0X-umY" id="Us5-AW-7Xj"/>
-                        <segue destination="xVP-1V-hQr" kind="show" id="BQD-6J-XTa"/>
-                        <segue destination="y3p-iS-Wtc" kind="show" id="WSK-zY-GDy"/>
+                        <segue destination="xVP-1V-hQr" kind="show" identifier="ShowHelp" id="BQD-6J-XTa"/>
+                        <segue destination="y3p-iS-Wtc" kind="show" identifier="ShowAbout" id="WSK-zY-GDy"/>
                         <segue destination="zy3-Tw-buy" kind="show" identifier="ShowLicenses" id="tLY-hT-VXa"/>
                     </connections>
                 </viewController>
