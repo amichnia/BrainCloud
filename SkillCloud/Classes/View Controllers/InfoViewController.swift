@@ -10,6 +10,7 @@ import UIKit
 import MessageUI
 import PromiseKit
 import DRNSnackBar
+import iRate
 
 class InfoViewController: UIViewController {
 
@@ -136,6 +137,8 @@ extension InfoViewController: UITableViewDelegate {
             self.performSegueWithIdentifier("ShowLicenses", sender: self)
         case .Feedback:
             self.sendFeedback()
+        case .Rate:
+            iRate.sharedInstance().promptForRating()
         default:
             break
         }

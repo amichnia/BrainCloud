@@ -20,6 +20,7 @@
 		C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86304911CC646B1002C068C /* SkillsViewController.swift */; };
 		C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */; };
 		C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C88EB4871CB50580002B9592 /* GoogleImages.storyboard */; };
+		C8A42EEC1D5CA06400C45829 /* iRate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8A42EEB1D5CA06400C45829 /* iRate.framework */; };
 		C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D231CC5017A009CDBFA /* AddViewController.swift */; };
 		C8DF6D261CC5033F009CDBFA /* AddScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D251CC5033F009CDBFA /* AddScene.swift */; };
 		C8DF6D281CC503A0009CDBFA /* AddScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C8DF6D271CC503A0009CDBFA /* AddScene.sks */; };
@@ -120,6 +121,7 @@
 		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImagesCollectionViewController.swift; sourceTree = "<group>"; };
 		C88EB4871CB50580002B9592 /* GoogleImages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoogleImages.storyboard; sourceTree = "<group>"; };
+		C8A42EEB1D5CA06400C45829 /* iRate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iRate.framework; path = Carthage/Build/iOS/iRate.framework; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* SkillCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8DF6D231CC5017A009CDBFA /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		C8DF6D251CC5033F009CDBFA /* AddScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScene.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8A42EEC1D5CA06400C45829 /* iRate.framework in Frameworks */,
 				C83BF83F1D5C73A100FDA60C /* TSMarkdownParser.framework in Frameworks */,
 				FE2E6BE81D16982900B86D8A /* CloudKit.framework in Frameworks */,
 				FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */,
@@ -221,6 +224,7 @@
 		7493D99371A43512DBFF49BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C8A42EEB1D5CA06400C45829 /* iRate.framework */,
 				C83BF83E1D5C73A100FDA60C /* TSMarkdownParser.framework */,
 				FE2E6BE71D16982900B86D8A /* CloudKit.framework */,
 				FE0522D71CAFE46600315468 /* SpriteKit.framework */,
@@ -637,6 +641,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/TSMarkdownParser.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/iRate.framework",
 			);
 			name = "[Carthage] Strip Club";
 			outputPaths = (

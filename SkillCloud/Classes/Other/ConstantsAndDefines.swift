@@ -13,7 +13,16 @@ import UIKit
 struct Key {
     
 }
+
 struct Defined {
+    struct Application {
+        static let AppStoreID: UInt         = 1125706679
+        static let RateAtLaunch: Bool       = false
+        static let RateAfterDays: Float     = 0 
+        static let RateAfterUses: UInt      = 0
+        static let RateAfterEvents: UInt    = 5
+    }
+    
     struct Cloud {
         static let ExportedDefaultSize:         CGSize      = CGSize(width: 1600, height: 1400)
         static let ThumbnailCaptureSize:        CGSize      = CGSize(width: 240, height: 210)
