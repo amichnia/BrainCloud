@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import MessageUI
+import PromiseKit
+import DRNSnackBar
 
 class InfoViewController: UIViewController {
 
@@ -15,7 +18,7 @@ class InfoViewController: UIViewController {
     
     // MARK: - Properties
     let menuOffset = 6
-    var first = true
+    var firstLayout = true
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -33,8 +36,8 @@ class InfoViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if self.first {
-            self.first = false
+        if self.firstLayout {
+            self.firstLayout = false
             
             let rowHeight: CGFloat = self.tableView.bounds.height / CGFloat(InfoMenuItem.allItems.count)
             self.tableView.rowHeight = rowHeight
@@ -46,6 +49,27 @@ class InfoViewController: UIViewController {
     }
     
     // MARK: - Actions
+    func sendFeedback() {
+        let mailComposeViewController = MFMailComposeViewController()
+        
+        mailComposeViewController.setToRecipients(["skillcloud@girappe.com"])
+        mailComposeViewController.setSubject("SkillCloud Feedback")
+        
+        self.promiseViewController(mailComposeViewController)
+        .then { result -> Void in
+            switch result {
+            case MFMailComposeResultSent:
+                self.showSnackBarMessage(NSLocalizedString("Thank you for sending feedback.", comment: "Thank you for sending feedback."))
+            case MFMailComposeResultFailed:
+                self.promiseHandleError(CommonError.Failure(reason: NSLocalizedString("Sending failed. Please verify you email settings.", comment: "Sending failed. Please verify you email settings.")))
+            default:
+                break
+            }
+        }
+        .error { error in
+            self.promiseHandleError(CommonError.Other(error))
+        }
+    }
     
     // MARK: - Helpers
     let colors = [
@@ -110,6 +134,8 @@ extension InfoViewController: UITableViewDelegate {
         switch InfoMenuItem.allItems[indexPath.row] {
         case .Licenses:
             self.performSegueWithIdentifier("ShowLicenses", sender: self)
+        case .Feedback:
+            self.sendFeedback()
         default:
             break
         }

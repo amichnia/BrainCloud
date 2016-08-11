@@ -60,6 +60,8 @@ PODS:
   - PromiseKit/Foundation (3.2.0):
     - OMGHTTPURLRQ (~> 3.1.0)
     - PromiseKit/CorePromise
+  - PromiseKit/MessageUI (3.2.0):
+    - PromiseKit/CorePromise
   - PromiseKit/QuartzCore (3.2.0):
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (3.2.0):
@@ -78,6 +80,7 @@ DEPENDENCIES:
   - MRProgress
   - PromiseKit
   - PromiseKit/AssetsLibrary
+  - PromiseKit/MessageUI
   - RSKImageCropper
   - SpriteKit-Spring
 
@@ -96,6 +99,6 @@ SPEC CHECKSUMS:
   SpriteKit-Spring: 51d289157e085eb629992ea8281f3bde60b589e9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: c4ee74d02445c3c6606ec1977a2bc3ca9a58df91
+PODFILE CHECKSUM: 8b87721c261405dbf687a2870507d6468c0b1867
 
 COCOAPODS: 1.0.1
