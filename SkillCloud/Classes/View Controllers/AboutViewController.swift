@@ -31,6 +31,13 @@ class AboutViewController: UIViewController {
     }
     
     // MARK: - Actions
+    @IBAction func writeAction(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func visitWebsite(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(Defined.Application.StudioURL)
+    }
     
     // MARK: - Navigation
 

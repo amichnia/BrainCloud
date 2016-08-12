@@ -21,6 +21,7 @@ struct Defined {
         static let RateAfterDays: Float     = 0 
         static let RateAfterUses: UInt      = 0
         static let RateAfterEvents: UInt    = 5
+        static let StudioURL: NSURL!        = NSURL(string: "http://www.girappe.com")
     }
     
     struct Cloud {
