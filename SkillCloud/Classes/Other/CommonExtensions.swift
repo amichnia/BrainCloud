@@ -71,6 +71,24 @@ extension UIViewController {
     
 }
 
+extension UIViewController {
+    
+    func promiseHandleError(error: ShowableError) -> Promise<Void> {
+        return Promise<Void> { fulfill,reject in
+            let alertController = UIAlertController(title: error.alertTitle(), message: error.alertBody(), preferredStyle: .Alert)
+            
+            let confirmAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .Default) { _ in
+                fulfill()
+            }
+            
+            alertController.addAction(confirmAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+    
+}
+
 // MARK: - Snack bar support
 extension UIViewController {
     
@@ -86,6 +104,46 @@ enum CommonError : ErrorType {
     case NotEnoughData
     case UserCancelled
     case OperationFailed
+    case Other(ErrorType)
+    case Failure(reason: String)
+}
+
+protocol ShowableError: ErrorType {
+    func alertTitle() -> String?
+    func alertBody() -> String
+}
+
+extension CommonError: ShowableError {
+    
+    func alertTitle() -> String? {
+        switch self {
+        case .Other(let otherError) where otherError is ShowableError:
+            return (otherError as! ShowableError).alertTitle()
+            
+        default:
+            return nil
+        }
+    }
+    
+    func alertBody() -> String {
+        switch self {
+        case .Other(let otherError) where otherError is ShowableError:
+            return (otherError as! ShowableError).alertBody()
+            
+        case .Other(let otherError):
+            return "\((otherError as NSError).localizedDescription)"
+            
+        case .UnknownError:
+            return NSLocalizedString("Unknown error occured!", comment: "Unknown error occured!")
+            
+        case .Failure(reason: let reason):
+            return reason
+            
+        default:
+            return "\(self)"
+        }
+    }
+    
 }
 
 // MARK: - Delay

@@ -8,22 +8,19 @@
 
 import UIKit
 import CocoaLumberjack
+import iRate
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let rate = iRate.sharedInstance()
     var window: UIWindow?
 
-
+    // MARK: - Lifecycle
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Cocoa Lubmerjack
-        DDLog.addLogger(DDTTYLogger.sharedInstance()) // TTY = Xcode console
-        DDLog.addLogger(DDASLLogger.sharedInstance()) // ASL = Apple System Logs
-        
-        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
-        fileLogger.rollingFrequency = 60*60*24  // 24 hours
-        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
-        DDLog.addLogger(fileLogger)
+        // Configuration
+        self.configureAppLogging()
+        self.configureAppRating()
         
         return true
     }
@@ -52,5 +49,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.saveContext() // TODO: to external
     }
 
+    // MARK: - Configuration
+    func configureAppLogging() {
+        // Cocoa Lubmerjack
+        DDLog.addLogger(DDTTYLogger.sharedInstance()) // TTY = Xcode console
+        DDLog.addLogger(DDASLLogger.sharedInstance()) // ASL = Apple System Logs
+        
+        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
+        fileLogger.rollingFrequency = 60*60*24  // 24 hours
+        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
+        DDLog.addLogger(fileLogger)
+    }
+    
+    func configureAppRating() {
+        self.rate.appStoreID = Defined.Application.AppStoreID
+        self.rate.promptAtLaunch = Defined.Application.RateAtLaunch
+        self.rate.daysUntilPrompt = Defined.Application.RateAfterDays
+        self.rate.usesUntilPrompt = Defined.Application.RateAfterUses
+        self.rate.eventsUntilPrompt = Defined.Application.RateAfterEvents
+        self.rate.useUIAlertControllerIfAvailable = true
+    }
+    
 }
 

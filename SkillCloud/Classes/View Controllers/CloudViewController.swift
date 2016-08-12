@@ -10,6 +10,7 @@ import UIKit
 import SpriteKit
 import PromiseKit
 import MRProgress
+import iRate
 
 let SkillLightCellIdentifier = "SkillLightCell"
 let SkillLighterCellIdentifier = "SkillLighterCell"
@@ -57,7 +58,7 @@ class CloudViewController: UIViewController, SkillsProvider {
         
         Node.rectSize = self.skView.bounds.size
         Node.color = self.skView.tintColor
-        Node.scaleFactor = 0.19 //self.scrollView.bounds.width / self.skView.bounds.width // FIXME: !IMportant - resolve scale factors
+        Node.scaleFactor = self.scrollView.bounds.width / self.skView.bounds.width
         print(Node.scaleFactor)
         
         self.scrollView.minimumZoomScale = Node.scaleFactor
@@ -148,6 +149,10 @@ class CloudViewController: UIViewController, SkillsProvider {
     
     // MARK: - Actions
     @IBAction func saveCloud(sender: AnyObject) {
+        // Log usage
+        iRate.sharedInstance().logEvent(true)
+        
+        // Save cloud
         MRProgressOverlayView.show()
         firstly {
             self.promiseCaptureThumbnail()
@@ -194,6 +199,14 @@ class CloudViewController: UIViewController, SkillsProvider {
         }
         .error { error in
             DDLogError("Error: \(error)")
+        }
+    }
+    
+    @IBAction func exportAction(sender: AnyObject) {
+        // TODO: Export action. When done - prompt for rating
+        
+        if iRate.sharedInstance().shouldPromptForRating() {
+            iRate.sharedInstance().promptForRating()
         }
     }
     

@@ -16,6 +16,7 @@ class RootTabBarViewController: UITabBarController {
     // MARK: - Outlets
     
     // MARK: - Properties
+    var isSyncing: Bool = false
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -27,11 +28,12 @@ class RootTabBarViewController: UITabBarController {
             $0.selectedImage = $0.selectedImage?.imageWithRenderingMode(.AlwaysOriginal)
         }
         
-        MRProgressOverlayView.show()
+        self.isSyncing = true
         firstly {
             CloudContainer().promiseSync()
         }
         .always {
+            self.isSyncing = false
             MRProgressOverlayView.hide()
         }
         .error { error in
@@ -41,10 +43,15 @@ class RootTabBarViewController: UITabBarController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        if self.isSyncing {
+            MRProgressOverlayView.show()
+        }
     }
     
     // MARK: - Actions
