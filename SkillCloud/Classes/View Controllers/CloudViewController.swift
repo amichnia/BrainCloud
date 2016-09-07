@@ -101,11 +101,11 @@ class CloudViewController: UIViewController, SkillsProvider {
     // MARK: - Configuration
     func prepareSceneIfNeeded(skView: SKView, size: CGSize){
         if let scene = CloudGraphScene(fileNamed:"CloudGraphScene") where self.scene == nil {
-            scene.cloudSceneDelegate = self
+//            scene.cloudSceneDelegate = self
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
-            skView.backgroundColor = UIColor.clearColor()
+            skView.backgroundColor = UIColor.grayColor()
             skView.allowsTransparency = true
             
 //            skView.showsFPS = true
@@ -114,18 +114,18 @@ class CloudViewController: UIViewController, SkillsProvider {
             scene.scaleMode = .ResizeFill
             
             self.scene = scene
-            self.scene.skillsProvider = self
-            if let cloud = self.cloudEntity, cloudId = cloud.cloudId {
-                scene.cloudIdentifier = cloudId
-                scene.slot = self.slot
-                scene.cloudEntity = cloud
-            }
-            else {
-                scene.cloudIdentifier = NSUUID().UUIDString
-                scene.slot = self.slot
-                print(scene.cloudIdentifier)
-                scene.nodes = try! self.loadNodesFromBundle()
-            }
+//            self.scene.skillsProvider = self
+//            if let cloud = self.cloudEntity, cloudId = cloud.cloudId {
+//                scene.cloudIdentifier = cloudId
+//                scene.slot = self.slot
+//                scene.cloudEntity = cloud
+//            }
+//            else {
+//                scene.cloudIdentifier = NSUUID().UUIDString
+//                scene.slot = self.slot
+//                print(scene.cloudIdentifier)
+//                scene.nodes = try! self.loadNodesFromBundle()
+//            }
             
             skView.presentScene(scene)
         }
@@ -158,7 +158,7 @@ class CloudViewController: UIViewController, SkillsProvider {
             self.promiseCaptureThumbnail()
         }
         .then { thumb -> Promise<GraphCloudEntity> in
-            self.scene.thumbnail = thumb
+//            self.scene.thumbnail = thumb
             
             // Decide
             if let _ = self.cloudEntity {
@@ -170,7 +170,7 @@ class CloudViewController: UIViewController, SkillsProvider {
         }
         .then { cloudEntity -> Void in
             self.cloudEntity = cloudEntity
-            self.scene.cloudEntity = cloudEntity
+//            self.scene.cloudEntity = cloudEntity
             DDLogInfo("Saved Cloud:\n\(cloudEntity)")
         }
         .always{
