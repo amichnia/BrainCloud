@@ -14,6 +14,7 @@ struct Node {
     static var color:       UIColor = UIColor.blueColor()
     static var lastId:      Int     = 0
     static var factor:      CGFloat { return 1.75 / self.scaleFactor }
+    static var rectPosition: CGPoint = CGPoint.zero
     static var rectSize:    CGSize  = CGSize(width: 100, height: 100)
     static var scaleFactor: CGFloat = 1.0
     
@@ -84,7 +85,7 @@ extension Node {
 extension Node {
     
     /// Absolute position in SpriteKit container of Node.rectSize size
-    var skPosition: CGPoint { return CGPoint(x: self.point.x * Node.rectSize.width, y: Node.rectSize.height - self.point.y * Node.rectSize.height) }
+    var skPosition: CGPoint { return CGPoint(x: Node.rectPosition.x + self.point.x * Node.rectSize.width, y: Node.rectPosition.y + Node.rectSize.height - self.point.y * Node.rectSize.height) }
     
     /**
      Returns relative position in Node.rectSize container

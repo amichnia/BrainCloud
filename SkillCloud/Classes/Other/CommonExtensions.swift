@@ -177,6 +177,30 @@ extension InteractiveNode where Self : SKNode {
 
 extension SKNode: NonInteractiveNode {}
 
+
+protocol TranslatableNode {
+    var position: CGPoint { get set }
+    var originalPosition: CGPoint { get set }
+}
+
+
+// MARK: - CGPoint Extension
+extension CGPoint {
+    
+    func invertX() -> CGPoint {
+        return CGPoint(x: -self.x, y: self.y)
+    }
+    
+    func invertY() -> CGPoint {
+        return CGPoint(x: self.x, y: -self.y)
+    }
+    
+}
+
+func *(lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+    return CGPoint(x: lhs.x + rhs, y: lhs.y * rhs)
+}
+
 // MARK: - Custom operators
 infix operator ?= {
 associativity none

@@ -32,6 +32,9 @@ class CloudGraphScene: SKScene, DTOModel {
     
     var draggedNode: TranslatableNode?
     
+    var nodes: [Node]!
+    var allNodesContainer: SKNode!
+    var allNodes: [BrainNode] = []
     
     // MARK: - DTOModel
     var uniqueIdentifierValue: String { return self.cloudIdentifier }
@@ -43,6 +46,14 @@ class CloudGraphScene: SKScene, DTOModel {
         super.didMoveToView(view)
         
         self.configureInView(view)
+        
+        Node.rectSize = CGSize(width: 1400, height: 1225)
+        Node.rectPosition = CGPoint(x: 0, y: 88)
+        Node.scaleFactor = 0.4
+        if let nodes = try? self.loadNodesFromBundle() {
+            self.nodes = nodes
+            self.addNodes(nodes)
+        }
     }
     
     deinit {
@@ -112,6 +123,19 @@ class CloudGraphScene: SKScene, DTOModel {
     
 }
 
+extension CloudGraphScene: SKPhysicsContactDelegate {
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        print("STARTED \(contact)")
+    }
+    
+    func didEndContact(contact: SKPhysicsContact) {
+        print("ENDED \(contact)")
+    }
+    
+}
+
+
 extension CloudGraphScene {
     
     func configureInView(view: SKView) {
@@ -127,125 +151,71 @@ extension CloudGraphScene {
         // Physics
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        self.physicsWorld.contactDelegate = self
         
         // Camera
         self.camera = self.childNodeWithName("MainCamera") as? SKCameraNode
         self.cameraSettings.position = self.frame.centerOfMass
     }
     
-}
-
-class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
-    
-    static let SceneName = "CurrentNode"
-    private static var templateNode: GraphNode!
-    
-    var originalPosition: CGPoint = CGPoint.zero
-    var pinned: Bool = false
-    var pinJoint: SKPhysicsJointSpring?
-    
-    static func grabFromScene(scene: SKScene) {
-        guard let template = scene.childNodeWithName(GraphNode.SceneName) as? GraphNode else {
-            assertionFailure()
-            return
+    func loadNodesFromBundle() throws -> [Node] {
+        guard let url = NSBundle.mainBundle().URLForResource("all_base_nodes", withExtension: "json"), data = NSData(contentsOfURL: url) else {
+            throw SCError.InvalidBundleResourceUrl
         }
         
-        template.removeFromParent()
-        GraphNode.templateNode = template
-    }
-    
-    static func newFromTemplate() -> GraphNode {
-        return self.templateNode.copy() as! GraphNode
-    }
-    
-    func spawInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true) -> GraphNode {
-        self.removeFromParent()
+        let array = ((try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)) as! NSArray) as! [NSDictionary]
         
-        if animated {
-            self.setScale(0)
-        }
-        
-        self.position = position
-        self.originalPosition = position
-        scene.addChild(self)
-        
-        return self
-    }
-    
-    func pinToScene(scene: SKScene? = nil) {
-        guard let scene = scene ?? self.scene else {
-            return
-        }
-        
-        let anchor = scene.convertPoint(CGPoint.zero, fromNode: self)
-        
-        let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: scene.physicsBody!, anchorA: anchor, anchorB: anchor)
-        joint.frequency = 0.35
-        joint.damping = 0.5
-        self.pinJoint = joint
-        
-        self.scene!.physicsWorld.addJoint(joint)
-    }
-    
-    func repin() {
-        self.unpin()
-        self.pinToScene()
-    }
-    
-    func unpin() {
-        guard let scene = self.scene, let joint = self.pinJoint else {
-            return
-        }
-        
-        scene.physicsWorld.removeJoint(joint)
-    }
-    
-    private func promiseAnimateToShown(show: Bool, time: NSTimeInterval = 0.5) -> Promise<GraphNode> {
-        if self.xScale == self.yScale && self.xScale == 1.0 {
-            return Promise<GraphNode>(self)
-        }
-        
-        return Promise<Void> { fulfill, reject in
-            let action = SKAction.scaleTo(show ? 1 : 0, duration: time, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.0)
-            self.runAction(action, completion: fulfill)
-        }.then { _ -> GraphNode in
-            return self
-        }
-    }
-
-    func promiseSpawnInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true, pinned: Bool = true) -> Promise<GraphNode> {
-        return firstly {
-            self.spawInScene(scene, atPosition: position, animated: animated).promiseAnimateToShown(true)
-        }
-        .then { node -> GraphNode in
-            node.pinned = pinned
-            if pinned {
-                node.repin()
-            }
-            
+        return array.map{
+            let scale = $0["s"] as! Int
+            let point = CGPoint(x: $0["x"] as! CGFloat, y: $0["y"] as! CGFloat)
+            var node =  Node(point: point, scale: scale, id: $0["id"] as! Int, connected: $0["connected"] as! [Int])
+            node.convex = $0["convex"] as! Bool
             return node
         }
     }
     
-}
-
-protocol TranslatableNode {
-    var position: CGPoint { get set }
-    var originalPosition: CGPoint { get set }
-}
-
-extension CGPoint {
-    
-    func invertX() -> CGPoint {
-        return CGPoint(x: -self.x, y: self.y)
+    func addNodes(nodes: [Node]) {
+        if allNodesContainer == nil {
+            allNodesContainer = SKNode()
+            allNodesContainer.position = CGPoint.zero
+            self.addChild(allNodesContainer)
+        }
+        
+        self.nodes.sortInPlace{ $0.id < $1.id }
+        
+        for node in nodes {
+            let brainNode = BrainNode.nodeWithNode(node)
+            brainNode.cloudIdentifier = self.cloudIdentifier
+            allNodesContainer.addChild(brainNode)
+            allNodes.append(brainNode)
+            
+            brainNode.name = "node"
+            
+            brainNode.physicsBody = SKPhysicsBody(circleOfRadius: brainNode.node.radius + 2)
+            brainNode.physicsBody?.linearDamping = 25
+            brainNode.physicsBody?.angularDamping = 25
+            brainNode.physicsBody?.categoryBitMask = !node.convex ? Defined.CollisionMask.None : Defined.CollisionMask.GraphBoundary
+            brainNode.physicsBody?.collisionBitMask = !node.convex ? Defined.CollisionMask.None : Defined.CollisionMask.GraphBoundary
+            brainNode.physicsBody?.contactTestBitMask = Defined.ContactMask.GraphNode
+            brainNode.physicsBody?.density = node.convex ? 20 : 1
+            
+            // Spring joint to current position
+            let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: brainNode.physicsBody!, anchorA: brainNode.position, anchorB: brainNode.position)
+            joint.frequency = 20
+            joint.damping = 10
+            brainNode.orginalJoint = joint
+            self.physicsWorld.addJoint(joint)
+        }
+        
+        allNodes.forEach{ node in
+            node.node.connected.forEach{ i in
+                node.connectNode(allNodes[i-1])
+            }
+        }
     }
     
-    func invertY() -> CGPoint {
-        return CGPoint(x: self.x, y: -self.y)
-    }
-    
 }
 
-func *(lhs: CGPoint, rhs: CGFloat) -> CGPoint {
-    return CGPoint(x: lhs.x + rhs, y: lhs.y * rhs)
-}
+
+
+

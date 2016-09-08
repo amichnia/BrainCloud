@@ -9,12 +9,8 @@
 import UIKit
 import SpriteKit
 
-//class Weak<T:AnyObject>: AnyObject, Hashable {
-//    weak var object: T?
-//}
-
 /// Main cloud node in graph
-class BrainNode: SKSpriteNode, DTOModel {
+class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
 
     var node: Node!
     var connected : Set<BrainNode> = Set()
@@ -24,11 +20,14 @@ class BrainNode: SKSpriteNode, DTOModel {
     var ghostJoint: SKPhysicsJointFixed?
     var isGhost: Bool = false
     
+    var isConvex: Bool = false
+    var pinJoint: SKPhysicsJointSpring?
+    var originalPosition: CGPoint = CGPoint.zero
+    
     // DTO values
     var uniqueIdentifierValue: String { return "\(self.cloudIdentifier)_\(self.node.id)" }
     var previousUniqueIdentifier: String?
     var cloudIdentifier = "cloud"
-    var pinnedSkillNode: SkillNode?
     
     // Actions
     func connectNode(node: BrainNode) {
@@ -58,6 +57,8 @@ class BrainNode: SKSpriteNode, DTOModel {
         
         brainNode.node = node
         brainNode.position = node.skPosition
+        brainNode.originalPosition = node.skPosition
+        brainNode.isConvex = node.convex
         
         return brainNode
     }
@@ -86,6 +87,36 @@ class BrainNode: SKSpriteNode, DTOModel {
         self.connected.forEach {
             self.lines[$0]?.path = self.pathToPoint($0.position)
         }
+    }
+    
+    // Pinning
+    
+    func pinToScene(scene: SKScene? = nil) {
+        guard let scene = scene ?? self.scene else {
+            return
+        }
+        
+        let anchor = scene.convertPoint(CGPoint.zero, fromNode: self)
+        
+        let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: scene.physicsBody!, anchorA: anchor, anchorB: anchor)
+        joint.frequency = 0.35
+        joint.damping = 0.5
+        self.pinJoint = joint
+        
+        self.scene!.physicsWorld.addJoint(joint)
+    }
+    
+    func repin() {
+        self.unpin()
+        self.pinToScene()
+    }
+    
+    func unpin() {
+        guard let scene = self.scene, let joint = self.pinJoint else {
+            return
+        }
+        
+        scene.physicsWorld.removeJoint(joint)
     }
     
 }
