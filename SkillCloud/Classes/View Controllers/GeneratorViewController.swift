@@ -42,7 +42,14 @@ class GeneratorViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func zoomingAction(sender: UIPinchGestureRecognizer) {
-        self.scene.cameraZoom(sender.scale)
+        switch sender.state {
+        case .Began, .Changed:
+            self.scene.cameraZoom(sender.scale)
+        case .Ended:
+            self.scene.cameraZoom(sender.scale, save: true)
+        default:
+            break
+        }
     }
     
     @IBAction func tapAction(sender: UITapGestureRecognizer) {
@@ -50,7 +57,16 @@ class GeneratorViewController: UIViewController {
     }
     
     @IBAction func panAction(sender: UIPanGestureRecognizer) {
-        self.scene.translate(sender.translationInView(sender.view!))
+        switch sender.state {
+        case .Began:
+            self.scene.willStartTranslateAt(sender.locationInView(sender.view!))
+        case .Changed:
+            self.scene.translate(sender.translationInView(sender.view!))
+        case .Ended:
+            self.scene.translate(sender.translationInView(sender.view!), save: true)
+        default:
+            break
+        }
     }
     
     // MARK: - Navigation

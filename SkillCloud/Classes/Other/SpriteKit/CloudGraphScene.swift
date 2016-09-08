@@ -28,6 +28,10 @@ class CloudGraphScene: SKScene, DTOModel {
     static var radius: CGFloat = 20
     
     // MARK: - Properties
+    var cameraSettings: (position: CGPoint, scale: CGFloat) = (position: CGPoint.zero, scale: 1)
+    
+    var draggedNode: TranslatableNode?
+    
     
     // MARK: - DTOModel
     var uniqueIdentifierValue: String { return self.cloudIdentifier }
@@ -48,19 +52,62 @@ class CloudGraphScene: SKScene, DTOModel {
     // MARK: - Configuration
     
     // MARK: - Actions
-    func cameraZoom(zoom: CGFloat) {
-        self.camera?.setScale(1/zoom)
+    func cameraZoom(zoom: CGFloat, save: Bool = false) {
+        let baseScale = self.cameraSettings.scale
+        let zoomScale = 1 / zoom
+        self.camera?.setScale(baseScale * zoomScale)
+        
+        if save {
+            self.cameraSettings.scale = baseScale * zoomScale
+        }
     }
     
-    func translate(translation: CGPoint) {
-        let convertedTranslation = translation.invertY()
-        self.camera?.position = self.frame.centerOfMass - convertedTranslation
+    func willStartTranslateAt(position: CGPoint) {
+        self.resolveDraggedNodeAr(position)
+    }
+    
+    func translate(translation: CGPoint, save: Bool = false) {
+        if let _ = self.draggedNode {
+            self.dragNode(&self.draggedNode!, translation: translation, save: save)
+        }
+        else {
+            self.moveCamera(translation, save: save)
+        }
+    }
+    
+    func dragNode(inout node: TranslatableNode, translation: CGPoint, save: Bool = false) {
+        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
+        node.position = node.originalPosition + convertedTranslation
+        
+        if save {
+            node.originalPosition = node.position
+            (self.draggedNode as? GraphNode)?.repin()
+        }
+    }
+    
+    func moveCamera(translation: CGPoint, save: Bool = false) {
+        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
+        self.camera?.position = self.cameraSettings.position - convertedTranslation
+        
+        if save {
+            self.cameraSettings.position = self.cameraSettings.position - convertedTranslation
+        }
     }
     
     func newNodeAt(point: CGPoint) {
         let convertedPoint = self.convertPointFromView(point)
         
-        GraphNode.newFromTemplate().promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinnedToNode: true)
+        GraphNode.newFromTemplate().promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true)
+    }
+    
+    func resolveDraggedNodeAr(position: CGPoint) {
+        let convertedPoint = self.convertPointFromView(position)
+        self.draggedNode = self.nodeAtPoint(convertedPoint).interactionNode as? TranslatableNode
+        
+        if let draggedNode = self.draggedNode as? GraphNode {
+            draggedNode.unpin()
+            draggedNode.originalPosition = draggedNode.position
+        }
     }
     
 }
@@ -83,17 +130,18 @@ extension CloudGraphScene {
         
         // Camera
         self.camera = self.childNodeWithName("MainCamera") as? SKCameraNode
+        self.cameraSettings.position = self.frame.centerOfMass
     }
     
 }
 
-class GraphNode: SKSpriteNode {
+class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
     
     static let SceneName = "CurrentNode"
     private static var templateNode: GraphNode!
     
-    var isPinned: Bool { return pinNode != nil }
-    var pinNode: PinNode?
+    var originalPosition: CGPoint = CGPoint.zero
+    var pinned: Bool = false
     var pinJoint: SKPhysicsJointSpring?
     
     static func grabFromScene(scene: SKScene) {
@@ -101,10 +149,6 @@ class GraphNode: SKSpriteNode {
             assertionFailure()
             return
         }
-        
-        PinNode.grabFromScene(scene)
-        
-        template.pinNode = PinNode.templateNode
         
         template.removeFromParent()
         GraphNode.templateNode = template
@@ -122,28 +166,38 @@ class GraphNode: SKSpriteNode {
         }
         
         self.position = position
+        self.originalPosition = position
         scene.addChild(self)
         
         return self
     }
     
-    func pinToScene(scene: SKScene) {
-        let anchor = self.scene!.convertPoint(CGPoint.zero, fromNode: self)
+    func pinToScene(scene: SKScene? = nil) {
+        guard let scene = scene ?? self.scene else {
+            return
+        }
+        
+        let anchor = scene.convertPoint(CGPoint.zero, fromNode: self)
         
         let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: scene.physicsBody!, anchorA: anchor, anchorB: anchor)
+        joint.frequency = 0.35
+        joint.damping = 0.5
         self.pinJoint = joint
         
         self.scene!.physicsWorld.addJoint(joint)
     }
     
-    func pinToNode(node: SKNode) {
-        let anchorA = self.scene!.convertPoint(CGPoint.zero, fromNode: self)
-        let anchorB = self.scene!.convertPoint(CGPoint.zero, fromNode: node)
+    func repin() {
+        self.unpin()
+        self.pinToScene()
+    }
+    
+    func unpin() {
+        guard let scene = self.scene, let joint = self.pinJoint else {
+            return
+        }
         
-        let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: node.physicsBody!, anchorA: anchorA, anchorB: anchorB)
-        self.pinJoint = joint
-        
-        self.scene!.physicsWorld.addJoint(joint)
+        scene.physicsWorld.removeJoint(joint)
     }
     
     private func promiseAnimateToShown(show: Bool, time: NSTimeInterval = 0.5) -> Promise<GraphNode> {
@@ -159,17 +213,14 @@ class GraphNode: SKSpriteNode {
         }
     }
 
-    func promiseSpawnInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true, pinnedToNode: Bool = true) -> Promise<GraphNode> {
+    func promiseSpawnInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true, pinned: Bool = true) -> Promise<GraphNode> {
         return firstly {
             self.spawInScene(scene, atPosition: position, animated: animated).promiseAnimateToShown(true)
         }
         .then { node -> GraphNode in
-            if pinnedToNode {
-                node.pinNode = PinNode.newFromTemplate().spawInScene(scene, atPosition: node.position)
-                node.pinToNode(node.pinNode!)
-            }
-            else {
-                node.pinToScene(node.scene!)
+            node.pinned = pinned
+            if pinned {
+                node.repin()
             }
             
             return node
@@ -178,35 +229,9 @@ class GraphNode: SKSpriteNode {
     
 }
 
-
-class PinNode: SKSpriteNode {
-    
-    static let SceneName = "CurrentNodePin"
-    private static var templateNode: PinNode!
-    
-    static func grabFromScene(scene: SKScene) {
-        guard let template = scene.childNodeWithName(PinNode.SceneName) as? PinNode else {
-            assertionFailure()
-            return
-        }
-        
-        template.removeFromParent()
-        PinNode.templateNode = template
-    }
-    
-    static func newFromTemplate() -> PinNode {
-        return self.templateNode.copy() as! PinNode
-    }
-    
-    func spawInScene(scene: SKScene, atPosition position: CGPoint) -> PinNode {
-        self.removeFromParent()
-        
-        self.position = position
-        scene.addChild(self)
-        
-        return self
-    }
-    
+protocol TranslatableNode {
+    var position: CGPoint { get set }
+    var originalPosition: CGPoint { get set }
 }
 
 extension CGPoint {
@@ -219,4 +244,8 @@ extension CGPoint {
         return CGPoint(x: self.x, y: -self.y)
     }
     
+}
+
+func *(lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+    return CGPoint(x: lhs.x + rhs, y: lhs.y * rhs)
 }
