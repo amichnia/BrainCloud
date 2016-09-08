@@ -46,7 +46,7 @@ class GeneratorViewController: UIViewController {
     }
     
     @IBAction func tapAction(sender: UITapGestureRecognizer) {
-        
+        self.scene.newNodeAt(sender.locationInView(sender.view))
     }
     
     @IBAction func panAction(sender: UIPanGestureRecognizer) {
