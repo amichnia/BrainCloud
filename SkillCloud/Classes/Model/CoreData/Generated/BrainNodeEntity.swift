@@ -26,20 +26,20 @@ class BrainNodeEntity: BaseNodeEntity, CoreDataEntity {
     }
     
     func setValuesFromModel(model: DTOModel) {
-        if let node = model as? BrainNode, ctx = self.managedObjectContext {
-            
-            self.nodeId = node.uniqueIdentifierValue
-            self.scale = Int16(node.node.scale)
-            self.isConvex = node.node.convex
-            self.positionRelative = NSValue(CGPoint: node.node.point )
-            self.connectedTo = node.node.connected.sort()
-            
-            // Set connection
-            if let skillNode = (model as? BrainNode)?.pinnedSkillNode {
-                self.pinnedSkillNode = DataManager.updateEntity(SkillNodeEntity.self, model: skillNode, intoContext: ctx)
-                DDLogInfo("Pinned Skill Node: \(self.pinnedSkillNode?.nodeId ?? "-")")
-            }
-        }
+//        if let node = model as? BrainNode, ctx = self.managedObjectContext {
+//            
+//            self.nodeId = node.uniqueIdentifierValue
+//            self.scale = Int16(node.node.scale)
+//            self.isConvex = node.node.convex
+//            self.positionRelative = NSValue(CGPoint: node.node.point )
+//            self.connectedTo = node.node.connected.sort()
+//            
+//            // Set connection
+//            if let skillNode = (model as? BrainNode)?.pinnedSkillNode {
+//                self.pinnedSkillNode = DataManager.updateEntity(SkillNodeEntity.self, model: skillNode, intoContext: ctx)
+//                DDLogInfo("Pinned Skill Node: \(self.pinnedSkillNode?.nodeId ?? "-")")
+//            }
+//        }
     }
 
 }

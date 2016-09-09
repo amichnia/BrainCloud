@@ -10,51 +10,19 @@ import UIKit
 import SpriteKit
 
 /// Main cloud node in graph
-class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
+class BrainNode: SKSpriteNode, TranslatableNode {
 
     var node: Node!
-    var connected : Set<BrainNode> = Set()
-    var lines : [BrainNode:SKShapeNode] = [:]
-    
-    var orginalJoint: SKPhysicsJointSpring?
-    var ghostJoint: SKPhysicsJointFixed?
-    var isGhost: Bool = false
     
     var isConvex: Bool = false
     var pinJoint: SKPhysicsJointSpring?
     var originalPosition: CGPoint = CGPoint.zero
     
-    // DTO values
-    var uniqueIdentifierValue: String { return "\(self.cloudIdentifier)_\(self.node.id)" }
-    var previousUniqueIdentifier: String?
-    var cloudIdentifier = "cloud"
-    
-    // Actions
-    func connectNode(node: BrainNode) {
-        guard !self.isConnectedTo(node) else {
-            return
-        }
-        
-        self.connected.insert(node)
-        self.node.connectNode(node.node)
-        
-        // Add child line node
-        self.addLineToNode(node)
-    }
-    
-    func disconnectNode(node: BrainNode) {
-        self.connected.remove(node)
-        self.node.disconnectNode(node.node)
-    }
-    
-    func isConnectedTo(node: BrainNode) -> Bool {
-        return self.lines[node] != nil || node.lines[self] != nil
-    }
-
     // Initialization
     static func nodeWithNode(node: Node) -> BrainNode {
         let brainNode = BrainNode(texture: SKTexture(imageNamed: "sprite-node"), size: CGSize(width: 2 * node.radius, height: 2 * node.radius))
         
+        brainNode.name = "node"
         brainNode.node = node
         brainNode.position = node.skPosition
         brainNode.originalPosition = node.skPosition
@@ -63,34 +31,87 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         return brainNode
     }
     
-    // Adding lines
-    func addLineToNode(node: BrainNode) {
-        let line = SKShapeNode(path: self.pathToPoint(node.position))
-        line.strokeColor = Node.color
-        line.zPosition = self.zPosition - 1
-        line.lineWidth = 1 / Node.scaleFactor
-        line.antialiased = true
-        
-        self.lines[node] = line
-        self.parent?.addChild(line)
-    }
- 
-    func pathToPoint(point: CGPoint) -> CGPath {
-//        let offset = CGPoint(x: point.x - self.position.x, y: point.y - self.position.y)
-        let path = CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, self.position.x, self.position.y)
-        CGPathAddLineToPoint(path, nil, point.x, point.y)
-        return path
+    // MARK: - Configuration
+    func configurePhysicsBody() {
+        self.physicsBody = SKPhysicsBody(circleOfRadius: self.node.radius + 2)
+        self.physicsBody?.linearDamping = 25
+        self.physicsBody?.angularDamping = 25
+        self.physicsBody?.categoryBitMask = !self.isConvex ? Defined.CollisionMask.GraphNode : Defined.CollisionMask.GraphBoundary
+        self.physicsBody?.collisionBitMask = !self.isConvex ? Defined.CollisionMask.None : Defined.CollisionMask.GraphBoundary
+        self.physicsBody?.contactTestBitMask = Defined.ContactMask.GraphNode
+        self.physicsBody?.density = node.convex ? 20 : 1
     }
     
-    func updateLines() {
-        self.connected.forEach {
-            self.lines[$0]?.path = self.pathToPoint($0.position)
+    // Adding lines
+    
+    // Sucking
+    var isSucked: Bool {
+        return self.sucker() != nil
+    }
+    
+    func sucker() -> SKNode? {
+        guard let node = self.pinJoint?.bodyB.node else {
+            return nil
+        }
+        
+        if let scene = self.scene where scene === node {
+            return nil
+        }
+        else {
+            return node
+        }
+    }
+    
+    func shouldBeSuckedBy(node: SKNode) -> Bool {
+        guard !self.isConvex else {
+            return false
+        }
+        
+        // If not sucked yet - should be
+        guard let sucker = self.sucker() else {
+            return true
+        }
+        
+        // Could be resucked only if new sucker is closer
+        return self.originalPosition.distanceTo(node.position) < self.originalPosition.distanceTo(sucker.position)
+    }
+    
+    func shouldSuckOff() -> Bool {
+        guard let sucker = self.sucker() else {
+            return false
+        }
+
+        let maxDistance = self.node.radius * 10
+        return self.originalPosition.distanceTo(sucker.position) > maxDistance
+    }
+    
+    // Handling suck
+    var awaitingSucker: SKNode?
+    
+    func getSuckedIfNeededBy(node: SKNode) {
+        if self.shouldBeSuckedBy(node) {
+            self.awaitingSucker = node
+        }
+    }
+    
+    func getSuckedOffIfNeeded() {
+        if let sucker = self.awaitingSucker {
+            let position = self.position
+            self.position = sucker.position
+            
+            self.unpin()
+            self.pinToNode(sucker)
+            self.awaitingSucker = nil
+            
+            self.position = position
+        }
+        
+        if self.shouldSuckOff() {
+            self.repinToOriginalPosition()
         }
     }
     
     // Pinning
-    
     func pinToScene(scene: SKScene? = nil) {
         guard let scene = scene ?? self.scene else {
             return
@@ -99,8 +120,8 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         let anchor = scene.convertPoint(CGPoint.zero, fromNode: self)
         
         let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: scene.physicsBody!, anchorA: anchor, anchorB: anchor)
-        joint.frequency = 0.35
-        joint.damping = 0.5
+        joint.frequency = 20
+        joint.damping = 10
         self.pinJoint = joint
         
         self.scene!.physicsWorld.addJoint(joint)
@@ -117,6 +138,32 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         }
         
         scene.physicsWorld.removeJoint(joint)
+        self.pinJoint = nil
+    }
+    
+    func repinToOriginalPosition() {
+        let position = self.position
+        
+        self.position = self.originalPosition
+        self.repin()
+        
+        self.position = position
+    }
+    
+    func pinToNode(node: SKNode) {
+        guard let scene = scene ?? self.scene else {
+            return
+        }
+        
+        let anchorA = scene.convertPoint(CGPoint.zero, fromNode: self)
+        let anchorB = scene.convertPoint(CGPoint.zero, fromNode: node)
+        
+        let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: node.physicsBody!, anchorA: anchorA, anchorB: anchorB)
+        joint.frequency = 10
+        joint.damping = 10
+        self.pinJoint = joint
+        
+        self.scene!.physicsWorld.addJoint(joint)
     }
     
 }

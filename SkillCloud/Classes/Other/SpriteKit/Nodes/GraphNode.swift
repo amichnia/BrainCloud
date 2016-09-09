@@ -41,6 +41,8 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
         }
         
         self.position = position
+        self.physicsBody?.density = 30
+        self.physicsBody?.linearDamping = 100
         self.originalPosition = position
         scene.addChild(self)
         
@@ -71,8 +73,8 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
         let anchor = scene.convertPoint(CGPoint.zero, fromNode: self)
         
         let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: scene.physicsBody!, anchorA: anchor, anchorB: anchor)
-        joint.frequency = 0.35
-        joint.damping = 0.5
+        joint.frequency = 20
+        joint.damping = 10
         self.pinJoint = joint
         
         self.scene!.physicsWorld.addJoint(joint)

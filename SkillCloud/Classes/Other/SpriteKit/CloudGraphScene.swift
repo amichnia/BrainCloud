@@ -74,7 +74,7 @@ class CloudGraphScene: SKScene, DTOModel {
     }
     
     func willStartTranslateAt(position: CGPoint) {
-        self.resolveDraggedNodeAr(position)
+        self.resolveDraggedNodeAt(position)
     }
     
     func translate(translation: CGPoint, save: Bool = false) {
@@ -93,6 +93,7 @@ class CloudGraphScene: SKScene, DTOModel {
         if save {
             node.originalPosition = node.position
             (self.draggedNode as? GraphNode)?.repin()
+            (node as? SKNode)?.physicsBody?.linearDamping = 20
         }
     }
     
@@ -111,22 +112,33 @@ class CloudGraphScene: SKScene, DTOModel {
         GraphNode.newFromTemplate().promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true)
     }
     
-    func resolveDraggedNodeAr(position: CGPoint) {
+    func resolveDraggedNodeAt(position: CGPoint) {
         let convertedPoint = self.convertPointFromView(position)
         self.draggedNode = self.nodeAtPoint(convertedPoint).interactionNode as? TranslatableNode
         
         if let draggedNode = self.draggedNode as? GraphNode {
             draggedNode.unpin()
             draggedNode.originalPosition = draggedNode.position
+            draggedNode.physicsBody?.linearDamping = 100000
         }
     }
     
+    // MARK: - Main run loop
+    override func update(currentTime: NSTimeInterval) {
+        self.allNodes.forEach {
+            $0.getSuckedOffIfNeeded()
+        }
+    }
 }
 
+// MARK: - SKPhysicsContactDelegate
 extension CloudGraphScene: SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
-        print("STARTED \(contact)")
+        if let brainNode = contact.bodyA.node as? BrainNode, graphNode = contact.bodyB.node?.interactionNode as? GraphNode {
+            print("SUCK? \(contact)")
+            brainNode.getSuckedIfNeededBy(graphNode)
+        }
     }
     
     func didEndContact(contact: SKPhysicsContact) {
@@ -135,7 +147,7 @@ extension CloudGraphScene: SKPhysicsContactDelegate {
     
 }
 
-
+// MARK: - Configure scene
 extension CloudGraphScene {
     
     func configureInView(view: SKView) {
@@ -185,32 +197,12 @@ extension CloudGraphScene {
         
         for node in nodes {
             let brainNode = BrainNode.nodeWithNode(node)
-            brainNode.cloudIdentifier = self.cloudIdentifier
-            allNodesContainer.addChild(brainNode)
-            allNodes.append(brainNode)
             
-            brainNode.name = "node"
+            self.allNodesContainer.addChild(brainNode)
+            self.allNodes.append(brainNode)
             
-            brainNode.physicsBody = SKPhysicsBody(circleOfRadius: brainNode.node.radius + 2)
-            brainNode.physicsBody?.linearDamping = 25
-            brainNode.physicsBody?.angularDamping = 25
-            brainNode.physicsBody?.categoryBitMask = !node.convex ? Defined.CollisionMask.None : Defined.CollisionMask.GraphBoundary
-            brainNode.physicsBody?.collisionBitMask = !node.convex ? Defined.CollisionMask.None : Defined.CollisionMask.GraphBoundary
-            brainNode.physicsBody?.contactTestBitMask = Defined.ContactMask.GraphNode
-            brainNode.physicsBody?.density = node.convex ? 20 : 1
-            
-            // Spring joint to current position
-            let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: brainNode.physicsBody!, anchorA: brainNode.position, anchorB: brainNode.position)
-            joint.frequency = 20
-            joint.damping = 10
-            brainNode.orginalJoint = joint
-            self.physicsWorld.addJoint(joint)
-        }
-        
-        allNodes.forEach{ node in
-            node.node.connected.forEach{ i in
-                node.connectNode(allNodes[i-1])
-            }
+            brainNode.configurePhysicsBody()
+            brainNode.pinToScene()
         }
     }
     
