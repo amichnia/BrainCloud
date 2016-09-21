@@ -11,7 +11,7 @@ import SpriteKit
 
 
 
-class GeneratorViewController: UIViewController {
+class GeneratorViewController: CloudViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var skView: SKView!
