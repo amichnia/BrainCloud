@@ -88,6 +88,8 @@
                                     <outletCollection property="gestureRecognizers" destination="skd-3C-yb8" appends="YES" id="yLd-yl-abl"/>
                                     <outletCollection property="gestureRecognizers" destination="JGp-4x-xrw" appends="YES" id="G74-O8-fdA"/>
                                     <outletCollection property="gestureRecognizers" destination="lDU-f5-eRG" appends="YES" id="eAh-f8-3lz"/>
+                                    <outletCollection property="gestureRecognizers" destination="2cX-Xs-9db" appends="YES" id="0Xp-NQ-ONV"/>
+                                    <outletCollection property="gestureRecognizers" destination="ynb-1A-7Px" appends="YES" id="Aa1-VT-g0b"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -102,6 +104,8 @@
                     <connections>
                         <outlet property="panGestureRecognizer" destination="JGp-4x-xrw" id="wqC-O3-mQP"/>
                         <outlet property="pinchGestureRecognizer" destination="skd-3C-yb8" id="LcZ-Xy-A46"/>
+                        <outlet property="selectPressGestureRecognizer" destination="ynb-1A-7Px" id="odg-Qs-4gb"/>
+                        <outlet property="selectTapGestureRecognizer" destination="2cX-Xs-9db" id="sKk-dh-vUQ"/>
                         <outlet property="skView" destination="Im5-i1-15t" id="Y21-re-fCf"/>
                         <outlet property="tapGestureRecognizer" destination="lDU-f5-eRG" id="3rf-T2-ztm"/>
                     </connections>
@@ -117,11 +121,21 @@
                         <action selector="panAction:" destination="sTb-IF-jcA" id="EOe-QI-l25"/>
                     </connections>
                 </panGestureRecognizer>
-                <tapGestureRecognizer id="lDU-f5-eRG">
+                <tapGestureRecognizer id="lDU-f5-eRG" userLabel="Add Tap Gesture Recognizer">
                     <connections>
                         <action selector="tapAction:" destination="sTb-IF-jcA" id="xko-WQ-zhm"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="2cX-Xs-9db" userLabel="Select Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="selectTapAction:" destination="sTb-IF-jcA" id="0Kj-JU-H7l"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="ynb-1A-7Px">
+                    <connections>
+                        <action selector="selectTapAction:" destination="sTb-IF-jcA" id="TeB-y9-bYG"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="458" y="1611"/>
         </scene>

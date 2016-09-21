@@ -181,6 +181,21 @@ extension Skill {
                 return 0
             }
         }
+        
+        var name: String {
+            switch self {
+            case .Any:
+                return "Any"
+            case .Beginner:
+                return "Beginner"
+            case .Intermediate:
+                return "Intermediate"
+            case .Professional:
+                return "Professional"
+            case .Expert:
+                return "Expert"
+            }
+        }
     }
 }
 

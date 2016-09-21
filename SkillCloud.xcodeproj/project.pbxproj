@@ -11,6 +11,7 @@
 		C80A918F1CB5206800529F0B /* GoogleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */; };
 		C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A91901CB5208200529F0B /* GoogleImage.swift */; };
 		C819FB9E1D8187F100B55C14 /* GraphNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C819FB9D1D8187F100B55C14 /* GraphNode.swift */; };
+		C82E24201D928DC6001D6A98 /* OptionsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82E241F1D928DC6001D6A98 /* OptionsNode.swift */; };
 		C83BBA9B1D4632BC00431B42 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */; };
 		C83BBA9D1D4649EF00431B42 /* SkillsSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */; };
 		C83BF83D1D5B369900FDA60C /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BF83C1D5B369900FDA60C /* InfoViewController.swift */; };
@@ -114,6 +115,7 @@
 		C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		C80A91901CB5208200529F0B /* GoogleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImage.swift; sourceTree = "<group>"; };
 		C819FB9D1D8187F100B55C14 /* GraphNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphNode.swift; sourceTree = "<group>"; };
+		C82E241F1D928DC6001D6A98 /* OptionsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsNode.swift; sourceTree = "<group>"; };
 		C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsSearchTableViewCell.swift; sourceTree = "<group>"; };
 		C83BF83C1D5B369900FDA60C /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				C863048D1CC6417E002C068C /* EditSkillNode.swift */,
 				FE712CAE1D15CA0B00C954CA /* ExperienceSelectNode.swift */,
 				FE9F6EDF1D2849FD008B3BC3 /* CloudNode.swift */,
+				C82E241F1D928DC6001D6A98 /* OptionsNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */,
 				FE9F6EE01D2849FD008B3BC3 /* CloudNode.swift in Sources */,
 				FE1FFCAF1D258B5A00E6F6C6 /* RootTabBarViewController.swift in Sources */,
+				C82E24201D928DC6001D6A98 /* OptionsNode.swift in Sources */,
 				FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,

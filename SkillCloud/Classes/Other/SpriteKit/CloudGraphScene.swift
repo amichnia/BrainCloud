@@ -31,6 +31,7 @@ class CloudGraphScene: SKScene, DTOModel {
     var cameraSettings: (position: CGPoint, scale: CGFloat) = (position: CGPoint.zero, scale: 1)
     
     var draggedNode: TranslatableNode?
+    var selectedNode: GraphNode?
     
     var nodes: [Node]!
     var allNodesContainer: SKNode!
@@ -123,6 +124,17 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
+    func selectNodeAt(point: CGPoint) {
+        let convertedPoint = self.convertPointFromView(point)
+
+        self.selectedNode?.areaNode?.hidden = true
+        
+        if let selectedNode = self.nodeAtPoint(convertedPoint).interactionNode as? GraphNode {
+            self.selectedNode = selectedNode
+            selectedNode.areaNode?.hidden = false
+        }
+    }
+    
     // MARK: - Main run loop
     override func update(currentTime: NSTimeInterval) {
         self.allNodes.forEach {
@@ -153,6 +165,7 @@ extension CloudGraphScene {
     func configureInView(view: SKView) {
         // Prepare templates
         GraphNode.grabFromScene(self)
+        OptionsNode.grabFromScene(self)
         
         // Background etc
         self.backgroundColor = view.backgroundColor!

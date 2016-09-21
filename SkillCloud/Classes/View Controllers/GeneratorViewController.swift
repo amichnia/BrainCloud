@@ -17,6 +17,8 @@ class GeneratorViewController: UIViewController {
     @IBOutlet weak var skView: SKView!
     @IBOutlet weak var pinchGestureRecognizer: UIPinchGestureRecognizer!
     @IBOutlet weak var tapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var selectTapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet var selectPressGestureRecognizer: UILongPressGestureRecognizer!
     @IBOutlet weak var panGestureRecognizer: UIPanGestureRecognizer!
     
     // MARK: - Properties
@@ -54,6 +56,10 @@ class GeneratorViewController: UIViewController {
     
     @IBAction func tapAction(sender: UITapGestureRecognizer) {
         self.scene.newNodeAt(sender.locationInView(sender.view))
+    }
+    
+    @IBAction func selectTapAction(sender: UIGestureRecognizer) {
+        self.scene.selectNodeAt(sender.locationInView(sender.view))
     }
     
     @IBAction func panAction(sender: UIPanGestureRecognizer) {
