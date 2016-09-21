@@ -283,12 +283,12 @@
 			isa = PBXGroup;
 			children = (
 				C819FB9D1D8187F100B55C14 /* GraphNode.swift */,
+				C82E241F1D928DC6001D6A98 /* OptionsNode.swift */,
 				FE0522DF1CB0157800315468 /* BrainNode.swift */,
 				C8F55CA51CFC264300208F88 /* SkillNode.swift */,
 				C863048D1CC6417E002C068C /* EditSkillNode.swift */,
 				FE712CAE1D15CA0B00C954CA /* ExperienceSelectNode.swift */,
 				FE9F6EDF1D2849FD008B3BC3 /* CloudNode.swift */,
-				C82E241F1D928DC6001D6A98 /* OptionsNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";

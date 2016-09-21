@@ -11,14 +11,20 @@ import SpriteKit
 
 /// Main cloud node in graph
 class BrainNode: SKSpriteNode, TranslatableNode {
-
+    // MARK: - Static Properties
+    static var epsilon: CGFloat = 0.005
+    
+    // MARK: - Properties
     var node: Node!
     
     var isConvex: Bool = false
     var pinJoint: SKPhysicsJointSpring?
     var originalPosition: CGPoint = CGPoint.zero
+    var lastUpdatePosition: CGPoint = CGPoint.zero
     
-    // Initialization
+    var lines: [BrainNode:SKShapeNode] = [:]
+    
+    // MARK: - Initialization
     static func nodeWithNode(node: Node) -> BrainNode {
         let brainNode = BrainNode(texture: SKTexture(imageNamed: "sprite-node"), size: CGSize(width: 2 * node.radius, height: 2 * node.radius))
         
@@ -42,9 +48,7 @@ class BrainNode: SKSpriteNode, TranslatableNode {
         self.physicsBody?.density = node.convex ? 20 : 1
     }
     
-    // Adding lines
-    
-    // Sucking
+    // MARK: - Sucking
     var isSucked: Bool {
         return self.sucker() != nil
     }
@@ -85,7 +89,7 @@ class BrainNode: SKSpriteNode, TranslatableNode {
         return self.originalPosition.distanceTo(sucker.position) > maxDistance
     }
     
-    // Handling suck
+    // MARK: - Handling suck
     var awaitingSucker: SKNode?
     
     func getSuckedIfNeededBy(node: SKNode) {
@@ -111,7 +115,7 @@ class BrainNode: SKSpriteNode, TranslatableNode {
         }
     }
     
-    // Pinning
+    // MARK: - Pinning
     func pinToScene(scene: SKScene? = nil) {
         guard let scene = scene ?? self.scene else {
             return
@@ -166,8 +170,44 @@ class BrainNode: SKSpriteNode, TranslatableNode {
         self.scene!.physicsWorld.addJoint(joint)
     }
     
+    
+    // MARK: - Adding lines
+    func addLineToNode(node: BrainNode) {
+        let line = SKShapeNode(path: self.pathToPoint(node.position))
+        line.strokeColor = Node.color
+        line.zPosition = self.zPosition - 1
+        line.lineWidth = 1 / Node.scaleFactor
+        line.antialiased = true
+        
+        self.lines[node] = line
+        node.lines[self] = line
+        self.parent?.addChild(line)
+    }
+    
+    func pathToPoint(point: CGPoint) -> CGPath {
+        //        let offset = CGPoint(x: point.x - self.position.x, y: point.y - self.position.y)
+        let path = CGPathCreateMutable()
+        CGPathMoveToPoint(path, nil, self.position.x, self.position.y)
+        CGPathAddLineToPoint(path, nil, point.x, point.y)
+        return path
+    }
+    
+    func updateLinesIfNeeded() {
+        defer {
+            self.lastUpdatePosition = self.position
+        }
+        
+        guard self.lastUpdatePosition.distanceTo(self.position) > BrainNode.epsilon else {
+            return
+        }
+        
+        self.lines.keys.forEach {
+            self.lines[$0]?.path = self.pathToPoint($0.position)
+        }
+    }
 }
 
+// MARK: - Entity handling
 extension BrainNode {
     
     static func nodeWithEntity(entity: BrainNodeEntity) -> BrainNode? {

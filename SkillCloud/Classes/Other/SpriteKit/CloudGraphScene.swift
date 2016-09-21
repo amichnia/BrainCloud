@@ -33,7 +33,7 @@ class CloudGraphScene: SKScene, DTOModel {
     
     var nodes: [Node]!
     var allNodesContainer: SKNode!
-    var allNodes: [BrainNode] = []
+    var allNodes: [Int:BrainNode] = [:]
     
     weak var cloudDelegate: CloudSceneDelegate?
     
@@ -152,8 +152,9 @@ class CloudGraphScene: SKScene, DTOModel {
     
     // MARK: - Main run loop
     override func update(currentTime: NSTimeInterval) {
-        self.allNodes.forEach {
+        self.allNodes.values.forEach {
             $0.getSuckedOffIfNeeded()
+            $0.updateLinesIfNeeded()
         }
     }
     
@@ -185,8 +186,9 @@ extension CloudGraphScene {
         // Background etc
         self.backgroundColor = view.backgroundColor!
 //        view.showsPhysics = true
-//        view.showsDrawCount = true
-//        view.showsNodeCount = true
+        view.showsDrawCount = true
+        view.showsNodeCount = true
+        view.showsFPS = true
         
         // Physics
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -227,10 +229,18 @@ extension CloudGraphScene {
             let brainNode = BrainNode.nodeWithNode(node)
             
             self.allNodesContainer.addChild(brainNode)
-            self.allNodes.append(brainNode)
+            self.allNodes[node.id] = brainNode
             
             brainNode.configurePhysicsBody()
             brainNode.pinToScene()
+        }
+        
+        for node in self.allNodes.values {
+            node.node.connected.forEach { connectedId in
+                if let connectedTo = self.allNodes[connectedId] {
+                    node.addLineToNode(connectedTo)
+                }
+            }
         }
     }
     
