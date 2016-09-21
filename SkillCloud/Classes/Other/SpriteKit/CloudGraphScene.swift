@@ -35,6 +35,9 @@ class CloudGraphScene: SKScene, DTOModel {
     var allNodesContainer: SKNode!
     var allNodes: [Int:BrainNode] = [:]
     
+    var slot: Int = 0
+    var thumbnail: UIImage?
+    
     weak var cloudDelegate: CloudSceneDelegate?
     
     // MARK: - DTOModel
@@ -114,11 +117,12 @@ class CloudGraphScene: SKScene, DTOModel {
         GraphNode.newFromTemplate(skill.experience)
         .promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true, skill: skill)
         .then { addedNode -> Void in
-            self.cloudDelegate?.didAddSkill()
             self.selectedNode?.selected = false
             addedNode.selected = true
             self.selectedNode = addedNode
         }
+        
+        self.cloudDelegate?.didAddSkill()
     }
     
     func resolveDraggedNodeAt(position: CGPoint) {

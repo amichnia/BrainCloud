@@ -8,8 +8,9 @@
 
 import UIKit
 import SpriteKit
-
-
+import PromiseKit
+import iRate
+import MRProgress
 
 class GeneratorViewController: CloudViewController {
 
@@ -36,6 +37,8 @@ class GeneratorViewController: CloudViewController {
         if let scene = CloudGraphScene(fileNamed:"CloudGraphScene") where self.scene == nil {
             scene.scaleMode = .AspectFit
             scene.cloudDelegate = self
+            scene.slot = self.slot
+            scene.cloudIdentifier = self.cloudEntity?.cloudId ?? NSUUID().UUIDString
             
             self.scene = scene
             Node.color = skView.tintColor
@@ -82,4 +85,117 @@ class GeneratorViewController: CloudViewController {
     
     // MARK: - Navigation
 
+    
+    // MARK: - Actions
+    @IBAction func saveCloud(sender: AnyObject) {
+        // Log usage
+        iRate.sharedInstance().logEvent(true)
+        
+        // Save cloud
+        MRProgressOverlayView.show()
+        firstly {
+            self.promiseCaptureThumbnail()
+        }
+        .then { thumb -> Promise<GraphCloudEntity> in
+            self.scene.thumbnail = thumb
+            
+            // Decide
+            if let _ = self.cloudEntity {
+                return DataManager.promiseUpdateEntity(GraphCloudEntity.self, model: self.scene)
+            }
+            else {
+                return DataManager.promiseEntity(GraphCloudEntity.self, model: self.scene)
+            }
+        }
+        .then { cloudEntity -> Void in
+            self.cloudEntity = cloudEntity
+            DDLogInfo("Saved Cloud:\n\(cloudEntity)")
+        }
+        .always{
+            MRProgressOverlayView.hide()
+        }
+        .error { error in
+            DDLogError("Error saving cloud: \(error)")
+        }
+    }
+    
+    @IBAction func settingsAction(sender: AnyObject) {
+        //        // Export
+        //        // Delete
+        //        typealias T = ()->()
+        //
+        //        self.promiseSelection(T.self, cancellable: true, options: [
+        //            (NSLocalizedString("Export", comment: "Export"),.Default,{
+        //                return self.promiseExportCloud()
+        //            }),
+        //            (NSLocalizedString("Delete", comment: "Delete"),.Destructive,{
+        //                return self.promiseDeleteCloud()
+        //            })
+        //        ])
+        //        .then { closure -> Void in
+        //            closure()
+        //        }
+        //        .error { error in
+        //            DDLogError("Error: \(error)")
+        //        }
+    }
+    
+    @IBAction func exportAction(sender: AnyObject) {
+        // TODO: Export action. When done - prompt for rating
+        
+        if iRate.sharedInstance().shouldPromptForRating() {
+            iRate.sharedInstance().promptForRating()
+        }
+    }
+    
+    func promiseExportCloud() -> Promise<()->()> {
+        return Promise<()->()> {
+            self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
+            self.performSegueWithIdentifier(ShowExportViewSegueIdentifier, sender: self)
+        }
+    }
+
+    func promiseDeleteCloud() -> Promise<()->()> {
+        return firstly {
+            DataManager.promiseDeleteEntity(GraphCloudEntity.self, model: self.scene)
+        }
+        .then { _ -> (()->()) in
+            return { self.performSegueWithIdentifier("UnwindToSelection", sender: nil) }
+        }
+    }
+    
+    func promiseCaptureThumbnail() -> Promise<UIImage> {
+        return Promise<UIImage> { fulfill,reject in
+            let image = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize).RBResizeImage(Defined.Cloud.ThumbnailCaptureSize)
+            let thumbnail = image.RBCenterCrop(Defined.Cloud.ThumbnailDefaultSize)
+            fulfill(thumbnail)
+        }
+    }
+    
+    // MARK: - Helpers
+    func captureCloudWithSize(size: CGSize) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 2.0)
+        
+        self.skView.drawViewHierarchyInRect(CGRect(origin: CGPoint.zero, size: size), afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return image
+    }
+    
+    // MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard let identifier = segue.identifier else {
+            return
+        }
+        
+        switch identifier {
+        case ShowExportViewSegueIdentifier:
+            (segue.destinationViewController as? CloudExportViewController)?.image = self.cloudImage
+        default:
+            break
+        }
+    }
+    
 }
