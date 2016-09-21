@@ -10,43 +10,93 @@ import SpriteKit
 import SpriteKit_Spring
 import PromiseKit
 
-class OptionsNode: SKSpriteNode {
+class OptionsNode: SKSpriteNode, TranslatableNode {
     // MARK: - Static properties
     static let SceneName = "OptionsNode"
-    private static var templateNodes: [Skill.Experience:OptionsNode] = [:]
+    private static var templateNode: OptionsNode!
+    
+    var originalPosition: CGPoint = CGPoint.zero
+    var graphNode: GraphNode?
     
     // MARK: - Properties
+    lazy var anchors: [SKNode] = {
+        return ["DeleteAnchor","ScaleAnchor","MoveAnchor"].mapExisting{ name in
+            return self.childNodeWithName(name)
+        }
+    }()
     
     // MARK: - Static methods
     static func grabFromScene(scene: SKScene) {
-        let exp: [Skill.Experience] = [.Beginner, .Intermediate, .Professional, .Expert]
-        exp.forEach { level in
-            if let template = scene.childNodeWithName("\(OptionsNode.SceneName)_\(level.name)") as? OptionsNode {
-                self.templateNodes[level] = template
-                template.removeFromParent()
-            }
-            else {
-                assertionFailure()
-            }
+        guard let template = scene.childNodeWithName(self.SceneName) as? OptionsNode else {
+            return
         }
+        
+        // FIXME: Temporarily hidden options
+        template.anchors[0].hidden = true
+        template.anchors[1].hidden = true
+        
+        template.removeFromParent()
+        self.templateNode = template
     }
     
-    static func newFromTemplate(level: Skill.Experience = .Beginner) -> OptionsNode {
-        return self.templateNodes[level]!.copy() as! OptionsNode
+    static func spawnAttachedTo(node: GraphNode) {
+        self.templateNode.spawnAttachedTo(node)
+    }
+    
+    static func unspawn() {
+        self.templateNode.unspawn()
     }
     
     // MARK: - Lifecycle and configuration
-    func spawInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = false) -> OptionsNode {
+    func spawnAttachedTo(node: GraphNode) {
         self.removeFromParent()
+        self.setScale(1)
         
-        if animated {
-            self.setScale(0)
+        self.position = node.position
+        let scaleFactor = node.size.width / self.size.width
+        self.setScale(scaleFactor)
+        
+        let innerScaleFactor = 1.0 / scaleFactor
+        self.anchors.forEach { anchor in
+            anchor.setScale(innerScaleFactor)
         }
         
-        self.position = position
-        scene.addChild(self)
+        node.parent?.addChild(self)
+        self.graphNode = node
         
-        return self
+        let distance = SKConstraint.distance(SKRange(lowerLimit: 0, upperLimit: 0), toNode: node)
+        self.constraints = [distance]
+    }
+    
+    func unspawn() {
+        self.removeFromParent()
+        self.constraints = nil
+        self.graphNode = nil
+    }
+    
+}
+
+class OptionNode: SKSpriteNode, InteractiveNode {
+    
+    var graphNode: GraphNode? { return (self.parent?.parent?.parent as? OptionsNode)?.graphNode }
+    lazy var action: Action = {
+        switch (self.name ?? "none") {
+        case "IconDelete":
+            return .Delete
+        case "IconScale":
+            return .Scale
+        case "IconMove":
+            return .Move
+        default:
+            return .None
+        }
+    }()
+    
+    enum Action {
+        case None
+        case Delete
+        case Scale
+        case Move
     }
     
 }

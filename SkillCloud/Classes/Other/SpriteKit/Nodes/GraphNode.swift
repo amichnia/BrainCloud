@@ -16,6 +16,14 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
     private static var templateNodes: [Skill.Experience:GraphNode] = [:]
     
     // MARK: - Properties
+    var selected: Bool = false {
+        didSet {
+            self.areaNode?.hidden = !self.selected
+            if self.selected {
+                OptionsNode.spawnAttachedTo(self)
+            }
+        }
+    }
     var originalPosition: CGPoint = CGPoint.zero
     var pinned: Bool = false
     var pinJoint: SKPhysicsJointSpring?

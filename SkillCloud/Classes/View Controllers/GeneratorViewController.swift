@@ -34,8 +34,8 @@ class GeneratorViewController: CloudViewController {
     // MARK: - Configuration
     func prepareSceneIfNeeded(skView: SKView, size: CGSize){
         if let scene = CloudGraphScene(fileNamed:"CloudGraphScene") where self.scene == nil {
-            
             scene.scaleMode = .AspectFit
+            scene.cloudDelegate = self
             
             self.scene = scene
             skView.presentScene(scene)
@@ -55,7 +55,11 @@ class GeneratorViewController: CloudViewController {
     }
     
     @IBAction func tapAction(sender: UITapGestureRecognizer) {
-        self.scene.newNodeAt(sender.locationInView(sender.view))
+        guard let skillToAdd = self.skillToAdd else {
+            return
+        }
+        
+        self.scene.newNodeAt(sender.locationInView(sender.view), forSkill: skillToAdd)
     }
     
     @IBAction func selectTapAction(sender: UIGestureRecognizer) {

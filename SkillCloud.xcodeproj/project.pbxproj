@@ -371,7 +371,6 @@
 			children = (
 				FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */,
 				FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */,
-				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
 				FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */,
 				C86304911CC646B1002C068C /* SkillsViewController.swift */,
 				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
@@ -380,6 +379,7 @@
 				C83BF83C1D5B369900FDA60C /* InfoViewController.swift */,
 				C83BF8441D5C76C100FDA60C /* LicensesViewController.swift */,
 				C8A42EED1D5CC1B000C45829 /* AboutViewController.swift */,
+				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
 				C8B3C71E1D804530002D9364 /* GeneratorViewController.swift */,
 			);
 			path = "View Controllers";

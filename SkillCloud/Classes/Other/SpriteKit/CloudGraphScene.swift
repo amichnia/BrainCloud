@@ -12,9 +12,7 @@ import SpriteKit_Spring
 import PromiseKit
 
 protocol CloudSceneDelegate: class {
-    
     func didAddSkill()
-    
 }
 
 protocol SkillsProvider: class {
@@ -36,6 +34,8 @@ class CloudGraphScene: SKScene, DTOModel {
     var nodes: [Node]!
     var allNodesContainer: SKNode!
     var allNodes: [BrainNode] = []
+    
+    weak var cloudDelegate: CloudSceneDelegate?
     
     // MARK: - DTOModel
     var uniqueIdentifierValue: String { return self.cloudIdentifier }
@@ -95,6 +95,7 @@ class CloudGraphScene: SKScene, DTOModel {
             node.originalPosition = node.position
             (self.draggedNode as? GraphNode)?.repin()
             (node as? SKNode)?.physicsBody?.linearDamping = 20
+            self.draggedNode = nil
         }
     }
     
@@ -107,31 +108,45 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
-    func newNodeAt(point: CGPoint) {
+    func newNodeAt(point: CGPoint, forSkill skill: Skill) {
         let convertedPoint = self.convertPointFromView(point)
         
-        GraphNode.newFromTemplate().promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true)
+        GraphNode.newFromTemplate(skill.experience)
+        .promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true)
+        .then { addedNode -> Void in
+            self.cloudDelegate?.didAddSkill()
+            self.selectedNode?.selected = false
+            addedNode.selected = true
+            self.selectedNode = addedNode
+        }
     }
     
     func resolveDraggedNodeAt(position: CGPoint) {
         let convertedPoint = self.convertPointFromView(position)
-        self.draggedNode = self.nodeAtPoint(convertedPoint).interactionNode as? TranslatableNode
         
-        if let draggedNode = self.draggedNode as? GraphNode {
-            draggedNode.unpin()
-            draggedNode.originalPosition = draggedNode.position
-            draggedNode.physicsBody?.linearDamping = 100000
+        if let option = self.nodeAtPoint(convertedPoint).interactionNode as? OptionNode, draggedNode = option.graphNode {
+            switch option.action {
+            case .Move:
+                self.draggedNode = draggedNode
+            default:
+                break
+            }
+            
+            if let draggedNode = self.draggedNode as? GraphNode {
+                draggedNode.unpin()
+                draggedNode.originalPosition = draggedNode.position
+                draggedNode.physicsBody?.linearDamping = 100000
+            }
         }
     }
     
     func selectNodeAt(point: CGPoint) {
         let convertedPoint = self.convertPointFromView(point)
-
-        self.selectedNode?.areaNode?.hidden = true
         
         if let selectedNode = self.nodeAtPoint(convertedPoint).interactionNode as? GraphNode {
+            self.selectedNode?.selected = false
+            selectedNode.selected = true
             self.selectedNode = selectedNode
-            selectedNode.areaNode?.hidden = false
         }
     }
     
@@ -141,6 +156,7 @@ class CloudGraphScene: SKScene, DTOModel {
             $0.getSuckedOffIfNeeded()
         }
     }
+    
 }
 
 // MARK: - SKPhysicsContactDelegate
@@ -148,13 +164,12 @@ extension CloudGraphScene: SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
         if let brainNode = contact.bodyA.node as? BrainNode, graphNode = contact.bodyB.node?.interactionNode as? GraphNode {
-            print("SUCK? \(contact)")
             brainNode.getSuckedIfNeededBy(graphNode)
         }
     }
     
     func didEndContact(contact: SKPhysicsContact) {
-        print("ENDED \(contact)")
+        
     }
     
 }
@@ -169,9 +184,9 @@ extension CloudGraphScene {
         
         // Background etc
         self.backgroundColor = view.backgroundColor!
-        view.showsPhysics = true
-        view.showsDrawCount = true
-        view.showsNodeCount = true
+//        view.showsPhysics = true
+//        view.showsDrawCount = true
+//        view.showsNodeCount = true
         
         // Physics
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
