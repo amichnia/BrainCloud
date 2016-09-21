@@ -34,6 +34,7 @@ class CloudGraphScene: SKScene, DTOModel {
     var nodes: [Node]!
     var allNodesContainer: SKNode!
     var allNodes: [Int:BrainNode] = [:]
+    var skillNodes: [SkillNode] = []
     
     var slot: Int = 0
     var thumbnail: UIImage?
@@ -120,7 +121,13 @@ class CloudGraphScene: SKScene, DTOModel {
             self.selectedNode?.selected = false
             addedNode.selected = true
             self.selectedNode = addedNode
+            
+            if let skillNode = addedNode.skillNode {
+                skillNode.cloudIdentifier = self.cloudIdentifier
+                self.skillNodes.append(skillNode)
+            }
         }
+        
         
         self.cloudDelegate?.didAddSkill()
     }
@@ -240,6 +247,7 @@ extension CloudGraphScene {
         }
         
         for node in self.allNodes.values {
+            node.cloudIdentifier = self.cloudIdentifier
             node.node.connected.forEach { connectedId in
                 if let connectedTo = self.allNodes[connectedId] {
                     node.addLineToNode(connectedTo)

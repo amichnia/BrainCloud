@@ -18,7 +18,6 @@ class SkillNode: SKNode, DTOModel {
     var nodeId: Int = 0
     var skill: Skill!
     
-    
     // MARK: - Initialisation
     static func nodeWithSkill(skill: Skill, attahcedTo graphNode: GraphNode) -> SkillNode {
         // Whole skill node container

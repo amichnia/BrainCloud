@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 /// Main cloud node in graph
-class BrainNode: SKSpriteNode, TranslatableNode {
+class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
     // MARK: - Static Properties
     static var epsilon: CGFloat = 0.005
     
@@ -23,6 +23,12 @@ class BrainNode: SKSpriteNode, TranslatableNode {
     var lastUpdatePosition: CGPoint = CGPoint.zero
     
     var lines: [BrainNode:SKShapeNode] = [:]
+    var pinnedSkillNode: SkillNode?
+    
+    // DTO values
+    var uniqueIdentifierValue: String { return "\(self.cloudIdentifier)_\(self.node.id)" }
+    var previousUniqueIdentifier: String?
+    var cloudIdentifier = "cloud"
     
     // MARK: - Initialization
     static func nodeWithNode(node: Node) -> BrainNode {
@@ -95,6 +101,7 @@ class BrainNode: SKSpriteNode, TranslatableNode {
     func getSuckedIfNeededBy(node: SKNode) {
         if self.shouldBeSuckedBy(node) {
             self.awaitingSucker = node
+            self.pinnedSkillNode = (node as? GraphNode)?.skillNode
         }
     }
     
