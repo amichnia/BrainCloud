@@ -112,7 +112,7 @@ class CloudGraphScene: SKScene, DTOModel {
         let convertedPoint = self.convertPointFromView(point)
         
         GraphNode.newFromTemplate(skill.experience)
-        .promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true)
+        .promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true, skill: skill)
         .then { addedNode -> Void in
             self.cloudDelegate?.didAddSkill()
             self.selectedNode?.selected = false

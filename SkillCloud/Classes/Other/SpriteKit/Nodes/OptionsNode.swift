@@ -53,6 +53,7 @@ class OptionsNode: SKSpriteNode, TranslatableNode {
         self.setScale(1)
         
         self.position = node.position
+        self.zPosition = 2048
         let scaleFactor = node.size.width / self.size.width
         self.setScale(scaleFactor)
         

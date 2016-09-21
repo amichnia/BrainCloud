@@ -29,6 +29,8 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
     var pinJoint: SKPhysicsJointSpring?
     lazy var areaNode: SKSpriteNode? = { return self.childNodeWithName("AreaNode") as? SKSpriteNode }()
     
+    var skillNode: SkillNode?
+    
     // MARK: - Static methods
     static func grabFromScene(scene: SKScene) {
         let exp: [Skill.Experience] = [.Beginner, .Intermediate, .Professional, .Expert]
@@ -48,8 +50,10 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
     }
     
     // MARK: - Lifecycle and configuration
-    func spawInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true) -> GraphNode {
+    func spawInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true, skill: Skill) -> GraphNode {
         self.removeFromParent()
+        
+        self.skillNode = SkillNode.nodeWithSkill(skill, attahcedTo: self)
         
         if animated {
             self.setScale(0)
@@ -127,17 +131,17 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
         }
     }
     
-    func promiseSpawnInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true, pinned: Bool = true) -> Promise<GraphNode> {
+    func promiseSpawnInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true, pinned: Bool = true, skill: Skill) -> Promise<GraphNode> {
         return firstly {
-            self.spawInScene(scene, atPosition: position, animated: animated).promiseAnimateToShown(true)
+            self.spawInScene(scene, atPosition: position, animated: animated, skill: skill).promiseAnimateToShown(true)
+        }
+        .then { node -> GraphNode in
+            node.pinned = pinned
+            if pinned {
+                node.repin()
             }
-            .then { node -> GraphNode in
-                node.pinned = pinned
-                if pinned {
-                    node.repin()
-                }
-                
-                return node
+            
+            return node
         }
     }
     
