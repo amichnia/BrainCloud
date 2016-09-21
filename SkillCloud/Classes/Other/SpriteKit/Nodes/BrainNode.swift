@@ -107,19 +107,30 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
     
     func getSuckedOffIfNeeded() {
         if let sucker = self.awaitingSucker {
-            let position = self.position
-            self.position = sucker.position
-            
-            self.unpin()
-            self.pinToNode(sucker)
+            self.pinToSucker(sucker)
             self.awaitingSucker = nil
-            
-            self.position = position
         }
         
         if self.shouldSuckOff() {
             self.repinToOriginalPosition()
         }
+    }
+    
+    func pinToSucker(sucker: SKNode) {
+        let position = self.position
+        self.position = sucker.position
+        
+        self.unpin()
+        self.pinToNode(sucker)
+        
+        self.position = position
+    }
+    
+    func forcePinToSucker(sucker: SKNode) {
+        self.position = sucker.position
+        
+        self.unpin()
+        self.pinToNode(sucker)
     }
     
     // MARK: - Pinning

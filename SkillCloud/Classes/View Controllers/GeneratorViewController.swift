@@ -39,6 +39,7 @@ class GeneratorViewController: CloudViewController {
             scene.cloudDelegate = self
             scene.slot = self.slot
             scene.cloudIdentifier = self.cloudEntity?.cloudId ?? NSUUID().UUIDString
+            scene.cloudEntity = self.cloudEntity
             
             self.scene = scene
             Node.color = skView.tintColor
@@ -46,7 +47,7 @@ class GeneratorViewController: CloudViewController {
         }
     }
     
-    // MARK: - Actions
+    // MARK: - Recognizers Actions
     @IBAction func zoomingAction(sender: UIPinchGestureRecognizer) {
         switch sender.state {
         case .Began, .Changed:
@@ -83,9 +84,6 @@ class GeneratorViewController: CloudViewController {
         }
     }
     
-    // MARK: - Navigation
-
-    
     // MARK: - Actions
     @IBAction func saveCloud(sender: AnyObject) {
         // Log usage
@@ -120,24 +118,24 @@ class GeneratorViewController: CloudViewController {
     }
     
     @IBAction func settingsAction(sender: AnyObject) {
-        //        // Export
-        //        // Delete
-        //        typealias T = ()->()
-        //
-        //        self.promiseSelection(T.self, cancellable: true, options: [
-        //            (NSLocalizedString("Export", comment: "Export"),.Default,{
-        //                return self.promiseExportCloud()
-        //            }),
-        //            (NSLocalizedString("Delete", comment: "Delete"),.Destructive,{
-        //                return self.promiseDeleteCloud()
-        //            })
-        //        ])
-        //        .then { closure -> Void in
-        //            closure()
-        //        }
-        //        .error { error in
-        //            DDLogError("Error: \(error)")
-        //        }
+        // Export
+        // Delete
+        typealias T = ()->()
+
+        self.promiseSelection(T.self, cancellable: true, options: [
+            (NSLocalizedString("Export", comment: "Export"),.Default,{
+                return self.promiseExportCloud()
+            }),
+            (NSLocalizedString("Delete", comment: "Delete"),.Destructive,{
+                return self.promiseDeleteCloud()
+            })
+        ])
+        .then { closure -> Void in
+            closure()
+        }
+        .error { error in
+            DDLogError("Error: \(error)")
+        }
     }
     
     @IBAction func exportAction(sender: AnyObject) {

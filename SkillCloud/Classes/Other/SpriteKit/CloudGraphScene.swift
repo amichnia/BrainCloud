@@ -46,6 +46,8 @@ class CloudGraphScene: SKScene, DTOModel {
     var previousUniqueIdentifier: String?
     var cloudIdentifier = "cloud"
     
+    var cloudEntity: GraphCloudEntity?
+    
     // MARK: - Lifecycle
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -55,7 +57,17 @@ class CloudGraphScene: SKScene, DTOModel {
         Node.rectSize = CGSize(width: 1400, height: 1225)
         Node.rectPosition = CGPoint(x: 0, y: 88)
         Node.scaleFactor = 0.4
-        if let nodes = try? self.loadNodesFromBundle() {
+        
+        if let entity = self.cloudEntity {
+            self.addSkillNodesFrom(entity)
+            
+            // load graph
+            self.addNodesFromEntity(entity)
+            
+            // load changes and skills
+            
+        }
+        else if let nodes = try? self.loadNodesFromBundle() {
             self.nodes = nodes
             self.addNodes(nodes)
         }
@@ -245,6 +257,51 @@ extension CloudGraphScene {
             brainNode.configurePhysicsBody()
             brainNode.pinToScene()
         }
+        
+        for node in self.allNodes.values {
+            node.cloudIdentifier = self.cloudIdentifier
+            node.node.connected.forEach { connectedId in
+                if let connectedTo = self.allNodes[connectedId] {
+                    node.addLineToNode(connectedTo)
+                }
+            }
+        }
+    }
+    
+    func addSkillNodesFrom(entity: GraphCloudEntity) {
+        let skillEntities = entity.skillNodes?.allObjects.map{ $0 as! SkillNodeEntity } ?? []
+        
+        for entity in skillEntities {
+            let level: Skill.Experience = Skill.Experience(rawValue: Int(entity.skillExperienceValue)) ?? Skill.Experience.Beginner
+            let position: CGPoint = entity.positionRelative?.CGPointValue() ?? CGPoint.zero
+            
+            GraphNode.newFromTemplate(level)
+            .promiseSpawnInScene(self, atPosition: position, animated: false, entity: entity)
+        }
+    }
+    
+    func addNodesFromEntity(entity: GraphCloudEntity) {
+        let nodeEntities: [BrainNodeEntity] = entity.brainNodes?.allObjects.map({ $0 as! BrainNodeEntity }) ?? []
+        
+        if allNodesContainer == nil {
+            allNodesContainer = SKNode()
+            allNodesContainer.position = CGPoint.zero
+            self.addChild(allNodesContainer)
+        }
+        
+        self.nodes = nodeEntities.map { Node(brainNodeEntity: $0)! }
+        
+        for node in nodeEntities {
+            let brainNode = BrainNode.nodeWithEntity(node)!
+            
+            self.allNodesContainer.addChild(brainNode)
+            self.allNodes[Int(node.nodeNodeId)] = brainNode
+            
+            brainNode.configurePhysicsBody()
+            brainNode.pinToScene()
+        }
+        
+        self.nodes.sortInPlace{ $0.id < $1.id }
         
         for node in self.allNodes.values {
             node.cloudIdentifier = self.cloudIdentifier

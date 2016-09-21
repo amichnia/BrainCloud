@@ -29,6 +29,7 @@ class BrainNodeEntity: BaseNodeEntity, CoreDataEntity {
         if let node = model as? BrainNode, ctx = self.managedObjectContext {
             
             self.nodeId = node.uniqueIdentifierValue
+            self.nodeNodeId = Int32(node.node.id)
             self.scale = Int16(node.node.scale)
             self.isConvex = node.node.convex
             self.positionRelative = NSValue(CGPoint: node.node.point )

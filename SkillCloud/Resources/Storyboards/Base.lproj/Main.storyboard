@@ -214,7 +214,7 @@
                                     <barButtonItem image="icon-x-black" id="TTI-kt-dJ2" userLabel="Back">
                                         <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
-                                            <segue destination="CpJ-Mm-euR" kind="unwind" unwindAction="unwindToCloudSelection:" id="Jve-y5-oPg"/>
+                                            <segue destination="CpJ-Mm-euR" kind="unwind" identifier="UnwindToSelection" unwindAction="unwindToCloudSelection:" id="Jve-y5-oPg"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="NIX-w4-uRq"/>

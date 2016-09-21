@@ -86,7 +86,7 @@ extension SkillNode {
 //        let skill = Skill(title: entity.skillName!, thumbnail: entity.skillImage!, experience: exp, description: nil)
 //        skill.image = entity.skillImage!
 //        let radius = skill.experience.radius
-//        
+//
 //        // Whole skill node container
 //        let skillNode = SkillNode();
 //        

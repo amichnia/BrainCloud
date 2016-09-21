@@ -15,6 +15,7 @@ import CoreData
 extension BrainNodeEntity {
 
     @NSManaged var isConvex: Bool
+    @NSManaged var nodeNodeId: Int32
     @NSManaged var connectedTo: Array<Int>?
     @NSManaged var pinnedSkillNode: SkillNodeEntity?
     @NSManaged var cloud: GraphCloudEntity?

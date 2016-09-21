@@ -8,6 +8,7 @@
     <entity name="BrainNodeEntity" representedClassName=".BrainNodeEntity" parentEntity="BaseNodeEntity" syncable="YES">
         <attribute name="connectedTo" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="isConvex" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="nodeNodeId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="cloud" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GraphCloudEntity" inverseName="brainNodes" inverseEntity="GraphCloudEntity" syncable="YES"/>
         <relationship name="pinnedSkillNode" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SkillNodeEntity" inverseName="pinnedNodes" inverseEntity="SkillNodeEntity" syncable="YES"/>
     </entity>
@@ -41,7 +42,7 @@
     </entity>
     <elements>
         <element name="BaseNodeEntity" positionX="-234" positionY="-54" width="128" height="88"/>
-        <element name="BrainNodeEntity" positionX="-405" positionY="-62" width="128" height="103"/>
+        <element name="BrainNodeEntity" positionX="-405" positionY="-62" width="128" height="118"/>
         <element name="GraphCloudEntity" positionX="-582" positionY="102" width="128" height="148"/>
         <element name="SkillEntity" positionX="-47" positionY="116" width="128" height="193"/>
         <element name="SkillNodeEntity" positionX="-232" positionY="117" width="128" height="118"/>

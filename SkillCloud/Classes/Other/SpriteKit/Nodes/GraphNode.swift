@@ -147,3 +147,15 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
     
 }
 
+extension GraphNode {
+    
+    func promiseSpawnInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true, entity: SkillNodeEntity) -> Promise<GraphNode> {
+        let exp = Skill.Experience(rawValue: Int(entity.skillExperienceValue))!
+        let skill = Skill(title: entity.skillName!, thumbnail: entity.skillImage!, experience: exp, description: nil)
+        skill.image = entity.skillImage!
+    
+        return self.promiseSpawnInScene(scene, atPosition: position, animated: animated, pinned: pinned, skill: skill)
+    }
+    
+}
+
