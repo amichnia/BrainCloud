@@ -40,13 +40,6 @@ class GraphCloudEntity: NSManagedObject, CoreDataEntity {
                 DDLogInfo("SN: \(skillNodeEntity?.nodeId ?? "-")")
                 skillNodeEntity?.cloud = self
             }
-            
-            // Update brain nodes
-            for brainNode in cloud.allNodes.values {
-                let brainNodeEntity = DataManager.updateEntity(BrainNodeEntity.self, model: brainNode, intoContext: ctx)
-                DDLogInfo("BN: \(brainNodeEntity?.nodeId ?? "-")")
-                brainNodeEntity?.cloud = self
-            }
         }
     }
 

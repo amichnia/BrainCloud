@@ -28,7 +28,7 @@ class SkillNodeEntity: BaseNodeEntity, CoreDataEntity {
         if let node = model as? SkillNode {
             self.nodeId = node.uniqueIdentifierValue
             self.positionRelative = NSValue(CGPoint: node.position )
-            self.scale = Int16(node.skill.experience.radius)
+            self.scale = Float(node.skill.experience.radius)
             
             self.skillName = node.skill.title
             self.skillImage = node.skill.image

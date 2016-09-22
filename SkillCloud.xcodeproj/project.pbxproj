@@ -33,8 +33,6 @@
 		C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */; };
 		C8F55CB11CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */; };
 		C8F55CB21CFC323000208F88 /* GraphCloudEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */; };
-		C8F55CB31CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAB1CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift */; };
-		C8F55CB41CFC323000208F88 /* BrainNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAC1CFC323000208F88 /* BrainNodeEntity.swift */; };
 		C8F55CB51CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */; };
 		C8F55CB61CFC323000208F88 /* SkillNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */; };
 		C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */; };
@@ -44,7 +42,7 @@
 		FE0522DD1CAFE69500315468 /* CloudGraphScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */; };
 		FE0522E01CB0157800315468 /* BrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DF1CB0157800315468 /* BrainNode.swift */; };
 		FE0522E21CB01BBF00315468 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522E11CB01BBF00315468 /* Node.swift */; };
-		FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */ = {isa = PBXBuildFile; fileRef = FE0522E51CB02D6600315468 /* all_base_nodes.json */; };
+		FE0522E61CB02D6600315468 /* brain_graph_v0.1.json in Resources */ = {isa = PBXBuildFile; fileRef = FE0522E51CB02D6600315468 /* brain_graph_v0.1.json */; };
 		FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */; };
 		FE1FFCAF1D258B5A00E6F6C6 /* RootTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */; };
 		FE2151451D1F3435005BC8B1 /* CloudContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2151441D1F3435005BC8B1 /* CloudContainer.swift */; };
@@ -138,8 +136,6 @@
 		C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNodeEntity.swift; sourceTree = "<group>"; };
 		C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GraphCloudEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCloudEntity.swift; sourceTree = "<group>"; };
-		C8F55CAB1CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BrainNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		C8F55CAC1CFC323000208F88 /* BrainNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainNodeEntity.swift; sourceTree = "<group>"; };
 		C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkillNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillNodeEntity.swift; sourceTree = "<group>"; };
 		C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAPI.swift; sourceTree = "<group>"; };
@@ -149,7 +145,7 @@
 		FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudGraphScene.swift; sourceTree = "<group>"; };
 		FE0522DF1CB0157800315468 /* BrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainNode.swift; sourceTree = "<group>"; };
 		FE0522E11CB01BBF00315468 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
-		FE0522E51CB02D6600315468 /* all_base_nodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = all_base_nodes.json; sourceTree = "<group>"; };
+		FE0522E51CB02D6600315468 /* brain_graph_v0.1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = brain_graph_v0.1.json; sourceTree = "<group>"; };
 		FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
 		FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarViewController.swift; sourceTree = "<group>"; };
 		FE2151441D1F3435005BC8B1 /* CloudContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudContainer.swift; sourceTree = "<group>"; };
@@ -296,7 +292,7 @@
 		FE0522E41CB02D6600315468 /* Patterns */ = {
 			isa = PBXGroup;
 			children = (
-				FE0522E51CB02D6600315468 /* all_base_nodes.json */,
+				FE0522E51CB02D6600315468 /* brain_graph_v0.1.json */,
 			);
 			path = Patterns;
 			sourceTree = "<group>";
@@ -458,8 +454,6 @@
 				C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */,
 				C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */,
 				C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */,
-				C8F55CAB1CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift */,
-				C8F55CAC1CFC323000208F88 /* BrainNodeEntity.swift */,
 				C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */,
 				C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */,
 				FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */,
@@ -585,7 +579,7 @@
 				FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */,
 				FE7C61101D32A4CE006C987C /* launch-screen-image.jpg in Resources */,
 				FE32AB121D271DEF0099B8B6 /* CloudSelectScene.sks in Resources */,
-				FE0522E61CB02D6600315468 /* all_base_nodes.json in Resources */,
+				FE0522E61CB02D6600315468 /* brain_graph_v0.1.json in Resources */,
 				FE7C610B1D32A16F006C987C /* Lato-Regular.ttf in Resources */,
 				FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */,
 				FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */,
@@ -678,7 +672,6 @@
 				FEE50AA21D2494100024060D /* CKRecordConvertible.swift in Sources */,
 				C8B3C71F1D804530002D9364 /* GeneratorViewController.swift in Sources */,
 				FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */,
-				C8F55CB31CFC323000208F88 /* BrainNodeEntity+CoreDataProperties.swift in Sources */,
 				FE0522E01CB0157800315468 /* BrainNode.swift in Sources */,
 				FE9F6EED1D285031008B3BC3 /* UIImage+RBResizer.swift in Sources */,
 				FE9F6EE51D284EE3008B3BC3 /* UIColor+Extensions.swift in Sources */,
@@ -689,7 +682,6 @@
 				FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */,
 				FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */,
 				C8F55CB11CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift in Sources */,
-				C8F55CB41CFC323000208F88 /* BrainNodeEntity.swift in Sources */,
 				FE60C9E91D22C4EE001129C8 /* ImageAsset.swift in Sources */,
 				FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */,
 				FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */,

@@ -26,8 +26,9 @@ class CloudGraphScene: SKScene, DTOModel {
     static var radius: CGFloat = 20
     
     // MARK: - Properties
-    var cameraSettings: (position: CGPoint, scale: CGFloat) = (position: CGPoint.zero, scale: 1)
+    weak var cloudDelegate: CloudSceneDelegate?
     
+    var cameraSettings: (position: CGPoint, scale: CGFloat) = (position: CGPoint.zero, scale: 1)
     var draggedNode: TranslatableNode?
     var selectedNode: GraphNode?
     
@@ -36,17 +37,16 @@ class CloudGraphScene: SKScene, DTOModel {
     var allNodes: [Int:BrainNode] = [:]
     var skillNodes: [SkillNode] = []
     
+    // Cloud entity handling
+    var cloudEntity: GraphCloudEntity?  // If set - all values below are overriden
+    var cloudIdentifier = "cloud"
     var slot: Int = 0
     var thumbnail: UIImage?
-    
-    weak var cloudDelegate: CloudSceneDelegate?
+    var graph: (name: String, version: String) = (name: "brain_graph", version: "v0.1")
     
     // MARK: - DTOModel
     var uniqueIdentifierValue: String { return self.cloudIdentifier }
     var previousUniqueIdentifier: String?
-    var cloudIdentifier = "cloud"
-    
-    var cloudEntity: GraphCloudEntity?
     
     // MARK: - Lifecycle
     override func didMoveToView(view: SKView) {
@@ -59,15 +59,13 @@ class CloudGraphScene: SKScene, DTOModel {
         Node.scaleFactor = 0.4
         
         if let entity = self.cloudEntity {
-            self.addSkillNodesFrom(entity)
-            
-            // load graph
-            self.addNodesFromEntity(entity)
-            
-            // load changes and skills
-            
+            self.slot = Int(entity.slot)
+            self.thumbnail ?= entity.thumbnail
+            self.cloudIdentifier ?= entity.cloudId
+            self.graph = (name: entity.graphName ?? "brain_graph", version: entity.graphVersion ?? "v0.1")  // Set graph name and version
         }
-        else if let nodes = try? self.loadNodesFromBundle() {
+        
+        if let nodes = try? self.loadNodesFromGraph(self.graph) {
             self.nodes = nodes
             self.addNodes(nodes)
         }
@@ -223,8 +221,10 @@ extension CloudGraphScene {
         self.cameraSettings.position = self.frame.centerOfMass
     }
     
-    func loadNodesFromBundle() throws -> [Node] {
-        guard let url = NSBundle.mainBundle().URLForResource("all_base_nodes", withExtension: "json"), data = NSData(contentsOfURL: url) else {
+    func loadNodesFromGraph(graph: (name: String, version: String)) throws -> [Node] {
+        let resource = "\(graph.name)_\(graph.version)"
+        
+        guard let url = NSBundle.mainBundle().URLForResource(resource, withExtension: "json"), data = NSData(contentsOfURL: url) else {
             throw SCError.InvalidBundleResourceUrl
         }
         
@@ -277,39 +277,6 @@ extension CloudGraphScene {
             
             GraphNode.newFromTemplate(level)
             .promiseSpawnInScene(self, atPosition: position, animated: false, entity: entity)
-        }
-    }
-    
-    func addNodesFromEntity(entity: GraphCloudEntity) {
-        let nodeEntities: [BrainNodeEntity] = entity.brainNodes?.allObjects.map({ $0 as! BrainNodeEntity }) ?? []
-        
-        if allNodesContainer == nil {
-            allNodesContainer = SKNode()
-            allNodesContainer.position = CGPoint.zero
-            self.addChild(allNodesContainer)
-        }
-        
-        self.nodes = nodeEntities.map { Node(brainNodeEntity: $0)! }
-        
-        for node in nodeEntities {
-            let brainNode = BrainNode.nodeWithEntity(node)!
-            
-            self.allNodesContainer.addChild(brainNode)
-            self.allNodes[Int(node.nodeNodeId)] = brainNode
-            
-            brainNode.configurePhysicsBody()
-            brainNode.pinToScene()
-        }
-        
-        self.nodes.sortInPlace{ $0.id < $1.id }
-        
-        for node in self.allNodes.values {
-            node.cloudIdentifier = self.cloudIdentifier
-            node.node.connected.forEach { connectedId in
-                if let connectedTo = self.allNodes[connectedId] {
-                    node.addLineToNode(connectedTo)
-                }
-            }
         }
     }
     

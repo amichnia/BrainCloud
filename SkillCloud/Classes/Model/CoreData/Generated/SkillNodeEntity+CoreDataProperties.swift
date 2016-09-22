@@ -2,7 +2,7 @@
 //  SkillNodeEntity+CoreDataProperties.swift
 //  SkillCloud
 //
-//  Created by Andrzej Michnia on 30/05/16.
+//  Created by Andrzej Michnia on 22/09/16.
 //  Copyright © 2016 amichnia. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,10 +14,9 @@ import CoreData
 
 extension SkillNodeEntity {
 
-    @NSManaged var skillName: String?
-    @NSManaged var skillImage: UIImage?
     @NSManaged var skillExperienceValue: Int16
-    @NSManaged var pinnedNodes: NSSet?
+    @NSManaged var skillImage: UIImage?
+    @NSManaged var skillName: String?
     @NSManaged var cloud: GraphCloudEntity?
 
 }

@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 7.0">
     <entity name="BaseNodeEntity" representedClassName=".BaseNodeEntity" syncable="YES">
+        <attribute name="color" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="connected" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="nodeId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="positionRelative" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="scale" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-    </entity>
-    <entity name="BrainNodeEntity" representedClassName=".BrainNodeEntity" parentEntity="BaseNodeEntity" syncable="YES">
-        <attribute name="connectedTo" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="isConvex" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="nodeNodeId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="cloud" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GraphCloudEntity" inverseName="brainNodes" inverseEntity="GraphCloudEntity" syncable="YES"/>
-        <relationship name="pinnedSkillNode" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SkillNodeEntity" inverseName="pinnedNodes" inverseEntity="SkillNodeEntity" syncable="YES"/>
+        <attribute name="scale" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="GraphCloudEntity" representedClassName=".GraphCloudEntity" syncable="YES">
         <attribute name="cloudId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="graphName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="graphVersion" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="slot" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="thumbnail" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <relationship name="brainNodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BrainNodeEntity" inverseName="cloud" inverseEntity="BrainNodeEntity" syncable="YES"/>
         <relationship name="skillNodes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SkillNodeEntity" inverseName="cloud" inverseEntity="SkillNodeEntity" syncable="YES"/>
     </entity>
     <entity name="SkillEntity" representedClassName=".SkillEntity" syncable="YES">
@@ -38,13 +34,11 @@
         <attribute name="skillImage" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="skillName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="cloud" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GraphCloudEntity" inverseName="skillNodes" inverseEntity="GraphCloudEntity" syncable="YES"/>
-        <relationship name="pinnedNodes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BrainNodeEntity" inverseName="pinnedSkillNode" inverseEntity="BrainNodeEntity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BaseNodeEntity" positionX="-234" positionY="-54" width="128" height="88"/>
-        <element name="BrainNodeEntity" positionX="-405" positionY="-62" width="128" height="118"/>
-        <element name="GraphCloudEntity" positionX="-582" positionY="102" width="128" height="148"/>
+        <element name="GraphCloudEntity" positionX="-582" positionY="102" width="128" height="163"/>
         <element name="SkillEntity" positionX="-47" positionY="116" width="128" height="193"/>
-        <element name="SkillNodeEntity" positionX="-232" positionY="117" width="128" height="118"/>
+        <element name="SkillNodeEntity" positionX="-308" positionY="162" width="128" height="103"/>
+        <element name="BaseNodeEntity" positionX="-310" positionY="18" width="128" height="118"/>
     </elements>
 </model>
