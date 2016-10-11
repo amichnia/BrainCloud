@@ -127,7 +127,7 @@
 		C8A42EEB1D5CA06400C45829 /* iRate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iRate.framework; path = Carthage/Build/iOS/iRate.framework; sourceTree = "<group>"; };
 		C8A42EED1D5CC1B000C45829 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* SkillCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C8B3C71E1D804530002D9364 /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorViewController.swift; sourceTree = "<group>"; };
+		C8B3C71E1D804530002D9364 /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeneratorViewController.swift; path = "../../View Controllers/GeneratorViewController.swift"; sourceTree = "<group>"; };
 		C8DF6D231CC5017A009CDBFA /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		C8DF6D251CC5033F009CDBFA /* AddScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScene.swift; sourceTree = "<group>"; };
 		C8DF6D271CC503A0009CDBFA /* AddScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AddScene.sks; sourceTree = "<group>"; };
@@ -139,7 +139,7 @@
 		C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkillNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillNodeEntity.swift; sourceTree = "<group>"; };
 		C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAPI.swift; sourceTree = "<group>"; };
-		FE0522B11CAEEF8000315468 /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
+		FE0522B11CAEEF8000315468 /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudViewController.swift; path = "../../View Controllers/CloudViewController.swift"; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
 		FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudGraphScene.swift; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 		FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PossiblePlaceView.xib; sourceTree = "<group>"; };
 		FE31DB081C9CA1240006D9EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillCloud.xcdatamodel; sourceTree = "<group>"; };
-		FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectionViewController.swift; sourceTree = "<group>"; };
+		FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudSelectionViewController.swift; path = "../../View Controllers/CloudSelectionViewController.swift"; sourceTree = "<group>"; };
 		FE32AB111D271DEF0099B8B6 /* CloudSelectScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudSelectScene.sks; sourceTree = "<group>"; };
 		FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CloudKit+Promises.swift"; sourceTree = "<group>"; };
 		FE60C9E81D22C4EE001129C8 /* ImageAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
@@ -191,7 +191,7 @@
 		FEB31DA41D31934800E7C203 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
 		FEB32F991D5BA5ED00ABE5F8 /* InfoMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoMenuTableViewCell.swift; sourceTree = "<group>"; };
 		FEB88E731CB6FD8500EED249 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudExportViewController.swift; sourceTree = "<group>"; };
+		FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudExportViewController.swift; path = "../../View Controllers/CloudExportViewController.swift"; sourceTree = "<group>"; };
 		FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsAndDefines.swift; sourceTree = "<group>"; };
 		FEE50A9F1D2493F70024060D /* CKRecordMappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRecordMappable.swift; sourceTree = "<group>"; };
 		FEE50AA11D2494100024060D /* CKRecordConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRecordConvertible.swift; sourceTree = "<group>"; };
@@ -261,16 +261,54 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CC942C661DAD19A6005FFB83 /* Cloud Graph */ = {
+			isa = PBXGroup;
+			children = (
+				FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */,
+				C8B3C71E1D804530002D9364 /* GeneratorViewController.swift */,
+				FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */,
+				FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */,
+				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
+				FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */,
+			);
+			name = "Cloud Graph";
+			path = Other/SpriteKit;
+			sourceTree = "<group>";
+		};
+		CC942C671DAD19B4005FFB83 /* Add Skill */ = {
+			isa = PBXGroup;
+			children = (
+				C8DF6D271CC503A0009CDBFA /* AddScene.sks */,
+				C8DF6D251CC5033F009CDBFA /* AddScene.swift */,
+			);
+			name = "Add Skill";
+			path = Other/SpriteKit;
+			sourceTree = "<group>";
+		};
+		CC942C681DAD19BC005FFB83 /* Select Cloud */ = {
+			isa = PBXGroup;
+			children = (
+				FE9F6EDD1D283433008B3BC3 /* CloudSelectScene.swift */,
+				FE32AB111D271DEF0099B8B6 /* CloudSelectScene.sks */,
+			);
+			name = "Select Cloud";
+			path = Other/SpriteKit;
+			sourceTree = "<group>";
+		};
+		CC942C691DAD19D1005FFB83 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				CC942C681DAD19BC005FFB83 /* Select Cloud */,
+				CC942C661DAD19A6005FFB83 /* Cloud Graph */,
+				CC942C671DAD19B4005FFB83 /* Add Skill */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
 		FE0522D91CAFE58400315468 /* SpriteKit */ = {
 			isa = PBXGroup;
 			children = (
 				FE0522DE1CB0155A00315468 /* Nodes */,
-				FE9F6EDD1D283433008B3BC3 /* CloudSelectScene.swift */,
-				FE32AB111D271DEF0099B8B6 /* CloudSelectScene.sks */,
-				FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */,
-				C8DF6D271CC503A0009CDBFA /* AddScene.sks */,
-				C8DF6D251CC5033F009CDBFA /* AddScene.swift */,
-				FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */,
 			);
 			path = SpriteKit;
 			sourceTree = "<group>";
@@ -322,6 +360,7 @@
 		FE31DAE81C9CA1240006D9EE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CC942C691DAD19D1005FFB83 /* Modules */,
 				FE31DAE91C9CA1240006D9EE /* Model */,
 				FE31DAF71C9CA1240006D9EE /* Views */,
 				FE31DAF31C9CA1240006D9EE /* View Controllers */,
@@ -366,8 +405,6 @@
 			isa = PBXGroup;
 			children = (
 				FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */,
-				FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */,
-				FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */,
 				C86304911CC646B1002C068C /* SkillsViewController.swift */,
 				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
 				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
@@ -375,8 +412,6 @@
 				C83BF83C1D5B369900FDA60C /* InfoViewController.swift */,
 				C83BF8441D5C76C100FDA60C /* LicensesViewController.swift */,
 				C8A42EED1D5CC1B000C45829 /* AboutViewController.swift */,
-				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
-				C8B3C71E1D804530002D9364 /* GeneratorViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -405,7 +440,6 @@
 				FE0522E41CB02D6600315468 /* Patterns */,
 				FE31DAFF1C9CA1240006D9EE /* Storyboards */,
 				FE31DB041C9CA1240006D9EE /* XIBs */,
-				FE31DB1E1C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -443,6 +477,7 @@
 			children = (
 				FE766D341C9D7FDD0079CA29 /* Generated */,
 				FE766D351C9D80010079CA29 /* DataManager.swift */,
+				FE31DB1E1C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -901,7 +936,8 @@
 				FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */,
 			);
 			currentVersion = FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */;
-			path = SkillCloud.xcdatamodeld;
+			name = SkillCloud.xcdatamodeld;
+			path = ../../../Resources/SkillCloud.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
