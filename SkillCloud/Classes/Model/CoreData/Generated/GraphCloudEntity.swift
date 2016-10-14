@@ -28,8 +28,6 @@ class GraphCloudEntity: NSManagedObject, CoreDataEntity {
     func setValuesFromModel(model: DTOModel) {
         if let cloud = model as? CloudGraphScene, ctx = self.managedObjectContext {
             // Basic
-            
-            print("START: \(cloud.cloudIdentifier) : [\(cloud.skillNodes.count)]")
             self.cloudId = cloud.cloudIdentifier
             self.date = NSDate().timeIntervalSince1970
             self.name = cloud.name
@@ -40,13 +38,17 @@ class GraphCloudEntity: NSManagedObject, CoreDataEntity {
             self.graphVersion = cloud.graph.version
             
             // Update skill nodes
+            
+            self.skillNodes?.forEach { node in
+                guard let node = node as? NSManagedObject else { return }
+
+                self.managedObjectContext?.deleteObject(node)
+            }
+            
             for skillNode in cloud.skillNodes {
-                print("SkillNode: \(skillNode.uniqueIdentifierValue)")
                 let skillNodeEntity = DataManager.updateEntity(SkillNodeEntity.self, model: skillNode, intoContext: ctx)
                 skillNodeEntity?.cloud = self
             }
-            
-            print("END")
         }
     }
 

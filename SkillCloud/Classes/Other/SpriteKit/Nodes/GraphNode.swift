@@ -173,6 +173,7 @@ extension GraphNode {
         }
         .then { node -> GraphNode in
             node.skillNode?.nodeId = nodeId
+            SkillNode.nodeId = max(nodeId + 1, SkillNode.nodeId)
             node.pinned = self.pinned
             if self.pinned {
                 node.repin()
