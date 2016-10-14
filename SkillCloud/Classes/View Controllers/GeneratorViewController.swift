@@ -64,7 +64,7 @@ class GeneratorViewController: CloudViewController {
             return
         }
         
-        self.scene.newNodeAt(sender.locationInView(sender.view), forSkill: skillToAdd)
+        self.scene.resolveTapAt(sender.locationInView(sender.view), forSkill: skillToAdd)
     }
     
     @IBAction func selectTapAction(sender: UIGestureRecognizer) {

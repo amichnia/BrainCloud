@@ -30,12 +30,14 @@ class CloudGraphScene: SKScene, DTOModel {
     
     var cameraSettings: (position: CGPoint, scale: CGFloat) = (position: CGPoint.zero, scale: 1)
     var draggedNode: TranslatableNode?
+    var scaledNode: ScalableNode?
     var selectedNode: GraphNode?
     
     var nodes: [Node]!
     var allNodesContainer: SKNode!
     var allNodes: [Int:BrainNode] = [:] // graph building nodes from graph resource
     var skillNodes: [SkillNode] = []    // added skills
+    var deletedNodes: [SkillNode] = []
     
     // Cloud entity handling
     var cloudEntity: GraphCloudEntity?  // If set - all values below are overriden
@@ -103,6 +105,9 @@ class CloudGraphScene: SKScene, DTOModel {
         if let _ = self.draggedNode {
             self.dragNode(&self.draggedNode!, translation: translation, save: save)
         }
+        else if let _ = self.scaledNode {
+            self.scaleNode(&self.scaledNode!, translation: translation, save: save)
+        }
         else {
             self.moveCamera(translation, save: save)
         }
@@ -120,6 +125,18 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
+    func scaleNode(inout node: ScalableNode, translation: CGPoint, save: Bool = false) {
+        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
+        let factor = 1 + convertedTranslation.x / 100
+        
+        self.scaledNode?.applyScale(factor)
+        
+        if save {
+            node.persistScale()
+            self.scaledNode = nil
+        }
+    }
+    
     func moveCamera(translation: CGPoint, save: Bool = false) {
         let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
         self.camera?.position = self.cameraSettings.position - convertedTranslation
@@ -129,8 +146,20 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
-    func newNodeAt(point: CGPoint, forSkill skill: Skill) {
+    func resolveTapAt(point: CGPoint, forSkill skill: Skill) {
         let convertedPoint = self.convertPointFromView(point)
+        
+        if let option = self.nodeAtPoint(convertedPoint).interactionNode as? OptionNode {
+            switch option.action {
+            case .Delete:
+                self.deleteNode(option.graphNode)
+            default:
+                break
+            }
+            
+            return
+        }
+        
         
         GraphNode.newFromTemplate(skill.experience)
         .promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true, skill: skill)
@@ -156,10 +185,21 @@ class CloudGraphScene: SKScene, DTOModel {
             switch option.action {
             case .Move:
                 self.draggedNode = draggedNode
+            case .Scale:
+                self.scaledNode = draggedNode
             default:
                 break
             }
             
+            if let draggedNode = self.draggedNode as? GraphNode {
+                draggedNode.unpin()
+                draggedNode.originalPosition = draggedNode.position
+                draggedNode.physicsBody?.linearDamping = 100000
+            }
+        }
+        
+        if let draggedNode = self.nodeAtPoint(convertedPoint).interactionNode as? GraphNode, selectedNode = self.selectedNode where draggedNode == selectedNode  {
+            self.draggedNode = draggedNode
             if let draggedNode = self.draggedNode as? GraphNode {
                 draggedNode.unpin()
                 draggedNode.originalPosition = draggedNode.position
@@ -176,6 +216,25 @@ class CloudGraphScene: SKScene, DTOModel {
             selectedNode.selected = true
             self.selectedNode = selectedNode
         }
+    }
+    
+    func deleteNode(node: GraphNode?) {
+        self.selectedNode?.selected = false
+        node?.selected = false
+        node?.skillNode?.pinnedNodes.forEach { nodeId in
+            self.allNodes[nodeId]?.repinToOriginalPosition()
+        }
+        
+        node?.removeFromParent()
+        
+        guard let skillNode = node?.skillNode, let index = skillNodes.indexOf(skillNode) else {
+            return
+        }
+        
+        skillNodes.removeAtIndex(index)
+        deletedNodes.append(skillNode)
+        
+        OptionsNode.unspawn()
     }
     
     // MARK: - Main run loop

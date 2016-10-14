@@ -183,6 +183,21 @@ protocol TranslatableNode {
     var originalPosition: CGPoint { get set }
 }
 
+protocol ScalableNode {
+    var currentScale: CGFloat { get set }
+    var originalScale: CGFloat { get set }
+}
+
+extension ScalableNode {
+    mutating func applyScale(scale: CGFloat) {
+        self.currentScale = self.originalScale * scale
+    }
+    
+    mutating func persistScale() {
+        self.originalScale = self.currentScale
+    }
+}
+
 
 // MARK: - CGPoint Extension
 extension CGPoint {

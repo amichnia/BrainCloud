@@ -10,7 +10,7 @@ import SpriteKit
 import SpriteKit_Spring
 import PromiseKit
 
-class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
+class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
     // MARK: - Static Properties
     static let SceneName = "CurrentNode"
     private static var templateNodes: [Skill.Experience:GraphNode] = [:]
@@ -25,6 +25,15 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
         }
     }
     var originalPosition: CGPoint = CGPoint.zero
+    var currentScale: CGFloat {
+        get {
+            return self.xScale
+        }
+        set {
+            self.setScale(newValue)
+        }
+    }
+    var originalScale: CGFloat = 1.0
     var pinned: Bool = false
     var pinJoint: SKPhysicsJointSpring?
     lazy var areaNode: SKSpriteNode? = { return self.childNodeWithName("AreaNode") as? SKSpriteNode }()

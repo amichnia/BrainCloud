@@ -31,10 +31,6 @@ class OptionsNode: SKSpriteNode, TranslatableNode {
             return
         }
         
-        // FIXME: Temporarily hidden options
-        template.anchors[0].hidden = true
-        template.anchors[1].hidden = true
-        
         template.removeFromParent()
         self.templateNode = template
     }
@@ -60,6 +56,7 @@ class OptionsNode: SKSpriteNode, TranslatableNode {
         let innerScaleFactor = 1.0 / scaleFactor
         self.anchors.forEach { anchor in
             anchor.setScale(innerScaleFactor)
+            anchor.zPosition = self.zPosition + 1
         }
         
         node.parent?.addChild(self)
