@@ -59,7 +59,7 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         return self.sucker() != nil
     }
     
-    func sucker() -> SKNode? {
+    func sucker() -> GraphNode? {
         guard let node = self.pinJoint?.bodyB.node else {
             return nil
         }
@@ -68,7 +68,7 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
             return nil
         }
         else {
-            return node
+            return node as? GraphNode
         }
     }
     
@@ -91,17 +91,17 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
             return false
         }
 
-        let maxDistance = self.node.radius * 10
+        let maxDistance = sucker.radius * 1.2
         return self.originalPosition.distanceTo(sucker.position) > maxDistance
     }
     
     // MARK: - Handling suck
-    var awaitingSucker: SKNode?
+    var awaitingSucker: GraphNode?
     
-    func getSuckedIfNeededBy(node: SKNode) {
+    func getSuckedIfNeededBy(node: GraphNode) {
         if self.shouldBeSuckedBy(node) {
             self.awaitingSucker = node
-            self.pinnedSkillNode = (node as? GraphNode)?.skillNode
+            self.pinnedSkillNode = node.skillNode
         }
     }
     
@@ -194,7 +194,7 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         let line = SKShapeNode(path: self.pathToPoint(node.position))
         line.strokeColor = Node.color
         line.zPosition = self.zPosition - 1
-        line.lineWidth = 1 / Node.scaleFactor
+        line.lineWidth = 1.25 / Node.scaleFactor
         line.antialiased = true
         
         self.lines[node] = line

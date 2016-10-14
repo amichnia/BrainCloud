@@ -56,7 +56,7 @@ class CloudGraphScene: SKScene, DTOModel {
         
         Node.rectSize = CGSize(width: 1400, height: 1225)
         Node.rectPosition = CGPoint(x: 0, y: 88)
-        Node.scaleFactor = 0.4
+        Node.scaleFactor = 0.35
         
         if let entity = self.cloudEntity {
             self.slot = Int(entity.slot)
@@ -185,7 +185,11 @@ class CloudGraphScene: SKScene, DTOModel {
 extension CloudGraphScene: SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
+        print(contact)
         if let brainNode = contact.bodyA.node as? BrainNode, graphNode = contact.bodyB.node?.interactionNode as? GraphNode {
+            brainNode.getSuckedIfNeededBy(graphNode)
+        }
+        else if let brainNode = contact.bodyB.node as? BrainNode, graphNode = contact.bodyA.node?.interactionNode as? GraphNode {
             brainNode.getSuckedIfNeededBy(graphNode)
         }
     }
@@ -206,7 +210,7 @@ extension CloudGraphScene {
         
         // Background etc
         self.backgroundColor = view.backgroundColor!
-//        view.showsPhysics = true
+        view.showsPhysics = true
         view.showsDrawCount = true
         view.showsNodeCount = true
         view.showsFPS = true

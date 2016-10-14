@@ -29,6 +29,8 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode {
     var pinJoint: SKPhysicsJointSpring?
     lazy var areaNode: SKSpriteNode? = { return self.childNodeWithName("AreaNode") as? SKSpriteNode }()
     
+    var radius: CGFloat { return self.frame.width/2 }
+    
     var skillNode: SkillNode?
     
     // MARK: - Static methods
