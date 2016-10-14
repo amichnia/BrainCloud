@@ -112,6 +112,9 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         }
         
         if self.shouldSuckOff() {
+            // Remove info about pinning
+            self.sucker()?.skillNode?.pinnedNodes.remove(self.node.id)
+            // Repin to original
             self.repinToOriginalPosition()
         }
     }
@@ -186,6 +189,10 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         self.pinJoint = joint
         
         self.scene!.physicsWorld.addJoint(joint)
+        
+        if let graphNode = node as? GraphNode, let skillNode = graphNode.skillNode {
+            skillNode.pinnedNodes.insert(self.node.id)
+        }
     }
     
     

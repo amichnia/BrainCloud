@@ -266,9 +266,9 @@
 			children = (
 				FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */,
 				C8B3C71E1D804530002D9364 /* GeneratorViewController.swift */,
+				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
 				FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */,
 				FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */,
-				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
 				FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */,
 			);
 			name = "Cloud Graph";

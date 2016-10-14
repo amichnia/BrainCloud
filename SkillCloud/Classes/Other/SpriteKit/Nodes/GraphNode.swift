@@ -156,7 +156,21 @@ extension GraphNode {
         let skill = Skill(title: entity.skillName!, thumbnail: entity.skillImage!, experience: exp, description: nil)
         skill.image = entity.skillImage!
     
-        return self.promiseSpawnInScene(scene, atPosition: position, animated: animated, pinned: pinned, skill: skill)
+        let nodeIdString = (entity.nodeId ?? "")
+        let nodeId = Int(nodeIdString.characters.split("_").map(String.init).last!) ?? 0
+        
+        return firstly {
+            self.spawInScene(scene, atPosition: position, animated: animated, skill: skill).promiseAnimateToShown(false)
+        }
+        .then { node -> GraphNode in
+            node.skillNode?.nodeId = nodeId
+            node.pinned = self.pinned
+            if self.pinned {
+                node.repin()
+            }
+            
+            return node
+        }
     }
     
 }

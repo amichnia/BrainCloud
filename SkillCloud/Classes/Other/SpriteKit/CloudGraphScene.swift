@@ -34,8 +34,8 @@ class CloudGraphScene: SKScene, DTOModel {
     
     var nodes: [Node]!
     var allNodesContainer: SKNode!
-    var allNodes: [Int:BrainNode] = [:]
-    var skillNodes: [SkillNode] = []
+    var allNodes: [Int:BrainNode] = [:] // graph building nodes from graph resource
+    var skillNodes: [SkillNode] = []    // added skills
     
     // Cloud entity handling
     var cloudEntity: GraphCloudEntity?  // If set - all values below are overriden
@@ -58,6 +58,7 @@ class CloudGraphScene: SKScene, DTOModel {
         Node.rectPosition = CGPoint(x: 0, y: 88)
         Node.scaleFactor = 0.35
         
+        // Load base data if any
         if let entity = self.cloudEntity {
             self.slot = Int(entity.slot)
             self.thumbnail ?= entity.thumbnail
@@ -65,9 +66,15 @@ class CloudGraphScene: SKScene, DTOModel {
             self.graph = (name: entity.graphName ?? "brain_graph", version: entity.graphVersion ?? "v0.1")  // Set graph name and version
         }
         
+        // Load graph from resources
         if let nodes = try? self.loadNodesFromGraph(self.graph) {
             self.nodes = nodes
             self.addNodes(nodes)
+        }
+        
+        // Load skills
+        if let entity = self.cloudEntity {
+            self.addSkillNodesFrom(entity)
         }
     }
     
@@ -185,7 +192,6 @@ class CloudGraphScene: SKScene, DTOModel {
 extension CloudGraphScene: SKPhysicsContactDelegate {
     
     func didBeginContact(contact: SKPhysicsContact) {
-        print(contact)
         if let brainNode = contact.bodyA.node as? BrainNode, graphNode = contact.bodyB.node?.interactionNode as? GraphNode {
             brainNode.getSuckedIfNeededBy(graphNode)
         }
@@ -225,6 +231,7 @@ extension CloudGraphScene {
         self.cameraSettings.position = self.frame.centerOfMass
     }
     
+    // loads nodes array from graph
     func loadNodesFromGraph(graph: (name: String, version: String)) throws -> [Node] {
         let resource = "\(graph.name)_\(graph.version)"
         
@@ -243,6 +250,7 @@ extension CloudGraphScene {
         }
     }
     
+    // adds bas nodes building graph
     func addNodes(nodes: [Node]) {
         if allNodesContainer == nil {
             allNodesContainer = SKNode()
@@ -278,9 +286,23 @@ extension CloudGraphScene {
         for entity in skillEntities {
             let level: Skill.Experience = Skill.Experience(rawValue: Int(entity.skillExperienceValue)) ?? Skill.Experience.Beginner
             let position: CGPoint = entity.positionRelative?.CGPointValue() ?? CGPoint.zero
+            let pinned: [Int] = entity.connected ?? []
             
+            // Spawn concrete entity
             GraphNode.newFromTemplate(level)
             .promiseSpawnInScene(self, atPosition: position, animated: false, entity: entity)
+            .then { addedNode -> Void in
+                pinned.map({ return self.allNodes[$0] }).forEach { node in
+                    node?.getSuckedIfNeededBy(addedNode)
+                }
+                
+                if let skillNode = addedNode.skillNode {
+                    skillNode.cloudIdentifier = self.cloudIdentifier
+                    self.skillNodes.append(skillNode)
+                }
+            }
+            
+            // Attach saved nodes
         }
     }
     
