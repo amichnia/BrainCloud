@@ -190,7 +190,7 @@ protocol ScalableNode {
 
 extension ScalableNode {
     mutating func applyScale(scale: CGFloat) {
-        self.currentScale = self.originalScale * scale
+        self.currentScale =  max(0.5, min(2.0, self.originalScale + scale))
     }
     
     mutating func persistScale() {

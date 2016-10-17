@@ -21,6 +21,9 @@ class GeneratorViewController: CloudViewController {
     @IBOutlet weak var selectTapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet var selectPressGestureRecognizer: UILongPressGestureRecognizer!
     @IBOutlet weak var panGestureRecognizer: UIPanGestureRecognizer!
+    @IBOutlet var scalePanGestureRecognizer: UIPanGestureRecognizer!
+    
+    @IBOutlet weak var scaleButtonItem: UIBarButtonItem!
     
     // MARK: - Properties
     var scene : CloudGraphScene!
@@ -84,7 +87,36 @@ class GeneratorViewController: CloudViewController {
         }
     }
     
+    @IBAction func scaleAction(sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .Began:
+            self.scene.willStartScale()
+        case .Changed:
+            self.scene.scale(sender.translationInView(sender.view!))
+        case .Ended:
+            self.scene.scale(sender.translationInView(sender.view!), save: true)
+        default:
+            break
+        }
+    }
+    
     // MARK: - Actions
+    @IBAction func deleteNode(sender: AnyObject) {
+        typealias T = ()->()
+        
+        self.promiseSelection(T.self, cancellable: true, options: [
+            (NSLocalizedString("Delete", comment: "Delete"),.Destructive,{
+                return self.promiseDeleteNode()
+            })
+        ])
+        .then { closure -> Void in
+            closure()
+        }
+        .error { error in
+            DDLogError("Error: \(error)")
+        }
+    }
+    
     @IBAction func saveCloud(sender: AnyObject) {
         // Log usage
         iRate.sharedInstance().logEvent(true)
@@ -167,6 +199,12 @@ class GeneratorViewController: CloudViewController {
             let image = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize).RBResizeImage(Defined.Cloud.ThumbnailCaptureSize)
             let thumbnail = image.RBCenterCrop(Defined.Cloud.ThumbnailDefaultSize)
             fulfill(thumbnail)
+        }
+    }
+    
+    func promiseDeleteNode() -> Promise<()->()> {
+        return Promise<()->()> {
+            self.scene.deleteNode()
         }
     }
     

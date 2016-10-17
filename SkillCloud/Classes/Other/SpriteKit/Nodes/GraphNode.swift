@@ -19,9 +19,6 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
     var selected: Bool = false {
         didSet {
             self.areaNode?.hidden = !self.selected
-            if self.selected {
-                OptionsNode.spawnAttachedTo(self)
-            }
         }
     }
     var originalPosition: CGPoint = CGPoint.zero

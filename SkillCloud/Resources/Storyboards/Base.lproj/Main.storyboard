@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2t6-Cf-HCf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2t6-Cf-HCf">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -25,6 +25,7 @@
             <string>Lato-Light</string>
         </mutableArray>
         <mutableArray key="Lato-Regular.ttf">
+            <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
             <string>Lato-Regular</string>
@@ -92,8 +93,74 @@
                                     <outletCollection property="gestureRecognizers" destination="ynb-1A-7Px" appends="YES" id="Aa1-VT-g0b"/>
                                 </connections>
                             </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S6I-27-Lw2">
+                                <rect key="frame" x="0.0" y="392" width="600" height="48"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="O3h-zJ-xWD"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="trash" id="bw9-lo-xt9">
+                                        <connections>
+                                            <action selector="deleteNode:" destination="sTb-IF-jcA" id="dg1-xr-a6E"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="22" style="plain" systemItem="fixedSpace" id="QD7-4h-TZ1"/>
+                                    <barButtonItem style="plain" id="e6n-HN-UsQ" userLabel="Scale">
+                                        <view key="customView" contentMode="scaleToFill" id="hWM-wY-lv2">
+                                            <rect key="frame" x="71" y="6" width="78" height="36"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scale" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LfQ-lN-5Jx">
+                                                    <rect key="frame" x="6" y="7" width="39" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="17"/>
+                                                    <color key="textColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-scale" translatesAutoresizingMaskIntoConstraints="NO" id="vku-mR-pwz">
+                                                    <rect key="frame" x="46" y="2" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="vku-mR-pwz" secondAttribute="height" multiplier="1:1" id="zqS-Xo-SWq"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <gestureRecognizers/>
+                                            <constraints>
+                                                <constraint firstItem="LfQ-lN-5Jx" firstAttribute="centerY" secondItem="hWM-wY-lv2" secondAttribute="centerY" id="0K0-Jm-62j"/>
+                                                <constraint firstItem="vku-mR-pwz" firstAttribute="top" secondItem="hWM-wY-lv2" secondAttribute="top" constant="2" id="4KF-fV-GQm"/>
+                                                <constraint firstItem="LfQ-lN-5Jx" firstAttribute="leading" secondItem="hWM-wY-lv2" secondAttribute="leading" constant="6" id="AKq-LB-OBG"/>
+                                                <constraint firstAttribute="bottom" secondItem="vku-mR-pwz" secondAttribute="bottom" constant="2" id="FD4-NA-bIT"/>
+                                                <constraint firstAttribute="trailing" secondItem="vku-mR-pwz" secondAttribute="trailing" id="pgY-G2-gLu"/>
+                                            </constraints>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="yZP-R3-Rer" appends="YES" id="RKk-6Y-6FH"/>
+                                            </connections>
+                                        </view>
+                                    </barButtonItem>
+                                    <barButtonItem systemItem="flexibleSpace" id="N5Z-1J-ZMD"/>
+                                    <barButtonItem image="icon-check-black" id="2cT-eY-ZPs" userLabel="Save">
+                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="saveCloud:" destination="sTb-IF-jcA" id="H0f-yN-i1T"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="icon-setting-black" id="gnQ-cJ-P2I" userLabel="Settings">
+                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="settingsAction:" destination="sTb-IF-jcA" id="Ywj-8Z-Bu2"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem image="icon-x-black" id="TTI-kt-dJ2" userLabel="Back">
+                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="CpJ-Mm-euR" kind="unwind" identifier="UnwindToSelection" unwindAction="unwindToCloudSelection:" id="Jve-y5-oPg"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="n1G-lN-A1t" userLabel="Skills List">
-                                <rect key="frame" x="0.0" y="392" width="600" height="160"/>
+                                <rect key="frame" x="0.0" y="440" width="600" height="160"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="ZxI-na-RI3"/>
@@ -205,46 +272,18 @@
                                     <outlet property="delegate" destination="sTb-IF-jcA" id="yKC-CP-9HZ"/>
                                 </connections>
                             </collectionView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S6I-27-Lw2">
-                                <rect key="frame" x="0.0" y="552" width="600" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="O3h-zJ-xWD"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem image="icon-x-black" id="TTI-kt-dJ2" userLabel="Back">
-                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <segue destination="CpJ-Mm-euR" kind="unwind" identifier="UnwindToSelection" unwindAction="unwindToCloudSelection:" id="Jve-y5-oPg"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="flexibleSpace" id="NIX-w4-uRq"/>
-                                    <barButtonItem image="icon-setting-black" id="gnQ-cJ-P2I" userLabel="Settings">
-                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="settingsAction:" destination="sTb-IF-jcA" id="Ywj-8Z-Bu2"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="flexibleSpace" id="N5Z-1J-ZMD"/>
-                                    <barButtonItem image="icon-check-black" id="2cT-eY-ZPs" userLabel="Save">
-                                        <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="saveCloud:" destination="sTb-IF-jcA" id="H0f-yN-i1T"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="S6I-27-Lw2" firstAttribute="leading" secondItem="paT-dW-Tqz" secondAttribute="leading" id="2uD-GW-fYy"/>
-                            <constraint firstAttribute="trailing" secondItem="S6I-27-Lw2" secondAttribute="trailing" id="8bu-rM-t3b"/>
+                            <constraint firstItem="kBY-kt-DCM" firstAttribute="top" secondItem="n1G-lN-A1t" secondAttribute="bottom" id="25j-rk-x2o"/>
+                            <constraint firstAttribute="trailing" secondItem="S6I-27-Lw2" secondAttribute="trailing" id="B1c-xY-xJM"/>
+                            <constraint firstItem="S6I-27-Lw2" firstAttribute="leading" secondItem="paT-dW-Tqz" secondAttribute="leading" id="Djl-Ow-PLZ"/>
                             <constraint firstItem="n1G-lN-A1t" firstAttribute="leading" secondItem="paT-dW-Tqz" secondAttribute="leading" id="FAz-9A-dKk"/>
                             <constraint firstAttribute="trailing" secondItem="n1G-lN-A1t" secondAttribute="trailing" id="OQ8-nJ-qfR"/>
                             <constraint firstItem="Im5-i1-15t" firstAttribute="leading" secondItem="paT-dW-Tqz" secondAttribute="leading" id="QIY-r2-bCD"/>
                             <constraint firstItem="Im5-i1-15t" firstAttribute="top" secondItem="yIa-Q3-3Uo" secondAttribute="bottom" constant="8" id="aZ9-wf-6XV"/>
-                            <constraint firstItem="kBY-kt-DCM" firstAttribute="top" secondItem="S6I-27-Lw2" secondAttribute="bottom" id="n7r-pD-Ihg"/>
-                            <constraint firstItem="S6I-27-Lw2" firstAttribute="top" secondItem="n1G-lN-A1t" secondAttribute="bottom" id="xYU-WZ-EPX"/>
+                            <constraint firstItem="n1G-lN-A1t" firstAttribute="top" secondItem="S6I-27-Lw2" secondAttribute="bottom" id="s1a-8l-UMc"/>
                             <constraint firstAttribute="trailing" secondItem="Im5-i1-15t" secondAttribute="trailing" id="yTO-Ov-6uE"/>
                         </constraints>
                     </view>
@@ -252,6 +291,8 @@
                         <outlet property="collectionView" destination="n1G-lN-A1t" id="Hcw-IQ-LOy"/>
                         <outlet property="panGestureRecognizer" destination="JGp-4x-xrw" id="wqC-O3-mQP"/>
                         <outlet property="pinchGestureRecognizer" destination="skd-3C-yb8" id="LcZ-Xy-A46"/>
+                        <outlet property="scaleButtonItem" destination="e6n-HN-UsQ" id="VcO-86-hjY"/>
+                        <outlet property="scalePanGestureRecognizer" destination="yZP-R3-Rer" id="NWB-hY-Mhg"/>
                         <outlet property="selectPressGestureRecognizer" destination="ynb-1A-7Px" id="odg-Qs-4gb"/>
                         <outlet property="selectTapGestureRecognizer" destination="2cX-Xs-9db" id="sKk-dh-vUQ"/>
                         <outlet property="skView" destination="Im5-i1-15t" id="Y21-re-fCf"/>
@@ -286,6 +327,11 @@
                         <action selector="selectTapAction:" destination="sTb-IF-jcA" id="TeB-y9-bYG"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="yZP-R3-Rer" userLabel="Scale Pan Gesture Recognizer">
+                    <connections>
+                        <action selector="scaleAction:" destination="sTb-IF-jcA" id="JSK-Bw-SeP"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3164" y="85"/>
         </scene>
@@ -365,7 +411,7 @@
                     <navigationItem key="navigationItem" id="kPs-HT-fw0">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="MLr-Tg-Ymk">
-                            <rect key="frame" x="205" y="6" width="190" height="33"/>
+                            <rect key="frame" x="205" y="5.5" width="190" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloud Graphs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqR-yP-j4U">
@@ -529,7 +575,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddSkillCell" id="gFp-zL-kwM" customClass="SkillCollectionViewCell" customModule="SkillCloud" customModuleProvider="target">
-                                        <rect key="frame" x="124" y="0.0" width="106" height="106"/>
+                                        <rect key="frame" x="123.5" y="0.0" width="106" height="106"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
@@ -596,7 +642,7 @@
                     <navigationItem key="navigationItem" id="lre-nl-LZE">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="WcX-Cd-sDh">
-                            <rect key="frame" x="205" y="6" width="190" height="33"/>
+                            <rect key="frame" x="205" y="5.5" width="190" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skills" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXJ-9X-ABB">
@@ -971,7 +1017,7 @@
                     <navigationItem key="navigationItem" id="cD4-TB-Bxl">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="CzV-tO-dYu">
-                            <rect key="frame" x="223" y="6" width="154" height="33"/>
+                            <rect key="frame" x="223" y="5.5" width="154" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSb-Vg-LUd">
@@ -1094,7 +1140,7 @@
                     <navigationItem key="navigationItem" id="Zrb-1R-jin">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="mJN-mk-4dZ">
-                            <rect key="frame" x="223" y="6" width="154" height="33"/>
+                            <rect key="frame" x="223" y="5.5" width="154" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzY-45-NxP">
@@ -1143,10 +1189,10 @@
             </objects>
             <point key="canvasLocation" x="1582" y="2365"/>
         </scene>
-        <!--View Controller-->
+        <!--Help View Controller-->
         <scene sceneID="fcM-GT-3iA">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="xVP-1V-hQr" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="xVP-1V-hQr" userLabel="Help View Controller" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8MZ-LO-3yZ"/>
                         <viewControllerLayoutGuide type="bottom" id="sdF-ni-0Dp"/>
@@ -1170,7 +1216,7 @@
                     <navigationItem key="navigationItem" id="EZL-IB-HTd">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="Ve7-dp-D4r">
-                            <rect key="frame" x="223" y="6" width="154" height="33"/>
+                            <rect key="frame" x="223" y="5.5" width="154" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTM-6V-a4u">
@@ -1213,10 +1259,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="887"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wxt-x7-nfT">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="770"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="769"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yaW-sb-2NF" userLabel="About SkillCloud">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="477"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="476.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" image="skillcloud" translatesAutoresizingMaskIntoConstraints="NO" id="3Vf-ig-uML">
                                                         <rect key="frame" x="16" y="18" width="60" height="60"/>
@@ -1257,7 +1303,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HzR-PG-iNT" userLabel="List Container">
-                                                        <rect key="frame" x="24" y="261" width="568" height="196"/>
+                                                        <rect key="frame" x="24" y="261" width="568" height="195.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsS-26-vG1" userLabel="Collect">
                                                                 <rect key="frame" x="0.0" y="0.0" width="568" height="32"/>
@@ -1384,7 +1430,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGX-qp-3Ad" userLabel="Export">
-                                                                <rect key="frame" x="0.0" y="152" width="568" height="44"/>
+                                                                <rect key="frame" x="0.0" y="152" width="568" height="43.5"/>
                                                                 <subviews>
                                                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="252" image="icon-about-export" translatesAutoresizingMaskIntoConstraints="NO" id="ErI-cT-D8Q">
                                                                         <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
@@ -1395,7 +1441,7 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="export your cloud graphs as images, which can be attached to any kinf of document" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JbJ-qg-ftt">
-                                                                        <rect key="frame" x="40" y="5" width="528" height="39"/>
+                                                                        <rect key="frame" x="40" y="5" width="528" height="38.5"/>
                                                                         <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="16"/>
                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -1459,7 +1505,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vLt-0D-cA7" userLabel="About GirAppe">
-                                                <rect key="frame" x="0.0" y="477" width="600" height="293"/>
+                                                <rect key="frame" x="0.0" y="476.5" width="600" height="292.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" image="logo-girappe-small" translatesAutoresizingMaskIntoConstraints="NO" id="hEC-R8-qru">
                                                         <rect key="frame" x="16" y="18" width="60" height="60"/>
@@ -1487,14 +1533,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmN-TB-UgP">
-                                                        <rect key="frame" x="16" y="102" width="576" height="39"/>
+                                                        <rect key="frame" x="16" y="102" width="576" height="38.5"/>
                                                         <string key="text">We are small studio, focused on delivering solutions both robust and good-looking. Our main goal is to bring art and creativity into process of software development.</string>
                                                         <fontDescription key="fontDescription" name="Lato-Light" family="Lato" pointSize="16"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9P2-wz-DU0">
-                                                        <rect key="frame" x="44" y="161" width="155" height="44"/>
+                                                        <rect key="frame" x="44" y="160.5" width="155" height="44"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="rZo-p9-BSy"/>
                                                         </constraints>
@@ -1506,7 +1552,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTo-t2-x23">
-                                                        <rect key="frame" x="44" y="217" width="158" height="44"/>
+                                                        <rect key="frame" x="44" y="216.5" width="158" height="44"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="Wlq-UD-7oO"/>
                                                         </constraints>
@@ -1575,7 +1621,7 @@
                     <navigationItem key="navigationItem" id="H2h-yX-XXt">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="QBg-fy-Gqx">
-                            <rect key="frame" x="223" y="6" width="154" height="33"/>
+                            <rect key="frame" x="223" y="5.5" width="154" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L40-nQ-RoH">
@@ -1643,7 +1689,7 @@
                     <navigationItem key="navigationItem" id="GaG-fB-omf">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="6ge-wf-pH4">
-                            <rect key="frame" x="223" y="6" width="154" height="33"/>
+                            <rect key="frame" x="223" y="5.5" width="154" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Licenses" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YkB-UA-hXn">
@@ -1675,6 +1721,7 @@
         <image name="background-image" width="414" height="736"/>
         <image name="ic-add" width="46" height="47"/>
         <image name="ic-big-blue-outline" width="300" height="300"/>
+        <image name="ic-scale" width="85" height="85"/>
         <image name="icon-about-cloud" width="21" height="16"/>
         <image name="icon-about-collect" width="21" height="21"/>
         <image name="icon-about-export" width="21" height="21"/>

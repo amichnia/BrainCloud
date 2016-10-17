@@ -91,7 +91,7 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
             return false
         }
 
-        let maxDistance = sucker.radius * 1.2
+        let maxDistance = sucker.radius * 1.2 + 60
         return self.originalPosition.distanceTo(sucker.position) > maxDistance
     }
     

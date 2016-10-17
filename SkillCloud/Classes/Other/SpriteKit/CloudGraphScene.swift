@@ -105,11 +105,14 @@ class CloudGraphScene: SKScene, DTOModel {
         if let _ = self.draggedNode {
             self.dragNode(&self.draggedNode!, translation: translation, save: save)
         }
-        else if let _ = self.scaledNode {
-            self.scaleNode(&self.scaledNode!, translation: translation, save: save)
-        }
         else {
             self.moveCamera(translation, save: save)
+        }
+    }
+    
+    func scale(translation: CGPoint, save: Bool = false) {
+        if let _ = self.scaledNode {
+            self.scaleNode(&self.scaledNode!, translation: translation, save: save)
         }
     }
     
@@ -122,18 +125,6 @@ class CloudGraphScene: SKScene, DTOModel {
             (self.draggedNode as? GraphNode)?.repin()
             (node as? SKNode)?.physicsBody?.linearDamping = 20
             self.draggedNode = nil
-        }
-    }
-    
-    func scaleNode(inout node: ScalableNode, translation: CGPoint, save: Bool = false) {
-        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
-        let factor = 1 + convertedTranslation.x / 100
-        
-        self.scaledNode?.applyScale(factor)
-        
-        if save {
-            node.persistScale()
-            self.scaledNode = nil
         }
     }
     
@@ -181,23 +172,6 @@ class CloudGraphScene: SKScene, DTOModel {
     func resolveDraggedNodeAt(position: CGPoint) {
         let convertedPoint = self.convertPointFromView(position)
         
-        if let option = self.nodeAtPoint(convertedPoint).interactionNode as? OptionNode, draggedNode = option.graphNode {
-            switch option.action {
-            case .Move:
-                self.draggedNode = draggedNode
-            case .Scale:
-                self.scaledNode = draggedNode
-            default:
-                break
-            }
-            
-            if let draggedNode = self.draggedNode as? GraphNode {
-                draggedNode.unpin()
-                draggedNode.originalPosition = draggedNode.position
-                draggedNode.physicsBody?.linearDamping = 100000
-            }
-        }
-        
         if let draggedNode = self.nodeAtPoint(convertedPoint).interactionNode as? GraphNode, selectedNode = self.selectedNode where draggedNode == selectedNode  {
             self.draggedNode = draggedNode
             if let draggedNode = self.draggedNode as? GraphNode {
@@ -218,6 +192,14 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
+    func deleteNode() {
+        guard let node = self.selectedNode else {
+            return
+        }
+        
+        self.deleteNode(node)
+    }
+    
     func deleteNode(node: GraphNode?) {
         self.selectedNode?.selected = false
         node?.selected = false
@@ -235,6 +217,22 @@ class CloudGraphScene: SKScene, DTOModel {
         deletedNodes.append(skillNode)
         
         OptionsNode.unspawn()
+    }
+    
+    func willStartScale() {
+        self.scaledNode = self.selectedNode
+    }
+    
+    func scaleNode(inout node: ScalableNode, translation: CGPoint, save: Bool = false) {
+        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
+        let factor = convertedTranslation.y / 200
+        
+        self.scaledNode?.applyScale(factor)
+        
+        if save {
+            node.persistScale()
+            self.scaledNode = nil
+        }
     }
     
     // MARK: - Main run loop
