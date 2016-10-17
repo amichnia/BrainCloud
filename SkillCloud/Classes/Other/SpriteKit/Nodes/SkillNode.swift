@@ -37,7 +37,7 @@ class SkillNode: SKNode, DTOModel {
         SkillNode.nodeId += 1
         
         // Mask shape - circular mask for skill image
-        let radius = graphNode.size.width / 2 - 9
+        let radius = graphNode.size.width / 2 - 10
         
         let maskShapeNode = SKShapeNode(circleOfRadius: radius - 1)
         maskShapeNode.strokeColor = Node.color

@@ -45,6 +45,7 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
         exp.forEach { level in
             if let template = scene.childNodeWithName("\(GraphNode.SceneName)_\(level.name)") as? GraphNode {
                 self.templateNodes[level] = template
+                
                 template.removeFromParent()
             }
             else {
@@ -60,6 +61,8 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
     // MARK: - Lifecycle and configuration
     func spawInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true, skill: Skill) -> GraphNode {
         self.removeFromParent()
+        
+        self.texture = SKTexture(imageNamed: "ic-empty")
         
         self.skillNode = SkillNode.nodeWithSkill(skill, attahcedTo: self)
         

@@ -170,16 +170,9 @@ class GeneratorViewController: CloudViewController {
         }
     }
     
-    @IBAction func exportAction(sender: AnyObject) {
-        // TODO: Export action. When done - prompt for rating
-        
-        if iRate.sharedInstance().shouldPromptForRating() {
-            iRate.sharedInstance().promptForRating()
-        }
-    }
-    
     func promiseExportCloud() -> Promise<()->()> {
         return Promise<()->()> {
+            self.scene.deselectNode()
             self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
             self.performSegueWithIdentifier(ShowExportViewSegueIdentifier, sender: self)
         }

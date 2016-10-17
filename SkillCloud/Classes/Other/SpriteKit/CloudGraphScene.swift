@@ -87,16 +87,6 @@ class CloudGraphScene: SKScene, DTOModel {
     // MARK: - Configuration
     
     // MARK: - Actions
-    func cameraZoom(zoom: CGFloat, save: Bool = false) {
-        let baseScale = self.cameraSettings.scale
-        let zoomScale = 1 / zoom
-        self.camera?.setScale(baseScale * zoomScale)
-        
-        if save {
-            self.cameraSettings.scale = baseScale * zoomScale
-        }
-    }
-    
     func willStartTranslateAt(position: CGPoint) {
         self.resolveDraggedNodeAt(position)
     }
@@ -128,15 +118,6 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
-    func moveCamera(translation: CGPoint, save: Bool = false) {
-        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
-        self.camera?.position = self.cameraSettings.position - convertedTranslation
-        
-        if save {
-            self.cameraSettings.position = self.cameraSettings.position - convertedTranslation
-        }
-    }
-    
     func resolveTapAt(point: CGPoint, forSkill skill: Skill) {
         let convertedPoint = self.convertPointFromView(point)
         
@@ -144,11 +125,10 @@ class CloudGraphScene: SKScene, DTOModel {
             switch option.action {
             case .Delete:
                 self.deleteNode(option.graphNode)
+                fallthrough
             default:
-                break
+                return
             }
-            
-            return
         }
         
         
@@ -185,11 +165,17 @@ class CloudGraphScene: SKScene, DTOModel {
     func selectNodeAt(point: CGPoint) {
         let convertedPoint = self.convertPointFromView(point)
         
+        self.deselectNode()
+        
         if let selectedNode = self.nodeAtPoint(convertedPoint).interactionNode as? GraphNode {
-            self.selectedNode?.selected = false
-            selectedNode.selected = true
             self.selectedNode = selectedNode
+            self.selectedNode?.selected = true
         }
+    }
+    
+    func deselectNode() {
+        self.selectedNode?.selected = false
+        self.selectedNode = nil
     }
     
     func deleteNode() {
@@ -235,6 +221,66 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
+    // MARK: - Camera handling
+    func cameraZoom(zoom: CGFloat, save: Bool = false) {
+        let baseScale = self.cameraSettings.scale
+        let newZoom = max(0.02,baseScale + (1 - zoom))
+        
+        self.camera?.setScale(newZoom)
+        
+        if save {
+            self.cameraSettings.scale = newZoom
+            self.cameraAnimateToValidValues()
+        }
+    }
+    
+    func moveCamera(translation: CGPoint, save: Bool = false) {
+        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
+        
+        let newPosition = self.cameraSettings.position - convertedTranslation
+        self.camera?.position = newPosition
+        
+        if save {
+            self.cameraSettings.position = newPosition
+            self.cameraAnimateToValidValues()
+        }
+    }
+    
+    func cameraAnimateToValidValues(duration: NSTimeInterval = 0.5) {
+        guard let camera = self.camera else {
+            return
+        }
+        
+        let scale = max(0.4, min(1.2,cameraSettings.scale))
+        let visibleArea = CGSize(width: self.size.width * scale, height: self.size.height * scale)
+        
+        let leftBound = camera.position.x - (visibleArea.width / 2)
+        let rightBound = camera.position.x + (visibleArea.width / 2)
+        let topBound = camera.position.y + (visibleArea.height / 2)
+        let bottomBound = camera.position.y - (visibleArea.height / 2)
+        
+        var translation = CGVector(dx: 0, dy: 0)
+        
+        if scale <= 1 {
+            translation.dx += -min(0, leftBound)
+            translation.dx -=  max(0, rightBound - size.width)
+            translation.dy -=  max(0, topBound - size.height)
+            translation.dy += -min(0, bottomBound)
+        }
+        else {
+            translation = CGVector(dx: (size.width / 2) - camera.position.x, dy: (size.height / 2) - camera.position.y)
+        }
+        
+        let moveAction = SKAction.moveBy(translation, duration: duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0)
+        let scaleAction = SKAction.scaleTo(scale, duration: duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0)
+        let action = SKAction.group([moveAction,scaleAction])
+        
+        camera.runAction(action) {
+            self.cameraSettings.scale = camera.xScale
+            self.cameraSettings.position = camera.position
+        }
+    }
+    
     // MARK: - Main run loop
     override func update(currentTime: NSTimeInterval) {
         self.allNodes.values.forEach {
@@ -266,6 +312,7 @@ extension CloudGraphScene: SKPhysicsContactDelegate {
 // MARK: - Configure scene
 extension CloudGraphScene {
     
+    // Basic configuration
     func configureInView(view: SKView) {
         // Prepare templates
         GraphNode.grabFromScene(self)
@@ -273,10 +320,11 @@ extension CloudGraphScene {
         
         // Background etc
         self.backgroundColor = view.backgroundColor!
-        view.showsPhysics = true
-        view.showsDrawCount = true
-        view.showsNodeCount = true
-        view.showsFPS = true
+        let showDebug = false
+        view.showsPhysics = showDebug
+        view.showsDrawCount = showDebug
+        view.showsNodeCount = showDebug
+        view.showsFPS = showDebug
         
         // Physics
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
