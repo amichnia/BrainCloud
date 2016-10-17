@@ -103,12 +103,6 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
-    func scale(translation: CGPoint, save: Bool = false) {
-        if let _ = self.scaledNode {
-            self.scaleNode(&self.scaledNode!, translation: translation, save: save)
-        }
-    }
-    
     func dragNode(inout node: TranslatableNode, translation: CGPoint, save: Bool = false) {
         let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
         node.position = node.originalPosition + convertedTranslation
@@ -186,6 +180,10 @@ class CloudGraphScene: SKScene, DTOModel {
             return
         }
         
+        self.selectedNode = nil
+        self.draggedNode = nil
+        self.scaledNode = nil
+        
         self.deleteNode(node)
     }
     
@@ -208,20 +206,38 @@ class CloudGraphScene: SKScene, DTOModel {
         OptionsNode.unspawn()
     }
     
-    func willStartScale() {
+    func willStartScale() -> CGFloat? {
         self.scaledNode = self.selectedNode
+        
+        if let _ = self.scaledNode {
+            return self.scaledNode!.applyScale(0)
+        }
+        else {
+            return nil
+        }
     }
     
-    func scaleNode(inout node: ScalableNode, translation: CGPoint, save: Bool = false) {
-        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
-        let factor = convertedTranslation.y / 200
+    func scale(translation: CGPoint, save: Bool = false) -> CGFloat? {
+        guard let _ = self.scaledNode else {
+            return nil
+        }
+
+        return self.scaleNode(&self.scaledNode!, translation: translation, save: save)
+    }
+    
+    func scaleNode(inout node: ScalableNode, translation: CGPoint, save: Bool = false) -> CGFloat? {
+//        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
+        let factor = -translation.y / 150
         
-        self.scaledNode?.applyScale(factor)
+        let fill = node.applyScale(factor)
         
         if save {
             node.persistScale()
             self.scaledNode = nil
+            return nil
         }
+        
+        return fill
     }
     
     // MARK: - Camera handling

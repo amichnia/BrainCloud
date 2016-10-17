@@ -333,13 +333,21 @@
                                     <constraint firstAttribute="height" constant="44" id="szu-e7-yNe"/>
                                 </constraints>
                             </view>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n1y-z6-6GM">
+                                <rect key="frame" x="-80" y="412" width="300" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="nlg-Qb-QLg"/>
+                                </constraints>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="kBY-kt-DCM" firstAttribute="top" secondItem="n1G-lN-A1t" secondAttribute="bottom" id="25j-rk-x2o"/>
                             <constraint firstItem="n1G-lN-A1t" firstAttribute="top" secondItem="uxL-IE-Fvs" secondAttribute="bottom" constant="1" id="2bk-iG-ZTq"/>
+                            <constraint firstItem="n1y-z6-6GM" firstAttribute="centerX" secondItem="AZL-zG-Lwe" secondAttribute="leading" constant="-6" id="7kf-ch-ZGC"/>
                             <constraint firstAttribute="trailing" secondItem="uxL-IE-Fvs" secondAttribute="trailing" id="8G3-S0-A0x"/>
+                            <constraint firstItem="n1y-z6-6GM" firstAttribute="centerY" secondItem="AZL-zG-Lwe" secondAttribute="centerY" id="Ctq-te-E77"/>
                             <constraint firstItem="n1G-lN-A1t" firstAttribute="leading" secondItem="paT-dW-Tqz" secondAttribute="leading" id="FAz-9A-dKk"/>
                             <constraint firstAttribute="trailing" secondItem="n1G-lN-A1t" secondAttribute="trailing" id="OQ8-nJ-qfR"/>
                             <constraint firstItem="QwJ-TA-3sh" firstAttribute="leading" secondItem="paT-dW-Tqz" secondAttribute="leading" id="PbM-fI-Xpd"/>
@@ -363,6 +371,7 @@
                         <outlet property="scaleImage" destination="q8c-2N-oza" id="BRn-NR-CKO"/>
                         <outlet property="scaleLabel" destination="AZL-zG-Lwe" id="ivo-kn-rz3"/>
                         <outlet property="scalePanGestureRecognizer" destination="FTL-tg-U4y" id="Kpc-iq-7Q4"/>
+                        <outlet property="scaleProgress" destination="n1y-z6-6GM" id="0a5-dw-Xnn"/>
                         <outlet property="selectPressGestureRecognizer" destination="ynb-1A-7Px" id="odg-Qs-4gb"/>
                         <outlet property="selectTapGestureRecognizer" destination="2cX-Xs-9db" id="sKk-dh-vUQ"/>
                         <outlet property="skView" destination="Im5-i1-15t" id="Y21-re-fCf"/>

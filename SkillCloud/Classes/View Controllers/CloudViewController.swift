@@ -82,7 +82,15 @@ extension CloudViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let identifier = self.pattern[indexPath.row % 4]
+        let identifier: String = {
+            switch indexPath.section {
+            case 2:
+                let offset = self.collectionView(collectionView, numberOfItemsInSection: 1) % 2
+                return self.pattern[(indexPath.row + (2 * offset)) % 4]
+            default:
+                return self.pattern[indexPath.row % 4]
+            }
+        }()
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! SkillCollectionViewCell
         
         if indexPath.section == 1 && indexPath.row < self.skills.count {

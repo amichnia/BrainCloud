@@ -28,6 +28,7 @@ class GeneratorViewController: CloudViewController {
     @IBOutlet weak var scaleContainer: UIView!
     @IBOutlet weak var scaleLabel: UILabel!
     @IBOutlet weak var scaleImage: UIImageView!
+    @IBOutlet weak var scaleProgress: UIProgressView!
     
     // MARK: - Properties
     var scene : CloudGraphScene!
@@ -105,16 +106,20 @@ class GeneratorViewController: CloudViewController {
     }
     
     @IBAction func scaleAction(sender: UIPanGestureRecognizer) {
+        var fill: CGFloat? = nil
+        
         switch sender.state {
         case .Began:
-            self.scene.willStartScale()
+            fill = self.scene.willStartScale()
         case .Changed:
-            self.scene.scale(sender.translationInView(sender.view!))
+            fill = self.scene.scale(sender.translationInView(sender.view!))
         case .Ended:
             self.scene.scale(sender.translationInView(sender.view!), save: true)
         default:
             break
         }
+        
+        self.showScaleSliderWithFill(fill)
     }
     
     // MARK: - Actions
@@ -228,6 +233,17 @@ class GeneratorViewController: CloudViewController {
         UIGraphicsEndImageContext()
         
         return image
+    }
+    
+    func showScaleSliderWithFill(fill: CGFloat?) {
+        guard let fill = fill else {
+            self.scaleProgress.hidden = true
+            return
+        }
+        
+        self.scaleProgress.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
+        self.scaleProgress.hidden = false
+        self.scaleProgress.progress = Float(fill)
     }
     
     // MARK: - Navigation
