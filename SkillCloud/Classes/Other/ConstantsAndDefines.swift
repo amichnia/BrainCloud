@@ -26,7 +26,7 @@ struct Defined {
     
     struct Cloud {
         static let ExportedDefaultSize:         CGSize      = CGSize(width: 1400, height: 1400)
-        static let ThumbnailCaptureSize:        CGSize      = CGSize(width: 240, height: 240)
+        static let ThumbnailCaptureSize:        CGSize      = CGSize(width: 350, height: 350)
         static let ThumbnailDefaultSize:        CGSize      = CGSize(width: 140, height: 140)
     }
     struct Skill {

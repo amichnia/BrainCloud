@@ -78,6 +78,9 @@ class CloudGraphScene: SKScene, DTOModel {
         if let entity = self.cloudEntity {
             self.addSkillNodesFrom(entity)
         }
+        
+        view.setNeedsDisplay()
+        view.setNeedsLayout()
     }
     
     deinit {

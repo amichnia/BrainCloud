@@ -23,12 +23,29 @@ class GeneratorViewController: CloudViewController {
     @IBOutlet weak var panGestureRecognizer: UIPanGestureRecognizer!
     @IBOutlet var scalePanGestureRecognizer: UIPanGestureRecognizer!
     
-    @IBOutlet weak var scaleButtonItem: UIBarButtonItem!
+    @IBOutlet weak var nodeToolbarSection: UIView!
+    @IBOutlet weak var removeButton: UIButton!
+    @IBOutlet weak var scaleContainer: UIView!
+    @IBOutlet weak var scaleLabel: UILabel!
+    @IBOutlet weak var scaleImage: UIImageView!
     
     // MARK: - Properties
     var scene : CloudGraphScene!
     
     // MARK: - Lifecycle
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let image = scaleImage.image?.imageWithRenderingMode(.AlwaysTemplate) {
+            self.scaleImage.tintColor = UIColor.whiteColor()
+            self.scaleImage.image = image
+            self.scaleImage.setNeedsDisplay()
+        }
+        else {
+            assertionFailure()
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -225,6 +242,14 @@ class GeneratorViewController: CloudViewController {
         default:
             break
         }
+    }
+    
+}
+
+extension GeneratorViewController {
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .Default
     }
     
 }
