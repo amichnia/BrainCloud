@@ -36,6 +36,7 @@
 		C8F55CB51CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */; };
 		C8F55CB61CFC323000208F88 /* SkillNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */; };
 		C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */; };
+		CC3776A11DB5217D002188FC /* UIViewController+AlertsHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */; };
 		FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B11CAEEF8000315468 /* CloudViewController.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
 		FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */; };
@@ -139,6 +140,7 @@
 		C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkillNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillNodeEntity.swift; sourceTree = "<group>"; };
 		C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAPI.swift; sourceTree = "<group>"; };
+		CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+AlertsHandling.swift"; sourceTree = "<group>"; };
 		FE0522B11CAEEF8000315468 /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudViewController.swift; path = "../../View Controllers/CloudViewController.swift"; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
@@ -395,6 +397,7 @@
 				FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */,
 				FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */,
 				C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */,
+				CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */,
 				FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */,
 				FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */,
 			);
@@ -719,6 +722,7 @@
 				C8F55CB11CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift in Sources */,
 				FE60C9E91D22C4EE001129C8 /* ImageAsset.swift in Sources */,
 				FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */,
+				CC3776A11DB5217D002188FC /* UIViewController+AlertsHandling.swift in Sources */,
 				FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */,
 				C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */,
 				FEE50AA41D24941E0024060D /* CKRecordSyncable.swift in Sources */,

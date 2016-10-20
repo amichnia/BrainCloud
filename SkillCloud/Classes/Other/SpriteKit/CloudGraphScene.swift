@@ -226,7 +226,6 @@ class CloudGraphScene: SKScene, DTOModel {
     }
     
     func scaleNode(inout node: ScalableNode, translation: CGPoint, save: Bool = false) -> CGFloat? {
-//        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
         let factor = -translation.y / 150
         
         let fill = node.applyScale(factor)
