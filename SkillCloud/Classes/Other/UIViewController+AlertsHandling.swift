@@ -16,7 +16,7 @@ extension UIViewController {
         return self.promiseSelection(T.self, cancellable: cancellable, customOption: nil, options: options)
     }
     
-    func promiseSelection<T>(type: T.Type, cancellable: Bool, customOption: (UIView,CGFloat)?, options: [(String,UIAlertActionStyle,(() -> Promise<T>))]) -> Promise<T> {
+    func promiseSelection<T>(type: T.Type, cancellable: Bool, customOption: (view: UIView, height: CGFloat)?, options: [(String,UIAlertActionStyle,(() -> Promise<T>))]) -> Promise<T> {
         let selection = Promise<Promise<T>> { (fulfill, reject) in
             guard options.count > 0 else {
                 reject(CommonError.NotEnoughData)
@@ -25,9 +25,9 @@ extension UIViewController {
             
             let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             
-            if let view = customOption?.0 {
+            if let view = customOption?.view {
                 let margin: CGFloat = 8
-                view.frame = CGRect(x: margin, y: -margin - customOption!.1, width: alertController.view.bounds.size.width - 4 * margin, height: customOption!.1)
+                view.frame = CGRect(x: margin, y: -margin - customOption!.1, width: alertController.view.bounds.size.width - 4 * margin, height: customOption!.height)
                 alertController.view.addSubview(view)
                 view.setNeedsLayout()
             }

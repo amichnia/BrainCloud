@@ -81,7 +81,7 @@
                                 <rect key="frame" x="0.0" y="8" width="600" height="387"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Im5-i1-15t" userLabel="SKView" customClass="SKView">
-                                        <rect key="frame" x="106.5" y="0.0" width="387" height="387"/>
+                                        <rect key="frame" x="107" y="0.0" width="387" height="387"/>
                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
@@ -241,7 +241,7 @@
                                                     <action selector="deleteNode:" destination="sTb-IF-jcA" eventType="touchUpInside" id="Iyp-dC-2Pg"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Kx-vN-Ubd" userLabel="Scale Container">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Kx-vN-Ubd" userLabel="Scale Container" customClass="TouchDownView" customModule="SkillCloud" customModuleProvider="target">
                                                 <rect key="frame" x="60" y="0.0" width="93.5" height="44"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scale " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZL-zG-Lwe">
@@ -260,6 +260,7 @@
                                                     </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="tintColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="q8c-2N-oza" firstAttribute="leading" secondItem="AZL-zG-Lwe" secondAttribute="trailing" constant="8" id="8Za-bL-eMM"/>
@@ -333,21 +334,19 @@
                                     <constraint firstAttribute="height" constant="44" id="szu-e7-yNe"/>
                                 </constraints>
                             </view>
-                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="n1y-z6-6GM">
-                                <rect key="frame" x="-80" y="412" width="300" height="2"/>
+                            <slider hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="p3V-qJ-uVD">
+                                <rect key="frame" x="-90" y="394" width="304" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="nlg-Qb-QLg"/>
+                                    <constraint firstAttribute="width" constant="300" id="v23-BJ-kdh"/>
                                 </constraints>
-                            </progressView>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96470588239999999" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.2037661523" green="0.62090265749999995" blue="0.75905740259999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="kBY-kt-DCM" firstAttribute="top" secondItem="n1G-lN-A1t" secondAttribute="bottom" id="25j-rk-x2o"/>
                             <constraint firstItem="n1G-lN-A1t" firstAttribute="top" secondItem="uxL-IE-Fvs" secondAttribute="bottom" constant="1" id="2bk-iG-ZTq"/>
-                            <constraint firstItem="n1y-z6-6GM" firstAttribute="centerX" secondItem="AZL-zG-Lwe" secondAttribute="leading" constant="-6" id="7kf-ch-ZGC"/>
                             <constraint firstAttribute="trailing" secondItem="uxL-IE-Fvs" secondAttribute="trailing" id="8G3-S0-A0x"/>
-                            <constraint firstItem="n1y-z6-6GM" firstAttribute="centerY" secondItem="AZL-zG-Lwe" secondAttribute="centerY" id="Ctq-te-E77"/>
                             <constraint firstItem="n1G-lN-A1t" firstAttribute="leading" secondItem="paT-dW-Tqz" secondAttribute="leading" id="FAz-9A-dKk"/>
                             <constraint firstAttribute="trailing" secondItem="n1G-lN-A1t" secondAttribute="trailing" id="OQ8-nJ-qfR"/>
                             <constraint firstItem="QwJ-TA-3sh" firstAttribute="leading" secondItem="paT-dW-Tqz" secondAttribute="leading" id="PbM-fI-Xpd"/>
@@ -355,8 +354,10 @@
                             <constraint firstAttribute="trailing" secondItem="Btt-Z0-Lcn" secondAttribute="trailing" id="bTH-LU-gDz"/>
                             <constraint firstItem="Btt-Z0-Lcn" firstAttribute="leading" secondItem="paT-dW-Tqz" secondAttribute="leading" id="eko-ku-nzy"/>
                             <constraint firstItem="uxL-IE-Fvs" firstAttribute="leading" secondItem="paT-dW-Tqz" secondAttribute="leading" id="fNB-ek-e2W"/>
+                            <constraint firstItem="p3V-qJ-uVD" firstAttribute="centerY" secondItem="1Kx-vN-Ubd" secondAttribute="centerY" id="hrd-wT-oWL"/>
                             <constraint firstItem="QwJ-TA-3sh" firstAttribute="top" secondItem="yIa-Q3-3Uo" secondAttribute="bottom" id="iBz-8v-2nr"/>
                             <constraint firstItem="Btt-Z0-Lcn" firstAttribute="top" secondItem="yIa-Q3-3Uo" secondAttribute="bottom" constant="8" id="nBh-ek-BLC"/>
+                            <constraint firstItem="p3V-qJ-uVD" firstAttribute="centerX" secondItem="1Kx-vN-Ubd" secondAttribute="leading" constant="-6" id="oWe-Oy-iUa"/>
                             <constraint firstAttribute="trailing" secondItem="QwJ-TA-3sh" secondAttribute="trailing" id="sic-Vp-wKJ"/>
                         </constraints>
                     </view>
@@ -371,7 +372,7 @@
                         <outlet property="scaleImage" destination="q8c-2N-oza" id="BRn-NR-CKO"/>
                         <outlet property="scaleLabel" destination="AZL-zG-Lwe" id="ivo-kn-rz3"/>
                         <outlet property="scalePanGestureRecognizer" destination="FTL-tg-U4y" id="Kpc-iq-7Q4"/>
-                        <outlet property="scaleProgress" destination="n1y-z6-6GM" id="0a5-dw-Xnn"/>
+                        <outlet property="scaleProgress" destination="p3V-qJ-uVD" id="7JR-P5-vJI"/>
                         <outlet property="selectPressGestureRecognizer" destination="ynb-1A-7Px" id="odg-Qs-4gb"/>
                         <outlet property="selectTapGestureRecognizer" destination="2cX-Xs-9db" id="sKk-dh-vUQ"/>
                         <outlet property="skView" destination="Im5-i1-15t" id="Y21-re-fCf"/>
@@ -1812,8 +1813,8 @@
         <image name="icon-cloud-tabbar-selected" width="30" height="30"/>
         <image name="icon-explore-tabbar" width="30" height="30"/>
         <image name="icon-explore-tabbar-selected" width="30" height="30"/>
-        <image name="icon-info-tabbar" width="32" height="32"/>
-        <image name="icon-info-tabbar-selected" width="32" height="32"/>
+        <image name="icon-info-tabbar" width="30" height="30"/>
+        <image name="icon-info-tabbar-selected" width="30" height="30"/>
         <image name="icon-scale" width="32" height="32"/>
         <image name="icon-setting" width="32" height="32"/>
         <image name="icon-setting-black" width="32" height="32"/>

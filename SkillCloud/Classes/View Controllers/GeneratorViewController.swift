@@ -25,15 +25,21 @@ class GeneratorViewController: CloudViewController {
     
     @IBOutlet weak var nodeToolbarSection: UIView!
     @IBOutlet weak var removeButton: UIButton!
-    @IBOutlet weak var scaleContainer: UIView!
+    @IBOutlet weak var scaleContainer: TouchDownView!
     @IBOutlet weak var scaleLabel: UILabel!
     @IBOutlet weak var scaleImage: UIImageView!
-    @IBOutlet weak var scaleProgress: UIProgressView!
+    @IBOutlet weak var scaleProgress: UISlider!
     
     // MARK: - Properties
     var scene : CloudGraphScene!
     
     // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.scaleContainer.delegate = self
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -243,7 +249,7 @@ class GeneratorViewController: CloudViewController {
         
         self.scaleProgress.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
         self.scaleProgress.hidden = false
-        self.scaleProgress.progress = Float(fill)
+        self.scaleProgress.value = Float(fill)
     }
     
     // MARK: - Navigation
@@ -266,6 +272,16 @@ extension GeneratorViewController {
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .Default
+    }
+    
+}
+
+extension GeneratorViewController: TouchDownViewDelegate {
+    
+    func didTouch(down: Bool) {
+        if down {
+            self.showScaleSliderWithFill(self.scene.willStartScale())
+        }
     }
     
 }
