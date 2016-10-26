@@ -27,25 +27,27 @@ class GraphCloudEntity: NSManagedObject, CoreDataEntity {
     
     func setValuesFromModel(model: DTOModel) {
         if let cloud = model as? CloudGraphScene, ctx = self.managedObjectContext {
-            
+            // Basic
             self.cloudId = cloud.cloudIdentifier
             self.date = NSDate().timeIntervalSince1970
             self.name = cloud.name
             self.thumbnail = cloud.thumbnail
             self.slot = Int16(cloud.slot)
             
+            self.graphName = cloud.graph.name
+            self.graphVersion = cloud.graph.version
+            
             // Update skill nodes
-            for skillNode in cloud.skillNodes {
-                let skillNodeEntity = DataManager.updateEntity(SkillNodeEntity.self, model: skillNode, intoContext: ctx)
-                DDLogInfo("SN: \(skillNodeEntity?.nodeId ?? "-")")
-                skillNodeEntity?.cloud = self
+            
+            self.skillNodes?.forEach { node in
+                guard let node = node as? NSManagedObject else { return }
+
+                self.managedObjectContext?.deleteObject(node)
             }
             
-            // Update brain nodes
-            for brainNode in cloud.allNodes {
-                let brainNodeEntity = DataManager.updateEntity(BrainNodeEntity.self, model: brainNode, intoContext: ctx)
-                DDLogInfo("BN: \(brainNodeEntity?.nodeId ?? "-")")
-                brainNodeEntity?.cloud = self
+            for skillNode in cloud.skillNodes {
+                let skillNodeEntity = DataManager.updateEntity(SkillNodeEntity.self, model: skillNode, intoContext: ctx)
+                skillNodeEntity?.cloud = self
             }
         }
     }

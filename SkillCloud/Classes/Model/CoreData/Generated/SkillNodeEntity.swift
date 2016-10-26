@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreData
-
+import UIKit
 
 class SkillNodeEntity: BaseNodeEntity, CoreDataEntity {
 
@@ -26,10 +26,14 @@ class SkillNodeEntity: BaseNodeEntity, CoreDataEntity {
     
     func setValuesFromModel(model: DTOModel) {
         if let node = model as? SkillNode {
+            // Base data
             self.nodeId = node.uniqueIdentifierValue
-            self.positionRelative = NSValue(CGPoint: node.position )
-            self.scale = Int16(node.skill.experience.radius)
+            self.positionRelative = NSValue(CGPoint: node.graphNode?.position ?? CGPoint.zero )
+            self.scale = Float(node.graphNode?.xScale ?? 1) // Custom scale setting
+//            self.color = node.color
+            self.connected = node.pinnedNodes.map { return $0 }
             
+            // Skill data
             self.skillName = node.skill.title
             self.skillImage = node.skill.image
             self.skillExperienceValue = Int16(node.skill.experience.rawValue)

@@ -25,8 +25,8 @@ struct Defined {
     }
     
     struct Cloud {
-        static let ExportedDefaultSize:         CGSize      = CGSize(width: 1600, height: 1400)
-        static let ThumbnailCaptureSize:        CGSize      = CGSize(width: 240, height: 210)
+        static let ExportedDefaultSize:         CGSize      = CGSize(width: 1400, height: 1400)
+        static let ThumbnailCaptureSize:        CGSize      = CGSize(width: 350, height: 350)
         static let ThumbnailDefaultSize:        CGSize      = CGSize(width: 140, height: 140)
     }
     struct Skill {
@@ -34,8 +34,19 @@ struct Defined {
     }
     // MARK: - Collision Masks
     struct CollisionMask {
-        static let None: UInt32 = 0x0
-        static let Default: UInt32 = 0x1 << 0
-        static let Ghost: UInt32 = 0x1 << 1
+        static let None: UInt32             = 0x0       // 0
+        static let Default: UInt32          = 0x1 << 0  // 1
+        static let Ghost: UInt32            = 0x1 << 1  // 2
+        static let GraphNode: UInt32        = 0x1 << 2  // 4
+        static let GraphBoundary: UInt32    = CollisionMask.GraphNode | CollisionMask.Default
+    }
+    
+    struct ContactMask {
+        static let None: UInt32             = 0x0       // 0
+        static let Default: UInt32          = 0x1 << 0  // 1
+        static let Ghost: UInt32            = 0x1 << 1  // 2
+        static let AreaNode: UInt32         = 0x1 << 2  // 4
+        static let GraphNode: UInt32        = ContactMask.AreaNode | ContactMask.Default
+        
     }
 }

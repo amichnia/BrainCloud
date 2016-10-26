@@ -9,11 +9,10 @@
 import Foundation
 import SpriteKit
 import SpriteKit_Spring
+import PromiseKit
 
 protocol CloudSceneDelegate: class {
-    
     func didAddSkill()
-    
 }
 
 protocol SkillsProvider: class {
@@ -22,54 +21,359 @@ protocol SkillsProvider: class {
 
 class CloudGraphScene: SKScene, DTOModel {
     
-    // Defined
-    static var radius: CGFloat = 25 // Current node radius for selected skill
-    static var colliderRadius: CGFloat { return radius + 1 }
+    // TODO: Remove this later
+    static var colliderRadius: CGFloat = 20
+    static var radius: CGFloat = 20
     
     // MARK: - Properties
-    var slot: Int = 0
-    weak var skillsProvider : SkillsProvider?
-    weak var cloudSceneDelegate: CloudSceneDelegate?
+    weak var cloudDelegate: CloudSceneDelegate?
+    
+    var cameraSettings: (position: CGPoint, scale: CGFloat) = (position: CGPoint.zero, scale: 1)
+    var draggedNode: TranslatableNode?
+    var scaledNode: ScalableNode?
+    var selectedNode: GraphNode?
+    
     var nodes: [Node]!
     var allNodesContainer: SKNode!
-    var allNodes: [BrainNode] = []
-    var skillNodes: [SkillNode] = []
-    var cloudEntity: GraphCloudEntity?
-    var thumbnail: UIImage?
+    var allNodes: [Int:BrainNode] = [:] // graph building nodes from graph resource
+    var skillNodes: [SkillNode] = []    // added skills
+    var deletedNodes: [SkillNode] = []
     
-    var shouldUpdateLines: Bool = false
+    // Cloud entity handling
+    var cloudEntity: GraphCloudEntity?  // If set - all values below are overriden
+    var cloudIdentifier = "cloud"
+    var slot: Int = 0
+    var thumbnail: UIImage?
+    var graph: (name: String, version: String) = (name: "brain_graph", version: "v0.1")
     
     // MARK: - DTOModel
     var uniqueIdentifierValue: String { return self.cloudIdentifier }
     var previousUniqueIdentifier: String?
-    var cloudIdentifier = "cloud"
     
     // MARK: - Lifecycle
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         
-        self.backgroundColor = view.backgroundColor!
-        Node.rectSize = self.frame.size
-        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        self.configureInView(view)
         
-        if self.nodes != nil {
-            self.addNodes(self.nodes)
+        Node.rectSize = CGSize(width: 1400, height: 1225)
+        Node.rectPosition = CGPoint(x: 0, y: 88)
+        Node.scaleFactor = 0.35
+        
+        // Load base data if any
+        if let entity = self.cloudEntity {
+            self.slot = Int(entity.slot)
+            self.thumbnail ?= entity.thumbnail
+            self.cloudIdentifier ?= entity.cloudId
+            self.graph = (name: entity.graphName ?? "brain_graph", version: entity.graphVersion ?? "v0.1")  // Set graph name and version
         }
-        else if let cloud = self.cloudEntity {
-            self.configureWithCloud(cloud)
+        
+        // Load graph from resources
+        if let nodes = try? self.loadNodesFromGraph(self.graph) {
+            self.nodes = nodes
+            self.addNodes(nodes)
         }
+        
+        // Load skills
+        if let entity = self.cloudEntity {
+            self.addSkillNodesFrom(entity)
+        }
+        
+        view.setNeedsDisplay()
+        view.setNeedsLayout()
     }
     
     deinit {
-        // TODO: Workaround for retain problems
-        self.allNodes.forEach {
-            $0.lines = [:]
-            $0.connected = Set()
-        }
+        
     }
     
     // MARK: - Configuration
+    
+    // MARK: - Actions
+    func willStartTranslateAt(position: CGPoint) {
+        self.resolveDraggedNodeAt(position)
+    }
+    
+    func translate(translation: CGPoint, save: Bool = false) {
+        if let _ = self.draggedNode {
+            self.dragNode(&self.draggedNode!, translation: translation, save: save)
+        }
+        else {
+            self.moveCamera(translation, save: save)
+        }
+    }
+    
+    func dragNode(inout node: TranslatableNode, translation: CGPoint, save: Bool = false) {
+        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
+        node.position = node.originalPosition + convertedTranslation
+        
+        if save {
+            node.originalPosition = node.position
+            (self.draggedNode as? GraphNode)?.repin()
+            (node as? SKNode)?.physicsBody?.linearDamping = 20
+            self.draggedNode = nil
+        }
+    }
+    
+    func resolveTapAt(point: CGPoint, forSkill skill: Skill) {
+        let convertedPoint = self.convertPointFromView(point)
+        
+        if let option = self.nodeAtPoint(convertedPoint).interactionNode as? OptionNode {
+            switch option.action {
+            case .Delete:
+                self.deleteNode(option.graphNode)
+                fallthrough
+            default:
+                return
+            }
+        }
+        
+        
+        GraphNode.newFromTemplate(skill.experience)
+        .promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true, skill: skill)
+        .then { addedNode -> Void in
+            self.selectedNode?.selected = false
+            addedNode.selected = true
+            self.selectedNode = addedNode
+            
+            if let skillNode = addedNode.skillNode {
+                skillNode.cloudIdentifier = self.cloudIdentifier
+                self.skillNodes.append(skillNode)
+            }
+        }
+        
+        
+        self.cloudDelegate?.didAddSkill()
+    }
+    
+    func resolveDraggedNodeAt(position: CGPoint) {
+        let convertedPoint = self.convertPointFromView(position)
+        
+        if let draggedNode = self.nodeAtPoint(convertedPoint).interactionNode as? GraphNode, selectedNode = self.selectedNode where draggedNode == selectedNode  {
+            self.draggedNode = draggedNode
+            if let draggedNode = self.draggedNode as? GraphNode {
+                draggedNode.unpin()
+                draggedNode.originalPosition = draggedNode.position
+                draggedNode.physicsBody?.linearDamping = 100000
+            }
+        }
+    }
+    
+    func selectNodeAt(point: CGPoint) {
+        let convertedPoint = self.convertPointFromView(point)
+        
+        self.deselectNode()
+        
+        if let selectedNode = self.nodeAtPoint(convertedPoint).interactionNode as? GraphNode {
+            self.selectedNode = selectedNode
+            self.selectedNode?.selected = true
+        }
+    }
+    
+    func deselectNode() {
+        self.selectedNode?.selected = false
+        self.selectedNode = nil
+    }
+    
+    func deleteNode() {
+        guard let node = self.selectedNode else {
+            return
+        }
+        
+        self.selectedNode = nil
+        self.draggedNode = nil
+        self.scaledNode = nil
+        
+        self.deleteNode(node)
+    }
+    
+    func deleteNode(node: GraphNode?) {
+        self.selectedNode?.selected = false
+        node?.selected = false
+        node?.skillNode?.pinnedNodes.forEach { nodeId in
+            self.allNodes[nodeId]?.repinToOriginalPosition()
+        }
+        
+        node?.removeFromParent()
+        
+        guard let skillNode = node?.skillNode, let index = skillNodes.indexOf(skillNode) else {
+            return
+        }
+        
+        skillNodes.removeAtIndex(index)
+        deletedNodes.append(skillNode)
+        
+        OptionsNode.unspawn()
+    }
+    
+    func willStartScale() -> CGFloat? {
+        self.scaledNode = self.selectedNode
+        
+        if let _ = self.scaledNode {
+            return self.scaledNode!.applyScale(0)
+        }
+        else {
+            return nil
+        }
+    }
+    
+    func scale(translation: CGPoint, save: Bool = false) -> CGFloat? {
+        guard let _ = self.scaledNode else {
+            return nil
+        }
+
+        return self.scaleNode(&self.scaledNode!, translation: translation, save: save)
+    }
+    
+    func scaleNode(inout node: ScalableNode, translation: CGPoint, save: Bool = false) -> CGFloat? {
+        let factor = -translation.y / 150
+        
+        let fill = node.applyScale(factor)
+        
+        if save {
+            node.persistScale()
+            self.scaledNode = nil
+            return nil
+        }
+        
+        return fill
+    }
+    
+    // MARK: - Camera handling
+    func cameraZoom(zoom: CGFloat, save: Bool = false) {
+        let baseScale = self.cameraSettings.scale
+        let newZoom = max(0.02,baseScale + (1 - zoom))
+        
+        self.camera?.setScale(newZoom)
+        
+        if save {
+            self.cameraSettings.scale = newZoom
+            self.cameraAnimateToValidValues()
+        }
+    }
+    
+    func moveCamera(translation: CGPoint, save: Bool = false) {
+        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
+        
+        let newPosition = self.cameraSettings.position - convertedTranslation
+        self.camera?.position = newPosition
+        
+        if save {
+            self.cameraSettings.position = newPosition
+            self.cameraAnimateToValidValues()
+        }
+    }
+    
+    func cameraAnimateToValidValues(duration: NSTimeInterval = 0.5) {
+        guard let camera = self.camera else {
+            return
+        }
+        
+        let scale = max(0.4, min(1.2,cameraSettings.scale))
+        let visibleArea = CGSize(width: self.size.width * scale, height: self.size.height * scale)
+        
+        let leftBound = camera.position.x - (visibleArea.width / 2)
+        let rightBound = camera.position.x + (visibleArea.width / 2)
+        let topBound = camera.position.y + (visibleArea.height / 2)
+        let bottomBound = camera.position.y - (visibleArea.height / 2)
+        
+        var translation = CGVector(dx: 0, dy: 0)
+        
+        if scale <= 1 {
+            translation.dx += -min(0, leftBound)
+            translation.dx -=  max(0, rightBound - size.width)
+            translation.dy -=  max(0, topBound - size.height)
+            translation.dy += -min(0, bottomBound)
+        }
+        else {
+            translation = CGVector(dx: (size.width / 2) - camera.position.x, dy: (size.height / 2) - camera.position.y)
+        }
+        
+        let moveAction = SKAction.moveBy(translation, duration: duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0)
+        let scaleAction = SKAction.scaleTo(scale, duration: duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0)
+        let action = SKAction.group([moveAction,scaleAction])
+        
+        camera.runAction(action) {
+            self.cameraSettings.scale = camera.xScale
+            self.cameraSettings.position = camera.position
+        }
+    }
+    
+    // MARK: - Main run loop
+    override func update(currentTime: NSTimeInterval) {
+        self.allNodes.values.forEach {
+            $0.getSuckedOffIfNeeded()
+            $0.updateLinesIfNeeded()
+        }
+    }
+    
+}
+
+// MARK: - SKPhysicsContactDelegate
+extension CloudGraphScene: SKPhysicsContactDelegate {
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        if let brainNode = contact.bodyA.node as? BrainNode, graphNode = contact.bodyB.node?.interactionNode as? GraphNode {
+            brainNode.getSuckedIfNeededBy(graphNode)
+        }
+        else if let brainNode = contact.bodyB.node as? BrainNode, graphNode = contact.bodyA.node?.interactionNode as? GraphNode {
+            brainNode.getSuckedIfNeededBy(graphNode)
+        }
+    }
+    
+    func didEndContact(contact: SKPhysicsContact) {
+        
+    }
+    
+}
+
+// MARK: - Configure scene
+extension CloudGraphScene {
+    
+    // Basic configuration
+    func configureInView(view: SKView) {
+        // Prepare templates
+        GraphNode.grabFromScene(self)
+        OptionsNode.grabFromScene(self)
+        
+        // Background etc
+        self.backgroundColor = view.backgroundColor!
+        let showDebug = false
+        view.showsPhysics = showDebug
+        view.showsDrawCount = showDebug
+        view.showsNodeCount = showDebug
+        view.showsFPS = showDebug
+        
+        // Physics
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        self.physicsWorld.contactDelegate = self
+        
+        // Camera
+        self.camera = self.childNodeWithName("MainCamera") as? SKCameraNode
+        self.cameraSettings.position = self.frame.centerOfMass
+    }
+    
+    // loads nodes array from graph
+    func loadNodesFromGraph(graph: (name: String, version: String)) throws -> [Node] {
+        let resource = "\(graph.name)_\(graph.version)"
+        
+        guard let url = NSBundle.mainBundle().URLForResource(resource, withExtension: "json"), data = NSData(contentsOfURL: url) else {
+            throw SCError.InvalidBundleResourceUrl
+        }
+        
+        let array = ((try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)) as! NSArray) as! [NSDictionary]
+        
+        return array.map{
+            let scale = $0["s"] as! Int
+            let point = CGPoint(x: $0["x"] as! CGFloat, y: $0["y"] as! CGFloat)
+            var node =  Node(point: point, scale: scale, id: $0["id"] as! Int, connected: $0["connected"] as! [Int])
+            node.convex = $0["convex"] as! Bool
+            return node
+        }
+    }
+    
+    // adds bas nodes building graph
     func addNodes(nodes: [Node]) {
         if allNodesContainer == nil {
             allNodesContainer = SKNode()
@@ -81,217 +385,52 @@ class CloudGraphScene: SKScene, DTOModel {
         
         for node in nodes {
             let brainNode = BrainNode.nodeWithNode(node)
-            brainNode.cloudIdentifier = self.cloudIdentifier
-            allNodesContainer.addChild(brainNode)
-            allNodes.append(brainNode)
             
-            brainNode.name = "node"
+            self.allNodesContainer.addChild(brainNode)
+            self.allNodes[node.id] = brainNode
             
-            brainNode.physicsBody = SKPhysicsBody(circleOfRadius: brainNode.node.radius + 2)
-            brainNode.physicsBody?.linearDamping = 25
-            brainNode.physicsBody?.angularDamping = 25
-            brainNode.physicsBody?.categoryBitMask = Defined.CollisionMask.Default
-            brainNode.physicsBody?.collisionBitMask = Defined.CollisionMask.Default
-            brainNode.physicsBody?.contactTestBitMask = Defined.CollisionMask.Default
-            brainNode.physicsBody?.density = node.convex ? 20 : 1
-            
-            // Spring joint to current position
-            let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: brainNode.physicsBody!, anchorA: brainNode.position, anchorB: brainNode.position)
-            joint.frequency = 20
-            joint.damping = 10
-            brainNode.orginalJoint = joint
-            self.physicsWorld.addJoint(joint)
+            brainNode.configurePhysicsBody()
+            brainNode.pinToScene()
         }
         
-        allNodes.forEach{ node in
-            node.node.connected.forEach{ i in
-                node.connectNode(allNodes[i-1])
+        for node in self.allNodes.values {
+            node.cloudIdentifier = self.cloudIdentifier
+            node.node.connected.forEach { connectedId in
+                if let connectedTo = self.allNodes[connectedId] {
+                    node.addLineToNode(connectedTo)
+                }
             }
         }
     }
     
-    func getNodes() -> [Node] {
-        return self.allNodes.map{ $0.node }
-    }
-    
-    func configureWithCloud(cloud: GraphCloudEntity) {
-        // Container
-        if allNodesContainer == nil {
-            allNodesContainer = SKNode()
-            allNodesContainer.position = CGPoint.zero
-            self.addChild(allNodesContainer)
-        }
+    func addSkillNodesFrom(entity: GraphCloudEntity) {
+        let skillEntities = entity.skillNodes?.allObjects.map{ $0 as! SkillNodeEntity } ?? []
         
-        // Saved skill nodes
-        var savedSkillNodes: [String:SkillNode] = [:]
-        
-        // Brain Nodes
-        let brainNodes: [BrainNodeEntity] = cloud.brainNodes?.map({ return ($0 as! BrainNodeEntity) }) ?? []
-        for brainNodeEntity in brainNodes {
-            guard let brainNode = BrainNode.nodeWithEntity(brainNodeEntity) else {
-                continue
-            }
+        for entity in skillEntities {
+            let level: Skill.Experience = Skill.Experience(rawValue: Int(entity.skillExperienceValue)) ?? Skill.Experience.Beginner
+            let position: CGPoint = entity.positionRelative?.CGPointValue() ?? CGPoint.zero
+            let pinned: [Int] = entity.connected ?? []
             
-            brainNode.cloudIdentifier = self.cloudIdentifier
-            allNodesContainer.addChild(brainNode)
-            allNodes.append(brainNode)
-            
-            brainNode.name = "node"
-            
-            brainNode.physicsBody = SKPhysicsBody(circleOfRadius: brainNode.node.radius + 2)
-            brainNode.physicsBody?.linearDamping = 25
-            brainNode.physicsBody?.angularDamping = 25
-            brainNode.physicsBody?.categoryBitMask = Defined.CollisionMask.Default
-            brainNode.physicsBody?.collisionBitMask = Defined.CollisionMask.Default
-            brainNode.physicsBody?.contactTestBitMask = Defined.CollisionMask.Default
-            brainNode.physicsBody?.density = brainNodeEntity.isConvex ? 20 : 1
-            
-            if let pinnedSkillEntity = brainNodeEntity.pinnedSkillNode {
-                guard let pinnedId = pinnedSkillEntity.nodeId else {
-                    continue
+            // Spawn concrete entity
+            GraphNode.newFromTemplate(level)
+            .promiseSpawnInScene(self, atPosition: position, animated: false, entity: entity)
+            .then { addedNode -> Void in
+                pinned.map({ return self.allNodes[$0] }).forEach { node in
+                    node?.getSuckedIfNeededBy(addedNode)
                 }
                 
-                guard let skillNode = savedSkillNodes[pinnedId] ?? SkillNode.nodeWithEntity(pinnedSkillEntity) else {
-                    continue
-                }
-                
-                // Save for later use
-                savedSkillNodes[pinnedId] = skillNode
-                
-                // Set colliders masks as 'non collidable'
-                brainNode.physicsBody?.categoryBitMask = Defined.CollisionMask.Ghost
-                brainNode.physicsBody?.collisionBitMask = Defined.CollisionMask.None
-                
-                // Remove node original spring joint
-                if let _ = brainNode.orginalJoint {
-                    self.physicsWorld.removeJoint(brainNode.orginalJoint!)
-                }
-                // Pin to node
-                brainNode.position = skillNode.position
-                brainNode.pinnedSkillNode = skillNode
-                // Pin node position with skill node position
-                let joint = SKPhysicsJointFixed.jointWithBodyA(brainNode.physicsBody!, bodyB: skillNode.physicsBody!, anchor: skillNode.position)
-                brainNode.ghostJoint = joint
-                brainNode.isGhost = true // Does not collide
-                
-                // Add skill node to saved
-                skillNode.cloudIdentifier = self.cloudIdentifier
-                // Add skill node to array
-                self.skillNodes.append(skillNode)
-                
-                if skillNode.parent == nil {
-                    self.addChild(skillNode)
-                }
-                
-                self.physicsWorld.addJoint(joint)
-            }
-            else {
-                // Spring joint to current position
-                let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: brainNode.physicsBody!, anchorA: brainNode.position, anchorB: brainNode.position)
-                joint.frequency = 20
-                joint.damping = 10
-                brainNode.orginalJoint = joint
-                self.physicsWorld.addJoint(joint)
-            }
-        }
-        
-        allNodes.sortInPlace { $0.node.id < $1.node.id }
-        allNodes.forEach{ node in
-            node.node.connected.forEach{ i in
-                node.connectNode(allNodes[i-1])
-            }
-        }
-        
-        self.skillNodes = savedSkillNodes.values.sort{ $0.nodeId < $1.nodeId }
-    }
-    
-    // MARK: - Actions
-    var fromNode : BrainNode?
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        guard let skill = self.skillsProvider?.skillToAdd else {
-            return
-        }
-        
-        if let touch = touches.first {
-            let location = touch.locationInNode(self)
-            
-            let touchedNode = self.nodeAtPoint(location)
-            
-            if let name = touchedNode.name where name == "skill" && location.distanceTo(touchedNode.position) < CloudGraphScene.radius {
-                return
-            }
-            
-            // Create new skill
-            let skillNode = self.addSkillNodeAt(location, withSkill: skill)
-            
-            // Skill node scale action
-            self.shouldUpdateLines = true
-            let action = SKAction.scaleTo(1, duration: 1, delay: 0.2, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-            skillNode.runAction(action) {
-                delay(1){
-                    self.shouldUpdateLines = false
+                if let skillNode = addedNode.skillNode {
+                    skillNode.cloudIdentifier = self.cloudIdentifier
+                    self.skillNodes.append(skillNode)
                 }
             }
             
-            self.addChild(skillNode)
-        }
-    }
-    
-    func addSkillNodeAt(location: CGPoint, withSkill skill: Skill) -> SkillNode {
-        let skillNode = SkillNode.nodeWithSkill(skill, andLocation: location)
-        
-        // Add skill node to saved
-        skillNode.cloudIdentifier = self.cloudIdentifier
-        skillNode.nodeId = (self.skillNodes.last?.nodeId ?? 0) + 1
-        // Add skill node to array
-        self.skillNodes.append(skillNode)
-        
-        // Combine nodes in "area" into one place (implosion)
-        let nodesInArea = allNodes.filter{
-            return hypot(location.x - $0.position.x, location.y - $0.position.y) < CloudGraphScene.radius * 1.1 && !$0.node.convex && !$0.isGhost
-        }
-        
-        // Foreach node in area - move it under Skill node, and remove its joints
-        nodesInArea.forEach{ node in
-            // Set colliders masks as 'non collidable'
-            node.physicsBody?.categoryBitMask = Defined.CollisionMask.Ghost
-            node.physicsBody?.collisionBitMask = Defined.CollisionMask.None
-            
-            // Remove node original spring joint
-            if let _ = node.orginalJoint {
-                self.physicsWorld.removeJoint(node.orginalJoint!)
-            }
-            
-            // Move node into position
-            let action = SKAction.moveTo(location, duration: 0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0)
-            
-            node.runAction(action) {
-                // Pin node position with skill node position
-                let joint = SKPhysicsJointFixed.jointWithBodyA(node.physicsBody!, bodyB: skillNode.physicsBody!, anchor: skillNode.position)
-                node.ghostJoint = joint
-                node.isGhost = true // Does not collide
-                self.physicsWorld.addJoint(node.ghostJoint!)
-            }
-            
-            // Save info to what node is it pinned
-            node.pinnedSkillNode = skillNode
-        }
-        
-        self.cloudSceneDelegate?.didAddSkill()
-        
-        return skillNode
-    }
-
-    // MARK: - Main run loop
-    override func update(currentTime: CFTimeInterval) {
-        guard self.shouldUpdateLines else {
-            return
-        }
-        
-        allNodes.forEach{
-            $0.updateLines()
+            // Attach saved nodes
         }
     }
     
 }
+
+
+
+

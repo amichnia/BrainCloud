@@ -33,62 +33,6 @@ extension UIViewController {
     
 }
 
-// MARK: - Promise decisions
-extension UIViewController {
-    
-    func promiseSelection<T>(type: T.Type, cancellable: Bool, options: [(String,UIAlertActionStyle,(() -> Promise<T>))]) -> Promise<T> {
-        let selection = Promise<Promise<T>> { (fulfill, reject) in
-            guard options.count > 0 else {
-                reject(CommonError.NotEnoughData)
-                return
-            }
-            
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-            
-            options.forEach{ (title, style, promise) in
-                let action = UIAlertAction(title: title, style: style) { (_) in
-                    fulfill(promise())
-                }
-                
-                alertController.addAction(action)
-            }
-            
-            if cancellable {
-                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .Default){ (_) in
-                    reject(CommonError.UserCancelled)
-                }
-                
-                alertController.addAction(cancelAction)
-            }
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-        
-        return selection.then { (promise) -> Promise<T> in
-            return promise
-        }
-    }
-    
-}
-
-extension UIViewController {
-    
-    func promiseHandleError(error: ShowableError) -> Promise<Void> {
-        return Promise<Void> { fulfill,reject in
-            let alertController = UIAlertController(title: error.alertTitle(), message: error.alertBody(), preferredStyle: .Alert)
-            
-            let confirmAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .Default) { _ in
-                fulfill()
-            }
-            
-            alertController.addAction(confirmAction)
-            
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-    }
-    
-}
-
 // MARK: - Snack bar support
 extension UIViewController {
     
@@ -176,6 +120,48 @@ extension InteractiveNode where Self : SKNode {
 }
 
 extension SKNode: NonInteractiveNode {}
+
+
+protocol TranslatableNode {
+    var position: CGPoint { get set }
+    var originalPosition: CGPoint { get set }
+}
+
+protocol ScalableNode {
+    var currentScale: CGFloat { get set }
+    var originalScale: CGFloat { get set }
+}
+
+extension ScalableNode {
+    mutating func applyScale(scale: CGFloat) -> CGFloat {
+        let minScale: CGFloat = 0.5
+        let maxScale: CGFloat = 2.0
+        self.currentScale =  max(0.5, min(2.0, self.originalScale + scale))
+        return (self.currentScale - minScale) / (maxScale - minScale)
+    }
+    
+    mutating func persistScale() {
+        self.originalScale = self.currentScale
+    }
+}
+
+
+// MARK: - CGPoint Extension
+extension CGPoint {
+    
+    func invertX() -> CGPoint {
+        return CGPoint(x: -self.x, y: self.y)
+    }
+    
+    func invertY() -> CGPoint {
+        return CGPoint(x: self.x, y: -self.y)
+    }
+    
+}
+
+func *(lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+    return CGPoint(x: lhs.x + rhs, y: lhs.y * rhs)
+}
 
 // MARK: - Custom operators
 infix operator ?= {
