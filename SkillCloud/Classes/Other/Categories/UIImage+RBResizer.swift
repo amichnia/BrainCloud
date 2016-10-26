@@ -120,3 +120,28 @@ extension UIImage {
     }
     
 }
+
+extension UIImage {
+    
+    static var mainScale: CGFloat { return UIScreen.mainScreen().scale }
+    
+    static func CircleImageWithStroke(stroke: (color: UIColor, width: CGFloat), fill fillColor: UIColor = UIColor.clearColor(), size: CGSize) -> UIImage {
+        // Context
+        UIGraphicsBeginImageContextWithOptions(size, false, UIImage.mainScale)
+        let rect = CGRect(origin: CGPoint.zero, size: size)
+        let context = UIGraphicsGetCurrentContext()!
+        // Fill
+        CGContextSetFillColorWithColor(context, fillColor.CGColor)
+        CGContextFillEllipseInRect(context, rect)
+        // Stroke
+        CGContextSetStrokeColorWithColor(context, stroke.color.CGColor)
+        CGContextSetLineWidth(context, stroke.width)
+        CGContextStrokeEllipseInRect(context, rect)
+        // Finish image
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        // Return
+        return image
+    }
+    
+}
