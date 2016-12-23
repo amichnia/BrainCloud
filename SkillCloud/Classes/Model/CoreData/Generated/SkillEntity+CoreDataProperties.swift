@@ -18,7 +18,7 @@ extension SkillEntity {
     @NSManaged var desc: String?
     @NSManaged var experienceValue: Int16
     @NSManaged var image: UIImage?
-    @NSManaged var modified: NSTimeInterval
+    @NSManaged var modified: TimeInterval
     @NSManaged var name: String?
     @NSManaged var offline: Bool
     @NSManaged var recordID: String?

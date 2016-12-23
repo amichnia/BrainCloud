@@ -24,7 +24,7 @@ class SkillNode: SKNode, DTOModel {
     var pinnedNodes: Set<Int> = Set<Int>()
     
     // MARK: - Initialisation
-    static func nodeWithSkill(skill: Skill, attahcedTo graphNode: GraphNode) -> SkillNode {
+    static func nodeWithSkill(_ skill: Skill, attahcedTo graphNode: GraphNode) -> SkillNode {
         // Whole skill node container
         let skillNode = SkillNode();
         skillNode.skill = skill
@@ -42,27 +42,27 @@ class SkillNode: SKNode, DTOModel {
         let maskShapeNode = SKShapeNode(circleOfRadius: radius - 1)
         maskShapeNode.strokeColor = Node.color
         maskShapeNode.fillColor = Node.color
-        maskShapeNode.position = CGPointZero
+        maskShapeNode.position = CGPoint.zero
         maskShapeNode.zPosition = skillNode.zPosition + 1
         
         // Skill image sprite node
         let skillImageTexture = SKTexture(image: skill.thumbnail)   // TODO: Verify what image to use for texture
         let skillImageNode = SKSpriteNode(texture: skillImageTexture, size: graphNode.size)
-        skillImageNode.position = CGPointZero
+        skillImageNode.position = CGPoint.zero
         skillImageNode.zPosition = skillNode.zPosition + 2
         
         // Foreground bordered circle - placed on top of image to provide "antialiasing"
         let foregroundShapeNode = SKShapeNode(circleOfRadius: radius - 1)
         foregroundShapeNode.strokeColor = Node.color
         foregroundShapeNode.lineWidth = 10
-        foregroundShapeNode.fillColor = UIColor.clearColor()
-        foregroundShapeNode.position = CGPointZero
+        foregroundShapeNode.fillColor = UIColor.clear
+        foregroundShapeNode.position = CGPoint.zero
         foregroundShapeNode.zPosition = skillNode.zPosition + 3
         
         // Cropping skill image to circle shape
         let cropNode = SKCropNode()
         cropNode.maskNode = maskShapeNode
-        cropNode.position = CGPointZero
+        cropNode.position = CGPoint.zero
         
         // Nodes hierarchy in container
         skillNode.addChild(cropNode)
@@ -82,7 +82,7 @@ extension SkillNode {
         return self.relativePositionWith(self.position)
     }
     
-    func relativePositionWith(skPosition: CGPoint) -> CGPoint {
+    func relativePositionWith(_ skPosition: CGPoint) -> CGPoint {
         return CGPoint(x: skPosition.x / Node.rectSize.width, y: (Node.rectSize.height - skPosition.y) / Node.rectSize.height)
     }
     

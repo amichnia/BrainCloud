@@ -41,11 +41,11 @@ class CloudViewController: UIViewController, SkillsProvider {
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
-            let initialIndex = NSIndexPath(forItem: 0, inSection: 1)
-            self.collectionView.selectItemAtIndexPath(initialIndex, animated: false, scrollPosition: UICollectionViewScrollPosition.None)
-            self.collectionView(self.collectionView, didSelectItemAtIndexPath: initialIndex)
+            let initialIndex = IndexPath(item: 0, section: 1)
+            self.collectionView.selectItem(at: initialIndex, animated: false, scrollPosition: .centeredHorizontally)
+            self.collectionView(self.collectionView, didSelectItemAt: initialIndex)
         }
-        .error { error in
+        .catch { error in
             print("Error: \(error)")
         }
     }
@@ -68,11 +68,11 @@ class CloudViewController: UIViewController, SkillsProvider {
 // MARK: - UICollectionViewDataSource
 extension CloudViewController: UICollectionViewDataSource {
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard section == 1 else {
             return self.skillsOffset
         }
@@ -81,7 +81,7 @@ extension CloudViewController: UICollectionViewDataSource {
         return cells + (cells % 2)
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let identifier: String = {
             switch indexPath.section {
             case 2:
@@ -91,17 +91,17 @@ extension CloudViewController: UICollectionViewDataSource {
                 return self.pattern[indexPath.row % 4]
             }
         }()
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! SkillCollectionViewCell
         
         if indexPath.section == 1 && indexPath.row < self.skills.count {
             cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
             if indexPath.row == self.selectedRow {
-                cell.selected = true
+                cell.isSelected = true
             }
         }
         else {
             cell.configureEmpty()
-            cell.selected = false
+            cell.isSelected = false
         }
         
         return cell
@@ -112,7 +112,7 @@ extension CloudViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension CloudViewController: UICollectionViewDelegate {
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == 1 && indexPath.row < self.skills.count else {
             return
         }
@@ -127,11 +127,11 @@ extension CloudViewController: UICollectionViewDelegate {
 extension CloudViewController: CloudSceneDelegate {
     
     func didAddSkill() {
-        if var indexPath = self.collectionView.indexPathsForSelectedItems()?.first {
-            self.collectionView.deselectItemAtIndexPath(indexPath, animated: false)
-            indexPath = NSIndexPath(forItem: (indexPath.row + 1) % self.skills.count , inSection: indexPath.section)
-            self.collectionView.selectItemAtIndexPath(indexPath, animated: false, scrollPosition: .None)
-            self.collectionView(self.collectionView, didSelectItemAtIndexPath: indexPath)
+        if var indexPath = self.collectionView.indexPathsForSelectedItems?.first {
+            self.collectionView.deselectItem(at: indexPath, animated: false)
+            indexPath = IndexPath(item: (indexPath.row + 1) % self.skills.count , section: indexPath.section)
+            self.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
+            self.collectionView(self.collectionView, didSelectItemAt: indexPath)
             self.collectionView.setContentOffset(CGPoint(x:  (80 * CGFloat(self.skillsOffset / 2) + (CGFloat(indexPath.row / 2) * 80)), y: 0), animated: true)
         }
     }
@@ -139,9 +139,9 @@ extension CloudViewController: CloudSceneDelegate {
 }
 
 
-enum SCError : ErrorType {
-    case CreateStreamError
-    case InvalidBundleResourceUrl
+enum SCError : Error {
+    case createStreamError
+    case invalidBundleResourceUrl
 }
 
 

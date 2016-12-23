@@ -16,7 +16,7 @@ import PromiseKit
 protocol CKRecordSyncable: CKRecordConvertible, CKRecordMappable {
     
     var recordChangeTag: String? { get set }
-    var modified: NSDate? { get set }
+    var modified: Date? { get set }
     var offline: Bool { get set }
     
     func clearTemporaryData()
@@ -29,7 +29,7 @@ extension CKRecordSyncable {
     typealias T = Self
     
     // Sync record to database
-    func promiseInsertTo(db: DatabaseType = .Private) -> Promise<Self> {
+    func promiseInsertTo(_ db: DatabaseType = .private) -> Promise<Self> {
         let container = CloudContainer.sharedContainer
         let database = container.database(db)
         
@@ -42,23 +42,23 @@ extension CKRecordSyncable {
         }
     }
     
-    private func promiseInsertTo(database: CKDatabase, type: DatabaseType = .Private) -> Promise<CKRecord> {
+    fileprivate func promiseInsertTo(_ database: CKDatabase, type: DatabaseType = .private) -> Promise<CKRecord> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecord()
         .then{ record -> CKRecord in
-            if type == .Public {
-                record.setObject(0, forKey: "accepted")
+            if type == .public {
+                record.setObject(NSNumber(booleanLiteral: false), forKey: "accepted")
             }
             return record
         }
-        .then(database.promiseInsertRecord)
+        .then(execute: database.promiseInsertRecord)
         .always {
             // So assure, that the temporary data will be always cleared
             self.clearTemporaryData()
         }
     }
     
-    func promiseSyncTo(db: DatabaseType = .Private) -> Promise<Self> {
+    func promiseSyncTo(_ db: DatabaseType = .private) -> Promise<Self> {
         let container = CloudContainer.sharedContainer
         let database = container.database(db)
         
@@ -71,39 +71,39 @@ extension CKRecordSyncable {
         }
     }
     
-    private func promiseSyncTo(database: CKDatabase, type: DatabaseType = .Private) -> Promise<CKRecord> {
+    fileprivate func promiseSyncTo(_ database: CKDatabase, type: DatabaseType = .private) -> Promise<CKRecord> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecord()
         .then{ record -> CKRecord in
-            if type == .Public {
-                record.setObject(0, forKey: "accepted")
+            if type == .public {
+                record.setObject(NSNumber(booleanLiteral: false), forKey: "accepted")
             }
             return record
         }
-        .then(database.promiseUpdateRecord)
+        .then(execute: database.promiseUpdateRecord)
         .always {
             // So assure, that the temporary data will be always cleared
             self.clearTemporaryData()
         }
     }
     
-    func promiseDeleteFrom(db: DatabaseType = .Private) -> Promise<Self> {
+    func promiseDeleteFrom(_ db: DatabaseType = .private) -> Promise<Self> {
         let container = CloudContainer.sharedContainer
         let database = container.database(db)
         
         return self.promiseDeleteFrom(database).then{ return self }
     }
     
-    private func promiseDeleteFrom(database: CKDatabase) -> Promise<Void> {
+    fileprivate func promiseDeleteFrom(_ database: CKDatabase) -> Promise<Void> {
         guard let recordID = self.recordID else {
-            return Promise<Void>(error: CommonError.NotEnoughData)
+            return Promise<Void>(error: CommonError.notEnoughData)
         }
         
         return database.promiseDeleteRecord(recordID)
     }
     
     // Sync record from database
-    func promiseSyncFrom(db: DatabaseType = .Private) -> Promise<Self> {
+    func promiseSyncFrom(_ db: DatabaseType = .private) -> Promise<Self> {
         let container = CloudContainer.sharedContainer
         let database = container.database(db)
         
@@ -116,22 +116,22 @@ extension CKRecordSyncable {
         }
     }
     
-    private func promiseSyncFrom(database: CKDatabase) -> Promise<CKRecord> {
+    fileprivate func promiseSyncFrom(_ database: CKDatabase) -> Promise<CKRecord> {
         guard let recordID = self.recordID else {
-            return Promise<CKRecord>(error: CloudError.NotMatchingRecordData)
+            return Promise<CKRecord>(error: CloudError.notMatchingRecordData)
         }
         
         return database.promiseRecordWithID(recordID)
     }
     
-    static func promiseAll(db: DatabaseType = .Private) -> Promise<[Self]> {
+    static func promiseAll(_ db: DatabaseType = .private) -> Promise<[Self]> {
         let container = CloudContainer.sharedContainer
         let database = container.database(db)
         
         return self.promiseAllFrom(database)
     }
     
-    private static func promiseAllFrom(database: CKDatabase) -> Promise<[Self]> {
+    fileprivate static func promiseAllFrom(_ database: CKDatabase) -> Promise<[Self]> {
         return database.promiseAllWith()
     }
     
@@ -143,13 +143,13 @@ extension Array where Element: CKRecordSyncable {
     typealias T = Element.Type
     
     func promiseRecords() -> Promise<[CKRecord]> {
-        return when(self.map { $0.promiseRecord() })
+        return when(fulfilled: self.map { $0.promiseRecord() })
     }
     
-    func promiseInsertTo(database: CKDatabase) -> Promise<[Element]> {
+    func promiseInsertTo(_ database: CKDatabase) -> Promise<[Element]> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecords()
-        .then(database.promiseInsertRecords)
+        .then(execute: database.promiseInsertRecords)
         .then { savedRecords -> [Element] in
             savedRecords.mapExisting { Element(record: $0) }
         }
@@ -160,10 +160,10 @@ extension Array where Element: CKRecordSyncable {
 
     }
     
-    func promiseSyncTo(database: CKDatabase) -> Promise<[Element]> {
+    func promiseSyncTo(_ database: CKDatabase) -> Promise<[Element]> {
         // Creating record resulted in creating temporary data at generated file url
         return self.promiseRecords()
-        .then(database.promiseUpdateRecords)
+        .then(execute: database.promiseUpdateRecords)
         .then { savedRecords -> [Element] in
             savedRecords.mapExisting { Element(record: $0) }
         }

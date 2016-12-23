@@ -30,17 +30,17 @@ class SkillsViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         firstly {
             Skill.fetchAll()
         }
-        .then(on: dispatch_get_main_queue()) { skills -> Void in
+        .then(on: DispatchQueue.main) { skills -> Void in
             self.skills = skills
             self.collectionView.reloadData()
         }
-        .error { error in
+        .catch { error in
             print("Error: \(error)")
         }
         
@@ -69,12 +69,12 @@ class SkillsViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @IBAction func addSkillAction(sender: UIView) {
-        let rect = self.view.convertRect(sender.bounds, fromView: sender)
-        try! self.promiseAddSkillWith(self.view.convertRect(rect, toView: self.view.window!))
+    @IBAction func addSkillAction(_ sender: UIView) {
+        let rect = self.view.convert(sender.bounds, from: sender)
+        try! self.promiseAddSkillWith(self.view.convert(rect, to: self.view.window!))
     }
     
-    func addSkillActionFromCell(cell: UICollectionViewCell) {
+    func addSkillActionFromCell(_ cell: UICollectionViewCell) {
         if let skillCell = cell as? SkillCollectionViewCell {
             let rect = self.frameForCell(skillCell)
             try! self.promiseAddSkillWith(rect)
@@ -84,7 +84,7 @@ class SkillsViewController: UIViewController {
         }
     }
     
-    func changeSkillActionFromCell(cell: UICollectionViewCell, withSkill skill: Skill) {
+    func changeSkillActionFromCell(_ cell: UICollectionViewCell, withSkill skill: Skill) {
         if let skillCell = cell as? SkillCollectionViewCell {
             let rect = self.frameForCell(skillCell)
             try! self.promiseChangeSkillWith(rect, withSkill: skill)
@@ -95,39 +95,39 @@ class SkillsViewController: UIViewController {
     }
     
     // MARK: - Promises
-    func promiseAddSkillWith(rect: CGRect?) throws {
+    func promiseAddSkillWith(_ rect: CGRect?) throws {
         firstly {
             try AddViewController.promiseNewSkillWith(self, rect: rect, preparedScene: self.preparedScene)
         }
-        .then(SkillEntity.promiseToInsert)
-        .then(on: dispatch_get_main_queue()) { savedEntity -> Promise<Skill> in
+        .then(execute: SkillEntity.promiseToInsert)
+        .then(on: DispatchQueue.main) { savedEntity -> Promise<Skill> in
             // Insert new skill
             self.skills.append(savedEntity.skill)
             self.collectionView.reloadData()
             
-            savedEntity.skill.promiseInsertTo(DatabaseType.Public)  // Help building explore section
+            _ = savedEntity.skill.promiseInsertTo(DatabaseType.public)  // Help building explore section
             
-            return savedEntity.skill.promiseInsertTo(DatabaseType.Private)
+            return savedEntity.skill.promiseInsertTo(DatabaseType.private)
         }
-        .then(SkillEntity.promiseToUpdate)  // TODO: Update only offline flag!!!
+        .then(execute: SkillEntity.promiseToUpdate)  // TODO: Update only offline flag!!!
         .then { [weak self] _ -> Void in
             self?.showSnackBarMessage(NSLocalizedString("New skill added.", comment: "New skill added."))
         }
-        .error { error in
+        .catch { error in
             print("Error: \(error)")
         }
     }
     
-    func promiseChangeSkillWith(rect: CGRect?, withSkill skill: Skill) throws {
+    func promiseChangeSkillWith(_ rect: CGRect?, withSkill skill: Skill) throws {
         firstly {
             try AddViewController.promiseChangeSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
         }
-        .then(SkillEntity.promiseToUpdate)                  // Save change to local storage
+        .then(execute: SkillEntity.promiseToUpdate)                  // Save change to local storage
         .then { savedEntity -> Promise<Skill> in
             return firstly {                                // Fetch changed
                 Skill.fetchAll()
             }
-            .then(on: dispatch_get_main_queue()) { skills -> Void in
+            .then(on: DispatchQueue.main) { skills -> Void in
                 self.skills = skills                        // Reload UI
                 self.collectionView.reloadData()            // Reload UI
             }
@@ -135,11 +135,11 @@ class SkillsViewController: UIViewController {
                 // Handle update cases:
                 if savedEntity.toDelete {
                     self.showSnackBarMessage(NSLocalizedString("Skill deleted!", comment: "Skill deleted!"))
-                    return savedEntity.skill.promiseDeleteFrom(.Private)
+                    return savedEntity.skill.promiseDeleteFrom(.private)
                 }
                 else {
                     self.showSnackBarMessage(NSLocalizedString("Skill updated.", comment: "Skill updated."))
-                    return savedEntity.skill.promiseSyncTo(.Private)
+                    return savedEntity.skill.promiseSyncTo(.private)
                 }
             }
         }
@@ -151,7 +151,7 @@ class SkillsViewController: UIViewController {
                 return SkillEntity.promiseToUpdate(skill).asVoid()
             }
         }
-        .error { error in
+        .catch { error in
             DDLogError("Error: \(error)")
         }
     }
@@ -163,7 +163,7 @@ class SkillsViewController: UIViewController {
         (UIColor(netHex: 0x182d32), UIColor(netHex: 0x315c68))
     ]
     
-    func configureColorFor(cell: SkillCollectionViewCell) {
+    func configureColorFor(_ cell: SkillCollectionViewCell) {
         var offset = cell.frame.origin
         offset.y -= self.collectionView.contentOffset.y
         offset.y = max(0, min(self.collectionView.bounds.height, offset.y))
@@ -176,7 +176,7 @@ class SkillsViewController: UIViewController {
         cell.backgroundColor = UIColor.interpolate(topColor, B: botColor, t: factor)
     }
     
-    func frameForCell(cell: SkillCollectionViewCell) -> CGRect {
+    func frameForCell(_ cell: SkillCollectionViewCell) -> CGRect {
         cell.layoutSubviews()
         let imgfrm = cell.imageView.frame
         let rect = CGRect(
@@ -184,7 +184,7 @@ class SkillsViewController: UIViewController {
             size: imgfrm.size
         )
         
-        return self.view.convertRect(rect, toView: self.view.window!)
+        return self.view.convert(rect, to: self.view.window!)
     }
     
     // MARK: - Navigation
@@ -194,11 +194,11 @@ class SkillsViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension SkillsViewController: UICollectionViewDataSource {
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard section == 1 else {
             return self.skillsOffset
         }
@@ -207,9 +207,9 @@ extension SkillsViewController: UICollectionViewDataSource {
         return cells + ((3 - cells % 3) % 3)
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard indexPath.section == 1 else {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SkillCellIdentifier, for: indexPath) as! SkillCollectionViewCell
             cell.indexPath = indexPath
             cell.prepareForReuse()
             self.configureColorFor(cell)
@@ -219,19 +219,19 @@ extension SkillsViewController: UICollectionViewDataSource {
         
         let cell : SkillCollectionViewCell = {
             if indexPath.row == self.skills.count {
-                let cell = collectionView.dequeueReusableCellWithReuseIdentifier(AddSkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddSkillCellIdentifier, for: indexPath) as! SkillCollectionViewCell
                 cell.prepareForReuse()
                 cell.configureAsAddCell(indexPath)
                 return cell
             }
             else if indexPath.row > self.skills.count {
-                let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SkillCellIdentifier, for: indexPath) as! SkillCollectionViewCell
                 cell.prepareForReuse()
                 cell.indexPath = indexPath
                 return cell
             }
             else {
-                let cell = collectionView.dequeueReusableCellWithReuseIdentifier(SkillCellIdentifier, forIndexPath: indexPath) as! SkillCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SkillCellIdentifier, for: indexPath) as! SkillCollectionViewCell
                 cell.prepareForReuse()
                 cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
                 return cell
@@ -247,18 +247,18 @@ extension SkillsViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension SkillsViewController: UICollectionViewDelegate {
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == 1 else {
             return
         }
         
-        if indexPath.row < self.skills.count, let cell = self.collectionView.visibleCells().filter({
+        if indexPath.row < self.skills.count, let cell = self.collectionView.visibleCells.filter({
             $0 is SkillCollectionViewCell ? ($0 as! SkillCollectionViewCell).indexPath.row == indexPath.row : false
         }).first {
             self.changeSkillActionFromCell(cell, withSkill: self.skills[indexPath.row])
             return
         }
-        if indexPath.row == self.skills.count , let cell = self.collectionView.visibleCells().filter({
+        if indexPath.row == self.skills.count , let cell = self.collectionView.visibleCells.filter({
             $0 is SkillCollectionViewCell ? ($0 as! SkillCollectionViewCell).indexPath.row == indexPath.row : false
         }).first {
             self.addSkillActionFromCell(cell)
@@ -270,8 +270,8 @@ extension SkillsViewController: UICollectionViewDelegate {
 
 extension SkillsViewController: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        self.collectionView.visibleCells().forEach {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.collectionView.visibleCells.forEach {
             self.configureColorFor($0 as! SkillCollectionViewCell)
         }
     }
@@ -280,7 +280,7 @@ extension SkillsViewController: UIScrollViewDelegate {
 
 extension UIColor {
     
-    static func interpolate(A:UIColor, B:UIColor, t: CGFloat) -> UIColor {
+    static func interpolate(_ A:UIColor, B:UIColor, t: CGFloat) -> UIColor {
         var Argba : (CGFloat,CGFloat,CGFloat,CGFloat) = (0,0,0,0)
         var Brgba : (CGFloat,CGFloat,CGFloat,CGFloat) = (0,0,0,0)
         A.getRed(&Argba.0, green: &Argba.1, blue: &Argba.2, alpha: &Argba.3)

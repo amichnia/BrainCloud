@@ -16,13 +16,13 @@ class SkillCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     // MARK: - Properties
-    var indexPath: NSIndexPath!
+    var indexPath: IndexPath!
     var column: Int {
         return self.indexPath.row % 3
     }
-    override var selected: Bool {
+    override var isSelected: Bool {
         didSet {
-            self.selectedView?.hidden = !self.selected
+            self.selectedView?.isHidden = !self.isSelected
         }
     }
     
@@ -35,13 +35,13 @@ class SkillCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Configuration
-    func configureAsAddCell(indexPath: NSIndexPath){
+    func configureAsAddCell(_ indexPath: IndexPath){
         self.indexPath = indexPath
         self.imageView.image = UIImage(named: "ic-plus")
         self.nameLabel.text = NSLocalizedString("Add new", comment: "Add new")
     }
     
-    func configureWithSkill(skill: Skill, atIndexPath indexPath: NSIndexPath) {
+    func configureWithSkill(_ skill: Skill, atIndexPath indexPath: IndexPath) {
         self.indexPath = indexPath
         self.nameLabel.text = skill.title
         self.imageView.image = skill.circleImage

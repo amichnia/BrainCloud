@@ -22,18 +22,18 @@ extension CKDatabase {
      
      - returns: Future CKRecord
      */
-    func promiseRecordWithID(recordID: CKRecordID) -> Promise<CKRecord> {
+    func promiseRecordWithID(_ recordID: CKRecordID) -> Promise<CKRecord> {
         return Promise<CKRecord> { fulfill,reject in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-                self.fetchRecordWithID(recordID) { fetchedRecord,error in
-                    if let record = fetchedRecord where error == nil {
+            DispatchQueue.global().async {
+                self.fetch(withRecordID: recordID) { fetchedRecord,error in
+                    if let record = fetchedRecord, error == nil {
                         fulfill(record)
                     }
-                    else if let error = error {
-                        reject(CloudError.FetchError(code: error.code, error: error))
+                    else if let error = error as? NSError {
+                        reject(CloudError.fetchError(code: error.code, error: error))
                     }
                     else {
-                        reject(CloudError.FetchFailed(reason: "Unknown error occured"))
+                        reject(CloudError.fetchFailed(reason: "Unknown error occured"))
                     }
                 }
             }
@@ -47,18 +47,18 @@ extension CKDatabase {
      
      - returns: Future saved record
      */
-    func promiseInsertRecord(record: CKRecord) -> Promise<CKRecord> {
+    func promiseInsertRecord(_ record: CKRecord) -> Promise<CKRecord> {
         return Promise<CKRecord> { fulfill,reject in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-                self.saveRecord(record) { savedRecord,error in
-                    if let savedRecord = savedRecord where error == nil {
+            DispatchQueue.global().async {
+                self.save(record) { savedRecord,error in
+                    if let savedRecord = savedRecord, error == nil {
                         fulfill(savedRecord)
                     }
-                    else if let error = error {
-                        reject(CloudError.SaveError(code: error.code, error: error))
+                    else if let error = error as? NSError {
+                        reject(CloudError.saveError(code: error.code, error: error))
                     }
                     else {
-                        reject(CloudError.SaveFailed(reason: "Unknown error occured"))
+                        reject(CloudError.saveFailed(reason: "Unknown error occured"))
                     }
                 }
             }
@@ -72,27 +72,27 @@ extension CKDatabase {
      
      - returns: Future saved record
      */
-    func promiseUpdateRecord(record: CKRecord) -> Promise<CKRecord> {
+    func promiseUpdateRecord(_ record: CKRecord) -> Promise<CKRecord> {
         return Promise<CKRecord> { fulfill,reject in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            DispatchQueue.global().async {
                 let updateRecordOperation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
                 
-                updateRecordOperation.savePolicy = .ChangedKeys
+                updateRecordOperation.savePolicy = .changedKeys
                 updateRecordOperation.modifyRecordsCompletionBlock = { savedRecords,_,error in
                     let savedRecord = savedRecords?.first
                     
-                    if let savedRecord = savedRecord where error == nil {
+                    if let savedRecord = savedRecord, error == nil {
                         fulfill(savedRecord)
                     }
-                    else if let error = error {
-                        reject(CloudError.SaveError(code: error.code, error: error))
+                    else if let error = error as? NSError {
+                        reject(CloudError.saveError(code: error.code, error: error))
                     }
                     else {
-                        reject(CloudError.SaveFailed(reason: "Unknown error occured"))
+                        reject(CloudError.saveFailed(reason: "Unknown error occured"))
                     }
                 }
                 
-                self.addOperation(updateRecordOperation)
+                self.add(updateRecordOperation)
             }
         }
     }
@@ -104,15 +104,15 @@ extension CKDatabase {
      
      - returns: Future without that record
      */
-    func promiseDeleteRecord(recordID: CKRecordID) -> Promise<Void> {
+    func promiseDeleteRecord(_ recordID: CKRecordID) -> Promise<Void> {
         return Promise<Void> { fulfill,reject in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-                self.deleteRecordWithID(recordID) { deletedID,error in
+            DispatchQueue.global().async {
+                self.delete(withRecordID: recordID) { deletedID,error in
                     if error == nil {
                         fulfill()
                     }
                     else {
-                        reject(error ?? CommonError.UnknownError)
+                        reject(error ?? CommonError.unknownError)
                     }
                 }
             }
@@ -132,29 +132,29 @@ extension CKDatabase {
      
      - returns: Future saved records
      */
-    func promiseInsertRecords(records: [CKRecord]) -> Promise<[CKRecord]> {
+    func promiseInsertRecords(_ records: [CKRecord]) -> Promise<[CKRecord]> {
         guard records.count > 0 else {
-            return Promise<[CKRecord]>([])
+            return Promise<[CKRecord]>(value: [])
         }
         
         return Promise<[CKRecord]> { fulfill,reject in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            DispatchQueue.global().async {
                 let insertRecordsOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
                 
-                insertRecordsOperation.savePolicy = .IfServerRecordUnchanged // Only save non existing
+                insertRecordsOperation.savePolicy = .ifServerRecordUnchanged // Only save non existing
                 insertRecordsOperation.modifyRecordsCompletionBlock = { savedRecords,_,error in
-                    if let savedRecords = savedRecords where error == nil {
+                    if let savedRecords = savedRecords, error == nil {
                         fulfill(savedRecords)
                     }
-                    else if let error = error {
-                        reject(CloudError.SaveError(code: error.code, error: error))
+                    else if let error = error as? NSError {
+                        reject(CloudError.saveError(code: error.code, error: error))
                     }
                     else {
-                        reject(CloudError.SaveFailed(reason: "Unknown error occured"))
+                        reject(CloudError.saveFailed(reason: "Unknown error occured"))
                     }
                 }
                 
-                self.addOperation(insertRecordsOperation)
+                self.add(insertRecordsOperation)
             }
         }
     }
@@ -166,29 +166,29 @@ extension CKDatabase {
      
      - returns: Future saved records
      */
-    func promiseUpdateRecords(records: [CKRecord]) -> Promise<[CKRecord]> {
+    func promiseUpdateRecords(_ records: [CKRecord]) -> Promise<[CKRecord]> {
         guard records.count > 0 else {
-            return Promise<[CKRecord]>([])
+            return Promise<[CKRecord]>(value: [])
         }
         
         return Promise<[CKRecord]> { fulfill,reject in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            DispatchQueue.global().async {
                 let updateRecordsOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
                 
-                updateRecordsOperation.savePolicy = .AllKeys // Update all keys
+                updateRecordsOperation.savePolicy = .allKeys // Update all keys
                 updateRecordsOperation.modifyRecordsCompletionBlock = { savedRecords,_,error in
-                    if let savedRecords = savedRecords where error == nil {
+                    if let savedRecords = savedRecords, error == nil {
                         fulfill(savedRecords)
                     }
-                    else if let error = error {
-                        reject(CloudError.SaveError(code: error.code, error: error))
+                    else if let error = error as? NSError {
+                        reject(CloudError.saveError(code: error.code, error: error))
                     }
                     else {
-                        reject(CloudError.SaveFailed(reason: "Unknown error occured"))
+                        reject(CloudError.saveFailed(reason: "Unknown error occured"))
                     }
                 }
                 
-                self.addOperation(updateRecordsOperation)
+                self.add(updateRecordsOperation)
             }
         }
     }
@@ -202,9 +202,9 @@ extension CKDatabase {
      
      - returns: Future of records
      */
-    func promiseFetchRecords(records: [CKRecord]) -> Promise<[CKRecord]> {
+    func promiseFetchRecords(_ records: [CKRecord]) -> Promise<[CKRecord]> {
         guard records.count > 0 else {
-            return Promise<[CKRecord]>([])
+            return Promise<[CKRecord]>(value: [])
         }
         
         return self.promiseFetchRecordsWithIDS(records.map{ $0.recordID })
@@ -217,26 +217,26 @@ extension CKDatabase {
      
      - returns: Future of records
      */
-    func promiseFetchRecordsWithIDS(recordIDS: [CKRecordID]) -> Promise<[CKRecord]> {
+    func promiseFetchRecordsWithIDS(_ recordIDS: [CKRecordID]) -> Promise<[CKRecord]> {
         return Promise<[CKRecord]> { fulfill,reject in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            DispatchQueue.global().async {
                 let fetchOperation = CKFetchRecordsOperation()
                 fetchOperation.recordIDs = recordIDS
                 
                 // TODO: Report progress by NSProgress
                 fetchOperation.fetchRecordsCompletionBlock = { recorsByID,error in
-                    if let savedRecords = recorsByID?.values where error == nil {
+                    if let savedRecords = recorsByID?.values, error == nil {
                         fulfill(savedRecords.map({ $0 }))
                     }
-                    else if let error = error {
-                        reject(CloudError.FetchError(code: error.code, error: error))
+                    else if let error = error as? NSError {
+                        reject(CloudError.fetchError(code: error.code, error: error))
                     }
                     else {
-                        reject(CloudError.FetchFailed(reason: "Unknown error occured"))
+                        reject(CloudError.fetchFailed(reason: "Unknown error occured"))
                     }
                 }
                 
-                self.addOperation(fetchOperation)
+                self.add(fetchOperation)
             }
         }
     }
@@ -251,21 +251,21 @@ extension CKDatabase {
      
      - returns: Future of records
      */
-    func promiseAllRecordsWith(type: String, andPredicate: NSPredicate? = nil) -> Promise<[CKRecord]> {
+    func promiseAllRecordsWith(_ type: String, andPredicate: NSPredicate? = nil) -> Promise<[CKRecord]> {
         return Promise<[CKRecord]>() { fulfill, reject in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            DispatchQueue.global().async {
                 let predicate = andPredicate ?? NSPredicate(value: true)
                 let query = CKQuery(recordType: type, predicate: predicate)
                 
-                self.performQuery(query, inZoneWithID: nil) { records, error in
-                    if let savedRecords = records where error == nil {
+                self.perform(query, inZoneWith: nil) { records, error in
+                    if let savedRecords = records, error == nil {
                         fulfill(savedRecords)
                     }
-                    else if let error = error {
-                        reject(CloudError.FetchError(code: error.code, error: error))
+                    else if let error = error as? NSError {
+                        reject(CloudError.fetchError(code: error.code, error: error))
                     }
                     else {
-                        reject(CloudError.FetchFailed(reason: "Unknown error occured"))
+                        reject(CloudError.fetchFailed(reason: "Unknown error occured"))
                     }
                 }
             }
@@ -279,7 +279,7 @@ extension CKDatabase {
      
      - returns: Future of syncable instances
      */
-    func promiseAllWith<T:CKRecordSyncable>(predicate: NSPredicate? = nil) -> Promise<[T]> {
+    func promiseAllWith<T:CKRecordSyncable>(_ predicate: NSPredicate? = nil) -> Promise<[T]> {
         return self.promiseAllRecordsWith(T.recordType, andPredicate: predicate)
         .then { records -> [T] in
             return records.mapExisting{ T(record: $0) }
@@ -303,14 +303,14 @@ extension CKRecord {
         }
     }
     
-    static func promise(recordConvertible: CKRecordConvertible) -> Promise<CKRecord> {
+    static func promise(_ recordConvertible: CKRecordConvertible) -> Promise<CKRecord> {
         return Promise<CKRecord>() { fulfill,reject in
             fulfill(CKRecord(recordConvertible: recordConvertible))
         }
     }
     
-    func imageForKey(key: String) -> UIImage? {
-        if let imageUrl = (self.objectForKey(key) as? CKAsset)?.fileURL, image = UIImage(contentsOfFile: imageUrl.path!) {
+    func imageForKey(_ key: String) -> UIImage? {
+        if let imageUrl = (self.object(forKey: key) as? CKAsset)?.fileURL, let image = UIImage(contentsOfFile: imageUrl.path) {
             return image
         }
         else {
@@ -332,13 +332,13 @@ extension CKAsset {
      
      - returns: Initialized image asset
      */
-    static func assetWithImage(image: UIImage) throws -> CKAsset {
+    static func assetWithImage(_ image: UIImage) throws -> CKAsset {
         guard let imageData = UIImageJPEGRepresentation(image, 0.9) else {
-            throw CloudError.WrongAsset
+            throw CloudError.wrongAsset
         }
         
         let fileUrl = generateFileURL("jpg")
-        try imageData.writeToURL(fileUrl, options: .AtomicWrite)
+        try imageData.write(to: fileUrl, options: .atomicWrite)
         let imageAsset = CKAsset(fileURL: fileUrl)
         
         return imageAsset
@@ -349,7 +349,7 @@ extension CKAsset {
      */
     func clearTemporaryData() {
         do {
-            try NSFileManager.defaultManager().removeItemAtURL(self.fileURL)
+            try FileManager.default.removeItem(at: self.fileURL)
         }
         catch {
             DDLogError("Couldn't clear data after performed upload! Error: \(error)")

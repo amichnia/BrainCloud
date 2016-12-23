@@ -17,7 +17,7 @@ class ImageAsset {
     var offline: Bool = true
     
     var recordChangeTag: String?
-    var modified: NSDate?
+    var modified: Date?
     var recordName: String?
     
     // MARK: - Initailizers
@@ -26,7 +26,7 @@ class ImageAsset {
         self.name = name
     }
     
-    private init() { }
+    fileprivate init() { }
     
     required convenience init?(record: CKRecord) {
         self.init()
@@ -37,7 +37,7 @@ class ImageAsset {
     }
     
     // MARK: - Static Keys
-    private struct CKKey {
+    fileprivate struct CKKey {
         static let Name = "name"
         static let Image = "image"
     }
@@ -47,16 +47,16 @@ class ImageAsset {
 // MARK: - CKRecordMappable
 extension ImageAsset: CKRecordMappable {
     
-    func performMappingWith(record: CKRecord) -> Self? {
+    func performMappingWith(_ record: CKRecord) -> Self? {
         guard let
-            imageUrl = (record.objectForKey(CKKey.Image) as? CKAsset)?.fileURL,
-            image = UIImage(contentsOfFile: imageUrl.path!)
+            imageUrl = (record.object(forKey: CKKey.Image) as? CKAsset)?.fileURL,
+            let image = UIImage(contentsOfFile: imageUrl.path)
         else {
             return nil
         }
         
         self.image = image
-        self.name = record.objectForKey(CKKey.Name) as? String
+        self.name = record.object(forKey: CKKey.Name) as? String
         self.recordName = record.recordID.recordName
         self.modified = record.modificationDate
         self.recordChangeTag = record.recordChangeTag
@@ -72,7 +72,7 @@ extension ImageAsset: CKRecordConvertible {
     func recordRepresentation() -> CKRecord? {
         let record = CKRecord(recordConvertible: self)
         
-        record.setObject(self.name, forKey: CKKey.Name)
+        record.setObject(self.name as CKRecordValue?, forKey: CKKey.Name)
         
         if let image = try? CKAsset.assetWithImage(self.image) {
             record.setObject(image, forKey: CKKey.Image)

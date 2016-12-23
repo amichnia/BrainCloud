@@ -20,29 +20,29 @@ class CloudExportViewController: UIViewController {
     var image: UIImage?
     
     // MARK: - Lifecycle
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.imageView.image = self.image
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.imageView.image = self.image
     }
     
     // MARK: - Actions
-    @IBAction func exportAction(sender: AnyObject) {
+    @IBAction func exportAction(_ sender: AnyObject) {
         guard let image = self.image else {
             return
         }
         
         let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        self.presentViewController(activityVC, animated: true, completion: nil)
+        self.present(activityVC, animated: true, completion: nil)
     }
     
-    @IBAction func saveAction(sender: AnyObject) {
+    @IBAction func saveAction(_ sender: AnyObject) {
         guard let image = self.image else {
             return
         }
@@ -50,11 +50,11 @@ class CloudExportViewController: UIViewController {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(imageSaveCompletedFor), nil)
     }
     
-    func imageSaveCompletedFor(image: UIImage, error: NSError?, info: AnyObject?) {
+    func imageSaveCompletedFor(_ image: UIImage, error: NSError?, info: AnyObject?) {
         if let e = error {
             DDLogError("Error: \(e)")
         }
-        self.navigationController?.popViewControllerAnimated(true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Navigation
@@ -63,7 +63,7 @@ class CloudExportViewController: UIViewController {
 
 extension CloudExportViewController: UIScrollViewDelegate {
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.imageView
     }
     

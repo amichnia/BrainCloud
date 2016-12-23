@@ -7,13 +7,12 @@
 //
 
 import SpriteKit
-import SpriteKit_Spring
 import PromiseKit
 
 class OptionsNode: SKSpriteNode, TranslatableNode {
     // MARK: - Static properties
     static let SceneName = "OptionsNode"
-    private static var templateNode: OptionsNode!
+    fileprivate static var templateNode: OptionsNode!
     
     var originalPosition: CGPoint = CGPoint.zero
     var graphNode: GraphNode?
@@ -21,13 +20,13 @@ class OptionsNode: SKSpriteNode, TranslatableNode {
     // MARK: - Properties
     lazy var anchors: [SKNode] = {
         return ["DeleteAnchor","ScaleAnchor","MoveAnchor"].mapExisting{ name in
-            return self.childNodeWithName(name)
+            return self.childNode(withName: name)
         }
     }()
     
     // MARK: - Static methods
-    static func grabFromScene(scene: SKScene) {
-        guard let template = scene.childNodeWithName(self.SceneName) as? OptionsNode else {
+    static func grabFromScene(_ scene: SKScene) {
+        guard let template = scene.childNode(withName: self.SceneName) as? OptionsNode else {
             return
         }
         
@@ -35,7 +34,7 @@ class OptionsNode: SKSpriteNode, TranslatableNode {
         self.templateNode = template
     }
     
-    static func spawnAttachedTo(node: GraphNode) {
+    static func spawnAttachedTo(_ node: GraphNode) {
         self.templateNode.spawnAttachedTo(node)
     }
     
@@ -44,7 +43,7 @@ class OptionsNode: SKSpriteNode, TranslatableNode {
     }
     
     // MARK: - Lifecycle and configuration
-    func spawnAttachedTo(node: GraphNode) {
+    func spawnAttachedTo(_ node: GraphNode) {
         self.removeFromParent()
         self.setScale(1)
         
@@ -62,7 +61,7 @@ class OptionsNode: SKSpriteNode, TranslatableNode {
         node.parent?.addChild(self)
         self.graphNode = node
         
-        let distance = SKConstraint.distance(SKRange(lowerLimit: 0, upperLimit: 0), toNode: node)
+        let distance = SKConstraint.distance(SKRange(lowerLimit: 0, upperLimit: 0), to: node)
         self.constraints = [distance]
     }
     
@@ -80,21 +79,21 @@ class OptionNode: SKSpriteNode, InteractiveNode {
     lazy var action: Action = {
         switch (self.name ?? "none") {
         case "IconDelete":
-            return .Delete
+            return .delete
         case "IconScale":
-            return .Scale
+            return .scale
         case "IconMove":
-            return .Move
+            return .move
         default:
-            return .None
+            return .none
         }
     }()
     
     enum Action {
-        case None
-        case Delete
-        case Scale
-        case Move
+        case none
+        case delete
+        case scale
+        case move
     }
     
 }

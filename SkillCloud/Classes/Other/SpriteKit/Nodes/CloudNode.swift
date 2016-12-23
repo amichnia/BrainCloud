@@ -8,7 +8,6 @@
 
 import UIKit
 import SpriteKit
-import SpriteKit_Spring
 
 class CloudNode: SKSpriteNode {
 
@@ -17,21 +16,21 @@ class CloudNode: SKSpriteNode {
     var cloudNode: Bool = false
     
     lazy var outlineNode: SKSpriteNode = {
-        return (self.childNodeWithName("CloudNodeOutline") as? SKSpriteNode) ?? SKSpriteNode()
+        return (self.childNode(withName: "CloudNodeOutline") as? SKSpriteNode) ?? SKSpriteNode()
     }()
     lazy var backgroundNode: SKShapeNode = {
         let bgr = SKShapeNode(circleOfRadius: self.size.width / 2 - 2)
         bgr.fillColor = UIColor(white: 0.9, alpha: 0.15)
         bgr.zPosition = (self.plusNode?.zPosition ?? (self.zPosition + 0.2)) - 0.15
-        bgr.blendMode = SKBlendMode.Screen
+        bgr.blendMode = SKBlendMode.screen
         self.addChild(bgr)
         return bgr
     }()
     lazy var plusNode: SKLabelNode? = {
-        return self.childNodeWithName("Number") as? SKLabelNode
+        return self.childNode(withName: "Number") as? SKLabelNode
     }()
     lazy var numberNode: SKNode? = {
-        return self.childNodeWithName("NumberNode")
+        return self.childNode(withName: "NumberNode")
     }()
 
     var sortNumber: CGFloat { return self.position.distanceTo(self.scene?.frame.centerOfMass ?? CGPoint.zero) }
@@ -48,27 +47,27 @@ class CloudNode: SKSpriteNode {
         
         self.constraints = [SKConstraint.zRotation(SKRange(constantValue: 0))]
         
-        let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: self.scene!.physicsBody!, anchorA: self.position, anchorB: self.position)
+        let joint = SKPhysicsJointSpring.joint(withBodyA: self.physicsBody!, bodyB: self.scene!.physicsBody!, anchorA: self.position, anchorB: self.position)
         joint.damping = 2
         joint.frequency = 1
         
-        self.scene?.physicsWorld.addJoint(joint)
+        self.scene?.physicsWorld.add(joint)
     }
     
-    func configureWithCloud(cloud: GraphCloudEntity?) {
-        self.childNodeWithName("ThumbnailNode")?.removeFromParent()
-        self.numberNode?.hidden = true
+    func configureWithCloud(_ cloud: GraphCloudEntity?) {
+        self.childNode(withName: "ThumbnailNode")?.removeFromParent()
+        self.numberNode?.isHidden = true
         
         guard let cloud = cloud else {
-            self.plusNode?.hidden = false
-            self.outlineNode.hidden = true
-            self.backgroundNode.hidden = true
+            self.plusNode?.isHidden = false
+            self.outlineNode.isHidden = true
+            self.backgroundNode.isHidden = true
             return
         }
         
-        self.plusNode?.hidden = true
-        self.outlineNode.hidden = false
-        self.backgroundNode.hidden = false
+        self.plusNode?.isHidden = true
+        self.outlineNode.isHidden = false
+        self.backgroundNode.isHidden = false
         
         if let thumbnail = cloud.thumbnail {
             let texture = SKTexture(image: thumbnail.RBCircleImage())

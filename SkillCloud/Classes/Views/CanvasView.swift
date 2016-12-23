@@ -10,7 +10,7 @@ import UIKit
 
 class CanvasView: UIView {
 
-    var canvasBoard : CanvasBoard = CanvasBoard(size: CanvasBoard.Size.Large)
+    var canvasBoard : CanvasBoard = CanvasBoard(size: CanvasBoard.Size.large)
 
     var possibleViews : [PossiblePlaceView] = []
     
@@ -40,11 +40,11 @@ class CanvasView: UIView {
 extension CanvasView {
     
     func newPossiblePlaceView() -> PossiblePlaceView {
-        return NSBundle.mainBundle().loadNibNamed("PossiblePlaceView", owner: self, options: nil).first! as! PossiblePlaceView
+        return Bundle.main.loadNibNamed("PossiblePlaceView", owner: self, options: nil)!.first! as! PossiblePlaceView
     }
     
     func newOccupiedPlaceView() -> OccupiedPlaceView {
-        return NSBundle.mainBundle().loadNibNamed("OccupiedPlaceView", owner: self, options: nil).first! as! OccupiedPlaceView
+        return Bundle.main.loadNibNamed("OccupiedPlaceView", owner: self, options: nil)!.first! as! OccupiedPlaceView
     }
     
     func clearPossibleViews() {
@@ -52,13 +52,13 @@ extension CanvasView {
         self.possibleViews = []
     }
     
-    func addPossibleViewForPlace(place: PossiblePlace) {
+    func addPossibleViewForPlace(_ place: PossiblePlace) {
         let view = self.newPossiblePlaceView()
         view.placeOnCanvas(self, possiblePlace: place)
         self.possibleViews.append(view)
     }
     
-    func addOccupiedPlace(place: OccupiedPlace) -> OccupiedPlaceView {
+    func addOccupiedPlace(_ place: OccupiedPlace) -> OccupiedPlaceView {
         let view = self.newOccupiedPlaceView()
         view.placeOnCanvas(self, occupiedPlace: place)
         return view

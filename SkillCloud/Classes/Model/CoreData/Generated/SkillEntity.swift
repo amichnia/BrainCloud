@@ -16,15 +16,15 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
     static var uniqueIdentifier = "name"
     
     convenience required init?(model: DTOModel, inContext ctx: NSManagedObjectContext) {
-        guard let entityDescription = NSEntityDescription.entityForName(SkillEntity.entityName, inManagedObjectContext: ctx) where model is Skill else {
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: SkillEntity.entityName, in: ctx), model is Skill else {
             return nil
         }
-        self.init(entity: entityDescription, insertIntoManagedObjectContext: ctx)
+        self.init(entity: entityDescription, insertInto: ctx)
         
         self.setValuesFromModel(model)
     }
     
-    func setValuesFromModel(model: DTOModel) {
+    func setValuesFromModel(_ model: DTOModel) {
         if let skill = model as? Skill {
             // Properties
             self.name               = skill.title
@@ -37,7 +37,7 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
             // CloudKit synced
             self.recordID           = skill.recordName
             self.changeTag          = skill.recordChangeTag
-            self.modified           = skill.modified?.timeIntervalSince1970 ?? NSDate().timeIntervalSince1970
+            self.modified           = skill.modified?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
         }
     }
     
@@ -56,7 +56,7 @@ extension SkillEntity {
         // CloudKit
         skill.recordName        = self.recordID
         skill.recordChangeTag   = self.changeTag
-        skill.modified          = NSDate(timeIntervalSince1970: self.modified)
+        skill.modified          = Date(timeIntervalSince1970: self.modified)
         
         return skill
     }
@@ -67,7 +67,7 @@ extension SkillEntity {
 extension SkillEntity {
     
     class func fetchAllUnsynced() -> Promise<[SkillEntity]> {
-        let predicate = NSPredicate(format: "offline == %@", true)
+        let predicate = NSPredicate(format: "offline == %@", true as CVarArg)
         return SkillEntity.fetchAllWithPredicate(predicate)
     }
     

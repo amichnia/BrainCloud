@@ -7,18 +7,17 @@
 //
 
 import SpriteKit
-import SpriteKit_Spring
 import PromiseKit
 
 class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
     // MARK: - Static Properties
     static let SceneName = "CurrentNode"
-    private static var templateNodes: [Skill.Experience:GraphNode] = [:]
+    fileprivate static var templateNodes: [Skill.Experience:GraphNode] = [:]
     
     // MARK: - Properties
     var selected: Bool = false {
         didSet {
-            self.areaNode?.hidden = !self.selected
+            self.areaNode?.isHidden = !self.selected
         }
     }
     var originalPosition: CGPoint = CGPoint.zero
@@ -33,17 +32,17 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
     var originalScale: CGFloat = 1.0
     var pinned: Bool = false
     var pinJoint: SKPhysicsJointSpring?
-    lazy var areaNode: SKSpriteNode? = { return self.childNodeWithName("AreaNode") as? SKSpriteNode }()
+    lazy var areaNode: SKSpriteNode? = { return self.childNode(withName: "AreaNode") as? SKSpriteNode }()
     
     var radius: CGFloat { return self.frame.width/2 }
     
     var skillNode: SkillNode?
     
     // MARK: - Static methods
-    static func grabFromScene(scene: SKScene) {
-        let exp: [Skill.Experience] = [.Beginner, .Intermediate, .Professional, .Expert]
+    static func grabFromScene(_ scene: SKScene) {
+        let exp: [Skill.Experience] = [.beginner, .intermediate, .professional, .expert]
         exp.forEach { level in
-            if let template = scene.childNodeWithName("\(GraphNode.SceneName)_\(level.name)") as? GraphNode {
+            if let template = scene.childNode(withName: "\(GraphNode.SceneName)_\(level.name)") as? GraphNode {
                 self.templateNodes[level] = template
                 
                 template.removeFromParent()
@@ -54,12 +53,12 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
         }
     }
     
-    static func newFromTemplate(level: Skill.Experience = .Beginner) -> GraphNode {
+    static func newFromTemplate(_ level: Skill.Experience = .beginner) -> GraphNode {
         return self.templateNodes[level]!.copy() as! GraphNode
     }
     
     // MARK: - Lifecycle and configuration
-    func spawInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true, skill: Skill) -> GraphNode {
+    func spawInScene(_ scene: SKScene, atPosition position: CGPoint, animated: Bool = true, skill: Skill) -> GraphNode {
         self.removeFromParent()
         
         self.texture = SKTexture(imageNamed: "ic-empty")
@@ -80,7 +79,7 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
         self.attachAreaNode()
         
         // Hide sprite for area
-        self.areaNode?.hidden = true
+        self.areaNode?.isHidden = true
         
         return self
     }
@@ -94,25 +93,25 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
             return
         }
         
-        let anchor = scene.convertPoint(CGPoint.zero, fromNode: self)
-        let joint = SKPhysicsJointPin.jointWithBodyA(self.physicsBody!, bodyB: areaNode.physicsBody!, anchor: anchor)
-        scene.physicsWorld.addJoint(joint)
+        let anchor = scene.convert(CGPoint.zero, from: self)
+        let joint = SKPhysicsJointPin.joint(withBodyA: self.physicsBody!, bodyB: areaNode.physicsBody!, anchor: anchor)
+        scene.physicsWorld.add(joint)
     }
     
     // MARK: - Pinning
-    func pinToScene(scene: SKScene? = nil) {
+    func pinToScene(_ scene: SKScene? = nil) {
         guard let scene = scene ?? self.scene else {
             return
         }
         
-        let anchor = scene.convertPoint(CGPoint.zero, fromNode: self)
+        let anchor = scene.convert(CGPoint.zero, from: self)
         
-        let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: scene.physicsBody!, anchorA: anchor, anchorB: anchor)
+        let joint = SKPhysicsJointSpring.joint(withBodyA: self.physicsBody!, bodyB: scene.physicsBody!, anchorA: anchor, anchorB: anchor)
         joint.frequency = 20
         joint.damping = 10
         self.pinJoint = joint
         
-        self.scene!.physicsWorld.addJoint(joint)
+        self.scene!.physicsWorld.add(joint)
     }
     
     func repin() {
@@ -125,24 +124,24 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
             return
         }
         
-        scene.physicsWorld.removeJoint(joint)
+        scene.physicsWorld.remove(joint)
     }
     
     // MARK: - Promises
-    private func promiseAnimateToShown(show: Bool, time: NSTimeInterval = 0.5) -> Promise<GraphNode> {
+    fileprivate func promiseAnimateToShown(_ show: Bool, time: TimeInterval = 0.5) -> Promise<GraphNode> {
         if self.xScale == self.yScale && self.xScale == 1.0 {
-            return Promise<GraphNode>(self)
+            return Promise<GraphNode>(value: self)
         }
         
         return Promise<Void> { fulfill, reject in
             let action = SKAction.scaleTo(show ? 1 : 0, duration: time, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.0)
-            self.runAction(action, completion: fulfill)
+            self.run(action, completion: fulfill)
             }.then { _ -> GraphNode in
                 return self
         }
     }
     
-    func promiseSpawnInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true, pinned: Bool = true, skill: Skill) -> Promise<GraphNode> {
+    func promiseSpawnInScene(_ scene: SKScene, atPosition position: CGPoint, animated: Bool = true, pinned: Bool = true, skill: Skill) -> Promise<GraphNode> {
         return firstly {
             self.spawInScene(scene, atPosition: position, animated: animated, skill: skill).promiseAnimateToShown(true)
         }
@@ -160,13 +159,13 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
 
 extension GraphNode {
     
-    func promiseSpawnInScene(scene: SKScene, atPosition position: CGPoint, animated: Bool = true, entity: SkillNodeEntity) -> Promise<GraphNode> {
+    func promiseSpawnInScene(_ scene: SKScene, atPosition position: CGPoint, animated: Bool = true, entity: SkillNodeEntity) -> Promise<GraphNode> {
         let exp = Skill.Experience(rawValue: Int(entity.skillExperienceValue))!
         let skill = Skill(title: entity.skillName!, thumbnail: entity.skillImage!, experience: exp, description: nil)
         skill.image = entity.skillImage!
     
         let nodeIdString = (entity.nodeId ?? "")
-        let nodeId = Int(nodeIdString.characters.split("_").map(String.init).last!) ?? 0
+        let nodeId = Int(nodeIdString.characters.split(separator: "_").map(String.init).last!) ?? 0
         
         return firstly {
             self.spawInScene(scene, atPosition: position, animated: animated, skill: skill).promiseAnimateToShown(false)

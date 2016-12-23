@@ -24,87 +24,85 @@ class CloudContainer {
     let publicDatabase: CKDatabase
     let privateDatabase: CKDatabase
     
-    var lastSyncDate: NSDate? {
+    var lastSyncDate: Date? {
         get {
-            return NSUserDefaults.standardUserDefaults().objectForKey(DefaultsLastSyncTimestampKey) as? NSDate
+            return UserDefaults.standard.object(forKey: DefaultsLastSyncTimestampKey) as? Date
         }
         set {
             if newValue == nil {
-                NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsLastSyncTimestampKey)
+                UserDefaults.standard.removeObject(forKey: DefaultsLastSyncTimestampKey)
             }
             else {
-                NSUserDefaults.standardUserDefaults().setObject(newValue!, forKey: DefaultsLastSyncTimestampKey)
+                UserDefaults.standard.set(newValue!, forKey: DefaultsLastSyncTimestampKey)
             }
-            NSUserDefaults.standardUserDefaults().synchronize()
+            UserDefaults.standard.synchronize()
         }
     }
     
     // MARK: - Private properties
-    private var userRecordID : CKRecordID!
-    private var contacts = [AnyObject]()
+    fileprivate var userRecordID : CKRecordID!
+    fileprivate var contacts = [AnyObject]()
     
     // MARK: - Initializers
     init() {
-        self.container = CKContainer.defaultContainer()
+        self.container = CKContainer.default()
         self.publicDatabase = self.container.publicCloudDatabase
         self.privateDatabase = self.container.privateCloudDatabase
     }
     
     // MARK: - Private
-    func database(type: DatabaseType) -> CKDatabase {
+    func database(_ type: DatabaseType) -> CKDatabase {
         switch type {
-        case .Private:
+        case .private:
             return self.privateDatabase
-        case .Public:
+        case .public:
             return self.publicDatabase
         }
     }
     
     // MARK: - Public promises
     // TODO: Remove it from there? Refactoring in v1.1
-    func promiseAllSkillsFromDatabase(database: DatabaseType) -> Promise<[Skill]> {
+    func promiseAllSkillsFromDatabase(_ database: DatabaseType) -> Promise<[Skill]> {
         return Promise<[Skill]>() { fulfill, reject in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            DispatchQueue.global(qos: .userInitiated).async {
                 let predicate = NSPredicate(value: true)
                 let query = CKQuery(recordType: Skill.recordType, predicate: predicate)
                 
-                self.database(database).performQuery(query, inZoneWithID: nil) { records, error in
+                self.database(database).perform(query, inZoneWith: nil) { records, error in
                     if let error = error {
                         reject(error)
                     }
                     else if let records = records {
                         let skillsPromises = records.map{ Skill.promiseWithRecord($0) }
-                        
-                        when(skillsPromises).then { skills -> Void in
+                        let _ = when(fulfilled: skillsPromises).then { skills -> Void in
                             fulfill(skills)
                         }
                     }
                     else {
-                        reject(CloudError.NoData)
+                        reject(CloudError.noData)
                     }
                 }
             }
         }
     }
     
-    func promiseAllSkillsWithPredicate(predicate: NSPredicate, fromDatabase database: DatabaseType) -> Promise<[Skill]> {
+    func promiseAllSkillsWithPredicate(_ predicate: NSPredicate, fromDatabase database: DatabaseType) -> Promise<[Skill]> {
         return Promise<[Skill]>() { fulfill, reject in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            DispatchQueue.global(qos: .userInitiated).async {
                 let query = CKQuery(recordType: Skill.recordType, predicate: predicate)
                 
-                self.database(database).performQuery(query, inZoneWithID: nil) { records, error in
+                self.database(database).perform(query, inZoneWith: nil) { records, error in
                     if let error = error {
                         reject(error)
                     }
                     else if let records = records {
                         let skillsPromises = records.map{ Skill.promiseWithRecord($0) }
-                        
-                        when(skillsPromises).then { skills -> Void in
+                        let _ = when(fulfilled: skillsPromises).then { skills -> Void in
                             fulfill(skills)
                         }
                     }
                     else {
-                        reject(CloudError.NoData)
+                        reject(CloudError.noData)
                     }
                 }
             }
@@ -116,24 +114,24 @@ class CloudContainer {
     // MARK: - Sync promises
     func promiseUserID() -> Promise<CKRecordID> {
         guard self.userRecordID == nil else {
-            return Promise<CKRecordID>(self.userRecordID)
+            return Promise<CKRecordID>(value: self.userRecordID)
         }
         
         return Promise<CKRecordID>() { fulfill,reject in
-            self.container.fetchUserRecordIDWithCompletionHandler() { recordID, error in
-                if let recordID = recordID where error == nil {
+            self.container.fetchUserRecordID() { recordID, error in
+                if let recordID = recordID, error == nil {
                     self.userRecordID = recordID
                     fulfill(recordID)
                 }
                 else {
-                    reject(error ?? CloudError.UnknownError)
+                    reject(error ?? CloudError.unknownError)
                 }
             }
         }
     }
     
     func promiseUserRecord() -> Promise<CKRecord> {
-        return self.promiseUserID().then(self.publicDatabase.promiseRecordWithID)
+        return self.promiseUserID().then(execute: self.publicDatabase.promiseRecordWithID)
     }
     
     func promiseSyncInfo() -> Promise<SyncInfo> {
@@ -141,24 +139,24 @@ class CloudContainer {
     }
     
     func promiseSync() -> Promise<Void> {
-        return self.promiseSyncTo().then(self.promiseSyncFrom)
+        return self.promiseSyncTo().then(execute: self.promiseSyncFrom)
     }
     
     func promiseSyncFrom() -> Promise<Void> {
         let predicate: NSPredicate? = {
             if let lastSyncDate = self.lastSyncDate {
-                return NSPredicate(format: "modificationDate >= %@", lastSyncDate)
+                return NSPredicate(format: "modificationDate >= %@", lastSyncDate as CVarArg)
             }
             else {
                 return nil
             }
         }()
         
-        let syncDate = NSDate()
+        let syncDate = Date()
         
         return self.privateDatabase.promiseAllWith(predicate)
-        .then(on: dispatch_get_main_queue()) { (skills: [Skill]) -> Promise<[SkillEntity]> in
-            return when(skills.map(SkillEntity.promiseToUpdate))
+        .then(on: DispatchQueue.main) { (skills: [Skill]) -> Promise<[SkillEntity]> in
+            return when(fulfilled: skills.map(SkillEntity.promiseToUpdate))
         }
         .then { savedEntities -> Void in
             self.lastSyncDate = syncDate
@@ -170,17 +168,17 @@ class CloudContainer {
     func promiseSyncTo() -> Promise<Void> {
         return Skill.fetchAllUnsynced()
         .then { skills -> Promise<[SkillEntity]> in
-            return when(skills.map{
-                $0.promiseSyncTo().then(SkillEntity.promiseToUpdate)
+            return when(fulfilled: skills.map{
+                $0.promiseSyncTo().then(execute: SkillEntity.promiseToUpdate)
             })
         }
         .then { savedEntities -> Void in
             print("Uploaded \(savedEntities.count) entities")
         }
-        .then(Skill.fetchAllToDelete)
+        .then(execute: Skill.fetchAllToDelete)
         .then { toDelete -> Promise<Void> in
-            return when(toDelete.map{
-                $0.promiseDeleteFrom().then(SkillEntity.promiseToDelete)
+            return when(fulfilled: toDelete.map{
+                $0.promiseDeleteFrom().then(execute: SkillEntity.promiseToDelete)
             })
         }
     }
@@ -192,22 +190,22 @@ class CKPageableResult<T:CKRecordSyncable> {
     var limit: Int = 10
     var desiredKeys: [String]?
     
-    internal private(set) var results: [T] = []
-    internal private(set) var hasNextPage: Bool = true
-    internal private(set) var numberOfFailed: Int = 0
+    internal fileprivate(set) var results: [T] = []
+    internal fileprivate(set) var hasNextPage: Bool = true
+    internal fileprivate(set) var numberOfFailed: Int = 0
     
-    private var cursor: CKQueryCursor?
-    private var container: CKContainer
-    private var database: CKDatabase
-    private var predicate: NSPredicate
-    private var query: CKQuery
-    private var currentPromise: Promise<[T]>?
-    private var delta: [T] = []
+    fileprivate var cursor: CKQueryCursor?
+    fileprivate var container: CKContainer
+    fileprivate var database: CKDatabase
+    fileprivate var predicate: NSPredicate
+    fileprivate var query: CKQuery
+    fileprivate var currentPromise: Promise<[T]>?
+    fileprivate var delta: [T] = []
     
     // MARK: - Lifecycle
     init(type: T.Type, predicate: NSPredicate, database: DatabaseType, limit: Int = 10) {
-        self.container = CKContainer.defaultContainer()
-        self.database = database == .Public ? self.container.publicCloudDatabase : self.container.privateCloudDatabase
+        self.container = CKContainer.default()
+        self.database = database == .public ? self.container.publicCloudDatabase : self.container.privateCloudDatabase
         self.predicate = predicate
         self.query = CKQuery(recordType: T.self.recordType, predicate: predicate)
     }
@@ -228,7 +226,7 @@ class CKPageableResult<T:CKRecordSyncable> {
     
     func promiseNextPage() -> Promise<[T]> {
         guard self.hasNextPage else {
-            return Promise<[T]>(error: CloudError.NoData)
+            return Promise<[T]>(error: CloudError.noData)
         }
         
         guard self.currentPromise == nil else {
@@ -238,11 +236,10 @@ class CKPageableResult<T:CKRecordSyncable> {
         self.delta = []
         
         self.currentPromise = Promise<[T]> { fulfill,reject in
-            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-            dispatch_async(dispatch_get_global_queue(priority, 0)) { [weak self] in
+            DispatchQueue.global().async { [weak self] in
                 // Query CloudKit
                 guard let operation = self?.operation() else {
-                    reject(CommonError.OperationFailed)
+                    reject(CommonError.operationFailed as Error)
                     return
                 }
                 
@@ -257,11 +254,11 @@ class CKPageableResult<T:CKRecordSyncable> {
                 }
                 
                 operation.queryCompletionBlock = { cursor,error in
-                    if let error = error {
+                    if let error = error as? NSError {
                         self?.hasNextPage = false
                         
-                        dispatch_async(dispatch_get_main_queue()) {
-                            reject(CloudError.FetchError(code: error.code, error: error))
+                        DispatchQueue.main.async {
+                            reject(CloudError.fetchError(code: error.code, error: error))
                         }
                     }
                     else {
@@ -274,20 +271,20 @@ class CKPageableResult<T:CKRecordSyncable> {
                         
                         self?.currentPromise = nil
                         
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             fulfill(self?.delta ?? [])
                         }
                     }
                 }
                 
-                self?.database.addOperation(operation)
+                self?.database.add(operation)
             }
         }
         
         return self.currentPromise!
     }
     
-    private func operation() -> CKQueryOperation {
+    fileprivate func operation() -> CKQueryOperation {
         if let cursor = self.cursor {
             let operation = CKQueryOperation(cursor: cursor)
             operation.resultsLimit = self.limit
@@ -306,24 +303,24 @@ class CKPageableResult<T:CKRecordSyncable> {
 
 enum SkillsPredicate {
     
-    case AnySkill
-    case Accepted
-    case NameLike(String)
-    case WhenAll([SkillsPredicate])
-    case WhenAny([SkillsPredicate])
+    case anySkill
+    case accepted
+    case nameLike(String)
+    case whenAll([SkillsPredicate])
+    case whenAny([SkillsPredicate])
     
     func predicate() -> NSPredicate {
         switch self {
-        case .AnySkill:
+        case .anySkill:
             return NSPredicate(format: "TRUEPREDICATE")
-        case .Accepted:
+        case .accepted:
             return NSPredicate(format: "accepted = %d", 1)
-        case .NameLike(let name):
+        case .nameLike(let name):
             return NSPredicate(format: "self contains %@", name)
-        case .WhenAll(let subpredicates):
+        case .whenAll(let subpredicates):
             let predicates = subpredicates.map{ $0.predicate() }
             return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
-        case .WhenAny(let subpredicates):
+        case .whenAny(let subpredicates):
             let predicates = subpredicates.map{ $0.predicate() }
             return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
         }
@@ -338,7 +335,7 @@ struct SyncInfo {
     
     init(userRecord: CKRecord) {
         self.userID = userRecord.recordID.recordName
-        self.skillsCount = (userRecord.objectForKey("skillsCount") as? Int) ?? 0
+        self.skillsCount = (userRecord.object(forKey: "skillsCount") as? Int) ?? 0
         self.changeTag = userRecord.recordChangeTag ?? ""
     }
  
@@ -351,17 +348,17 @@ struct SyncInfo {
 }
 
 enum DatabaseType {
-    case Public
-    case Private
+    case `public`
+    case `private`
 }
 
-enum CloudError: ErrorType {
-    case NoData
-    case WrongAsset
-    case NotMatchingRecordData
-    case UnknownError
-    case FetchFailed(reason: String)
-    case FetchError(code: Int, error: NSError)
-    case SaveFailed(reason: String)
-    case SaveError(code: Int, error: NSError)
+enum CloudError: Error {
+    case noData
+    case wrongAsset
+    case notMatchingRecordData
+    case unknownError
+    case fetchFailed(reason: String)
+    case fetchError(code: Int, error: NSError)
+    case saveFailed(reason: String)
+    case saveError(code: Int, error: NSError)
 }

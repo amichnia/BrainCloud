@@ -14,9 +14,9 @@ import RSKImageCropper
 
 class PromiseHandler<T> {
     let fulfill : ((T)->Void)
-    let reject : ((ErrorType)->Void)
+    let reject : ((Error)->Void)
     
-    init(fulfill: ((T)->Void), reject: ((ErrorType)->Void)) {
+    init(fulfill: @escaping ((T)->Void), reject: @escaping ((Error)->Void)) {
         self.fulfill = fulfill
         self.reject = reject
     }
@@ -37,7 +37,7 @@ class AddViewController: UIViewController {
     
     // MARK: - Properties
     var fulfill : ((Skill)->Void)!
-    var reject : ((ErrorType)->Void)!
+    var reject : ((Error)->Void)!
     
     lazy var promise: Promise<Skill> = {
         return Promise<Skill> { (fulfill, reject) in
@@ -56,7 +56,7 @@ class AddViewController: UIViewController {
     var skill : Skill?          // If not null - changing skill, not adding
     var image: UIImage? {
         didSet {
-            self.doneButton?.enabled = self.canBeFulfilled()
+            self.doneButton?.isEnabled = self.canBeFulfilled()
         }
     }
     var experience : Skill.Experience?
@@ -64,37 +64,37 @@ class AddViewController: UIViewController {
     var skillBottomDefaultValue : CGFloat = 0;
     
     
-    private var imageCropPromiseHandler: PromiseHandler<UIImage>?
+    fileprivate var imageCropPromiseHandler: PromiseHandler<UIImage>?
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.skView.hidden = true
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        self.skView.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         self.skView.allowsTransparency = true
-        self.settingsButton.hidden = self.immutable
-        self.skillNameField.userInteractionEnabled = !self.immutable
+        self.settingsButton.isHidden = self.immutable
+        self.skillNameField.isUserInteractionEnabled = !self.immutable
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if firstLayout {
             if self.skill?.experience == nil {
-                self.doneButton.setImage(UIImage(named: "icon-plus"), forState: .Normal)
+                self.doneButton.setImage(UIImage(named: "icon-plus"), for: UIControlState())
             }
             else {
-                self.doneButton.setImage(UIImage(named: "icon-check-black"), forState: .Normal)
+                self.doneButton.setImage(UIImage(named: "icon-check-black"), for: UIControlState())
             }
             
-            self.doneButton.enabled = self.canBeFulfilled()
+            self.doneButton.isEnabled = self.canBeFulfilled()
             
             self.prepareScene(self.skView, size: self.view.bounds.size)
             self.menuContainerTopConstraint.constant = -100
@@ -103,7 +103,7 @@ class AddViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if firstLayout {
@@ -112,21 +112,21 @@ class AddViewController: UIViewController {
             self.animateShow(0.7)
         }
         
-        self.skView.paused = false
+        self.skView.isPaused = false
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        self.skView.paused = true
+        self.skView.isPaused = true
         
-        if self.isBeingDismissed() {
+        if self.isBeingDismissed {
             self.tryFulfill()
         }
     }
     
     // MARK: - Configuration
-    func prepareScene(skView: SKView, size: CGSize){
+    func prepareScene(_ skView: SKView, size: CGSize){
         if self.scene == nil, let scene = AddScene(fileNamed:"AddScene") {
             self.scene = scene
         }
@@ -135,7 +135,7 @@ class AddViewController: UIViewController {
 //        skView.showsFPS = true
 //        skView.showsNodeCount = true
         skView.showsPhysics = true
-        skView.backgroundColor = UIColor.whiteColor()
+        skView.backgroundColor = UIColor.white
         
         self.scene.size = skView.bounds.size
         
@@ -143,7 +143,7 @@ class AddViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         
         /* Set the scale mode to scale to fit the window */
-        self.scene.scaleMode = .Fill
+        self.scene.scaleMode = .fill
         
         skView.presentScene(self.scene)
         
@@ -161,27 +161,27 @@ class AddViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @IBAction func hideKeyboard(sender: AnyObject?) {
+    @IBAction func hideKeyboard(_ sender: AnyObject?) {
         self.skillNameField.resignFirstResponder()
     }
     
-    @IBAction func doneAction(sender: AnyObject?) {
+    @IBAction func doneAction(_ sender: AnyObject?) {
         self.hideKeyboard(self)
         self.hideAddViewController(nil)
     }
     
-    @IBAction func cancelAction(sender: AnyObject?) {
+    @IBAction func cancelAction(_ sender: AnyObject?) {
         self.cancelled = true
         self.hideKeyboard(self)
         self.hideAddViewController(nil)
     }
     
-    @IBAction func settingsAction(sender: AnyObject?) {
+    @IBAction func settingsAction(_ sender: AnyObject?) {
         self.hideKeyboard(self)
         
-        self.promiseSelection(Void.self, cancellable: true, options: [
-            (NSLocalizedString("Change Image", comment: "Change Image"),.Default,{ self.selectImage().then{ image -> Void in self.scene.setSkillImage(image) } }),
-            (NSLocalizedString("Remove skill", comment: "Remove skill"),.Destructive,{ self.removeSkill().then{ _ -> Void in
+        let _ = self.promiseSelection(Void.self, cancellable: true, options: [
+            (NSLocalizedString("Change Image", comment: "Change Image"),.default,{ self.selectImage().then{ image -> Void in self.scene.setSkillImage(image) } }),
+            (NSLocalizedString("Remove skill", comment: "Remove skill"),.destructive,{ self.removeSkill().then{ _ -> Void in
                 self.hideKeyboard(self)
                 self.hideAddViewController(nil)
             }})
@@ -190,9 +190,9 @@ class AddViewController: UIViewController {
     
     func selectImage() -> Promise<UIImage> {
         return self.promiseSelection(UIImage.self, cancellable: true, options: [
-            (NSLocalizedString("Take photo", comment: "Take photo"),.Default,{ self.selectPickerImage(.Camera) }),
-            (NSLocalizedString("Photo Library", comment: "Photo Library"),.Default, { self.selectPickerImage(.PhotoLibrary) }),
-            (NSLocalizedString("Google Images", comment: "Google Images"),.Default, { self.selectGoogleImage("\(self.skillNameField.text)") })
+            (NSLocalizedString("Take photo", comment: "Take photo"),.default,{ self.selectPickerImage(.camera) }),
+            (NSLocalizedString("Photo Library", comment: "Photo Library"),.default, { self.selectPickerImage(.photoLibrary) }),
+            (NSLocalizedString("Google Images", comment: "Google Images"),.default, { self.selectGoogleImage("\(self.skillNameField.text)") })
         ])
         .then{ image -> Promise<UIImage> in
             return self.promiseCroppedImage(image)
@@ -200,7 +200,7 @@ class AddViewController: UIViewController {
         .then { image -> UIImage in
             self.image = image
             
-            self.doneButton.enabled = self.canBeFulfilled()
+            self.doneButton.isEnabled = self.canBeFulfilled()
             
             return image
         }
@@ -213,15 +213,15 @@ class AddViewController: UIViewController {
         })
     }
     
-    func selectedLevel(level: Skill.Experience){
+    func selectedLevel(_ level: Skill.Experience){
         self.experience = level
         
-        self.doneButton.enabled = self.canBeFulfilled()
+        self.doneButton.isEnabled = self.canBeFulfilled()
     }
 
     // MARK: - Promise handling
     func canBeFulfilled() -> Bool {
-        if let _ = self.image, name = self.skillNameField.text, _ = self.experience where name.characters.count > 0  {
+        if let _ = self.image, let name = self.skillNameField.text, let _ = self.experience, name.characters.count > 0  {
             return true
         }
         else {
@@ -237,13 +237,13 @@ class AddViewController: UIViewController {
                 return
             }
             else {
-                self.reject(CommonError.UserCancelled)
+                self.reject(CommonError.userCancelled)
                 return
             }
         }
         
-        guard let image = self.image, name = self.skillNameField.text, experience = self.experience where !self.cancelled && name.characters.count > 0 else {
-            self.reject(CommonError.UserCancelled)
+        guard let image = self.image, let name = self.skillNameField.text, let experience = self.experience, !self.cancelled && name.characters.count > 0 else {
+            self.reject(CommonError.userCancelled)
             return
         }
         
@@ -264,7 +264,7 @@ class AddViewController: UIViewController {
             }
             // Otherwise = cancel
             else {
-                self.reject(CommonError.UserCancelled)
+                self.reject(CommonError.userCancelled)
             }
         }
         // If adding new
@@ -274,42 +274,42 @@ class AddViewController: UIViewController {
     }
 
     // MARK: - Helpers
-    func showFromViewController(parent: UIViewController, withOriginRect rect: CGRect?) {
-        let snapshot = parent.view.window!.snapshotViewAfterScreenUpdates(false)
-        let snapshotTop = parent.view.window!.snapshotViewAfterScreenUpdates(false)
-        snapshot.frame = parent.view.window!.bounds
-        snapshotTop.frame = parent.view.window!.bounds
+    func showFromViewController(_ parent: UIViewController, withOriginRect rect: CGRect?) {
+        let snapshot = parent.view.window!.snapshotView(afterScreenUpdates: false)
+        let snapshotTop = parent.view.window!.snapshotView(afterScreenUpdates: false)
+        snapshot?.frame = parent.view.window!.bounds
+        snapshotTop?.frame = parent.view.window!.bounds
         self.snapshotTop = snapshotTop
-        self.view.insertSubview(snapshot, atIndex: 0)
-        self.view.insertSubview(snapshotTop, aboveSubview: self.blurView)
+        self.view.insertSubview(snapshot!, at: 0)
+        self.view.insertSubview(snapshotTop!, aboveSubview: self.blurView)
         self.originRect = rect ?? self.originRect
         self.skillNameField.alpha = 0
         self.doneButton.alpha = 0
         
-        parent.presentViewController(self, animated: false) {
-            UIView.animateWithDuration( 0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-                snapshotTop.alpha = 0
+        parent.present(self, animated: false) {
+            UIView.animate( withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+                snapshotTop?.alpha = 0
                 self.skillNameField.alpha = 1
                 self.doneButton.alpha = 1
             }, completion: { (_) in
-                snapshotTop.hidden = true
+                snapshotTop?.isHidden = true
             })
        }
     }
     
-    func hideAddViewController(rect: CGRect?) {
+    func hideAddViewController(_ rect: CGRect?) {
         self.originRect = rect ?? self.originRect
-        self.snapshotTop?.hidden = false
-        self.scene.paused = false
+        self.snapshotTop?.isHidden = false
+        self.scene.isPaused = false
         self.scene.animateHide(0.7, rect: self.originRect){
-            self.scene.paused = true
-            self.dismissViewControllerAnimated(false, completion: nil)
+            self.scene.isPaused = true
+            self.dismiss(animated: false, completion: nil)
         }
         
         self.view.layoutIfNeeded()
         self.menuContainerTopConstraint.constant = -100
         
-        UIView.animateWithDuration(0.7, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.7, delay: 0, options: UIViewAnimationOptions(), animations: {
             self.snapshotTop?.alpha = 1
             self.skillNameField.alpha = 0
             self.doneButton.alpha = 0
@@ -317,42 +317,42 @@ class AddViewController: UIViewController {
         }, completion: nil)
     }
     
-    func animateShow(duration: NSTimeInterval, fromRect rect: CGRect? = nil){
+    func animateShow(_ duration: TimeInterval, fromRect rect: CGRect? = nil){
         self.originRect = rect ?? self.originRect
-        self.skView.paused = false
-        self.skView.hidden = false
+        self.skView.isPaused = false
+        self.skView.isHidden = false
         self.scene.animateShow(duration, rect: self.originRect)
         
         self.view.layoutIfNeeded()
         self.menuContainerTopConstraint.constant = 8
         
-        UIView.animateWithDuration(duration) {
+        UIView.animate(withDuration: duration, animations: {
             self.view.layoutIfNeeded()
-        }
+        }) 
     }
     
     // MARK: - Navigation
 
     // MARK: - Appearance
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
 }
 
 extension AddViewController: UITextFieldDelegate {
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        self.doneButton.enabled = self.canBeFulfilled()
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        self.doneButton.isEnabled = self.canBeFulfilled()
         return true
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        self.doneButton.enabled = self.canBeFulfilled()
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.doneButton.isEnabled = self.canBeFulfilled()
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-        self.doneButton.enabled = self.canBeFulfilled()
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.doneButton.isEnabled = self.canBeFulfilled()
     }
     
 }
@@ -360,10 +360,10 @@ extension AddViewController: UITextFieldDelegate {
 // MARK: - Keyboard handling
 extension AddViewController {
     
-    func keyboardWillShow(notification: NSNotification){
-        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+    func keyboardWillShow(_ notification: Notification){
+        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
         let curve =  UIViewAnimationCurve.init(rawValue: notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! Int)!
-        let frameHeight = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue().height
+        let frameHeight = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.height
         
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(duration)
@@ -375,13 +375,13 @@ extension AddViewController {
         
         UIView.commitAnimations()
         
-        UIView.animateWithDuration(duration) {
+        UIView.animate(withDuration: duration, animations: {
             self.containerView.setNeedsDisplay()
-        }
+        }) 
     }
     
-    func keyboardWillHide(notification: NSNotification){
-        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! NSTimeInterval
+    func keyboardWillHide(_ notification: Notification){
+        let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
         let curve =  UIViewAnimationCurve.init(rawValue: notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! Int)!
         let frameHeight : CGFloat = 0
         
@@ -395,9 +395,9 @@ extension AddViewController {
         
         UIView.commitAnimations()
         
-        UIView.animateWithDuration(duration) {
+        UIView.animate(withDuration: duration, animations: {
             self.containerView.setNeedsDisplay()
-        }
+        }) 
     }
     
 }
@@ -405,9 +405,9 @@ extension AddViewController {
 // MARK: - Skill promises
 extension AddViewController {
     
-    static func promiseNewSkillWith(sender: UIViewController, rect: CGRect?, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
-        guard let addViewController = sender.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
-            throw CommonError.UnknownError
+    static func promiseNewSkillWith(_ sender: UIViewController, rect: CGRect?, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
+        guard let addViewController = sender.storyboard?.instantiateViewController(withIdentifier: "AddSkillViewController") as? AddViewController else {
+            throw CommonError.unknownError
         }
         
         if let scene = preparedScene {
@@ -419,9 +419,9 @@ extension AddViewController {
         return addViewController.promise
     }
     
-    static func promiseChangeSkillWith(sender: UIViewController, rect: CGRect?, skill: Skill, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
-        guard let addViewController = sender.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
-            throw CommonError.UnknownError
+    static func promiseChangeSkillWith(_ sender: UIViewController, rect: CGRect?, skill: Skill, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
+        guard let addViewController = sender.storyboard?.instantiateViewController(withIdentifier: "AddSkillViewController") as? AddViewController else {
+            throw CommonError.unknownError
         }
         
         if let scene = preparedScene {
@@ -435,9 +435,9 @@ extension AddViewController {
         return addViewController.promise
     }
     
-    static func promiseSelectSkillWith(sender: UIViewController, rect: CGRect?, skill: Skill, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
-        guard let addViewController = sender.storyboard?.instantiateViewControllerWithIdentifier("AddSkillViewController") as? AddViewController else {
-            throw CommonError.UnknownError
+    static func promiseSelectSkillWith(_ sender: UIViewController, rect: CGRect?, skill: Skill, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
+        guard let addViewController = sender.storyboard?.instantiateViewController(withIdentifier: "AddSkillViewController") as? AddViewController else {
+            throw CommonError.unknownError
         }
         
         if let scene = preparedScene {
@@ -457,11 +457,11 @@ extension AddViewController {
 // MARK: - Image selection
 extension AddViewController {
     
-    func selectPickerImage(source: UIImagePickerControllerSourceType) -> Promise<UIImage> {
+    func selectPickerImage(_ source: UIImagePickerControllerSourceType) -> Promise<UIImage> {
         let picker = UIImagePickerController()
         picker.sourceType = source
         picker.allowsEditing = false
-        return self.promiseViewController(picker)
+        return self.promise(picker)
     }
     
 }
@@ -469,29 +469,29 @@ extension AddViewController {
 extension AddViewController : RSKImageCropViewControllerDelegate {
     
     
-    func promiseCroppedImage(image: UIImage) -> Promise<UIImage> {
+    func promiseCroppedImage(_ image: UIImage) -> Promise<UIImage> {
         return Promise<UIImage> { (fulfill, reject) in
             self.imageCropPromiseHandler = PromiseHandler<UIImage>(fulfill: fulfill, reject: reject)
             
             let iconImage = image.size.width < Defined.Skill.MinimumCroppableSize ? UIImage.RBResizeImage(image, targetSize: CGSize(width: image.size.width * (Defined.Skill.MinimumCroppableSize / image.size.width), height: image.size.height * (Defined.Skill.MinimumCroppableSize / image.size.width))) : image
             
-            let cropViewController = RSKImageCropViewController(image: iconImage, cropMode: RSKImageCropMode.Circle)
+            let cropViewController = RSKImageCropViewController(image: iconImage, cropMode: RSKImageCropMode.circle)
             cropViewController.delegate = self
             cropViewController.avoidEmptySpaceAroundImage = true
-            cropViewController.rotationEnabled = false
-            self.presentViewController(cropViewController, animated: true, completion: nil)
+            cropViewController.isRotationEnabled = false
+            self.present(cropViewController, animated: true, completion: nil)
         }
     }
     
-    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController) {
-        self.dismissViewControllerAnimated(true) {
-            self.imageCropPromiseHandler?.reject(CommonError.UserCancelled)
+    func imageCropViewControllerDidCancelCrop(_ controller: RSKImageCropViewController) {
+        self.dismiss(animated: true) {
+            self.imageCropPromiseHandler?.reject(CommonError.userCancelled)
             self.imageCropPromiseHandler = nil
         }
     }
     
-    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
-        self.dismissViewControllerAnimated(true) {
+    func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
+        self.dismiss(animated: true) {
             self.imageCropPromiseHandler?.fulfill(croppedImage)
             self.imageCropPromiseHandler = nil
         }

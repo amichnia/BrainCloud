@@ -8,7 +8,6 @@
 
 import UIKit
 import SpriteKit
-import SpriteKit_Spring
 
 class CloudSelectScene: SKScene {
 
@@ -18,11 +17,11 @@ class CloudSelectScene: SKScene {
     lazy var cloudNodes: [CloudNode] = {
         var nodes: [CloudNode] = []
         
-        self.enumerateChildNodesWithName("CloudNode") { (node, _) in
+        self.enumerateChildNodes(withName: "CloudNode") { (node, _) in
             nodes.append(node as! CloudNode)
         }
         
-        nodes.sortInPlace {
+        nodes.sort {
             $0.sortNumber < $1.sortNumber
         }
         
@@ -36,11 +35,11 @@ class CloudSelectScene: SKScene {
     lazy var emptyNodes: [CloudNode] = {
         var nodes: [CloudNode] = []
         
-        self.enumerateChildNodesWithName("EmptyNode") { (node, _) in
+        self.enumerateChildNodes(withName: "EmptyNode") { (node, _) in
             nodes.append(node as! CloudNode)
         }
         
-        nodes.sortInPlace {
+        nodes.sort {
             $0.sortNumber < $1.sortNumber
         }
         
@@ -56,12 +55,12 @@ class CloudSelectScene: SKScene {
     var ready: Bool = false
     
     // MARK: - Lifecycle
-    override func didMoveToView(view: SKView) {
-        super.didMoveToView(view)
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
         
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         
         self.allNodes.forEach { $0.configurePhysics() }
         self.updateClouds()
@@ -76,7 +75,7 @@ class CloudSelectScene: SKScene {
     }
     
     func updateClouds() {
-        self.enumerateChildNodesWithName("EmptyNode") { node,_ in
+        self.enumerateChildNodes(withName: "EmptyNode") { node,_ in
             node.alpha = 0.5
         }
         
@@ -87,20 +86,20 @@ class CloudSelectScene: SKScene {
     
     // MARK: - Touches Handling
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
-            let touchedNode = self.nodeAtPoint(location)
+            let touchedNode = self.atPoint(location)
             
-            if let cloudNode = touchedNode.interactionNode as? CloudNode where cloudNode.cloudNode {
-                self.selectionDelegate?.didSelectCloudWithNumber(self.cloudNodes.indexOf(cloudNode) ?? nil)
+            if let cloudNode = touchedNode.interactionNode as? CloudNode, cloudNode.cloudNode {
+                self.selectionDelegate?.didSelectCloudWithNumber(self.cloudNodes.index(of: cloudNode) ?? nil)
             }
         }
     }
     
     // MARK: - Main run loop
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         self.deltaTime += (currentTime - self.lastTime)
         
         if self.deltaTime > self.impulseInterval, let body = self.allNodes.randomElement().physicsBody {
@@ -116,8 +115,8 @@ class CloudSelectScene: SKScene {
 extension CGVector {
     
     func randomVector() -> CGVector {
-        let randomX = CGFloat(Int(arc4random())) % (2 * self.dx) - self.dx
-        let randomY = CGFloat(Int(arc4random())) % (2 * self.dy) - self.dy
+        let randomX = CGFloat(Int(arc4random())).truncatingRemainder(dividingBy: (2 * self.dx)) - self.dx
+        let randomY = CGFloat(Int(arc4random())).truncatingRemainder(dividingBy: (2 * self.dy)) - self.dy
         return CGVector(dx: randomX, dy: randomY)
     }
     

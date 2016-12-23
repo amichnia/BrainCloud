@@ -16,19 +16,19 @@ class SkillNodeEntity: BaseNodeEntity, CoreDataEntity {
     static var uniqueIdentifier = "nodeId"
     
     convenience required init?(model: DTOModel, inContext ctx: NSManagedObjectContext) {
-        guard let entityDescription = NSEntityDescription.entityForName(SkillNodeEntity.entityName, inManagedObjectContext: ctx) where model is SkillNode else {
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: SkillNodeEntity.entityName, in: ctx), model is SkillNode else {
             return nil
         }
-        self.init(entity: entityDescription, insertIntoManagedObjectContext: ctx)
+        self.init(entity: entityDescription, insertInto: ctx)
         
         self.setValuesFromModel(model)
     }
     
-    func setValuesFromModel(model: DTOModel) {
+    func setValuesFromModel(_ model: DTOModel) {
         if let node = model as? SkillNode {
             // Base data
             self.nodeId = node.uniqueIdentifierValue
-            self.positionRelative = NSValue(CGPoint: node.graphNode?.position ?? CGPoint.zero )
+            self.positionRelative = NSValue(cgPoint: node.graphNode?.position ?? CGPoint.zero )
             self.scale = Float(node.graphNode?.xScale ?? 1) // Custom scale setting
 //            self.color = node.color
             self.connected = node.pinnedNodes.map { return $0 }

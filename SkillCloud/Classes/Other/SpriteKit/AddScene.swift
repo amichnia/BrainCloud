@@ -8,7 +8,6 @@
 
 import UIKit
 import SpriteKit
-import SpriteKit_Spring
 
 class AddScene: SKScene {
 
@@ -16,13 +15,13 @@ class AddScene: SKScene {
     var skill: Skill?
     weak var controller: AddViewController?
     lazy var skillNode: EditSkillNode = {
-        return (self.childNodeWithName("Skill") as? EditSkillNode) ?? EditSkillNode()
+        return (self.childNode(withName: "Skill") as? EditSkillNode) ?? EditSkillNode()
     }()
     weak var selectedNode: ExperienceSelectNode?
     
     // MARK: - Lifecycle
-    override func didMoveToView(view: SKView) {
-        self.backgroundColor = UIColor.clearColor()
+    override func didMove(to view: SKView) {
+        self.backgroundColor = UIColor.clear
         
         self.prepareWith()
     }
@@ -33,7 +32,7 @@ class AddScene: SKScene {
     }
     
     // MARK: - Actions
-    func prepareWith(skill: Skill? = nil) {
+    func prepareWith(_ skill: Skill? = nil) {
         let resolvedSkill = skill ?? self.skill
         
         // Configure Skill node
@@ -44,18 +43,18 @@ class AddScene: SKScene {
         self.skillNode.finalFrame = final
         self.skillNode.position = self.skillNode.startFrame.centerOfMass
 
-        self[Skill.Experience.Beginner]?.outline.alpha = 0
-        self[Skill.Experience.Beginner]?.experience = Skill.Experience.Beginner
+        self[Skill.Experience.beginner]?.outline.alpha = 0
+        self[Skill.Experience.beginner]?.experience = Skill.Experience.beginner
         
-        self[Skill.Experience.Intermediate]?.outline.alpha = 0
-        self[Skill.Experience.Intermediate]?.experience = Skill.Experience.Intermediate
+        self[Skill.Experience.intermediate]?.outline.alpha = 0
+        self[Skill.Experience.intermediate]?.experience = Skill.Experience.intermediate
         
-        self[Skill.Experience.Professional]?.outline.alpha = 0
-        self[Skill.Experience.Professional]?.experience = Skill.Experience.Professional
+        self[Skill.Experience.professional]?.outline.alpha = 0
+        self[Skill.Experience.professional]?.experience = Skill.Experience.professional
         
-        self[Skill.Experience.Expert]?.outline.alpha = 0
-        self[Skill.Experience.Expert]?.experience = Skill.Experience.Expert
-        self[Skill.Experience.Expert]?.prepareRocket()
+        self[Skill.Experience.expert]?.outline.alpha = 0
+        self[Skill.Experience.expert]?.experience = Skill.Experience.expert
+        self[Skill.Experience.expert]?.prepareRocket()
         
         self.skillNode.setSkill(resolvedSkill)
         
@@ -70,7 +69,7 @@ class AddScene: SKScene {
      - parameter duration: duration
      - parameter rect:     start frame in view coordinate space
      */
-    func animateShow(duration: NSTimeInterval, rect: CGRect? = nil){
+    func animateShow(_ duration: TimeInterval, rect: CGRect? = nil){
         self.setAllVisible(true)
         
         let size = CGSize(width: self.size.width * 0.5, height: self.size.width * 0.5)
@@ -79,32 +78,32 @@ class AddScene: SKScene {
         self.skillNode.position = self.skillNode.startFrame.centerOfMass
         
         self.skillNode.animateShow(duration)
-        self[Skill.Experience.Beginner]?.animateShow()
-        self[Skill.Experience.Intermediate]?.animateShow()
-        self[Skill.Experience.Professional]?.animateShow()
-        self[Skill.Experience.Expert]?.animateShow()
+        self[Skill.Experience.beginner]?.animateShow()
+        self[Skill.Experience.intermediate]?.animateShow()
+        self[Skill.Experience.professional]?.animateShow()
+        self[Skill.Experience.expert]?.animateShow()
     }
     
-    func animateHide(duration: NSTimeInterval, rect: CGRect?, completion: (()->())? = nil) {
+    func animateHide(_ duration: TimeInterval, rect: CGRect?, completion: (()->())? = nil) {
         self.skillNode.startFrame ?= self.convertRectFromView(rect)
         
         self.skillNode.animateHide(duration) { [weak self] in
             self?.setAllVisible(false)
             completion?()
         }
-        self[Skill.Experience.Beginner]?.animateHide()
-        self[Skill.Experience.Intermediate]?.animateHide()
-        self[Skill.Experience.Professional]?.animateHide()
-        self[Skill.Experience.Expert]?.animateHide()
+        self[Skill.Experience.beginner]?.animateHide()
+        self[Skill.Experience.intermediate]?.animateHide()
+        self[Skill.Experience.professional]?.animateHide()
+        self[Skill.Experience.expert]?.animateHide()
     }
     
-    func setSkillImage(image: UIImage?) {
+    func setSkillImage(_ image: UIImage?) {
         self.skillNode.setSkillImage(image)
     }
     
-    func setAllVisible(visible: Bool) {
+    func setAllVisible(_ visible: Bool) {
         self.children.forEach {
-            $0.hidden = !visible
+            $0.isHidden = !visible
         }
     }
     
@@ -119,16 +118,16 @@ class AddScene: SKScene {
 // MARK: - Touches support
 extension AddScene {
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return
         }
         
-        let location = touch.locationInNode(self)
-        let touchedNode = self.nodeAtPoint(location).interactionNode ?? self
+        let location = touch.location(in: self)
+        let touchedNode = self.atPoint(location).interactionNode ?? self
         
         if touchedNode == self.skillNode.imageSelect {
-            self.controller?.selectImage()
+            _ = self.controller?.selectImage()
             .then { image -> Void in
                 self.setSkillImage(image)
             }
@@ -142,10 +141,6 @@ extension AddScene {
                 self.controller?.selectedLevel(experienceNode.experience)
             }
         }
-        else {
-            print(touchedNode.name)
-            print(touchedNode)
-        }
         
         self.controller?.hideKeyboard(nil)
     }
@@ -154,18 +149,18 @@ extension AddScene {
 
 extension SKScene {
     
-    func convertRectFromView(rect: CGRect?) -> CGRect? {
+    func convertRectFromView(_ rect: CGRect?) -> CGRect? {
         guard let rect = rect else {
             return nil
         }
         
-        var origin = self.convertPointFromView(rect.origin)
+        var origin = self.convertPoint(fromView: rect.origin)
         
         guard rect.size != CGSize.zero else {
             return CGRect(origin: origin, size: CGSize.zero)
         }
         
-        let temporarySize = self.convertPointFromView(CGPoint(x: rect.size.width, y: rect.size.height))
+        let temporarySize = self.convertPoint(fromView: CGPoint(x: rect.size.width, y: rect.size.height))
         let factor = temporarySize.x / rect.size.width
         
         let size = CGSize(width: rect.size.width * factor, height: rect.size.height * factor)

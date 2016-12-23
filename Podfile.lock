@@ -1,20 +1,19 @@
 PODS:
-  - Alamofire (3.4.1)
-  - AlamofireSwiftyJSON (0.1.1):
-    - Alamofire (~> 3.4)
-    - SwiftyJSON (~> 2.3)
-  - AMKSlidingTableViewCell (1.0.1)
-  - ASIACheckmarkView (1.0.2)
-  - CocoaLumberjack (2.3.0):
-    - CocoaLumberjack/Default (= 2.3.0)
-    - CocoaLumberjack/Extensions (= 2.3.0)
-  - CocoaLumberjack/Core (2.3.0)
-  - CocoaLumberjack/Default (2.3.0):
+  - Alamofire (4.2.0)
+  - AlamofireSwiftyJSON (0.2.0):
+    - Alamofire (~> 4.0)
+    - SwiftyJSON (~> 3.1)
+  - AMKSlidingTableViewCell (3.0.1)
+  - ASIACheckmarkView (3.0.1)
+  - CocoaLumberjack (3.0.0):
+    - CocoaLumberjack/Default (= 3.0.0)
+    - CocoaLumberjack/Extensions (= 3.0.0)
+  - CocoaLumberjack/Core (3.0.0)
+  - CocoaLumberjack/Default (3.0.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.3.0):
+  - CocoaLumberjack/Extensions (3.0.0):
     - CocoaLumberjack/Default
   - DRNSnackBar (0.0.1)
-  - LTMorphingLabel (0.2.0)
   - MRProgress (0.8.3):
     - MRProgress/ActivityIndicator (= 0.8.3)
     - MRProgress/Blur (= 0.8.3)
@@ -43,32 +42,23 @@ PODS:
   - MRProgress/ProgressBaseClass (0.8.3)
   - MRProgress/Stopable (0.8.3):
     - MRProgress/Helper
-  - OMGHTTPURLRQ (3.1.2):
-    - OMGHTTPURLRQ/RQ (= 3.1.2)
-  - OMGHTTPURLRQ/FormURLEncode (3.1.2)
-  - OMGHTTPURLRQ/RQ (3.1.2):
-    - OMGHTTPURLRQ/FormURLEncode
-    - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (3.1.2)
-  - PromiseKit (3.2.0):
-    - PromiseKit/Foundation (= 3.2.0)
-    - PromiseKit/QuartzCore (= 3.2.0)
-    - PromiseKit/UIKit (= 3.2.0)
-  - PromiseKit/AssetsLibrary (3.2.0):
-    - PromiseKit/UIKit
-  - PromiseKit/CorePromise (3.2.0)
-  - PromiseKit/Foundation (3.2.0):
-    - OMGHTTPURLRQ (~> 3.1.0)
+  - PromiseKit (4.1.0):
+    - PromiseKit/Foundation (= 4.1.0)
+    - PromiseKit/QuartzCore (= 4.1.0)
+    - PromiseKit/UIKit (= 4.1.0)
+  - PromiseKit/AssetsLibrary (4.1.0):
     - PromiseKit/CorePromise
-  - PromiseKit/MessageUI (3.2.0):
+  - PromiseKit/CorePromise (4.1.0)
+  - PromiseKit/Foundation (4.1.0):
     - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (3.2.0):
+  - PromiseKit/MessageUI (4.1.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (3.2.0):
+  - PromiseKit/QuartzCore (4.1.0):
     - PromiseKit/CorePromise
-  - RSKImageCropper (1.5.1)
-  - SpriteKit-Spring (1.0.1)
-  - SwiftyJSON (2.3.2)
+  - PromiseKit/UIKit (4.1.0):
+    - PromiseKit/CorePromise
+  - RSKImageCropper (1.5.2)
+  - SwiftyJSON (3.1.3)
 
 DEPENDENCIES:
   - AlamofireSwiftyJSON
@@ -76,29 +66,24 @@ DEPENDENCIES:
   - ASIACheckmarkView
   - CocoaLumberjack
   - DRNSnackBar
-  - LTMorphingLabel
   - MRProgress
   - PromiseKit
   - PromiseKit/AssetsLibrary
   - PromiseKit/MessageUI
   - RSKImageCropper
-  - SpriteKit-Spring
 
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  AlamofireSwiftyJSON: 4787ff07c7e6687b787f1723229e729653e3359f
-  AMKSlidingTableViewCell: 4f7f9278ef72297a716a8429ca04a49432943259
-  ASIACheckmarkView: 701ef0d4b618134bae36cc01f8cdabca12c6117d
-  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
+  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  AlamofireSwiftyJSON: 5a49196b8b061e32f5ebc84fa0815300bd8a974e
+  AMKSlidingTableViewCell: 29a139dbcb58693891e719c8d85348c4802e17d0
+  ASIACheckmarkView: b3b988102ebd7662f0a2e1f6308c5726c52d3a90
+  CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
   DRNSnackBar: 227cc12275ae405bb62e5c598b920cacc04b3a2d
-  LTMorphingLabel: 490aa8e079f9247c7f3130f7d4b1be1d66677377
   MRProgress: 16de7cc9f347e8846797a770db102a323fe7ef09
-  OMGHTTPURLRQ: 38316b56d88125c600bcdb16df8329147da2b0ee
-  PromiseKit: 1db024241265f428137a9f3c00ff9590740c4be6
-  RSKImageCropper: edd65fedb3734332818deb139906d6b7f54b8a44
-  SpriteKit-Spring: 51d289157e085eb629992ea8281f3bde60b589e9
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  PromiseKit: c98453ff78544c0ad5bb0ea980782e6875f47978
+  RSKImageCropper: 27d0e7efa800b509720163c3561fe08a04853780
+  SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: 8b87721c261405dbf687a2870507d6468c0b1867
+PODFILE CHECKSUM: 1b9213c9cec656e59aa7ae31d8bd287f6dd08504
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.1

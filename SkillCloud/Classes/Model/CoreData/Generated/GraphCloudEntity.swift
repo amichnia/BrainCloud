@@ -16,20 +16,20 @@ class GraphCloudEntity: NSManagedObject, CoreDataEntity {
     static var uniqueIdentifier = "cloudId"
     
     convenience required init?(model: DTOModel, inContext ctx: NSManagedObjectContext) {
-        guard let entityDescription = NSEntityDescription.entityForName(GraphCloudEntity.entityName, inManagedObjectContext: ctx) where model is CloudGraphScene else {
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: GraphCloudEntity.entityName, in: ctx), model is CloudGraphScene else {
             return nil
         }
-        self.init(entity: entityDescription, insertIntoManagedObjectContext: ctx)
+        self.init(entity: entityDescription, insertInto: ctx)
         
         // Set values
         self.setValuesFromModel(model)
     }
     
-    func setValuesFromModel(model: DTOModel) {
-        if let cloud = model as? CloudGraphScene, ctx = self.managedObjectContext {
+    func setValuesFromModel(_ model: DTOModel) {
+        if let cloud = model as? CloudGraphScene, let ctx = self.managedObjectContext {
             // Basic
             self.cloudId = cloud.cloudIdentifier
-            self.date = NSDate().timeIntervalSince1970
+            self.date = Date().timeIntervalSince1970
             self.name = cloud.name
             self.thumbnail = cloud.thumbnail
             self.slot = Int16(cloud.slot)
@@ -42,7 +42,7 @@ class GraphCloudEntity: NSManagedObject, CoreDataEntity {
             self.skillNodes?.forEach { node in
                 guard let node = node as? NSManagedObject else { return }
 
-                self.managedObjectContext?.deleteObject(node)
+                self.managedObjectContext?.delete(node)
             }
             
             for skillNode in cloud.skillNodes {

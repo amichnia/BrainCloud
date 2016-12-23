@@ -8,7 +8,6 @@
 
 import Foundation
 import SpriteKit
-import SpriteKit_Spring
 import PromiseKit
 
 protocol CloudSceneDelegate: class {
@@ -51,8 +50,8 @@ class CloudGraphScene: SKScene, DTOModel {
     var previousUniqueIdentifier: String?
     
     // MARK: - Lifecycle
-    override func didMoveToView(view: SKView) {
-        super.didMoveToView(view)
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
         
         self.configureInView(view)
         
@@ -90,11 +89,11 @@ class CloudGraphScene: SKScene, DTOModel {
     // MARK: - Configuration
     
     // MARK: - Actions
-    func willStartTranslateAt(position: CGPoint) {
+    func willStartTranslateAt(_ position: CGPoint) {
         self.resolveDraggedNodeAt(position)
     }
     
-    func translate(translation: CGPoint, save: Bool = false) {
+    func translate(_ translation: CGPoint, save: Bool = false) {
         if let _ = self.draggedNode {
             self.dragNode(&self.draggedNode!, translation: translation, save: save)
         }
@@ -103,8 +102,8 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
-    func dragNode(inout node: TranslatableNode, translation: CGPoint, save: Bool = false) {
-        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
+    func dragNode(_ node: inout TranslatableNode, translation: CGPoint, save: Bool = false) {
+        let convertedTranslation = self.convertPoint(fromView: translation) - self.convertPoint(fromView: CGPoint.zero)
         node.position = node.originalPosition + convertedTranslation
         
         if save {
@@ -115,12 +114,12 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
-    func resolveTapAt(point: CGPoint, forSkill skill: Skill) {
-        let convertedPoint = self.convertPointFromView(point)
+    func resolveTapAt(_ point: CGPoint, forSkill skill: Skill) {
+        let convertedPoint = self.convertPoint(fromView: point)
         
-        if let option = self.nodeAtPoint(convertedPoint).interactionNode as? OptionNode {
+        if let option = self.atPoint(convertedPoint).interactionNode as? OptionNode {
             switch option.action {
-            case .Delete:
+            case .delete:
                 self.deleteNode(option.graphNode)
                 fallthrough
             default:
@@ -129,7 +128,7 @@ class CloudGraphScene: SKScene, DTOModel {
         }
         
         
-        GraphNode.newFromTemplate(skill.experience)
+        _ = GraphNode.newFromTemplate(skill.experience)
         .promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true, skill: skill)
         .then { addedNode -> Void in
             self.selectedNode?.selected = false
@@ -146,10 +145,10 @@ class CloudGraphScene: SKScene, DTOModel {
         self.cloudDelegate?.didAddSkill()
     }
     
-    func resolveDraggedNodeAt(position: CGPoint) {
-        let convertedPoint = self.convertPointFromView(position)
+    func resolveDraggedNodeAt(_ position: CGPoint) {
+        let convertedPoint = self.convertPoint(fromView: position)
         
-        if let draggedNode = self.nodeAtPoint(convertedPoint).interactionNode as? GraphNode, selectedNode = self.selectedNode where draggedNode == selectedNode  {
+        if let draggedNode = self.atPoint(convertedPoint).interactionNode as? GraphNode, let selectedNode = self.selectedNode, draggedNode == selectedNode  {
             self.draggedNode = draggedNode
             if let draggedNode = self.draggedNode as? GraphNode {
                 draggedNode.unpin()
@@ -159,12 +158,12 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
-    func selectNodeAt(point: CGPoint) {
-        let convertedPoint = self.convertPointFromView(point)
+    func selectNodeAt(_ point: CGPoint) {
+        let convertedPoint = self.convertPoint(fromView: point)
         
         self.deselectNode()
         
-        if let selectedNode = self.nodeAtPoint(convertedPoint).interactionNode as? GraphNode {
+        if let selectedNode = self.atPoint(convertedPoint).interactionNode as? GraphNode {
             self.selectedNode = selectedNode
             self.selectedNode?.selected = true
         }
@@ -187,7 +186,7 @@ class CloudGraphScene: SKScene, DTOModel {
         self.deleteNode(node)
     }
     
-    func deleteNode(node: GraphNode?) {
+    func deleteNode(_ node: GraphNode?) {
         self.selectedNode?.selected = false
         node?.selected = false
         node?.skillNode?.pinnedNodes.forEach { nodeId in
@@ -196,11 +195,11 @@ class CloudGraphScene: SKScene, DTOModel {
         
         node?.removeFromParent()
         
-        guard let skillNode = node?.skillNode, let index = skillNodes.indexOf(skillNode) else {
+        guard let skillNode = node?.skillNode, let index = skillNodes.index(of: skillNode) else {
             return
         }
         
-        skillNodes.removeAtIndex(index)
+        skillNodes.remove(at: index)
         deletedNodes.append(skillNode)
         
         OptionsNode.unspawn()
@@ -217,7 +216,7 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
-    func scale(translation: CGPoint, save: Bool = false) -> CGFloat? {
+    func scale(_ translation: CGPoint, save: Bool = false) -> CGFloat? {
         guard let _ = self.scaledNode else {
             return nil
         }
@@ -225,7 +224,7 @@ class CloudGraphScene: SKScene, DTOModel {
         return self.scaleNode(&self.scaledNode!, translation: translation, save: save)
     }
     
-    func scaleNode(inout node: ScalableNode, translation: CGPoint, save: Bool = false) -> CGFloat? {
+    func scaleNode(_ node: inout ScalableNode, translation: CGPoint, save: Bool = false) -> CGFloat? {
         let factor = -translation.y / 150
         
         let fill = node.applyScale(factor)
@@ -240,7 +239,7 @@ class CloudGraphScene: SKScene, DTOModel {
     }
     
     // MARK: - Camera handling
-    func cameraZoom(zoom: CGFloat, save: Bool = false) {
+    func cameraZoom(_ zoom: CGFloat, save: Bool = false) {
         let baseScale = self.cameraSettings.scale
         let newZoom = max(0.02,baseScale + (1 - zoom))
         
@@ -252,8 +251,8 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
-    func moveCamera(translation: CGPoint, save: Bool = false) {
-        let convertedTranslation = self.convertPointFromView(translation) - self.convertPointFromView(CGPoint.zero)
+    func moveCamera(_ translation: CGPoint, save: Bool = false) {
+        let convertedTranslation = self.convertPoint(fromView: translation) - self.convertPoint(fromView: CGPoint.zero)
         
         let newPosition = self.cameraSettings.position - convertedTranslation
         self.camera?.position = newPosition
@@ -264,7 +263,7 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
-    func cameraAnimateToValidValues(duration: NSTimeInterval = 0.5) {
+    func cameraAnimateToValidValues(_ duration: TimeInterval = 0.5) {
         guard let camera = self.camera else {
             return
         }
@@ -293,14 +292,14 @@ class CloudGraphScene: SKScene, DTOModel {
         let scaleAction = SKAction.scaleTo(scale, duration: duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0)
         let action = SKAction.group([moveAction,scaleAction])
         
-        camera.runAction(action) {
+        camera.run(action, completion: {
             self.cameraSettings.scale = camera.xScale
             self.cameraSettings.position = camera.position
-        }
+        }) 
     }
     
     // MARK: - Main run loop
-    override func update(currentTime: NSTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         self.allNodes.values.forEach {
             $0.getSuckedOffIfNeeded()
             $0.updateLinesIfNeeded()
@@ -312,16 +311,16 @@ class CloudGraphScene: SKScene, DTOModel {
 // MARK: - SKPhysicsContactDelegate
 extension CloudGraphScene: SKPhysicsContactDelegate {
     
-    func didBeginContact(contact: SKPhysicsContact) {
-        if let brainNode = contact.bodyA.node as? BrainNode, graphNode = contact.bodyB.node?.interactionNode as? GraphNode {
+    func didBegin(_ contact: SKPhysicsContact) {
+        if let brainNode = contact.bodyA.node as? BrainNode, let graphNode = contact.bodyB.node?.interactionNode as? GraphNode {
             brainNode.getSuckedIfNeededBy(graphNode)
         }
-        else if let brainNode = contact.bodyB.node as? BrainNode, graphNode = contact.bodyA.node?.interactionNode as? GraphNode {
+        else if let brainNode = contact.bodyB.node as? BrainNode, let graphNode = contact.bodyA.node?.interactionNode as? GraphNode {
             brainNode.getSuckedIfNeededBy(graphNode)
         }
     }
     
-    func didEndContact(contact: SKPhysicsContact) {
+    func didEnd(_ contact: SKPhysicsContact) {
         
     }
     
@@ -331,7 +330,7 @@ extension CloudGraphScene: SKPhysicsContactDelegate {
 extension CloudGraphScene {
     
     // Basic configuration
-    func configureInView(view: SKView) {
+    func configureInView(_ view: SKView) {
         // Prepare templates
         GraphNode.grabFromScene(self)
         OptionsNode.grabFromScene(self)
@@ -346,23 +345,23 @@ extension CloudGraphScene {
         
         // Physics
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
-        self.physicsBody = SKPhysicsBody(edgeLoopFromRect: self.frame)
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         self.physicsWorld.contactDelegate = self
         
         // Camera
-        self.camera = self.childNodeWithName("MainCamera") as? SKCameraNode
+        self.camera = self.childNode(withName: "MainCamera") as? SKCameraNode
         self.cameraSettings.position = self.frame.centerOfMass
     }
     
     // loads nodes array from graph
-    func loadNodesFromGraph(graph: (name: String, version: String)) throws -> [Node] {
+    func loadNodesFromGraph(_ graph: (name: String, version: String)) throws -> [Node] {
         let resource = "\(graph.name)_\(graph.version)"
         
-        guard let url = NSBundle.mainBundle().URLForResource(resource, withExtension: "json"), data = NSData(contentsOfURL: url) else {
-            throw SCError.InvalidBundleResourceUrl
+        guard let url = Bundle.main.url(forResource: resource, withExtension: "json"), let data = try? Data(contentsOf: url) else {
+            throw SCError.invalidBundleResourceUrl
         }
         
-        let array = ((try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)) as! NSArray) as! [NSDictionary]
+        let array = ((try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)) as! NSArray) as! [NSDictionary]
         
         return array.map{
             let scale = $0["s"] as! Int
@@ -374,14 +373,14 @@ extension CloudGraphScene {
     }
     
     // adds bas nodes building graph
-    func addNodes(nodes: [Node]) {
+    func addNodes(_ nodes: [Node]) {
         if allNodesContainer == nil {
             allNodesContainer = SKNode()
             allNodesContainer.position = CGPoint.zero
             self.addChild(allNodesContainer)
         }
         
-        self.nodes.sortInPlace{ $0.id < $1.id }
+        self.nodes.sort{ $0.id < $1.id }
         
         for node in nodes {
             let brainNode = BrainNode.nodeWithNode(node)
@@ -403,16 +402,16 @@ extension CloudGraphScene {
         }
     }
     
-    func addSkillNodesFrom(entity: GraphCloudEntity) {
+    func addSkillNodesFrom(_ entity: GraphCloudEntity) {
         let skillEntities = entity.skillNodes?.allObjects.map{ $0 as! SkillNodeEntity } ?? []
         
         for entity in skillEntities {
-            let level: Skill.Experience = Skill.Experience(rawValue: Int(entity.skillExperienceValue)) ?? Skill.Experience.Beginner
-            let position: CGPoint = entity.positionRelative?.CGPointValue() ?? CGPoint.zero
+            let level: Skill.Experience = Skill.Experience(rawValue: Int(entity.skillExperienceValue)) ?? Skill.Experience.beginner
+            let position: CGPoint = entity.positionRelative?.cgPointValue ?? CGPoint.zero
             let pinned: [Int] = entity.connected ?? []
             
             // Spawn concrete entity
-            GraphNode.newFromTemplate(level)
+            _ = GraphNode.newFromTemplate(level)
             .promiseSpawnInScene(self, atPosition: position, animated: false, entity: entity)
             .then { addedNode -> Void in
                 pinned.map({ return self.allNodes[$0] }).forEach { node in

@@ -16,26 +16,34 @@ protocol JSONMappable {
     init?(json: JSON)
 }
 
-protocol AnyAPI: URLStringConvertible {
-    var method      : Alamofire.Method { get }
+
+protocol AnyAPI: URLConvertible {
+    var URLString   : String { get }
+    var method      : Alamofire.HTTPMethod { get }
     var parameters  : [String:AnyObject]? { get }
     var headers     : [String:String]? { get }
     var encoding    : Alamofire.ParameterEncoding { get }
+    var uploadFiles : [String:URL]? { get }
+    var uploadData  : [String : Data]? { get }
     
-    func resolveErrorWith(nserror: NSError?) -> ErrorType
+    var request     : Alamofire.DataRequest { get }
 }
 
 extension AnyAPI {
-    var method      : Alamofire.Method { return Alamofire.Method.GET }
+    var method      : Alamofire.HTTPMethod { return Alamofire.HTTPMethod.get }
     var parameters  : [String:AnyObject]? { return nil }
     var headers     : [String:String]? { return nil }
-    var encoding    : Alamofire.ParameterEncoding { return Alamofire.ParameterEncoding.URL }
+    var encoding    : Alamofire.ParameterEncoding { return Alamofire.URLEncoding() }
+    var uploadFiles : [String:URL]? { return nil }
+    var uploadData  : [String : Data]? { return nil }
     
-    func resolveErrorWith(nserror: NSError?) -> ErrorType {
-        return nserror ?? APIError.UnknownError
+    var request : Alamofire.DataRequest {
+        return Alamofire.request(self, method: self.method, parameters: self.parameters, encoding: self.encoding, headers: self.headers)
     }
+    public func asURL() throws -> URL { return URL(string: self.URLString)! }
 }
 
+// MARK: - Static instance
 extension AnyAPI {
     var staticSelf : Self.Type {
         return Self.self
@@ -46,17 +54,17 @@ extension AnyAPI {
     
     func invoke<T:JSONMappable>() -> Promise<T> {
         return Promise<T> { (fulfill, reject) in
-            Alamofire.request(self.method, self, parameters: self.parameters, encoding: self.encoding, headers: self.headers).responseSwiftyJSON { response in
+            Alamofire.request(self, method: self.method, parameters: self.parameters, encoding: self.encoding, headers: self.headers).responseSwiftyJSON { response in
                 if response.result.isSuccess && response.result.error == nil, let json = response.result.value {
                     if let model = T(json: json) {
                         fulfill(model)
                     }
                     else {
-                        reject(APIError.SerializationError)
+                        reject(APIError.serializationError)
                     }
                 }
                 else {
-                    reject(self.resolveErrorWith(response.result.error))
+                    reject(APIError.unknownError)
                 }
             }
         }
@@ -66,7 +74,7 @@ extension AnyAPI {
 
 extension JSON {
     
-    static func json(data: AnyObject?) -> JSON? {
+    static func json(_ data: AnyObject?) -> JSON? {
         if data == nil {
             return nil
         }
@@ -75,12 +83,12 @@ extension JSON {
     
 }
 
-enum APIError : ErrorType {
-    case UnknownError
-    case Other(NSError)
-    case Unauthorized
-    case ServerError
-    case Timeout
-    case NotFound
-    case SerializationError
+enum APIError : Error {
+    case unknownError
+    case other(NSError)
+    case unauthorized
+    case serverError
+    case timeout
+    case notFound
+    case serializationError
 }

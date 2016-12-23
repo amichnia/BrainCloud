@@ -25,18 +25,18 @@ class AboutViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         self.tintedImages.forEach {
-            $0.tintColor = UIColor.whiteColor()
-            $0.image = $0.image?.imageWithRenderingMode(.AlwaysTemplate)
+            $0.tintColor = UIColor.white
+            $0.image = $0.image?.withRenderingMode(.alwaysTemplate)
         }
     }
     
     // MARK: - Actions
-    @IBAction func writeAction(sender: AnyObject) {
+    @IBAction func writeAction(_ sender: AnyObject) {
         
     }
     
-    @IBAction func visitWebsite(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(Defined.Application.StudioURL)
+    @IBAction func visitWebsite(_ sender: AnyObject) {
+        UIApplication.shared.openURL(Defined.Application.StudioURL)
     }
     
     // MARK: - Navigation

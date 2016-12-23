@@ -12,14 +12,14 @@ import SpriteKit
 import DRNSnackBar
 
 // MARK: - Global functions
-func generateFileURL(fileExtension: String = "jpg") -> NSURL {
-    let fileManager = NSFileManager.defaultManager()
-    let fileArray: NSArray = fileManager.URLsForDirectory(.CachesDirectory, inDomains: .UserDomainMask)
-    let fileURL = fileArray.lastObject?.URLByAppendingPathComponent(NSUUID().UUIDString).URLByAppendingPathExtension(fileExtension)
+func generateFileURL(_ fileExtension: String = "jpg") -> URL {
+    let fileManager = FileManager.default
+    let fileArray: NSArray = fileManager.urls(for: .cachesDirectory, in: .userDomainMask) as NSArray
+    let fileURL = (fileArray.lastObject as? URL)?.appendingPathComponent(UUID().uuidString).appendingPathExtension(fileExtension)
     
-    if let filePath = (fileArray.lastObject as? NSURL)?.path {
-        if !fileManager.fileExistsAtPath(filePath) {
-            try! fileManager.createDirectoryAtPath(filePath, withIntermediateDirectories: true, attributes: nil)
+    if let filePath = (fileArray.lastObject as? URL)?.path {
+        if !fileManager.fileExists(atPath: filePath) {
+            try! fileManager.createDirectory(atPath: filePath, withIntermediateDirectories: true, attributes: nil)
         }
     }
     
@@ -29,30 +29,30 @@ func generateFileURL(fileExtension: String = "jpg") -> NSURL {
 // MARK: - Default unwind segue for back
 extension UIViewController {
     
-    @IBAction func unwindToPreviousViewController(unwindSegue: UIStoryboardSegue) { }
+    @IBAction func unwindToPreviousViewController(_ unwindSegue: UIStoryboardSegue) { }
     
 }
 
 // MARK: - Snack bar support
 extension UIViewController {
     
-    func showSnackBarMessage(message: String){
-        DRNSnackBar.makeText(message).show()
+    func showSnackBarMessage(_ message: String){
+        (DRNSnackBar.makeText(message) as AnyObject).show()
     }
     
 }
 
 // MARK: Common Error
-enum CommonError : ErrorType {
-    case UnknownError
-    case NotEnoughData
-    case UserCancelled
-    case OperationFailed
-    case Other(ErrorType)
-    case Failure(reason: String)
+enum CommonError : Error {
+    case unknownError
+    case notEnoughData
+    case userCancelled
+    case operationFailed
+    case other(Error)
+    case failure(reason: String)
 }
 
-protocol ShowableError: ErrorType {
+protocol ShowableError: Error {
     func alertTitle() -> String?
     func alertBody() -> String
 }
@@ -61,7 +61,7 @@ extension CommonError: ShowableError {
     
     func alertTitle() -> String? {
         switch self {
-        case .Other(let otherError) where otherError is ShowableError:
+        case .other(let otherError) where otherError is ShowableError:
             return (otherError as! ShowableError).alertTitle()
             
         default:
@@ -71,16 +71,16 @@ extension CommonError: ShowableError {
     
     func alertBody() -> String {
         switch self {
-        case .Other(let otherError) where otherError is ShowableError:
+        case .other(let otherError) where otherError is ShowableError:
             return (otherError as! ShowableError).alertBody()
             
-        case .Other(let otherError):
+        case .other(let otherError):
             return "\((otherError as NSError).localizedDescription)"
             
-        case .UnknownError:
+        case .unknownError:
             return NSLocalizedString("Unknown error occured!", comment: "Unknown error occured!")
             
-        case .Failure(reason: let reason):
+        case .failure(reason: let reason):
             return reason
             
         default:
@@ -91,13 +91,9 @@ extension CommonError: ShowableError {
 }
 
 // MARK: - Delay
-func delay(delay:Double, closure:()->()) {
-    dispatch_after(
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(delay * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(), closure)
+func delay(_ delay:Double, closure:@escaping ()->()) {
+    DispatchQueue.main.asyncAfter(
+        deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
 }
 
 // MARK: - Sprite Kit interactive nodes
@@ -133,7 +129,7 @@ protocol ScalableNode {
 }
 
 extension ScalableNode {
-    mutating func applyScale(scale: CGFloat) -> CGFloat {
+    mutating func applyScale(_ scale: CGFloat) -> CGFloat {
         let minScale: CGFloat = 0.5
         let maxScale: CGFloat = 2.0
         self.currentScale =  max(0.5, min(2.0, self.originalScale + scale))
@@ -164,11 +160,9 @@ func *(lhs: CGPoint, rhs: CGFloat) -> CGPoint {
 }
 
 // MARK: - Custom operators
-infix operator ?= {
-associativity none
-precedence 130
-}
-public func ?=<T,U>(inout lhs: T, rhs: U?) {
+// MARK: - Optional assignment
+infix operator ?=: AdditionPrecedence
+public func ?=<T,U>(lhs: inout T, rhs: U?) {
     if let value = rhs {
         lhs = (value as! T)
     }

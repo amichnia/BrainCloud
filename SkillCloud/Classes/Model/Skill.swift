@@ -25,7 +25,7 @@ class Skill {
     // Cloud Kit only
     var createdRecord: CKRecord?
     var recordName: String?
-    var modified: NSDate?
+    var modified: Date?
     var recordChangeTag: String?
     
     // Prepared images
@@ -41,7 +41,7 @@ class Skill {
         self.skillDescription = description
     }
     
-    private init() { }
+    fileprivate init() { }
     
     required convenience init?(record: CKRecord) {
         self.init()
@@ -52,7 +52,7 @@ class Skill {
     }
     
     // MARK: - Static Keys
-    private struct CKKey {
+    fileprivate struct CKKey {
         static let Name = "name"
         static let Experience = "experienceValue"
         static let Thumbnail = "thumbnail"
@@ -65,17 +65,17 @@ class Skill {
 // MARK: - CKRecordMappable
 extension Skill: CKRecordMappable {
     
-    func performMappingWith(record: CKRecord) -> Self? {
+    func performMappingWith(_ record: CKRecord) -> Self? {
         guard let
-            title = record.objectForKey(CKKey.Name) as? String,
-            expValue = record.objectForKey(CKKey.Experience) as? Int,
-            experience = Skill.Experience(rawValue: expValue),
-            thumbnail = record.imageForKey(CKKey.Thumbnail) ?? self.thumbnail
+            title = record.object(forKey: CKKey.Name) as? String,
+            let expValue = record.object(forKey: CKKey.Experience) as? Int,
+            let experience = Skill.Experience(rawValue: expValue),
+            let thumbnail = record.imageForKey(CKKey.Thumbnail) ?? self.thumbnail
         else {
             return nil
         }
         
-        let description = record.objectForKey(CKKey.Description) as? String
+        let description = record.object(forKey: CKKey.Description) as? String
         
         self.title = title
         self.thumbnail = thumbnail
@@ -100,9 +100,9 @@ extension Skill: CKRecordConvertible {
     func recordRepresentation() -> CKRecord? {
         let record = CKRecord(recordConvertible: self)
         
-        record.setObject(self.title, forKey: CKKey.Name)
-        record.setObject(self.experience.rawValue, forKey: CKKey.Experience)
-        record.setObject(self.skillDescription, forKey: CKKey.Description)
+        record.setObject(self.title as CKRecordValue?, forKey: CKKey.Name)
+        record.setObject(self.experience.rawValue as CKRecordValue?, forKey: CKKey.Experience)
+        record.setObject(self.skillDescription as CKRecordValue?, forKey: CKKey.Description)
         
         if let thumbnail = try? CKAsset.assetWithImage(self.thumbnail) {
             record.setObject(thumbnail, forKey: CKKey.Thumbnail)
@@ -129,8 +129,8 @@ extension Skill: CKRecordConvertible {
 extension Skill: CKRecordSyncable {
     
     func clearTemporaryData() {
-        (self.createdRecord?.objectForKey(CKKey.Thumbnail) as? CKAsset)?.clearTemporaryData()
-        (self.createdRecord?.objectForKey(CKKey.Image) as? CKAsset)?.clearTemporaryData()
+        (self.createdRecord?.object(forKey: CKKey.Thumbnail) as? CKAsset)?.clearTemporaryData()
+        (self.createdRecord?.object(forKey: CKKey.Image) as? CKAsset)?.clearTemporaryData()
     }
     
 }
@@ -146,21 +146,21 @@ extension Skill : DTOModel {
 extension Skill {
     
     enum Experience : Int {
-        case Any = -1
-        case Beginner = 0
-        case Intermediate
-        case Professional
-        case Expert
+        case any = -1
+        case beginner = 0
+        case intermediate
+        case professional
+        case expert
         
         var image: UIImage? {
             switch self {
-            case .Beginner:
+            case .beginner:
                 return UIImage(named: "icon-skill-beginner")
-            case .Intermediate:
+            case .intermediate:
                 return UIImage(named: "icon-skill-intermediate")
-            case .Professional:
+            case .professional:
                 return UIImage(named: "icon-skill-professional")
-            case .Expert:
+            case .expert:
                 return UIImage(named: "icon-skill-expert")
             default:
                 return nil
@@ -169,13 +169,13 @@ extension Skill {
         
         var radius: CGFloat {
             switch self {
-            case .Beginner:
+            case .beginner:
                 return 10
-            case .Intermediate:
+            case .intermediate:
                 return 15
-            case .Professional:
+            case .professional:
                 return 20
-            case .Expert:
+            case .expert:
                 return 25
             default:
                 return 0
@@ -184,15 +184,15 @@ extension Skill {
         
         var name: String {
             switch self {
-            case .Any:
+            case .any:
                 return "Any"
-            case .Beginner:
+            case .beginner:
                 return "Beginner"
-            case .Intermediate:
+            case .intermediate:
                 return "Intermediate"
-            case .Professional:
+            case .professional:
                 return "Professional"
-            case .Expert:
+            case .expert:
                 return "Expert"
             }
         }
@@ -201,7 +201,7 @@ extension Skill {
 
 extension Skill {
     
-    class func fetchAllWithPredicate(predicate: NSPredicate) -> Promise<[Skill]> {
+    class func fetchAllWithPredicate(_ predicate: NSPredicate) -> Promise<[Skill]> {
         return SkillEntity.fetchAllWithPredicate(predicate).then { entities -> [Skill] in
             return entities.map { $0.skill }
         }
@@ -218,12 +218,12 @@ extension Skill {
     }
     
     class func fetchAllNotDeleted() -> Promise<[Skill]> {
-        let predicate = NSPredicate(format: "toDelete == %@", false)
+        let predicate = NSPredicate(format: "toDelete == %@", false as CVarArg)
         return self.fetchAllWithPredicate(predicate)
     }
     
     class func fetchAllToDelete() -> Promise<[Skill]> {
-        let predicate = NSPredicate(format: "toDelete == %@", true)
+        let predicate = NSPredicate(format: "toDelete == %@", true as CVarArg)
         return self.fetchAllWithPredicate(predicate)
     }
     

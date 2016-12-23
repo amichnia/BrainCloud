@@ -1,16 +1,14 @@
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 target 'SkillCloud' do
 
 pod 'AlamofireSwiftyJSON'
-pod "AMKSlidingTableViewCell"
-pod "ASIACheckmarkView"
-pod "LTMorphingLabel"
-pod "PromiseKit"
-pod "PromiseKit/AssetsLibrary"
-pod "PromiseKit/MessageUI"
-pod 'SpriteKit-Spring'
+pod 'AMKSlidingTableViewCell'
+pod 'ASIACheckmarkView'
+pod 'PromiseKit'
+pod 'PromiseKit/AssetsLibrary'
+pod 'PromiseKit/MessageUI'
 pod 'RSKImageCropper'
 pod 'MRProgress'
 pod 'CocoaLumberjack'

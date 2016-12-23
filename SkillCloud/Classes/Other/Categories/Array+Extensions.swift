@@ -10,18 +10,18 @@ import Foundation
 
 // MARK: - Array shifting
 extension Array {
-    func rotate(shift:Int) -> Array {
+    func rotate(_ shift:Int) -> Array {
         var array = Array()
         if (self.count > 0) {
             array = self
             if (shift > 0) {
                 for _ in 1...shift {
-                    array.append(array.removeAtIndex(0))
+                    array.append(array.remove(at: 0))
                 }
             }
             else if (shift < 0) {
                 for _ in 1...abs(shift) {
-                    array.insert(array.removeAtIndex(array.count-1),atIndex:0)
+                    array.insert(array.remove(at: array.count-1),at:0)
                 }
             }
         }
@@ -32,7 +32,7 @@ extension Array {
 // MARK: - Array indexPath shorthand
 extension Array {
     
-    subscript(indexPath: NSIndexPath) -> Element {
+    subscript(indexPath: IndexPath) -> Element {
         return self[indexPath.row]
     }
     
@@ -50,7 +50,7 @@ extension Array {
      
      - returns: Array containing of these mapping results, which returned non nil values
      */
-    public func mapExisting<T>(@noescape transform: (Array.Generator.Element) throws -> T?) rethrows -> [T] {
+    public func mapExisting<T>(transform: (Array.Iterator.Element) throws -> T?) rethrows -> [T] {
         return try self.reduce([T]()) { (array, element) -> [T] in
             if let mappedElement = try transform(element) {
                 return array + [mappedElement]

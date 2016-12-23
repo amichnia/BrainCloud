@@ -11,7 +11,7 @@ import UIKit
 struct Node {
     
     // Static properties
-    static var color:       UIColor = UIColor.blueColor()
+    static var color:       UIColor = UIColor.blue
     static var lastId:      Int     = 0
     static var factor:      CGFloat { return 1.75 / self.scaleFactor }
     static var rectPosition: CGPoint = CGPoint.zero
@@ -28,7 +28,7 @@ struct Node {
     // Computed properties
     var radius:     CGFloat { return CGFloat(self.scale) * Node.factor }
     var minRadius:  CGFloat { return max(self.radius,CGFloat(1.25) * Node.factor) }
-    var frame:      CGRect  { return CGRectInset(CGRect(origin: self.point, size: CGSize.zero), -radius, -radius) }
+    var frame:      CGRect  { return CGRect(origin: self.point, size: CGSize.zero).insetBy(dx: -radius, dy: -radius) }
     var rel:        CGPoint { return CGPoint(x: point.x / Node.rectSize.width, y: point.y / Node.rectSize.height) }
     
     // Initializers
@@ -47,16 +47,16 @@ struct Node {
     }
     
     // Actions
-    mutating func connectNode(node: Node) {
+    mutating func connectNode(_ node: Node) {
         self.connected.insert(node.id)
     }
     
-    mutating func disconnectNode(node: Node) {
+    mutating func disconnectNode(_ node: Node) {
         self.connected.remove(node.id)
     }
     
     // Custom accessors
-    func isConnectedTo(node: Node) -> Bool {
+    func isConnectedTo(_ node: Node) -> Bool {
         return self.connected.contains(node.id) || node.connected.contains(self.id)
     }
     
@@ -75,7 +75,7 @@ extension Node {
      
      - returns: Position relative to container
      */
-    func relativePositionWith(skPosition: CGPoint) -> CGPoint {
+    func relativePositionWith(_ skPosition: CGPoint) -> CGPoint {
         return CGPoint(x: skPosition.x / Node.rectSize.width, y: (Node.rectSize.height - skPosition.y) / Node.rectSize.height)
     }
     
@@ -84,8 +84,8 @@ extension Node {
 // MARK: - Helpers
 extension Node {
     
-    func drawInContext(ctx: CGContextRef) {
-        CGContextFillEllipseInRect(ctx,self.frame)
+    func drawInContext(_ ctx: CGContext) {
+        ctx.fillEllipse(in: self.frame)
     }
     
     func jsonString() -> String {
@@ -94,18 +94,18 @@ extension Node {
     
     func dictRepresentation() -> NSDictionary {
         let dict : [String:AnyObject] = [
-            "id":Int(id),
-            "x":Float(point.x),
-            "y":Float(point.y),
-            "s":Float(scale),
-            "convex":self.convex,
-            "connected":Array(self.connected)
+            "id":Int(id) as AnyObject,
+            "x":Float(point.x) as AnyObject,
+            "y":Float(point.y) as AnyObject,
+            "s":Float(scale) as AnyObject,
+            "convex":self.convex as AnyObject,
+            "connected":Array(self.connected) as AnyObject
         ]
         return NSDictionary(dictionary: dict)
     }
     
-    func isNodeWithin(node: Node) -> Bool {
-        return CGRectContainsPoint(CGRectInset(self.frame, -minRadius, -minRadius), node.point)
+    func isNodeWithin(_ node: Node) -> Bool {
+        return self.frame.insetBy(dx: -minRadius, dy: -minRadius).contains(node.point)
     }
     
 }

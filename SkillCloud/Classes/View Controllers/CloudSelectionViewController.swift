@@ -43,12 +43,12 @@ class CloudSelectionViewController: UIViewController {
         .always {
             self.fetching = false
         }
-        .error { error in
+        .catch { error in
             DDLogError("Error fetching clouds: \(error)")
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         guard !self.fetching else {
@@ -69,15 +69,15 @@ class CloudSelectionViewController: UIViewController {
         .always {
             self.fetching = false
         }
-        .error { error in
+        .catch { error in
             DDLogError("Error fetching clouds: \(error)")
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.scene?.paused = false
+        self.scene?.isPaused = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -86,28 +86,28 @@ class CloudSelectionViewController: UIViewController {
         self.prepareSceneIfNeeded(self.skView, size: self.skView.bounds.size)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.scene?.paused = true
+        self.scene?.isPaused = true
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        self.scene?.paused = true
+        self.scene?.isPaused = true
     }
     
     // MARK: - Configuration
-    func prepareSceneIfNeeded(skView: SKView, size: CGSize){
-        if let scene = CloudSelectScene(fileNamed:"CloudSelectScene") where self.scene == nil {
+    func prepareSceneIfNeeded(_ skView: SKView, size: CGSize){
+        if let scene = CloudSelectScene(fileNamed:"CloudSelectScene"), self.scene == nil {
             /* Sprite Kit applies additional optimizations to improve rendering performance */
             skView.ignoresSiblingOrder = true
             skView.allowsTransparency = true
-            skView.backgroundColor = UIColor.clearColor()
+            skView.backgroundColor = UIColor.clear
             
             /* Set the scale mode to scale to fit the window */
-            scene.scaleMode = .AspectFill
+            scene.scaleMode = .aspectFill
             
             scene.selectionDelegate = self
             
@@ -119,49 +119,49 @@ class CloudSelectionViewController: UIViewController {
     // MARK: - Actions
     
     // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else {
             return
         }
         
         switch identifier {
         case ShowCloudViewSegueIdentifier:
-            (segue.destinationViewController as? CloudViewController)?.cloudEntity = self.selectedCloud
-            (segue.destinationViewController as? CloudViewController)?.slot = self.selectedSlot
+            (segue.destination as? CloudViewController)?.cloudEntity = self.selectedCloud
+            (segue.destination as? CloudViewController)?.slot = self.selectedSlot
             self.selectedCloud = nil
         default:
             break
         }
     }
     
-    @IBAction func unwindToCloudSelection(unwindSegue: UIStoryboardSegue) { }
+    @IBAction func unwindToCloudSelection(_ unwindSegue: UIStoryboardSegue) { }
     
 }
 
 extension CloudSelectionViewController: CloudSelectionDelegate {
     
-    func didSelectCloudWithNumber(number: Int?) {
+    func didSelectCloudWithNumber(_ number: Int?) {
         guard let slot = number else {
             return
         }
         
         self.selectedCloud = self.clouds[slot]
         self.selectedSlot = slot
-        self.performSegueWithIdentifier(ShowCloudViewSegueIdentifier, sender: self)
+        self.performSegue(withIdentifier: ShowCloudViewSegueIdentifier, sender: self)
     }
     
-    func didSelectToAddNewCloud(slot: Int) {
+    func didSelectToAddNewCloud(_ slot: Int) {
         self.selectedSlot = slot
-        self.performSegueWithIdentifier(ShowCloudViewSegueIdentifier, sender: self)
+        self.performSegue(withIdentifier: ShowCloudViewSegueIdentifier, sender: self)
     }
     
-    func cloudForNumber(number: Int) -> GraphCloudEntity? {
+    func cloudForNumber(_ number: Int) -> GraphCloudEntity? {
         return self.clouds[number]
     }
     
 }
 
 protocol CloudSelectionDelegate: class {
-    func didSelectCloudWithNumber(number: Int?)
-    func cloudForNumber(number: Int) -> GraphCloudEntity?
+    func didSelectCloudWithNumber(_ number: Int?)
+    func cloudForNumber(_ number: Int) -> GraphCloudEntity?
 }

@@ -22,7 +22,7 @@ class PossiblePlaceView: UIView {
     // MARK: - Lifecycle
     
     // MARK: - Actions
-    func placeOnCanvas(canvas: CanvasView, possiblePlace: PossiblePlace) {
+    func placeOnCanvas(_ canvas: CanvasView, possiblePlace: PossiblePlace) {
         self.removeFromSuperview()
         self.place = possiblePlace
         self.canvas = canvas
@@ -30,43 +30,43 @@ class PossiblePlaceView: UIView {
         self.size = self.place.size
         self.frame = CGRect(origin: canvas[self.place.position], size: canvas[self.place.size])
         
-        self.container.layer.borderColor = UIColor.lightGrayColor().CGColor // TODO: use global settings
+        self.container.layer.borderColor = UIColor.lightGray.cgColor // TODO: use global settings
         
         self.canvas.addSubview(self)
     }
     
-    func placeOnCanvas(canvas: CanvasView, position: Position, size: Place.Size) {
+    func placeOnCanvas(_ canvas: CanvasView, position: Position, size: Place.Size) {
         self.removeFromSuperview()
         self.canvas = canvas
         self.position = position
         self.size = size
         self.frame = CGRect(origin: canvas[position], size: canvas[size])
         
-        self.container.layer.borderColor = UIColor.lightGrayColor().CGColor // TODO: use global settings
+        self.container.layer.borderColor = UIColor.lightGray.cgColor // TODO: use global settings
         
         self.canvas.addSubview(self)
     }
     
-    func checkOffset(offset: Position, withPlace occupiedPlace: OccupiedPlace) -> Bool {
+    func checkOffset(_ offset: Position, withPlace occupiedPlace: OccupiedPlace) -> Bool {
         // Check new self positions
         for position in self.size.generatePositions() {
             let newPosition = self.position + position + offset
             
             if let field = self.canvas.canvasBoard[newPosition] {
                 switch field.content {
-                case .Border:
+                case .border:
                     return false
-                case .Impossible:
+                case .impossible:
                     return false
-                case .Outline:
+                case .outline:
                     break
                 case .Empty:
                     break
-                case .Possible(place: _):
+                case .possible(place: _):
                     break
-                case .Occupied(place: let place) where place === occupiedPlace:
+                case .occupied(place: let place) where place === occupiedPlace:
                     break
-                case .Occupied(place: _):
+                case .occupied(place: _):
                     return false
                 }
             }
@@ -93,14 +93,14 @@ class OccupiedPlaceView: UIView {
     // MARK: - Lifecycle
     
     // MARK: - Actions
-    func placeOnCanvas(canvas: CanvasView, occupiedPlace: OccupiedPlace) {
+    func placeOnCanvas(_ canvas: CanvasView, occupiedPlace: OccupiedPlace) {
         self.place = occupiedPlace
         self.place.view = self
         self.canvas = canvas
         self.frame = CGRect(origin: canvas[self.place.position], size: canvas[self.place.size])
         
         self.imageView.image = self.place.skill.image
-        self.container.layer.borderColor = canvas.tintColor.CGColor
+        self.container.layer.borderColor = canvas.tintColor.cgColor
         
         self.canvas.addSubview(self)
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 class PossiblePlace : Place {
-    var color = UIColor.blueColor()
+    var color = UIColor.blue
     
     var position : Position
     var canvas : CanvasBoard
@@ -33,11 +33,11 @@ class PossiblePlace : Place {
         return nil
     }
     
-    func canBePlacedOn(canvas: CanvasBoard, withConfiguration configuration: Position? = nil) -> Bool {
+    func canBePlacedOn(_ canvas: CanvasBoard, withConfiguration configuration: Position? = nil) -> Bool {
         let configuration = configuration ?? Position.zero
         
         for offset in self.size.generateConfiguration() {
-            guard let field = canvas[self.position + offset - configuration] where field.isEmpty else {
+            guard let field = canvas[self.position + offset - configuration], field.isEmpty else {
                 return false
             }
         }
@@ -48,18 +48,18 @@ class PossiblePlace : Place {
     func place(){
         for offset in self.size.generatePositions() {
             let position = self.position + offset
-            self.canvas[position]?.content = .Possible(place: self)
+            self.canvas[position]?.content = .possible(place: self)
         }
     }
     
-    func occupyBy(occupiedPlace: OccupiedPlace){
+    func occupyBy(_ occupiedPlace: OccupiedPlace){
         // Add to canvas places
         self.canvas.occupiedPlaces.append(occupiedPlace)
         
         // Occupy self positions
         for offset in self.size.generatePositions() {
             let position = self.position + offset
-            self.canvas[position]?.content = .Occupied(place: occupiedPlace)
+            self.canvas[position]?.content = .occupied(place: occupiedPlace)
         }
         
         // Modify Outline
@@ -70,7 +70,7 @@ class PossiblePlace : Place {
         self.canvas.savedOutline = self.canvas.outline
     }
     
-    func occupy(skill: Skill) -> OccupiedPlace? {
+    func occupy(_ skill: Skill) -> OccupiedPlace? {
         return OccupiedPlace(possiblePlace: self, skill: skill)
     }
 }
@@ -92,26 +92,26 @@ class OccupiedPlace : Place {
         possiblePlace.occupyBy(self)
     }
     
-    func checkOffset(offset: Position) -> Bool {
+    func checkOffset(_ offset: Position) -> Bool {
         // Check new self positions
         for position in self.size.generatePositions() {
             let newPosition = self.position + position + offset
             
             if let field = self.canvas[newPosition] {
                 switch field.content {
-                case .Border:
+                case .border:
                     return false
-                case .Impossible:
+                case .impossible:
                     return false
-                case .Outline:
+                case .outline:
                     break
                 case .Empty:
                     break
-                case .Possible(place: _):
+                case .possible(place: _):
                     break
-                case .Occupied(place: let place) where place === self:
+                case .occupied(place: let place) where place === self:
                     break
-                case .Occupied(place: _):
+                case .occupied(place: _):
                     return false
                 }
             }
@@ -123,14 +123,14 @@ class OccupiedPlace : Place {
         return true
     }
     
-    func checkIfNeighbour(offset: Position) -> Bool {
+    func checkIfNeighbour(_ offset: Position) -> Bool {
         // Check for neighbourhood
         for position in self.size.generateOuterRim(){
             let newPosition = self.position + position + offset
             
             if let field = self.canvas[newPosition] {
                 switch field.content {
-                case .Occupied(place: let place) where !(place === self):
+                case .occupied(place: let place) where !(place === self):
                     return true
                 default:
                     break
@@ -141,7 +141,7 @@ class OccupiedPlace : Place {
         return false
     }
     
-    func moveByOffset(offset: Position){
+    func moveByOffset(_ offset: Position){
         // Free self positions
         for offset in self.size.generatePositions() {
             let position = self.position + offset
@@ -153,7 +153,7 @@ class OccupiedPlace : Place {
         
         // Occupy new self positions
         for offset in self.size.generatePositions() {
-            self.canvas[self.position + offset]?.content = .Occupied(place: self)
+            self.canvas[self.position + offset]?.content = .occupied(place: self)
         }
         
         // Reset outline
@@ -179,16 +179,16 @@ class Place {
     }
     
     enum Size : Int {
-        case Tiny = 2
-        case Small = 3
-        case Medium = 4
-        case Large = 5
+        case tiny = 2
+        case small = 3
+        case medium = 4
+        case large = 5
     }
 }
 
 extension Place.Size {
     
-    func generateConfiguration(permutation: Int = 0) -> [Position] {
+    func generateConfiguration(_ permutation: Int = 0) -> [Position] {
         var configuration : [Position] = []
         var position = Position.zero
         
@@ -260,16 +260,16 @@ extension Place.Size {
     
     init(exp: Skill.Experience) {
         switch exp {
-        case .Beginner:
-            self = .Tiny
-        case .Intermediate:
-            self = .Small
-        case .Professional:
-            self = .Medium
-        case .Expert:
-            self = .Large
+        case .beginner:
+            self = .tiny
+        case .intermediate:
+            self = .small
+        case .professional:
+            self = .medium
+        case .expert:
+            self = .large
         default:
-            self = .Tiny
+            self = .tiny
         }
     }
     

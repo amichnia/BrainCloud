@@ -41,10 +41,10 @@ func -(lhs: Position, rhs: Position) -> Position {
     return Position(row: lhs.row - rhs.row, col: lhs.col - rhs.col)
 }
 
-func +=(inout lhs: Position, rhs: Position) {
+func +=(lhs: inout Position, rhs: Position) {
     lhs = lhs + rhs
 }
 
-func -=(inout lhs: Position, rhs: Position) {
+func -=(lhs: inout Position, rhs: Position) {
     lhs = lhs - rhs
 }

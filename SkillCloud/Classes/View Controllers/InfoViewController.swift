@@ -26,11 +26,11 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.menu = [.Help,.About,.Licenses,.Feedback,.Rate(rated: iRate.sharedInstance().ratedThisVersion)]
+        self.menu = [.help,.about,.licenses,.feedback,.rate(rated: iRate.sharedInstance().ratedThisVersion)]
         (self.tableView as UIScrollView).delegate = self
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.tableView.visibleCells.forEach {
@@ -62,19 +62,19 @@ class InfoViewController: UIViewController {
         mailComposeViewController.setToRecipients(["skillcloud@girappe.com"])
         mailComposeViewController.setSubject("SkillCloud Feedback")
         
-        self.promiseViewController(mailComposeViewController)
+        _ = self.promise(mailComposeViewController)
         .then { result -> Void in
             switch result {
-            case MFMailComposeResultSent:
+            case MFMailComposeResult.sent:
                 self.showSnackBarMessage(NSLocalizedString("Thank you for sending feedback.", comment: "Thank you for sending feedback."))
-            case MFMailComposeResultFailed:
-                self.promiseHandleError(CommonError.Failure(reason: NSLocalizedString("Sending failed. Please verify you email settings.", comment: "Sending failed. Please verify you email settings.")))
+            case MFMailComposeResult.failed:
+                _ = self.promiseHandleError(CommonError.failure(reason: NSLocalizedString("Sending failed. Please verify you email settings.", comment: "Sending failed. Please verify you email settings.")))
             default:
                 break
             }
         }
-        .error { error in
-            self.promiseHandleError(CommonError.Other(error))
+        .catch { error in
+            _ = self.promiseHandleError(CommonError.other(error))
         }
     }
     
@@ -85,7 +85,7 @@ class InfoViewController: UIViewController {
         (UIColor(netHex: 0x182d32), UIColor(netHex: 0x315c68))
     ]
     
-    func configureColorFor(cell: UITableViewCell) {
+    func configureColorFor(_ cell: UITableViewCell) {
         var offset = cell.frame.origin
         offset.y -= self.tableView.contentOffset.y
         offset.y = max(0, min(self.tableView.bounds.height, offset.y))
@@ -110,11 +110,11 @@ class InfoViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension InfoViewController: UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 1:
             return self.menu.count
@@ -123,12 +123,12 @@ extension InfoViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard indexPath.section == 1 else {
-            return tableView.dequeueReusableCellWithIdentifier("EmptyCell")!
+            return tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
         }
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell") as! InfoMenuTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell") as! InfoMenuTableViewCell
         
         cell.selectedBackgroundView = UIView()
         
@@ -142,26 +142,26 @@ extension InfoViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension InfoViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.section == 1 else {
             return
         }
         
         switch self.menu[indexPath.row] {
-        case .Help:
-            self.performSegueWithIdentifier("ShowHelp", sender: self)
-        case .About:
-            self.performSegueWithIdentifier("ShowAbout", sender: self)
-        case .Licenses:
-            self.performSegueWithIdentifier("ShowLicenses", sender: self)
-        case .Feedback:
+        case .help:
+            self.performSegue(withIdentifier: "ShowHelp", sender: self)
+        case .about:
+            self.performSegue(withIdentifier: "ShowAbout", sender: self)
+        case .licenses:
+            self.performSegue(withIdentifier: "ShowLicenses", sender: self)
+        case .feedback:
             self.sendFeedback()
-        case .Rate:
+        case .rate:
             iRate.sharedInstance().delegate = self
             iRate.sharedInstance().promptForRating()
         }
         
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
@@ -169,7 +169,7 @@ extension InfoViewController: UITableViewDelegate {
 // MARK: - UIScrollViewDelegate
 extension InfoViewController: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.tableView.visibleCells.forEach {
             self.configureColorFor($0)
         }
@@ -181,7 +181,7 @@ extension InfoViewController: UIScrollViewDelegate {
 extension InfoViewController: iRateDelegate {
     
     func iRateDidOpenAppStore() {
-        self.menu = [.Help,.About,.Licenses,.Feedback,.Rate(rated: iRate.sharedInstance().ratedThisVersion)]
+        self.menu = [.help,.about,.licenses,.feedback,.rate(rated: iRate.sharedInstance().ratedThisVersion)]
         self.tableView.reloadData()
     }
     

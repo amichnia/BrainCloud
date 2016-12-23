@@ -13,19 +13,19 @@ import MRProgress
 extension MRProgressOverlayView {
     
     static func show() {
-        guard let window = UIApplication.sharedApplication().delegate?.window else {
+        guard let window = UIApplication.shared.delegate?.window else {
             return
         }
         
-        MRProgressOverlayView.showOverlayAddedTo(window, animated: true)
+        MRProgressOverlayView.showOverlayAdded(to: window, animated: true)
     }
     
     static func hide() {
-        guard let window = UIApplication.sharedApplication().delegate?.window else {
+        guard let window = UIApplication.shared.delegate?.window else {
             return
         }
         
-        MRProgressOverlayView.dismissAllOverlaysForView(window, animated: true)
+        MRProgressOverlayView.dismissAllOverlays(for: window, animated: true)
     }
     
 }

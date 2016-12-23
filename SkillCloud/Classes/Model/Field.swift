@@ -28,13 +28,13 @@ class Field {
     
     func addToOutlineIfPossible() {
         if self.isEmpty {
-            self.content = .Outline
+            self.content = .outline
         }
     }
     
-    func removeFromOutlineIfPossible(place: OccupiedPlace) {
+    func removeFromOutlineIfPossible(_ place: OccupiedPlace) {
         switch self.content {
-        case .Occupied(place: let occupiedPlace) where !(occupiedPlace === place):
+        case .occupied(place: let occupiedPlace) where !(occupiedPlace === place):
             break
         default:
             self.content = .Empty
@@ -56,7 +56,7 @@ class Field {
     
     var occupiedPlace: OccupiedPlace? {
         switch self.content {
-        case .Occupied(place: let place):
+        case .occupied(place: let place):
             return place
         default:
             return nil
@@ -65,17 +65,17 @@ class Field {
     
     enum Content {
         case Empty
-        case Impossible
-        case Possible(place: PossiblePlace)
-        case Occupied(place: OccupiedPlace)
-        case Outline
-        case Border
+        case impossible
+        case possible(place: PossiblePlace)
+        case occupied(place: OccupiedPlace)
+        case outline
+        case border
         
         var empty : Bool {
             if case .Empty = self {
                 return true
             }
-            else if case .Outline = self {
+            else if case .outline = self {
                 return true
             }
             else {

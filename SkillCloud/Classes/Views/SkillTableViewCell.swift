@@ -15,14 +15,14 @@ class SkillTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var skillImageView: UIImageView!
     
-    var indexPath: NSIndexPath!
+    var indexPath: IndexPath!
     
-    func configureForSkill(skill: Skill, owned: Skill? = nil) {
+    func configureForSkill(_ skill: Skill, owned: Skill? = nil) {
         self.titleLabel.text = skill.title
         self.skillImageView?.image = skill.circleImage
         self.descriptionLabel.text = skill.skillDescription
         
-        if let owned = owned, image = owned.experience.image {
+        if let owned = owned, let image = owned.experience.image {
             let experienceImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
             experienceImageView.image = image
             self.accessoryView = experienceImageView

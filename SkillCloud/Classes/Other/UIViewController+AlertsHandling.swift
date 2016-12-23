@@ -12,18 +12,18 @@ import PromiseKit
 // MARK: - Promise decisions
 extension UIViewController {
     
-    func promiseSelection<T>(type: T.Type, cancellable: Bool, options: [(String,UIAlertActionStyle,(() -> Promise<T>))]) -> Promise<T> {
+    func promiseSelection<T>(_ type: T.Type, cancellable: Bool, options: [(String,UIAlertActionStyle,(() -> Promise<T>))]) -> Promise<T> {
         return self.promiseSelection(T.self, cancellable: cancellable, customOption: nil, options: options)
     }
     
-    func promiseSelection<T>(type: T.Type, cancellable: Bool, customOption: (view: UIView, height: CGFloat)?, options: [(String,UIAlertActionStyle,(() -> Promise<T>))]) -> Promise<T> {
+    func promiseSelection<T>(_ type: T.Type, cancellable: Bool, customOption: (view: UIView, height: CGFloat)?, options: [(String,UIAlertActionStyle,(() -> Promise<T>))]) -> Promise<T> {
         let selection = Promise<Promise<T>> { (fulfill, reject) in
             guard options.count > 0 else {
-                reject(CommonError.NotEnoughData)
+                reject(CommonError.notEnoughData)
                 return
             }
             
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
             if let view = customOption?.view {
                 let margin: CGFloat = 8
@@ -41,14 +41,14 @@ extension UIViewController {
             }
             
             if cancellable {
-                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .Default){ (_) in
-                    reject(CommonError.UserCancelled)
+                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .default){ (_) in
+                    reject(CommonError.userCancelled)
                 }
                 
                 alertController.addAction(cancelAction)
             }
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
         
         return selection.then { (promise) -> Promise<T> in
@@ -60,17 +60,17 @@ extension UIViewController {
 
 extension UIViewController {
     
-    func promiseHandleError(error: ShowableError) -> Promise<Void> {
+    func promiseHandleError(_ error: ShowableError) -> Promise<Void> {
         return Promise<Void> { fulfill,reject in
-            let alertController = UIAlertController(title: error.alertTitle(), message: error.alertBody(), preferredStyle: .Alert)
+            let alertController = UIAlertController(title: error.alertTitle(), message: error.alertBody(), preferredStyle: .alert)
             
-            let confirmAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .Default) { _ in
+            let confirmAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default) { _ in
                 fulfill()
             }
             
             alertController.addAction(confirmAction)
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     

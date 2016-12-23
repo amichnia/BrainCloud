@@ -17,14 +17,14 @@ class ExploreViewController: UIViewController {
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
-    var skillsResult: CKPageableResult = CKPageableResult(type: Skill.self, skillsPredicate: SkillsPredicate.Accepted, database: .Public)
+    var skillsResult: CKPageableResult = CKPageableResult(type: Skill.self, skillsPredicate: SkillsPredicate.accepted, database: .public)
     var updating: Bool = false
     var preparedScene : AddScene?
     
     var ownedSkills: [Skill] = []
     
     lazy var searchCell: SkillsSearchTableViewCell = {
-        return self.tableView.dequeueReusableCellWithIdentifier("SearchSkillsHeader")! as! SkillsSearchTableViewCell
+        return self.tableView.dequeueReusableCell(withIdentifier: "SearchSkillsHeader")! as! SkillsSearchTableViewCell
     }()
     
     // MARK: - Lifecycle
@@ -42,10 +42,10 @@ class ExploreViewController: UIViewController {
         self.skillsResult.limit = 10
         
         self.refetchSelfSkills()
-        self.updateIfNeeded()
+        _ = self.updateIfNeeded()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.refetchSelfSkills()
@@ -57,7 +57,7 @@ class ExploreViewController: UIViewController {
     }
     
     // MARK: - Actions
-    func addSkillActionFromCell(cell: UITableViewCell, withSkill skill: Skill) {
+    func addSkillActionFromCell(_ cell: UITableViewCell, withSkill skill: Skill) {
         if let skillCell = cell as? SkillTableViewCell {
             let rect = self.frameForCell(skillCell)
             try! self.promiseShowSkillWith(rect, withSkill: skill)
@@ -70,7 +70,7 @@ class ExploreViewController: UIViewController {
     // MARK: - Helpers
     func updateIfNeeded() -> Promise<Void> {
         guard !self.updating else {
-            return Promise<Void>()
+            return Promise<Void>(value: Void())
         }
         
         self.updating = true
@@ -95,16 +95,16 @@ class ExploreViewController: UIViewController {
         firstly {
             Skill.fetchAll()
         }
-        .then(on: dispatch_get_main_queue()) { skills -> Void in
+        .then(on: DispatchQueue.main) { skills -> Void in
             self.ownedSkills = skills
             self.tableView.reloadData()
         }
-        .error { error in
+        .catch { error in
             print("Error: \(error)")
         }
     }
     
-    func frameForCell(cell: SkillTableViewCell) -> CGRect {
+    func frameForCell(_ cell: SkillTableViewCell) -> CGRect {
         cell.layoutSubviews()
         let imgfrm = cell.skillImageView.frame
         let rect = CGRect(
@@ -112,20 +112,20 @@ class ExploreViewController: UIViewController {
             size: imgfrm.size
         )
         
-        return self.view.convertRect(rect, toView: self.view.window!)
+        return self.view.convert(rect, to: self.view.window!)
     }
     
     // MARK: - Promises
-    func promiseShowSkillWith(rect: CGRect?, withSkill skill: Skill) throws {
+    func promiseShowSkillWith(_ rect: CGRect?, withSkill skill: Skill) throws {
         firstly {
             try AddViewController.promiseSelectSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
         }
-        .then(SkillEntity.promiseToUpdate)                  // Save change to local storage
+        .then(execute: SkillEntity.promiseToUpdate)                  // Save change to local storage
         .then { [weak self] _ -> Void in
             self?.showSnackBarMessage(NSLocalizedString("New skill added.", comment: "New skill added."))
             self?.refetchSelfSkills()
         }
-        .error { error in
+        .catch { error in
             print("Error: \(error)")
         }
     }
@@ -137,30 +137,30 @@ class ExploreViewController: UIViewController {
 // MARK: - UISearchBarDelegate
 extension ExploreViewController: UISearchBarDelegate {
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let predicate: SkillsPredicate = {
             if let searchText = searchBar.text {
-                return SkillsPredicate.WhenAll([.Accepted,.NameLike(searchText)])
+                return SkillsPredicate.whenAll([.accepted,.nameLike(searchText)])
             }
             else {
-                return SkillsPredicate.Accepted
+                return SkillsPredicate.accepted
             }
         }()
         
         self.searchCell.searchBar.resignFirstResponder()
-        self.skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: predicate, database: .Public)
+        self.skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: predicate, database: .public)
         self.updateIfNeeded()
-        .error { error in
+        .catch { error in
             print("Error: \(error)")
         }
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.searchCell.searchBar.resignFirstResponder()
-        self.skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: .Accepted, database: .Public)
+        self.skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: .accepted, database: .public)
         
         self.updateIfNeeded()
-        .error { error in
+        .catch { error in
             print("Error: \(error)")
         }
     }
@@ -170,16 +170,16 @@ extension ExploreViewController: UISearchBarDelegate {
 // MARK: - UITableViewDataSource
 extension ExploreViewController: UITableViewDataSource {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.skillsResult.results.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SkillCell")! as! SkillTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SkillCell")! as! SkillTableViewCell
         
         let skill = self.skillsResult.results[indexPath.row]
         let owned = self.ownedSkills.filter{ $0.title == skill.title }.first
@@ -195,12 +195,12 @@ extension ExploreViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension ExploreViewController: UITableViewDelegate {
 
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         self.searchCell.searchBar.delegate = self
         return self.searchCell.contentView
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let skill = self.skillsResult.results[indexPath.row]
 
         if let cell = self.tableView.visibleCells.filter({
@@ -217,7 +217,7 @@ extension ExploreViewController: UITableViewDelegate {
 // MARK: - UIScrollViewDelegate
 extension ExploreViewController: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // TODO: Implement pagination
         let bound = self.tableView.contentSize.height - 200
         let offset = self.tableView.contentOffset.y + self.tableView.bounds.height
@@ -237,7 +237,7 @@ extension ExploreViewController: UIScrollViewDelegate {
                 print("Update finished")
                 self?.updating = false
             }
-            .error { error in
+            .catch { error in
                 print("Error: \(error)")
             }
         }

@@ -24,7 +24,7 @@ protocol CKRecordMappable: class {
      */
     init?(record: CKRecord)
     
-    func performMappingWith(record: CKRecord) -> Self?
+    func performMappingWith(_ record: CKRecord) -> Self?
     
 }
 
@@ -32,24 +32,24 @@ extension CKRecordMappable {
     
     typealias T = Self
     
-    func promiseMappingWith(record: CKRecord) -> Promise<T> {
+    func promiseMappingWith(_ record: CKRecord) -> Promise<T> {
         return Promise<T>() { fulfill, reject in
             if let object = self.performMappingWith(record) {
                 fulfill(object)
             }
             else {
-                reject(CloudError.NotMatchingRecordData)
+                reject(CloudError.notMatchingRecordData)
             }
         }
     }
     
-    static func promiseWithRecord(record: CKRecord) -> Promise<T> {
+    static func promiseWithRecord(_ record: CKRecord) -> Promise<T> {
         return Promise<T>() { fulfill, reject in
             if let object = T(record: record) {
                 fulfill(object)
             }
             else {
-                reject(CloudError.NotMatchingRecordData)
+                reject(CloudError.notMatchingRecordData)
             }
         }
     }

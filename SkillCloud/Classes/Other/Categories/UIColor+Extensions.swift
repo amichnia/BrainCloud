@@ -19,8 +19,8 @@ extension UIColor {
         var color : (CGFloat,CGFloat,CGFloat,CGFloat) = (0,0,0,0)
         self.getRed(&color.0, green: &color.1, blue: &color.2, alpha: &color.3)
         
-        color.0 += CGFloat(random()%40 - 20)
-        color.1 += CGFloat(random()%40 - 20)
+        color.0 += CGFloat(arc4random()%40 - 20)
+        color.1 += CGFloat(arc4random()%40 - 20)
         
         return UIColor(rgba: color)
     }

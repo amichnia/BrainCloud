@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol TouchDownViewDelegate: NSObjectProtocol {
-    func didTouch(down: Bool)
+    func didTouch(_ down: Bool)
 }
 
 class TouchDownView: UIView {
@@ -22,13 +22,13 @@ class TouchDownView: UIView {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
         touchDown = true
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         touchDown = false
     }
     

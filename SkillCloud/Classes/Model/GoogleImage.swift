@@ -21,7 +21,7 @@ class GoogleImage : JSONMappable {
     var thumbnail : UIImage?
     
     required init?(json: JSON){
-        guard let link = json["link"].string, thumbnailLink = json["image"]["thumbnailLink"].string else {
+        guard let link = json["link"].string, let thumbnailLink = json["image"]["thumbnailLink"].string else {
             return nil
         }
         
@@ -61,11 +61,11 @@ class GoogleImagePage : JSONMappable, PageablePromise {
     var images : [GoogleImage] = []
     
     lazy var promiseNextPage : Promise<GoogleImagePage>? = {
-        guard let startIndex = self.nextPageStart, terms = self.terms else {
+        guard let startIndex = self.nextPageStart, let terms = self.terms else {
             return nil
         }
         
-        return ImagesAPI.Search(query: terms, page: startIndex).promiseImages()
+        return ImagesAPI.search(query: terms, page: startIndex).promiseImages()
     }()
     var nextPageStart : Int?
     var terms : String?
@@ -78,7 +78,7 @@ class GoogleImagePage : JSONMappable, PageablePromise {
         self.images = items.mapExisting{ return GoogleImage(json: $0) }
         
         // If next page exists
-        if let startIndex = json["queries"]["nextPage"][0]["startIndex"].int, terms = json["queries"]["nextPage"][0]["searchTerms"].string {
+        if let startIndex = json["queries"]["nextPage"][0]["startIndex"].int, let terms = json["queries"]["nextPage"][0]["searchTerms"].string {
             DDLogInfo("NEXT PAGE: \(startIndex)")
             self.nextPageStart = startIndex
             self.terms = terms
@@ -94,14 +94,14 @@ protocol PageablePromise {
 
 extension UIImage {
     
-    static func promiseImageWithUrl(url: URLStringConvertible) -> Promise<UIImage> {
+    static func promiseImageWithUrl(_ url: URLConvertible) -> Promise<UIImage> {
         return Promise<UIImage> { (fulfill, reject) in
-            Alamofire.request(.GET, url).responseData { response in
-                if let data = response.data, image = UIImage(data: data) {
+            Alamofire.request(url).responseData { response in
+                if let data = response.data, let image = UIImage(data: data) {
                     fulfill(image)
                 }
                 else {
-                    reject(APIError.SerializationError)
+                    reject(APIError.serializationError)
                 }
             }
         }

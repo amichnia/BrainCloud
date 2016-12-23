@@ -20,7 +20,7 @@ class CanvasBoard {
     
     init(size: Size){
         self.size = size
-        self.fields = Array(count: size.rawValue, repeatedValue: Array(count: size.rawValue, repeatedValue: Field(position: Position.zero)))
+        self.fields = Array(repeating: Array(repeating: Field(position: Position.zero), count: size.rawValue), count: size.rawValue)
         
         // Fill canvas with fields
         for row in 0..<(size.rawValue) {
@@ -29,10 +29,10 @@ class CanvasBoard {
                 self.fields[row][col].canvas = self
                 
                 if(row == 0 || col == 0 ){
-                    self.fields[row][col].content = .Border
+                    self.fields[row][col].content = .border
                 }
                 if(row == size.rawValue-1 || col == size.rawValue-1){
-                    self.fields[row][col].content = .Border
+                    self.fields[row][col].content = .border
                 }
             }
         }
@@ -49,16 +49,16 @@ class CanvasBoard {
     
     func setInitialOutline(){
         let centralPosition = Position(row: (size.rawValue-1) / 2, col: (size.rawValue-1) / 2)
-        if let field = self[centralPosition] where field.isEmpty {
-            field.content = .Outline
+        if let field = self[centralPosition], field.isEmpty {
+            field.content = .outline
             self.bounds = (left: field.position,right: field.position,top: field.position,bottom: field.position)
         }
     }
     
     enum Size : Int {
-        case Small = 10 // 1...10, 0,11 - borders
-        case Medium = 20
-        case Large = 40
+        case small = 10 // 1...10, 0,11 - borders
+        case medium = 20
+        case large = 40
     }
 }
 
@@ -74,7 +74,7 @@ extension CanvasBoard {
     var outline : [Field] {
         get {
         return self.allFields.filter{
-            if case Field.Content.Outline = $0.content {
+            if case Field.Content.outline = $0.content {
                 return true
             }
             else {
@@ -84,8 +84,8 @@ extension CanvasBoard {
         }
         set {
             for savedField in newValue {
-                if let field = self[savedField.position] where field.isEmpty {
-                    field.content = .Outline
+                if let field = self[savedField.position], field.isEmpty {
+                    field.content = .outline
                 }
             }
         }
@@ -145,13 +145,13 @@ extension CanvasBoard {
     
     func clearPossibles() {
         for field in self.allFields {
-            if case Field.Content.Possible(place: _) = field.content {
+            if case Field.Content.possible(place: _) = field.content {
                 field.content = .Empty
             }
         }
     }
     
-    func iteratePossibles(size: Place.Size) -> [PossiblePlace] {
+    func iteratePossibles(_ size: Place.Size) -> [PossiblePlace] {
         self.restoreOutline()
         
         var possibles : [PossiblePlace] = []

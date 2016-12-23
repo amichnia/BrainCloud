@@ -11,6 +11,6 @@ import CoreData
 
 class BaseNodeEntity: NSManagedObject {
 
-    var relativePositionValue: CGPoint { return self.positionRelative?.CGPointValue() ?? CGPoint.zero }
+    var relativePositionValue: CGPoint { return self.positionRelative?.cgPointValue ?? CGPoint.zero }
     
 }

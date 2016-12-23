@@ -15,7 +15,7 @@ import CoreData
 extension GraphCloudEntity {
 
     @NSManaged var cloudId: String?
-    @NSManaged var date: NSTimeInterval
+    @NSManaged var date: TimeInterval
     @NSManaged var name: String?
     @NSManaged var slot: Int16
     @NSManaged var thumbnail: UIImage?

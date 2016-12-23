@@ -40,11 +40,11 @@ class GeneratorViewController: CloudViewController {
         self.scaleContainer.delegate = self
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let image = scaleImage.image?.imageWithRenderingMode(.AlwaysTemplate) {
-            self.scaleImage.tintColor = UIColor.whiteColor()
+        if let image = scaleImage.image?.withRenderingMode(.alwaysTemplate) {
+            self.scaleImage.tintColor = UIColor.white
             self.scaleImage.image = image
             self.scaleImage.setNeedsDisplay()
         }
@@ -60,12 +60,12 @@ class GeneratorViewController: CloudViewController {
     }
     
     // MARK: - Configuration
-    func prepareSceneIfNeeded(skView: SKView, size: CGSize){
-        if let scene = CloudGraphScene(fileNamed:"CloudGraphScene") where self.scene == nil {
-            scene.scaleMode = .AspectFit
+    func prepareSceneIfNeeded(_ skView: SKView, size: CGSize){
+        if let scene = CloudGraphScene(fileNamed:"CloudGraphScene"), self.scene == nil {
+            scene.scaleMode = .aspectFit
             scene.cloudDelegate = self
             scene.slot = self.slot
-            scene.cloudIdentifier = self.cloudEntity?.cloudId ?? NSUUID().UUIDString
+            scene.cloudIdentifier = self.cloudEntity?.cloudId ?? UUID().uuidString
             scene.cloudEntity = self.cloudEntity
             
             self.scene = scene
@@ -75,52 +75,52 @@ class GeneratorViewController: CloudViewController {
     }
     
     // MARK: - Recognizers Actions
-    @IBAction func zoomingAction(sender: UIPinchGestureRecognizer) {
+    @IBAction func zoomingAction(_ sender: UIPinchGestureRecognizer) {
         switch sender.state {
-        case .Began, .Changed:
+        case .began, .changed:
             self.scene.cameraZoom(sender.scale)
-        case .Ended:
+        case .ended:
             self.scene.cameraZoom(sender.scale, save: true)
         default:
             break
         }
     }
     
-    @IBAction func tapAction(sender: UITapGestureRecognizer) {
+    @IBAction func tapAction(_ sender: UITapGestureRecognizer) {
         guard let skillToAdd = self.skillToAdd else {
             return
         }
         
-        self.scene.resolveTapAt(sender.locationInView(sender.view), forSkill: skillToAdd)
+        self.scene.resolveTapAt(sender.location(in: sender.view), forSkill: skillToAdd)
     }
     
-    @IBAction func selectTapAction(sender: UIGestureRecognizer) {
-        self.scene.selectNodeAt(sender.locationInView(sender.view))
+    @IBAction func selectTapAction(_ sender: UIGestureRecognizer) {
+        self.scene.selectNodeAt(sender.location(in: sender.view))
     }
     
-    @IBAction func panAction(sender: UIPanGestureRecognizer) {
+    @IBAction func panAction(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
-        case .Began:
-            self.scene.willStartTranslateAt(sender.locationInView(sender.view!))
-        case .Changed:
-            self.scene.translate(sender.translationInView(sender.view!))
-        case .Ended:
-            self.scene.translate(sender.translationInView(sender.view!), save: true)
+        case .began:
+            self.scene.willStartTranslateAt(sender.location(in: sender.view!))
+        case .changed:
+            self.scene.translate(sender.translation(in: sender.view!))
+        case .ended:
+            self.scene.translate(sender.translation(in: sender.view!), save: true)
         default:
             break
         }
     }
     
-    @IBAction func scaleAction(sender: UIPanGestureRecognizer) {
+    @IBAction func scaleAction(_ sender: UIPanGestureRecognizer) {
         var fill: CGFloat? = nil
         
         switch sender.state {
-        case .Began:
+        case .began:
             fill = self.scene.willStartScale()
-        case .Changed:
-            fill = self.scene.scale(sender.translationInView(sender.view!))
-        case .Ended:
-            self.scene.scale(sender.translationInView(sender.view!), save: true)
+        case .changed:
+            fill = self.scene.scale(sender.translation(in: sender.view!))
+        case .ended:
+            _ = self.scene.scale(sender.translation(in: sender.view!), save: true)
         default:
             break
         }
@@ -129,23 +129,23 @@ class GeneratorViewController: CloudViewController {
     }
     
     // MARK: - Actions
-    @IBAction func deleteNode(sender: AnyObject) {
+    @IBAction func deleteNode(_ sender: AnyObject) {
         typealias T = ()->()
         
         self.promiseSelection(T.self, cancellable: true, options: [
-            (NSLocalizedString("Delete", comment: "Delete"),.Destructive,{
+            (NSLocalizedString("Delete", comment: "Delete"),.destructive,{
                 return self.promiseDeleteNode()
             })
         ])
         .then { closure -> Void in
             closure()
         }
-        .error { error in
+        .catch { error in
             DDLogError("Error: \(error)")
         }
     }
     
-    @IBAction func saveCloud(sender: AnyObject) {
+    @IBAction func saveCloud(_ sender: AnyObject) {
         // Log usage
         iRate.sharedInstance().logEvent(true)
         
@@ -172,28 +172,28 @@ class GeneratorViewController: CloudViewController {
         .always{
             MRProgressOverlayView.hide()
         }
-        .error { error in
+        .catch { error in
             DDLogError("Error saving cloud: \(error)")
         }
     }
     
-    @IBAction func settingsAction(sender: AnyObject) {
+    @IBAction func settingsAction(_ sender: AnyObject) {
         // Export
         // Delete
         typealias T = ()->()
 
         self.promiseSelection(T.self, cancellable: true, options: [
-            (NSLocalizedString("Export", comment: "Export"),.Default,{
+            (NSLocalizedString("Export", comment: "Export"),.default,{
                 return self.promiseExportCloud()
             }),
-            (NSLocalizedString("Delete", comment: "Delete"),.Destructive,{
+            (NSLocalizedString("Delete", comment: "Delete"),.destructive,{
                 return self.promiseDeleteCloud()
             })
         ])
         .then { closure -> Void in
             closure()
         }
-        .error { error in
+        .catch { error in
             DDLogError("Error: \(error)")
         }
     }
@@ -202,7 +202,7 @@ class GeneratorViewController: CloudViewController {
         return Promise<()->()> {
             self.scene.deselectNode()
             self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
-            self.performSegueWithIdentifier(ShowExportViewSegueIdentifier, sender: self)
+            self.performSegue(withIdentifier: ShowExportViewSegueIdentifier, sender: self)
         }
     }
 
@@ -211,7 +211,7 @@ class GeneratorViewController: CloudViewController {
             DataManager.promiseDeleteEntity(GraphCloudEntity.self, model: self.scene)
         }
         .then { _ -> (()->()) in
-            return { self.performSegueWithIdentifier("UnwindToSelection", sender: nil) }
+            return { self.performSegue(withIdentifier: "UnwindToSelection", sender: nil) }
         }
     }
     
@@ -230,37 +230,37 @@ class GeneratorViewController: CloudViewController {
     }
     
     // MARK: - Helpers
-    func captureCloudWithSize(size: CGSize) -> UIImage {
+    func captureCloudWithSize(_ size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 2.0)
         
-        self.skView.drawViewHierarchyInRect(CGRect(origin: CGPoint.zero, size: size), afterScreenUpdates: true)
+        self.skView.drawHierarchy(in: CGRect(origin: CGPoint.zero, size: size), afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
         
-        return image
+        return image!
     }
     
-    func showScaleSliderWithFill(fill: CGFloat?) {
+    func showScaleSliderWithFill(_ fill: CGFloat?) {
         guard let fill = fill else {
-            self.scaleProgress.hidden = true
+            self.scaleProgress.isHidden = true
             return
         }
         
-        self.scaleProgress.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_2))
-        self.scaleProgress.hidden = false
+        self.scaleProgress.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+        self.scaleProgress.isHidden = false
         self.scaleProgress.value = Float(fill)
     }
     
     // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else {
             return
         }
         
         switch identifier {
         case ShowExportViewSegueIdentifier:
-            (segue.destinationViewController as? CloudExportViewController)?.image = self.cloudImage
+            (segue.destination as? CloudExportViewController)?.image = self.cloudImage
         default:
             break
         }
@@ -270,15 +270,15 @@ class GeneratorViewController: CloudViewController {
 
 extension GeneratorViewController {
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .Default
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .default
     }
     
 }
 
 extension GeneratorViewController: TouchDownViewDelegate {
     
-    func didTouch(down: Bool) {
+    func didTouch(_ down: Bool) {
         if down {
             self.showScaleSliderWithFill(self.scene.willStartScale())
         }

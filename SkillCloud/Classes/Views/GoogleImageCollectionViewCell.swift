@@ -21,9 +21,9 @@ class GoogleImageCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     var googleImage : GoogleImage?
     
-    override var selected : Bool {
+    override var isSelected : Bool {
         didSet {
-            self.checkmark.animateTo(self.selected)
+            self.checkmark.animate(checked: self.isSelected)
         }
     }
     
@@ -31,23 +31,23 @@ class GoogleImageCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.checkmark.animateTo(false)
+        self.checkmark.animate(checked: false)
         self.imageView.image = nil
         self.spinner.stopAnimating()
         self.googleImage = nil
     }
     
     // MARK: - Configuration
-    func configureWithGoogleImage(googleImage: GoogleImage) {
+    func configureWithGoogleImage(_ googleImage: GoogleImage) {
         self.googleImage = googleImage
         self.spinner.startAnimating()
         
-        googleImage.promiseThumbnail().then { [weak self] image -> Void in
-            guard let img = self?.googleImage where img === googleImage else {
+        let _ = googleImage.promiseThumbnail().then { [weak self] image -> Void in
+            guard let img = self?.googleImage, img === googleImage else {
                 return
             }
             
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async() {
                 self?.imageView.image = image
                 self?.spinner.stopAnimating()
             }
@@ -55,7 +55,7 @@ class GoogleImageCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Actions
-    @IBAction func selectAction(sender: ASIACheckmarkView) {
+    @IBAction func selectAction(_ sender: ASIACheckmarkView) {
 //        sender.animateTo(!sender.boolValue)
 //        self.selected = !self.selected
     }

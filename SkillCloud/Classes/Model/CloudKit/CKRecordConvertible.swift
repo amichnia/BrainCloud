@@ -35,7 +35,7 @@ extension CKRecordConvertible {
     }
     
     static var recordType: String {
-        return String(Self)
+        return String(describing: Self.self)
     }
     
     func promiseRecord() -> Promise<CKRecord> {
@@ -44,7 +44,7 @@ extension CKRecordConvertible {
                 fulfill(record)
             }
             else {
-                reject(CloudError.NotMatchingRecordData)
+                reject(CloudError.notMatchingRecordData)
             }
         }
     }

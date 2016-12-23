@@ -28,23 +28,23 @@ func +(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
 func -(lhs: CGPoint, rhs: CGPoint) -> CGPoint {
     return lhs + -rhs
 }
-func +=(inout lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+func +=(lhs: inout CGPoint, rhs: CGPoint) -> CGPoint {
     lhs = lhs + rhs
     return lhs
 }
-func -=(inout lhs: CGPoint, rhs: CGPoint) -> CGPoint {
+func -=(lhs: inout CGPoint, rhs: CGPoint) -> CGPoint {
     return lhs += -rhs
 }
 
 // MARK: - CGSize Inset
-public func CGSizeInset(size: CGSize, _ dx: CGFloat, _ dy: CGFloat) -> CGSize {
+public func CGSizeInset(_ size: CGSize, _ dx: CGFloat, _ dy: CGFloat) -> CGSize {
     return CGSize(width: size.width - dx, height: size.height - dy)
 }
 
 // MARK: - CGPoint Extensions
 extension CGPoint {
     
-    func distanceTo(p: CGPoint) -> CGFloat {
+    func distanceTo(_ p: CGPoint) -> CGFloat {
         return hypot(self.x - p.x, self.y - p.y)
     }
     

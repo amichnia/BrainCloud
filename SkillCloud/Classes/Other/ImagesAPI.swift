@@ -14,14 +14,12 @@ import PromiseKit
 
 enum ImagesAPI {
     
-    static let alamofireManager = Alamofire.Manager(configuration: NSURLSessionConfiguration.ephemeralSessionConfiguration())
-    
     static let baseUrl : String = "https://www.googleapis.com/customsearch/"
     static let APIKey = "AIzaSyB4lSM9rrY6flfWtEhcEzgK1I5IVLSFvdQ"
     static let CustomSearchEngineIdentifier = "014471330025575907481:wg54zrvhcla"
     static let apiVersion : String = "v1"
     
-    case Search(query: String, page: Int)
+    case search(query: String, page: Int)
  
     struct Key {
         static let EngineIdentifier = "cx"
@@ -39,16 +37,16 @@ enum ImagesAPI {
 extension ImagesAPI : AnyAPI {
     
     var URLString : String { return "https://www.googleapis.com/customsearch/v1" }
-    var method: Alamofire.Method { return Alamofire.Method.GET }
+    var method: Alamofire.HTTPMethod { return Alamofire.HTTPMethod.get }
     var parameters: [String : AnyObject]? {
         switch self {
-        case .Search(query: let query, page: let page) where page > 0:
+        case .search(query: let query, page: let page) where page > 0:
             return [
-                Key.EngineIdentifier    : staticSelf.CustomSearchEngineIdentifier,
-                Key.APIKey              : staticSelf.APIKey,
-                Key.SearchType          : "image",
-                Key.Query               : query,
-                Key.StartPage           : page
+                Key.EngineIdentifier    : staticSelf.CustomSearchEngineIdentifier as AnyObject,
+                Key.APIKey              : staticSelf.APIKey as AnyObject,
+                Key.SearchType          : "image" as AnyObject,
+                Key.Query               : query as AnyObject,
+                Key.StartPage           : page as AnyObject
             ]
         default:
             return nil

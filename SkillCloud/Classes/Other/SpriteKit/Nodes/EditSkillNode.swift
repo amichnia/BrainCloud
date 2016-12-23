@@ -8,7 +8,6 @@
 
 import UIKit
 import SpriteKit
-import SpriteKit_Spring
 
 class EditSkillNode: SKSpriteNode {
     
@@ -27,19 +26,19 @@ class EditSkillNode: SKSpriteNode {
             self.yScale = newValue
         }
     }
-    private var savedStartScale: CGFloat = 1
-    private var startScale: CGFloat {
+    fileprivate var savedStartScale: CGFloat = 1
+    fileprivate var startScale: CGFloat {
         return self.size.width != 0 ? self.startFrame.width / (self.size.width / self.mainScale) : self.mainScale
     }
-    private var finalScale: CGFloat {
+    fileprivate var finalScale: CGFloat {
         return self.size.width != 0 ? self.finalFrame.size.width / (self.size.width / self.mainScale) : self.mainScale
     }
     
     lazy var outline: SKSpriteNode = {
-        return (self.childNodeWithName("Outline") as? SKSpriteNode) ?? SKSpriteNode()
+        return (self.childNode(withName: "Outline") as? SKSpriteNode) ?? SKSpriteNode()
     }()
     lazy var imageSelect: ImageSelectNode = {
-        let select = (self.childNodeWithName("AddImage") as? ImageSelectNode) ?? ImageSelectNode()
+        let select = (self.childNode(withName: "AddImage") as? ImageSelectNode) ?? ImageSelectNode()
         select.configure()
         return select
     }()
@@ -47,12 +46,12 @@ class EditSkillNode: SKSpriteNode {
     // MARK: - Lifecycle
     
     // MARK: - Actions
-    func setSkill(skill: Skill?) {
+    func setSkill(_ skill: Skill?) {
         self.skill = skill
         
         if self.imageNode == nil {
             // Image node
-            self.imageNode = SKSpriteNode(texture: nil, color: UIColor.clearColor(), size: CGSizeInset(self.size, 5, 5))
+            self.imageNode = SKSpriteNode(texture: nil, color: UIColor.clear, size: CGSizeInset(self.size, 5, 5))
             self.imageNode?.zPosition = self.zPosition - 1
             self.addChild(self.imageNode!)
             // Outline
@@ -61,10 +60,10 @@ class EditSkillNode: SKSpriteNode {
         
         self.setSkillImage(skill?.image)
 
-        [Skill.Experience.Beginner,
-         Skill.Experience.Intermediate,
-         Skill.Experience.Professional,
-         Skill.Experience.Expert].forEach { [weak self] in
+        [Skill.Experience.beginner,
+         Skill.Experience.intermediate,
+         Skill.Experience.professional,
+         Skill.Experience.expert].forEach { [weak self] in
             self?[$0]?.setSelected(false)
         }
         
@@ -73,55 +72,55 @@ class EditSkillNode: SKSpriteNode {
         }
     }
     
-    func setSkillImage(image: UIImage?) {
+    func setSkillImage(_ image: UIImage?) {
         let configured = (image != nil)
-        self.outline.hidden = !configured
+        self.outline.isHidden = !configured
         self.imageNode?.texture = SKTexture(image: image?.RBCircleImage() ?? UIImage(named: "ic-placeholder-circle")!)
         self.imageNode?.alpha = configured ? 1.0 : 0.3
     }
     
-    func animateShow(duration: NSTimeInterval = 1, completion: (()->())? = nil){
-        self.hidden = false
+    func animateShow(_ duration: TimeInterval = 1, completion: (()->())? = nil){
+        self.isHidden = false
         self.mainScale = self.startScale
         self.savedStartScale = self.mainScale
         self.outline.alpha = 0
         
         let scaleAction = SKAction.scaleTo(self.finalScale, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         let moveAction = SKAction.moveTo(self.finalFrame.centerOfMass, duration: duration, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0)
-        let outlineAlphaAction = SKAction.fadeInWithDuration(duration * 0.7)
+        let outlineAlphaAction = SKAction.fadeIn(withDuration: duration * 0.7)
         
-        self.runAction(scaleAction){
+        self.run(scaleAction, completion: {
             completion?()
-        }
-        self.runAction(moveAction)
-        self.outline.runAction(outlineAlphaAction)
+        })
+        self.run(moveAction)
+        self.outline.run(outlineAlphaAction)
         
         if let _ = self.skill {
-            self.imageSelect.hidden = true
+            self.imageSelect.isHidden = true
         }
         else {
-            self.imageSelect.hidden = false
+            self.imageSelect.isHidden = false
             self.imageSelect.animateShow()
         }
     }
     
-    func animateHide(duration: NSTimeInterval = 1, completion: (()->())? = nil){
+    func animateHide(_ duration: TimeInterval = 1, completion: (()->())? = nil){
         let scaleAction = SKAction.scaleTo(self.savedStartScale, duration: duration * 0.8, delay: 0.01, usingSpringWithDamping: 0.95, initialSpringVelocity: 0.2)
         let moveAction = SKAction.moveTo(self.startFrame.centerOfMass, duration: duration, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0)
-        let outlineAlphaAction = SKAction.fadeOutWithDuration(duration * 0.7)
+        let outlineAlphaAction = SKAction.fadeOut(withDuration: duration * 0.7)
         
-        self.runAction(scaleAction){ [weak self] in
-            self?.hidden = true
+        self.run(scaleAction, completion: { [weak self] in
+            self?.isHidden = true
             completion?()
-        }
-        self.runAction(moveAction)
-        self.outline.runAction(outlineAlphaAction)
+        })
+        self.run(moveAction)
+        self.outline.run(outlineAlphaAction)
         
         if let _ = self.skill {
-            self.imageSelect.hidden = true
+            self.imageSelect.isHidden = true
         }
         else {
-            self.imageSelect.hidden = false
+            self.imageSelect.isHidden = false
             self.imageSelect.animateHide()
         }
     }
@@ -129,14 +128,14 @@ class EditSkillNode: SKSpriteNode {
     // MARK: - Helpers
     subscript(level: Skill.Experience) -> ExperienceSelectNode? {
         switch level {
-        case .Beginner:
-            return self.childNodeWithName("Experience.Beginner") as? ExperienceSelectNode
-        case .Intermediate:
-            return self.childNodeWithName("Experience.Intermediate") as? ExperienceSelectNode
-        case .Professional:
-            return self.childNodeWithName("Experience.Professional") as? ExperienceSelectNode
-        case .Expert:
-            return self.childNodeWithName("Experience.Expert") as? ExperienceSelectNode
+        case .beginner:
+            return self.childNode(withName: "Experience.Beginner") as? ExperienceSelectNode
+        case .intermediate:
+            return self.childNode(withName: "Experience.Intermediate") as? ExperienceSelectNode
+        case .professional:
+            return self.childNode(withName: "Experience.Professional") as? ExperienceSelectNode
+        case .expert:
+            return self.childNode(withName: "Experience.Expert") as? ExperienceSelectNode
         default:
             return nil
         }
@@ -147,10 +146,10 @@ class EditSkillNode: SKSpriteNode {
 class ImageSelectNode: SKSpriteNode, InteractiveNode {
     
     lazy var outline: SKSpriteNode = {
-        return (self.childNodeWithName("Outline") as? SKSpriteNode) ?? SKSpriteNode()
+        return (self.childNode(withName: "Outline") as? SKSpriteNode) ?? SKSpriteNode()
     }()
     
-    private var savedScale: CGFloat = 1
+    fileprivate var savedScale: CGFloat = 1
     var mainScale: CGFloat {
         get {
             return self.xScale
@@ -170,7 +169,7 @@ class ImageSelectNode: SKSpriteNode, InteractiveNode {
         self.addChild(bgr)
     }
     
-    func animateShow(duration: NSTimeInterval = 1) {
+    func animateShow(_ duration: TimeInterval = 1) {
         self.targetPosition = self.position
         self.position = CGPoint.zero
         
@@ -181,28 +180,28 @@ class ImageSelectNode: SKSpriteNode, InteractiveNode {
         self.mainScale = (parentSprite.size.width / parentSprite.xScale) / self.size.width
         self.savedScale = self.mainScale
         
-        self.hidden =  false
+        self.isHidden =  false
         self.outline.alpha = 0
         
         let scaleAction = SKAction.scaleTo(1, duration: duration, delay: 0.1, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         let moveAction = SKAction.moveTo(self.targetPosition, duration: duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-        let outlineAlphaAction = SKAction.fadeInWithDuration(duration * 0.7)
+        let outlineAlphaAction = SKAction.fadeIn(withDuration: duration * 0.7)
         
-        self.runAction(scaleAction)
-        self.runAction(moveAction)
-        self.outline.runAction(outlineAlphaAction)
+        self.run(scaleAction)
+        self.run(moveAction)
+        self.outline.run(outlineAlphaAction)
     }
     
-    func animateHide(duration: NSTimeInterval = 0.7) {
+    func animateHide(_ duration: TimeInterval = 0.7) {
         let scaleAction = SKAction.scaleTo(self.savedScale, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
         let moveAction = SKAction.moveTo(CGPoint.zero, duration: duration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-        let outlineAlphaAction = SKAction.fadeOutWithDuration(duration * 0.7)
+        let outlineAlphaAction = SKAction.fadeOut(withDuration: duration * 0.7)
         
-        self.runAction(scaleAction) { [weak self] in
-            self?.hidden =  true
-        }
-        self.runAction(moveAction)
-        self.outline.runAction(outlineAlphaAction)
+        self.run(scaleAction, completion: { [weak self] in
+            self?.isHidden =  true
+        }) 
+        self.run(moveAction)
+        self.outline.run(outlineAlphaAction)
     }
     
 }

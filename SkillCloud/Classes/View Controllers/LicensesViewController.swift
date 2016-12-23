@@ -21,13 +21,13 @@ class LicensesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let path = NSBundle.mainBundle().pathForResource("Licenses", ofType: "md"), licensesString = try? String(contentsOfFile: path) else {
+        guard let path = Bundle.main.path(forResource: "Licenses", ofType: "md"), let licensesString = try? String(contentsOfFile: path) else {
             assert(false)
             return
         }
         
-        let parser = TSMarkdownParser.standardParser()
-        self.textView.attributedText = parser.attributedStringFromMarkdown(licensesString, attributes: [NSForegroundColorAttributeName : UIColor.whiteColor()])
+        let parser = TSMarkdownParser.standard()
+        self.textView.attributedText = parser.attributedString(fromMarkdown: licensesString, attributes: [NSForegroundColorAttributeName : UIColor.white])
     }
     
     override func viewDidLayoutSubviews() {

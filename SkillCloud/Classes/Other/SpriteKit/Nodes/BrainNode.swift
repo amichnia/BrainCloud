@@ -31,7 +31,7 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
     var cloudIdentifier = "cloud"
     
     // MARK: - Initialization
-    static func nodeWithNode(node: Node) -> BrainNode {
+    static func nodeWithNode(_ node: Node) -> BrainNode {
         let brainNode = BrainNode(texture: SKTexture(imageNamed: "sprite-node"), size: CGSize(width: 2 * node.radius, height: 2 * node.radius))
         
         brainNode.name = "node"
@@ -64,7 +64,7 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
             return nil
         }
         
-        if let scene = self.scene where scene === node {
+        if let scene = self.scene, scene === node {
             return nil
         }
         else {
@@ -72,7 +72,7 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         }
     }
     
-    func shouldBeSuckedBy(node: SKNode) -> Bool {
+    func shouldBeSuckedBy(_ node: SKNode) -> Bool {
         guard !self.isConvex else {
             return false
         }
@@ -98,7 +98,7 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
     // MARK: - Handling suck
     var awaitingSucker: GraphNode?
     
-    func getSuckedIfNeededBy(node: GraphNode) {
+    func getSuckedIfNeededBy(_ node: GraphNode) {
         if self.shouldBeSuckedBy(node) {
             self.awaitingSucker = node
             self.pinnedSkillNode = node.skillNode
@@ -113,13 +113,13 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         
         if self.shouldSuckOff() {
             // Remove info about pinning
-            self.sucker()?.skillNode?.pinnedNodes.remove(self.node.id)
+            _ = self.sucker()?.skillNode?.pinnedNodes.remove(self.node.id)
             // Repin to original
             self.repinToOriginalPosition()
         }
     }
     
-    func pinToSucker(sucker: SKNode) {
+    func pinToSucker(_ sucker: SKNode) {
         let position = self.position
         self.position = sucker.position
         
@@ -129,7 +129,7 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         self.position = position
     }
     
-    func forcePinToSucker(sucker: SKNode) {
+    func forcePinToSucker(_ sucker: SKNode) {
         self.position = sucker.position
         
         self.unpin()
@@ -137,19 +137,19 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
     }
     
     // MARK: - Pinning
-    func pinToScene(scene: SKScene? = nil) {
+    func pinToScene(_ scene: SKScene? = nil) {
         guard let scene = scene ?? self.scene else {
             return
         }
         
-        let anchor = scene.convertPoint(CGPoint.zero, fromNode: self)
+        let anchor = scene.convert(CGPoint.zero, from: self)
         
-        let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: scene.physicsBody!, anchorA: anchor, anchorB: anchor)
+        let joint = SKPhysicsJointSpring.joint(withBodyA: self.physicsBody!, bodyB: scene.physicsBody!, anchorA: anchor, anchorB: anchor)
         joint.frequency = 20
         joint.damping = 10
         self.pinJoint = joint
         
-        self.scene!.physicsWorld.addJoint(joint)
+        self.scene!.physicsWorld.add(joint)
     }
     
     func repin() {
@@ -162,7 +162,7 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
             return
         }
         
-        scene.physicsWorld.removeJoint(joint)
+        scene.physicsWorld.remove(joint)
         self.pinJoint = nil
     }
     
@@ -175,20 +175,20 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         self.position = position
     }
     
-    func pinToNode(node: SKNode) {
+    func pinToNode(_ node: SKNode) {
         guard let scene = scene ?? self.scene else {
             return
         }
         
-        let anchorA = scene.convertPoint(CGPoint.zero, fromNode: self)
-        let anchorB = scene.convertPoint(CGPoint.zero, fromNode: node)
+        let anchorA = scene.convert(CGPoint.zero, from: self)
+        let anchorB = scene.convert(CGPoint.zero, from: node)
         
-        let joint = SKPhysicsJointSpring.jointWithBodyA(self.physicsBody!, bodyB: node.physicsBody!, anchorA: anchorA, anchorB: anchorB)
+        let joint = SKPhysicsJointSpring.joint(withBodyA: self.physicsBody!, bodyB: node.physicsBody!, anchorA: anchorA, anchorB: anchorB)
         joint.frequency = 10
         joint.damping = 10
         self.pinJoint = joint
         
-        self.scene!.physicsWorld.addJoint(joint)
+        self.scene!.physicsWorld.add(joint)
         
         if let graphNode = node as? GraphNode, let skillNode = graphNode.skillNode {
             skillNode.pinnedNodes.insert(self.node.id)
@@ -197,23 +197,22 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
     
     
     // MARK: - Adding lines
-    func addLineToNode(node: BrainNode) {
+    func addLineToNode(_ node: BrainNode) {
         let line = SKShapeNode(path: self.pathToPoint(node.position))
         line.strokeColor = Node.color
         line.zPosition = self.zPosition - 1
         line.lineWidth = 1.25 / Node.scaleFactor
-        line.antialiased = true
+        line.isAntialiased = true
         
         self.lines[node] = line
         node.lines[self] = line
         self.parent?.addChild(line)
     }
     
-    func pathToPoint(point: CGPoint) -> CGPath {
-        //        let offset = CGPoint(x: point.x - self.position.x, y: point.y - self.position.y)
-        let path = CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, self.position.x, self.position.y)
-        CGPathAddLineToPoint(path, nil, point.x, point.y)
+    func pathToPoint(_ point: CGPoint) -> CGPath {
+        let path = CGMutablePath()
+        path.move(to: self.position)
+        path.addLine(to: point)
         return path
     }
     
