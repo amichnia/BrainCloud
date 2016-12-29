@@ -56,6 +56,12 @@ class GeneratorViewController: CloudViewController {
         skView.setNeedsLayout()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

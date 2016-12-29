@@ -164,7 +164,7 @@
 		FE31DAEE1C9CA1240006D9EE /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
 		FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
-		FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
+		FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagesAPI.swift; path = ../Other/ImagesAPI.swift; sourceTree = "<group>"; };
 		FE31DAF81C9CA1240006D9EE /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PossiblePlaceView.swift; sourceTree = "<group>"; };
 		FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillTableViewCell.swift; sourceTree = "<group>"; };
@@ -346,6 +346,7 @@
 				CC942C671DAD19B4005FFB83 /* Add Skill */,
 				CC88FB181E1551C10051607B /* Explore */,
 				CC88FB161E1551B10051607B /* Info */,
+				FE31DAF31C9CA1240006D9EE /* GoogleImages */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -409,7 +410,6 @@
 				CC942C691DAD19D1005FFB83 /* Modules */,
 				FE31DAE91C9CA1240006D9EE /* Model */,
 				FE31DAF71C9CA1240006D9EE /* Views */,
-				FE31DAF31C9CA1240006D9EE /* View Controllers */,
 				FE31DAEF1C9CA1240006D9EE /* Other */,
 			);
 			path = Classes;
@@ -443,16 +443,17 @@
 				C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */,
 				CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */,
 				FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */,
-				FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
 		};
-		FE31DAF31C9CA1240006D9EE /* View Controllers */ = {
+		FE31DAF31C9CA1240006D9EE /* GoogleImages */ = {
 			isa = PBXGroup;
 			children = (
+				FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */,
 				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
 			);
+			name = GoogleImages;
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
