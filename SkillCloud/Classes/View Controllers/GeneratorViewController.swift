@@ -202,7 +202,8 @@ class GeneratorViewController: CloudViewController {
     }
     
     @IBAction func exportAction(_ sender: AnyObject) {
-        _ = promiseExportCloud()
+        _ = promiseScaleToVisible()
+        .then(execute: promiseExportCloud)
         .then { closure -> Void in
             closure()
         }
@@ -211,11 +212,36 @@ class GeneratorViewController: CloudViewController {
         }
     }
     
+    func promiseScaleToVisible() -> Promise<Void> {
+        return Promise<Void>(resolvers: { (success, failure) in
+            guard let scene = self.skView.scene, let camera = scene.camera else {
+                success()
+                return
+            }
+            
+            guard camera.xScale != 1.0 else {
+                success()
+                return
+            }
+            
+            let scale = SKAction.scaleTo(1, duration: 0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0)
+            let center = CGPoint(x: scene.size.width / 2, y: scene.size.height / 2)
+            let move = SKAction.moveTo(center, duration: 0.5, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0)
+            let group = SKAction.group([scale,move])
+            
+            camera.run(group){
+                self.scene.cameraSaveValues()
+                success()
+            }
+        })
+    }
+    
     func promiseExportCloud() -> Promise<()->()> {
         return Promise<()->()> {
             self.scene.deselectNode()
             self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
-            self.performSegue(withIdentifier: ShowExportViewSegueIdentifier, sender: self)
+            let activityVC = UIActivityViewController(activityItems: [self.cloudImage!], applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
         }
     }
 
@@ -245,6 +271,7 @@ class GeneratorViewController: CloudViewController {
     // MARK: - Helpers
     func captureCloudWithSize(_ size: CGSize) -> UIImage {
         let frame = skView.frame
+        let color = skView.backgroundColor
         
         // Overlay image context
         UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
@@ -259,9 +286,11 @@ class GeneratorViewController: CloudViewController {
         overlayImageView.image = overlay
         
         // Main image export context
+        skView.backgroundColor = UIColor.clear
+        skView.frame = CGRect(origin: CGPoint.zero, size: size)
+        
         UIGraphicsBeginImageContextWithOptions(size, false, 2.0)
         
-        skView.frame = CGRect(origin: CGPoint.zero, size: size)
         skView.drawHierarchy(in: CGRect(origin: CGPoint.zero, size: size), afterScreenUpdates: true)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -269,6 +298,7 @@ class GeneratorViewController: CloudViewController {
         UIGraphicsEndImageContext()
         
         skView.frame = frame
+        skView.backgroundColor = color
         overlayImageView.isHidden = true
         
         return image!

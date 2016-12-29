@@ -117,21 +117,21 @@
 		C80A91901CB5208200529F0B /* GoogleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImage.swift; sourceTree = "<group>"; };
 		C819FB9D1D8187F100B55C14 /* GraphNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphNode.swift; sourceTree = "<group>"; };
 		C82E241F1D928DC6001D6A98 /* OptionsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsNode.swift; sourceTree = "<group>"; };
-		C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExploreViewController.swift; path = "View Controllers/ExploreViewController.swift"; sourceTree = "<group>"; };
 		C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsSearchTableViewCell.swift; sourceTree = "<group>"; };
-		C83BF83C1D5B369900FDA60C /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		C83BF83C1D5B369900FDA60C /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoViewController.swift; path = "View Controllers/InfoViewController.swift"; sourceTree = "<group>"; };
 		C83BF83E1D5C73A100FDA60C /* TSMarkdownParser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSMarkdownParser.framework; path = Carthage/Build/iOS/TSMarkdownParser.framework; sourceTree = "<group>"; };
-		C83BF8441D5C76C100FDA60C /* LicensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
+		C83BF8441D5C76C100FDA60C /* LicensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LicensesViewController.swift; path = "View Controllers/LicensesViewController.swift"; sourceTree = "<group>"; };
 		C83BF8461D5C784300FDA60C /* Licenses.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Licenses.md; sourceTree = "<group>"; };
 		C863048D1CC6417E002C068C /* EditSkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSkillNode.swift; sourceTree = "<group>"; };
-		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
+		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillsViewController.swift; path = "View Controllers/SkillsViewController.swift"; sourceTree = "<group>"; };
 		C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImagesCollectionViewController.swift; sourceTree = "<group>"; };
 		C88EB4871CB50580002B9592 /* GoogleImages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoogleImages.storyboard; sourceTree = "<group>"; };
 		C8A42EEB1D5CA06400C45829 /* iRate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iRate.framework; path = Carthage/Build/iOS/iRate.framework; sourceTree = "<group>"; };
-		C8A42EED1D5CC1B000C45829 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		C8A42EED1D5CC1B000C45829 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = "View Controllers/AboutViewController.swift"; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* SkillCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B3C71E1D804530002D9364 /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeneratorViewController.swift; path = "../../View Controllers/GeneratorViewController.swift"; sourceTree = "<group>"; };
-		C8DF6D231CC5017A009CDBFA /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		C8DF6D231CC5017A009CDBFA /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddViewController.swift; path = "../../View Controllers/AddViewController.swift"; sourceTree = "<group>"; };
 		C8DF6D251CC5033F009CDBFA /* AddScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScene.swift; sourceTree = "<group>"; };
 		C8DF6D271CC503A0009CDBFA /* AddScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AddScene.sks; sourceTree = "<group>"; };
 		C8F55CA51CFC264300208F88 /* SkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillNode.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 		FE0522E11CB01BBF00315468 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		FE0522E51CB02D6600315468 /* brain_graph_v0.1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = brain_graph_v0.1.json; sourceTree = "<group>"; };
 		FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
-		FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarViewController.swift; sourceTree = "<group>"; };
+		FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootTabBarViewController.swift; path = "View Controllers/RootTabBarViewController.swift"; sourceTree = "<group>"; };
 		FE2151441D1F3435005BC8B1 /* CloudContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudContainer.swift; sourceTree = "<group>"; };
 		FE2E6BE61D16963600B86D8A /* SkillCloud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = SkillCloud.entitlements; path = ../SkillCloud.entitlements; sourceTree = "<group>"; };
 		FE2E6BE71D16982900B86D8A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -267,6 +267,40 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CC88FB161E1551B10051607B /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				C83BF83C1D5B369900FDA60C /* InfoViewController.swift */,
+				C83BF8441D5C76C100FDA60C /* LicensesViewController.swift */,
+				C8A42EED1D5CC1B000C45829 /* AboutViewController.swift */,
+			);
+			name = Info;
+			sourceTree = "<group>";
+		};
+		CC88FB171E1551B70051607B /* Skills */ = {
+			isa = PBXGroup;
+			children = (
+				C86304911CC646B1002C068C /* SkillsViewController.swift */,
+			);
+			name = Skills;
+			sourceTree = "<group>";
+		};
+		CC88FB181E1551C10051607B /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */,
+			);
+			name = Explore;
+			sourceTree = "<group>";
+		};
+		CC88FB191E1551C60051607B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
 		CC942C661DAD19A6005FFB83 /* Cloud Graph */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +318,7 @@
 		CC942C671DAD19B4005FFB83 /* Add Skill */ = {
 			isa = PBXGroup;
 			children = (
+				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
 				C8DF6D271CC503A0009CDBFA /* AddScene.sks */,
 				C8DF6D251CC5033F009CDBFA /* AddScene.swift */,
 			);
@@ -304,9 +339,13 @@
 		CC942C691DAD19D1005FFB83 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CC88FB191E1551C60051607B /* Main */,
 				CC942C681DAD19BC005FFB83 /* Select Cloud */,
 				CC942C661DAD19A6005FFB83 /* Cloud Graph */,
+				CC88FB171E1551B70051607B /* Skills */,
 				CC942C671DAD19B4005FFB83 /* Add Skill */,
+				CC88FB181E1551C10051607B /* Explore */,
+				CC88FB161E1551B10051607B /* Info */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -412,14 +451,7 @@
 		FE31DAF31C9CA1240006D9EE /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */,
-				C86304911CC646B1002C068C /* SkillsViewController.swift */,
-				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
 				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
-				C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */,
-				C83BF83C1D5B369900FDA60C /* InfoViewController.swift */,
-				C83BF8441D5C76C100FDA60C /* LicensesViewController.swift */,
-				C8A42EED1D5CC1B000C45829 /* AboutViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

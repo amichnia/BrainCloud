@@ -299,6 +299,15 @@ class CloudGraphScene: SKScene, DTOModel {
         }) 
     }
     
+    func cameraSaveValues() {
+        guard let camera = self.camera else {
+            return
+        }
+        
+        cameraSettings.position = camera.position
+        cameraSettings.scale = camera.xScale
+    }
+    
     // MARK: - Main run loop
     override func update(_ currentTime: TimeInterval) {
         self.allNodes.values.forEach {
