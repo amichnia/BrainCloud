@@ -198,6 +198,16 @@ class GeneratorViewController: CloudViewController {
         }
     }
     
+    @IBAction func exportAction(_ sender: AnyObject) {
+        _ = promiseExportCloud()
+        .then { closure -> Void in
+            closure()
+        }
+        .catch { error in
+            DDLogError("Error: \(error)")
+        }
+    }
+    
     func promiseExportCloud() -> Promise<()->()> {
         return Promise<()->()> {
             self.scene.deselectNode()

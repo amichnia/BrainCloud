@@ -241,7 +241,8 @@ class CloudGraphScene: SKScene, DTOModel {
     // MARK: - Camera handling
     func cameraZoom(_ zoom: CGFloat, save: Bool = false) {
         let baseScale = self.cameraSettings.scale
-        let newZoom = max(0.02,baseScale + (1 - zoom))
+        let delta = zoom - 1.0
+        let newZoom = max(0.2,baseScale - delta * baseScale)
         
         self.camera?.setScale(newZoom)
         
