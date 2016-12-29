@@ -16,6 +16,7 @@ class GeneratorViewController: CloudViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var skView: SKView!
+    @IBOutlet weak var overlayImageView: UIImageView!
     @IBOutlet weak var pinchGestureRecognizer: UIPinchGestureRecognizer!
     @IBOutlet weak var tapGestureRecognizer: UITapGestureRecognizer!
     @IBOutlet weak var selectTapGestureRecognizer: UITapGestureRecognizer!
@@ -51,6 +52,8 @@ class GeneratorViewController: CloudViewController {
         else {
             assertionFailure()
         }
+        
+        skView.setNeedsLayout()
     }
     
     override func viewDidLayoutSubviews() {
@@ -241,12 +244,32 @@ class GeneratorViewController: CloudViewController {
     
     // MARK: - Helpers
     func captureCloudWithSize(_ size: CGSize) -> UIImage {
+        let frame = skView.frame
+        
+        // Overlay image context
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+        
+        skView.drawHierarchy(in: CGRect(origin: CGPoint.zero, size: frame.size), afterScreenUpdates: false)
+        
+        let overlay = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        overlayImageView.isHidden = false
+        overlayImageView.image = overlay
+        
+        // Main image export context
         UIGraphicsBeginImageContextWithOptions(size, false, 2.0)
         
-        self.skView.drawHierarchy(in: CGRect(origin: CGPoint.zero, size: size), afterScreenUpdates: true)
+        skView.frame = CGRect(origin: CGPoint.zero, size: size)
+        skView.drawHierarchy(in: CGRect(origin: CGPoint.zero, size: size), afterScreenUpdates: true)
+        
         let image = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
+        
+        skView.frame = frame
+        overlayImageView.isHidden = true
         
         return image!
     }
