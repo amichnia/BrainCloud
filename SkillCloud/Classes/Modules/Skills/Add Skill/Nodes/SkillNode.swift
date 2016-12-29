@@ -37,7 +37,6 @@ class SkillNode: SKNode, DTOModel {
         SkillNode.nodeId += 1
         
         // Mask shape - circular mask for skill image
-        let radius = graphNode.size.width / 2 - 10
         let size = CGSize(width: graphNode.size.width - 10, height: graphNode.size.height - 10)
         
         let texture = SKTexture(image: UIImage.circle(size: size, color: UIColor.red))
@@ -52,10 +51,8 @@ class SkillNode: SKNode, DTOModel {
         skillImageNode.zPosition = skillNode.zPosition + 2
         
         // Foreground bordered circle - placed on top of image to provide "antialiasing"
-        let foregroundShapeNode = SKShapeNode(circleOfRadius: radius - 1)
-        foregroundShapeNode.strokeColor = Node.color
-        foregroundShapeNode.lineWidth = 10
-        foregroundShapeNode.fillColor = UIColor.clear
+        let outlineTexture = SKTexture(image: UIImage.outline(size: graphNode.size, width: 10, color: Node.color))
+        let foregroundShapeNode = SKSpriteNode(texture: outlineTexture, size: graphNode.size)
         foregroundShapeNode.position = CGPoint.zero
         foregroundShapeNode.zPosition = skillNode.zPosition + 3
         
