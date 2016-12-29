@@ -419,11 +419,14 @@ extension CloudGraphScene {
             let level: Skill.Experience = Skill.Experience(rawValue: Int(entity.skillExperienceValue)) ?? Skill.Experience.beginner
             let position: CGPoint = entity.positionRelative?.cgPointValue ?? CGPoint.zero
             let pinned: [Int] = entity.connected ?? []
+            let scale = CGFloat(entity.scale)
             
             // Spawn concrete entity
             _ = GraphNode.newFromTemplate(level)
             .promiseSpawnInScene(self, atPosition: position, animated: false, entity: entity)
             .then { addedNode -> Void in
+                addedNode.setScale(scale)
+                
                 pinned.map({ return self.allNodes[$0] }).forEach { node in
                     node?.getSuckedIfNeededBy(addedNode)
                 }
@@ -433,8 +436,6 @@ extension CloudGraphScene {
                     self.skillNodes.append(skillNode)
                 }
             }
-            
-            // Attach saved nodes
         }
     }
     

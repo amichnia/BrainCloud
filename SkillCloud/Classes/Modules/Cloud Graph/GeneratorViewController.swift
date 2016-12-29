@@ -212,6 +212,7 @@ class GeneratorViewController: CloudViewController {
         }
     }
     
+    // MARK: - Promises
     func promiseScaleToVisible() -> Promise<Void> {
         return Promise<Void>(resolvers: { (success, failure) in
             guard let scene = self.skView.scene, let camera = scene.camera else {
