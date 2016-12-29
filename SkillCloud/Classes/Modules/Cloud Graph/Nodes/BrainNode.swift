@@ -32,7 +32,10 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
     
     // MARK: - Initialization
     static func nodeWithNode(_ node: Node) -> BrainNode {
-        let brainNode = BrainNode(texture: SKTexture(imageNamed: "sprite-node"), size: CGSize(width: 2 * node.radius, height: 2 * node.radius))
+        let size = CGSize(width: 2 * node.radius, height: 2 * node.radius)
+        let image = UIImage.circle(size: size, color: Node.color)
+        let texture = SKTexture(image: image) //SKTexture(imageNamed: "sprite-node")
+        let brainNode = BrainNode(texture: texture, size: size)
         
         brainNode.name = "node"
         brainNode.node = node

@@ -38,10 +38,10 @@ class SkillNode: SKNode, DTOModel {
         
         // Mask shape - circular mask for skill image
         let radius = graphNode.size.width / 2 - 10
+        let size = CGSize(width: graphNode.size.width - 10, height: graphNode.size.height - 10)
         
-        let maskShapeNode = SKShapeNode(circleOfRadius: radius - 1)
-        maskShapeNode.strokeColor = Node.color
-        maskShapeNode.fillColor = Node.color
+        let texture = SKTexture(image: UIImage.circle(size: size, color: UIColor.red))
+        let maskShapeNode = SKSpriteNode(texture: texture, size: size)
         maskShapeNode.position = CGPoint.zero
         maskShapeNode.zPosition = skillNode.zPosition + 1
         

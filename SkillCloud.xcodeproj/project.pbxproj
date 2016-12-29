@@ -38,6 +38,7 @@
 		C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */; };
 		CC3776A11DB5217D002188FC /* UIViewController+AlertsHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */; };
 		CC7CEFA61DC0CB7A00D4057A /* TouchDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7CEFA51DC0CB7A00D4057A /* TouchDownView.swift */; };
+		CC8C216C1E15709A001E466C /* UIImage+ShapeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */; };
 		CC9E4D411E0C480900ABB5A7 /* SpriteKit+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */; };
 		FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B11CAEEF8000315468 /* CloudViewController.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
@@ -144,6 +145,7 @@
 		C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAPI.swift; sourceTree = "<group>"; };
 		CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+AlertsHandling.swift"; sourceTree = "<group>"; };
 		CC7CEFA51DC0CB7A00D4057A /* TouchDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchDownView.swift; sourceTree = "<group>"; };
+		CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ShapeImage.swift"; sourceTree = "<group>"; };
 		CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SpriteKit+Spring.swift"; sourceTree = "<group>"; };
 		FE0522B11CAEEF8000315468 /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -561,6 +563,7 @@
 				FEB31DA11D31207D00E7C203 /* MRProgress+Show.swift */,
 				FE9F6EE41D284EE3008B3BC3 /* UIColor+Extensions.swift */,
 				FE9F6EEC1D285031008B3BC3 /* UIImage+RBResizer.swift */,
+				CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -777,6 +780,7 @@
 				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
 				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,
 				C819FB9E1D8187F100B55C14 /* GraphNode.swift in Sources */,
+				CC8C216C1E15709A001E466C /* UIImage+ShapeImage.swift in Sources */,
 				C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */,
 				FE9F6EDE1D283433008B3BC3 /* CloudSelectScene.swift in Sources */,
 				FE9F6EE71D284F15008B3BC3 /* Array+Extensions.swift in Sources */,
