@@ -56,12 +56,6 @@ class GeneratorViewController: CloudViewController {
         skView.setNeedsLayout()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -245,9 +239,12 @@ class GeneratorViewController: CloudViewController {
     func promiseExportCloud() -> Promise<()->()> {
         return Promise<()->()> {
             self.scene.deselectNode()
-            self.cloudImage = self.captureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
-            let activityVC = UIActivityViewController(activityItems: [self.cloudImage!], applicationActivities: nil)
-            self.present(activityVC, animated: true, completion: nil)
+            _ = self.promiseCaptureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
+            .then { image -> Void in
+                self.cloudImage = image
+                let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+                self.present(activityVC, animated: true, completion: nil)
+            }
         }
     }
 
@@ -275,6 +272,45 @@ class GeneratorViewController: CloudViewController {
     }
     
     // MARK: - Helpers
+    func promiseCaptureCloudWithSize(_ size: CGSize) -> Promise<UIImage> {
+        return Promise<UIImage>(resolvers: { (success, failure) in
+            let frame = skView.frame
+            let color = skView.backgroundColor
+            
+            // Overlay image context
+            UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+            
+            skView.drawHierarchy(in: CGRect(origin: CGPoint.zero, size: frame.size), afterScreenUpdates: false)
+            
+            let overlay = UIGraphicsGetImageFromCurrentImageContext()
+            
+            UIGraphicsEndImageContext()
+            
+            overlayImageView.isHidden = false
+            overlayImageView.image = overlay
+            
+            // Main image export context
+            skView.backgroundColor = UIColor.clear
+            skView.frame = CGRect(origin: CGPoint.zero, size: size)
+            
+            DispatchQueue.main.async() {
+                UIGraphicsBeginImageContextWithOptions(size, false, 2.0)
+                
+                self.skView.drawHierarchy(in: CGRect(origin: CGPoint.zero, size: size), afterScreenUpdates: true)
+                
+                let image = UIGraphicsGetImageFromCurrentImageContext()
+                
+                UIGraphicsEndImageContext()
+                
+                self.skView.frame = frame
+                self.skView.backgroundColor = color
+                self.overlayImageView.isHidden = true
+                
+                success(image!)
+            }
+        })
+    }
+    
     func captureCloudWithSize(_ size: CGSize) -> UIImage {
         let frame = skView.frame
         let color = skView.backgroundColor
