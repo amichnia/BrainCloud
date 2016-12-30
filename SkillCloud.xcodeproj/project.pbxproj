@@ -52,16 +52,10 @@
 		FE1FFCAF1D258B5A00E6F6C6 /* RootTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */; };
 		FE2151451D1F3435005BC8B1 /* CloudContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2151441D1F3435005BC8B1 /* CloudContainer.swift */; };
 		FE2E6BE81D16982900B86D8A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2E6BE71D16982900B86D8A /* CloudKit.framework */; };
-		FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */; };
-		FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEB1C9CA1240006D9EE /* Field.swift */; };
-		FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEC1C9CA1240006D9EE /* Place.swift */; };
-		FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAED1C9CA1240006D9EE /* Position.swift */; };
 		FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEE1C9CA1240006D9EE /* Skill.swift */; };
 		FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */; };
 		FE31DB0F1C9CA1240006D9EE /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */; };
 		FE31DB101C9CA1240006D9EE /* ImagesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */; };
-		FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF81C9CA1240006D9EE /* CanvasView.swift */; };
-		FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */; };
 		FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */; };
 		FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB001C9CA1240006D9EE /* LaunchScreen.storyboard */; };
 		FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB021C9CA1240006D9EE /* Main.storyboard */; };
@@ -161,16 +155,10 @@
 		FE2151441D1F3435005BC8B1 /* CloudContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudContainer.swift; sourceTree = "<group>"; };
 		FE2E6BE61D16963600B86D8A /* SkillCloud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SkillCloud.entitlements; sourceTree = "<group>"; };
 		FE2E6BE71D16982900B86D8A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasBoard.swift; sourceTree = "<group>"; };
-		FE31DAEB1C9CA1240006D9EE /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
-		FE31DAEC1C9CA1240006D9EE /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
-		FE31DAED1C9CA1240006D9EE /* Position.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		FE31DAEE1C9CA1240006D9EE /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
 		FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE31DAF11C9CA1240006D9EE /* CommonExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
 		FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
-		FE31DAF81C9CA1240006D9EE /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
-		FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PossiblePlaceView.swift; sourceTree = "<group>"; };
 		FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillTableViewCell.swift; sourceTree = "<group>"; };
 		FE31DB011C9CA1240006D9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE31DB031C9CA1240006D9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -430,11 +418,7 @@
 			children = (
 				FE2151431D1F3402005BC8B1 /* CloudKit */,
 				FE766D331C9D7FDD0079CA29 /* CoreData */,
-				FE31DAEA1C9CA1240006D9EE /* CanvasBoard.swift */,
-				FE31DAEB1C9CA1240006D9EE /* Field.swift */,
 				FE0522E11CB01BBF00315468 /* Node.swift */,
-				FE31DAEC1C9CA1240006D9EE /* Place.swift */,
-				FE31DAED1C9CA1240006D9EE /* Position.swift */,
 				FE31DAEE1C9CA1240006D9EE /* Skill.swift */,
 				CC2D3E001E1585E000047519 /* Palette.swift */,
 			);
@@ -469,10 +453,8 @@
 		FE31DAF71C9CA1240006D9EE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				FE31DAF81C9CA1240006D9EE /* CanvasView.swift */,
 				C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */,
 				FEB32F991D5BA5ED00ABE5F8 /* InfoMenuTableViewCell.swift */,
-				FE31DAF91C9CA1240006D9EE /* PossiblePlaceView.swift */,
 				FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */,
 				FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */,
 				C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */,
@@ -768,11 +750,9 @@
 				FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */,
 				FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */,
 				FE766D411C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift in Sources */,
-				FE31DB151C9CA1240006D9EE /* PossiblePlaceView.swift in Sources */,
 				FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */,
 				C8F55CB11CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift in Sources */,
 				FE60C9E91D22C4EE001129C8 /* ImageAsset.swift in Sources */,
-				FE31DB0B1C9CA1240006D9EE /* Place.swift in Sources */,
 				CC3776A11DB5217D002188FC /* UIViewController+AlertsHandling.swift in Sources */,
 				FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */,
 				C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */,
@@ -780,8 +760,6 @@
 				FE9F6EE31D284E9F008B3BC3 /* CGStructures+Convenience.swift in Sources */,
 				C83BBA9D1D4649EF00431B42 /* SkillsSearchTableViewCell.swift in Sources */,
 				C8F55CA61CFC264300208F88 /* SkillNode.swift in Sources */,
-				FE31DB141C9CA1240006D9EE /* CanvasView.swift in Sources */,
-				FE31DB0A1C9CA1240006D9EE /* Field.swift in Sources */,
 				C819FB9E1D8187F100B55C14 /* GraphNode.swift in Sources */,
 				CC8C216C1E15709A001E466C /* UIImage+ShapeImage.swift in Sources */,
 				C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */,
@@ -798,7 +776,6 @@
 				FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				CC9E4D411E0C480900ABB5A7 /* SpriteKit+Spring.swift in Sources */,
-				FE31DB0C1C9CA1240006D9EE /* Position.swift in Sources */,
 				CC2D3E011E1585E000047519 /* Palette.swift in Sources */,
 				C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */,
 				FE60C9E71D22C34C001129C8 /* CloudKit+Promises.swift in Sources */,
@@ -813,7 +790,6 @@
 				C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */,
 				FE31DB101C9CA1240006D9EE /* ImagesAPI.swift in Sources */,
 				FE32AB101D271CBF0099B8B6 /* CloudSelectionViewController.swift in Sources */,
-				FE31DB091C9CA1240006D9EE /* CanvasBoard.swift in Sources */,
 				C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */,
 				FE31DB0F1C9CA1240006D9EE /* CommonExtensions.swift in Sources */,
 			);
