@@ -19,11 +19,13 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>217</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We use access to photos to allow exporting cloud images and using saved images as skill images.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>We use camera to allow you adding skill images.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

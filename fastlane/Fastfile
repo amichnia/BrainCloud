@@ -1,0 +1,51 @@
+fastlane_version "2.1.3"
+
+default_platform :ios
+platform :ios do
+
+  debug_fastlane = true
+  scheme_to_build = "SkillCloud"
+
+  before_all do
+     ensure_git_status_clean unless debug_fastlane
+     ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+     increment_build_number(build_number: number_of_commits)
+  end
+
+  lane :beta do
+    ENV["LANE_NAME"] = "TestFlight"
+    gym(scheme: scheme_to_build)
+    pilot
+  end
+
+  desc "Deploy a new version to the App Store"
+  lane :release do
+    ENV["LANE_NAME"] = "AppStore"
+    # snapshot
+    gym(scheme: scheme_to_build)
+    deliver(force: true)
+    # frameit
+  end
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+
+    slack(
+      message: "[#{ENV["LANE_NAME"]}] Successfully deployed Skillcloud."
+    )
+  end
+
+  error do |lane, exception|
+    # slack(
+    #   message: exception.message,
+    #   success: false
+    # )
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used
+# No personal data is recorded. Learn more at https://github.com/fastlane/enhancer
