@@ -21,7 +21,9 @@
 	<key>CFBundleVersion</key>
 	<string>3</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We use access to photos only to allow exporting cloud images.</string>
+	<string>We use access to photos to allow exporting cloud images and using saved images as skill images.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We use camera to allow you adding skill images.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

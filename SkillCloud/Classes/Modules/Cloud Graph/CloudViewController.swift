@@ -91,8 +91,8 @@ extension CloudViewController: UICollectionViewDataSource {
         let identifier: String = {
             switch indexPath.section {
             case 2:
-                let offset = self.collectionView(collectionView, numberOfItemsInSection: 1) % 2
-                return self.pattern[(indexPath.row + (2 * offset)) % 4]
+                let offset = self.collectionView(collectionView, numberOfItemsInSection: 1) % 4
+                return self.pattern[(indexPath.row + offset) % 4]
             default:
                 return self.pattern[indexPath.row % 4]
             }

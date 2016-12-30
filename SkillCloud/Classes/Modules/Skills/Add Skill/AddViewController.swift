@@ -39,6 +39,9 @@ class AddViewController: UIViewController {
     var fulfill : ((Skill)->Void)!
     var reject : ((Error)->Void)!
     
+    var imageFulfill: ((UIImage)->Void)!
+    var imageFailure: ((Error)->Void)!
+    
     lazy var promise: Promise<Skill> = {
         return Promise<Skill> { (fulfill, reject) in
             self.fulfill = fulfill
@@ -61,7 +64,7 @@ class AddViewController: UIViewController {
     }
     var experience : Skill.Experience?
     var isEditingText : Bool = true
-    var skillBottomDefaultValue : CGFloat = 0;
+    var skillBottomDefaultValue : CGFloat = 0
     
     
     fileprivate var imageCropPromiseHandler: PromiseHandler<UIImage>?
@@ -192,7 +195,7 @@ class AddViewController: UIViewController {
         return self.promiseSelection(UIImage.self, cancellable: true, options: [
             (NSLocalizedString("Take photo", comment: "Take photo"),.default,{ self.selectPickerImage(.camera) }),
             (NSLocalizedString("Photo Library", comment: "Photo Library"),.default, { self.selectPickerImage(.photoLibrary) }),
-            (NSLocalizedString("Google Images", comment: "Google Images"),.default, { self.selectGoogleImage("\(self.skillNameField.text)") })
+            (NSLocalizedString("Google Images", comment: "Google Images"),.default, { self.selectGoogleImage(self.skillNameField.text) })
         ])
         .then{ image -> Promise<UIImage> in
             return self.promiseCroppedImage(image)
@@ -461,7 +464,35 @@ extension AddViewController {
         let picker = UIImagePickerController()
         picker.sourceType = source
         picker.allowsEditing = false
-        return self.promise(picker)
+        picker.delegate = self
+        
+        present(picker, animated: true, completion: nil)
+        
+        return Promise<UIImage> { (success, error) in
+            self.imageFulfill = success
+            self.imageFailure = error
+        }
+    }
+    
+    
+}
+
+extension AddViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        imageFailure(CommonError.userCancelled)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            imageFulfill(image)
+        }
+        else {
+            imageFailure(CommonError.unknownError)
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
     
 }

@@ -14,35 +14,68 @@ class GoogleImagesCollectionViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var confirmActionButton: UIBarButtonItem!
+    @IBOutlet weak var searchButon: UIButton!
+    @IBOutlet weak var searchTextField: UITextField!
     
     // MARK: - Properties
     var fullfillHandler: ((GoogleImage)->())?
     var rejectHandler: ((Error)->())?
-    var searchTerm : String = "swift icon"
+    var searchTerm : String?
     var lastPage : GoogleImagePage?
     var images: [GoogleImage] = []
     var selectedIndexPath : IndexPath?
     var selectedImage : GoogleImage?
-    var isFetching = false
+    var isFetching = false {
+        didSet {
+            searchButon.isEnabled = !isFetching
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.confirmActionButton.title = NSLocalizedString("Cancel", comment: "Cancel")
-        self.fetchNextPage()
+        confirmActionButton.title = NSLocalizedString("Cancel", comment: "Cancel")
+        searchTextField.text = searchTerm
+        
+        fetchNextPage()
     }
     
     // MARK: - Actions
+    @IBAction func confirmImageSelection(_ sender: AnyObject) {
+        self.presentingViewController?.dismiss(animated: true) {
+            if let image = self.selectedImage {
+                self.fullfillHandler?(image)
+            }
+            else {
+                self.rejectHandler?(ImageSelectError.noImageSelected)
+            }
+        }
+    }
+    
+    @IBAction func searchAction(_ sender: AnyObject) {
+        guard let term = searchTextField.text, term != searchTerm else {
+            return
+        }
+        
+        reloadSearch(with: term)
+        _ = searchTextField.resignFirstResponder()
+    }
+    
+    // MARK: - Fetching Images
     func fetchNextPage(){
         guard !self.isFetching else {
+            return
+        }
+        
+        guard let searchTerm = self.searchTerm, searchTerm.characters.count > 0 else {
             return
         }
         
         self.isFetching = true
         
         guard let page = lastPage else {
-            _ = ImagesAPI.search(query: self.searchTerm, page: 1).promiseImages()
+            _ = ImagesAPI.search(query: searchTerm, page: 1).promiseImages()
             .then { [weak self] page -> Void in
                 self?.addPage(page)
             }
@@ -57,12 +90,19 @@ class GoogleImagesCollectionViewController: UIViewController {
         .then { [weak self] page -> Void in
             self?.addPage(page)
         }
+        .catch { error in
+            print("error \(error)")
+        }
         .always {
             self.isFetching = false
-            self.scrollViewDidScroll(self.collectionView as UIScrollView)
+        }
+        .then { [weak self] page -> Void in
+            if let sself = self {
+                sself.scrollViewDidScroll(sself.collectionView as UIScrollView)
+            }
         }
     }
-
+    
     func addPage(_ page: GoogleImagePage) {
         self.lastPage = page
         let indexPaths = (0..<page.images.count).map{
@@ -72,15 +112,17 @@ class GoogleImagesCollectionViewController: UIViewController {
         self.collectionView?.insertItems(at: indexPaths)
     }
     
-    @IBAction func confirmImageSelection(_ sender: AnyObject) {
-        self.presentingViewController?.dismiss(animated: true) {
-            if let image = self.selectedImage {
-                self.fullfillHandler?(image)
-            }
-            else {
-                self.rejectHandler?(ImageSelectError.noImageSelected)
-            }
-        }
+    func reloadSearch(with term: String?) {
+        searchTerm = term
+        searchTextField.text = searchTerm
+        lastPage = nil
+        images = []
+        selectedIndexPath = nil
+        selectedImage = nil
+        confirmActionButton.title = NSLocalizedString("Cancel", comment: "Cancel")
+        collectionView.reloadData()
+        
+        fetchNextPage()
     }
     
 }
@@ -105,23 +147,32 @@ extension GoogleImagesCollectionViewController : UICollectionViewDataSource, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GoogleImageCellIdentifier, for: indexPath) as! GoogleImageCollectionViewCell
         
         cell.configureWithGoogleImage(self.images[indexPath.row])
-        if let selectedIndexPath = self.selectedIndexPath, cell.isSelected != (indexPath == selectedIndexPath) {
-            cell.isSelected = (indexPath == selectedIndexPath)
+        if let selectedIndexPath = self.selectedIndexPath {
+            if indexPath.row == selectedIndexPath.row {
+                cell.isSelected = true
+                cell.overlay.isHidden = false
+            }
+            else {
+                cell.isSelected = false
+                cell.overlay.isHidden = true
+            }
         }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        self.selectedIndexPath = nil
-        self.selectedImage = nil
-        self.confirmActionButton.title = NSLocalizedString("Cancel", comment: "Cancel")
+        selectedIndexPath = nil
+        selectedImage = nil
+        confirmActionButton.title = NSLocalizedString("Cancel", comment: "Cancel")
+        collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.selectedIndexPath = indexPath
-        self.selectedImage = self.images[indexPath.row]
-        self.confirmActionButton.title = NSLocalizedString("OK", comment: "OK")
+        selectedIndexPath = indexPath
+        selectedImage = self.images[indexPath.row]
+        confirmActionButton.title = NSLocalizedString("OK", comment: "OK")
+        collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -137,7 +188,7 @@ extension GoogleImagesCollectionViewController : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let delta = scrollView.contentSize.height - (scrollView.contentOffset.y + scrollView.bounds.height)
         
-        if delta < 180 || scrollView.contentSize.height < scrollView.bounds.height {
+        if delta < 180 || scrollView.contentSize.height < scrollView.bounds.height, images.count < 40 {
             self.fetchNextPage()
         }
     }
@@ -146,7 +197,7 @@ extension GoogleImagesCollectionViewController : UIScrollViewDelegate {
 
 extension UIViewController {
     
-    func promiseGoogleImageForSearchTerm(_ term: String) throws -> Promise<GoogleImage> {
+    func promiseGoogleImageForSearchTerm(_ term: String?) throws -> Promise<GoogleImage> {
         guard let selectViewController = UIStoryboard(name: "GoogleImages", bundle: Bundle.main).instantiateInitialViewController() as? GoogleImagesCollectionViewController else {
             throw ImageSelectError.cannotCreateSelectionView
         }
@@ -160,8 +211,9 @@ extension UIViewController {
         })
     }
     
-    func selectGoogleImage(_ query: String) -> Promise<UIImage> {
-        return try! self.promiseGoogleImageForSearchTerm(query).then{ (image) -> Promise<UIImage> in
+    func selectGoogleImage(_ query: String?) -> Promise<UIImage> {
+        return try! self.promiseGoogleImageForSearchTerm(query)
+        .then{ (image) -> Promise<UIImage> in
             print(image.imageUrl)
             return image.promiseImage()
         }

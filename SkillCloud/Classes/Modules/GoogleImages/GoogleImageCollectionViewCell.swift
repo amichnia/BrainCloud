@@ -15,7 +15,7 @@ class GoogleImageCollectionViewCell: UICollectionViewCell {
  
     // MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var checkmark: ASIACheckmarkView!
+    @IBOutlet weak var overlay: UIView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     // MARK: - Properties
@@ -23,7 +23,7 @@ class GoogleImageCollectionViewCell: UICollectionViewCell {
     
     override var isSelected : Bool {
         didSet {
-            self.checkmark.animate(checked: self.isSelected)
+            overlay.isHidden = !isSelected
         }
     }
     
@@ -31,10 +31,10 @@ class GoogleImageCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.checkmark.animate(checked: false)
-        self.imageView.image = nil
-        self.spinner.stopAnimating()
-        self.googleImage = nil
+        overlay.isHidden = true
+        imageView.image = nil
+        spinner.stopAnimating()
+        googleImage = nil
     }
     
     // MARK: - Configuration
@@ -55,10 +55,6 @@ class GoogleImageCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Actions
-    @IBAction func selectAction(_ sender: ASIACheckmarkView) {
-//        sender.animateTo(!sender.boolValue)
-//        self.selected = !self.selected
-    }
     
     
 }

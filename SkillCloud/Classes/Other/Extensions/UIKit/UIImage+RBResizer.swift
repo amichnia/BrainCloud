@@ -40,7 +40,9 @@ extension UIImage {
                                              provider: (maskImage?.dataProvider!)!, decode: nil, shouldInterpolate: true)
         
         let imageRef = (image.cgImage)?.masking(maskImageRef!)
-        return UIImage(cgImage: imageRef ?? maskImage!, scale: UIScreen.main.scale, orientation: image.imageOrientation)
+        let resultImage = UIImage(cgImage: imageRef ?? maskImage!, scale: image.scale, orientation: image.imageOrientation)
+        
+        return resultImage
     }
     
     func RBResizeImage(_ targetSize: CGSize) -> UIImage {

@@ -15,7 +15,8 @@ import PromiseKit
 enum ImagesAPI {
     
     static let baseUrl : String = "https://www.googleapis.com/customsearch/"
-    static let APIKey = "AIzaSyB4lSM9rrY6flfWtEhcEzgK1I5IVLSFvdQ"
+//    static let APIKey = "AIzaSyB4lSM9rrY6flfWtEhcEzgK1I5IVLSFvdQ"
+    static let APIKey = "AIzaSyAk5iFp1jM0-xp6adKdxBgIUkl5-a74Yac"
     static let CustomSearchEngineIdentifier = "014471330025575907481:wg54zrvhcla"
     static let apiVersion : String = "v1"
     

@@ -49,12 +49,18 @@ class EditSkillNode: SKSpriteNode {
         self.skill = skill
         
         if self.imageNode == nil {
+            let cropNode = SKCropNode()
+            self.addChild(cropNode)
             // Image node
             self.imageNode = SKSpriteNode(texture: nil, color: UIColor.clear, size: size.inset(dw: 8, dh: 8))
             self.imageNode?.zPosition = self.zPosition - 1
-            self.addChild(self.imageNode!)
+            cropNode.zPosition = self.zPosition - 1
+            cropNode.addChild(self.imageNode!)
             // Outline
             self.outline.zPosition = self.zPosition + 1
+            let mask = UIImage.circle(size: size.inset(dw: 8, dh: 8), color: UIColor.black)
+            let texture = SKTexture(image: mask)
+            cropNode.maskNode = SKSpriteNode(texture: texture, size: size.inset(dw: 8, dh: 8))
         }
         
         self.setSkillImage(skill?.image)
@@ -78,7 +84,8 @@ class EditSkillNode: SKSpriteNode {
     
     func setSkillImage(_ image: UIImage?) {
         let configured = image != nil
-        imageNode?.texture = SKTexture(image: image?.RBCircleImage() ?? UIImage(named: "ic-placeholder-circle")!)
+//        imageNode?.texture = SKTexture(image: image?.RBCircleImage() ?? UIImage(named: "ic-placeholder-circle")!)
+        imageNode?.texture = SKTexture(image: image ?? UIImage(named: "ic-placeholder-circle")!)
         imageNode?.alpha = configured ? 1.0 : 0.3
         configureOutline(configured)
     }
