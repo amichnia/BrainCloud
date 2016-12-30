@@ -49,3 +49,20 @@ extension CGPoint {
     }
     
 }
+
+// MARK: - CGPoint Extension
+extension CGPoint {
+    
+    func invertX() -> CGPoint {
+        return CGPoint(x: -self.x, y: self.y)
+    }
+    
+    func invertY() -> CGPoint {
+        return CGPoint(x: self.x, y: -self.y)
+    }
+    
+}
+
+func *(lhs: CGPoint, rhs: CGFloat) -> CGPoint {
+    return CGPoint(x: lhs.x + rhs, y: lhs.y * rhs)
+}

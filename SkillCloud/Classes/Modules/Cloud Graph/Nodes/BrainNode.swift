@@ -31,10 +31,10 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
     var cloudIdentifier = "cloud"
     
     // MARK: - Initialization
-    static func nodeWithNode(_ node: Node) -> BrainNode {
+    static func nodeWithNode(_ node: Node, palette: Palette = Palette.main) -> BrainNode {
         let size = CGSize(width: 2 * node.radius, height: 2 * node.radius)
-        let image = UIImage.circle(size: size, color: Node.color)
-        let texture = SKTexture(image: image) //SKTexture(imageNamed: "sprite-node")
+        let image = UIImage.circle(size: size, color: palette.color)
+        let texture = SKTexture(image: image)
         let brainNode = BrainNode(texture: texture, size: size)
         
         brainNode.name = "node"
@@ -198,11 +198,21 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
         }
     }
     
+    // MARK: - Colors Handling
+    func updateColor(palette: Palette = Palette.main) {
+        let size = CGSize(width: 2 * node.radius, height: 2 * node.radius)
+        let image = UIImage.circle(size: size, color: palette.color)
+        self.texture = SKTexture(image: image)
+        
+        self.lines.forEach { _,line in
+            line.strokeColor = palette.color
+        }
+    }
     
     // MARK: - Adding lines
-    func addLineToNode(_ node: BrainNode) {
+    func addLineToNode(_ node: BrainNode, palette: Palette = Palette.main) {
         let line = SKShapeNode(path: self.pathToPoint(node.position))
-        line.strokeColor = Node.color
+        line.strokeColor = palette.color
         line.zPosition = self.zPosition - 1
         line.lineWidth = 1.25 / Node.scaleFactor
         line.isAntialiased = true

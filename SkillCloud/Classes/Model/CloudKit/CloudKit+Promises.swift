@@ -337,7 +337,7 @@ extension CKAsset {
             throw CloudError.wrongAsset
         }
         
-        let fileUrl = generateFileURL("jpg")
+        let fileUrl = FileManager.generateFileURL("jpg")
         try imageData.write(to: fileUrl, options: .atomicWrite)
         let imageAsset = CKAsset(fileURL: fileUrl)
         

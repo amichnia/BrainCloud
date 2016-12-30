@@ -24,7 +24,7 @@ class SkillNode: SKNode, DTOModel {
     var pinnedNodes: Set<Int> = Set<Int>()
     
     // MARK: - Initialisation
-    static func nodeWithSkill(_ skill: Skill, attahcedTo graphNode: GraphNode) -> SkillNode {
+    static func nodeWithSkill(_ skill: Skill, palette: Palette = Palette.main, attahcedTo graphNode: GraphNode) -> SkillNode {
         // Whole skill node container
         let skillNode = SkillNode();
         skillNode.skill = skill
@@ -50,7 +50,7 @@ class SkillNode: SKNode, DTOModel {
         skillImageNode.zPosition = skillNode.zPosition + 2
         
         // Foreground bordered circle - placed on top of image to provide "antialiasing"
-        let outlineTexture = SKTexture(image: UIImage.outline(size: graphNode.size, width: 10, color: Node.color))
+        let outlineTexture = SKTexture(image: UIImage.outline(size: graphNode.size, width: 10, color: palette.color))
         let foregroundShapeNode = SKSpriteNode(texture: outlineTexture, size: graphNode.size)
         foregroundShapeNode.position = CGPoint.zero
         foregroundShapeNode.zPosition = skillNode.zPosition + 3

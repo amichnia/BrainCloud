@@ -1,11 +1,3 @@
-//
-//  MRProgress+Show.swift
-//  SkillCloud
-//
-//  Created by Andrzej Michnia on 09/07/16.
-//  Copyright © 2016 amichnia. All rights reserved.
-//
-
 import Foundation
 import MRProgress
 

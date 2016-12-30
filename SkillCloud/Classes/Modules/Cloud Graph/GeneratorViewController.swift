@@ -72,7 +72,6 @@ class GeneratorViewController: CloudViewController {
             scene.cloudEntity = self.cloudEntity
             
             self.scene = scene
-            Node.color = skView.tintColor
             skView.presentScene(scene)
         }
     }

@@ -11,7 +11,6 @@ import UIKit
 struct Node {
     
     // Static properties
-    static var color:       UIColor = UIColor.blue
     static var lastId:      Int     = 0
     static var factor:      CGFloat { return 1.75 / self.scaleFactor }
     static var rectPosition: CGPoint = CGPoint.zero
