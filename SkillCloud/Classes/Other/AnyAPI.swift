@@ -1,6 +1,5 @@
 //
 //  AnyAPI.swift
-//  SkillCloud
 //
 //  Created by Andrzej Michnia on 05/04/16.
 //  Copyright © 2016 amichnia. All rights reserved.
