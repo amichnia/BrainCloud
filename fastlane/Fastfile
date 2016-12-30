@@ -31,15 +31,17 @@ platform :ios do
     # This block is called, only if the executed lane was successful
 
     slack(
-      message: "[#{ENV["LANE_NAME"]}] Successfully deployed Skillcloud."
+      message: "[#{ENV["LANE_NAME"]}] Successfully deployed Skillcloud.",
+      use_webhook_configured_username_and_icon: true
     )
   end
 
   error do |lane, exception|
-    # slack(
-    #   message: exception.message,
-    #   success: false
-    # )
+    slack(
+      message: "[#{ENV["LANE_NAME"]}] Failure deploying Skillcloud #{exception.message}",
+      success: false,
+      use_webhook_configured_username_and_icon: true
+    )
   end
 end
 
