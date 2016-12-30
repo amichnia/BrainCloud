@@ -72,6 +72,7 @@ class SkillNode: SKNode, DTOModel {
         return skillNode
     }
     
+    // MARK: - Configuration
     func configureOutline(_ selected: Bool, palette: Palette = Palette.main) {
         guard let graphNode = self.graphNode else {
             return

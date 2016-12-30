@@ -130,7 +130,7 @@ class EditSkillNode: SKSpriteNode {
     }
     
     // MARK: - Helpers
-    func configureOutline(_ configured: Bool, palette: Palette = Palette.main) {
+    func configureOutline(_ configured: Bool, palette: Palette = Palette.default) {
         let image = UIImage.outline(size: outline.size, width: 5, color: configured ? palette.color : palette.light)
         let texture = SKTexture(image: image)
         outline.texture = texture

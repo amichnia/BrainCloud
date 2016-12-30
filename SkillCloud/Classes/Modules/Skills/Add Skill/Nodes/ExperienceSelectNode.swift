@@ -30,7 +30,7 @@ class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
     }()
     lazy var background: SKShapeNode = {
         let node = SKShapeNode(circleOfRadius: self.size.width / 2 - 1)
-        node.fillColor = Palette.main.light
+        node.fillColor = Palette.default.light
         node.zPosition = self.outline.zPosition - 0.5
         self.addChild(node)
         return node

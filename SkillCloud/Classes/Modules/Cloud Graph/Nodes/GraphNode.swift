@@ -128,6 +128,11 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
         scene.physicsWorld.remove(joint)
     }
     
+    // MARK: - Colors Handling
+    func updateColor(palette: Palette = Palette.main) {
+        skillNode?.configureOutline(selected, palette: palette)
+    }
+    
     // MARK: - Promises
     fileprivate func promiseAnimateToShown(_ show: Bool, time: TimeInterval = 0.5) -> Promise<GraphNode> {
         if self.xScale == self.yScale && self.xScale == 1.0 {

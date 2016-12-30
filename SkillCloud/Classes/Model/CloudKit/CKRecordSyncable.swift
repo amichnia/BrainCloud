@@ -40,6 +40,9 @@ extension CKRecordSyncable {
         .then { object -> T in
             return object
         }
+        .catch { error in
+            print("ERROR \(error)")
+        }
     }
     
     fileprivate func promiseInsertTo(_ database: CKDatabase, type: DatabaseType = .private) -> Promise<CKRecord> {

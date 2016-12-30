@@ -316,6 +316,17 @@ class CloudGraphScene: SKScene, DTOModel {
         }
     }
     
+    // MARK: - Colors Handling
+    func updateColor(palette: Palette = Palette.main) {
+        allNodes.values.forEach { node in
+            node.updateColor(palette: palette)
+        }
+        
+        skillNodes.forEach { node in
+            node.graphNode?.updateColor(palette: palette)
+        }
+    }
+    
 }
 
 // MARK: - SKPhysicsContactDelegate
@@ -382,7 +393,7 @@ extension CloudGraphScene {
         }
     }
     
-    // adds bas nodes building graph
+    // adds base nodes building graph
     func addNodes(_ nodes: [Node]) {
         if allNodesContainer == nil {
             allNodesContainer = SKNode()

@@ -83,6 +83,7 @@ class GeneratorViewController: CloudViewController {
     func configurePalette() {
         let size = CGSize(width: 30, height: 30)
         paletteButton.setImage(Palette.main.thumbnail(for: size), for: .normal)
+        scene?.updateColor(palette: Palette.main)
     }
     
     // MARK: - Recognizers Actions
@@ -221,7 +222,7 @@ class GeneratorViewController: CloudViewController {
     }
     
     @IBAction func paletteAction(_ sender: AnyObject) {
-        
+        performSegue(withIdentifier: ShowPaletteSelectionSegueIdentifier, sender: self)
     }
     
     // MARK: - Promises
@@ -377,6 +378,24 @@ class GeneratorViewController: CloudViewController {
         }
         
         switch identifier {
+        case ShowPaletteSelectionSegueIdentifier:
+            let paletteSelectionViewController = segue.destination as! PaletteSelectionViewController
+            paletteSelectionViewController.preferredContentSize = CGSize(width: 300, height: 300)
+            let popoverController = paletteSelectionViewController.popoverPresentationController
+            
+            _ = paletteSelectionViewController.promisePalette()
+            .then { palette -> Void in
+                Palette.main = palette
+                self.configurePalette()
+            }
+            
+            if popoverController != nil {
+                popoverController!.delegate = self
+                popoverController!.backgroundColor = UIColor.black
+            }
+            else {
+                print("no pope")
+            }
         case ShowExportViewSegueIdentifier:
             (segue.destination as? CloudExportViewController)?.image = self.cloudImage
         default:

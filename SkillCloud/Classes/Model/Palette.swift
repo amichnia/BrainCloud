@@ -20,6 +20,16 @@ struct Palette {
     // MARK: - Pallettes
     static var `default` = Palette()
     static var main = Palette.default
+    
+    // MARK: - Initializers
+    init(color: UIColor? = nil, complementary: UIColor? = nil, background: UIColor? = nil, light: UIColor? = nil, lineWidth: CGFloat? = nil){
+        self.color ?= color
+        self.complementary ?= complementary
+        self.background ?= background
+        self.light ?= light
+        self.lineWidth ?= lineWidth
+    }
+    
 }
 
 extension Palette {
@@ -27,5 +37,34 @@ extension Palette {
     func thumbnail(for size: CGSize) -> UIImage {
         return UIImage.circle(size: size, color: color, outline: complementary, width: 3)
     }
+    
+}
+
+extension Palette {
+    
+    static var all: [Palette] {
+        return [
+            Palette(color: UIColor(netHex: 0x349EC2), complementary: UIColor(netHex: 0xFF8000)),
+            Palette(color: UIColor(netHex: 0x000000), complementary: UIColor(netHex: 0xFF8000)),
+            Palette(color: UIColor(netHex: 0x333333), complementary: UIColor(netHex: 0xFF8000)),
+            Palette(color: UIColor(netHex: 0x800000), complementary: UIColor(netHex: 0xFF8000)),
+            
+            Palette(color: UIColor(netHex: 0x408000), complementary: UIColor(netHex: 0xFF8000)),
+            Palette(color: UIColor(netHex: 0x004080), complementary: UIColor(netHex: 0xFF8000)),
+            Palette(color: UIColor(netHex: 0x400080), complementary: UIColor(netHex: 0xFF8000)),
+            Palette(color: UIColor(netHex: 0xFF8000), complementary: UIColor(netHex: 0x408000)),
+            
+            Palette(color: UIColor(netHex: 0x0000FF), complementary: UIColor(netHex: 0xFF8000)),
+            Palette(color: UIColor(netHex: 0x00007F), complementary: UIColor(netHex: 0xFF8000)),
+//            Palette(color: UIColor(netHex: 0x349EC2), complementary: UIColor(netHex: 0xFF8000)),
+//            Palette(color: UIColor(netHex: 0x349EC2), complementary: UIColor(netHex: 0xFF8000)),
+//            
+//            Palette(color: UIColor(netHex: 0x349EC2), complementary: UIColor(netHex: 0xFF8000)),
+//            Palette(color: UIColor(netHex: 0x349EC2), complementary: UIColor(netHex: 0xFF8000)),
+//            Palette(color: UIColor(netHex: 0x349EC2), complementary: UIColor(netHex: 0xFF8000)),
+//            Palette(color: UIColor(netHex: 0x349EC2), complementary: UIColor(netHex: 0xFF8000)),
+        ]
+    }
+    
     
 }

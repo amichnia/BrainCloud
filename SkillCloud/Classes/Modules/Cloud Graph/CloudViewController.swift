@@ -16,8 +16,9 @@ let SkillLightCellIdentifier = "SkillLightCell"
 let SkillLighterCellIdentifier = "SkillLighterCell"
 
 let ShowExportViewSegueIdentifier = "ShowExportView"
+let ShowPaletteSelectionSegueIdentifier = "ShowPaletteSelection"
 
-class CloudViewController: UIViewController, SkillsProvider {
+class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentationControllerDelegate {
 
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
@@ -64,15 +65,8 @@ class CloudViewController: UIViewController, SkillsProvider {
     }
     
     // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let identifier = segue.identifier else {
-            return
-        }
-        
-        switch identifier {
-        default:
-            break
-        }
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
 }
@@ -149,7 +143,6 @@ extension CloudViewController: CloudSceneDelegate {
     }
     
 }
-
 
 enum SCError : Error {
     case createStreamError

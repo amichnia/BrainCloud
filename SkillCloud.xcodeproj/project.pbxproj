@@ -53,6 +53,7 @@
 		CCC6276E1E16705200694204 /* CloudSelectScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCC6276B1E16705200694204 /* CloudSelectScene.sks */; };
 		CCC6276F1E16705200694204 /* CloudSelectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6276C1E16705200694204 /* CloudSelectScene.swift */; };
 		CCC627711E16728300694204 /* ImageSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC627701E16728300694204 /* ImageSelectNode.swift */; };
+		CCC627741E16863600694204 /* PaletteSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC627731E16863600694204 /* PaletteSelectionViewController.swift */; };
 		FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B11CAEEF8000315468 /* CloudViewController.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
 		FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */; };
@@ -164,6 +165,7 @@
 		CCC6276B1E16705200694204 /* CloudSelectScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudSelectScene.sks; sourceTree = "<group>"; };
 		CCC6276C1E16705200694204 /* CloudSelectScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectScene.swift; sourceTree = "<group>"; };
 		CCC627701E16728300694204 /* ImageSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSelectNode.swift; sourceTree = "<group>"; };
+		CCC627731E16863600694204 /* PaletteSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteSelectionViewController.swift; sourceTree = "<group>"; };
 		FE0522B11CAEEF8000315468 /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 		CCC627721E16838600694204 /* Palette */ = {
 			isa = PBXGroup;
 			children = (
+				CCC627731E16863600694204 /* PaletteSelectionViewController.swift */,
 			);
 			name = Palette;
 			sourceTree = "<group>";
@@ -792,6 +795,7 @@
 				FEB32F9A1D5BA5ED00ABE5F8 /* InfoMenuTableViewCell.swift in Sources */,
 				FE766D361C9D80010079CA29 /* DataManager.swift in Sources */,
 				CCC627711E16728300694204 /* ImageSelectNode.swift in Sources */,
+				CCC627741E16863600694204 /* PaletteSelectionViewController.swift in Sources */,
 				C83BBA9B1D4632BC00431B42 /* ExploreViewController.swift in Sources */,
 				FEE50AA21D2494100024060D /* CKRecordConvertible.swift in Sources */,
 				C8B3C71F1D804530002D9364 /* GeneratorViewController.swift in Sources */,
