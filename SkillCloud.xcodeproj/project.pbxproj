@@ -52,6 +52,7 @@
 		CCC6276D1E16705200694204 /* CloudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6276A1E16705200694204 /* CloudNode.swift */; };
 		CCC6276E1E16705200694204 /* CloudSelectScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCC6276B1E16705200694204 /* CloudSelectScene.sks */; };
 		CCC6276F1E16705200694204 /* CloudSelectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6276C1E16705200694204 /* CloudSelectScene.swift */; };
+		CCC627711E16728300694204 /* ImageSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC627701E16728300694204 /* ImageSelectNode.swift */; };
 		FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B11CAEEF8000315468 /* CloudViewController.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
 		FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */; };
@@ -138,7 +139,7 @@
 		C8DF6D231CC5017A009CDBFA /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		C8DF6D251CC5033F009CDBFA /* AddScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScene.swift; sourceTree = "<group>"; };
 		C8DF6D271CC503A0009CDBFA /* AddScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AddScene.sks; sourceTree = "<group>"; };
-		C8F55CA51CFC264300208F88 /* SkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillNode.swift; sourceTree = "<group>"; };
+		C8F55CA51CFC264300208F88 /* SkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillNode.swift; path = "../../Skills/Add Skill/Nodes/SkillNode.swift"; sourceTree = "<group>"; };
 		C8F55CA71CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNodeEntity.swift; sourceTree = "<group>"; };
 		C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GraphCloudEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -162,6 +163,7 @@
 		CCC6276A1E16705200694204 /* CloudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudNode.swift; sourceTree = "<group>"; };
 		CCC6276B1E16705200694204 /* CloudSelectScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudSelectScene.sks; sourceTree = "<group>"; };
 		CCC6276C1E16705200694204 /* CloudSelectScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectScene.swift; sourceTree = "<group>"; };
+		CCC627701E16728300694204 /* ImageSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSelectNode.swift; sourceTree = "<group>"; };
 		FE0522B11CAEEF8000315468 /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
@@ -260,10 +262,10 @@
 		C8A4A03A1C981B6C004E055D = {
 			isa = PBXGroup;
 			children = (
+				FE31DAE71C9CA1240006D9EE /* SkillCloud */,
 				7493D99371A43512DBFF49BD /* Frameworks */,
 				535E56388DA760F8FAA213BA /* Pods */,
 				C8A4A0441C981B6C004E055D /* Products */,
-				FE31DAE71C9CA1240006D9EE /* SkillCloud */,
 			);
 			sourceTree = "<group>";
 		};
@@ -387,6 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				FE0522DF1CB0157800315468 /* BrainNode.swift */,
+				C8F55CA51CFC264300208F88 /* SkillNode.swift */,
 				C819FB9D1D8187F100B55C14 /* GraphNode.swift */,
 				C82E241F1D928DC6001D6A98 /* OptionsNode.swift */,
 			);
@@ -397,8 +400,8 @@
 			isa = PBXGroup;
 			children = (
 				C863048D1CC6417E002C068C /* EditSkillNode.swift */,
+				CCC627701E16728300694204 /* ImageSelectNode.swift */,
 				FE712CAE1D15CA0B00C954CA /* ExperienceSelectNode.swift */,
-				C8F55CA51CFC264300208F88 /* SkillNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -780,6 +783,7 @@
 				FE0522E21CB01BBF00315468 /* Node.swift in Sources */,
 				FEB32F9A1D5BA5ED00ABE5F8 /* InfoMenuTableViewCell.swift in Sources */,
 				FE766D361C9D80010079CA29 /* DataManager.swift in Sources */,
+				CCC627711E16728300694204 /* ImageSelectNode.swift in Sources */,
 				C83BBA9B1D4632BC00431B42 /* ExploreViewController.swift in Sources */,
 				FEE50AA21D2494100024060D /* CKRecordConvertible.swift in Sources */,
 				C8B3C71F1D804530002D9364 /* GeneratorViewController.swift in Sources */,

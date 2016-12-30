@@ -37,8 +37,14 @@ func -=(lhs: inout CGPoint, rhs: CGPoint) -> CGPoint {
 }
 
 // MARK: - CGSize Inset
-public func CGSizeInset(_ size: CGSize, _ dx: CGFloat, _ dy: CGFloat) -> CGSize {
-    return CGSize(width: size.width - dx, height: size.height - dy)
+public func CGSizeInset(_ size: CGSize, _ dw: CGFloat, _ dh: CGFloat) -> CGSize {
+    return CGSize(width: size.width - dw, height: size.height - dh)
+}
+
+extension CGSize {
+    func inset(dw: CGFloat, dh: CGFloat) -> CGSize {
+        return CGSizeInset(self, dw, dh)
+    }
 }
 
 // MARK: - CGPoint Extensions

@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class SkillNode: SKNode, DTOModel {
-    
+    // MARK: - Static Properties
     static var nodeId = 0
     
     // MARK: - Properties

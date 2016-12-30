@@ -10,10 +10,17 @@ import UIKit
 import SpriteKit
 
 class EditSkillNode: SKSpriteNode {
-    
     // MARK: - Properties
     var skill: Skill?
     var imageNode: SKSpriteNode?
+    lazy var outline: SKSpriteNode = {
+        return (self.childNode(withName: "Outline") as? SKSpriteNode) ?? SKSpriteNode()
+    }()
+    lazy var imageSelect: ImageSelectNode = {
+        let select = (self.childNode(withName: "AddImage") as? ImageSelectNode) ?? ImageSelectNode()
+        select.configure()
+        return select
+    }()
     
     var startFrame: CGRect = CGRect.zero
     var finalFrame: CGRect = CGRect.zero
@@ -26,6 +33,7 @@ class EditSkillNode: SKSpriteNode {
             self.yScale = newValue
         }
     }
+    
     fileprivate var savedStartScale: CGFloat = 1
     fileprivate var startScale: CGFloat {
         return self.size.width != 0 ? self.startFrame.width / (self.size.width / self.mainScale) : self.mainScale
@@ -33,15 +41,6 @@ class EditSkillNode: SKSpriteNode {
     fileprivate var finalScale: CGFloat {
         return self.size.width != 0 ? self.finalFrame.size.width / (self.size.width / self.mainScale) : self.mainScale
     }
-    
-    lazy var outline: SKSpriteNode = {
-        return (self.childNode(withName: "Outline") as? SKSpriteNode) ?? SKSpriteNode()
-    }()
-    lazy var imageSelect: ImageSelectNode = {
-        let select = (self.childNode(withName: "AddImage") as? ImageSelectNode) ?? ImageSelectNode()
-        select.configure()
-        return select
-    }()
     
     // MARK: - Lifecycle
     
@@ -51,7 +50,7 @@ class EditSkillNode: SKSpriteNode {
         
         if self.imageNode == nil {
             // Image node
-            self.imageNode = SKSpriteNode(texture: nil, color: UIColor.clear, size: CGSizeInset(self.size, 5, 5))
+            self.imageNode = SKSpriteNode(texture: nil, color: UIColor.clear, size: size.inset(dw: 8, dh: 8))
             self.imageNode?.zPosition = self.zPosition - 1
             self.addChild(self.imageNode!)
             // Outline
@@ -60,23 +59,28 @@ class EditSkillNode: SKSpriteNode {
         
         self.setSkillImage(skill?.image)
 
-        [Skill.Experience.beginner,
+        [
+         Skill.Experience.beginner,
          Skill.Experience.intermediate,
          Skill.Experience.professional,
-         Skill.Experience.expert].forEach { [weak self] in
+         Skill.Experience.expert
+        ]
+        .forEach { [weak self] in
             self?[$0]?.setSelected(false)
         }
         
         if let exp = skill?.experience {
-            self[exp]?.setSelected(true)
+            DispatchQueue.delay(0.3) {
+                self[exp]?.setSelected(true)
+            }
         }
     }
     
     func setSkillImage(_ image: UIImage?) {
-        let configured = (image != nil)
-        self.outline.isHidden = !configured
-        self.imageNode?.texture = SKTexture(image: image?.RBCircleImage() ?? UIImage(named: "ic-placeholder-circle")!)
-        self.imageNode?.alpha = configured ? 1.0 : 0.3
+        let configured = image != nil
+        imageNode?.texture = SKTexture(image: image?.RBCircleImage() ?? UIImage(named: "ic-placeholder-circle")!)
+        imageNode?.alpha = configured ? 1.0 : 0.3
+        configureOutline(configured)
     }
     
     func animateShow(_ duration: TimeInterval = 1, completion: (()->())? = nil){
@@ -126,6 +130,13 @@ class EditSkillNode: SKSpriteNode {
     }
     
     // MARK: - Helpers
+    func configureOutline(_ configured: Bool, palette: Palette = Palette.main) {
+        let image = UIImage.outline(size: outline.size, width: 5, color: configured ? palette.color : palette.light)
+        let texture = SKTexture(image: image)
+        outline.texture = texture
+    }
+    
+    // MARK: - Subscripts
     subscript(level: Skill.Experience) -> ExperienceSelectNode? {
         switch level {
         case .beginner:
@@ -143,65 +154,3 @@ class EditSkillNode: SKSpriteNode {
     
 }
 
-class ImageSelectNode: SKSpriteNode, InteractiveNode {
-    
-    lazy var outline: SKSpriteNode = {
-        return (self.childNode(withName: "Outline") as? SKSpriteNode) ?? SKSpriteNode()
-    }()
-    
-    fileprivate var savedScale: CGFloat = 1
-    var mainScale: CGFloat {
-        get {
-            return self.xScale
-        }
-        set {
-            self.xScale = newValue
-            self.yScale = newValue
-        }
-    }
-    
-    var targetPosition: CGPoint = CGPoint.zero
-    
-    func configure() {
-        let bgr = SKShapeNode(circleOfRadius: self.size.width / 2 - 1)
-        bgr.fillColor = self.color
-        bgr.zPosition = self.outline.zPosition - 2
-        self.addChild(bgr)
-    }
-    
-    func animateShow(_ duration: TimeInterval = 1) {
-        self.targetPosition = self.position
-        self.position = CGPoint.zero
-        
-        guard let parentSprite = self.parent as? SKSpriteNode else {
-            return
-        }
-        
-        self.mainScale = (parentSprite.size.width / parentSprite.xScale) / self.size.width
-        self.savedScale = self.mainScale
-        
-        self.isHidden =  false
-        self.outline.alpha = 0
-        
-        let scaleAction = SKAction.scaleTo(1, duration: duration, delay: 0.1, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-        let moveAction = SKAction.moveTo(self.targetPosition, duration: duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-        let outlineAlphaAction = SKAction.fadeIn(withDuration: duration * 0.7)
-        
-        self.run(scaleAction)
-        self.run(moveAction)
-        self.outline.run(outlineAlphaAction)
-    }
-    
-    func animateHide(_ duration: TimeInterval = 0.7) {
-        let scaleAction = SKAction.scaleTo(self.savedScale, duration: duration, delay: 0.01, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-        let moveAction = SKAction.moveTo(CGPoint.zero, duration: duration, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0)
-        let outlineAlphaAction = SKAction.fadeOut(withDuration: duration * 0.7)
-        
-        self.run(scaleAction, completion: { [weak self] in
-            self?.isHidden =  true
-        }) 
-        self.run(moveAction)
-        self.outline.run(outlineAlphaAction)
-    }
-    
-}

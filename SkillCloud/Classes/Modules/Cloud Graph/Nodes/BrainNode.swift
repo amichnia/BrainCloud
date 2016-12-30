@@ -242,4 +242,5 @@ class BrainNode: SKSpriteNode, DTOModel, TranslatableNode {
             self.lines[$0]?.path = self.pathToPoint($0.position)
         }
     }
+    
 }

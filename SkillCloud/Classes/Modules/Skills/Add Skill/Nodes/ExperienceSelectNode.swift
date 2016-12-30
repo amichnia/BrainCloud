@@ -12,7 +12,6 @@ class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
     
     // MARK: - Properties
     var experience : Skill.Experience = .beginner
-    var tintColor: UIColor = Palette.default.color
     
     var rocketPosition: CGPoint = CGPoint.zero
     var ray1position: CGPoint = CGPoint.zero
@@ -31,7 +30,7 @@ class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
     }()
     lazy var background: SKShapeNode = {
         let node = SKShapeNode(circleOfRadius: self.size.width / 2 - 1)
-        node.fillColor = self.tintColor
+        node.fillColor = Palette.main.light
         node.zPosition = self.outline.zPosition - 0.5
         self.addChild(node)
         return node
