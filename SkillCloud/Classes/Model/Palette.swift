@@ -22,3 +22,10 @@ struct Palette {
     static var main = Palette.default
 }
 
+extension Palette {
+    
+    func thumbnail(for size: CGSize) -> UIImage {
+        return UIImage.circle(size: size, color: color, outline: complementary, width: 3)
+    }
+    
+}

@@ -17,12 +17,6 @@ class GeneratorViewController: CloudViewController {
     // MARK: - Outlets
     @IBOutlet weak var skView: SKView!
     @IBOutlet weak var overlayImageView: UIImageView!
-    @IBOutlet weak var pinchGestureRecognizer: UIPinchGestureRecognizer!
-    @IBOutlet weak var tapGestureRecognizer: UITapGestureRecognizer!
-    @IBOutlet weak var selectTapGestureRecognizer: UITapGestureRecognizer!
-    @IBOutlet var selectPressGestureRecognizer: UILongPressGestureRecognizer!
-    @IBOutlet weak var panGestureRecognizer: UIPanGestureRecognizer!
-    @IBOutlet var scalePanGestureRecognizer: UIPanGestureRecognizer!
     
     @IBOutlet weak var nodeToolbarSection: UIView!
     @IBOutlet weak var removeButton: UIButton!
@@ -30,6 +24,15 @@ class GeneratorViewController: CloudViewController {
     @IBOutlet weak var scaleLabel: UILabel!
     @IBOutlet weak var scaleImage: UIImageView!
     @IBOutlet weak var scaleProgress: UISlider!
+    @IBOutlet weak var paletteButton: UIButton!
+    
+    // MARK: - Gesture recognizers
+    @IBOutlet weak var pinchGestureRecognizer: UIPinchGestureRecognizer!
+    @IBOutlet weak var tapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet weak var selectTapGestureRecognizer: UITapGestureRecognizer!
+    @IBOutlet var selectPressGestureRecognizer: UILongPressGestureRecognizer!
+    @IBOutlet weak var panGestureRecognizer: UIPanGestureRecognizer!
+    @IBOutlet var scalePanGestureRecognizer: UIPanGestureRecognizer!
     
     // MARK: - Properties
     var scene : CloudGraphScene!
@@ -54,6 +57,7 @@ class GeneratorViewController: CloudViewController {
         }
         
         skView.setNeedsLayout()
+        configurePalette()
     }
     
     override func viewDidLayoutSubviews() {
@@ -74,6 +78,11 @@ class GeneratorViewController: CloudViewController {
             self.scene = scene
             skView.presentScene(scene)
         }
+    }
+    
+    func configurePalette() {
+        let size = CGSize(width: 30, height: 30)
+        paletteButton.setImage(Palette.main.thumbnail(for: size), for: .normal)
     }
     
     // MARK: - Recognizers Actions
@@ -209,6 +218,10 @@ class GeneratorViewController: CloudViewController {
         .catch { error in
             DDLogError("Error: \(error)")
         }
+    }
+    
+    @IBAction func paletteAction(_ sender: AnyObject) {
+        
     }
     
     // MARK: - Promises

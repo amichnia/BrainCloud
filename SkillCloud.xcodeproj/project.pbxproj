@@ -187,7 +187,7 @@
 		FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PossiblePlaceView.xib; sourceTree = "<group>"; };
 		FE31DB081C9CA1240006D9EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillCloud.xcdatamodel; sourceTree = "<group>"; };
-		FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectionViewController.swift; sourceTree = "<group>"; };
+		FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudSelectionViewController.swift; path = "../Cloud Graph/CloudSelectionViewController.swift"; sourceTree = "<group>"; };
 		FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CloudKit+Promises.swift"; sourceTree = "<group>"; };
 		FE60C9E81D22C4EE001129C8 /* ImageAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
 		FE712CAE1D15CA0B00C954CA /* ExperienceSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceSelectNode.swift; sourceTree = "<group>"; };
@@ -348,11 +348,11 @@
 		CC942C661DAD19A6005FFB83 /* Cloud Graph */ = {
 			isa = PBXGroup;
 			children = (
+				CCC627721E16838600694204 /* Palette */,
 				CC9E884B1E1558AC00E550FC /* Nodes */,
 				FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */,
 				FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */,
 				FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */,
-				FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */,
 				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
 				C8B3C71E1D804530002D9364 /* GeneratorViewController.swift */,
 				CC7CEFA51DC0CB7A00D4057A /* TouchDownView.swift */,
@@ -409,11 +409,19 @@
 		CCC627691E16705200694204 /* Cloud Selection */ = {
 			isa = PBXGroup;
 			children = (
+				FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */,
 				CCC6276A1E16705200694204 /* CloudNode.swift */,
 				CCC6276B1E16705200694204 /* CloudSelectScene.sks */,
 				CCC6276C1E16705200694204 /* CloudSelectScene.swift */,
 			);
 			path = "Cloud Selection";
+			sourceTree = "<group>";
+		};
+		CCC627721E16838600694204 /* Palette */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Palette;
 			sourceTree = "<group>";
 		};
 		FE0522D91CAFE58400315468 /* SpriteKit */ = {

@@ -63,6 +63,18 @@ class CloudViewController: UIViewController, SkillsProvider {
         self.collectionView.alwaysBounceHorizontal = true
     }
     
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else {
+            return
+        }
+        
+        switch identifier {
+        default:
+            break
+        }
+    }
+    
 }
 
 // MARK: - UICollectionViewDataSource
