@@ -15,6 +15,7 @@ struct Palette {
     var background: UIColor     = UIColor(netHex: 0xF7F6F1)
     var light: UIColor          = UIColor(netHex: 0xecebe8)
 
+    var lineWidth: CGFloat      = 10
     
     // MARK: - Pallettes
     static var `default` = Palette()

@@ -17,7 +17,8 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
     // MARK: - Properties
     var selected: Bool = false {
         didSet {
-            self.areaNode?.isHidden = !self.selected
+            areaNode?.isHidden = !selected
+            skillNode?.configureOutline(selected)
         }
     }
     var originalPosition: CGPoint = CGPoint.zero

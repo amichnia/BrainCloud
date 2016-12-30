@@ -21,6 +21,7 @@ class SkillNode: SKNode, DTOModel {
     var skill: Skill!
     
     var graphNode: GraphNode? { return self.parent as? GraphNode }
+    var outline: SKSpriteNode?
     var pinnedNodes: Set<Int> = Set<Int>()
     
     // MARK: - Initialisation
@@ -50,10 +51,11 @@ class SkillNode: SKNode, DTOModel {
         skillImageNode.zPosition = skillNode.zPosition + 2
         
         // Foreground bordered circle - placed on top of image to provide "antialiasing"
-        let outlineTexture = SKTexture(image: UIImage.outline(size: graphNode.size, width: 10, color: palette.color))
+        let outlineTexture = SKTexture(image: UIImage.outline(size: graphNode.size, width: palette.lineWidth, color: palette.color))
         let foregroundShapeNode = SKSpriteNode(texture: outlineTexture, size: graphNode.size)
         foregroundShapeNode.position = CGPoint.zero
         foregroundShapeNode.zPosition = skillNode.zPosition + 3
+        skillNode.outline = foregroundShapeNode
         
         // Cropping skill image to circle shape
         let cropNode = SKCropNode()
@@ -68,6 +70,15 @@ class SkillNode: SKNode, DTOModel {
         graphNode.addChild(skillNode)
         
         return skillNode
+    }
+    
+    func configureOutline(_ selected: Bool, palette: Palette = Palette.main) {
+        guard let graphNode = self.graphNode else {
+            return
+        }
+        
+        let color = selected ? palette.complementary : palette.color
+        outline?.texture = SKTexture(image: UIImage.outline(size: graphNode.size, width: palette.lineWidth * graphNode.currentScale, color: color))
     }
     
 }
