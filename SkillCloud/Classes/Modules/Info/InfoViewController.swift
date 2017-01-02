@@ -33,26 +33,27 @@ class InfoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.tableView.visibleCells.forEach {
-            self.configureColorFor($0)
-        }
-        
         iRate.sharedInstance().delegate = self
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if self.firstLayout {
-            self.firstLayout = false
+        if firstLayout {
+            firstLayout = false
             
             let rowHeight: CGFloat = self.tableView.bounds.height / CGFloat(self.menu.count)
-            self.tableView.rowHeight = rowHeight
-            self.tableView.layoutIfNeeded()
+            tableView.rowHeight = rowHeight
+            
+            let height = CGFloat(self.menuOffset) * self.tableView.rowHeight
+            tableView.contentInset = UIEdgeInsets(top: -height, left: 0, bottom: -height, right: 0)
+            
+            tableView.setNeedsLayout()
+            tableView.layoutIfNeeded()
+            
+            tableView.visibleCells.forEach(configureColorFor)
+            tableView.reloadData()
         }
-        
-        let height = CGFloat(self.menuOffset) * self.tableView.rowHeight
-        self.tableView.contentInset = UIEdgeInsets(top: -height, left: 0, bottom: -height, right: 0)
     }
     
     // MARK: - Actions
@@ -96,15 +97,13 @@ class InfoViewController: UIViewController {
         let botColor = self.colors[0].1
         
         cell.backgroundColor = UIColor.interpolate(topColor, B: botColor, t: factor)
-        
-        let selectedTopColor = self.colors[2].0
-        let selectedBotColor = self.colors[2].1
-        
-        cell.selectedBackgroundView?.backgroundColor = UIColor.interpolate(selectedTopColor, B: selectedBotColor, t: factor)
+        cell.selectedBackgroundView?.backgroundColor = UIColor.interpolate(topColor, B: botColor, t: factor)
+//        let selectedTopColor = self.colors[2].0
+//        let selectedBotColor = self.colors[2].1
+//        
+//        cell.selectedBackgroundView?.backgroundColor = UIColor.interpolate(selectedTopColor, B: selectedBotColor, t: factor)
     }
     
-    // MARK: - Navigation
-
 }
 
 // MARK: - UITableViewDataSource
@@ -170,9 +169,7 @@ extension InfoViewController: UITableViewDelegate {
 extension InfoViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.tableView.visibleCells.forEach {
-            self.configureColorFor($0)
-        }
+        self.tableView.visibleCells.forEach(configureColorFor)
     }
     
 }

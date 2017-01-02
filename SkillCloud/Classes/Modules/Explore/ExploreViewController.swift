@@ -20,6 +20,8 @@ class ExploreViewController: UIViewController {
     var skillsResult: CKPageableResult = CKPageableResult(type: Skill.self, skillsPredicate: SkillsPredicate.accepted, database: .public)
     var updating: Bool = false
     var preparedScene : AddScene?
+    let menuOffset = 12
+    var firstLayout = true
     
     var ownedSkills: [Skill] = []
     
@@ -31,10 +33,7 @@ class ExploreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.estimatedRowHeight = 76
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedSectionHeaderHeight = 40
-        self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = 82
         
         (self.tableView as UIScrollView).delegate = self
         
@@ -53,6 +52,23 @@ class ExploreViewController: UIViewController {
         if let scene = AddScene(fileNamed:"AddScene") {
             self.preparedScene = scene
             scene.size = self.view.bounds.size
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if firstLayout {
+            firstLayout = false
+            
+            let height = CGFloat(self.menuOffset) * self.tableView.rowHeight
+            tableView.contentInset = UIEdgeInsets(top: -height, left: 0, bottom: -height, right: 0)
+            
+            tableView.setNeedsLayout()
+            tableView.layoutIfNeeded()
+            
+            tableView.reloadData()
+            tableView.visibleCells.forEach(configureColorFor)
         }
     }
     
@@ -82,6 +98,9 @@ class ExploreViewController: UIViewController {
         .then { [weak self] _ -> Void in
             print("LOADED more!")
             self?.tableView.reloadData()
+            if let strongSelf = self {
+                self?.tableView.visibleCells.forEach(strongSelf.configureColorFor)
+            }
         }
         .always { [weak self] in
             print("Update finished")
@@ -97,7 +116,15 @@ class ExploreViewController: UIViewController {
         }
         .then(on: DispatchQueue.main) { skills -> Void in
             self.ownedSkills = skills
+            
+            let height = CGFloat(self.menuOffset) * self.tableView.rowHeight
+            self.tableView.contentInset = UIEdgeInsets(top: -height, left: 0, bottom: -height, right: 0)
+            
+            self.tableView.setNeedsLayout()
+            self.tableView.layoutIfNeeded()
+            
             self.tableView.reloadData()
+            self.tableView.visibleCells.forEach(self.configureColorFor)
         }
         .catch { error in
             print("Error: \(error)")
@@ -115,8 +142,32 @@ class ExploreViewController: UIViewController {
         return self.view.convert(rect, to: self.view.window!)
     }
     
+    // MARK: - Table cells coloring
+    let colors = [
+        (UIColor(netHex: 0x0b1518), UIColor(netHex: 0x25444d)),
+        (UIColor(netHex: 0x122125), UIColor(netHex: 0x2b505a)),
+        (UIColor(netHex: 0x182d32), UIColor(netHex: 0x315c68))
+    ]
+    
+    func configureColorFor(_ cell: UITableViewCell) {
+        var offset = cell.frame.origin
+        offset.y -= self.tableView.contentOffset.y
+        offset.y = max(0, min(self.tableView.bounds.height, offset.y))
+        
+        let factor = offset.y / self.tableView.bounds.height;
+        
+        let topColor = self.colors[0].0
+        let botColor = self.colors[0].1
+        
+        cell.backgroundColor = UIColor.interpolate(topColor, B: botColor, t: factor)
+        cell.selectedBackgroundView?.backgroundColor = UIColor.interpolate(topColor, B: botColor, t: factor)
+    }
+    
+    
     // MARK: - Promises
     func promiseShowSkillWith(_ rect: CGRect?, withSkill skill: Skill) throws {
+        
+        
         firstly {
             try AddViewController.promiseSelectSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
         }
@@ -171,14 +222,25 @@ extension ExploreViewController: UISearchBarDelegate {
 extension ExploreViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.skillsResult.results.count
+        switch section {
+        case 1:
+            return self.skillsResult.results.count
+        default:
+            return self.menuOffset
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard indexPath.section == 1 else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
+            configureColorFor(cell)
+            return cell
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "SkillCell")! as! SkillTableViewCell
         
         let skill = self.skillsResult.results[indexPath.row]
@@ -186,6 +248,7 @@ extension ExploreViewController: UITableViewDataSource {
         
         cell.configureForSkill(skill, owned: owned)
         cell.indexPath = indexPath
+        configureColorFor(cell)
         
         return cell
     }
@@ -194,13 +257,12 @@ extension ExploreViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension ExploreViewController: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        self.searchCell.searchBar.delegate = self
-        return self.searchCell.contentView
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section == 1 else {
+            return
+        }
+        
         let skill = self.skillsResult.results[indexPath.row]
 
         if let cell = self.tableView.visibleCells.filter({
@@ -218,6 +280,8 @@ extension ExploreViewController: UITableViewDelegate {
 extension ExploreViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.tableView.visibleCells.forEach(configureColorFor)
+        
         // TODO: Implement pagination
         let bound = self.tableView.contentSize.height - 200
         let offset = self.tableView.contentOffset.y + self.tableView.bounds.height
@@ -232,6 +296,9 @@ extension ExploreViewController: UIScrollViewDelegate {
             .then { [weak self] _ -> Void in
                 print("LOADED more!")
                 self?.tableView.reloadData()
+                if let strongSelf = self {
+                    self?.tableView.visibleCells.forEach(strongSelf.configureColorFor)
+                }
             }
             .always { [weak self] in
                 print("Update finished")

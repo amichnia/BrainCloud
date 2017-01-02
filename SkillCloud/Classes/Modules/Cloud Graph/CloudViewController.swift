@@ -43,6 +43,11 @@ class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentati
         .then { entities -> Void in
             self.skills = entities.mapExisting{ $0.skill }
             self.collectionView.reloadData()
+            
+            guard entities.count > 0 else {
+                return
+            }
+            
             let initialIndex = IndexPath(item: 0, section: 1)
             self.collectionView.selectItem(at: initialIndex, animated: false, scrollPosition: .centeredHorizontally)
             self.collectionView(self.collectionView, didSelectItemAt: initialIndex)
