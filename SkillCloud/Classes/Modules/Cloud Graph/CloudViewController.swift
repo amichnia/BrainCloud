@@ -33,6 +33,7 @@ class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentati
     
     var skillToAdd : Skill?
     var selectedRow: Int = 0
+    var collectionConfigured = false
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -54,7 +55,7 @@ class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentati
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let height = ceil(self.collectionView.bounds.height/2)
+        let height = floor(self.collectionView.bounds.height/2)
         (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = CGSize(width: height, height: height)
         
         let sectionWidth = CGFloat((self.skillsOffset + self.skillsOffset % 4) / 2) * height
@@ -62,6 +63,14 @@ class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentati
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: -sectionWidth, bottom: 0, right: -sectionWidth)
         self.collectionView.bounces = true
         self.collectionView.alwaysBounceHorizontal = true
+        
+        if !collectionConfigured {
+            (self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: height, height: height)
+            collectionConfigured = true
+            collectionView.setNeedsLayout()
+            collectionView.layoutIfNeeded()
+            (self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.invalidateLayout()
+        }
     }
     
     // MARK: - Navigation
