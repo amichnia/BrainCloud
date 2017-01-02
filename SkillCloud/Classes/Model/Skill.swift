@@ -28,6 +28,9 @@ class Skill {
     var modified: Date?
     var recordChangeTag: String?
     
+    var shouldRefetchImage: Bool = false
+    var recordID: CKRecordID?
+    
     // Prepared images
     lazy var circleImage: UIImage? = {
         return self.thumbnail.RBCircleImage()
@@ -87,9 +90,50 @@ extension Skill: CKRecordMappable {
         
         self.offline = false
         
-        self.image = record.imageForKey(CKKey.Image) ?? self.image ?? thumbnail
+        let img = record.imageForKey(CKKey.Image)
+        if img == nil && self.image == nil {
+            shouldRefetchImage = true
+            recordID = record.recordID
+        }
+        
+        self.image = img ?? self.image ?? thumbnail
         
         return self
+    }
+    
+}
+
+extension Skill {
+    
+    func fetchImage(from databaseType: DatabaseType) -> Promise<Void> {
+        let container = CKContainer.default()
+        let database = databaseType == .public ? container.publicCloudDatabase : container.privateCloudDatabase
+        
+        guard self.shouldRefetchImage else {
+            return Promise<Void>(value: ())
+        }
+        
+        return Promise<Void>(resolvers: { (success, failure) in
+            guard let recordID = self.recordID else {
+                failure(CommonError.notEnoughData)
+                return
+            }
+            
+            database.fetch(withRecordID: recordID, completionHandler: { (record, error) in
+                if let _ = record, let image = record?.imageForKey(CKKey.Image) {
+                    self.image = image
+                    self.shouldRefetchImage = false
+                    success()
+                }
+                else if let error = error {
+                    failure(error)
+                }
+                else {
+                    failure(CommonError.operationFailed)
+                }
+            })
+            
+        })
     }
     
 }

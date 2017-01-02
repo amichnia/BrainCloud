@@ -167,9 +167,18 @@ class ExploreViewController: UIViewController {
     // MARK: - Promises
     func promiseShowSkillWith(_ rect: CGRect?, withSkill skill: Skill) throws {
         
-        
+        MRProgressOverlayView.show()
         firstly {
-            try AddViewController.promiseSelectSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
+            skill.fetchImage(from: .public)
+        }
+        .then { Void -> Promise<Void> in
+            return MRProgressOverlayView.promiseHide()
+        }
+        .always {
+            MRProgressOverlayView.hide()
+        }
+        .then { Void -> Promise<Skill> in
+            return try AddViewController.promiseSelectSkillWith(self, rect: rect, skill: skill, preparedScene: self.preparedScene)
         }
         .then(execute: SkillEntity.promiseToUpdate)                  // Save change to local storage
         .then { [weak self] _ -> Void in
