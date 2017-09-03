@@ -34,10 +34,11 @@ class GoogleImagesCollectionViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        confirmActionButton.title = NSLocalizedString("Cancel", comment: "Cancel")
+
+        confirmActionButton.title = R.string.localize.imagesCancelButton()
         searchTextField.text = searchTerm
-        
+        searchButon.setTitle(R.string.localize.imagesSearchButton(), for: .normal)
+
         fetchNextPage()
     }
     
@@ -119,7 +120,7 @@ class GoogleImagesCollectionViewController: UIViewController {
         images = []
         selectedIndexPath = nil
         selectedImage = nil
-        confirmActionButton.title = NSLocalizedString("Cancel", comment: "Cancel")
+        confirmActionButton.title = R.string.localize.imagesCancelButton()
         collectionView.reloadData()
         
         fetchNextPage()
@@ -162,14 +163,14 @@ extension GoogleImagesCollectionViewController : UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         selectedIndexPath = nil
         selectedImage = nil
-        confirmActionButton.title = NSLocalizedString("Cancel", comment: "Cancel")
+        confirmActionButton.title = R.string.localize.imagesCancelButton()
         collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         selectedImage = self.images[indexPath.row]
-        confirmActionButton.title = NSLocalizedString("OK", comment: "OK")
+        confirmActionButton.title = R.string.localize.imagesConfirmButton()
         collectionView.reloadData()
     }
     
@@ -194,7 +195,6 @@ extension GoogleImagesCollectionViewController : UIScrollViewDelegate {
 }
 
 extension UIViewController {
-    
     func promiseGoogleImageForSearchTerm(_ term: String?) throws -> Promise<GoogleImage> {
         guard let selectViewController = UIStoryboard(name: "GoogleImages", bundle: Bundle.main).instantiateInitialViewController() as? GoogleImagesCollectionViewController else {
             throw ImageSelectError.cannotCreateSelectionView
@@ -213,8 +213,7 @@ extension UIViewController {
         return try! self.promiseGoogleImageForSearchTerm(query)
         .then{ (image) -> Promise<UIImage> in
             print(image.imageUrl)
-            return image.promiseImage()
+            return image.promiseImage(withBackground: .white)
         }
     }
-    
 }

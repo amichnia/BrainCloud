@@ -9,7 +9,6 @@
 import UIKit
 
 class InfoMenuTableViewCell: UITableViewCell {
-
     // MARK: - Outlets
     @IBOutlet weak var menuIconImage: UIImageView!
     @IBOutlet weak var itemTitle: UILabel!
@@ -28,11 +27,9 @@ class InfoMenuTableViewCell: UITableViewCell {
         self.itemTitle.text = item.title()
         self.itemSubtitle.text = item.subtitle()
     }
-    
 }
 
 enum InfoMenuItem {
-    
     case help
     case about
     case licenses
@@ -42,46 +39,45 @@ enum InfoMenuItem {
     func title() -> String {
         switch self {
         case .help:
-            return NSLocalizedString("Help", comment: "Help")
+            return R.string.localize.infoOptionHelpTitle()
         case .about:
-            return NSLocalizedString("About", comment: "About")
+            return R.string.localize.infoOptionAboutTitle()
         case .licenses:
-            return NSLocalizedString("Licenses", comment: "Licenses")
+            return R.string.localize.infoOptionLicensesTitle()
         case .feedback:
-            return NSLocalizedString("Feedback", comment: "Feedback")
+            return R.string.localize.infoOptionFeedbackTitle()
         case .rate:
-            return NSLocalizedString("Rate", comment: "Rate")
+            return R.string.localize.infoOptionRateTitle()
         }
     }
     
     func subtitle() -> String {
         switch self {
         case .help:
-            return NSLocalizedString("How to use SkillCLoud application", comment: "How to use SkillCLoud application")
+            return R.string.localize.infoOptionHelpSubtitle()
         case .about:
-            return NSLocalizedString("About SkillCloud and GirAppe Studio", comment: "About SkillCloud and GirAppe Studio")
+            return R.string.localize.infoOptionAboutSubtitle()
         case .licenses:
-            return NSLocalizedString("Licenses and 3rd party libraries", comment: "Licenses and 3rd party libraries")
+            return R.string.localize.infoOptionLicensesSubtitle()
         case .feedback:
-            return NSLocalizedString("Send us your feedback", comment: "Send us your feedback")
+            return R.string.localize.infoOptionFeedbackSubtitle()
         case .rate:
-            return NSLocalizedString("Rate us on AppStore", comment: "Rate us on AppStore")
+            return R.string.localize.infoOptionRateSubtitle()
         }
     }
     
     func icon() -> UIImage? {
         switch self {
         case .help:
-            return UIImage(named: "icon-help")
+            return R.image.iconHelp()
         case .about:
-            return UIImage(named: "icon-info")
+            return R.image.iconInfo()
         case .licenses:
-            return UIImage(named: "icon-licenses")
+            return R.image.iconLicenses()
         case .feedback:
-            return UIImage(named: "icon-feedback")
+            return R.image.iconFeedback()
         case .rate(let rated):
-            return UIImage(named: rated ? "icon-rated" : "icon-rate")
+            return rated ? R.image.iconRated() : R.image.iconRate()
         }
     }
-    
 }

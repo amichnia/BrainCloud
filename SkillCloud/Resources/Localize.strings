@@ -16,10 +16,26 @@
 
 // Skills
 "skills.navigation.title" = "Skills";
-"skill.name.placeholder" = "enter skill name";
-"skill.option.changeImage" = "Change image";
-"skill.option.removeSkill" = "Remove skill";
-"skill.option.cancel" = "Cancel";
+
+"skill.add.option.changeImage" = "Change image";
+"skill.add.option.removeSkill" = "Remove skill";
+"skill.add.option.cancel" = "Cancel";
+
+"skill.add.new.item" = "Add new";
+"skill.add.name.placeholder" = "enter skill name";
+"skill.add.image.option.takePhoto" = "Take photo";
+"skill.add.image.option.photoLibrary" = "Photo library";
+"skill.add.image.option.googleImages" = "Google images";
+"skill.add.image.option.cancel" = "Cancel";
+
+"skill.add.snackBar.message" = "New skill added.";
+"skill.update.snackBar.message" = "Skill updated.";
+"skill.delete.snackBar.message" = "Skill deleted!";
+
+// Google Images
+"images.search.button" = "Search";
+"images.cancel.button" = "Cancel";
+"images.confirm.button" = "Confirm";
 
 // Explore
 "explore.navigation.title" = "Explore";
@@ -42,3 +58,15 @@
 
 "about.appSection.title" = "SkillCloud";
 "about.appSection.subtitle" = "About application";
+
+// Feedback
+"feedback.sent.success.snackBar.message" = "Thank you for sending feedback.";
+"feedback.sent.failure.snackBar.message" = "Sending failed. Please verify you email settings.";
+
+// Genreic
+"alert.ok" = "OK";
+"alert.cancel" = "Cancel";
+
+// Errors
+"error.unknown" = "Unknown error occured!";
+"error.serialization" = "Serialization error";

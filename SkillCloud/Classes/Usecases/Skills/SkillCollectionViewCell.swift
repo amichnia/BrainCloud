@@ -9,7 +9,6 @@
 import UIKit
 
 class SkillCollectionViewCell: UICollectionViewCell {
-    
     // MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var selectedView: UIImageView?
@@ -37,8 +36,8 @@ class SkillCollectionViewCell: UICollectionViewCell {
     // MARK: - Configuration
     func configureAsAddCell(_ indexPath: IndexPath){
         self.indexPath = indexPath
-        self.imageView.image = UIImage(named: "ic-plus")
-        self.nameLabel.text = NSLocalizedString("Add new", comment: "Add new")
+        self.imageView.image = R.image.icPlus()
+        self.nameLabel.text = R.string.localize.skillAddNewItem()
     }
     
     func configureWithSkill(_ skill: Skill, atIndexPath indexPath: IndexPath) {

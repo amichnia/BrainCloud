@@ -143,16 +143,16 @@ class GeneratorViewController: CloudViewController {
         typealias T = () -> ()
 
         self.promiseSelection(T.self, cancellable: true, options: [
-                    (NSLocalizedString("Delete", comment: "Delete"), .destructive, {
-                        return self.promiseDeleteNode()
-                    })
-                ])
-                .then { closure -> Void in
-                    closure()
-                }
-                .catch { error in
-                    DDLogError("Error: \(error)")
-                }
+            (R.string.localize.cloudGraphSkillOptionDelete(), .destructive, {
+                return self.promiseDeleteNode()
+            })
+        ])
+        .then { closure -> Void in
+            closure()
+        }
+        .catch { error in
+            DDLogError("Error: \(error)")
+        }
     }
 
     @IBAction func saveCloud(_ sender: AnyObject) {
@@ -164,26 +164,26 @@ class GeneratorViewController: CloudViewController {
         firstly {
             self.promiseCaptureThumbnail()
         }
-                .then { thumb -> Promise<GraphCloudEntity> in
-                    self.scene.thumbnail = thumb
+        .then { thumb -> Promise<GraphCloudEntity> in
+            self.scene.thumbnail = thumb
 
-                    // Decide
-                    if let _ = self.cloudEntity {
-                        return DataManager.promiseUpdateEntity(GraphCloudEntity.self, model: self.scene)
-                    } else {
-                        return DataManager.promiseEntity(GraphCloudEntity.self, model: self.scene)
-                    }
-                }
-                .then { cloudEntity -> Void in
-                    self.cloudEntity = cloudEntity
-                    DDLogInfo("Saved Cloud:\n\(cloudEntity)")
-                }
-                .always {
-                    MRProgressOverlayView.hide()
-                }
-                .catch { error in
-                    DDLogError("Error saving cloud: \(error)")
-                }
+            // Decide
+            if let _ = self.cloudEntity {
+                return DataManager.promiseUpdateEntity(GraphCloudEntity.self, model: self.scene)
+            } else {
+                return DataManager.promiseEntity(GraphCloudEntity.self, model: self.scene)
+            }
+        }
+        .then { cloudEntity -> Void in
+            self.cloudEntity = cloudEntity
+            DDLogInfo("Saved Cloud:\n\(cloudEntity)")
+        }
+        .always {
+            MRProgressOverlayView.hide()
+        }
+        .catch { error in
+            DDLogError("Error saving cloud: \(error)")
+        }
     }
 
     @IBAction func settingsAction(_ sender: AnyObject) {
@@ -192,10 +192,10 @@ class GeneratorViewController: CloudViewController {
         typealias T = () -> ()
 
         self.promiseSelection(T.self, cancellable: true, options: [
-            (NSLocalizedString("Export", comment: "Export"), .default, {
+            (R.string.localize.cloudGraphOptionExport(), .default, {
                 return self.promiseExportCloud()
             }),
-            (NSLocalizedString("Delete", comment: "Delete"), .destructive, {
+            (R.string.localize.cloudGraphOptionDelete(), .destructive, {
                 return self.promiseDeleteCloud()
             })
         ])
@@ -263,9 +263,9 @@ class GeneratorViewController: CloudViewController {
         return firstly {
             DataManager.promiseDeleteEntity(GraphCloudEntity.self, model: self.scene)
         }
-                .then { _ -> (() -> ()) in
-                    return { self.performSegue(withIdentifier: "UnwindToSelection", sender: nil) }
-                }
+        .then { _ -> (() -> ()) in
+            return { self.performSegue(withIdentifier: "UnwindToSelection", sender: nil) }
+        }
     }
 
     func promiseCaptureThumbnail() -> Promise<UIImage> {
@@ -381,10 +381,10 @@ class GeneratorViewController: CloudViewController {
             let popoverController = paletteSelectionViewController.popoverPresentationController
 
             _ = paletteSelectionViewController.promisePalette()
-                    .then { palette -> Void in
-                        Palette.main = palette
-                        self.configurePalette()
-                    }
+            .then { palette -> Void in
+                Palette.main = palette
+                self.configurePalette()
+            }
 
             if popoverController != nil {
                 popoverController!.delegate = self

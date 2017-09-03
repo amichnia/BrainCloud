@@ -67,6 +67,7 @@
 		CC6E68951F5C24D0006750BF /* SkillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68721F5C24D0006750BF /* SkillCollectionViewCell.swift */; };
 		CC6E68961F5C24D0006750BF /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68731F5C24D0006750BF /* SkillsViewController.swift */; };
 		CC6E68981F5C2547006750BF /* Localize.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC6E68971F5C2547006750BF /* Localize.strings */; };
+		CC6E689B1F5C36F7006750BF /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E689A1F5C36F7006750BF /* R.generated.swift */; };
 		CC8C216C1E15709A001E466C /* UIImage+ShapeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */; };
 		CC9E4D411E0C480900ABB5A7 /* SpriteKit+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */; };
 		CCFFF6D51F5C0879004CD3D2 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFFF6D41F5C0879004CD3D2 /* TransparentNavigationBar.swift */; };
@@ -80,8 +81,6 @@
 		FE31DB0F1C9CA1240006D9EE /* FileManager+CacheFileUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF11C9CA1240006D9EE /* FileManager+CacheFileUrl.swift */; };
 		FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB001C9CA1240006D9EE /* LaunchScreen.storyboard */; };
 		FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB021C9CA1240006D9EE /* Main.storyboard */; };
-		FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */; };
-		FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */; };
 		FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE31DB1E1C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld */; };
 		FE60C9E71D22C34C001129C8 /* CloudKit+Promises.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */; };
 		FE60C9E91D22C4EE001129C8 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60C9E81D22C4EE001129C8 /* ImageAsset.swift */; };
@@ -183,6 +182,7 @@
 		CC6E68721F5C24D0006750BF /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC6E68731F5C24D0006750BF /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
 		CC6E68971F5C2547006750BF /* Localize.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localize.strings; sourceTree = "<group>"; };
+		CC6E689A1F5C36F7006750BF /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ShapeImage.swift"; sourceTree = "<group>"; };
 		CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SpriteKit+Spring.swift"; sourceTree = "<group>"; };
 		CCFFF6D41F5C0879004CD3D2 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentNavigationBar.swift; sourceTree = "<group>"; };
@@ -197,8 +197,6 @@
 		FE31DAF11C9CA1240006D9EE /* FileManager+CacheFileUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+CacheFileUrl.swift"; sourceTree = "<group>"; };
 		FE31DB011C9CA1240006D9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE31DB031C9CA1240006D9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OccupiedPlaceView.xib; sourceTree = "<group>"; };
-		FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PossiblePlaceView.xib; sourceTree = "<group>"; };
 		FE31DB081C9CA1240006D9EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillCloud.xcdatamodel; sourceTree = "<group>"; };
 		FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CloudKit+Promises.swift"; sourceTree = "<group>"; };
@@ -533,9 +531,9 @@
 				C83BF8411D5C751200FDA60C /* Markdown */,
 				FE0522E41CB02D6600315468 /* Patterns */,
 				FE31DAFF1C9CA1240006D9EE /* Storyboards */,
-				FE31DB041C9CA1240006D9EE /* XIBs */,
 				FEB88E731CB6FD8500EED249 /* Assets.xcassets */,
 				CC6E68971F5C2547006750BF /* Localize.strings */,
+				CC6E689A1F5C36F7006750BF /* R.generated.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -548,15 +546,6 @@
 				FE31DB021C9CA1240006D9EE /* Main.storyboard */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		FE31DB041C9CA1240006D9EE /* XIBs */ = {
-			isa = PBXGroup;
-			children = (
-				FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */,
-				FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */,
-			);
-			path = XIBs;
 			sourceTree = "<group>";
 		};
 		FE31DB071C9CA1240006D9EE /* Supporting Files */ = {
@@ -644,6 +633,7 @@
 			buildConfigurationList = C8A4A0581C981B6C004E055D /* Build configuration list for PBXNativeTarget "SkillCloud" */;
 			buildPhases = (
 				1A3825BC2F3E47B9A22B961D /* [CP] Check Pods Manifest.lock */,
+				CC6E68991F5C3557006750BF /* [R] Generate */,
 				C8A4A03F1C981B6C004E055D /* Sources */,
 				C8A4A0401C981B6C004E055D /* Frameworks */,
 				C8A4A0411C981B6C004E055D /* Resources */,
@@ -712,13 +702,11 @@
 				FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */,
 				C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */,
 				FEB31DA51D31934800E7C203 /* Lato-Light.ttf in Resources */,
-				FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */,
 				FE7C61101D32A4CE006C987C /* launch-screen-image.jpg in Resources */,
 				CC6E68751F5C24D0006750BF /* CloudGraphScene.sks in Resources */,
 				FE0522E61CB02D6600315468 /* brain_graph_v0.1.json in Resources */,
 				CC6E68801F5C24D0006750BF /* CloudSelectScene.sks in Resources */,
 				FE7C610B1D32A16F006C987C /* Lato-Regular.ttf in Resources */,
-				FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */,
 				FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */,
 				FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */,
 				FE7C61121D32A4CE006C987C /* launch-screen-image@3x.jpg in Resources */,
@@ -790,6 +778,20 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
+		CC6E68991F5C3557006750BF /* [R] Generate */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[R] Generate";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT/SkillCloud/Resources\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -860,6 +862,7 @@
 				C8F55CAF1CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift in Sources */,
 				FEB31DA21D31207D00E7C203 /* MRProgress+Show.swift in Sources */,
 				CC2D3E051E1669FB00047519 /* SpriteKit+InteractiveNodes.swift in Sources */,
+				CC6E689B1F5C36F7006750BF /* R.generated.swift in Sources */,
 				CC6E68921F5C24D0006750BF /* ExperienceSelectNode.swift in Sources */,
 				CC2D3E101E166BBA00047519 /* UIViewController+SnackBar.swift in Sources */,
 				CC6E68811F5C24D0006750BF /* CloudSelectScene.swift in Sources */,

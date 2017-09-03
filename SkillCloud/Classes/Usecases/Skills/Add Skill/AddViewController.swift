@@ -23,7 +23,6 @@ class PromiseHandler<T> {
 }
 
 class AddViewController: UIViewController {
-
     // MARK: - Outlets
     @IBOutlet weak var skView: SKView!
     @IBOutlet weak var blurView: UIVisualEffectView!
@@ -65,8 +64,7 @@ class AddViewController: UIViewController {
     var experience : Skill.Experience?
     var isEditingText : Bool = true
     var skillBottomDefaultValue : CGFloat = 0
-    
-    
+
     fileprivate var imageCropPromiseHandler: PromiseHandler<UIImage>?
     
     // MARK: - Lifecycle
@@ -183,19 +181,31 @@ class AddViewController: UIViewController {
         self.hideKeyboard(self)
         
         let _ = self.promiseSelection(Void.self, cancellable: true, options: [
-            (NSLocalizedString("Change Image", comment: "Change Image"),.default,{ self.selectImage().then{ image -> Void in self.scene.setSkillImage(image) } }),
-            (NSLocalizedString("Remove skill", comment: "Remove skill"),.destructive,{ self.removeSkill().then{ _ -> Void in
-                self.hideKeyboard(self)
-                self.hideAddViewController(nil)
-            }})
+            (R.string.localize.skillAddOptionChangeImage(),.default,{
+                self.selectImage().then{ image -> Void in
+                    self.scene.setSkillImage(image)
+                }
+            }),
+            (R.string.localize.skillAddOptionRemoveSkill(),.destructive,{
+                self.removeSkill().then{ _ -> Void in
+                    self.hideKeyboard(self)
+                    self.hideAddViewController(nil)
+                }
+            })
         ])
     }
     
     func selectImage() -> Promise<UIImage> {
         return self.promiseSelection(UIImage.self, cancellable: true, options: [
-            (NSLocalizedString("Take photo", comment: "Take photo"),.default,{ self.selectPickerImage(.camera) }),
-            (NSLocalizedString("Photo Library", comment: "Photo Library"),.default, { self.selectPickerImage(.photoLibrary) }),
-            (NSLocalizedString("Google Images", comment: "Google Images"),.default, { self.selectGoogleImage(self.skillNameField.text) })
+            (R.string.localize.skillAddImageOptionTakePhoto(),.default,{
+                self.selectPickerImage(.camera)
+            }),
+            (R.string.localize.skillAddImageOptionPhotoLibrary(),.default, {
+                self.selectPickerImage(.photoLibrary)
+            }),
+            (R.string.localize.skillAddImageOptionGoogleImages(),.default, {
+                self.selectGoogleImage(self.skillNameField.text)
+            })
         ])
         .then{ image -> Promise<UIImage> in
             return self.promiseCroppedImage(image)
@@ -333,18 +343,14 @@ class AddViewController: UIViewController {
             self.view.layoutIfNeeded()
         }) 
     }
-    
-    // MARK: - Navigation
 
     // MARK: - Appearance
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
     }
-    
 }
 
 extension AddViewController: UITextFieldDelegate {
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         self.doneButton.isEnabled = self.canBeFulfilled()
         return true
@@ -357,12 +363,10 @@ extension AddViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.doneButton.isEnabled = self.canBeFulfilled()
     }
-    
 }
 
 // MARK: - Keyboard handling
 extension AddViewController {
-    
     func keyboardWillShow(_ notification: Notification){
         let duration = notification.userInfo![UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval
         let curve =  UIViewAnimationCurve.init(rawValue: notification.userInfo![UIKeyboardAnimationCurveUserInfoKey] as! Int)!
@@ -402,12 +406,10 @@ extension AddViewController {
             self.containerView.setNeedsDisplay()
         }) 
     }
-    
 }
 
 // MARK: - Skill promises
 extension AddViewController {
-    
     static func promiseNewSkillWith(_ sender: UIViewController, rect: CGRect?, preparedScene: AddScene? = nil) throws -> Promise<Skill> {
         guard let addViewController = sender.storyboard?.instantiateViewController(withIdentifier: "AddSkillViewController") as? AddViewController else {
             throw CommonError.unknownError
@@ -454,12 +456,10 @@ extension AddViewController {
         
         return addViewController.promise
     }
-    
 }
 
 // MARK: - Image selection
 extension AddViewController {
-    
     func selectPickerImage(_ source: UIImagePickerControllerSourceType) -> Promise<UIImage> {
         let picker = UIImagePickerController()
         picker.sourceType = source
@@ -473,12 +473,9 @@ extension AddViewController {
             self.imageFailure = error
         }
     }
-    
-    
 }
 
 extension AddViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         imageFailure(CommonError.userCancelled)
         dismiss(animated: true, completion: nil)
@@ -486,7 +483,7 @@ extension AddViewController: UIImagePickerControllerDelegate, UINavigationContro
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            imageFulfill(image)
+            imageFulfill(image.RBImage(backgroundColor: .white))
         }
         else {
             imageFailure(CommonError.unknownError)
@@ -494,12 +491,9 @@ extension AddViewController: UIImagePickerControllerDelegate, UINavigationContro
         
         dismiss(animated: true, completion: nil)
     }
-    
 }
 
 extension AddViewController : RSKImageCropViewControllerDelegate {
-    
-    
     func promiseCroppedImage(_ image: UIImage) -> Promise<UIImage> {
         return Promise<UIImage> { (fulfill, reject) in
             self.imageCropPromiseHandler = PromiseHandler<UIImage>(fulfill: fulfill, reject: reject)
@@ -527,6 +521,5 @@ extension AddViewController : RSKImageCropViewControllerDelegate {
             self.imageCropPromiseHandler = nil
         }
     }
-    
 }
 

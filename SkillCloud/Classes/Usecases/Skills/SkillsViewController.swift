@@ -111,7 +111,7 @@ class SkillsViewController: UIViewController {
         }
         .then(execute: SkillEntity.promiseToUpdate)  // TODO: Update only offline flag!!!
         .then { [weak self] _ -> Void in
-            self?.showSnackBarMessage(NSLocalizedString("New skill added.", comment: "New skill added."))
+            self?.showSnackBarMessage(R.string.localize.skillAddSnackBarMessage())
         }
         .catch { error in
             print("Error: \(error)")
@@ -134,11 +134,11 @@ class SkillsViewController: UIViewController {
             .then { _ -> Promise<Skill> in                  // Call and update to CloudKit
                 // Handle update cases:
                 if savedEntity.toDelete {
-                    self.showSnackBarMessage(NSLocalizedString("Skill deleted!", comment: "Skill deleted!"))
+                    self.showSnackBarMessage(R.string.localize.skillDeleteSnackBarMessage())
                     return savedEntity.skill.promiseDeleteFrom(.private)
                 }
                 else {
-                    self.showSnackBarMessage(NSLocalizedString("Skill updated.", comment: "Skill updated."))
+                    self.showSnackBarMessage(R.string.localize.skillUpdateSnackBarMessage())
                     return savedEntity.skill.promiseSyncTo(.private)
                 }
             }

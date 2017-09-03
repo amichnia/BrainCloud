@@ -67,15 +67,15 @@ class InfoViewController: UIViewController {
         .then { result -> Void in
             switch result {
             case MFMailComposeResult.sent:
-                self.showSnackBarMessage(NSLocalizedString("Thank you for sending feedback.", comment: "Thank you for sending feedback."))
+                self.showSnackBarMessage(R.string.localize.feedbackSentSuccessSnackBarMessage())
             case MFMailComposeResult.failed:
-                _ = self.promiseHandleError(CommonError.failure(reason: NSLocalizedString("Sending failed. Please verify you email settings.", comment: "Sending failed. Please verify you email settings.")))
+                self.promiseHandleError(CommonError.failure(reason: R.string.localize.feedbackSentFailureSnackBarMessage()))
             default:
                 break
             }
         }
         .catch { error in
-            _ = self.promiseHandleError(CommonError.other(error))
+            self.promiseHandleError(CommonError.other(error))
         }
     }
     

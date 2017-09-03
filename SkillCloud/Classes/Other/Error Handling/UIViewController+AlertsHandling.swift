@@ -11,7 +11,6 @@ import PromiseKit
 
 // MARK: - Promise decisions
 extension UIViewController {
-    
     func promiseSelection<T>(_ type: T.Type, cancellable: Bool, options: [(String,UIAlertActionStyle,(() -> Promise<T>))]) -> Promise<T> {
         return self.promiseSelection(T.self, cancellable: cancellable, customOption: nil, options: options)
     }
@@ -41,7 +40,7 @@ extension UIViewController {
             }
             
             if cancellable {
-                let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .default){ (_) in
+                let cancelAction = UIAlertAction(title: R.string.localize.alertCancel(), style: .default){ (_) in
                     reject(CommonError.userCancelled)
                 }
                 
@@ -55,16 +54,15 @@ extension UIViewController {
             return promise
         }
     }
-    
 }
 
 extension UIViewController {
-    
+    @discardableResult
     func promiseHandleError(_ error: ShowableError) -> Promise<Void> {
         return Promise<Void> { fulfill,reject in
             let alertController = UIAlertController(title: error.alertTitle(), message: error.alertBody(), preferredStyle: .alert)
             
-            let confirmAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: .default) { _ in
+            let confirmAction = UIAlertAction(title: R.string.localize.alertOk(), style: .default) { _ in
                 fulfill()
             }
             
@@ -73,7 +71,6 @@ extension UIViewController {
             self.present(alertController, animated: true, completion: nil)
         }
     }
-    
 }
 
 

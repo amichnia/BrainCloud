@@ -54,6 +54,12 @@ class GoogleImage : JSONMappable {
             return image
         }
     }
+
+    func promiseImage(withBackground color: UIColor) -> Promise<UIImage> {
+        return promiseImage().then { image -> UIImage in
+            return image.RBImage(backgroundColor: color)
+        }
+    }
 }
 
 class GoogleImagePage : JSONMappable, PageablePromise {
