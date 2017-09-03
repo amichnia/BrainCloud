@@ -91,19 +91,19 @@ class ExploreViewController: UIViewController {
         return firstly {
             self.skillsResult.promiseNextPage()
         }
-        .then { [weak self] _ -> Void in
-            print("LOADED more!")
-            self?.tableView.reloadData()
-            if let strongSelf = self {
-                self?.tableView.visibleCells.forEach(strongSelf.configureColorFor)
-            }
-        }
-        .always { [weak self] in
-            print("Update finished")
-            self?.updating = false
-            MRProgressOverlayView.hide()
-        }
-        .asVoid()
+                .then { [weak self] _ -> Void in
+                    print("LOADED more!")
+                    self?.tableView.reloadData()
+                    if let strongSelf = self {
+                        self?.tableView.visibleCells.forEach(strongSelf.configureColorFor)
+                    }
+                }
+                .always { [weak self] in
+                    print("Update finished")
+                    self?.updating = false
+                    MRProgressOverlayView.hide()
+                }
+                .asVoid()
     }
 
     func refetchSelfSkills() {

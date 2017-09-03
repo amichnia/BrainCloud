@@ -422,14 +422,14 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1581.1594202898552" y="1415.217391304348"/>
+            <point key="canvasLocation" x="1582" y="1248"/>
         </scene>
         <!--Skills Section-->
         <scene sceneID="Bz5-WD-Jb0">
             <objects>
                 <navigationController id="Zhu-Ph-jdQ" userLabel="Skills Section" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" title="" image="icon-skills-tabbar" selectedImage="icon-skills-tabbar-selected" id="OYx-iM-PZs"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="BJj-Xo-NXc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="BJj-Xo-NXc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -441,7 +441,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UH6-me-cCH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3582" y="-337"/>
+            <point key="canvasLocation" x="2556" y="-337"/>
         </scene>
         <!--Clouds Section-->
         <scene sceneID="YLj-fE-PAW">
@@ -450,7 +450,7 @@
                     <tabBarItem key="tabBarItem" title="" image="icon-cloud-tabbar" selectedImage="icon-cloud-tabbar-selected" id="xUo-VF-0z3">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="yEy-e1-2Jf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="yEy-e1-2Jf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -599,7 +599,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t3u-fD-ucu" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="OXL-tr-5I9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2556" y="1416"/>
+            <point key="canvasLocation" x="2329" y="2183"/>
         </scene>
         <!--Palette Selection View Controller-->
         <scene sceneID="0S4-Rg-xPc">
@@ -1060,7 +1060,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4IR-MY-hFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3582" y="430"/>
+            <point key="canvasLocation" x="2556" y="430"/>
         </scene>
         <!--Add View Controller-->
         <scene sceneID="xjn-P4-X33">
@@ -1208,14 +1208,14 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4519" y="430"/>
+            <point key="canvasLocation" x="3062" y="1247"/>
         </scene>
         <!--Explore Section-->
         <scene sceneID="N0H-6p-1YG">
             <objects>
                 <navigationController id="VcD-r6-nOo" userLabel="Explore Section" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="" image="icon-explore-tabbar" selectedImage="icon-explore-tabbar-selected" id="OBH-tx-XPj"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="Myk-cb-kVS" customClass="TransparentNavigationBar" customModule="SkillCloud" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="Myk-cb-kVS" customClass="TransparentNavigationBar" customModule="SkillCloud" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1227,7 +1227,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lCu-n8-Ubm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5406" y="-337"/>
+            <point key="canvasLocation" x="3510" y="-338"/>
         </scene>
         <!--Explore View Controller-->
         <scene sceneID="XsW-Kl-526">
@@ -1383,7 +1383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SO1-0L-fEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5405.6000000000004" y="429.53523238380814"/>
+            <point key="canvasLocation" x="3510" y="430"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="EcP-eN-DOM">
@@ -1508,14 +1508,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mjk-Gh-Gwj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7185" y="430"/>
+            <point key="canvasLocation" x="4458" y="430"/>
         </scene>
         <!--Info Section-->
         <scene sceneID="FVV-DV-F5N">
             <objects>
                 <navigationController id="i5X-WB-nIA" userLabel="Info Section" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="" image="icon-info-tabbar" selectedImage="icon-info-tabbar-selected" id="Zu7-5U-QoB"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="LJ5-l8-6m5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="LJ5-l8-6m5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1527,7 +1527,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3c1-Kk-e9q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7185" y="-338"/>
+            <point key="canvasLocation" x="4457" y="-339"/>
         </scene>
         <!--Help View Controller-->
         <scene sceneID="fcM-GT-3iA">
@@ -1578,7 +1578,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4Y-Px-QiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7185" y="1417"/>
+            <point key="canvasLocation" x="4457" y="1247"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="1mO-lR-PIe">
@@ -1990,7 +1990,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JHn-He-Wwf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7905" y="1417"/>
+            <point key="canvasLocation" x="5382" y="1247"/>
         </scene>
         <!--Licenses View Controller-->
         <scene sceneID="TGo-qV-f41">
@@ -2053,7 +2053,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="858-Ci-WGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8644" y="1417"/>
+            <point key="canvasLocation" x="6310" y="1247"/>
         </scene>
     </scenes>
     <resources>

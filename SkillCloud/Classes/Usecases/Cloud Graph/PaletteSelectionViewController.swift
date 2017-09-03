@@ -46,6 +46,7 @@ class PaletteSelectionViewController: UIViewController {
     }
     
     // MARK: - Public
+    @discardableResult
     func promisePalette() -> Promise<Palette> {
         return Promise<Palette> { success,_ in
             self.complete = success

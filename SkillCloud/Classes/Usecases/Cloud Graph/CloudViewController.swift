@@ -19,35 +19,34 @@ let ShowExportViewSegueIdentifier = "ShowExportView"
 let ShowPaletteSelectionSegueIdentifier = "ShowPaletteSelection"
 
 class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentationControllerDelegate {
-
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
-    
+
     // MARK: - Properties
-    let pattern = [SkillLightCellIdentifier,SkillLighterCellIdentifier,SkillLighterCellIdentifier,SkillLightCellIdentifier]
-    var skills : [Skill] = []
+    let pattern = [SkillLightCellIdentifier, SkillLighterCellIdentifier, SkillLighterCellIdentifier, SkillLightCellIdentifier]
+    var skills: [Skill] = []
     var skillsOffset = 16
     var cloudImage: UIImage?
     var cloudEntity: GraphCloudEntity?
     var slot: Int!
-    
-    var skillToAdd : Skill?
+
+    var skillToAdd: Skill?
     var selectedRow: Int = 0
     var collectionConfigured = false
-    
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         SkillEntity.fetchAll()
         .then { entities -> Void in
-            self.skills = entities.mapExisting{ $0.skill }
+            self.skills = entities.mapExisting { $0.skill }
             self.collectionView.reloadData()
-            
+
             guard entities.count > 0 else {
                 return
             }
-            
+
             let initialIndex = IndexPath(item: 0, section: 1)
             self.collectionView.selectItem(at: initialIndex, animated: false, scrollPosition: .centeredHorizontally)
             self.collectionView(self.collectionView, didSelectItemAt: initialIndex)
@@ -56,19 +55,19 @@ class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentati
             print("Error: \(error)")
         }
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        let height = floor(self.collectionView.bounds.height/2)
+
+        let height = floor(self.collectionView.bounds.height / 2)
         (self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = CGSize(width: height, height: height)
-        
+
         let sectionWidth = CGFloat((self.skillsOffset + self.skillsOffset % 4) / 2) * height
-        
+
         self.collectionView.contentInset = UIEdgeInsets(top: 0, left: -sectionWidth, bottom: 0, right: -sectionWidth)
         self.collectionView.bounces = true
         self.collectionView.alwaysBounceHorizontal = true
-        
+
         if !collectionConfigured {
             (self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize = CGSize(width: height, height: height)
             collectionConfigured = true
@@ -77,30 +76,28 @@ class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentati
             (self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.invalidateLayout()
         }
     }
-    
+
     // MARK: - Navigation
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
-    
 }
 
 // MARK: - UICollectionViewDataSource
 extension CloudViewController: UICollectionViewDataSource {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard section == 1 else {
             return self.skillsOffset
         }
-        
+
         let cells = self.skills.count
         return cells + (cells % 2)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let identifier: String = {
             switch indexPath.section {
@@ -112,57 +109,55 @@ extension CloudViewController: UICollectionViewDataSource {
             }
         }()
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! SkillCollectionViewCell
-        
+
         if indexPath.section == 1 && indexPath.row < self.skills.count {
             cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
             if indexPath.row == self.selectedRow {
                 cell.isSelected = true
             }
-        }
-        else {
+        } else {
             cell.configureEmpty()
             cell.isSelected = false
         }
-        
+
         return cell
     }
-    
 }
 
 // MARK: - UICollectionViewDelegate
 extension CloudViewController: UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == 1 && indexPath.row < self.skills.count else {
             return
         }
-        
+
         self.skillToAdd = self.skills[indexPath.row]
         self.selectedRow = indexPath.row
         CloudGraphScene.radius = self.skillToAdd!.experience.radius / Node.scaleFactor
     }
-    
 }
 
 extension CloudViewController: CloudSceneDelegate {
-    
     func didAddSkill() {
-        if var indexPath = self.collectionView.indexPathsForSelectedItems?.first {
-            self.collectionView.deselectItem(at: indexPath, animated: false)
-            indexPath = IndexPath(item: (indexPath.row + 1) % self.skills.count , section: indexPath.section)
-            self.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
-            self.collectionView(self.collectionView, didSelectItemAt: indexPath)
-            self.collectionView.setContentOffset(CGPoint(x:  (80 * CGFloat(self.skillsOffset / 2) + (CGFloat(indexPath.row / 2) * 80)), y: 0), animated: true)
+        let indexPath = IndexPath(item: selectedRow, section: 1)
+        let newIndexPath = IndexPath(item: (indexPath.row + 1) % self.skills.count, section: 1)
+        self.collectionView.deselectItem(at: indexPath, animated: false)
+        collectionView(self.collectionView, didSelectItemAt: newIndexPath)
+        collectionView.reloadItems(at: [indexPath, newIndexPath])
+
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
         }
+
+        guard let rect = layout.layoutAttributesForItem(at: newIndexPath)?.frame else {
+            return
+        }
+
+        collectionView.scrollRectToVisible(rect, animated: true)
     }
-    
 }
 
-enum SCError : Error {
+enum SCError: Error {
     case createStreamError
     case invalidBundleResourceUrl
 }
-
-
-
-

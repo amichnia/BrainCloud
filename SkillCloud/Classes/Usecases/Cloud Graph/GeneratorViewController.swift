@@ -208,7 +208,7 @@ class GeneratorViewController: CloudViewController {
     }
 
     @IBAction func exportAction(_ sender: AnyObject) {
-        _ = promiseScaleToVisible()
+        promiseScaleToVisible()
         .then(execute: promiseExportCloud)
         .then { closure -> Void in
             closure()
@@ -223,6 +223,7 @@ class GeneratorViewController: CloudViewController {
     }
 
     // MARK: - Promises
+    @discardableResult
     func promiseScaleToVisible() -> Promise<Void> {
         return Promise<Void>(resolvers: { (success, failure) in
             guard let scene = self.skView.scene, let camera = scene.camera else {
@@ -250,12 +251,12 @@ class GeneratorViewController: CloudViewController {
     func promiseExportCloud() -> Promise<() -> ()> {
         return Promise<() -> ()> {
             self.scene.deselectNode()
-            _ = self.promiseCaptureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
-                    .then { image -> Void in
-                        self.cloudImage = image
-                        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-                        self.present(activityVC, animated: true, completion: nil)
-                    }
+            self.promiseCaptureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
+            .then { image -> Void in
+                self.cloudImage = image
+                let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+                self.present(activityVC, animated: true, completion: nil)
+            }
         }
     }
 
@@ -263,9 +264,9 @@ class GeneratorViewController: CloudViewController {
         return firstly {
             DataManager.promiseDeleteEntity(GraphCloudEntity.self, model: self.scene)
         }
-        .then { _ -> (() -> ()) in
-            return { self.performSegue(withIdentifier: "UnwindToSelection", sender: nil) }
-        }
+                .then { _ -> (() -> ()) in
+                    return { self.performSegue(withIdentifier: "UnwindToSelection", sender: nil) }
+                }
     }
 
     func promiseCaptureThumbnail() -> Promise<UIImage> {
@@ -283,6 +284,7 @@ class GeneratorViewController: CloudViewController {
     }
 
     // MARK: - Helpers
+    @discardableResult
     func promiseCaptureCloudWithSize(_ size: CGSize) -> Promise<UIImage> {
         return Promise<UIImage>(resolvers: { (success, failure) in
             let frame = skView.frame
@@ -380,7 +382,7 @@ class GeneratorViewController: CloudViewController {
             paletteSelectionViewController.preferredContentSize = CGSize(width: 300, height: 300)
             let popoverController = paletteSelectionViewController.popoverPresentationController
 
-            _ = paletteSelectionViewController.promisePalette()
+            paletteSelectionViewController.promisePalette()
             .then { palette -> Void in
                 Palette.main = palette
                 self.configurePalette()
