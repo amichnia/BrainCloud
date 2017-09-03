@@ -124,7 +124,6 @@ class GoogleImagesCollectionViewController: UIViewController {
         
         fetchNextPage()
     }
-    
 }
 
 enum ImageSelectError : Error {
@@ -134,7 +133,6 @@ enum ImageSelectError : Error {
 
 // MARK: - UICollectionViewDataSource
 extension GoogleImagesCollectionViewController : UICollectionViewDataSource, UICollectionViewDelegate {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }

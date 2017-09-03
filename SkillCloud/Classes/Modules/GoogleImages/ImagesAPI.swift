@@ -13,7 +13,6 @@ import AlamofireSwiftyJSON
 import PromiseKit
 
 enum ImagesAPI {
-    
     static let baseUrl : String = "https://www.googleapis.com/customsearch/"
 //    static let APIKey = "AIzaSyB4lSM9rrY6flfWtEhcEzgK1I5IVLSFvdQ"
     static let APIKey = "AIzaSyAk5iFp1jM0-xp6adKdxBgIUkl5-a74Yac"
@@ -36,7 +35,6 @@ enum ImagesAPI {
 }
 
 extension ImagesAPI : AnyAPI {
-    
     var URLString : String { return "https://www.googleapis.com/customsearch/v1" }
     var method: Alamofire.HTTPMethod { return Alamofire.HTTPMethod.get }
     var parameters: [String : AnyObject]? {
@@ -53,6 +51,5 @@ extension ImagesAPI : AnyAPI {
             return nil
         }
     }
-    
 }
 

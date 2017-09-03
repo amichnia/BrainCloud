@@ -133,7 +133,6 @@ extension DataManager {
 
 // MARK: - Inserting entities
 extension DataManager {
-    
     static func updateEntity<T:CoreDataEntity>(_ entity: T.Type, model: DTOModel, intoContext ctx: NSManagedObjectContext? = nil) -> T? {
         do {
             if let existingEntity = try DataManager.getFirst(entity, withIdentifier: model.uniqueIdentifierValue, fromContext: ctx) {
@@ -222,38 +221,32 @@ extension DataManager {
             try DataManager.saveRootContext()
         }
     }
-    
 }
 
 extension DataManager {
-    
     static func deleteEntity<T:CoreDataEntity>(_ entity: T.Type, withIdentifier identifier: String, fromContext ctx: NSManagedObjectContext? = nil) throws {
         let predicate = NSPredicate(format: "\(entity.uniqueIdentifier) = %@", identifier)
         if let existingEntity = try DataManager.getAll(entity, withPredicate: predicate, fromContext: ctx).first as? NSManagedObject {
             (ctx ?? DataManager.managedObjectContext).delete(existingEntity)
         }
     }
-    
 }
 
 protocol DTOModel {
-    
     var previousUniqueIdentifier: String? { get }
     var uniqueIdentifierValue: String { get }
-    
 }
 
 /**
  *  Base CoreDataEntity protocol
  */
 protocol CoreDataEntity : class {
-    
     static var entityName : String { get }
     static var uniqueIdentifier : String { get }
     
     init?(model: DTOModel, inContext ctx: NSManagedObjectContext)
+
     func setValuesFromModel(_ model: DTOModel)
-    
 }
 
 // MARK: - Default implementations for all CoreDataEntities

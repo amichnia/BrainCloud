@@ -29,7 +29,7 @@ extension CKDatabase {
                     if let record = fetchedRecord, error == nil {
                         fulfill(record)
                     }
-                    else if let error = error as? NSError {
+                    else if let error = error as NSError? {
                         reject(CloudError.fetchError(code: error.code, error: error))
                     }
                     else {
@@ -54,7 +54,7 @@ extension CKDatabase {
                     if let savedRecord = savedRecord, error == nil {
                         fulfill(savedRecord)
                     }
-                    else if let error = error as? NSError {
+                    else if let error = error as NSError? {
                         reject(CloudError.saveError(code: error.code, error: error))
                     }
                     else {
@@ -84,7 +84,7 @@ extension CKDatabase {
                     if let savedRecord = savedRecord, error == nil {
                         fulfill(savedRecord)
                     }
-                    else if let error = error as? NSError {
+                    else if let error = error as NSError? {
                         reject(CloudError.saveError(code: error.code, error: error))
                     }
                     else {
@@ -146,7 +146,7 @@ extension CKDatabase {
                     if let savedRecords = savedRecords, error == nil {
                         fulfill(savedRecords)
                     }
-                    else if let error = error as? NSError {
+                    else if let error = error as NSError? {
                         reject(CloudError.saveError(code: error.code, error: error))
                     }
                     else {
@@ -180,7 +180,7 @@ extension CKDatabase {
                     if let savedRecords = savedRecords, error == nil {
                         fulfill(savedRecords)
                     }
-                    else if let error = error as? NSError {
+                    else if let error = error as NSError? {
                         reject(CloudError.saveError(code: error.code, error: error))
                     }
                     else {
@@ -228,7 +228,7 @@ extension CKDatabase {
                     if let savedRecords = recorsByID?.values, error == nil {
                         fulfill(savedRecords.map({ $0 }))
                     }
-                    else if let error = error as? NSError {
+                    else if let error = error as NSError? {
                         reject(CloudError.fetchError(code: error.code, error: error))
                     }
                     else {
@@ -261,7 +261,7 @@ extension CKDatabase {
                     if let savedRecords = records, error == nil {
                         fulfill(savedRecords)
                     }
-                    else if let error = error as? NSError {
+                    else if let error = error as NSError? {
                         reject(CloudError.fetchError(code: error.code, error: error))
                     }
                     else {

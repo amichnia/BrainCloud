@@ -1,24 +1,39 @@
-platform :ios, '9.0'
+# Disable sending stats
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, :deployment_target => '9.0'
+inhibit_all_warnings!
 use_frameworks!
 
-target 'SkillCloud' do
-
-pod 'AlamofireSwiftyJSON'
-pod 'AMKSlidingTableViewCell'
-pod 'ASIACheckmarkView'
-pod 'PromiseKit'
-pod 'PromiseKit/AssetsLibrary'
-pod 'PromiseKit/MessageUI'
-pod 'RSKImageCropper'
-pod 'MRProgress'
-pod 'CocoaLumberjack'
-pod 'DRNSnackBar'
-
+def promises
+    pod 'PromiseKit'
+    pod 'PromiseKit/AssetsLibrary'
+    pod 'PromiseKit/MessageUI'
 end
 
-post_install do |installer|
-    filename = 'Pods/PromiseKit/Categories/Foundation/NSNotificationCenter+Promise.swift'
-    contents = '// This file removed due to Swift compiler bug https://bugs.swift.org/browse/SR-1427\n'\
-               '// PromiseKit tracking of this issue: https://github.com/mxcl/PromiseKit/issues/415\n'
-    system("chmod +w #{filename}; printf \"#{contents}\" > #{filename}; chmod -w #{filename}")
+def networking
+    pod 'AlamofireSwiftyJSON'
+end
+
+def ui_components
+    pod 'MRProgress'
+    pod 'DRNSnackBar'
+end
+
+def image_adjustment
+    pod 'RSKImageCropper'
+end
+
+def logging
+    pod 'CocoaLumberjack'
+end
+
+
+target 'SkillCloud' do
+    promises
+    networking
+    ui_components
+    image_adjustment
+    logging
 end

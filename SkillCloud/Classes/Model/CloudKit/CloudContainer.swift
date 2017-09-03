@@ -168,7 +168,7 @@ class CloudContainer {
     func promiseSyncTo() -> Promise<Void> {
         return Skill.fetchAllUnsynced()
         .then { skills -> Promise<[SkillEntity]> in
-            return when(fulfilled: skills.map{
+            return when(fulfilled: skills.map {
                 $0.promiseSyncTo().then(execute: SkillEntity.promiseToUpdate)
             })
         }
@@ -254,7 +254,7 @@ class CKPageableResult<T:CKRecordSyncable> {
                 }
                 
                 operation.queryCompletionBlock = { cursor,error in
-                    if let error = error as? NSError {
+                    if let error = error as NSError? {
                         self?.hasNextPage = false
                         
                         DispatchQueue.main.async {

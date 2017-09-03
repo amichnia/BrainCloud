@@ -366,7 +366,7 @@ class GeneratorViewController: CloudViewController {
             return
         }
         
-        self.scaleProgress.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+        self.scaleProgress.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
         self.scaleProgress.isHidden = false
         self.scaleProgress.value = Float(fill)
     }

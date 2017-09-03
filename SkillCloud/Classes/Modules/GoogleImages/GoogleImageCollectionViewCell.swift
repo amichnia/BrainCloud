@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import ASIACheckmarkView
 
 let GoogleImageCellIdentifier = "GoogleImageCell"
 
 class GoogleImageCollectionViewCell: UICollectionViewCell {
- 
     // MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var overlay: UIView!
@@ -53,8 +51,4 @@ class GoogleImageCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-    
-    // MARK: - Actions
-    
-    
 }

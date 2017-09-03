@@ -14,39 +14,34 @@ import PromiseKit
 // MARK: - CKRecordConvertible
 /// Class implementing CKRecordConvertible protocol has means to be used to initialize new CKRecord instance
 protocol CKRecordConvertible: class {
-    
-    var recordName: String? { get set }
-    
-    var recordID: CKRecordID? { get }
     static var recordType: String { get }
-    
+
+    var recordName: String? { get set }
+    var recordID: CKRecordID? { get }
+
     func recordRepresentation() -> CKRecord?
-    
 }
 
 extension CKRecordConvertible {
-    
-    var recordID: CKRecordID? {
-        return self.recordName == nil ? nil : CKRecordID(recordName: self.recordName!)
-    }
-    
-    var recordType: String {
-        return Self.recordType
-    }
-    
     static var recordType: String {
         return String(describing: Self.self)
     }
-    
+
+    var recordID: CKRecordID? {
+        return self.recordName == nil ? nil : CKRecordID(recordName: self.recordName!)
+    }
+
+    var recordType: String {
+        return Self.recordType
+    }
+
     func promiseRecord() -> Promise<CKRecord> {
-        return Promise<CKRecord> { fulfill,reject in
+        return Promise<CKRecord> { fulfill, reject in
             if let record = self.recordRepresentation() {
                 fulfill(record)
-            }
-            else {
+            } else {
                 reject(CloudError.notMatchingRecordData)
             }
         }
     }
-    
 }

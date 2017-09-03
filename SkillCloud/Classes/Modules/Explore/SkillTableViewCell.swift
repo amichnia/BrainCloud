@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AMKSlidingTableViewCell
 
 class SkillTableViewCell: UITableViewCell {
     
@@ -31,5 +30,4 @@ class SkillTableViewCell: UITableViewCell {
             self.accessoryView = nil
         }
     }
-    
 }

@@ -1,17 +1,13 @@
 PODS:
-  - Alamofire (4.2.0)
-  - AlamofireSwiftyJSON (0.2.0):
+  - Alamofire (4.5.0)
+  - AlamofireSwiftyJSON (1.0.0):
     - Alamofire (~> 4.0)
-    - SwiftyJSON (~> 3.1)
-  - AMKSlidingTableViewCell (3.0.1)
-  - ASIACheckmarkView (3.0.1)
-  - CocoaLumberjack (3.0.0):
-    - CocoaLumberjack/Default (= 3.0.0)
-    - CocoaLumberjack/Extensions (= 3.0.0)
-  - CocoaLumberjack/Core (3.0.0)
-  - CocoaLumberjack/Default (3.0.0):
-    - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (3.0.0):
+    - SwiftyJSON (~> 3.0)
+  - CocoaLumberjack (3.2.1):
+    - CocoaLumberjack/Default (= 3.2.1)
+    - CocoaLumberjack/Extensions (= 3.2.1)
+  - CocoaLumberjack/Default (3.2.1)
+  - CocoaLumberjack/Extensions (3.2.1):
     - CocoaLumberjack/Default
   - DRNSnackBar (0.0.1)
   - MRProgress (0.8.3):
@@ -42,28 +38,26 @@ PODS:
   - MRProgress/ProgressBaseClass (0.8.3)
   - MRProgress/Stopable (0.8.3):
     - MRProgress/Helper
-  - PromiseKit (4.1.0):
-    - PromiseKit/Foundation (= 4.1.0)
-    - PromiseKit/QuartzCore (= 4.1.0)
-    - PromiseKit/UIKit (= 4.1.0)
-  - PromiseKit/AssetsLibrary (4.1.0):
+  - PromiseKit (4.4.0):
+    - PromiseKit/Foundation (= 4.4.0)
+    - PromiseKit/QuartzCore (= 4.4.0)
+    - PromiseKit/UIKit (= 4.4.0)
+  - PromiseKit/AssetsLibrary (4.4.0):
     - PromiseKit/CorePromise
-  - PromiseKit/CorePromise (4.1.0)
-  - PromiseKit/Foundation (4.1.0):
+  - PromiseKit/CorePromise (4.4.0)
+  - PromiseKit/Foundation (4.4.0):
     - PromiseKit/CorePromise
-  - PromiseKit/MessageUI (4.1.0):
+  - PromiseKit/MessageUI (4.4.0):
     - PromiseKit/CorePromise
-  - PromiseKit/QuartzCore (4.1.0):
+  - PromiseKit/QuartzCore (4.4.0):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (4.1.0):
+  - PromiseKit/UIKit (4.4.0):
     - PromiseKit/CorePromise
-  - RSKImageCropper (1.5.2)
-  - SwiftyJSON (3.1.3)
+  - RSKImageCropper (1.6.3)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - AlamofireSwiftyJSON
-  - AMKSlidingTableViewCell
-  - ASIACheckmarkView
   - CocoaLumberjack
   - DRNSnackBar
   - MRProgress
@@ -73,17 +67,15 @@ DEPENDENCIES:
   - RSKImageCropper
 
 SPEC CHECKSUMS:
-  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
-  AlamofireSwiftyJSON: 5a49196b8b061e32f5ebc84fa0815300bd8a974e
-  AMKSlidingTableViewCell: 29a139dbcb58693891e719c8d85348c4802e17d0
-  ASIACheckmarkView: b3b988102ebd7662f0a2e1f6308c5726c52d3a90
-  CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  AlamofireSwiftyJSON: 78908b766483a28aa5cc90fd191a687467042973
+  CocoaLumberjack: 2800c03334042fe80589423c8d80e582dcaec482
   DRNSnackBar: 227cc12275ae405bb62e5c598b920cacc04b3a2d
   MRProgress: 16de7cc9f347e8846797a770db102a323fe7ef09
-  PromiseKit: c98453ff78544c0ad5bb0ea980782e6875f47978
-  RSKImageCropper: 27d0e7efa800b509720163c3561fe08a04853780
-  SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
+  PromiseKit: ecf5fe92275d57ee77c9ede858af47a162e9b97e
+  RSKImageCropper: 356e36fc58c57c371b5d8b23d603936d6a73df6c
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 1b9213c9cec656e59aa7ae31d8bd287f6dd08504
+PODFILE CHECKSUM: 439f874e351b0078bd1bb4368973375a1ae587ec
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1
