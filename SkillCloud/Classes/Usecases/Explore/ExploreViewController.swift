@@ -13,6 +13,7 @@ import MRProgress
 class ExploreViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
 
     // MARK: - Properties
@@ -24,10 +25,6 @@ class ExploreViewController: UIViewController {
 
     var ownedSkills: [Skill] = []
 
-    lazy var searchCell: SkillsSearchTableViewCell = {
-        return self.tableView.dequeueReusableCell(withIdentifier: "SearchSkillsHeader")! as! SkillsSearchTableViewCell
-    }()
-
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +32,13 @@ class ExploreViewController: UIViewController {
         self.tableView.rowHeight = 82
 
         (self.tableView as UIScrollView).delegate = self
+        self.searchBar.placeholder = R.string.localize.exploreSearchPlaceholder()
 
         self.skillsResult.desiredKeys = ["name", "experienceValue", "thumbnail", "desc"]
         self.skillsResult.limit = 10
 
         self.refetchSelfSkills()
-        _ = self.updateIfNeeded()
+        self.updateIfNeeded()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -82,7 +80,7 @@ class ExploreViewController: UIViewController {
     }
 
     // MARK: - Helpers
-    func updateIfNeeded() -> Promise<Void> {
+    @discardableResult func updateIfNeeded() -> Promise<Void> {
         guard !self.updating else {
             return Promise<Void>(value: Void())
         }
@@ -198,19 +196,19 @@ extension ExploreViewController: UISearchBarDelegate {
             }
         }()
 
-        self.searchCell.searchBar.resignFirstResponder()
-        self.skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: predicate, database: .public)
-        self.updateIfNeeded()
+        searchBar.resignFirstResponder()
+        skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: predicate, database: .public)
+        updateIfNeeded()
         .catch { error in
             print("Error: \(error)")
         }
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.searchCell.searchBar.resignFirstResponder()
-        self.skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: .accepted, database: .public)
+        searchBar.resignFirstResponder()
+        skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: .accepted, database: .public)
 
-        self.updateIfNeeded()
+        updateIfNeeded()
         .catch { error in
             print("Error: \(error)")
         }
@@ -276,31 +274,32 @@ extension ExploreViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.tableView.visibleCells.forEach(configureColorFor)
 
-        // TODO: Implement pagination
         let bound = self.tableView.contentSize.height - 200
         let offset = self.tableView.contentOffset.y + self.tableView.bounds.height
 
-        if !updating && offset >= bound && self.skillsResult.hasNextPage {
-            self.updating = true
-            print("Loading more!")
+        guard !updating, offset >= bound, skillsResult.hasNextPage else {
+            return
+        }
 
-            firstly {
-                self.skillsResult.promiseNextPage()
+        self.updating = true
+        print("Loading more!")
+
+        firstly {
+            self.skillsResult.promiseNextPage()
+        }
+        .then { [weak self] _ -> Void in
+            print("LOADED more!")
+            self?.tableView.reloadData()
+            if let strongSelf = self {
+                self?.tableView.visibleCells.forEach(strongSelf.configureColorFor)
             }
-            .then { [weak self] _ -> Void in
-                print("LOADED more!")
-                self?.tableView.reloadData()
-                if let strongSelf = self {
-                    self?.tableView.visibleCells.forEach(strongSelf.configureColorFor)
-                }
-            }
-            .always { [weak self] in
-                print("Update finished")
-                self?.updating = false
-            }
-            .catch { error in
-                print("Error: \(error)")
-            }
+        }
+        .always { [weak self] in
+            print("Update finished")
+            self?.updating = false
+        }
+        .catch { error in
+            print("Error: \(error)")
         }
     }
 }

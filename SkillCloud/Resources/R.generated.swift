@@ -606,7 +606,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 8 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 7 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `AddSkillCell`.
     static let addSkillCell: Rswift.ReuseIdentifier<SkillCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "AddSkillCell")
@@ -618,8 +618,6 @@ struct R: Rswift.Validatable {
     static let headerCell: Rswift.ReuseIdentifier<SkillTableViewCell> = Rswift.ReuseIdentifier(identifier: "HeaderCell")
     /// Reuse identifier `MenuCell`.
     static let menuCell: Rswift.ReuseIdentifier<InfoMenuTableViewCell> = Rswift.ReuseIdentifier(identifier: "MenuCell")
-    /// Reuse identifier `SearchSkillsHeader`.
-    static let searchSkillsHeader: Rswift.ReuseIdentifier<SkillsSearchTableViewCell> = Rswift.ReuseIdentifier(identifier: "SearchSkillsHeader")
     /// Reuse identifier `SkillLightCell`.
     static let skillLightCell: Rswift.ReuseIdentifier<SkillCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "SkillLightCell")
     /// Reuse identifier `SkillLighterCell`.
@@ -775,8 +773,8 @@ struct R: Rswift.Validatable {
       static let imagesConfirmButton = Rswift.StringResource(key: "images.confirm.button", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Delete graph
       static let cloudGraphOptionDelete = Rswift.StringResource(key: "cloud.graph.option.delete", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
-      /// Value: Explore
-      static let exploreNavigationTitle = Rswift.StringResource(key: "explore.navigation.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Explore all skills
+      static let exploreSearchPlaceholder = Rswift.StringResource(key: "explore.search.placeholder", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Export graph
       static let cloudGraphOptionExport = Rswift.StringResource(key: "cloud.graph.option.export", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Feedback
@@ -907,9 +905,9 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("cloud.graph.option.delete", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
-      /// Value: Explore
-      static func exploreNavigationTitle(_: Void = ()) -> String {
-        return NSLocalizedString("explore.navigation.title", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      /// Value: Explore all skills
+      static func exploreSearchPlaceholder(_: Void = ()) -> String {
+        return NSLocalizedString("explore.search.placeholder", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: Export graph

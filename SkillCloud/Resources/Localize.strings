@@ -38,7 +38,7 @@
 "images.confirm.button" = "Confirm";
 
 // Explore
-"explore.navigation.title" = "Explore";
+"explore.search.placeholder" = "Explore all skills";
 
 // Info
 "info.navigation.title" = "Info";
@@ -63,7 +63,7 @@
 "feedback.sent.success.snackBar.message" = "Thank you for sending feedback.";
 "feedback.sent.failure.snackBar.message" = "Sending failed. Please verify you email settings.";
 
-// Genreic
+// Generic
 "alert.ok" = "OK";
 "alert.cancel" = "Cancel";
 

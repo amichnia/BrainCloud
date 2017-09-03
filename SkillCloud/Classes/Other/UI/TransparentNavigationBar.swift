@@ -21,6 +21,14 @@ public class TransparentNavigationBar: UINavigationBar {
     public override func setItems(_ items: [UINavigationItem]?, animated: Bool) {
         super.setItems(items, animated: animated)
     }
+
+    public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        guard let _ = subviews.first(where: { $0.isUserInteractionEnabled && $0.point(inside: self.convert(point, to: $0), with: event) }) else {
+            return false
+        }
+
+        return true
+    }
 }
 
 extension UINavigationController {
@@ -35,4 +43,6 @@ extension UINavigationController {
         navigationBar.isTranslucent = UINavigationBar.appearance().isTranslucent
         navigationBar.shadowImage = UINavigationBar.appearance().shadowImage
     }
+
+
 }
