@@ -314,7 +314,7 @@
                             </view>
                             <slider hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="p3V-qJ-uVD">
                                 <rect key="frame" x="152" y="442" width="304" height="31"/>
-                                <color key="tintColor" red="0.44313725490196076" green="0.19607843137254902" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.26666666666666666" green="0.26759335398674011" blue="0.26737037301063538" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="v23-BJ-kdh"/>
                                 </constraints>

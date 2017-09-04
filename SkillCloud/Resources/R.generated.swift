@@ -17,7 +17,7 @@ struct R: Rswift.Validatable {
     try intern.validate()
   }
   
-  /// This `R.color` struct is generated, and contains static references to 7 color palettes.
+  /// This `R.color` struct is generated, and contains static references to 9 color palettes.
   struct color {
     /// This `R.color.graphPaletteAutumnRed` struct is generated, and contains static references to 5 colors.
     struct graphPaletteAutumnRed {
@@ -130,6 +130,66 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
+    /// This `R.color.graphPaletteGrayShades` struct is generated, and contains static references to 6 colors.
+    struct graphPaletteGrayShades {
+      /// <span style='background-color: #444444; color: #BBBBBB; padding: 1px 3px;'>#444444</span> skill4
+      static let skill4 = Rswift.ColorResource(name: "skill4", red: 0.2666666667, green: 0.267593354, blue: 0.267370373, alpha: 1.0)
+      /// <span style='background-color: #535353; color: #ACACAC; padding: 1px 3px;'>#535353</span> skill3
+      static let skill3 = Rswift.ColorResource(name: "skill3", red: 0.3254901961, green: 0.3256013095, blue: 0.3253414035, alpha: 1.0)
+      /// <span style='background-color: #797979; color: #868686; padding: 1px 3px;'>#797979</span> skill2
+      static let skill2 = Rswift.ColorResource(name: "skill2", red: 0.4745098039, green: 0.47622329, blue: 0.4758179784, alpha: 1.0)
+      /// <span style='background-color: #898989; color: #767676; padding: 1px 3px;'>#898989</span> skill1
+      static let skill1 = Rswift.ColorResource(name: "skill1", red: 0.537254902, green: 0.5368462801, blue: 0.5363980532, alpha: 1.0)
+      /// <span style='background-color: #A8A8A8; color: #575757; padding: 1px 3px;'>#A8A8A8</span> nodes
+      static let nodes = Rswift.ColorResource(name: "nodes", red: 0.6588235294, green: 0.6597424746, blue: 0.6592137218, alpha: 1.0)
+      /// <span style='background-color: #FC6A08; color: #0395F7; padding: 1px 3px;'>#FC6A08</span> selection
+      static let selection = Rswift.ColorResource(name: "selection", red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      
+      /// <span style='background-color: #444444; color: #BBBBBB; padding: 1px 3px;'>#444444</span> skill4
+      /// 
+      /// UIColor(red: 0.2666666667, green: 0.267593354, blue: 0.267370373, alpha: 1.0)
+      static func skill4(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.2666666667, green: 0.267593354, blue: 0.267370373, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #535353; color: #ACACAC; padding: 1px 3px;'>#535353</span> skill3
+      /// 
+      /// UIColor(red: 0.3254901961, green: 0.3256013095, blue: 0.3253414035, alpha: 1.0)
+      static func skill3(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.3254901961, green: 0.3256013095, blue: 0.3253414035, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #797979; color: #868686; padding: 1px 3px;'>#797979</span> skill2
+      /// 
+      /// UIColor(red: 0.4745098039, green: 0.47622329, blue: 0.4758179784, alpha: 1.0)
+      static func skill2(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.4745098039, green: 0.47622329, blue: 0.4758179784, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #898989; color: #767676; padding: 1px 3px;'>#898989</span> skill1
+      /// 
+      /// UIColor(red: 0.537254902, green: 0.5368462801, blue: 0.5363980532, alpha: 1.0)
+      static func skill1(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.537254902, green: 0.5368462801, blue: 0.5363980532, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #A8A8A8; color: #575757; padding: 1px 3px;'>#A8A8A8</span> nodes
+      /// 
+      /// UIColor(red: 0.6588235294, green: 0.6597424746, blue: 0.6592137218, alpha: 1.0)
+      static func nodes(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.6588235294, green: 0.6597424746, blue: 0.6592137218, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #FC6A08; color: #0395F7; padding: 1px 3px;'>#FC6A08</span> selection
+      /// 
+      /// UIColor(red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      static func selection(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      }
+      
+      fileprivate init() {}
+    }
+    
     /// This `R.color.graphPaletteGreens` struct is generated, and contains static references to 6 colors.
     struct graphPaletteGreens {
       /// <span style='background-color: #29393F; color: #D6C6C0; padding: 1px 3px;'>#29393F</span> skill4
@@ -178,6 +238,57 @@ struct R: Rswift.Validatable {
       /// UIColor(red: 0.5872479677, green: 0.6649456024, blue: 0.544706583, alpha: 1.0)
       static func nodes(_: Void = ()) -> UIKit.UIColor {
         return UIKit.UIColor(red: 0.5872479677, green: 0.6649456024, blue: 0.544706583, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #FC6A08; color: #0395F7; padding: 1px 3px;'>#FC6A08</span> selection
+      /// 
+      /// UIColor(red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      static func selection(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      }
+      
+      fileprivate init() {}
+    }
+    
+    /// This `R.color.graphPaletteLavander` struct is generated, and contains static references to 5 colors.
+    struct graphPaletteLavander {
+      /// <span style='background-color: #534946; color: #ACB6B9; padding: 1px 3px;'>#534946</span> skill3
+      static let skill3 = Rswift.ColorResource(name: "skill3", red: 0.3254901961, green: 0.2864725888, blue: 0.2751354277, alpha: 1.0)
+      /// <span style='background-color: #796471; color: #869B8E; padding: 1px 3px;'>#796471</span> skill2
+      static let skill2 = Rswift.ColorResource(name: "skill2", red: 0.4745098039, green: 0.3929418325, blue: 0.4437621236, alpha: 1.0)
+      /// <span style='background-color: #7F7D89; color: #808276; padding: 1px 3px;'>#7F7D89</span> skill1
+      static let skill1 = Rswift.ColorResource(name: "skill1", red: 0.4980392157, green: 0.4904855192, blue: 0.5363036394, alpha: 1.0)
+      /// <span style='background-color: #868799; color: #797866; padding: 1px 3px;'>#868799</span> nodes
+      static let nodes = Rswift.ColorResource(name: "nodes", red: 0.5254901961, green: 0.5302495956, blue: 0.6014695764, alpha: 1.0)
+      /// <span style='background-color: #FC6A08; color: #0395F7; padding: 1px 3px;'>#FC6A08</span> selection
+      static let selection = Rswift.ColorResource(name: "selection", red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      
+      /// <span style='background-color: #534946; color: #ACB6B9; padding: 1px 3px;'>#534946</span> skill3
+      /// 
+      /// UIColor(red: 0.3254901961, green: 0.2864725888, blue: 0.2751354277, alpha: 1.0)
+      static func skill3(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.3254901961, green: 0.2864725888, blue: 0.2751354277, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #796471; color: #869B8E; padding: 1px 3px;'>#796471</span> skill2
+      /// 
+      /// UIColor(red: 0.4745098039, green: 0.3929418325, blue: 0.4437621236, alpha: 1.0)
+      static func skill2(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.4745098039, green: 0.3929418325, blue: 0.4437621236, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #7F7D89; color: #808276; padding: 1px 3px;'>#7F7D89</span> skill1
+      /// 
+      /// UIColor(red: 0.4980392157, green: 0.4904855192, blue: 0.5363036394, alpha: 1.0)
+      static func skill1(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.4980392157, green: 0.4904855192, blue: 0.5363036394, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #868799; color: #797866; padding: 1px 3px;'>#868799</span> nodes
+      /// 
+      /// UIColor(red: 0.5254901961, green: 0.5302495956, blue: 0.6014695764, alpha: 1.0)
+      static func nodes(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.5254901961, green: 0.5302495956, blue: 0.6014695764, alpha: 1.0)
       }
       
       /// <span style='background-color: #FC6A08; color: #0395F7; padding: 1px 3px;'>#FC6A08</span> selection
@@ -388,7 +499,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 17 files.
+  /// This `R.file` struct is generated, and contains static references to 19 files.
   struct file {
     /// Resource file `AddScene.sks`.
     static let addSceneSks = Rswift.FileResource(bundle: R.hostingBundle, name: "AddScene", pathExtension: "sks")
@@ -400,8 +511,12 @@ struct R: Rswift.Validatable {
     static let graphPaletteAutumnRedClr = Rswift.FileResource(bundle: R.hostingBundle, name: "GraphPaletteAutumnRed", pathExtension: "clr")
     /// Resource file `GraphPaletteGrayGreenForest.clr`.
     static let graphPaletteGrayGreenForestClr = Rswift.FileResource(bundle: R.hostingBundle, name: "GraphPaletteGrayGreenForest", pathExtension: "clr")
+    /// Resource file `GraphPaletteGrayShades.clr`.
+    static let graphPaletteGrayShadesClr = Rswift.FileResource(bundle: R.hostingBundle, name: "GraphPaletteGrayShades", pathExtension: "clr")
     /// Resource file `GraphPaletteGreens.clr`.
     static let graphPaletteGreensClr = Rswift.FileResource(bundle: R.hostingBundle, name: "GraphPaletteGreens", pathExtension: "clr")
+    /// Resource file `GraphPaletteLavander.clr`.
+    static let graphPaletteLavanderClr = Rswift.FileResource(bundle: R.hostingBundle, name: "GraphPaletteLavander", pathExtension: "clr")
     /// Resource file `GraphPalettePastelWet.clr`.
     static let graphPalettePastelWetClr = Rswift.FileResource(bundle: R.hostingBundle, name: "GraphPalettePastelWet", pathExtension: "clr")
     /// Resource file `GraphPaletteSteelAndGlass.clr`.
@@ -455,9 +570,21 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
     
+    /// `bundle.url(forResource: "GraphPaletteGrayShades", withExtension: "clr")`
+    static func graphPaletteGrayShadesClr(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.graphPaletteGrayShadesClr
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
     /// `bundle.url(forResource: "GraphPaletteGreens", withExtension: "clr")`
     static func graphPaletteGreensClr(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.graphPaletteGreensClr
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "GraphPaletteLavander", withExtension: "clr")`
+    static func graphPaletteLavanderClr(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.graphPaletteLavanderClr
       return fileResource.bundle.url(forResource: fileResource)
     }
     

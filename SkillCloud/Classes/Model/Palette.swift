@@ -104,6 +104,18 @@ extension Palette {
                 Skill.Experience.professional: R.color.graphPalettePastelWet.skill3(),
                 Skill.Experience.expert:       R.color.graphPalettePastelWet.skill4()
             ]),
+            Palette("lavander", node: R.color.graphPaletteLavander.nodes() , selection: R.color.graphPaletteLavander.selection(), skills: [
+                Skill.Experience.beginner:     R.color.graphPaletteLavander.nodes(),
+                Skill.Experience.intermediate: R.color.graphPaletteLavander.skill1(),
+                Skill.Experience.professional: R.color.graphPaletteLavander.skill2(),
+                Skill.Experience.expert:       R.color.graphPaletteLavander.skill3()
+            ]),
+            Palette("grayShades", node: R.color.graphPaletteGrayShades.nodes() , selection: R.color.graphPaletteGrayShades.selection(), skills: [
+                Skill.Experience.beginner:     R.color.graphPaletteGrayShades.skill1(),
+                Skill.Experience.intermediate: R.color.graphPaletteGrayShades.skill2(),
+                Skill.Experience.professional: R.color.graphPaletteGrayShades.skill3(),
+                Skill.Experience.expert:       R.color.graphPaletteGrayShades.skill4()
+            ])
         ]
     }
 
