@@ -70,6 +70,11 @@
 		CC6E689B1F5C36F7006750BF /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E689A1F5C36F7006750BF /* R.generated.swift */; };
 		CC8C216C1E15709A001E466C /* UIImage+ShapeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */; };
 		CC9E4D411E0C480900ABB5A7 /* SpriteKit+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */; };
+		CCFDFEF01F5D834E000FF966 /* GraphPaletteTurquiseShades.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEEE1F5D834E000FF966 /* GraphPaletteTurquiseShades.clr */; };
+		CCFDFEF11F5D834E000FF966 /* GraphPaletteTurquiseSimple.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEEF1F5D834E000FF966 /* GraphPaletteTurquiseSimple.clr */; };
+		CCFDFEF51F5D8692000FF966 /* GraphPaletteAutumnRed.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEF21F5D8692000FF966 /* GraphPaletteAutumnRed.clr */; };
+		CCFDFEF61F5D8692000FF966 /* GraphPaletteGrayGreenForest.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEF31F5D8692000FF966 /* GraphPaletteGrayGreenForest.clr */; };
+		CCFDFEF71F5D8692000FF966 /* GraphPaletteSteelAndGlass.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEF41F5D8692000FF966 /* GraphPaletteSteelAndGlass.clr */; };
 		CCFFF6D51F5C0879004CD3D2 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFFF6D41F5C0879004CD3D2 /* TransparentNavigationBar.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
 		FE0522E21CB01BBF00315468 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522E11CB01BBF00315468 /* Node.swift */; };
@@ -185,6 +190,11 @@
 		CC6E689A1F5C36F7006750BF /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ShapeImage.swift"; sourceTree = "<group>"; };
 		CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SpriteKit+Spring.swift"; sourceTree = "<group>"; };
+		CCFDFEEE1F5D834E000FF966 /* GraphPaletteTurquiseShades.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteTurquiseShades.clr; sourceTree = "<group>"; };
+		CCFDFEEF1F5D834E000FF966 /* GraphPaletteTurquiseSimple.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteTurquiseSimple.clr; sourceTree = "<group>"; };
+		CCFDFEF21F5D8692000FF966 /* GraphPaletteAutumnRed.clr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GraphPaletteAutumnRed.clr; sourceTree = "<group>"; };
+		CCFDFEF31F5D8692000FF966 /* GraphPaletteGrayGreenForest.clr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GraphPaletteGrayGreenForest.clr; sourceTree = "<group>"; };
+		CCFDFEF41F5D8692000FF966 /* GraphPaletteSteelAndGlass.clr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GraphPaletteSteelAndGlass.clr; sourceTree = "<group>"; };
 		CCFFF6D41F5C0879004CD3D2 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentNavigationBar.swift; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		FE0522E11CB01BBF00315468 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -436,6 +446,18 @@
 			path = Nodes;
 			sourceTree = "<group>";
 		};
+		CCFDFEE91F5D8076000FF966 /* Palettes */ = {
+			isa = PBXGroup;
+			children = (
+				CCFDFEF21F5D8692000FF966 /* GraphPaletteAutumnRed.clr */,
+				CCFDFEF31F5D8692000FF966 /* GraphPaletteGrayGreenForest.clr */,
+				CCFDFEF41F5D8692000FF966 /* GraphPaletteSteelAndGlass.clr */,
+				CCFDFEEE1F5D834E000FF966 /* GraphPaletteTurquiseShades.clr */,
+				CCFDFEEF1F5D834E000FF966 /* GraphPaletteTurquiseSimple.clr */,
+			);
+			path = Palettes;
+			sourceTree = "<group>";
+		};
 		CCFFF6D31F5C0879004CD3D2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,6 +550,7 @@
 			children = (
 				FEB31DA31D31934800E7C203 /* Fonts */,
 				FE7C610C1D32A4CE006C987C /* Images */,
+				CCFDFEE91F5D8076000FF966 /* Palettes */,
 				C83BF8411D5C751200FDA60C /* Markdown */,
 				FE0522E41CB02D6600315468 /* Patterns */,
 				FE31DAFF1C9CA1240006D9EE /* Storyboards */,
@@ -698,14 +721,19 @@
 			files = (
 				C83BF8481D5C785A00FDA60C /* Licenses.md in Resources */,
 				FE7C61111D32A4CE006C987C /* launch-screen-image@2x.jpg in Resources */,
+				CCFDFEF01F5D834E000FF966 /* GraphPaletteTurquiseShades.clr in Resources */,
 				CC6E688E1F5C24D0006750BF /* AddScene.sks in Resources */,
+				CCFDFEF51F5D8692000FF966 /* GraphPaletteAutumnRed.clr in Resources */,
 				FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */,
 				C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */,
+				CCFDFEF71F5D8692000FF966 /* GraphPaletteSteelAndGlass.clr in Resources */,
 				FEB31DA51D31934800E7C203 /* Lato-Light.ttf in Resources */,
 				FE7C61101D32A4CE006C987C /* launch-screen-image.jpg in Resources */,
 				CC6E68751F5C24D0006750BF /* CloudGraphScene.sks in Resources */,
+				CCFDFEF61F5D8692000FF966 /* GraphPaletteGrayGreenForest.clr in Resources */,
 				FE0522E61CB02D6600315468 /* brain_graph_v0.1.json in Resources */,
 				CC6E68801F5C24D0006750BF /* CloudSelectScene.sks in Resources */,
+				CCFDFEF11F5D834E000FF966 /* GraphPaletteTurquiseSimple.clr in Resources */,
 				FE7C610B1D32A16F006C987C /* Lato-Regular.ttf in Resources */,
 				FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */,
 				FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */,

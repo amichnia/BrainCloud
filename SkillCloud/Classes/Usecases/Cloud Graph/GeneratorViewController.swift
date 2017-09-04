@@ -20,7 +20,6 @@ class GeneratorViewController: CloudViewController {
     @IBOutlet weak var nodeToolbarSection: UIView!
     @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var scaleContainer: TouchDownView!
-    @IBOutlet weak var scaleLabel: UILabel!
     @IBOutlet weak var scaleImage: UIImageView!
     @IBOutlet weak var scaleProgress: UISlider!
     @IBOutlet weak var paletteButton: UIButton!
@@ -45,14 +44,6 @@ class GeneratorViewController: CloudViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        if let image = scaleImage.image?.withRenderingMode(.alwaysTemplate) {
-            self.scaleImage.tintColor = UIColor.white
-            self.scaleImage.image = image
-            self.scaleImage.setNeedsDisplay()
-        } else {
-            assertionFailure()
-        }
 
         skView.setNeedsLayout()
         configurePalette()
@@ -251,7 +242,7 @@ class GeneratorViewController: CloudViewController {
     func promiseExportCloud() -> Promise<() -> ()> {
         return Promise<() -> ()> {
             self.scene.deselectNode()
-            self.promiseCaptureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
+            _ = self.promiseCaptureCloudWithSize(Defined.Cloud.ExportedDefaultSize)
             .then { image -> Void in
                 self.cloudImage = image
                 let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
@@ -382,7 +373,7 @@ class GeneratorViewController: CloudViewController {
             paletteSelectionViewController.preferredContentSize = CGSize(width: 300, height: 300)
             let popoverController = paletteSelectionViewController.popoverPresentationController
 
-            paletteSelectionViewController.promisePalette()
+            _ = paletteSelectionViewController.promisePalette()
             .then { palette -> Void in
                 Palette.main = palette
                 self.configurePalette()

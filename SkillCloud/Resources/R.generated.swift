@@ -17,12 +17,231 @@ struct R: Rswift.Validatable {
     try intern.validate()
   }
   
-  /// This `R.color` struct is generated, and contains static references to 0 color palettes.
+  /// This `R.color` struct is generated, and contains static references to 5 color palettes.
   struct color {
+    /// This `R.color.graphPaletteAutumnRed` struct is generated, and contains static references to 3 colors.
+    struct graphPaletteAutumnRed {
+      /// <span style='background-color: #585552; color: #A7AAAD; padding: 1px 3px;'>#585552</span> skill
+      static let skill = Rswift.ColorResource(name: "skill", red: 0.3450980392, green: 0.3333333333, blue: 0.3215686275, alpha: 1.0)
+      /// <span style='background-color: #71323E; color: #8ECDC1; padding: 1px 3px;'>#71323E</span> selection
+      static let selection = Rswift.ColorResource(name: "selection", red: 0.4431372549, green: 0.1960784314, blue: 0.2431372549, alpha: 1.0)
+      /// <span style='background-color: #A67A6D; color: #598592; padding: 1px 3px;'>#A67A6D</span> nodes
+      static let nodes = Rswift.ColorResource(name: "nodes", red: 0.6509803922, green: 0.4784313725, blue: 0.4274509804, alpha: 1.0)
+      
+      /// <span style='background-color: #585552; color: #A7AAAD; padding: 1px 3px;'>#585552</span> skill
+      /// 
+      /// UIColor(red: 0.3450980392, green: 0.3333333333, blue: 0.3215686275, alpha: 1.0)
+      static func skill(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.3450980392, green: 0.3333333333, blue: 0.3215686275, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #71323E; color: #8ECDC1; padding: 1px 3px;'>#71323E</span> selection
+      /// 
+      /// UIColor(red: 0.4431372549, green: 0.1960784314, blue: 0.2431372549, alpha: 1.0)
+      static func selection(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.4431372549, green: 0.1960784314, blue: 0.2431372549, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #A67A6D; color: #598592; padding: 1px 3px;'>#A67A6D</span> nodes
+      /// 
+      /// UIColor(red: 0.6509803922, green: 0.4784313725, blue: 0.4274509804, alpha: 1.0)
+      static func nodes(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.6509803922, green: 0.4784313725, blue: 0.4274509804, alpha: 1.0)
+      }
+      
+      fileprivate init() {}
+    }
+    
+    /// This `R.color.graphPaletteGrayGreenForest` struct is generated, and contains static references to 6 colors.
+    struct graphPaletteGrayGreenForest {
+      /// <span style='background-color: #247294; color: #DB8D6B; padding: 1px 3px;'>#247294</span> selection
+      static let selection = Rswift.ColorResource(name: "selection", red: 0.1411764706, green: 0.4470588235, blue: 0.5803921569, alpha: 1.0)
+      /// <span style='background-color: #565131; color: #A9AECE; padding: 1px 3px;'>#565131</span> skill3
+      static let skill3 = Rswift.ColorResource(name: "skill3", red: 0.337254902, green: 0.3176470588, blue: 0.1921568627, alpha: 1.0)
+      /// <span style='background-color: #5D3B2B; color: #A2C4D4; padding: 1px 3px;'>#5D3B2B</span> skill4
+      static let skill4 = Rswift.ColorResource(name: "skill4", red: 0.3647058824, green: 0.231372549, blue: 0.168627451, alpha: 1.0)
+      /// <span style='background-color: #7A6661; color: #85999E; padding: 1px 3px;'>#7A6661</span> skill2
+      static let skill2 = Rswift.ColorResource(name: "skill2", red: 0.4784313725, green: 0.4, blue: 0.3803921569, alpha: 1.0)
+      /// <span style='background-color: #A49879; color: #5B6786; padding: 1px 3px;'>#A49879</span> skill1
+      static let skill1 = Rswift.ColorResource(name: "skill1", red: 0.6431372549, green: 0.5960784314, blue: 0.4745098039, alpha: 1.0)
+      /// <span style='background-color: #F7DEBB; color: #082144; padding: 1px 3px;'>#F7DEBB</span> nodes
+      static let nodes = Rswift.ColorResource(name: "nodes", red: 0.968627451, green: 0.8705882353, blue: 0.7333333333, alpha: 1.0)
+      
+      /// <span style='background-color: #247294; color: #DB8D6B; padding: 1px 3px;'>#247294</span> selection
+      /// 
+      /// UIColor(red: 0.1411764706, green: 0.4470588235, blue: 0.5803921569, alpha: 1.0)
+      static func selection(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.1411764706, green: 0.4470588235, blue: 0.5803921569, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #565131; color: #A9AECE; padding: 1px 3px;'>#565131</span> skill3
+      /// 
+      /// UIColor(red: 0.337254902, green: 0.3176470588, blue: 0.1921568627, alpha: 1.0)
+      static func skill3(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.337254902, green: 0.3176470588, blue: 0.1921568627, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #5D3B2B; color: #A2C4D4; padding: 1px 3px;'>#5D3B2B</span> skill4
+      /// 
+      /// UIColor(red: 0.3647058824, green: 0.231372549, blue: 0.168627451, alpha: 1.0)
+      static func skill4(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.3647058824, green: 0.231372549, blue: 0.168627451, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #7A6661; color: #85999E; padding: 1px 3px;'>#7A6661</span> skill2
+      /// 
+      /// UIColor(red: 0.4784313725, green: 0.4, blue: 0.3803921569, alpha: 1.0)
+      static func skill2(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.4784313725, green: 0.4, blue: 0.3803921569, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #A49879; color: #5B6786; padding: 1px 3px;'>#A49879</span> skill1
+      /// 
+      /// UIColor(red: 0.6431372549, green: 0.5960784314, blue: 0.4745098039, alpha: 1.0)
+      static func skill1(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.6431372549, green: 0.5960784314, blue: 0.4745098039, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #F7DEBB; color: #082144; padding: 1px 3px;'>#F7DEBB</span> nodes
+      /// 
+      /// UIColor(red: 0.968627451, green: 0.8705882353, blue: 0.7333333333, alpha: 1.0)
+      static func nodes(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.968627451, green: 0.8705882353, blue: 0.7333333333, alpha: 1.0)
+      }
+      
+      fileprivate init() {}
+    }
+    
+    /// This `R.color.graphPaletteSteelAndGlass` struct is generated, and contains static references to 4 colors.
+    struct graphPaletteSteelAndGlass {
+      /// <span style='background-color: #394D61; color: #C6B29E; padding: 1px 3px;'>#394D61</span> skillsBig
+      static let skillsBig = Rswift.ColorResource(name: "skillsBig", red: 0.2235294118, green: 0.3019607843, blue: 0.3803921569, alpha: 1.0)
+      /// <span style='background-color: #98C2E7; color: #673D18; padding: 1px 3px;'>#98C2E7</span> skillsSmall
+      static let skillsSmall = Rswift.ColorResource(name: "skillsSmall", red: 0.5960784314, green: 0.7607843137, blue: 0.9058823529, alpha: 1.0)
+      /// <span style='background-color: #DFE2EB; color: #201D14; padding: 1px 3px;'>#DFE2EB</span> nodes
+      static let nodes = Rswift.ColorResource(name: "nodes", red: 0.8745098039, green: 0.8862745098, blue: 0.9215686275, alpha: 1.0)
+      /// <span style='background-color: #FC6A08; color: #0395F7; padding: 1px 3px;'>#FC6A08</span> selection
+      static let selection = Rswift.ColorResource(name: "selection", red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      
+      /// <span style='background-color: #394D61; color: #C6B29E; padding: 1px 3px;'>#394D61</span> skillsBig
+      /// 
+      /// UIColor(red: 0.2235294118, green: 0.3019607843, blue: 0.3803921569, alpha: 1.0)
+      static func skillsBig(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.2235294118, green: 0.3019607843, blue: 0.3803921569, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #98C2E7; color: #673D18; padding: 1px 3px;'>#98C2E7</span> skillsSmall
+      /// 
+      /// UIColor(red: 0.5960784314, green: 0.7607843137, blue: 0.9058823529, alpha: 1.0)
+      static func skillsSmall(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.5960784314, green: 0.7607843137, blue: 0.9058823529, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #DFE2EB; color: #201D14; padding: 1px 3px;'>#DFE2EB</span> nodes
+      /// 
+      /// UIColor(red: 0.8745098039, green: 0.8862745098, blue: 0.9215686275, alpha: 1.0)
+      static func nodes(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.8745098039, green: 0.8862745098, blue: 0.9215686275, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #FC6A08; color: #0395F7; padding: 1px 3px;'>#FC6A08</span> selection
+      /// 
+      /// UIColor(red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      static func selection(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      }
+      
+      fileprivate init() {}
+    }
+    
+    /// This `R.color.graphPaletteTurquiseShades` struct is generated, and contains static references to 6 colors.
+    struct graphPaletteTurquiseShades {
+      /// <span style='background-color: #0C2631; color: #F3D9CE; padding: 1px 3px;'>#0C2631</span> nodes
+      static let nodes = Rswift.ColorResource(name: "nodes", red: 0.04705882353, green: 0.1490196078, blue: 0.1921568627, alpha: 1.0)
+      /// <span style='background-color: #143F52; color: #EBC0AD; padding: 1px 3px;'>#143F52</span> skill1
+      static let skill1 = Rswift.ColorResource(name: "skill1", red: 0.07843137255, green: 0.2470588235, blue: 0.3215686275, alpha: 1.0)
+      /// <span style='background-color: #1C5973; color: #E3A68C; padding: 1px 3px;'>#1C5973</span> skill2
+      static let skill2 = Rswift.ColorResource(name: "skill2", red: 0.1098039216, green: 0.3490196078, blue: 0.4509803922, alpha: 1.0)
+      /// <span style='background-color: #247294; color: #DB8D6B; padding: 1px 3px;'>#247294</span> skill3
+      static let skill3 = Rswift.ColorResource(name: "skill3", red: 0.1411764706, green: 0.4470588235, blue: 0.5803921569, alpha: 1.0)
+      /// <span style='background-color: #2C8CB5; color: #D3734A; padding: 1px 3px;'>#2C8CB5</span> skill4
+      static let skill4 = Rswift.ColorResource(name: "skill4", red: 0.1725490196, green: 0.5490196078, blue: 0.7098039216, alpha: 1.0)
+      /// <span style='background-color: #FC6A08; color: #0395F7; padding: 1px 3px;'>#FC6A08</span> selection
+      static let selection = Rswift.ColorResource(name: "selection", red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      
+      /// <span style='background-color: #0C2631; color: #F3D9CE; padding: 1px 3px;'>#0C2631</span> nodes
+      /// 
+      /// UIColor(red: 0.04705882353, green: 0.1490196078, blue: 0.1921568627, alpha: 1.0)
+      static func nodes(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.04705882353, green: 0.1490196078, blue: 0.1921568627, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #143F52; color: #EBC0AD; padding: 1px 3px;'>#143F52</span> skill1
+      /// 
+      /// UIColor(red: 0.07843137255, green: 0.2470588235, blue: 0.3215686275, alpha: 1.0)
+      static func skill1(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.07843137255, green: 0.2470588235, blue: 0.3215686275, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #1C5973; color: #E3A68C; padding: 1px 3px;'>#1C5973</span> skill2
+      /// 
+      /// UIColor(red: 0.1098039216, green: 0.3490196078, blue: 0.4509803922, alpha: 1.0)
+      static func skill2(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.1098039216, green: 0.3490196078, blue: 0.4509803922, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #247294; color: #DB8D6B; padding: 1px 3px;'>#247294</span> skill3
+      /// 
+      /// UIColor(red: 0.1411764706, green: 0.4470588235, blue: 0.5803921569, alpha: 1.0)
+      static func skill3(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.1411764706, green: 0.4470588235, blue: 0.5803921569, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #2C8CB5; color: #D3734A; padding: 1px 3px;'>#2C8CB5</span> skill4
+      /// 
+      /// UIColor(red: 0.1725490196, green: 0.5490196078, blue: 0.7098039216, alpha: 1.0)
+      static func skill4(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.1725490196, green: 0.5490196078, blue: 0.7098039216, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #FC6A08; color: #0395F7; padding: 1px 3px;'>#FC6A08</span> selection
+      /// 
+      /// UIColor(red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      static func selection(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      }
+      
+      fileprivate init() {}
+    }
+    
+    /// This `R.color.graphPaletteTurquiseSimple` struct is generated, and contains static references to 2 colors.
+    struct graphPaletteTurquiseSimple {
+      /// <span style='background-color: #2C8CB5; color: #D3734A; padding: 1px 3px;'>#2C8CB5</span> nodes
+      static let nodes = Rswift.ColorResource(name: "nodes", red: 0.1725490196, green: 0.5490196078, blue: 0.7098039216, alpha: 1.0)
+      /// <span style='background-color: #FC6A08; color: #0395F7; padding: 1px 3px;'>#FC6A08</span> selection
+      static let selection = Rswift.ColorResource(name: "selection", red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      
+      /// <span style='background-color: #2C8CB5; color: #D3734A; padding: 1px 3px;'>#2C8CB5</span> nodes
+      /// 
+      /// UIColor(red: 0.1725490196, green: 0.5490196078, blue: 0.7098039216, alpha: 1.0)
+      static func nodes(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.1725490196, green: 0.5490196078, blue: 0.7098039216, alpha: 1.0)
+      }
+      
+      /// <span style='background-color: #FC6A08; color: #0395F7; padding: 1px 3px;'>#FC6A08</span> selection
+      /// 
+      /// UIColor(red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      static func selection(_: Void = ()) -> UIKit.UIColor {
+        return UIKit.UIColor(red: 0.9882352941, green: 0.4156862745, blue: 0.03137254902, alpha: 1.0)
+      }
+      
+      fileprivate init() {}
+    }
+    
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 10 files.
+  /// This `R.file` struct is generated, and contains static references to 15 files.
   struct file {
     /// Resource file `AddScene.sks`.
     static let addSceneSks = Rswift.FileResource(bundle: R.hostingBundle, name: "AddScene", pathExtension: "sks")
@@ -30,6 +249,16 @@ struct R: Rswift.Validatable {
     static let cloudGraphSceneSks = Rswift.FileResource(bundle: R.hostingBundle, name: "CloudGraphScene", pathExtension: "sks")
     /// Resource file `CloudSelectScene.sks`.
     static let cloudSelectSceneSks = Rswift.FileResource(bundle: R.hostingBundle, name: "CloudSelectScene", pathExtension: "sks")
+    /// Resource file `GraphPaletteAutumnRed.clr`.
+    static let graphPaletteAutumnRedClr = Rswift.FileResource(bundle: R.hostingBundle, name: "GraphPaletteAutumnRed", pathExtension: "clr")
+    /// Resource file `GraphPaletteGrayGreenForest.clr`.
+    static let graphPaletteGrayGreenForestClr = Rswift.FileResource(bundle: R.hostingBundle, name: "GraphPaletteGrayGreenForest", pathExtension: "clr")
+    /// Resource file `GraphPaletteSteelAndGlass.clr`.
+    static let graphPaletteSteelAndGlassClr = Rswift.FileResource(bundle: R.hostingBundle, name: "GraphPaletteSteelAndGlass", pathExtension: "clr")
+    /// Resource file `GraphPaletteTurquiseShades.clr`.
+    static let graphPaletteTurquiseShadesClr = Rswift.FileResource(bundle: R.hostingBundle, name: "GraphPaletteTurquiseShades", pathExtension: "clr")
+    /// Resource file `GraphPaletteTurquiseSimple.clr`.
+    static let graphPaletteTurquiseSimpleClr = Rswift.FileResource(bundle: R.hostingBundle, name: "GraphPaletteTurquiseSimple", pathExtension: "clr")
     /// Resource file `Lato-Light.ttf`.
     static let latoLightTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-Light", pathExtension: "ttf")
     /// Resource file `Lato-Regular.ttf`.
@@ -60,6 +289,36 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "CloudSelectScene", withExtension: "sks")`
     static func cloudSelectSceneSks(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.cloudSelectSceneSks
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "GraphPaletteAutumnRed", withExtension: "clr")`
+    static func graphPaletteAutumnRedClr(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.graphPaletteAutumnRedClr
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "GraphPaletteGrayGreenForest", withExtension: "clr")`
+    static func graphPaletteGrayGreenForestClr(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.graphPaletteGrayGreenForestClr
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "GraphPaletteSteelAndGlass", withExtension: "clr")`
+    static func graphPaletteSteelAndGlassClr(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.graphPaletteSteelAndGlassClr
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "GraphPaletteTurquiseShades", withExtension: "clr")`
+    static func graphPaletteTurquiseShadesClr(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.graphPaletteTurquiseShadesClr
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    /// `bundle.url(forResource: "GraphPaletteTurquiseSimple", withExtension: "clr")`
+    static func graphPaletteTurquiseSimpleClr(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.graphPaletteTurquiseSimpleClr
       return fileResource.bundle.url(forResource: fileResource)
     }
     
@@ -598,6 +857,46 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.spriteNode, compatibleWith: traitCollection)
     }
     
+    /// This `R.image.icon` struct is generated, and contains static references to 1 images.
+    struct icon {
+      /// Image `export`.
+      static let export = Rswift.ImageResource(bundle: R.hostingBundle, name: "Icon/export")
+      
+      /// `UIImage(named: "export", bundle: ..., traitCollection: ...)`
+      static func export(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.icon.export, compatibleWith: traitCollection)
+      }
+      
+      /// This `R.image.icon.graph` struct is generated, and contains static references to 3 images.
+      struct graph {
+        /// Image `empty`.
+        static let empty = Rswift.ImageResource(bundle: R.hostingBundle, name: "Icon/Graph/empty")
+        /// Image `remove`.
+        static let remove = Rswift.ImageResource(bundle: R.hostingBundle, name: "Icon/Graph/remove")
+        /// Image `resize`.
+        static let resize = Rswift.ImageResource(bundle: R.hostingBundle, name: "Icon/Graph/resize")
+        
+        /// `UIImage(named: "empty", bundle: ..., traitCollection: ...)`
+        static func empty(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+          return UIKit.UIImage(resource: R.image.icon.graph.empty, compatibleWith: traitCollection)
+        }
+        
+        /// `UIImage(named: "remove", bundle: ..., traitCollection: ...)`
+        static func remove(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+          return UIKit.UIImage(resource: R.image.icon.graph.remove, compatibleWith: traitCollection)
+        }
+        
+        /// `UIImage(named: "resize", bundle: ..., traitCollection: ...)`
+        static func resize(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+          return UIKit.UIImage(resource: R.image.icon.graph.resize, compatibleWith: traitCollection)
+        }
+        
+        fileprivate init() {}
+      }
+      
+      fileprivate init() {}
+    }
+    
     fileprivate init() {}
   }
   
@@ -1114,12 +1413,12 @@ struct _R: Rswift.Validatable {
       
       static func validate() throws {
         if UIKit.UIImage(named: "icon-info-tabbar-selected") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-info-tabbar-selected' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "Icon/Graph/remove") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Icon/Graph/remove' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-about-sync") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-about-sync' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-about-website") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-about-website' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-explore-tabbar-selected") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-explore-tabbar-selected' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-about-export") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-about-export' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-skills-tabbar") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-skills-tabbar' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "icon-scale") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-scale' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-info-tabbar") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-info-tabbar' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-about-cloud") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-about-cloud' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-setting") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-setting' is used in storyboard 'Main', but couldn't be loaded.") }
@@ -1131,14 +1430,15 @@ struct _R: Rswift.Validatable {
         if UIKit.UIImage(named: "ic-big-blue-outline") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'ic-big-blue-outline' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-x") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-x' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-cloud-tabbar-selected") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-cloud-tabbar-selected' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "icon-trash") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-trash' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-x-black") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-x-black' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "logo-girappe-small") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo-girappe-small' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic-add") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'ic-add' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "icon-export-black") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-export-black' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "Icon/export") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Icon/export' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "skillcloud") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'skillcloud' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "Icon/Graph/resize") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Icon/Graph/resize' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-about-levels") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-about-levels' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-explore-tabbar") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-explore-tabbar' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "Icon/Graph/empty") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Icon/Graph/empty' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-about-collect") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-about-collect' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-about-write") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-about-write' is used in storyboard 'Main', but couldn't be loaded.") }
         if _R.storyboard.main().addSkillViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'addSkillViewController' could not be loaded from storyboard 'Main' as 'AddViewController'.") }
