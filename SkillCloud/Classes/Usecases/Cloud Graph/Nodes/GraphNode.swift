@@ -23,12 +23,8 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
     }
     var originalPosition: CGPoint = CGPoint.zero
     var currentScale: CGFloat {
-        get {
-            return self.xScale
-        }
-        set {
-            self.setScale(newValue)
-        }
+        get { return self.xScale }
+        set { self.setScale(newValue) }
     }
     var originalScale: CGFloat = 1.0
     var pinned: Bool = false
@@ -160,11 +156,9 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
             return node
         }
     }
-    
 }
 
 extension GraphNode {
-    
     func promiseSpawnInScene(_ scene: SKScene, atPosition position: CGPoint, animated: Bool = true, entity: SkillNodeEntity) -> Promise<GraphNode> {
         let exp = Skill.Experience(rawValue: Int(entity.skillExperienceValue))!
         let skill = Skill(title: entity.skillName!, thumbnail: entity.skillImage!, experience: exp, description: nil)
@@ -187,6 +181,4 @@ extension GraphNode {
             return node
         }
     }
-    
 }
-

@@ -255,9 +255,9 @@ class GeneratorViewController: CloudViewController {
         return firstly {
             DataManager.promiseDeleteEntity(GraphCloudEntity.self, model: self.scene)
         }
-                .then { _ -> (() -> ()) in
-                    return { self.performSegue(withIdentifier: "UnwindToSelection", sender: nil) }
-                }
+        .then { _ -> (() -> ()) in
+            return { self.performSegue(withIdentifier: "UnwindToSelection", sender: nil) }
+        }
     }
 
     func promiseCaptureThumbnail() -> Promise<UIImage> {
@@ -401,7 +401,11 @@ extension GeneratorViewController {
 
 extension GeneratorViewController: TouchDownViewDelegate {
     func didTouch(_ down: Bool) {
-        guard down else { return }
+        guard down else {
+            showScaleSliderWithFill(nil)
+            return
+        }
+        
         self.showScaleSliderWithFill(self.scene.willStartScale())
     }
 }

@@ -17,9 +17,7 @@ class TouchDownView: UIView {
     @IBOutlet weak var delegate: TouchDownViewDelegate?
     
     var touchDown: Bool = false {
-        didSet {
-            delegate?.didTouch(self.touchDown)
-        }
+        didSet { delegate?.didTouch(self.touchDown) }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

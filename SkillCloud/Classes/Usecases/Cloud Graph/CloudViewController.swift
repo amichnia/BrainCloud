@@ -77,13 +77,25 @@ class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentati
         }
     }
 
+    // MARK: - Helpers
+    func scrollToItem(at indexPath: IndexPath) {
+        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+
+        guard let rect = layout.layoutAttributesForItem(at: indexPath)?.frame else {
+            return
+        }
+
+        collectionView.scrollRectToVisible(rect, animated: true)
+    }
+
     // MARK: - Navigation
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
     }
 }
 
-// MARK: - UICollectionViewDataSource
 extension CloudViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
@@ -124,7 +136,6 @@ extension CloudViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UICollectionViewDelegate
 extension CloudViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == 1 && indexPath.row < self.skills.count else {
@@ -133,7 +144,6 @@ extension CloudViewController: UICollectionViewDelegate {
 
         self.skillToAdd = self.skills[indexPath.row]
         self.selectedRow = indexPath.row
-        CloudGraphScene.radius = self.skillToAdd!.experience.radius / Node.scaleFactor
     }
 }
 
@@ -145,15 +155,7 @@ extension CloudViewController: CloudSceneDelegate {
         collectionView(self.collectionView, didSelectItemAt: newIndexPath)
         collectionView.reloadItems(at: [indexPath, newIndexPath])
 
-        guard let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
-            return
-        }
-
-        guard let rect = layout.layoutAttributesForItem(at: newIndexPath)?.frame else {
-            return
-        }
-
-        collectionView.scrollRectToVisible(rect, animated: true)
+        scrollToItem(at: newIndexPath)
     }
 }
 

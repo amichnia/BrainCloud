@@ -19,11 +19,6 @@ protocol SkillsProvider: class {
 }
 
 class CloudGraphScene: SKScene, DTOModel {
-
-    // TODO: Remove this later
-    static var colliderRadius: CGFloat = 20
-    static var radius: CGFloat = 20
-
     // MARK: - Properties
     weak var cloudDelegate: CloudSceneDelegate?
 
