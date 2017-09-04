@@ -70,7 +70,7 @@ class GeneratorViewController: CloudViewController {
     }
 
     func configurePalette() {
-        let size = CGSize(width: 30, height: 30)
+        let size = CGSize(width: 24, height: 24)
         paletteButton.setImage(Palette.main.thumbnail(for: size), for: .normal)
         scene?.updateColor(palette: Palette.main)
     }

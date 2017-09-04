@@ -60,7 +60,7 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
         
         self.texture = SKTexture(imageNamed: "ic-empty")
         
-        self.skillNode = SkillNode.nodeWithSkill(skill, attahcedTo: self)
+        self.skillNode = SkillNode.nodeWithSkill(skill, attachedTo: self)
         
         if animated {
             self.setScale(0)

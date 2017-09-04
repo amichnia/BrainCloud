@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0EBD292BB6568C34F93754EC /* Pods_SkillCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0973088A39C9FDA46F42FEC2 /* Pods_SkillCloud.framework */; };
 		8CA6C4F36E731EB0C7ACC96C /* Skill+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6C6E5BEC7A3AD7960DD44 /* Skill+CloudKit.swift */; };
+		8CA6CD66266C0B5A486D3E0A /* Skill+DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6C4FDC3856442D5417107 /* Skill+DTO.swift */; };
 		8CA6CE3FD63AB58C9E23C35D /* Skill+Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CE61836B24CB81699B31 /* Skill+Experience.swift */; };
 		C83BF83F1D5C73A100FDA60C /* TSMarkdownParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C83BF83E1D5C73A100FDA60C /* TSMarkdownParser.framework */; };
 		C83BF8481D5C785A00FDA60C /* Licenses.md in Resources */ = {isa = PBXBuildFile; fileRef = C83BF8461D5C784300FDA60C /* Licenses.md */; };
@@ -70,11 +71,13 @@
 		CC6E689B1F5C36F7006750BF /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E689A1F5C36F7006750BF /* R.generated.swift */; };
 		CC8C216C1E15709A001E466C /* UIImage+ShapeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */; };
 		CC9E4D411E0C480900ABB5A7 /* SpriteKit+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */; };
-		CCFDFEF01F5D834E000FF966 /* GraphPaletteTurquiseShades.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEEE1F5D834E000FF966 /* GraphPaletteTurquiseShades.clr */; };
-		CCFDFEF11F5D834E000FF966 /* GraphPaletteTurquiseSimple.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEEF1F5D834E000FF966 /* GraphPaletteTurquiseSimple.clr */; };
-		CCFDFEF51F5D8692000FF966 /* GraphPaletteAutumnRed.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEF21F5D8692000FF966 /* GraphPaletteAutumnRed.clr */; };
-		CCFDFEF61F5D8692000FF966 /* GraphPaletteGrayGreenForest.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEF31F5D8692000FF966 /* GraphPaletteGrayGreenForest.clr */; };
-		CCFDFEF71F5D8692000FF966 /* GraphPaletteSteelAndGlass.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEF41F5D8692000FF966 /* GraphPaletteSteelAndGlass.clr */; };
+		CCFDFF001F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEF91F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr */; };
+		CCFDFF011F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFA1F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr */; };
+		CCFDFF021F5DF0D4000FF966 /* GraphPaletteGreens.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFB1F5DF0D4000FF966 /* GraphPaletteGreens.clr */; };
+		CCFDFF031F5DF0D4000FF966 /* GraphPalettePastelWet.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFC1F5DF0D4000FF966 /* GraphPalettePastelWet.clr */; };
+		CCFDFF041F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFD1F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr */; };
+		CCFDFF051F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFE1F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr */; };
+		CCFDFF061F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFF1F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr */; };
 		CCFFF6D51F5C0879004CD3D2 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFFF6D41F5C0879004CD3D2 /* TransparentNavigationBar.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
 		FE0522E21CB01BBF00315468 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522E11CB01BBF00315468 /* Node.swift */; };
@@ -127,6 +130,7 @@
 		0973088A39C9FDA46F42FEC2 /* Pods_SkillCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkillCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1712187C40B694294151165F /* Pods-SkillCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.release.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.release.xcconfig"; sourceTree = "<group>"; };
 		475C05D26AD5AF1583C89837 /* Pods-SkillCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.debug.xcconfig"; sourceTree = "<group>"; };
+		8CA6C4FDC3856442D5417107 /* Skill+DTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skill+DTO.swift"; sourceTree = "<group>"; };
 		8CA6C6E5BEC7A3AD7960DD44 /* Skill+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skill+CloudKit.swift"; sourceTree = "<group>"; };
 		8CA6CE61836B24CB81699B31 /* Skill+Experience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skill+Experience.swift"; sourceTree = "<group>"; };
 		C83BF83E1D5C73A100FDA60C /* TSMarkdownParser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSMarkdownParser.framework; path = Carthage/Build/iOS/TSMarkdownParser.framework; sourceTree = "<group>"; };
@@ -190,11 +194,13 @@
 		CC6E689A1F5C36F7006750BF /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ShapeImage.swift"; sourceTree = "<group>"; };
 		CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SpriteKit+Spring.swift"; sourceTree = "<group>"; };
-		CCFDFEEE1F5D834E000FF966 /* GraphPaletteTurquiseShades.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteTurquiseShades.clr; sourceTree = "<group>"; };
-		CCFDFEEF1F5D834E000FF966 /* GraphPaletteTurquiseSimple.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteTurquiseSimple.clr; sourceTree = "<group>"; };
-		CCFDFEF21F5D8692000FF966 /* GraphPaletteAutumnRed.clr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GraphPaletteAutumnRed.clr; sourceTree = "<group>"; };
-		CCFDFEF31F5D8692000FF966 /* GraphPaletteGrayGreenForest.clr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GraphPaletteGrayGreenForest.clr; sourceTree = "<group>"; };
-		CCFDFEF41F5D8692000FF966 /* GraphPaletteSteelAndGlass.clr */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GraphPaletteSteelAndGlass.clr; sourceTree = "<group>"; };
+		CCFDFEF91F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteAutumnRed.clr; sourceTree = "<group>"; };
+		CCFDFEFA1F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteGrayGreenForest.clr; sourceTree = "<group>"; };
+		CCFDFEFB1F5DF0D4000FF966 /* GraphPaletteGreens.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteGreens.clr; sourceTree = "<group>"; };
+		CCFDFEFC1F5DF0D4000FF966 /* GraphPalettePastelWet.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPalettePastelWet.clr; sourceTree = "<group>"; };
+		CCFDFEFD1F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteSteelAndGlass.clr; sourceTree = "<group>"; };
+		CCFDFEFE1F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteTurquiseShades.clr; sourceTree = "<group>"; };
+		CCFDFEFF1F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteTurquiseSimple.clr; sourceTree = "<group>"; };
 		CCFFF6D41F5C0879004CD3D2 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentNavigationBar.swift; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		FE0522E11CB01BBF00315468 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -446,14 +452,16 @@
 			path = Nodes;
 			sourceTree = "<group>";
 		};
-		CCFDFEE91F5D8076000FF966 /* Palettes */ = {
+		CCFDFEF81F5DF0D4000FF966 /* Palettes */ = {
 			isa = PBXGroup;
 			children = (
-				CCFDFEF21F5D8692000FF966 /* GraphPaletteAutumnRed.clr */,
-				CCFDFEF31F5D8692000FF966 /* GraphPaletteGrayGreenForest.clr */,
-				CCFDFEF41F5D8692000FF966 /* GraphPaletteSteelAndGlass.clr */,
-				CCFDFEEE1F5D834E000FF966 /* GraphPaletteTurquiseShades.clr */,
-				CCFDFEEF1F5D834E000FF966 /* GraphPaletteTurquiseSimple.clr */,
+				CCFDFEF91F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr */,
+				CCFDFEFA1F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr */,
+				CCFDFEFB1F5DF0D4000FF966 /* GraphPaletteGreens.clr */,
+				CCFDFEFC1F5DF0D4000FF966 /* GraphPalettePastelWet.clr */,
+				CCFDFEFD1F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr */,
+				CCFDFEFE1F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr */,
+				CCFDFEFF1F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr */,
 			);
 			path = Palettes;
 			sourceTree = "<group>";
@@ -527,6 +535,7 @@
 				FE31DAEE1C9CA1240006D9EE /* Skill.swift */,
 				8CA6CE61836B24CB81699B31 /* Skill+Experience.swift */,
 				8CA6C6E5BEC7A3AD7960DD44 /* Skill+CloudKit.swift */,
+				8CA6C4FDC3856442D5417107 /* Skill+DTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -550,7 +559,7 @@
 			children = (
 				FEB31DA31D31934800E7C203 /* Fonts */,
 				FE7C610C1D32A4CE006C987C /* Images */,
-				CCFDFEE91F5D8076000FF966 /* Palettes */,
+				CCFDFEF81F5DF0D4000FF966 /* Palettes */,
 				C83BF8411D5C751200FDA60C /* Markdown */,
 				FE0522E41CB02D6600315468 /* Patterns */,
 				FE31DAFF1C9CA1240006D9EE /* Storyboards */,
@@ -719,26 +728,28 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCFDFF051F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr in Resources */,
 				C83BF8481D5C785A00FDA60C /* Licenses.md in Resources */,
 				FE7C61111D32A4CE006C987C /* launch-screen-image@2x.jpg in Resources */,
-				CCFDFEF01F5D834E000FF966 /* GraphPaletteTurquiseShades.clr in Resources */,
 				CC6E688E1F5C24D0006750BF /* AddScene.sks in Resources */,
-				CCFDFEF51F5D8692000FF966 /* GraphPaletteAutumnRed.clr in Resources */,
 				FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */,
 				C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */,
-				CCFDFEF71F5D8692000FF966 /* GraphPaletteSteelAndGlass.clr in Resources */,
 				FEB31DA51D31934800E7C203 /* Lato-Light.ttf in Resources */,
 				FE7C61101D32A4CE006C987C /* launch-screen-image.jpg in Resources */,
+				CCFDFF061F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr in Resources */,
+				CCFDFF041F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr in Resources */,
 				CC6E68751F5C24D0006750BF /* CloudGraphScene.sks in Resources */,
-				CCFDFEF61F5D8692000FF966 /* GraphPaletteGrayGreenForest.clr in Resources */,
+				CCFDFF031F5DF0D4000FF966 /* GraphPalettePastelWet.clr in Resources */,
 				FE0522E61CB02D6600315468 /* brain_graph_v0.1.json in Resources */,
 				CC6E68801F5C24D0006750BF /* CloudSelectScene.sks in Resources */,
-				CCFDFEF11F5D834E000FF966 /* GraphPaletteTurquiseSimple.clr in Resources */,
 				FE7C610B1D32A16F006C987C /* Lato-Regular.ttf in Resources */,
 				FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */,
+				CCFDFF021F5DF0D4000FF966 /* GraphPaletteGreens.clr in Resources */,
 				FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */,
 				FE7C61121D32A4CE006C987C /* launch-screen-image@3x.jpg in Resources */,
+				CCFDFF001F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr in Resources */,
 				CC6E68981F5C2547006750BF /* Localize.strings in Resources */,
+				CCFDFF011F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,6 +914,7 @@
 				CC6E68791F5C24D0006750BF /* GeneratorViewController.swift in Sources */,
 				CC6E68951F5C24D0006750BF /* SkillCollectionViewCell.swift in Sources */,
 				8CA6C4F36E731EB0C7ACC96C /* Skill+CloudKit.swift in Sources */,
+				8CA6CD66266C0B5A486D3E0A /* Skill+DTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

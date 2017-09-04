@@ -43,6 +43,48 @@ extension UIImage {
         
         return resultImage
     }
+
+    func RBCircleImage(size: CGSize) -> UIImage {
+        let image = self.RBSquareImage()
+        let scale = UIScreen.main.scale
+
+        UIGraphicsBeginImageContextWithOptions(size, true, scale)
+        // draw your path here
+        let ctx = UIGraphicsGetCurrentContext()
+        ctx?.setFillColor(UIColor.white.cgColor)
+        ctx?.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        ctx?.setFillColor(UIColor.black.cgColor)
+        ctx?.fillEllipse(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+
+        guard let maskImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage else {
+            fatalError()
+        }
+
+        UIGraphicsEndImageContext()
+
+
+        UIGraphicsBeginImageContextWithOptions(size, true, scale)
+        let rect = CGRect(origin: .zero, size: size)
+        self.draw(in: rect)
+        guard let refImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage else {
+            fatalError()
+        }
+        UIGraphicsEndImageContext()
+
+        let maskImageRef = CGImage(maskWidth: (maskImage.width),
+                                   height: (maskImage.height),
+                                   bitsPerComponent: (maskImage.bitsPerComponent),
+                                   bitsPerPixel: (maskImage.bitsPerPixel),
+                                   bytesPerRow: (maskImage.bytesPerRow),
+                                   provider: (maskImage.dataProvider!), decode: nil, shouldInterpolate: true)
+
+//        let imageRef = mask.masking(maskImageRef!)
+
+        let imageRef = refImage.masking(maskImageRef!)
+        let resultImage = UIImage(cgImage: imageRef ?? maskImage, scale: scale, orientation: image.imageOrientation)
+
+        return resultImage
+    }
     
     func RBResizeImage(_ targetSize: CGSize) -> UIImage {
         return UIImage.RBResizeImage(self, targetSize: targetSize)

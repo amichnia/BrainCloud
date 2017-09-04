@@ -21,7 +21,7 @@ class ExperienceSelectNode: SKSpriteNode, InteractiveNode {
     lazy var outline: SKShapeNode = {
         let node = (self.childNode(withName: "Selected") as? SKSpriteNode) ?? SKSpriteNode()
         let shape = SKShapeNode(circleOfRadius: node.size.width / 2 - 1)
-        shape.strokeColor = Palette.default.color
+        shape.strokeColor = Palette.default.node
         shape.lineWidth = 4
         shape.zPosition = node.zPosition
         node.removeFromParent()

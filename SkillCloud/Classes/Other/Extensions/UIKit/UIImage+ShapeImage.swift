@@ -69,5 +69,31 @@ extension UIImage {
         
         return image!
     }
+
+    static func circle(size: CGSize, colors: [UIColor]) -> UIImage {
+        guard !colors.isEmpty else { fatalError() }
+
+
+        let width = size.width / CGFloat(colors.count)
+        var rect = CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: size.height))
+
+        UIGraphicsBeginImageContextWithOptions(size, false, UIScreen.main.scale)
+
+        guard let ctx = UIGraphicsGetCurrentContext() else { fatalError() }
+
+        ctx.clear(rect)
+
+        colors.forEach { color in
+            ctx.setFillColor(color.cgColor)
+            ctx.fill(rect.insetBy(dx: -width/10, dy: 0))
+            rect = rect.offsetBy(dx: width, dy: 0)
+        }
+
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsEndImageContext()
+
+        return image!.RBCircleImage(size: size)
+    }
     
 }
