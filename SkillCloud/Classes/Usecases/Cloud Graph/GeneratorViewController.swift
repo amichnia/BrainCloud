@@ -370,7 +370,7 @@ class GeneratorViewController: CloudViewController {
         switch identifier {
         case ShowPaletteSelectionSegueIdentifier:
             let paletteSelectionViewController = segue.destination as! PaletteSelectionViewController
-            paletteSelectionViewController.preferredContentSize = CGSize(width: 300, height: 300)
+            paletteSelectionViewController.preferredContentSize = CGSize(width: 225, height: 225)
             let popoverController = paletteSelectionViewController.popoverPresentationController
 
             _ = paletteSelectionViewController.promisePalette()
@@ -381,12 +381,10 @@ class GeneratorViewController: CloudViewController {
 
             if popoverController != nil {
                 popoverController!.delegate = self
-                popoverController!.backgroundColor = UIColor.black
+                popoverController!.backgroundColor = .white
             } else {
                 print("no pope")
             }
-        case ShowExportViewSegueIdentifier:
-            (segue.destination as? CloudExportViewController)?.image = self.cloudImage
         default:
             break
         }

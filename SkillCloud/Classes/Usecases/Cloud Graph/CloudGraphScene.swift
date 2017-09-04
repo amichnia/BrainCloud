@@ -46,6 +46,8 @@ class CloudGraphScene: SKScene, DTOModel {
     }
     var previousUniqueIdentifier: String?
 
+    var palette = Palette.main
+
     // MARK: - Lifecycle
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -62,6 +64,7 @@ class CloudGraphScene: SKScene, DTOModel {
             self.thumbnail ?= entity.thumbnail
             self.cloudIdentifier ?= entity.cloudId
             self.graph = (name: entity.graphName ?? "brain_graph", version: entity.graphVersion ?? "v0.1")  // Set graph name and version
+            self.palette = Palette.palette(with: entity.paletteId)
         }
 
         // Load graph from resources
@@ -74,6 +77,8 @@ class CloudGraphScene: SKScene, DTOModel {
         if let entity = self.cloudEntity {
             self.addSkillNodesFrom(entity)
         }
+
+        self.updateColor(palette: self.palette)
 
         view.setNeedsDisplay()
         view.setNeedsLayout()
@@ -308,6 +313,8 @@ class CloudGraphScene: SKScene, DTOModel {
 
     // MARK: - Colors Handling
     func updateColor(palette: Palette = Palette.main) {
+        self.palette = palette
+
         allNodes.values.forEach { node in
             node.updateColor(palette: palette)
         }

@@ -25,7 +25,7 @@ class PaletteSelectionViewController: UIViewController {
             
             if i < Palette.all.count {
                 button.isHidden = false
-                let image = Palette.all[i].thumbnail(for: CGSize(width: 30, height: 30))
+                let image = Palette.all[i].thumbnail(for: CGSize(width: 44, height: 44))
                 button.setImage(image, for: .normal)
             }
             else {
@@ -52,5 +52,4 @@ class PaletteSelectionViewController: UIViewController {
             self.complete = success
         }
     }
-
 }

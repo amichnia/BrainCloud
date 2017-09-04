@@ -18,7 +18,6 @@
 		C8F55CAF1CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA71CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift */; };
 		C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */; };
 		C8F55CB11CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */; };
-		C8F55CB21CFC323000208F88 /* GraphCloudEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */; };
 		C8F55CB51CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */; };
 		C8F55CB61CFC323000208F88 /* SkillNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */; };
 		C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */; };
@@ -32,7 +31,6 @@
 		CC2D3E121E166BF300047519 /* UIViewController+Unwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2D3E111E166BF300047519 /* UIViewController+Unwind.swift */; };
 		CC2D3E141E166CF000047519 /* DispatchQueue+Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2D3E131E166CF000047519 /* DispatchQueue+Delay.swift */; };
 		CC3776A11DB5217D002188FC /* UIViewController+AlertsHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */; };
-		CC6E68741F5C24D0006750BF /* CloudExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68481F5C24D0006750BF /* CloudExportViewController.swift */; };
 		CC6E68751F5C24D0006750BF /* CloudGraphScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC6E68491F5C24D0006750BF /* CloudGraphScene.sks */; };
 		CC6E68761F5C24D0006750BF /* CloudGraphScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E684A1F5C24D0006750BF /* CloudGraphScene.swift */; };
 		CC6E68771F5C24D0006750BF /* CloudSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */; };
@@ -78,6 +76,7 @@
 		CCFDFF041F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFD1F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr */; };
 		CCFDFF051F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFE1F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr */; };
 		CCFDFF061F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFF1F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr */; };
+		CCFDFF0E1F5E0A62000FF966 /* GraphCloudEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFDFF0D1F5E0A62000FF966 /* GraphCloudEntity+CoreDataClass.swift */; };
 		CCFFF6D51F5C0879004CD3D2 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFFF6D41F5C0879004CD3D2 /* TransparentNavigationBar.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
 		FE0522E21CB01BBF00315468 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522E11CB01BBF00315468 /* Node.swift */; };
@@ -141,7 +140,6 @@
 		C8F55CA71CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNodeEntity.swift; sourceTree = "<group>"; };
 		C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GraphCloudEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCloudEntity.swift; sourceTree = "<group>"; };
 		C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkillNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillNodeEntity.swift; sourceTree = "<group>"; };
 		C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAPI.swift; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 		CC2D3E111E166BF300047519 /* UIViewController+Unwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Unwind.swift"; sourceTree = "<group>"; };
 		CC2D3E131E166CF000047519 /* DispatchQueue+Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Delay.swift"; sourceTree = "<group>"; };
 		CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+AlertsHandling.swift"; sourceTree = "<group>"; };
-		CC6E68481F5C24D0006750BF /* CloudExportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudExportViewController.swift; sourceTree = "<group>"; };
 		CC6E68491F5C24D0006750BF /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
 		CC6E684A1F5C24D0006750BF /* CloudGraphScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudGraphScene.swift; sourceTree = "<group>"; };
 		CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectionViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +198,7 @@
 		CCFDFEFD1F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteSteelAndGlass.clr; sourceTree = "<group>"; };
 		CCFDFEFE1F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteTurquiseShades.clr; sourceTree = "<group>"; };
 		CCFDFEFF1F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteTurquiseSimple.clr; sourceTree = "<group>"; };
+		CCFDFF0D1F5E0A62000FF966 /* GraphCloudEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GraphCloudEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CCFFF6D41F5C0879004CD3D2 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentNavigationBar.swift; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		FE0522E11CB01BBF00315468 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -347,7 +345,6 @@
 		CC6E68471F5C24D0006750BF /* Cloud Graph */ = {
 			isa = PBXGroup;
 			children = (
-				CC6E68481F5C24D0006750BF /* CloudExportViewController.swift */,
 				CC6E68491F5C24D0006750BF /* CloudGraphScene.sks */,
 				CC6E684A1F5C24D0006750BF /* CloudGraphScene.swift */,
 				CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */,
@@ -604,8 +601,8 @@
 			children = (
 				C8F55CA71CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift */,
 				C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */,
+				CCFDFF0D1F5E0A62000FF966 /* GraphCloudEntity+CoreDataClass.swift */,
 				C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */,
-				C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */,
 				FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */,
 				FE766D401C9D82780079CA29 /* SkillEntity.swift */,
 				C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */,
@@ -696,7 +693,7 @@
 					C8A4A0421C981B6C004E055D = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = YYAKJ5SR76;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.iCloud = {
 								enabled = 1;
@@ -843,7 +840,6 @@
 				CC2D3E0C1E166B5100047519 /* SpriteKit+NodesTransforms.swift in Sources */,
 				FEE50AA01D2493F70024060D /* CKRecordMappable.swift in Sources */,
 				CC6E68891F5C24D0006750BF /* AboutViewController.swift in Sources */,
-				CC6E68741F5C24D0006750BF /* CloudExportViewController.swift in Sources */,
 				CC6E687A1F5C24D0006750BF /* BrainNode.swift in Sources */,
 				CCFFF6D51F5C0879004CD3D2 /* TransparentNavigationBar.swift in Sources */,
 				FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */,
@@ -885,7 +881,6 @@
 				CC6E688F1F5C24D0006750BF /* AddScene.swift in Sources */,
 				CC6E687C1F5C24D0006750BF /* OptionsNode.swift in Sources */,
 				C8F55CB51CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift in Sources */,
-				C8F55CB21CFC323000208F88 /* GraphCloudEntity.swift in Sources */,
 				CC6E687B1F5C24D0006750BF /* GraphNode.swift in Sources */,
 				FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
@@ -899,6 +894,7 @@
 				FE9F6EEB1D28500C008B3BC3 /* CocoaLumberjack.swift in Sources */,
 				CC6E68771F5C24D0006750BF /* CloudSelectionViewController.swift in Sources */,
 				C8F55CAF1CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift in Sources */,
+				CCFDFF0E1F5E0A62000FF966 /* GraphCloudEntity+CoreDataClass.swift in Sources */,
 				FEB31DA21D31207D00E7C203 /* MRProgress+Show.swift in Sources */,
 				CC2D3E051E1669FB00047519 /* SpriteKit+InteractiveNodes.swift in Sources */,
 				CC6E689B1F5C36F7006750BF /* R.generated.swift in Sources */,
@@ -1034,6 +1030,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "SkillCloud/Supporting Files/SkillCloud.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1047,6 +1044,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.girappe.skillcloud;
 				PRODUCT_NAME = SkillCloud;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1057,6 +1055,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "SkillCloud/Supporting Files/SkillCloud.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

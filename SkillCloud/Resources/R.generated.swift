@@ -1105,21 +1105,12 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This struct is generated for `GeneratorViewController`, and contains static references to 3 segues.
+    /// This struct is generated for `GeneratorViewController`, and contains static references to 2 segues.
     struct generatorViewController {
-      /// Segue identifier `ShowExportView`.
-      static let showExportView: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, GeneratorViewController, CloudExportViewController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowExportView")
       /// Segue identifier `ShowPaletteSelection`.
       static let showPaletteSelection: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, GeneratorViewController, PaletteSelectionViewController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowPaletteSelection")
       /// Segue identifier `UnwindToSelection`.
       static let unwindToSelection: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, GeneratorViewController, UIKit.UIViewController> = Rswift.StoryboardSegueIdentifier(identifier: "UnwindToSelection")
-      
-      /// Optionally returns a typed version of segue `ShowExportView`.
-      /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
-      /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
-      static func showExportView(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, GeneratorViewController, CloudExportViewController>? {
-        return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.generatorViewController.showExportView, segue: segue)
-      }
       
       /// Optionally returns a typed version of segue `ShowPaletteSelection`.
       /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.

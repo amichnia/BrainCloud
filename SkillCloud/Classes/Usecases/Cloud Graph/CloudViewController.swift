@@ -15,7 +15,6 @@ import iRate
 let SkillLightCellIdentifier = "SkillLightCell"
 let SkillLighterCellIdentifier = "SkillLighterCell"
 
-let ShowExportViewSegueIdentifier = "ShowExportView"
 let ShowPaletteSelectionSegueIdentifier = "ShowPaletteSelection"
 
 class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentationControllerDelegate {
