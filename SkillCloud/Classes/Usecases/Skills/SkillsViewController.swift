@@ -9,12 +9,9 @@
 import UIKit
 import PromiseKit
 import MRProgress
-
-let AddSkillCellIdentifier = "AddSkillCell"
-let SkillCellIdentifier = "SkillCell"
+import Rswift
 
 class SkillsViewController: UIViewController {
-
     // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewWidth: NSLayoutConstraint!
@@ -186,14 +183,9 @@ class SkillsViewController: UIViewController {
         
         return self.view.convert(rect, to: self.view.window!)
     }
-    
-    // MARK: - Navigation
-    
 }
 
-// MARK: - UICollectionViewDataSource
 extension SkillsViewController: UICollectionViewDataSource {
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
@@ -209,7 +201,7 @@ extension SkillsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard indexPath.section == 1 else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SkillCellIdentifier, for: indexPath) as! SkillCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.skillCell, for: indexPath)!
             cell.indexPath = indexPath
             cell.prepareForReuse()
             self.configureColorFor(cell)
@@ -219,19 +211,19 @@ extension SkillsViewController: UICollectionViewDataSource {
         
         let cell : SkillCollectionViewCell = {
             if indexPath.row == self.skills.count {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddSkillCellIdentifier, for: indexPath) as! SkillCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.addSkillCell, for: indexPath)!
                 cell.prepareForReuse()
                 cell.configureAsAddCell(indexPath)
                 return cell
             }
             else if indexPath.row > self.skills.count {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SkillCellIdentifier, for: indexPath) as! SkillCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.skillCell, for: indexPath)!
                 cell.prepareForReuse()
                 cell.indexPath = indexPath
                 return cell
             }
             else {
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SkillCellIdentifier, for: indexPath) as! SkillCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.skillCell, for: indexPath)!
                 cell.prepareForReuse()
                 cell.configureWithSkill(self.skills[indexPath.row], atIndexPath: indexPath)
                 return cell
@@ -241,12 +233,9 @@ extension SkillsViewController: UICollectionViewDataSource {
         cell.setNeedsLayout()
         return cell
     }
-    
 }
 
-// MARK: - UICollectionViewDelegate
 extension SkillsViewController: UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == 1 else {
             return
@@ -265,34 +254,12 @@ extension SkillsViewController: UICollectionViewDelegate {
             return
         }
     }
-    
 }
 
 extension SkillsViewController: UIScrollViewDelegate {
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.collectionView.visibleCells.forEach {
-            self.configureColorFor($0 as! SkillCollectionViewCell)
+        collectionView.visibleCells.forEach {
+            configureColorFor($0 as! SkillCollectionViewCell)
         }
     }
-    
-}
-
-extension UIColor {
-    
-    static func interpolate(_ A:UIColor, B:UIColor, t: CGFloat) -> UIColor {
-        var Argba : (CGFloat,CGFloat,CGFloat,CGFloat) = (0,0,0,0)
-        var Brgba : (CGFloat,CGFloat,CGFloat,CGFloat) = (0,0,0,0)
-        A.getRed(&Argba.0, green: &Argba.1, blue: &Argba.2, alpha: &Argba.3)
-        B.getRed(&Brgba.0, green: &Brgba.1, blue: &Brgba.2, alpha: &Brgba.3)
-        
-        var rgba : (CGFloat,CGFloat,CGFloat,CGFloat) = (0,0,0,0)
-        rgba.0 = (Argba.0 * (1-t)) + (Brgba.0 * t)
-        rgba.1 = (Argba.1 * (1-t)) + (Brgba.1 * t)
-        rgba.2 = (Argba.2 * (1-t)) + (Brgba.2 * t)
-        rgba.3 = (Argba.3 * (1-t)) + (Brgba.3 * t)
-        
-        return UIColor(rgba: rgba)
-    }
-    
 }

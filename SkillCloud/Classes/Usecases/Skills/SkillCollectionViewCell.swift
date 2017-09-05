@@ -36,7 +36,7 @@ class SkillCollectionViewCell: UICollectionViewCell {
     // MARK: - Configuration
     func configureAsAddCell(_ indexPath: IndexPath){
         self.indexPath = indexPath
-        self.imageView.image = R.image.icPlus()
+        self.imageView.image = R.image.icPlus()?.withRenderingMode(.alwaysTemplate)
         self.nameLabel.text = R.string.localize.skillAddNewItem()
     }
     

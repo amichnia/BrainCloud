@@ -11,6 +11,7 @@
 		8CA6C4F36E731EB0C7ACC96C /* Skill+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6C6E5BEC7A3AD7960DD44 /* Skill+CloudKit.swift */; };
 		8CA6CD66266C0B5A486D3E0A /* Skill+DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6C4FDC3856442D5417107 /* Skill+DTO.swift */; };
 		8CA6CE3FD63AB58C9E23C35D /* Skill+Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CE61836B24CB81699B31 /* Skill+Experience.swift */; };
+		8CA6CFBE27735FD22D8817D1 /* UIColor+Interpolate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6C28B8D6E845AAD2FFD53 /* UIColor+Interpolate.swift */; };
 		C83BF83F1D5C73A100FDA60C /* TSMarkdownParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C83BF83E1D5C73A100FDA60C /* TSMarkdownParser.framework */; };
 		C83BF8481D5C785A00FDA60C /* Licenses.md in Resources */ = {isa = PBXBuildFile; fileRef = C83BF8461D5C784300FDA60C /* Licenses.md */; };
 		C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C88EB4871CB50580002B9592 /* GoogleImages.storyboard */; };
@@ -131,6 +132,7 @@
 		0973088A39C9FDA46F42FEC2 /* Pods_SkillCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkillCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1712187C40B694294151165F /* Pods-SkillCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.release.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.release.xcconfig"; sourceTree = "<group>"; };
 		475C05D26AD5AF1583C89837 /* Pods-SkillCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.debug.xcconfig"; sourceTree = "<group>"; };
+		8CA6C28B8D6E845AAD2FFD53 /* UIColor+Interpolate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Interpolate.swift"; sourceTree = "<group>"; };
 		8CA6C4FDC3856442D5417107 /* Skill+DTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skill+DTO.swift"; sourceTree = "<group>"; };
 		8CA6C6E5BEC7A3AD7960DD44 /* Skill+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skill+CloudKit.swift"; sourceTree = "<group>"; };
 		8CA6CE61836B24CB81699B31 /* Skill+Experience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skill+Experience.swift"; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				FE9F6EEC1D285031008B3BC3 /* UIImage+RBResizer.swift */,
 				CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */,
 				CC2D3E111E166BF300047519 /* UIViewController+Unwind.swift */,
+				8CA6C28B8D6E845AAD2FFD53 /* UIColor+Interpolate.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				CC6E68951F5C24D0006750BF /* SkillCollectionViewCell.swift in Sources */,
 				8CA6C4F36E731EB0C7ACC96C /* Skill+CloudKit.swift in Sources */,
 				8CA6CD66266C0B5A486D3E0A /* Skill+DTO.swift in Sources */,
+				8CA6CFBE27735FD22D8817D1 /* UIColor+Interpolate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1042,6 +1046,7 @@
 				CODE_SIGN_ENTITLEMENTS = "SkillCloud/Supporting Files/SkillCloud.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = YYAKJ5SR76;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1067,6 +1072,7 @@
 				CODE_SIGN_ENTITLEMENTS = "SkillCloud/Supporting Files/SkillCloud.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = YYAKJ5SR76;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

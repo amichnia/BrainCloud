@@ -210,7 +210,7 @@ class GeneratorViewController: CloudViewController {
     }
 
     @IBAction func paletteAction(_ sender: AnyObject) {
-        performSegue(withIdentifier: ShowPaletteSelectionSegueIdentifier, sender: self)
+        performSegue(withIdentifier: R.segue.generatorViewController.showPaletteSelection.identifier, sender: self)
     }
 
     // MARK: - Promises
@@ -368,7 +368,7 @@ class GeneratorViewController: CloudViewController {
         }
 
         switch identifier {
-        case ShowPaletteSelectionSegueIdentifier:
+        case R.segue.generatorViewController.showPaletteSelection.identifier:
             let paletteSelectionViewController = segue.destination as! PaletteSelectionViewController
             paletteSelectionViewController.preferredContentSize = CGSize(width: 225, height: 225)
             let popoverController = paletteSelectionViewController.popoverPresentationController
