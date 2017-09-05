@@ -47,6 +47,7 @@ class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentati
         SkillEntity.fetchAll()
         .then { entities -> Void in
             self.skills = entities.mapExisting { $0.skill }
+            self.skillToAdd = self.skills.first
             self.collectionView.reloadData()
         }
         .catch { error in
