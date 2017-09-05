@@ -46,7 +46,6 @@ class GeneratorViewController: CloudViewController {
         super.viewWillAppear(animated)
 
         skView.setNeedsLayout()
-        configurePalette()
     }
 
     override func viewDidLayoutSubviews() {
@@ -63,16 +62,19 @@ class GeneratorViewController: CloudViewController {
             scene.slot = self.slot
             scene.cloudIdentifier = self.cloudEntity?.cloudId ?? UUID().uuidString
             scene.cloudEntity = self.cloudEntity
+            let paletteId = cloudEntity?.paletteId ?? Palette.main.identifier
+            let palette = Palette.palette(with: paletteId)
+            configurePalette(with: palette)
 
             self.scene = scene
             skView.presentScene(scene)
         }
     }
 
-    func configurePalette() {
+    func configurePalette(with palette: Palette) {
         let size = CGSize(width: 24, height: 24)
-        paletteButton.setImage(Palette.main.thumbnail(for: size), for: .normal)
-        scene?.updateColor(palette: Palette.main)
+        paletteButton.setImage(palette.thumbnail(for: size), for: .normal)
+        scene?.updateColor(palette: palette)
     }
 
     // MARK: - Recognizers Actions
@@ -210,7 +212,7 @@ class GeneratorViewController: CloudViewController {
     }
 
     @IBAction func paletteAction(_ sender: AnyObject) {
-        performSegue(withIdentifier: ShowPaletteSelectionSegueIdentifier, sender: self)
+        performSegue(withIdentifier: R.segue.generatorViewController.showPaletteSelection.identifier, sender: self)
     }
 
     // MARK: - Promises
@@ -368,15 +370,14 @@ class GeneratorViewController: CloudViewController {
         }
 
         switch identifier {
-        case ShowPaletteSelectionSegueIdentifier:
+        case R.segue.generatorViewController.showPaletteSelection.identifier:
             let paletteSelectionViewController = segue.destination as! PaletteSelectionViewController
             paletteSelectionViewController.preferredContentSize = CGSize(width: 225, height: 225)
             let popoverController = paletteSelectionViewController.popoverPresentationController
 
             _ = paletteSelectionViewController.promisePalette()
             .then { palette -> Void in
-                Palette.main = palette
-                self.configurePalette()
+                self.configurePalette(with: palette)
             }
 
             if popoverController != nil {

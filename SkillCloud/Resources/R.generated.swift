@@ -1195,18 +1195,26 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 7 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 11 reuse identifiers.
   struct reuseIdentifier {
+    /// Reuse identifier `AddSkillCellLight`.
+    static let addSkillCellLight: Rswift.ReuseIdentifier<SkillCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "AddSkillCellLight")
+    /// Reuse identifier `AddSkillCellLighter`.
+    static let addSkillCellLighter: Rswift.ReuseIdentifier<SkillCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "AddSkillCellLighter")
     /// Reuse identifier `AddSkillCell`.
     static let addSkillCell: Rswift.ReuseIdentifier<SkillCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "AddSkillCell")
     /// Reuse identifier `EmptyCell`.
     static let emptyCell: Rswift.ReuseIdentifier<UIKit.UITableViewCell> = Rswift.ReuseIdentifier(identifier: "EmptyCell")
+    /// Reuse identifier `ExploreSkillCell`.
+    static let exploreSkillCell: Rswift.ReuseIdentifier<SkillTableViewCell> = Rswift.ReuseIdentifier(identifier: "ExploreSkillCell")
     /// Reuse identifier `GoogleImageCell`.
     static let googleImageCell: Rswift.ReuseIdentifier<GoogleImageCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "GoogleImageCell")
     /// Reuse identifier `HeaderCell`.
     static let headerCell: Rswift.ReuseIdentifier<SkillTableViewCell> = Rswift.ReuseIdentifier(identifier: "HeaderCell")
     /// Reuse identifier `MenuCell`.
     static let menuCell: Rswift.ReuseIdentifier<InfoMenuTableViewCell> = Rswift.ReuseIdentifier(identifier: "MenuCell")
+    /// Reuse identifier `SkillCell`.
+    static let skillCell: Rswift.ReuseIdentifier<SkillCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "SkillCell")
     /// Reuse identifier `SkillLightCell`.
     static let skillLightCell: Rswift.ReuseIdentifier<SkillCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "SkillLightCell")
     /// Reuse identifier `SkillLighterCell`.

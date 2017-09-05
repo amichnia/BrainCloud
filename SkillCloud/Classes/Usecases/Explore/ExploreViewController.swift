@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import MRProgress
+import Rswift
 
 class ExploreViewController: UIViewController {
     // MARK: - Outlets
@@ -248,12 +249,12 @@ extension ExploreViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard indexPath.section == 1 else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EmptyCell")!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.emptyCell, for: indexPath)!
             configureColorFor(cell)
             return cell
         }
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SkillCell")! as! SkillTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.exploreSkillCell, for: indexPath)!
 
         let skill = self.skillsResult.results[indexPath.row]
         let owned = self.ownedSkills.filter { $0.title == skill.title }.first
