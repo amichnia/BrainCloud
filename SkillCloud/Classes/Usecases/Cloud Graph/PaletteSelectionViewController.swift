@@ -38,7 +38,6 @@ class PaletteSelectionViewController: UIViewController {
     @IBAction func paletteChosen(_ sender: UIButton) {
         if let index = paletteButtons.index(of: sender) {
             let palette = Palette.all[index]
-            Palette.main = palette
             complete?(palette)
         }
         
