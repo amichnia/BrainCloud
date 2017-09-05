@@ -14,11 +14,12 @@ class ExploreViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBarLeading: NSLayoutConstraint!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
 
     // MARK: - Properties
     var skillsResult: CKPageableResult = CKPageableResult(type: Skill.self, skillsPredicate: SkillsPredicate.accepted, database: .public)
-    var updating: Bool = false
+    var updating = false
     var preparedScene: AddScene?
     let menuOffset = 12
     var firstLayout = true
@@ -50,6 +51,8 @@ class ExploreViewController: UIViewController {
             self.preparedScene = scene
             scene.size = self.view.bounds.size
         }
+
+        updateUI()
     }
 
     override func viewDidLayoutSubviews() {
@@ -80,33 +83,35 @@ class ExploreViewController: UIViewController {
     }
 
     // MARK: - Helpers
-    @discardableResult func updateIfNeeded() -> Promise<Void> {
+    @discardableResult fileprivate func updateIfNeeded() -> Promise<Void> {
         guard !self.updating else {
             return Promise<Void>(value: Void())
         }
 
         self.updating = true
 
+        updateUI()
         MRProgressOverlayView.show()
+
         return firstly {
             self.skillsResult.promiseNextPage()
         }
-                .then { [weak self] _ -> Void in
-                    print("LOADED more!")
-                    self?.tableView.reloadData()
-                    if let strongSelf = self {
-                        self?.tableView.visibleCells.forEach(strongSelf.configureColorFor)
-                    }
-                }
-                .always { [weak self] in
-                    print("Update finished")
-                    self?.updating = false
-                    MRProgressOverlayView.hide()
-                }
-                .asVoid()
+        .then { [weak self] _ -> Void in
+            print("LOADED more!")
+            self?.tableView.reloadData()
+            if let strongSelf = self {
+                self?.tableView.visibleCells.forEach(strongSelf.configureColorFor)
+            }
+        }
+        .always { [weak self] in
+            print("Update finished")
+            self?.updating = false
+            MRProgressOverlayView.hide()
+        }
+        .asVoid()
     }
 
-    func refetchSelfSkills() {
+    fileprivate func refetchSelfSkills() {
         firstly {
             Skill.fetchAll()
         }
@@ -127,7 +132,7 @@ class ExploreViewController: UIViewController {
         }
     }
 
-    func frameForCell(_ cell: SkillTableViewCell) -> CGRect {
+    fileprivate func frameForCell(_ cell: SkillTableViewCell) -> CGRect {
         cell.layoutSubviews()
         let imgfrm = cell.skillImageView.frame
         let rect = CGRect(
@@ -136,6 +141,11 @@ class ExploreViewController: UIViewController {
         )
 
         return self.view.convert(rect, to: self.view.window!)
+    }
+
+    fileprivate func updateUI() {
+        let backVisible = navigationItem.leftBarButtonItem != nil
+        searchBarLeading.constant = backVisible ? 60 : 0
     }
 
     // MARK: - Table cells coloring
@@ -188,30 +198,36 @@ class ExploreViewController: UIViewController {
 // MARK: - UISearchBarDelegate
 extension ExploreViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        search(with: searchBar.text)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        search(with: searchBar.text)
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        guard searchBar.text?.isEmpty ?? true else { return }
+
+        search(with: nil)
+    }
+
+    private func search(with text: String?) {
         let predicate: SkillsPredicate = {
-            if let searchText = searchBar.text {
+            if let searchText = text, !searchText.isEmpty {
                 return SkillsPredicate.whenAll([.accepted, .nameLike(searchText)])
             } else {
                 return SkillsPredicate.accepted
             }
         }()
 
-        searchBar.resignFirstResponder()
         skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: predicate, database: .public)
         updateIfNeeded()
         .catch { error in
             print("Error: \(error)")
         }
-    }
 
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        skillsResult = CKPageableResult(type: Skill.self, skillsPredicate: .accepted, database: .public)
-
-        updateIfNeeded()
-        .catch { error in
-            print("Error: \(error)")
-        }
     }
 }
 

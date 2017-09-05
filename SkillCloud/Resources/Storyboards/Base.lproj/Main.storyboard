@@ -458,7 +458,7 @@
             <objects>
                 <navigationController id="Zhu-Ph-jdQ" userLabel="Skills Section" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" title="" image="icon-skills-tabbar" selectedImage="icon-skills-tabbar-selected" id="OYx-iM-PZs"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="BJj-Xo-NXc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="BJj-Xo-NXc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -479,7 +479,7 @@
                     <tabBarItem key="tabBarItem" title="" image="icon-cloud-tabbar" selectedImage="icon-cloud-tabbar-selected" id="xUo-VF-0z3">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="yEy-e1-2Jf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="yEy-e1-2Jf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -810,7 +810,7 @@
                     <navigationItem key="navigationItem" id="lre-nl-LZE">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="WcX-Cd-sDh">
-                            <rect key="frame" x="112" y="5.5" width="190" height="33"/>
+                            <rect key="frame" x="92.5" y="5.5" width="190" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skills" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXJ-9X-ABB">
@@ -830,7 +830,7 @@
                         </view>
                         <barButtonItem key="rightBarButtonItem" id="Lec-am-Xto">
                             <view key="customView" contentMode="scaleToFill" id="ymy-6g-tOa">
-                                <rect key="frame" x="361" y="5" width="33" height="33"/>
+                                <rect key="frame" x="326" y="5" width="33" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAW-uR-g1L">
@@ -1045,16 +1045,9 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-image" translatesAutoresizingMaskIntoConstraints="NO" id="Eag-0O-7ke">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIg-Tc-B3R">
-                                <rect key="frame" x="0.0" y="-100" width="375" height="100"/>
-                                <color key="backgroundColor" red="0.17711684107780457" green="0.18209603428840637" blue="0.15800946950912476" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e1B-2A-cD3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.044178687039999998" green="0.082160077989999997" blue="0.092739813030000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SkillCell" id="Ggu-Op-pvf" customClass="SkillTableViewCell" customModule="SkillCloud" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="82"/>
@@ -1148,31 +1141,45 @@
                                     <outlet property="delegate" destination="ie4-Qi-UIw" id="Qhg-9k-Oce"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" barStyle="black" placeholder="Explore all skills" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1dY-5b-SV5">
-                                <rect key="frame" x="0.0" y="-44" width="375" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="ie4-Qi-UIw" id="yGw-5w-VGh"/>
-                                </connections>
-                            </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIg-Tc-B3R">
+                                <rect key="frame" x="0.0" y="-100" width="375" height="101"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" placeholder="Explore all skills" translatesAutoresizingMaskIntoConstraints="NO" id="1dY-5b-SV5">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="ie4-Qi-UIw" id="yGw-5w-VGh"/>
+                                        </connections>
+                                    </searchBar>
+                                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CsR-Ja-Nun" userLabel="Line">
+                                        <rect key="frame" x="0.0" y="100" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.30756625533103943" green="0.33313870429992676" blue="0.38312533497810364" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="01i-ge-kJ6"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.044178687036037445" green="0.08216007798910141" blue="0.092739813029766083" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="1dY-5b-SV5" firstAttribute="leading" secondItem="jIg-Tc-B3R" secondAttribute="leading" id="CMR-JU-eqc"/>
+                                    <constraint firstAttribute="trailing" secondItem="CsR-Ja-Nun" secondAttribute="trailing" id="Nsg-Ez-6ji"/>
+                                    <constraint firstItem="CsR-Ja-Nun" firstAttribute="leading" secondItem="jIg-Tc-B3R" secondAttribute="leading" id="PuN-Ci-QdY"/>
+                                    <constraint firstAttribute="bottom" secondItem="1dY-5b-SV5" secondAttribute="bottom" constant="1" id="heC-LP-aeh"/>
+                                    <constraint firstAttribute="trailing" secondItem="1dY-5b-SV5" secondAttribute="trailing" id="ke1-nU-d38"/>
+                                    <constraint firstAttribute="bottom" secondItem="CsR-Ja-Nun" secondAttribute="bottom" id="lwq-FY-Rer"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="jIg-Tc-B3R" secondAttribute="trailing" id="3H4-73-XSH"/>
-                            <constraint firstItem="e1B-2A-cD3" firstAttribute="top" secondItem="jIg-Tc-B3R" secondAttribute="bottom" id="4vW-5n-Hv6"/>
-                            <constraint firstAttribute="trailing" secondItem="Eag-0O-7ke" secondAttribute="trailing" id="LpR-lt-0wk"/>
                             <constraint firstItem="jIg-Tc-B3R" firstAttribute="leading" secondItem="EYD-CP-VDd" secondAttribute="leading" id="NC2-aO-JhG"/>
+                            <constraint firstItem="e1B-2A-cD3" firstAttribute="top" secondItem="V13-Zd-L1k" secondAttribute="bottom" id="VdY-KS-FAe"/>
                             <constraint firstItem="cvb-Be-FUh" firstAttribute="top" secondItem="e1B-2A-cD3" secondAttribute="bottom" id="XVm-NW-PfL"/>
-                            <constraint firstItem="1dY-5b-SV5" firstAttribute="leading" secondItem="EYD-CP-VDd" secondAttribute="leading" id="caY-pg-Ibk"/>
-                            <constraint firstItem="Eag-0O-7ke" firstAttribute="top" secondItem="V13-Zd-L1k" secondAttribute="bottom" id="equ-m5-rzI"/>
-                            <constraint firstItem="e1B-2A-cD3" firstAttribute="top" secondItem="V13-Zd-L1k" secondAttribute="bottom" id="gTF-Al-PD6"/>
                             <constraint firstItem="e1B-2A-cD3" firstAttribute="leading" secondItem="EYD-CP-VDd" secondAttribute="leading" id="hWH-iX-kHp"/>
-                            <constraint firstAttribute="trailing" secondItem="1dY-5b-SV5" secondAttribute="trailing" id="lcu-bk-l8P"/>
-                            <constraint firstItem="Eag-0O-7ke" firstAttribute="leading" secondItem="EYD-CP-VDd" secondAttribute="leading" id="oKS-3l-hkJ"/>
                             <constraint firstAttribute="trailing" secondItem="e1B-2A-cD3" secondAttribute="trailing" id="ogW-r1-Z05"/>
-                            <constraint firstItem="1dY-5b-SV5" firstAttribute="bottom" secondItem="e1B-2A-cD3" secondAttribute="top" id="p5K-Wd-EWt"/>
+                            <constraint firstItem="jIg-Tc-B3R" firstAttribute="bottom" secondItem="V13-Zd-L1k" secondAttribute="bottom" constant="1" id="pM0-2Y-Tr5"/>
                             <constraint firstItem="jIg-Tc-B3R" firstAttribute="top" secondItem="EYD-CP-VDd" secondAttribute="top" constant="-100" id="qGe-Gh-MjK"/>
-                            <constraint firstItem="cvb-Be-FUh" firstAttribute="top" secondItem="Eag-0O-7ke" secondAttribute="bottom" id="vas-Dq-0ZV"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -1181,13 +1188,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="1dY-5b-SV5" id="j5X-Ni-oiN"/>
+                        <outlet property="searchBarLeading" destination="CMR-JU-eqc" id="zLP-Rl-FmD"/>
                         <outlet property="tableView" destination="e1B-2A-cD3" id="9Om-sw-OGz"/>
                         <outlet property="tableViewBottomConstraint" destination="XVm-NW-PfL" id="iP2-nb-qoh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SO1-0L-fEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3510" y="430"/>
+            <point key="canvasLocation" x="3509.5999999999999" y="429.53523238380814"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="EcP-eN-DOM">
@@ -1284,7 +1292,7 @@
                     <navigationItem key="navigationItem" id="Zrb-1R-jin">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="mJN-mk-4dZ">
-                            <rect key="frame" x="130" y="5.5" width="154" height="33"/>
+                            <rect key="frame" x="110.5" y="5.5" width="154" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzY-45-NxP">
@@ -1319,7 +1327,7 @@
             <objects>
                 <navigationController id="i5X-WB-nIA" userLabel="Info Section" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="" image="icon-info-tabbar" selectedImage="icon-info-tabbar-selected" id="Zu7-5U-QoB"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="LJ5-l8-6m5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="LJ5-l8-6m5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
