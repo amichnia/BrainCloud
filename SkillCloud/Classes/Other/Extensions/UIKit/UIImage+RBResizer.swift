@@ -9,7 +9,6 @@
 import UIKit
 
 extension UIImage {
- 
     func RBSquareImageTo(_ size: CGSize) -> UIImage {
         return UIImage.RBSquareImageTo(self, size: size)
     }
@@ -44,6 +43,48 @@ extension UIImage {
         
         return resultImage
     }
+
+    func RBCircleImage(size: CGSize) -> UIImage {
+        let image = self.RBSquareImage()
+        let scale = UIScreen.main.scale
+
+        UIGraphicsBeginImageContextWithOptions(size, true, scale)
+        // draw your path here
+        let ctx = UIGraphicsGetCurrentContext()
+        ctx?.setFillColor(UIColor.white.cgColor)
+        ctx?.fill(CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        ctx?.setFillColor(UIColor.black.cgColor)
+        ctx?.fillEllipse(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+
+        guard let maskImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage else {
+            fatalError()
+        }
+
+        UIGraphicsEndImageContext()
+
+
+        UIGraphicsBeginImageContextWithOptions(size, true, scale)
+        let rect = CGRect(origin: .zero, size: size)
+        self.draw(in: rect)
+        guard let refImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage else {
+            fatalError()
+        }
+        UIGraphicsEndImageContext()
+
+        let maskImageRef = CGImage(maskWidth: (maskImage.width),
+                                   height: (maskImage.height),
+                                   bitsPerComponent: (maskImage.bitsPerComponent),
+                                   bitsPerPixel: (maskImage.bitsPerPixel),
+                                   bytesPerRow: (maskImage.bytesPerRow),
+                                   provider: (maskImage.dataProvider!), decode: nil, shouldInterpolate: true)
+
+//        let imageRef = mask.masking(maskImageRef!)
+
+        let imageRef = refImage.masking(maskImageRef!)
+        let resultImage = UIImage(cgImage: imageRef ?? maskImage, scale: scale, orientation: image.imageOrientation)
+
+        return resultImage
+    }
     
     func RBResizeImage(_ targetSize: CGSize) -> UIImage {
         return UIImage.RBResizeImage(self, targetSize: targetSize)
@@ -52,7 +93,11 @@ extension UIImage {
     func RBCenterCrop(_ targetSize: CGSize) -> UIImage {
         return UIImage.RBCenterCropImage(self, targetSize: targetSize)
     }
-    
+
+    func RBImage(backgroundColor: UIColor) -> UIImage {
+        return UIImage.RBImage(self, backgroundColor: backgroundColor)
+    }
+
     static func RBSquareImageTo(_ image: UIImage, size: CGSize) -> UIImage {
         return UIImage.RBResizeImage(RBSquareImage(image), targetSize: size)
     }
@@ -120,11 +165,27 @@ extension UIImage {
         
         return newImage!
     }
-    
+
+    static func RBImage(_ image: UIImage, backgroundColor: UIColor) -> UIImage {
+        let size = image.size
+
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(size, false, 1.0)
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(backgroundColor.cgColor)
+        context.fill(rect)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage!
+    }
 }
 
 extension UIImage {
-    
     static var mainScale: CGFloat { return UIScreen.main.scale }
     
     static func CircleImageWithStroke(_ stroke: (color: UIColor, width: CGFloat), fill fillColor: UIColor = UIColor.clear, size: CGSize) -> UIImage {
@@ -145,5 +206,4 @@ extension UIImage {
         // Return
         return image!
     }
-    
 }

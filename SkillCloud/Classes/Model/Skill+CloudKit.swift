@@ -76,7 +76,6 @@ extension Skill {
                     failure(CommonError.operationFailed)
                 }
             })
-
         })
     }
 }

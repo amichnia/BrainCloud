@@ -18,12 +18,10 @@ enum CommonError : Error {
 }
 
 extension CommonError: ShowableError {
-    
     func alertTitle() -> String? {
         switch self {
         case .other(let otherError) where otherError is ShowableError:
             return (otherError as! ShowableError).alertTitle()
-            
         default:
             return nil
         }
@@ -32,23 +30,17 @@ extension CommonError: ShowableError {
     func alertBody() -> String {
         switch self {
         case .serializationError:
-            return NSLocalizedString("Serialization error", comment: "Serialization error")
-        
+            return R.string.localize.errorSerialization()
         case .other(let otherError) where otherError is ShowableError:
             return (otherError as! ShowableError).alertBody()
-            
         case .other(let otherError):
             return "\((otherError as NSError).localizedDescription)"
-            
         case .unknownError:
-            return NSLocalizedString("Unknown error occured!", comment: "Unknown error occured!")
-            
+            return R.string.localize.errorUnknown()
         case .failure(reason: let reason):
             return reason
-            
         default:
             return "\(self)"
         }
     }
-    
 }

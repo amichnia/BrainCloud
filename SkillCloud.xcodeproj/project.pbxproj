@@ -9,32 +9,15 @@
 /* Begin PBXBuildFile section */
 		0EBD292BB6568C34F93754EC /* Pods_SkillCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0973088A39C9FDA46F42FEC2 /* Pods_SkillCloud.framework */; };
 		8CA6C4F36E731EB0C7ACC96C /* Skill+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6C6E5BEC7A3AD7960DD44 /* Skill+CloudKit.swift */; };
+		8CA6CD66266C0B5A486D3E0A /* Skill+DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6C4FDC3856442D5417107 /* Skill+DTO.swift */; };
 		8CA6CE3FD63AB58C9E23C35D /* Skill+Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CE61836B24CB81699B31 /* Skill+Experience.swift */; };
-		C80A918F1CB5206800529F0B /* GoogleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */; };
-		C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C80A91901CB5208200529F0B /* GoogleImage.swift */; };
-		C819FB9E1D8187F100B55C14 /* GraphNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C819FB9D1D8187F100B55C14 /* GraphNode.swift */; };
-		C82E24201D928DC6001D6A98 /* OptionsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82E241F1D928DC6001D6A98 /* OptionsNode.swift */; };
-		C83BBA9B1D4632BC00431B42 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */; };
-		C83BBA9D1D4649EF00431B42 /* SkillsSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */; };
-		C83BF83D1D5B369900FDA60C /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BF83C1D5B369900FDA60C /* InfoViewController.swift */; };
 		C83BF83F1D5C73A100FDA60C /* TSMarkdownParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C83BF83E1D5C73A100FDA60C /* TSMarkdownParser.framework */; };
-		C83BF8451D5C76C100FDA60C /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83BF8441D5C76C100FDA60C /* LicensesViewController.swift */; };
 		C83BF8481D5C785A00FDA60C /* Licenses.md in Resources */ = {isa = PBXBuildFile; fileRef = C83BF8461D5C784300FDA60C /* Licenses.md */; };
-		C863048E1CC6417E002C068C /* EditSkillNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863048D1CC6417E002C068C /* EditSkillNode.swift */; };
-		C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86304911CC646B1002C068C /* SkillsViewController.swift */; };
-		C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */; };
 		C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C88EB4871CB50580002B9592 /* GoogleImages.storyboard */; };
 		C8A42EEC1D5CA06400C45829 /* iRate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8A42EEB1D5CA06400C45829 /* iRate.framework */; };
-		C8A42EEE1D5CC1B000C45829 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A42EED1D5CC1B000C45829 /* AboutViewController.swift */; };
-		C8B3C71F1D804530002D9364 /* GeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B3C71E1D804530002D9364 /* GeneratorViewController.swift */; };
-		C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D231CC5017A009CDBFA /* AddViewController.swift */; };
-		C8DF6D261CC5033F009CDBFA /* AddScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DF6D251CC5033F009CDBFA /* AddScene.swift */; };
-		C8DF6D281CC503A0009CDBFA /* AddScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C8DF6D271CC503A0009CDBFA /* AddScene.sks */; };
-		C8F55CA61CFC264300208F88 /* SkillNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA51CFC264300208F88 /* SkillNode.swift */; };
 		C8F55CAF1CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA71CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift */; };
 		C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */; };
 		C8F55CB11CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */; };
-		C8F55CB21CFC323000208F88 /* GraphCloudEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */; };
 		C8F55CB51CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */; };
 		C8F55CB61CFC323000208F88 /* SkillNodeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */; };
 		C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */; };
@@ -48,39 +31,68 @@
 		CC2D3E121E166BF300047519 /* UIViewController+Unwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2D3E111E166BF300047519 /* UIViewController+Unwind.swift */; };
 		CC2D3E141E166CF000047519 /* DispatchQueue+Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2D3E131E166CF000047519 /* DispatchQueue+Delay.swift */; };
 		CC3776A11DB5217D002188FC /* UIViewController+AlertsHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */; };
-		CC7CEFA61DC0CB7A00D4057A /* TouchDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7CEFA51DC0CB7A00D4057A /* TouchDownView.swift */; };
+		CC6E68751F5C24D0006750BF /* CloudGraphScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC6E68491F5C24D0006750BF /* CloudGraphScene.sks */; };
+		CC6E68761F5C24D0006750BF /* CloudGraphScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E684A1F5C24D0006750BF /* CloudGraphScene.swift */; };
+		CC6E68771F5C24D0006750BF /* CloudSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */; };
+		CC6E68781F5C24D0006750BF /* CloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E684C1F5C24D0006750BF /* CloudViewController.swift */; };
+		CC6E68791F5C24D0006750BF /* GeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E684D1F5C24D0006750BF /* GeneratorViewController.swift */; };
+		CC6E687A1F5C24D0006750BF /* BrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E684F1F5C24D0006750BF /* BrainNode.swift */; };
+		CC6E687B1F5C24D0006750BF /* GraphNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68501F5C24D0006750BF /* GraphNode.swift */; };
+		CC6E687C1F5C24D0006750BF /* OptionsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68511F5C24D0006750BF /* OptionsNode.swift */; };
+		CC6E687D1F5C24D0006750BF /* PaletteSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68521F5C24D0006750BF /* PaletteSelectionViewController.swift */; };
+		CC6E687E1F5C24D0006750BF /* TouchDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68531F5C24D0006750BF /* TouchDownView.swift */; };
+		CC6E687F1F5C24D0006750BF /* CloudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68551F5C24D0006750BF /* CloudNode.swift */; };
+		CC6E68801F5C24D0006750BF /* CloudSelectScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC6E68561F5C24D0006750BF /* CloudSelectScene.sks */; };
+		CC6E68811F5C24D0006750BF /* CloudSelectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68571F5C24D0006750BF /* CloudSelectScene.swift */; };
+		CC6E68821F5C24D0006750BF /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68591F5C24D0006750BF /* ExploreViewController.swift */; };
+		CC6E68831F5C24D0006750BF /* SkillsSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E685A1F5C24D0006750BF /* SkillsSearchTableViewCell.swift */; };
+		CC6E68841F5C24D0006750BF /* SkillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E685B1F5C24D0006750BF /* SkillTableViewCell.swift */; };
+		CC6E68851F5C24D0006750BF /* GoogleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E685D1F5C24D0006750BF /* GoogleImage.swift */; };
+		CC6E68861F5C24D0006750BF /* GoogleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E685E1F5C24D0006750BF /* GoogleImageCollectionViewCell.swift */; };
+		CC6E68871F5C24D0006750BF /* GoogleImagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E685F1F5C24D0006750BF /* GoogleImagesCollectionViewController.swift */; };
+		CC6E68881F5C24D0006750BF /* ImagesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68601F5C24D0006750BF /* ImagesAPI.swift */; };
+		CC6E68891F5C24D0006750BF /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68621F5C24D0006750BF /* AboutViewController.swift */; };
+		CC6E688A1F5C24D0006750BF /* InfoMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68631F5C24D0006750BF /* InfoMenuTableViewCell.swift */; };
+		CC6E688B1F5C24D0006750BF /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68641F5C24D0006750BF /* InfoViewController.swift */; };
+		CC6E688C1F5C24D0006750BF /* LicensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68651F5C24D0006750BF /* LicensesViewController.swift */; };
+		CC6E688D1F5C24D0006750BF /* RootTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68671F5C24D0006750BF /* RootTabBarViewController.swift */; };
+		CC6E688E1F5C24D0006750BF /* AddScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC6E686A1F5C24D0006750BF /* AddScene.sks */; };
+		CC6E688F1F5C24D0006750BF /* AddScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E686B1F5C24D0006750BF /* AddScene.swift */; };
+		CC6E68901F5C24D0006750BF /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E686C1F5C24D0006750BF /* AddViewController.swift */; };
+		CC6E68911F5C24D0006750BF /* EditSkillNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E686E1F5C24D0006750BF /* EditSkillNode.swift */; };
+		CC6E68921F5C24D0006750BF /* ExperienceSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E686F1F5C24D0006750BF /* ExperienceSelectNode.swift */; };
+		CC6E68931F5C24D0006750BF /* ImageSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68701F5C24D0006750BF /* ImageSelectNode.swift */; };
+		CC6E68941F5C24D0006750BF /* SkillNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68711F5C24D0006750BF /* SkillNode.swift */; };
+		CC6E68951F5C24D0006750BF /* SkillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68721F5C24D0006750BF /* SkillCollectionViewCell.swift */; };
+		CC6E68961F5C24D0006750BF /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E68731F5C24D0006750BF /* SkillsViewController.swift */; };
+		CC6E68981F5C2547006750BF /* Localize.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC6E68971F5C2547006750BF /* Localize.strings */; };
+		CC6E689B1F5C36F7006750BF /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E689A1F5C36F7006750BF /* R.generated.swift */; };
 		CC8C216C1E15709A001E466C /* UIImage+ShapeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */; };
 		CC9E4D411E0C480900ABB5A7 /* SpriteKit+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */; };
-		CCC6276D1E16705200694204 /* CloudNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6276A1E16705200694204 /* CloudNode.swift */; };
-		CCC6276E1E16705200694204 /* CloudSelectScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CCC6276B1E16705200694204 /* CloudSelectScene.sks */; };
-		CCC6276F1E16705200694204 /* CloudSelectScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC6276C1E16705200694204 /* CloudSelectScene.swift */; };
-		CCC627711E16728300694204 /* ImageSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC627701E16728300694204 /* ImageSelectNode.swift */; };
-		CCC627741E16863600694204 /* PaletteSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC627731E16863600694204 /* PaletteSelectionViewController.swift */; };
-		FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522B11CAEEF8000315468 /* CloudViewController.swift */; };
+		CCFDFF001F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEF91F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr */; };
+		CCFDFF011F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFA1F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr */; };
+		CCFDFF021F5DF0D4000FF966 /* GraphPaletteGreens.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFB1F5DF0D4000FF966 /* GraphPaletteGreens.clr */; };
+		CCFDFF031F5DF0D4000FF966 /* GraphPalettePastelWet.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFC1F5DF0D4000FF966 /* GraphPalettePastelWet.clr */; };
+		CCFDFF041F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFD1F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr */; };
+		CCFDFF051F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFE1F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr */; };
+		CCFDFF061F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFF1F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr */; };
+		CCFDFF0E1F5E0A62000FF966 /* GraphCloudEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFDFF0D1F5E0A62000FF966 /* GraphCloudEntity+CoreDataClass.swift */; };
+		CCFDFF111F5E153A000FF966 /* GraphPaletteGrayShades.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFF0F1F5E153A000FF966 /* GraphPaletteGrayShades.clr */; };
+		CCFDFF121F5E153A000FF966 /* GraphPaletteLavander.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFF101F5E153A000FF966 /* GraphPaletteLavander.clr */; };
+		CCFFF6D51F5C0879004CD3D2 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFFF6D41F5C0879004CD3D2 /* TransparentNavigationBar.swift */; };
 		FE0522D81CAFE46600315468 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0522D71CAFE46600315468 /* SpriteKit.framework */; };
-		FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */; };
-		FE0522DD1CAFE69500315468 /* CloudGraphScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */; };
-		FE0522E01CB0157800315468 /* BrainNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522DF1CB0157800315468 /* BrainNode.swift */; };
 		FE0522E21CB01BBF00315468 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0522E11CB01BBF00315468 /* Node.swift */; };
 		FE0522E61CB02D6600315468 /* brain_graph_v0.1.json in Resources */ = {isa = PBXBuildFile; fileRef = FE0522E51CB02D6600315468 /* brain_graph_v0.1.json */; };
-		FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */; };
-		FE1FFCAF1D258B5A00E6F6C6 /* RootTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */; };
 		FE2151451D1F3435005BC8B1 /* CloudContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2151441D1F3435005BC8B1 /* CloudContainer.swift */; };
 		FE2E6BE81D16982900B86D8A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2E6BE71D16982900B86D8A /* CloudKit.framework */; };
 		FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAEE1C9CA1240006D9EE /* Skill.swift */; };
 		FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */; };
 		FE31DB0F1C9CA1240006D9EE /* FileManager+CacheFileUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF11C9CA1240006D9EE /* FileManager+CacheFileUrl.swift */; };
-		FE31DB101C9CA1240006D9EE /* ImagesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */; };
-		FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */; };
 		FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB001C9CA1240006D9EE /* LaunchScreen.storyboard */; };
 		FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB021C9CA1240006D9EE /* Main.storyboard */; };
-		FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */; };
-		FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */; };
 		FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FE31DB1E1C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld */; };
-		FE32AB101D271CBF0099B8B6 /* CloudSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */; };
 		FE60C9E71D22C34C001129C8 /* CloudKit+Promises.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */; };
 		FE60C9E91D22C4EE001129C8 /* ImageAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE60C9E81D22C4EE001129C8 /* ImageAsset.swift */; };
-		FE712CAF1D15CA0B00C954CA /* ExperienceSelectNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE712CAE1D15CA0B00C954CA /* ExperienceSelectNode.swift */; };
 		FE766D361C9D80010079CA29 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D351C9D80010079CA29 /* DataManager.swift */; };
 		FE766D411C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */; };
 		FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE766D401C9D82780079CA29 /* SkillEntity.swift */; };
@@ -95,9 +107,7 @@
 		FE9F6EED1D285031008B3BC3 /* UIImage+RBResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9F6EEC1D285031008B3BC3 /* UIImage+RBResizer.swift */; };
 		FEB31DA21D31207D00E7C203 /* MRProgress+Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB31DA11D31207D00E7C203 /* MRProgress+Show.swift */; };
 		FEB31DA51D31934800E7C203 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEB31DA41D31934800E7C203 /* Lato-Light.ttf */; };
-		FEB32F9A1D5BA5ED00ABE5F8 /* InfoMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB32F991D5BA5ED00ABE5F8 /* InfoMenuTableViewCell.swift */; };
 		FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB88E731CB6FD8500EED249 /* Assets.xcassets */; };
-		FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */; };
 		FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */; };
 		FEE50AA01D2493F70024060D /* CKRecordMappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE50A9F1D2493F70024060D /* CKRecordMappable.swift */; };
 		FEE50AA21D2494100024060D /* CKRecordConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE50AA11D2494100024060D /* CKRecordConvertible.swift */; };
@@ -121,34 +131,17 @@
 		0973088A39C9FDA46F42FEC2 /* Pods_SkillCloud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SkillCloud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1712187C40B694294151165F /* Pods-SkillCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.release.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.release.xcconfig"; sourceTree = "<group>"; };
 		475C05D26AD5AF1583C89837 /* Pods-SkillCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SkillCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SkillCloud/Pods-SkillCloud.debug.xcconfig"; sourceTree = "<group>"; };
+		8CA6C4FDC3856442D5417107 /* Skill+DTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skill+DTO.swift"; sourceTree = "<group>"; };
 		8CA6C6E5BEC7A3AD7960DD44 /* Skill+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skill+CloudKit.swift"; sourceTree = "<group>"; };
 		8CA6CE61836B24CB81699B31 /* Skill+Experience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skill+Experience.swift"; sourceTree = "<group>"; };
-		C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		C80A91901CB5208200529F0B /* GoogleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImage.swift; sourceTree = "<group>"; };
-		C819FB9D1D8187F100B55C14 /* GraphNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphNode.swift; sourceTree = "<group>"; };
-		C82E241F1D928DC6001D6A98 /* OptionsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsNode.swift; sourceTree = "<group>"; };
-		C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
-		C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsSearchTableViewCell.swift; sourceTree = "<group>"; };
-		C83BF83C1D5B369900FDA60C /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		C83BF83E1D5C73A100FDA60C /* TSMarkdownParser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSMarkdownParser.framework; path = Carthage/Build/iOS/TSMarkdownParser.framework; sourceTree = "<group>"; };
-		C83BF8441D5C76C100FDA60C /* LicensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
 		C83BF8461D5C784300FDA60C /* Licenses.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Licenses.md; sourceTree = "<group>"; };
-		C863048D1CC6417E002C068C /* EditSkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSkillNode.swift; sourceTree = "<group>"; };
-		C86304911CC646B1002C068C /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
-		C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImagesCollectionViewController.swift; sourceTree = "<group>"; };
 		C88EB4871CB50580002B9592 /* GoogleImages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoogleImages.storyboard; sourceTree = "<group>"; };
 		C8A42EEB1D5CA06400C45829 /* iRate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iRate.framework; path = Carthage/Build/iOS/iRate.framework; sourceTree = "<group>"; };
-		C8A42EED1D5CC1B000C45829 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* SkillCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C8B3C71E1D804530002D9364 /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorViewController.swift; sourceTree = "<group>"; };
-		C8DF6D231CC5017A009CDBFA /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		C8DF6D251CC5033F009CDBFA /* AddScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScene.swift; sourceTree = "<group>"; };
-		C8DF6D271CC503A0009CDBFA /* AddScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AddScene.sks; sourceTree = "<group>"; };
-		C8F55CA51CFC264300208F88 /* SkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkillNode.swift; path = "../../Skills/Add Skill/Nodes/SkillNode.swift"; sourceTree = "<group>"; };
 		C8F55CA71CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNodeEntity.swift; sourceTree = "<group>"; };
 		C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GraphCloudEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphCloudEntity.swift; sourceTree = "<group>"; };
 		C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkillNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C8F55CAE1CFC323000208F88 /* SkillNodeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillNodeEntity.swift; sourceTree = "<group>"; };
 		C8FF6EFF1CB3F9F5000B276E /* AnyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyAPI.swift; sourceTree = "<group>"; };
@@ -162,41 +155,70 @@
 		CC2D3E111E166BF300047519 /* UIViewController+Unwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Unwind.swift"; sourceTree = "<group>"; };
 		CC2D3E131E166CF000047519 /* DispatchQueue+Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Delay.swift"; sourceTree = "<group>"; };
 		CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+AlertsHandling.swift"; sourceTree = "<group>"; };
-		CC7CEFA51DC0CB7A00D4057A /* TouchDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchDownView.swift; sourceTree = "<group>"; };
+		CC6E68491F5C24D0006750BF /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
+		CC6E684A1F5C24D0006750BF /* CloudGraphScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudGraphScene.swift; sourceTree = "<group>"; };
+		CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectionViewController.swift; sourceTree = "<group>"; };
+		CC6E684C1F5C24D0006750BF /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
+		CC6E684D1F5C24D0006750BF /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorViewController.swift; sourceTree = "<group>"; };
+		CC6E684F1F5C24D0006750BF /* BrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainNode.swift; sourceTree = "<group>"; };
+		CC6E68501F5C24D0006750BF /* GraphNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphNode.swift; sourceTree = "<group>"; };
+		CC6E68511F5C24D0006750BF /* OptionsNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsNode.swift; sourceTree = "<group>"; };
+		CC6E68521F5C24D0006750BF /* PaletteSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteSelectionViewController.swift; sourceTree = "<group>"; };
+		CC6E68531F5C24D0006750BF /* TouchDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchDownView.swift; sourceTree = "<group>"; };
+		CC6E68551F5C24D0006750BF /* CloudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudNode.swift; sourceTree = "<group>"; };
+		CC6E68561F5C24D0006750BF /* CloudSelectScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudSelectScene.sks; sourceTree = "<group>"; };
+		CC6E68571F5C24D0006750BF /* CloudSelectScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectScene.swift; sourceTree = "<group>"; };
+		CC6E68591F5C24D0006750BF /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		CC6E685A1F5C24D0006750BF /* SkillsSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsSearchTableViewCell.swift; sourceTree = "<group>"; };
+		CC6E685B1F5C24D0006750BF /* SkillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillTableViewCell.swift; sourceTree = "<group>"; };
+		CC6E685D1F5C24D0006750BF /* GoogleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImage.swift; sourceTree = "<group>"; };
+		CC6E685E1F5C24D0006750BF /* GoogleImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		CC6E685F1F5C24D0006750BF /* GoogleImagesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleImagesCollectionViewController.swift; sourceTree = "<group>"; };
+		CC6E68601F5C24D0006750BF /* ImagesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
+		CC6E68621F5C24D0006750BF /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		CC6E68631F5C24D0006750BF /* InfoMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoMenuTableViewCell.swift; sourceTree = "<group>"; };
+		CC6E68641F5C24D0006750BF /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		CC6E68651F5C24D0006750BF /* LicensesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicensesViewController.swift; sourceTree = "<group>"; };
+		CC6E68671F5C24D0006750BF /* RootTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarViewController.swift; sourceTree = "<group>"; };
+		CC6E686A1F5C24D0006750BF /* AddScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AddScene.sks; sourceTree = "<group>"; };
+		CC6E686B1F5C24D0006750BF /* AddScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScene.swift; sourceTree = "<group>"; };
+		CC6E686C1F5C24D0006750BF /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		CC6E686E1F5C24D0006750BF /* EditSkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSkillNode.swift; sourceTree = "<group>"; };
+		CC6E686F1F5C24D0006750BF /* ExperienceSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceSelectNode.swift; sourceTree = "<group>"; };
+		CC6E68701F5C24D0006750BF /* ImageSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSelectNode.swift; sourceTree = "<group>"; };
+		CC6E68711F5C24D0006750BF /* SkillNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillNode.swift; sourceTree = "<group>"; };
+		CC6E68721F5C24D0006750BF /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
+		CC6E68731F5C24D0006750BF /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
+		CC6E68971F5C2547006750BF /* Localize.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localize.strings; sourceTree = "<group>"; };
+		CC6E689A1F5C36F7006750BF /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ShapeImage.swift"; sourceTree = "<group>"; };
 		CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SpriteKit+Spring.swift"; sourceTree = "<group>"; };
-		CCC6276A1E16705200694204 /* CloudNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudNode.swift; sourceTree = "<group>"; };
-		CCC6276B1E16705200694204 /* CloudSelectScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudSelectScene.sks; sourceTree = "<group>"; };
-		CCC6276C1E16705200694204 /* CloudSelectScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectScene.swift; sourceTree = "<group>"; };
-		CCC627701E16728300694204 /* ImageSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSelectNode.swift; sourceTree = "<group>"; };
-		CCC627731E16863600694204 /* PaletteSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteSelectionViewController.swift; sourceTree = "<group>"; };
-		FE0522B11CAEEF8000315468 /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
+		CCFDFEF91F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteAutumnRed.clr; sourceTree = "<group>"; };
+		CCFDFEFA1F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteGrayGreenForest.clr; sourceTree = "<group>"; };
+		CCFDFEFB1F5DF0D4000FF966 /* GraphPaletteGreens.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteGreens.clr; sourceTree = "<group>"; };
+		CCFDFEFC1F5DF0D4000FF966 /* GraphPalettePastelWet.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPalettePastelWet.clr; sourceTree = "<group>"; };
+		CCFDFEFD1F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteSteelAndGlass.clr; sourceTree = "<group>"; };
+		CCFDFEFE1F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteTurquiseShades.clr; sourceTree = "<group>"; };
+		CCFDFEFF1F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteTurquiseSimple.clr; sourceTree = "<group>"; };
+		CCFDFF0D1F5E0A62000FF966 /* GraphCloudEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GraphCloudEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CCFDFF0F1F5E153A000FF966 /* GraphPaletteGrayShades.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteGrayShades.clr; sourceTree = "<group>"; };
+		CCFDFF101F5E153A000FF966 /* GraphPaletteLavander.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteLavander.clr; sourceTree = "<group>"; };
+		CCFFF6D41F5C0879004CD3D2 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentNavigationBar.swift; sourceTree = "<group>"; };
 		FE0522D71CAFE46600315468 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
-		FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudGraphScene.swift; sourceTree = "<group>"; };
-		FE0522DF1CB0157800315468 /* BrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainNode.swift; sourceTree = "<group>"; };
 		FE0522E11CB01BBF00315468 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		FE0522E51CB02D6600315468 /* brain_graph_v0.1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = brain_graph_v0.1.json; sourceTree = "<group>"; };
-		FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillCollectionViewCell.swift; sourceTree = "<group>"; };
-		FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarViewController.swift; sourceTree = "<group>"; };
 		FE2151441D1F3435005BC8B1 /* CloudContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudContainer.swift; sourceTree = "<group>"; };
 		FE2E6BE61D16963600B86D8A /* SkillCloud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SkillCloud.entitlements; sourceTree = "<group>"; };
 		FE2E6BE71D16982900B86D8A /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		FE31DAEE1C9CA1240006D9EE /* Skill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
 		FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE31DAF11C9CA1240006D9EE /* FileManager+CacheFileUrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+CacheFileUrl.swift"; sourceTree = "<group>"; };
-		FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesAPI.swift; sourceTree = "<group>"; };
-		FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillTableViewCell.swift; sourceTree = "<group>"; };
 		FE31DB011C9CA1240006D9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FE31DB031C9CA1240006D9EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OccupiedPlaceView.xib; sourceTree = "<group>"; };
-		FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PossiblePlaceView.xib; sourceTree = "<group>"; };
 		FE31DB081C9CA1240006D9EE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE31DB1F1C9CA1DC0006D9EE /* SkillCloud.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SkillCloud.xcdatamodel; sourceTree = "<group>"; };
-		FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudSelectionViewController.swift; path = "../Cloud Graph/CloudSelectionViewController.swift"; sourceTree = "<group>"; };
 		FE60C9E61D22C34C001129C8 /* CloudKit+Promises.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CloudKit+Promises.swift"; sourceTree = "<group>"; };
 		FE60C9E81D22C4EE001129C8 /* ImageAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsset.swift; sourceTree = "<group>"; };
-		FE712CAE1D15CA0B00C954CA /* ExperienceSelectNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExperienceSelectNode.swift; sourceTree = "<group>"; };
 		FE766D351C9D80010079CA29 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkillEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FE766D401C9D82780079CA29 /* SkillEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillEntity.swift; sourceTree = "<group>"; };
@@ -211,9 +233,7 @@
 		FE9F6EEC1D285031008B3BC3 /* UIImage+RBResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+RBResizer.swift"; sourceTree = "<group>"; };
 		FEB31DA11D31207D00E7C203 /* MRProgress+Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MRProgress+Show.swift"; sourceTree = "<group>"; };
 		FEB31DA41D31934800E7C203 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
-		FEB32F991D5BA5ED00ABE5F8 /* InfoMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoMenuTableViewCell.swift; sourceTree = "<group>"; };
 		FEB88E731CB6FD8500EED249 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudExportViewController.swift; sourceTree = "<group>"; };
 		FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsAndDefines.swift; sourceTree = "<group>"; };
 		FEE50A9F1D2493F70024060D /* CKRecordMappable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRecordMappable.swift; sourceTree = "<group>"; };
 		FEE50AA11D2494100024060D /* CKRecordConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CKRecordConvertible.swift; sourceTree = "<group>"; };
@@ -312,123 +332,149 @@
 			path = "Error Handling";
 			sourceTree = "<group>";
 		};
-		CC88FB161E1551B10051607B /* Info */ = {
+		CC6E68461F5C24D0006750BF /* Usecases */ = {
 			isa = PBXGroup;
 			children = (
-				C8A42EED1D5CC1B000C45829 /* AboutViewController.swift */,
-				FEB32F991D5BA5ED00ABE5F8 /* InfoMenuTableViewCell.swift */,
-				C83BF83C1D5B369900FDA60C /* InfoViewController.swift */,
-				C83BF8441D5C76C100FDA60C /* LicensesViewController.swift */,
+				CC6E68661F5C24D0006750BF /* Main */,
+				CC6E68541F5C24D0006750BF /* Cloud Selection */,
+				CC6E68471F5C24D0006750BF /* Cloud Graph */,
+				CC6E68681F5C24D0006750BF /* Skills */,
+				CC6E685C1F5C24D0006750BF /* GoogleImages */,
+				CC6E68581F5C24D0006750BF /* Explore */,
+				CC6E68611F5C24D0006750BF /* Info */,
 			);
-			path = Info;
+			path = Usecases;
 			sourceTree = "<group>";
 		};
-		CC88FB171E1551B70051607B /* Skills */ = {
+		CC6E68471F5C24D0006750BF /* Cloud Graph */ = {
 			isa = PBXGroup;
 			children = (
-				CC942C671DAD19B4005FFB83 /* Add Skill */,
-				FE1CDFEA1C9DDCF40043485B /* SkillCollectionViewCell.swift */,
-				C86304911CC646B1002C068C /* SkillsViewController.swift */,
-			);
-			path = Skills;
-			sourceTree = "<group>";
-		};
-		CC88FB181E1551C10051607B /* Explore */ = {
-			isa = PBXGroup;
-			children = (
-				C83BBA9A1D4632BC00431B42 /* ExploreViewController.swift */,
-				FE31DAFA1C9CA1240006D9EE /* SkillTableViewCell.swift */,
-				C83BBA9C1D4649EF00431B42 /* SkillsSearchTableViewCell.swift */,
-			);
-			path = Explore;
-			sourceTree = "<group>";
-		};
-		CC88FB191E1551C60051607B /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				FE1FFCAE1D258B5A00E6F6C6 /* RootTabBarViewController.swift */,
-			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		CC942C661DAD19A6005FFB83 /* Cloud Graph */ = {
-			isa = PBXGroup;
-			children = (
-				CCC627721E16838600694204 /* Palette */,
-				CC9E884B1E1558AC00E550FC /* Nodes */,
-				FEB96C551CFB3B2B000BA362 /* CloudExportViewController.swift */,
-				FE0522DA1CAFE5CC00315468 /* CloudGraphScene.sks */,
-				FE0522DC1CAFE69500315468 /* CloudGraphScene.swift */,
-				FE0522B11CAEEF8000315468 /* CloudViewController.swift */,
-				C8B3C71E1D804530002D9364 /* GeneratorViewController.swift */,
-				CC7CEFA51DC0CB7A00D4057A /* TouchDownView.swift */,
+				CC6E68491F5C24D0006750BF /* CloudGraphScene.sks */,
+				CC6E684A1F5C24D0006750BF /* CloudGraphScene.swift */,
+				CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */,
+				CC6E684C1F5C24D0006750BF /* CloudViewController.swift */,
+				CC6E684D1F5C24D0006750BF /* GeneratorViewController.swift */,
+				CC6E684E1F5C24D0006750BF /* Nodes */,
+				CC6E68521F5C24D0006750BF /* PaletteSelectionViewController.swift */,
+				CC6E68531F5C24D0006750BF /* TouchDownView.swift */,
 			);
 			path = "Cloud Graph";
 			sourceTree = "<group>";
 		};
-		CC942C671DAD19B4005FFB83 /* Add Skill */ = {
+		CC6E684E1F5C24D0006750BF /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
-				CC9E884C1E1558D800E550FC /* Nodes */,
-				C8DF6D271CC503A0009CDBFA /* AddScene.sks */,
-				C8DF6D251CC5033F009CDBFA /* AddScene.swift */,
-				C8DF6D231CC5017A009CDBFA /* AddViewController.swift */,
-			);
-			path = "Add Skill";
-			sourceTree = "<group>";
-		};
-		CC942C691DAD19D1005FFB83 /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				CC88FB191E1551C60051607B /* Main */,
-				CCC627691E16705200694204 /* Cloud Selection */,
-				CC942C661DAD19A6005FFB83 /* Cloud Graph */,
-				CC88FB171E1551B70051607B /* Skills */,
-				CC88FB181E1551C10051607B /* Explore */,
-				CC88FB161E1551B10051607B /* Info */,
-				FE31DAF31C9CA1240006D9EE /* GoogleImages */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		CC9E884B1E1558AC00E550FC /* Nodes */ = {
-			isa = PBXGroup;
-			children = (
-				FE0522DF1CB0157800315468 /* BrainNode.swift */,
-				C819FB9D1D8187F100B55C14 /* GraphNode.swift */,
-				C8F55CA51CFC264300208F88 /* SkillNode.swift */,
-				C82E241F1D928DC6001D6A98 /* OptionsNode.swift */,
+				CC6E684F1F5C24D0006750BF /* BrainNode.swift */,
+				CC6E68501F5C24D0006750BF /* GraphNode.swift */,
+				CC6E68511F5C24D0006750BF /* OptionsNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
 		};
-		CC9E884C1E1558D800E550FC /* Nodes */ = {
+		CC6E68541F5C24D0006750BF /* Cloud Selection */ = {
 			isa = PBXGroup;
 			children = (
-				C863048D1CC6417E002C068C /* EditSkillNode.swift */,
-				CCC627701E16728300694204 /* ImageSelectNode.swift */,
-				FE712CAE1D15CA0B00C954CA /* ExperienceSelectNode.swift */,
-			);
-			path = Nodes;
-			sourceTree = "<group>";
-		};
-		CCC627691E16705200694204 /* Cloud Selection */ = {
-			isa = PBXGroup;
-			children = (
-				FE32AB0F1D271CBF0099B8B6 /* CloudSelectionViewController.swift */,
-				CCC6276A1E16705200694204 /* CloudNode.swift */,
-				CCC6276B1E16705200694204 /* CloudSelectScene.sks */,
-				CCC6276C1E16705200694204 /* CloudSelectScene.swift */,
+				CC6E68551F5C24D0006750BF /* CloudNode.swift */,
+				CC6E68561F5C24D0006750BF /* CloudSelectScene.sks */,
+				CC6E68571F5C24D0006750BF /* CloudSelectScene.swift */,
 			);
 			path = "Cloud Selection";
 			sourceTree = "<group>";
 		};
-		CCC627721E16838600694204 /* Palette */ = {
+		CC6E68581F5C24D0006750BF /* Explore */ = {
 			isa = PBXGroup;
 			children = (
-				CCC627731E16863600694204 /* PaletteSelectionViewController.swift */,
+				CC6E68591F5C24D0006750BF /* ExploreViewController.swift */,
+				CC6E685A1F5C24D0006750BF /* SkillsSearchTableViewCell.swift */,
+				CC6E685B1F5C24D0006750BF /* SkillTableViewCell.swift */,
 			);
-			name = Palette;
+			path = Explore;
+			sourceTree = "<group>";
+		};
+		CC6E685C1F5C24D0006750BF /* GoogleImages */ = {
+			isa = PBXGroup;
+			children = (
+				CC6E685D1F5C24D0006750BF /* GoogleImage.swift */,
+				CC6E685E1F5C24D0006750BF /* GoogleImageCollectionViewCell.swift */,
+				CC6E685F1F5C24D0006750BF /* GoogleImagesCollectionViewController.swift */,
+				CC6E68601F5C24D0006750BF /* ImagesAPI.swift */,
+			);
+			path = GoogleImages;
+			sourceTree = "<group>";
+		};
+		CC6E68611F5C24D0006750BF /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				CC6E68621F5C24D0006750BF /* AboutViewController.swift */,
+				CC6E68631F5C24D0006750BF /* InfoMenuTableViewCell.swift */,
+				CC6E68641F5C24D0006750BF /* InfoViewController.swift */,
+				CC6E68651F5C24D0006750BF /* LicensesViewController.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		CC6E68661F5C24D0006750BF /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CC6E68671F5C24D0006750BF /* RootTabBarViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		CC6E68681F5C24D0006750BF /* Skills */ = {
+			isa = PBXGroup;
+			children = (
+				CC6E68691F5C24D0006750BF /* Add Skill */,
+				CC6E68721F5C24D0006750BF /* SkillCollectionViewCell.swift */,
+				CC6E68731F5C24D0006750BF /* SkillsViewController.swift */,
+			);
+			path = Skills;
+			sourceTree = "<group>";
+		};
+		CC6E68691F5C24D0006750BF /* Add Skill */ = {
+			isa = PBXGroup;
+			children = (
+				CC6E686A1F5C24D0006750BF /* AddScene.sks */,
+				CC6E686B1F5C24D0006750BF /* AddScene.swift */,
+				CC6E686C1F5C24D0006750BF /* AddViewController.swift */,
+				CC6E686D1F5C24D0006750BF /* Nodes */,
+			);
+			path = "Add Skill";
+			sourceTree = "<group>";
+		};
+		CC6E686D1F5C24D0006750BF /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				CC6E686E1F5C24D0006750BF /* EditSkillNode.swift */,
+				CC6E686F1F5C24D0006750BF /* ExperienceSelectNode.swift */,
+				CC6E68701F5C24D0006750BF /* ImageSelectNode.swift */,
+				CC6E68711F5C24D0006750BF /* SkillNode.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		CCFDFEF81F5DF0D4000FF966 /* Palettes */ = {
+			isa = PBXGroup;
+			children = (
+				CCFDFEF91F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr */,
+				CCFDFEFA1F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr */,
+				CCFDFEFB1F5DF0D4000FF966 /* GraphPaletteGreens.clr */,
+				CCFDFEFC1F5DF0D4000FF966 /* GraphPalettePastelWet.clr */,
+				CCFDFEFD1F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr */,
+				CCFDFEFE1F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr */,
+				CCFDFEFF1F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr */,
+				CCFDFF0F1F5E153A000FF966 /* GraphPaletteGrayShades.clr */,
+				CCFDFF101F5E153A000FF966 /* GraphPaletteLavander.clr */,
+			);
+			path = Palettes;
+			sourceTree = "<group>";
+		};
+		CCFFF6D31F5C0879004CD3D2 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				CCFFF6D41F5C0879004CD3D2 /* TransparentNavigationBar.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		FE0522D91CAFE58400315468 /* SpriteKit */ = {
@@ -476,7 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				FE31DAE91C9CA1240006D9EE /* Model */,
-				CC942C691DAD19D1005FFB83 /* Modules */,
+				CC6E68461F5C24D0006750BF /* Usecases */,
 				FE31DAEF1C9CA1240006D9EE /* Other */,
 			);
 			path = Classes;
@@ -492,6 +538,7 @@
 				FE31DAEE1C9CA1240006D9EE /* Skill.swift */,
 				8CA6CE61836B24CB81699B31 /* Skill+Experience.swift */,
 				8CA6C6E5BEC7A3AD7960DD44 /* Skill+CloudKit.swift */,
+				8CA6C4FDC3856442D5417107 /* Skill+DTO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -499,6 +546,7 @@
 		FE31DAEF1C9CA1240006D9EE /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				CCFFF6D31F5C0879004CD3D2 /* UI */,
 				CC2D3E0A1E166B1600047519 /* Error Handling */,
 				FE9F6EE11D284E27008B3BC3 /* Extensions */,
 				FE9F6EE91D28500C008B3BC3 /* Externals */,
@@ -509,27 +557,18 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
-		FE31DAF31C9CA1240006D9EE /* GoogleImages */ = {
-			isa = PBXGroup;
-			children = (
-				C80A91901CB5208200529F0B /* GoogleImage.swift */,
-				C80A918E1CB5206800529F0B /* GoogleImageCollectionViewCell.swift */,
-				C88EB4851CB5050D002B9592 /* GoogleImagesCollectionViewController.swift */,
-				FE31DAF21C9CA1240006D9EE /* ImagesAPI.swift */,
-			);
-			path = GoogleImages;
-			sourceTree = "<group>";
-		};
 		FE31DAFB1C9CA1240006D9EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				FEB31DA31D31934800E7C203 /* Fonts */,
 				FE7C610C1D32A4CE006C987C /* Images */,
+				CCFDFEF81F5DF0D4000FF966 /* Palettes */,
 				C83BF8411D5C751200FDA60C /* Markdown */,
 				FE0522E41CB02D6600315468 /* Patterns */,
 				FE31DAFF1C9CA1240006D9EE /* Storyboards */,
-				FE31DB041C9CA1240006D9EE /* XIBs */,
 				FEB88E731CB6FD8500EED249 /* Assets.xcassets */,
+				CC6E68971F5C2547006750BF /* Localize.strings */,
+				CC6E689A1F5C36F7006750BF /* R.generated.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -542,15 +581,6 @@
 				FE31DB021C9CA1240006D9EE /* Main.storyboard */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		FE31DB041C9CA1240006D9EE /* XIBs */ = {
-			isa = PBXGroup;
-			children = (
-				FE31DB051C9CA1240006D9EE /* OccupiedPlaceView.xib */,
-				FE31DB061C9CA1240006D9EE /* PossiblePlaceView.xib */,
-			);
-			path = XIBs;
 			sourceTree = "<group>";
 		};
 		FE31DB071C9CA1240006D9EE /* Supporting Files */ = {
@@ -577,8 +607,8 @@
 			children = (
 				C8F55CA71CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift */,
 				C8F55CA81CFC323000208F88 /* BaseNodeEntity.swift */,
+				CCFDFF0D1F5E0A62000FF966 /* GraphCloudEntity+CoreDataClass.swift */,
 				C8F55CA91CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift */,
-				C8F55CAA1CFC323000208F88 /* GraphCloudEntity.swift */,
 				FE766D3F1C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift */,
 				FE766D401C9D82780079CA29 /* SkillEntity.swift */,
 				C8F55CAD1CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift */,
@@ -638,6 +668,7 @@
 			buildConfigurationList = C8A4A0581C981B6C004E055D /* Build configuration list for PBXNativeTarget "SkillCloud" */;
 			buildPhases = (
 				1A3825BC2F3E47B9A22B961D /* [CP] Check Pods Manifest.lock */,
+				CC6E68991F5C3557006750BF /* [R] Generate */,
 				C8A4A03F1C981B6C004E055D /* Sources */,
 				C8A4A0401C981B6C004E055D /* Frameworks */,
 				C8A4A0411C981B6C004E055D /* Resources */,
@@ -668,7 +699,7 @@
 					C8A4A0421C981B6C004E055D = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = YYAKJ5SR76;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0830;
 						SystemCapabilities = {
 							com.apple.iCloud = {
 								enabled = 1;
@@ -700,22 +731,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCFDFF051F5DF0D4000FF966 /* GraphPaletteTurquiseShades.clr in Resources */,
 				C83BF8481D5C785A00FDA60C /* Licenses.md in Resources */,
-				C8DF6D281CC503A0009CDBFA /* AddScene.sks in Resources */,
 				FE7C61111D32A4CE006C987C /* launch-screen-image@2x.jpg in Resources */,
+				CC6E688E1F5C24D0006750BF /* AddScene.sks in Resources */,
+				CCFDFF111F5E153A000FF966 /* GraphPaletteGrayShades.clr in Resources */,
+				CCFDFF121F5E153A000FF966 /* GraphPaletteLavander.clr in Resources */,
 				FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */,
 				C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */,
 				FEB31DA51D31934800E7C203 /* Lato-Light.ttf in Resources */,
-				FE31DB1B1C9CA1240006D9EE /* OccupiedPlaceView.xib in Resources */,
 				FE7C61101D32A4CE006C987C /* launch-screen-image.jpg in Resources */,
-				CCC6276E1E16705200694204 /* CloudSelectScene.sks in Resources */,
+				CCFDFF061F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr in Resources */,
+				CCFDFF041F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr in Resources */,
+				CC6E68751F5C24D0006750BF /* CloudGraphScene.sks in Resources */,
+				CCFDFF031F5DF0D4000FF966 /* GraphPalettePastelWet.clr in Resources */,
 				FE0522E61CB02D6600315468 /* brain_graph_v0.1.json in Resources */,
+				CC6E68801F5C24D0006750BF /* CloudSelectScene.sks in Resources */,
 				FE7C610B1D32A16F006C987C /* Lato-Regular.ttf in Resources */,
-				FE31DB1C1C9CA1240006D9EE /* PossiblePlaceView.xib in Resources */,
-				FE0522DB1CAFE5CC00315468 /* CloudGraphScene.sks in Resources */,
 				FEB88E741CB6FD8500EED249 /* Assets.xcassets in Resources */,
+				CCFDFF021F5DF0D4000FF966 /* GraphPaletteGreens.clr in Resources */,
 				FE31DB191C9CA1240006D9EE /* LaunchScreen.storyboard in Resources */,
 				FE7C61121D32A4CE006C987C /* launch-screen-image@3x.jpg in Resources */,
+				CCFDFF001F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr in Resources */,
+				CC6E68981F5C2547006750BF /* Localize.strings in Resources */,
+				CCFDFF011F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -783,6 +822,20 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
+		CC6E68991F5C3557006750BF /* [R] Generate */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[R] Generate";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT/SkillCloud/Resources\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -790,80 +843,82 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC7CEFA61DC0CB7A00D4057A /* TouchDownView.swift in Sources */,
-				C83BF8451D5C76C100FDA60C /* LicensesViewController.swift in Sources */,
+				CC6E68871F5C24D0006750BF /* GoogleImagesCollectionViewController.swift in Sources */,
+				CC6E68931F5C24D0006750BF /* ImageSelectNode.swift in Sources */,
 				CC2D3E0C1E166B5100047519 /* SpriteKit+NodesTransforms.swift in Sources */,
-				C8DF6D261CC5033F009CDBFA /* AddScene.swift in Sources */,
 				FEE50AA01D2493F70024060D /* CKRecordMappable.swift in Sources */,
+				CC6E68891F5C24D0006750BF /* AboutViewController.swift in Sources */,
+				CC6E687A1F5C24D0006750BF /* BrainNode.swift in Sources */,
+				CCFFF6D51F5C0879004CD3D2 /* TransparentNavigationBar.swift in Sources */,
 				FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */,
-				C80A918F1CB5206800529F0B /* GoogleImageCollectionViewCell.swift in Sources */,
+				CC6E68781F5C24D0006750BF /* CloudViewController.swift in Sources */,
+				CC6E688B1F5C24D0006750BF /* InfoViewController.swift in Sources */,
 				FE0522E21CB01BBF00315468 /* Node.swift in Sources */,
-				FEB32F9A1D5BA5ED00ABE5F8 /* InfoMenuTableViewCell.swift in Sources */,
+				CC6E68901F5C24D0006750BF /* AddViewController.swift in Sources */,
+				CC6E68961F5C24D0006750BF /* SkillsViewController.swift in Sources */,
 				FE766D361C9D80010079CA29 /* DataManager.swift in Sources */,
-				CCC627711E16728300694204 /* ImageSelectNode.swift in Sources */,
-				CCC627741E16863600694204 /* PaletteSelectionViewController.swift in Sources */,
-				C83BBA9B1D4632BC00431B42 /* ExploreViewController.swift in Sources */,
+				CC6E68861F5C24D0006750BF /* GoogleImageCollectionViewCell.swift in Sources */,
 				FEE50AA21D2494100024060D /* CKRecordConvertible.swift in Sources */,
-				C8B3C71F1D804530002D9364 /* GeneratorViewController.swift in Sources */,
 				FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */,
-				FE0522E01CB0157800315468 /* BrainNode.swift in Sources */,
-				CCC6276D1E16705200694204 /* CloudNode.swift in Sources */,
+				CC6E687D1F5C24D0006750BF /* PaletteSelectionViewController.swift in Sources */,
+				CC6E68821F5C24D0006750BF /* ExploreViewController.swift in Sources */,
+				CC6E688D1F5C24D0006750BF /* RootTabBarViewController.swift in Sources */,
+				CC6E68841F5C24D0006750BF /* SkillTableViewCell.swift in Sources */,
 				FE9F6EED1D285031008B3BC3 /* UIImage+RBResizer.swift in Sources */,
+				CC6E68911F5C24D0006750BF /* EditSkillNode.swift in Sources */,
 				FE9F6EE51D284EE3008B3BC3 /* UIColor+Extensions.swift in Sources */,
 				FE2151451D1F3435005BC8B1 /* CloudContainer.swift in Sources */,
-				FE31DB161C9CA1240006D9EE /* SkillTableViewCell.swift in Sources */,
 				FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */,
+				CC6E687E1F5C24D0006750BF /* TouchDownView.swift in Sources */,
 				FE766D411C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift in Sources */,
-				FE0522B21CAEEF8000315468 /* CloudViewController.swift in Sources */,
+				CC6E68851F5C24D0006750BF /* GoogleImage.swift in Sources */,
 				C8F55CB11CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift in Sources */,
+				CC6E68881F5C24D0006750BF /* ImagesAPI.swift in Sources */,
+				CC6E688A1F5C24D0006750BF /* InfoMenuTableViewCell.swift in Sources */,
 				CC2D3E031E16699F00047519 /* CommonError+ShowableError.swift in Sources */,
 				FE60C9E91D22C4EE001129C8 /* ImageAsset.swift in Sources */,
 				CC3776A11DB5217D002188FC /* UIViewController+AlertsHandling.swift in Sources */,
-				FEB96C561CFB3B2B000BA362 /* CloudExportViewController.swift in Sources */,
 				C8F55CB01CFC323000208F88 /* BaseNodeEntity.swift in Sources */,
 				FEE50AA41D24941E0024060D /* CKRecordSyncable.swift in Sources */,
 				CC2D3E0E1E166B8900047519 /* Operators+OptionalAssignment.swift in Sources */,
 				FE9F6EE31D284E9F008B3BC3 /* CGStructures+Convenience.swift in Sources */,
-				C83BBA9D1D4649EF00431B42 /* SkillsSearchTableViewCell.swift in Sources */,
-				C8F55CA61CFC264300208F88 /* SkillNode.swift in Sources */,
-				C819FB9E1D8187F100B55C14 /* GraphNode.swift in Sources */,
 				CC8C216C1E15709A001E466C /* UIImage+ShapeImage.swift in Sources */,
-				C80A91911CB5208200529F0B /* GoogleImage.swift in Sources */,
+				CC6E68761F5C24D0006750BF /* CloudGraphScene.swift in Sources */,
 				CC2D3E121E166BF300047519 /* UIViewController+Unwind.swift in Sources */,
 				FE9F6EE71D284F15008B3BC3 /* Array+Extensions.swift in Sources */,
-				C83BF83D1D5B369900FDA60C /* InfoViewController.swift in Sources */,
+				CC6E688F1F5C24D0006750BF /* AddScene.swift in Sources */,
+				CC6E687C1F5C24D0006750BF /* OptionsNode.swift in Sources */,
 				C8F55CB51CFC323000208F88 /* SkillNodeEntity+CoreDataProperties.swift in Sources */,
-				FE1CDFEB1C9DDCF40043485B /* SkillCollectionViewCell.swift in Sources */,
-				C8F55CB21CFC323000208F88 /* GraphCloudEntity.swift in Sources */,
-				C8DF6D241CC5017A009CDBFA /* AddViewController.swift in Sources */,
-				FE1FFCAF1D258B5A00E6F6C6 /* RootTabBarViewController.swift in Sources */,
-				C82E24201D928DC6001D6A98 /* OptionsNode.swift in Sources */,
+				CC6E687B1F5C24D0006750BF /* GraphNode.swift in Sources */,
 				FEB96C581CFB5D53000BA362 /* ConstantsAndDefines.swift in Sources */,
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				CC2D3E141E166CF000047519 /* DispatchQueue+Delay.swift in Sources */,
+				CC6E68831F5C24D0006750BF /* SkillsSearchTableViewCell.swift in Sources */,
 				CC9E4D411E0C480900ABB5A7 /* SpriteKit+Spring.swift in Sources */,
+				CC6E688C1F5C24D0006750BF /* LicensesViewController.swift in Sources */,
 				CC2D3E011E1585E000047519 /* Palette.swift in Sources */,
-				C86304921CC646B1002C068C /* SkillsViewController.swift in Sources */,
+				CC6E687F1F5C24D0006750BF /* CloudNode.swift in Sources */,
 				FE60C9E71D22C34C001129C8 /* CloudKit+Promises.swift in Sources */,
-				C863048E1CC6417E002C068C /* EditSkillNode.swift in Sources */,
-				FE0522DD1CAFE69500315468 /* CloudGraphScene.swift in Sources */,
 				FE9F6EEB1D28500C008B3BC3 /* CocoaLumberjack.swift in Sources */,
+				CC6E68771F5C24D0006750BF /* CloudSelectionViewController.swift in Sources */,
 				C8F55CAF1CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift in Sources */,
-				C8A42EEE1D5CC1B000C45829 /* AboutViewController.swift in Sources */,
+				CCFDFF0E1F5E0A62000FF966 /* GraphCloudEntity+CoreDataClass.swift in Sources */,
 				FEB31DA21D31207D00E7C203 /* MRProgress+Show.swift in Sources */,
 				CC2D3E051E1669FB00047519 /* SpriteKit+InteractiveNodes.swift in Sources */,
+				CC6E689B1F5C36F7006750BF /* R.generated.swift in Sources */,
+				CC6E68921F5C24D0006750BF /* ExperienceSelectNode.swift in Sources */,
 				CC2D3E101E166BBA00047519 /* UIViewController+SnackBar.swift in Sources */,
-				FE712CAF1D15CA0B00C954CA /* ExperienceSelectNode.swift in Sources */,
-				CCC6276F1E16705200694204 /* CloudSelectScene.swift in Sources */,
+				CC6E68811F5C24D0006750BF /* CloudSelectScene.swift in Sources */,
+				CC6E68941F5C24D0006750BF /* SkillNode.swift in Sources */,
 				C8F55CB61CFC323000208F88 /* SkillNodeEntity.swift in Sources */,
 				C8FF6F001CB3F9F5000B276E /* AnyAPI.swift in Sources */,
-				FE31DB101C9CA1240006D9EE /* ImagesAPI.swift in Sources */,
-				FE32AB101D271CBF0099B8B6 /* CloudSelectionViewController.swift in Sources */,
-				C88EB4861CB5050D002B9592 /* GoogleImagesCollectionViewController.swift in Sources */,
 				FE31DB0F1C9CA1240006D9EE /* FileManager+CacheFileUrl.swift in Sources */,
 				CC2D3E071E166A8300047519 /* Array+MapExisting.swift in Sources */,
 				8CA6CE3FD63AB58C9E23C35D /* Skill+Experience.swift in Sources */,
+				CC6E68791F5C24D0006750BF /* GeneratorViewController.swift in Sources */,
+				CC6E68951F5C24D0006750BF /* SkillCollectionViewCell.swift in Sources */,
 				8CA6C4F36E731EB0C7ACC96C /* Skill+CloudKit.swift in Sources */,
+				8CA6CD66266C0B5A486D3E0A /* Skill+DTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -983,6 +1038,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "SkillCloud/Supporting Files/SkillCloud.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -996,6 +1052,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.girappe.skillcloud;
 				PRODUCT_NAME = SkillCloud;
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1006,6 +1063,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "SkillCloud/Supporting Files/SkillCloud.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

@@ -53,12 +53,3 @@ class Skill {
         }
     }
 }
-
-// MARK: - DTOModel
-extension Skill: DTOModel {
-
-    var uniqueIdentifierValue: String {
-        return self.title
-    }
-
-}

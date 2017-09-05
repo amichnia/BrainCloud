@@ -69,6 +69,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.rate?.eventsUntilPrompt = Defined.Application.RateAfterEvents
         self.rate?.useUIAlertControllerIfAvailable = true
     }
-    
 }
 

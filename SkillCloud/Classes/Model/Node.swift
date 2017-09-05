@@ -9,7 +9,6 @@
 import UIKit
 
 struct Node {
-    
     // Static properties
     static var lastId:      Int     = 0
     static var factor:      CGFloat { return 1.75 / self.scaleFactor }
@@ -58,12 +57,10 @@ struct Node {
     func isConnectedTo(_ node: Node) -> Bool {
         return self.connected.contains(node.id) || node.connected.contains(self.id)
     }
-    
 }
 
 // MARK: - SpriteKit position
 extension Node {
-    
     /// Absolute position in SpriteKit container of Node.rectSize size
     var skPosition: CGPoint { return CGPoint(x: Node.rectPosition.x + self.point.x * Node.rectSize.width, y: Node.rectPosition.y + Node.rectSize.height - self.point.y * Node.rectSize.height) }
     
@@ -77,12 +74,10 @@ extension Node {
     func relativePositionWith(_ skPosition: CGPoint) -> CGPoint {
         return CGPoint(x: skPosition.x / Node.rectSize.width, y: (Node.rectSize.height - skPosition.y) / Node.rectSize.height)
     }
-    
 }
 
 // MARK: - Helpers
 extension Node {
-    
     func drawInContext(_ ctx: CGContext) {
         ctx.fillEllipse(in: self.frame)
     }
@@ -106,5 +101,4 @@ extension Node {
     func isNodeWithin(_ node: Node) -> Bool {
         return self.frame.insetBy(dx: -minRadius, dy: -minRadius).contains(node.point)
     }
-    
 }

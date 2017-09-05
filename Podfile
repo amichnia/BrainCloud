@@ -21,6 +21,10 @@ def ui_components
     pod 'DRNSnackBar'
 end
 
+def assets_management
+    pod 'R.swift'
+end
+
 def image_adjustment
     pod 'RSKImageCropper'
 end
@@ -35,5 +39,6 @@ target 'SkillCloud' do
     networking
     ui_components
     image_adjustment
+    assets_management
     logging
 end
