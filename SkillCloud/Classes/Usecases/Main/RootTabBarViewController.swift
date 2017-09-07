@@ -12,11 +12,17 @@ import CloudKit
 import MRProgress
 
 class RootTabBarViewController: UITabBarController {
-
-    // MARK: - Outlets
-    
     // MARK: - Properties
     var isSyncing: Bool = false
+    var howToShown: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "howToShown")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "howToShown")
+            UserDefaults.standard.synchronize()
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -41,21 +47,14 @@ class RootTabBarViewController: UITabBarController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if self.isSyncing {
+
+        if !howToShown {
+            howToShown = true
+            performSegue(withIdentifier: R.segue.rootTabBarViewController.showHelp.identifier, sender: nil)
+        } else if self.isSyncing {
             MRProgressOverlayView.show()
         }
     }
-    
-    // MARK: - Actions
-    
-    // MARK: - Navigation
-    
 }

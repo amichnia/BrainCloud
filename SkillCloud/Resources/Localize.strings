@@ -59,6 +59,18 @@
 "about.appSection.title" = "SkillCloud";
 "about.appSection.subtitle" = "About application";
 
+// Help
+"help.page.1.top" = "Tap + to create new graph";
+"help.page.1.bottom" = "Select existing graphs to update";
+"help.page.2.top" = "Tap on graph to add skill node";
+"help.page.2.bottom" = "Select skill to add";
+"help.page.3.top" = "Long press to select skill node";
+"help.page.3.bottom" = "Remove or scale selected node";
+"help.page.4.top" = "Manage list of your skills";
+"help.page.4.bottom" = "Add new custom skill";
+"help.page.5.top" = "Fill details, like proficency or image";
+"help.page.5.bottom" = "Add skill to you’r list";
+
 // Feedback
 "feedback.sent.success.snackBar.message" = "Thank you for sending feedback.";
 "feedback.sent.failure.snackBar.message" = "Sending failed. Please verify you email settings.";

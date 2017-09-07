@@ -34,6 +34,7 @@
                         <segue destination="Zhu-Ph-jdQ" kind="relationship" relationship="viewControllers" id="VeQ-Ct-Ckx"/>
                         <segue destination="VcD-r6-nOo" kind="relationship" relationship="viewControllers" id="ElT-Kd-hdY"/>
                         <segue destination="i5X-WB-nIA" kind="relationship" relationship="viewControllers" id="ugc-Xf-z8a"/>
+                        <segue destination="nye-C1-YSK" kind="presentation" identifier="ShowHelp" id="BIK-sK-ibr"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r68-vz-Z02" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -215,13 +216,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Add new" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7w-ra-wLF">
-                                                    <rect key="frame" x="8" y="58.5" width="64" height="13.5"/>
+                                                    <rect key="frame" x="8" y="59" width="64" height="13"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="11"/>
                                                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-add" translatesAutoresizingMaskIntoConstraints="NO" id="bqY-p5-xNg">
-                                                    <rect key="frame" x="23" y="12" width="34.5" height="34.5"/>
+                                                    <rect key="frame" x="23" y="12" width="35" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="bqY-p5-xNg" secondAttribute="height" multiplier="1:1" id="lkg-9n-91o"/>
                                                     </constraints>
@@ -256,13 +257,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="500" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Add new" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTe-SZ-ygX">
-                                                    <rect key="frame" x="8" y="58.5" width="64" height="13.5"/>
+                                                    <rect key="frame" x="8" y="59" width="64" height="13"/>
                                                     <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="11"/>
                                                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-add" translatesAutoresizingMaskIntoConstraints="NO" id="Ljw-Hn-ncc">
-                                                    <rect key="frame" x="23" y="12" width="34.5" height="34.5"/>
+                                                    <rect key="frame" x="23" y="12" width="35" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Ljw-Hn-ncc" secondAttribute="height" multiplier="1:1" id="YjA-nb-Wrw"/>
                                                     </constraints>
@@ -1395,7 +1396,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Y45-0X-umY" id="Us5-AW-7Xj"/>
-                        <segue destination="xVP-1V-hQr" kind="show" identifier="ShowHelp" id="BQD-6J-XTa"/>
                         <segue destination="zy3-Tw-buy" kind="show" identifier="ShowLicenses" id="tLY-hT-VXa"/>
                         <segue destination="g0D-XB-mAf" kind="show" identifier="ShowAbout" id="GoZ-hf-hJd"/>
                     </connections>
@@ -1423,56 +1423,13 @@
             </objects>
             <point key="canvasLocation" x="4457" y="-339"/>
         </scene>
-        <!--Help View Controller-->
-        <scene sceneID="fcM-GT-3iA">
+        <!--Help-->
+        <scene sceneID="OlG-NJ-9co">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="xVP-1V-hQr" userLabel="Help View Controller" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8MZ-LO-3yZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="sdF-ni-0Dp"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="t42-ra-azz">
-                        <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-image" translatesAutoresizingMaskIntoConstraints="NO" id="R9r-nx-4Ci">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="R9r-nx-4Ci" firstAttribute="top" secondItem="8MZ-LO-3yZ" secondAttribute="bottom" id="1ww-ne-8wS"/>
-                            <constraint firstItem="R9r-nx-4Ci" firstAttribute="leading" secondItem="t42-ra-azz" secondAttribute="leading" id="AJw-F6-MBb"/>
-                            <constraint firstAttribute="trailing" secondItem="R9r-nx-4Ci" secondAttribute="trailing" id="mAs-oB-SNn"/>
-                            <constraint firstItem="sdF-ni-0Dp" firstAttribute="top" secondItem="R9r-nx-4Ci" secondAttribute="bottom" id="okH-Td-Jxn"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="EZL-IB-HTd">
-                        <nil key="title"/>
-                        <view key="titleView" contentMode="scaleToFill" id="Ve7-dp-D4r">
-                            <rect key="frame" x="110.5" y="5.5" width="154" height="33"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Help" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTM-6V-a4u">
-                                    <rect key="frame" x="6" y="6" width="140" height="21"/>
-                                    <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="18"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstItem="jTM-6V-a4u" firstAttribute="leading" secondItem="Ve7-dp-D4r" secondAttribute="leading" constant="6" id="3fk-Jb-QWM"/>
-                                <constraint firstAttribute="trailing" secondItem="jTM-6V-a4u" secondAttribute="trailing" constant="8" id="Nes-4Q-tm5"/>
-                                <constraint firstAttribute="bottom" secondItem="jTM-6V-a4u" secondAttribute="bottom" constant="6" id="f3E-qa-5Cs"/>
-                                <constraint firstItem="jTM-6V-a4u" firstAttribute="top" secondItem="Ve7-dp-D4r" secondAttribute="top" constant="6" id="kEN-1Z-ocD"/>
-                            </constraints>
-                        </view>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H4Y-Px-QiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Help" id="nye-C1-YSK" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IpI-Ba-c3I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4457" y="1247"/>
+            <point key="canvasLocation" x="2305" y="-1281"/>
         </scene>
         <!--About View Controller-->
         <scene sceneID="1mO-lR-PIe">
@@ -1922,7 +1879,7 @@
                     <navigationItem key="navigationItem" id="GaG-fB-omf">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="6ge-wf-pH4">
-                            <rect key="frame" x="130" y="5.5" width="154" height="33"/>
+                            <rect key="frame" x="110.5" y="5.5" width="154" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Licenses" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YkB-UA-hXn">

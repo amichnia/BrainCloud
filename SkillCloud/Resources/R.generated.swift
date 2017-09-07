@@ -1147,6 +1147,54 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.spriteNode, compatibleWith: traitCollection)
     }
     
+    /// This `R.image.help` struct is generated, and contains static references to 6 images.
+    struct help {
+      /// Image `frame`.
+      static let frame = Rswift.ImageResource(bundle: R.hostingBundle, name: "Help/frame")
+      /// Image `image1`.
+      static let image1 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Help/image1")
+      /// Image `image2`.
+      static let image2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Help/image2")
+      /// Image `image3`.
+      static let image3 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Help/image3")
+      /// Image `image4`.
+      static let image4 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Help/image4")
+      /// Image `image5`.
+      static let image5 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Help/image5")
+      
+      /// `UIImage(named: "frame", bundle: ..., traitCollection: ...)`
+      static func frame(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.help.frame, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "image1", bundle: ..., traitCollection: ...)`
+      static func image1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.help.image1, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "image2", bundle: ..., traitCollection: ...)`
+      static func image2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.help.image2, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "image3", bundle: ..., traitCollection: ...)`
+      static func image3(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.help.image3, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "image4", bundle: ..., traitCollection: ...)`
+      static func image4(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.help.image4, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "image5", bundle: ..., traitCollection: ...)`
+      static func image5(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.help.image5, compatibleWith: traitCollection)
+      }
+      
+      fileprivate init() {}
+    }
+    
     /// This `R.image.icon` struct is generated, and contains static references to 1 images.
     struct icon {
       /// Image `export`.
@@ -1195,7 +1243,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 11 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 12 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `AddSkillCellLight`.
     static let addSkillCellLight: Rswift.ReuseIdentifier<SkillCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "AddSkillCellLight")
@@ -1211,6 +1259,8 @@ struct R: Rswift.Validatable {
     static let googleImageCell: Rswift.ReuseIdentifier<GoogleImageCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "GoogleImageCell")
     /// Reuse identifier `HeaderCell`.
     static let headerCell: Rswift.ReuseIdentifier<SkillTableViewCell> = Rswift.ReuseIdentifier(identifier: "HeaderCell")
+    /// Reuse identifier `HelpCollectionViewCell`.
+    static let helpCollectionViewCell: Rswift.ReuseIdentifier<HelpCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "HelpCollectionViewCell")
     /// Reuse identifier `MenuCell`.
     static let menuCell: Rswift.ReuseIdentifier<InfoMenuTableViewCell> = Rswift.ReuseIdentifier(identifier: "MenuCell")
     /// Reuse identifier `SkillCell`.
@@ -1223,7 +1273,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.segue` struct is generated, and contains static references to 3 view controllers.
+  /// This `R.segue` struct is generated, and contains static references to 4 view controllers.
   struct segue {
     /// This struct is generated for `CloudSelectionViewController`, and contains static references to 1 segues.
     struct cloudSelectionViewController {
@@ -1264,12 +1314,10 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This struct is generated for `InfoViewController`, and contains static references to 3 segues.
+    /// This struct is generated for `InfoViewController`, and contains static references to 2 segues.
     struct infoViewController {
       /// Segue identifier `ShowAbout`.
       static let showAbout: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, InfoViewController, AboutViewController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowAbout")
-      /// Segue identifier `ShowHelp`.
-      static let showHelp: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, InfoViewController, UIKit.UIViewController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowHelp")
       /// Segue identifier `ShowLicenses`.
       static let showLicenses: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, InfoViewController, LicensesViewController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowLicenses")
       
@@ -1278,13 +1326,6 @@ struct R: Rswift.Validatable {
       /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
       static func showAbout(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, InfoViewController, AboutViewController>? {
         return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.infoViewController.showAbout, segue: segue)
-      }
-      
-      /// Optionally returns a typed version of segue `ShowHelp`.
-      /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
-      /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
-      static func showHelp(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, InfoViewController, UIKit.UIViewController>? {
-        return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.infoViewController.showHelp, segue: segue)
       }
       
       /// Optionally returns a typed version of segue `ShowLicenses`.
@@ -1297,13 +1338,30 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
+    /// This struct is generated for `RootTabBarViewController`, and contains static references to 1 segues.
+    struct rootTabBarViewController {
+      /// Segue identifier `ShowHelp`.
+      static let showHelp: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, RootTabBarViewController, HelpViewController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowHelp")
+      
+      /// Optionally returns a typed version of segue `ShowHelp`.
+      /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
+      /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
+      static func showHelp(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, RootTabBarViewController, HelpViewController>? {
+        return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.rootTabBarViewController.showHelp, segue: segue)
+      }
+      
+      fileprivate init() {}
+    }
+    
     fileprivate init() {}
   }
   
-  /// This `R.storyboard` struct is generated, and contains static references to 3 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 4 storyboards.
   struct storyboard {
     /// Storyboard `GoogleImages`.
     static let googleImages = _R.storyboard.googleImages()
+    /// Storyboard `Help`.
+    static let help = _R.storyboard.help()
     /// Storyboard `LaunchScreen`.
     static let launchScreen = _R.storyboard.launchScreen()
     /// Storyboard `Main`.
@@ -1312,6 +1370,11 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "GoogleImages", bundle: ...)`
     static func googleImages(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.googleImages)
+    }
+    
+    /// `UIStoryboard(name: "Help", bundle: ...)`
+    static func help(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.help)
     }
     
     /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
@@ -1329,7 +1392,7 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localize` struct is generated, and contains static references to 43 localization keys.
+    /// This `R.string.localize` struct is generated, and contains static references to 53 localization keys.
     struct localize {
       /// Value: About
       static let aboutNavigationTitle = Rswift.StringResource(key: "about.navigation.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -1341,6 +1404,10 @@ struct R: Rswift.Validatable {
       static let aboutAppSectionSubtitle = Rswift.StringResource(key: "about.appSection.subtitle", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Add new
       static let skillAddNewItem = Rswift.StringResource(key: "skill.add.new.item", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Add new custom skill
+      static let helpPage4Bottom = Rswift.StringResource(key: "help.page.4.bottom", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Add skill to you’r list
+      static let helpPage5Bottom = Rswift.StringResource(key: "help.page.5.bottom", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Cancel
       static let alertCancel = Rswift.StringResource(key: "alert.cancel", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Cancel
@@ -1367,6 +1434,8 @@ struct R: Rswift.Validatable {
       static let cloudGraphOptionExport = Rswift.StringResource(key: "cloud.graph.option.export", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Feedback
       static let infoOptionFeedbackTitle = Rswift.StringResource(key: "info.option.feedback.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Fill details, like proficency or image
+      static let helpPage5Top = Rswift.StringResource(key: "help.page.5.top", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Google images
       static let skillAddImageOptionGoogleImages = Rswift.StringResource(key: "skill.add.image.option.googleImages", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Help & HowTo
@@ -1379,6 +1448,10 @@ struct R: Rswift.Validatable {
       static let infoOptionLicensesTitle = Rswift.StringResource(key: "info.option.licenses.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Licenses and 3rd party libraries
       static let infoOptionLicensesSubtitle = Rswift.StringResource(key: "info.option.licenses.subtitle", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Long press to select skill node
+      static let helpPage3Top = Rswift.StringResource(key: "help.page.3.top", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Manage list of your skills
+      static let helpPage4Top = Rswift.StringResource(key: "help.page.4.top", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: New skill added.
       static let skillAddSnackBarMessage = Rswift.StringResource(key: "skill.add.snackBar.message", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: OK
@@ -1391,10 +1464,16 @@ struct R: Rswift.Validatable {
       static let infoOptionRateSubtitle = Rswift.StringResource(key: "info.option.rate.subtitle", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Remove node
       static let cloudGraphSkillOptionDelete = Rswift.StringResource(key: "cloud.graph.skill.option.delete", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Remove or scale selected node
+      static let helpPage3Bottom = Rswift.StringResource(key: "help.page.3.bottom", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Remove skill
       static let skillAddOptionRemoveSkill = Rswift.StringResource(key: "skill.add.option.removeSkill", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Search
       static let imagesSearchButton = Rswift.StringResource(key: "images.search.button", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Select existing graphs to update
+      static let helpPage1Bottom = Rswift.StringResource(key: "help.page.1.bottom", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Select skill to add
+      static let helpPage2Bottom = Rswift.StringResource(key: "help.page.2.bottom", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Send us your feedback
       static let infoOptionFeedbackSubtitle = Rswift.StringResource(key: "info.option.feedback.subtitle", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Sending failed. Please verify you email settings.
@@ -1411,6 +1490,10 @@ struct R: Rswift.Validatable {
       static let skillsNavigationTitle = Rswift.StringResource(key: "skills.navigation.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Take photo
       static let skillAddImageOptionTakePhoto = Rswift.StringResource(key: "skill.add.image.option.takePhoto", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Tap + to create new graph
+      static let helpPage1Top = Rswift.StringResource(key: "help.page.1.top", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Tap on graph to add skill node
+      static let helpPage2Top = Rswift.StringResource(key: "help.page.2.top", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Thank you for sending feedback.
       static let feedbackSentSuccessSnackBarMessage = Rswift.StringResource(key: "feedback.sent.success.snackBar.message", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Unknown error occured!
@@ -1441,6 +1524,16 @@ struct R: Rswift.Validatable {
       /// Value: Add new
       static func skillAddNewItem(_: Void = ()) -> String {
         return NSLocalizedString("skill.add.new.item", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Add new custom skill
+      static func helpPage4Bottom(_: Void = ()) -> String {
+        return NSLocalizedString("help.page.4.bottom", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Add skill to you’r list
+      static func helpPage5Bottom(_: Void = ()) -> String {
+        return NSLocalizedString("help.page.5.bottom", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: Cancel
@@ -1508,6 +1601,11 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("info.option.feedback.title", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
+      /// Value: Fill details, like proficency or image
+      static func helpPage5Top(_: Void = ()) -> String {
+        return NSLocalizedString("help.page.5.top", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// Value: Google images
       static func skillAddImageOptionGoogleImages(_: Void = ()) -> String {
         return NSLocalizedString("skill.add.image.option.googleImages", tableName: "Localize", bundle: R.hostingBundle, comment: "")
@@ -1536,6 +1634,16 @@ struct R: Rswift.Validatable {
       /// Value: Licenses and 3rd party libraries
       static func infoOptionLicensesSubtitle(_: Void = ()) -> String {
         return NSLocalizedString("info.option.licenses.subtitle", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Long press to select skill node
+      static func helpPage3Top(_: Void = ()) -> String {
+        return NSLocalizedString("help.page.3.top", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Manage list of your skills
+      static func helpPage4Top(_: Void = ()) -> String {
+        return NSLocalizedString("help.page.4.top", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: New skill added.
@@ -1568,6 +1676,11 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("cloud.graph.skill.option.delete", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
+      /// Value: Remove or scale selected node
+      static func helpPage3Bottom(_: Void = ()) -> String {
+        return NSLocalizedString("help.page.3.bottom", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// Value: Remove skill
       static func skillAddOptionRemoveSkill(_: Void = ()) -> String {
         return NSLocalizedString("skill.add.option.removeSkill", tableName: "Localize", bundle: R.hostingBundle, comment: "")
@@ -1576,6 +1689,16 @@ struct R: Rswift.Validatable {
       /// Value: Search
       static func imagesSearchButton(_: Void = ()) -> String {
         return NSLocalizedString("images.search.button", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Select existing graphs to update
+      static func helpPage1Bottom(_: Void = ()) -> String {
+        return NSLocalizedString("help.page.1.bottom", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Select skill to add
+      static func helpPage2Bottom(_: Void = ()) -> String {
+        return NSLocalizedString("help.page.2.bottom", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: Send us your feedback
@@ -1616,6 +1739,16 @@ struct R: Rswift.Validatable {
       /// Value: Take photo
       static func skillAddImageOptionTakePhoto(_: Void = ()) -> String {
         return NSLocalizedString("skill.add.image.option.takePhoto", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Tap + to create new graph
+      static func helpPage1Top(_: Void = ()) -> String {
+        return NSLocalizedString("help.page.1.top", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Tap on graph to add skill node
+      static func helpPage2Top(_: Void = ()) -> String {
+        return NSLocalizedString("help.page.2.top", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: Thank you for sending feedback.
@@ -1664,6 +1797,7 @@ struct _R: Rswift.Validatable {
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       try main.validate()
+      try help.validate()
       try launchScreen.validate()
     }
     
@@ -1672,6 +1806,20 @@ struct _R: Rswift.Validatable {
       
       let bundle = R.hostingBundle
       let name = "GoogleImages"
+      
+      fileprivate init() {}
+    }
+    
+    struct help: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = HelpViewController
+      
+      let bundle = R.hostingBundle
+      let name = "Help"
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "Help/frame") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Help/frame' is used in storyboard 'Help', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "Help/image1") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Help/image1' is used in storyboard 'Help', but couldn't be loaded.") }
+      }
       
       fileprivate init() {}
     }

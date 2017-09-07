@@ -148,7 +148,7 @@ extension InfoViewController: UITableViewDelegate {
         
         switch self.menu[indexPath.row] {
         case .help:
-            self.performSegue(withIdentifier: "ShowHelp", sender: self)
+            self.tabBarController?.performSegue(withIdentifier: "ShowHelp", sender: self)
         case .about:
             self.performSegue(withIdentifier: "ShowAbout", sender: self)
         case .licenses:

@@ -10,6 +10,7 @@ PODS:
   - CocoaLumberjack/Extensions (3.2.1):
     - CocoaLumberjack/Default
   - DRNSnackBar (0.0.1)
+  - LTMorphingLabel (0.5.3)
   - MRProgress (0.8.3):
     - MRProgress/ActivityIndicator (= 0.8.3)
     - MRProgress/Blur (= 0.8.3)
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - AlamofireSwiftyJSON
   - CocoaLumberjack
   - DRNSnackBar
+  - LTMorphingLabel
   - MRProgress
   - PromiseKit
   - PromiseKit/AssetsLibrary
@@ -75,6 +77,7 @@ SPEC CHECKSUMS:
   AlamofireSwiftyJSON: 78908b766483a28aa5cc90fd191a687467042973
   CocoaLumberjack: 2800c03334042fe80589423c8d80e582dcaec482
   DRNSnackBar: 227cc12275ae405bb62e5c598b920cacc04b3a2d
+  LTMorphingLabel: b85b6c1c5d0c4203e22f8d3dca722546f67b8410
   MRProgress: 16de7cc9f347e8846797a770db102a323fe7ef09
   PromiseKit: ecf5fe92275d57ee77c9ede858af47a162e9b97e
   R.swift: bde9704d50ff36820f49e266bc88ef545e1e9b36
@@ -82,6 +85,6 @@ SPEC CHECKSUMS:
   RSKImageCropper: 356e36fc58c57c371b5d8b23d603936d6a73df6c
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 20669e2e9b4140705516878cd0f958a01b47cfe5
+PODFILE CHECKSUM: d4cdda4bd27f333467c5b9497e2448f5f09178bd
 
 COCOAPODS: 1.2.1

@@ -19,6 +19,7 @@ end
 def ui_components
     pod 'MRProgress'
     pod 'DRNSnackBar'
+    pod 'LTMorphingLabel'
 end
 
 def assets_management

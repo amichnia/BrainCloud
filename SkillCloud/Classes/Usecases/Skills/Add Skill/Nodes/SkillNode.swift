@@ -52,7 +52,7 @@ class SkillNode: SKNode, DTOModel {
         
         // Foreground bordered circle - placed on top of image to provide "antialiasing"
         // TODO: get rid of magic numbers
-        let outlineSize = CGSize(width: graphNode.size.width + 1.1 * palette.lineWidth, height: graphNode.size.height + 1.1 * palette.lineWidth)
+        let outlineSize = CGSize(width: graphNode.size.width + 1 * palette.lineWidth, height: graphNode.size.height + 1 * palette.lineWidth)
         let outlineTexture = SKTexture(image: UIImage.outline(size: outlineSize, width: palette.lineWidth, color: palette.color(for: skill.experience)))
         let foregroundShapeNode = SKSpriteNode(texture: outlineTexture, size: outlineSize)
         foregroundShapeNode.position = CGPoint.zero
