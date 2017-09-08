@@ -33,6 +33,9 @@ class CloudGraphScene: SKScene, DTOModel {
     var skillNodes: [SkillNode] = []    // added skills
     var deletedNodes: [SkillNode] = []
 
+    var maxScale: CGFloat = 1.1 // zoomout
+    var minScale: CGFloat = 0.4 // zoomin
+
     // Cloud entity handling
     var cloudEntity: GraphCloudEntity?  // If set - all values below are overriden
     var cloudIdentifier = "cloud"
@@ -235,6 +238,16 @@ class CloudGraphScene: SKScene, DTOModel {
     }
 
     // MARK: - Camera handling
+    func cameraZoomTickle(_ duration: TimeInterval = 0.5) {
+        guard let camera = self.camera else { return }
+
+        let scaleAction = SKAction.scaleTo(maxScale, duration: duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: -100.0)
+
+        camera.run(scaleAction, completion: {
+            self.cameraSettings.scale = camera.xScale
+        })
+    }
+
     func cameraZoom(_ zoom: CGFloat, save: Bool = false) {
         let baseScale = self.cameraSettings.scale
         let delta = zoom - 1.0
@@ -265,7 +278,7 @@ class CloudGraphScene: SKScene, DTOModel {
             return
         }
 
-        let scale = max(0.4, min(1.2, cameraSettings.scale))
+        let scale = max(minScale, min(maxScale, cameraSettings.scale))
         let visibleArea = CGSize(width: self.size.width * scale, height: self.size.height * scale)
 
         let leftBound = camera.position.x - (visibleArea.width / 2)

@@ -35,6 +35,12 @@ class GeneratorViewController: CloudViewController {
     // MARK: - Properties
     var scene: CloudGraphScene!
 
+    // MARK: - Setup Once
+    lazy var showZoomPossibility: () -> Void = {
+        self.scene.cameraZoomTickle()
+        return {}
+    }()
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +52,12 @@ class GeneratorViewController: CloudViewController {
         super.viewWillAppear(animated)
 
         skView.setNeedsLayout()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        showZoomPossibility()
     }
 
     override func viewDidLayoutSubviews() {
