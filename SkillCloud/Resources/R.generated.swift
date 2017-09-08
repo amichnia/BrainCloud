@@ -682,7 +682,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 66 images.
+  /// This `R.image` struct is generated, and contains static references to 67 images.
   struct image {
     /// Image `background-image`.
     static let backgroundImage = Rswift.ImageResource(bundle: R.hostingBundle, name: "background-image")
@@ -702,6 +702,8 @@ struct R: Rswift.Validatable {
     static let icCircleOutline = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic-circle-outline")
     /// Image `ic-circle-turquoise-outline`.
     static let icCircleTurquoiseOutline = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic-circle-turquoise-outline")
+    /// Image `ic-circle-white-outline-part`.
+    static let icCircleWhiteOutlinePart = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic-circle-white-outline-part")
     /// Image `ic-circle-white-outline`.
     static let icCircleWhiteOutline = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic-circle-white-outline")
     /// Image `ic-circle`.
@@ -870,6 +872,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "ic-circle-white-outline", bundle: ..., traitCollection: ...)`
     static func icCircleWhiteOutline(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.icCircleWhiteOutline, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "ic-circle-white-outline-part", bundle: ..., traitCollection: ...)`
+    static func icCircleWhiteOutlinePart(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icCircleWhiteOutlinePart, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "ic-delete", bundle: ..., traitCollection: ...)`
