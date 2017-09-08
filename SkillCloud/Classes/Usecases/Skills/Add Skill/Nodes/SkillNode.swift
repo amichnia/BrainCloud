@@ -18,6 +18,7 @@ class SkillNode: SKNode, DTOModel {
     var previousUniqueIdentifier: String?
     var cloudIdentifier = "cloud"
     var nodeId: Int = 0
+    var palette: Palette = Palette.main
     var skill: Skill!
     
     var graphNode: GraphNode? { return self.parent as? GraphNode }
@@ -32,6 +33,7 @@ class SkillNode: SKNode, DTOModel {
         skillNode.zPosition = 1028;
         skillNode.name = "skill"
         skillNode.position = CGPoint.zero
+        skillNode.palette = palette
         
         // Update unique id
         skillNode.nodeId = SkillNode.nodeId
@@ -75,10 +77,13 @@ class SkillNode: SKNode, DTOModel {
     }
     
     // MARK: - Configuration
-    func configureOutline(_ selected: Bool, palette: Palette = Palette.main) {
+    func configureOutline(_ selected: Bool, palette: Palette? = nil) {
         guard let graphNode = self.graphNode else {
             return
         }
+
+        let palette = palette ?? self.palette
+        self.palette = palette
         
         let color = selected ? palette.selection : palette.color(for: skill.experience)
         outline?.texture = SKTexture(image: UIImage.outline(size: graphNode.size, width: palette.lineWidth * graphNode.currentScale, color: color))

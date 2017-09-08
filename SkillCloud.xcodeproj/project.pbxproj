@@ -142,7 +142,7 @@
 		8CA6CE61836B24CB81699B31 /* Skill+Experience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Skill+Experience.swift"; sourceTree = "<group>"; };
 		C83BF83E1D5C73A100FDA60C /* TSMarkdownParser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSMarkdownParser.framework; path = Carthage/Build/iOS/TSMarkdownParser.framework; sourceTree = "<group>"; };
 		C83BF8461D5C784300FDA60C /* Licenses.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Licenses.md; sourceTree = "<group>"; };
-		C88EB4871CB50580002B9592 /* GoogleImages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = GoogleImages.storyboard; path = GoogleImages.storyboard; sourceTree = "<group>"; };
+		C88EB4871CB50580002B9592 /* GoogleImages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GoogleImages.storyboard; sourceTree = "<group>"; };
 		C8A42EEB1D5CA06400C45829 /* iRate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iRate.framework; path = Carthage/Build/iOS/iRate.framework; sourceTree = "<group>"; };
 		C8A4A0431C981B6C004E055D /* SkillCloud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkillCloud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8F55CA71CFC323000208F88 /* BaseNodeEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BaseNodeEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 		CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+AlertsHandling.swift"; sourceTree = "<group>"; };
 		CC6E68491F5C24D0006750BF /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
 		CC6E684A1F5C24D0006750BF /* CloudGraphScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudGraphScene.swift; sourceTree = "<group>"; };
-		CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectionViewController.swift; sourceTree = "<group>"; };
+		CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudSelectionViewController.swift; path = CloudSelectionViewController.swift; sourceTree = "<group>"; };
 		CC6E684C1F5C24D0006750BF /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
 		CC6E684D1F5C24D0006750BF /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorViewController.swift; sourceTree = "<group>"; };
 		CC6E684F1F5C24D0006750BF /* BrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainNode.swift; sourceTree = "<group>"; };
@@ -320,7 +320,6 @@
 				CCD455D71F6160F300258E4A /* HelpViewController.swift */,
 				CCD455D91F61623A00258E4A /* HelpCollectionViewCell.swift */,
 			);
-			name = Help;
 			path = Help;
 			sourceTree = "<group>";
 		};
@@ -329,7 +328,6 @@
 			children = (
 				CC6E68651F5C24D0006750BF /* LicensesViewController.swift */,
 			);
-			name = Licenses;
 			path = Licenses;
 			sourceTree = "<group>";
 		};
@@ -338,7 +336,6 @@
 			children = (
 				CC6E68621F5C24D0006750BF /* AboutViewController.swift */,
 			);
-			name = About;
 			path = About;
 			sourceTree = "<group>";
 		};
@@ -390,14 +387,12 @@
 			children = (
 				CC6E68491F5C24D0006750BF /* CloudGraphScene.sks */,
 				CC6E684A1F5C24D0006750BF /* CloudGraphScene.swift */,
-				CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */,
 				CC6E684C1F5C24D0006750BF /* CloudViewController.swift */,
 				CC6E684D1F5C24D0006750BF /* GeneratorViewController.swift */,
 				CC6E684E1F5C24D0006750BF /* Nodes */,
 				CC6E68521F5C24D0006750BF /* PaletteSelectionViewController.swift */,
 				CC6E68531F5C24D0006750BF /* TouchDownView.swift */,
 			);
-			name = Graph;
 			path = Graph;
 			sourceTree = "<group>";
 		};
@@ -417,9 +412,9 @@
 				CC6E68551F5C24D0006750BF /* CloudNode.swift */,
 				CC6E68561F5C24D0006750BF /* CloudSelectScene.sks */,
 				CC6E68571F5C24D0006750BF /* CloudSelectScene.swift */,
+				CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */,
 				CC6E68471F5C24D0006750BF /* Graph */,
 			);
-			name = Cloud;
 			path = Cloud;
 			sourceTree = "<group>";
 		};
@@ -442,7 +437,6 @@
 				CC6E685F1F5C24D0006750BF /* GoogleImagesCollectionViewController.swift */,
 				CC6E68601F5C24D0006750BF /* ImagesAPI.swift */,
 			);
-			name = GoogleImages;
 			path = GoogleImages;
 			sourceTree = "<group>";
 		};
@@ -601,7 +595,6 @@
 				FE31DAF01C9CA1240006D9EE /* AppDelegate.swift */,
 				FEB96C571CFB5D53000BA362 /* ConstantsAndDefines.swift */,
 			);
-			name = Utils;
 			path = Utils;
 			sourceTree = "<group>";
 		};

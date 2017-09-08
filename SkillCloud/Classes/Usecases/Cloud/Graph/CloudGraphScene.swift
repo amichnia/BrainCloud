@@ -127,7 +127,7 @@ class CloudGraphScene: SKScene, DTOModel {
         }
 
         _ = GraphNode.newFromTemplate(skill.experience)
-        .promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true, skill: skill)
+        .promiseSpawnInScene(self, atPosition: convertedPoint, animated: true, pinned: true, skill: skill, palette: palette)
         .then { addedNode -> Void in
             self.selectedNode?.selected = false
             addedNode.selected = true
@@ -425,7 +425,7 @@ extension CloudGraphScene {
 
             // Spawn concrete entity
             _ = GraphNode.newFromTemplate(level)
-            .promiseSpawnInScene(self, atPosition: position, animated: false, entity: entity)
+            .promiseSpawnInScene(self, atPosition: position, animated: false, entity: entity, palette: palette)
             .then { addedNode -> Void in
                 addedNode.setScale(scale)
 
@@ -441,7 +441,3 @@ extension CloudGraphScene {
         }
     }
 }
-
-
-
-

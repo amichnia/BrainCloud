@@ -55,12 +55,12 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
     }
     
     // MARK: - Lifecycle and configuration
-    func spawInScene(_ scene: SKScene, atPosition position: CGPoint, animated: Bool = true, skill: Skill) -> GraphNode {
+    func spawInScene(_ scene: SKScene, atPosition position: CGPoint, animated: Bool = true, skill: Skill, palette: Palette) -> GraphNode {
         self.removeFromParent()
         
         self.texture = SKTexture(imageNamed: "ic-empty")
         
-        self.skillNode = SkillNode.nodeWithSkill(skill, attachedTo: self)
+        self.skillNode = SkillNode.nodeWithSkill(skill, palette: palette, attachedTo: self)
         
         if animated {
             self.setScale(0)
@@ -143,9 +143,9 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
         }
     }
     
-    func promiseSpawnInScene(_ scene: SKScene, atPosition position: CGPoint, animated: Bool = true, pinned: Bool = true, skill: Skill) -> Promise<GraphNode> {
+    func promiseSpawnInScene(_ scene: SKScene, atPosition position: CGPoint, animated: Bool = true, pinned: Bool = true, skill: Skill, palette: Palette) -> Promise<GraphNode> {
         return firstly {
-            self.spawInScene(scene, atPosition: position, animated: animated, skill: skill).promiseAnimateToShown(true)
+            self.spawInScene(scene, atPosition: position, animated: animated, skill: skill, palette: palette).promiseAnimateToShown(true)
         }
         .then { node -> GraphNode in
             node.pinned = pinned
@@ -159,7 +159,7 @@ class GraphNode: SKSpriteNode, InteractiveNode, TranslatableNode, ScalableNode {
 }
 
 extension GraphNode {
-    func promiseSpawnInScene(_ scene: SKScene, atPosition position: CGPoint, animated: Bool = true, entity: SkillNodeEntity) -> Promise<GraphNode> {
+    func promiseSpawnInScene(_ scene: SKScene, atPosition position: CGPoint, animated: Bool = true, entity: SkillNodeEntity, palette: Palette) -> Promise<GraphNode> {
         let exp = Skill.Experience(rawValue: Int(entity.skillExperienceValue))!
         let skill = Skill(title: entity.skillName!, thumbnail: entity.skillImage!, experience: exp, description: nil)
         skill.image = entity.skillImage!
@@ -168,7 +168,7 @@ extension GraphNode {
         let nodeId = Int(nodeIdString.characters.split(separator: "_").map(String.init).last!) ?? 0
         
         return firstly {
-            self.spawInScene(scene, atPosition: position, animated: animated, skill: skill).promiseAnimateToShown(false)
+            self.spawInScene(scene, atPosition: position, animated: animated, skill: skill, palette: palette).promiseAnimateToShown(false)
         }
         .then { node -> GraphNode in
             node.skillNode?.nodeId = nodeId
