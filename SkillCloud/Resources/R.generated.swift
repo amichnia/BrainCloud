@@ -682,7 +682,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 67 images.
+  /// This `R.image` struct is generated, and contains static references to 68 images.
   struct image {
     /// Image `background-image`.
     static let backgroundImage = Rswift.ImageResource(bundle: R.hostingBundle, name: "background-image")
@@ -812,6 +812,8 @@ struct R: Rswift.Validatable {
     static let launchScreenImageJpg = Rswift.ImageResource(bundle: R.hostingBundle, name: "launch-screen-image.jpg")
     /// Image `logo-girappe-small`.
     static let logoGirappeSmall = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo-girappe-small")
+    /// Image `logo-girappe-yellow-small`.
+    static let logoGirappeYellowSmall = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo-girappe-yellow-small")
     /// Image `skill cloud brain`.
     static let skillCloudBrain = Rswift.ImageResource(bundle: R.hostingBundle, name: "skill cloud brain")
     /// Image `skillcloud`.
@@ -1137,6 +1139,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "logo-girappe-small", bundle: ..., traitCollection: ...)`
     static func logoGirappeSmall(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.logoGirappeSmall, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "logo-girappe-yellow-small", bundle: ..., traitCollection: ...)`
+    static func logoGirappeYellowSmall(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.logoGirappeYellowSmall, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "skill cloud brain", bundle: ..., traitCollection: ...)`
@@ -1875,7 +1882,7 @@ struct _R: Rswift.Validatable {
         if UIKit.UIImage(named: "icon-x") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-x' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-cloud-tabbar-selected") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-cloud-tabbar-selected' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "icon-x-black") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'icon-x-black' is used in storyboard 'Main', but couldn't be loaded.") }
-        if UIKit.UIImage(named: "logo-girappe-small") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo-girappe-small' is used in storyboard 'Main', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "logo-girappe-yellow-small") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'logo-girappe-yellow-small' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "ic-add") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'ic-add' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "Icon/export") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Icon/export' is used in storyboard 'Main', but couldn't be loaded.") }
         if UIKit.UIImage(named: "skillcloud") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'skillcloud' is used in storyboard 'Main', but couldn't be loaded.") }

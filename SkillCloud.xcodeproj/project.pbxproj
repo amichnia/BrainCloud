@@ -71,9 +71,13 @@
 		CC6E68981F5C2547006750BF /* Localize.strings in Resources */ = {isa = PBXBuildFile; fileRef = CC6E68971F5C2547006750BF /* Localize.strings */; };
 		CC6E689B1F5C36F7006750BF /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6E689A1F5C36F7006750BF /* R.generated.swift */; };
 		CC8C216C1E15709A001E466C /* UIImage+ShapeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */; };
+		CC9B20BF1F69417700C2D6DF /* VectorMath+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B20BD1F69417700C2D6DF /* VectorMath+Transform.swift */; };
+		CC9B20C01F69417700C2D6DF /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B20BE1F69417700C2D6DF /* VectorMath.swift */; };
+		CC9B20C21F6941D700C2D6DF /* UIBezierPath+Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B20C11F6941D700C2D6DF /* UIBezierPath+Polygon.swift */; };
 		CC9E4D411E0C480900ABB5A7 /* SpriteKit+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */; };
 		CCD455D81F6160F300258E4A /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD455D71F6160F300258E4A /* HelpViewController.swift */; };
 		CCD455DA1F61623A00258E4A /* HelpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD455D91F61623A00258E4A /* HelpCollectionViewCell.swift */; };
+		CCE7878A1F6946550086ED12 /* CGPoint+Vector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE787891F6946550086ED12 /* CGPoint+Vector2.swift */; };
 		CCFDFF001F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEF91F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr */; };
 		CCFDFF011F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFA1F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr */; };
 		CCFDFF021F5DF0D4000FF966 /* GraphPaletteGreens.clr in Resources */ = {isa = PBXBuildFile; fileRef = CCFDFEFB1F5DF0D4000FF966 /* GraphPaletteGreens.clr */; };
@@ -165,7 +169,7 @@
 		CC3776A01DB5217D002188FC /* UIViewController+AlertsHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+AlertsHandling.swift"; sourceTree = "<group>"; };
 		CC6E68491F5C24D0006750BF /* CloudGraphScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CloudGraphScene.sks; sourceTree = "<group>"; };
 		CC6E684A1F5C24D0006750BF /* CloudGraphScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudGraphScene.swift; sourceTree = "<group>"; };
-		CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudSelectionViewController.swift; path = CloudSelectionViewController.swift; sourceTree = "<group>"; };
+		CC6E684B1F5C24D0006750BF /* CloudSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSelectionViewController.swift; sourceTree = "<group>"; };
 		CC6E684C1F5C24D0006750BF /* CloudViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
 		CC6E684D1F5C24D0006750BF /* GeneratorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratorViewController.swift; sourceTree = "<group>"; };
 		CC6E684F1F5C24D0006750BF /* BrainNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrainNode.swift; sourceTree = "<group>"; };
@@ -200,9 +204,13 @@
 		CC6E68971F5C2547006750BF /* Localize.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localize.strings; sourceTree = "<group>"; };
 		CC6E689A1F5C36F7006750BF /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		CC8C216B1E15709A001E466C /* UIImage+ShapeImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ShapeImage.swift"; sourceTree = "<group>"; };
+		CC9B20BD1F69417700C2D6DF /* VectorMath+Transform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "VectorMath+Transform.swift"; sourceTree = "<group>"; };
+		CC9B20BE1F69417700C2D6DF /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorMath.swift; sourceTree = "<group>"; };
+		CC9B20C11F6941D700C2D6DF /* UIBezierPath+Polygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Polygon.swift"; sourceTree = "<group>"; };
 		CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SpriteKit+Spring.swift"; sourceTree = "<group>"; };
 		CCD455D71F6160F300258E4A /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		CCD455D91F61623A00258E4A /* HelpCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCE787891F6946550086ED12 /* CGPoint+Vector2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Vector2.swift"; sourceTree = "<group>"; };
 		CCFDFEF91F5DF0D4000FF966 /* GraphPaletteAutumnRed.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteAutumnRed.clr; sourceTree = "<group>"; };
 		CCFDFEFA1F5DF0D4000FF966 /* GraphPaletteGrayGreenForest.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteGrayGreenForest.clr; sourceTree = "<group>"; };
 		CCFDFEFB1F5DF0D4000FF966 /* GraphPaletteGreens.clr */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = GraphPaletteGreens.clr; sourceTree = "<group>"; };
@@ -493,6 +501,17 @@
 			path = Nodes;
 			sourceTree = "<group>";
 		};
+		CC9B20BC1F69417700C2D6DF /* Polygon */ = {
+			isa = PBXGroup;
+			children = (
+				CC9B20BE1F69417700C2D6DF /* VectorMath.swift */,
+				CC9B20BD1F69417700C2D6DF /* VectorMath+Transform.swift */,
+				CCE787891F6946550086ED12 /* CGPoint+Vector2.swift */,
+				CC9B20C11F6941D700C2D6DF /* UIBezierPath+Polygon.swift */,
+			);
+			path = Polygon;
+			sourceTree = "<group>";
+		};
 		CCFDFEF81F5DF0D4000FF966 /* Palettes */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,6 +607,7 @@
 			isa = PBXGroup;
 			children = (
 				CCFFF6D31F5C0879004CD3D2 /* UI */,
+				CC9B20BC1F69417700C2D6DF /* Polygon */,
 				CC2D3E0A1E166B1600047519 /* Error Handling */,
 				FE9F6EE11D284E27008B3BC3 /* Extensions */,
 				FE9F6EE91D28500C008B3BC3 /* Externals */,
@@ -875,6 +895,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCE7878A1F6946550086ED12 /* CGPoint+Vector2.swift in Sources */,
 				CC6E68871F5C24D0006750BF /* GoogleImagesCollectionViewController.swift in Sources */,
 				CC6E68931F5C24D0006750BF /* ImageSelectNode.swift in Sources */,
 				CC2D3E0C1E166B5100047519 /* SpriteKit+NodesTransforms.swift in Sources */,
@@ -891,6 +912,7 @@
 				FE766D361C9D80010079CA29 /* DataManager.swift in Sources */,
 				CC6E68861F5C24D0006750BF /* GoogleImageCollectionViewCell.swift in Sources */,
 				FEE50AA21D2494100024060D /* CKRecordConvertible.swift in Sources */,
+				CC9B20BF1F69417700C2D6DF /* VectorMath+Transform.swift in Sources */,
 				FE31DB0E1C9CA1240006D9EE /* AppDelegate.swift in Sources */,
 				CC6E687D1F5C24D0006750BF /* PaletteSelectionViewController.swift in Sources */,
 				CC6E68821F5C24D0006750BF /* ExploreViewController.swift in Sources */,
@@ -903,9 +925,11 @@
 				FE2151451D1F3435005BC8B1 /* CloudContainer.swift in Sources */,
 				FE766D421C9D82780079CA29 /* SkillEntity.swift in Sources */,
 				CC6E687E1F5C24D0006750BF /* TouchDownView.swift in Sources */,
+				CC9B20C21F6941D700C2D6DF /* UIBezierPath+Polygon.swift in Sources */,
 				FE766D411C9D82780079CA29 /* SkillEntity+CoreDataProperties.swift in Sources */,
 				CC6E68851F5C24D0006750BF /* GoogleImage.swift in Sources */,
 				C8F55CB11CFC323000208F88 /* GraphCloudEntity+CoreDataProperties.swift in Sources */,
+				CC9B20C01F69417700C2D6DF /* VectorMath.swift in Sources */,
 				CC6E68881F5C24D0006750BF /* ImagesAPI.swift in Sources */,
 				CC6E688A1F5C24D0006750BF /* InfoMenuTableViewCell.swift in Sources */,
 				CC2D3E031E16699F00047519 /* CommonError+ShowableError.swift in Sources */,

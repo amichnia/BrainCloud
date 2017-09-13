@@ -541,7 +541,7 @@
             <objects>
                 <navigationController id="Zhu-Ph-jdQ" userLabel="Skills Section" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" title="" image="icon-skills-tabbar" selectedImage="icon-skills-tabbar-selected" id="OYx-iM-PZs"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="BJj-Xo-NXc">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="BJj-Xo-NXc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -562,7 +562,7 @@
                     <tabBarItem key="tabBarItem" title="" image="icon-cloud-tabbar" selectedImage="icon-cloud-tabbar-selected" id="xUo-VF-0z3">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="yEy-e1-2Jf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="yEy-e1-2Jf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.043137254899999998" green="0.08235294118" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1102,7 +1102,7 @@
             <objects>
                 <navigationController id="VcD-r6-nOo" userLabel="Explore Section" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="" image="icon-explore-tabbar" selectedImage="icon-explore-tabbar-selected" id="OBH-tx-XPj"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="Myk-cb-kVS" customClass="TransparentNavigationBar" customModule="SkillCloud" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="Myk-cb-kVS" customClass="TransparentNavigationBar" customModule="SkillCloud" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1409,7 +1409,7 @@
             <objects>
                 <navigationController id="i5X-WB-nIA" userLabel="Info Section" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="2" title="" image="icon-info-tabbar" selectedImage="icon-info-tabbar-selected" id="Zu7-5U-QoB"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" translucent="NO" id="LJ5-l8-6m5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="LJ5-l8-6m5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.33333333329999998" green="0.63529411759999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1698,7 +1698,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vLt-0D-cA7" userLabel="About GirAppe">
                                                 <rect key="frame" x="0.0" y="578.5" width="375" height="331"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" image="logo-girappe-small" translatesAutoresizingMaskIntoConstraints="NO" id="hEC-R8-qru">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" image="logo-girappe-yellow-small" translatesAutoresizingMaskIntoConstraints="NO" id="hEC-R8-qru">
                                                         <rect key="frame" x="16" y="18" width="60" height="60"/>
                                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
@@ -1935,7 +1935,7 @@
         <image name="icon-skills-tabbar-selected" width="30" height="30"/>
         <image name="icon-x" width="32" height="32"/>
         <image name="icon-x-black" width="32" height="32"/>
-        <image name="logo-girappe-small" width="63" height="63"/>
+        <image name="logo-girappe-yellow-small" width="63" height="63"/>
         <image name="skillcloud" width="60" height="60"/>
     </resources>
     <color key="tintColor" red="0.20392156862745098" green="0.61960784313725492" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
