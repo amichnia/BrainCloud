@@ -10,7 +10,6 @@ import UIKit
 import SpriteKit
 
 class CloudNode: SKSpriteNode {
-
     // MARK: - Properties
     var slot: Int = 0
     var cloudNode: Bool = false
@@ -35,8 +34,6 @@ class CloudNode: SKSpriteNode {
 
     var sortNumber: CGFloat { return self.position.distanceTo(self.scene?.frame.centerOfMass ?? CGPoint.zero) }
     
-    // MARK: - Lifecycle
-
     // MARK: - Configuration
     func configurePhysics() {
         let radius: CGFloat = self.size.width / 2
@@ -79,15 +76,10 @@ class CloudNode: SKSpriteNode {
             self.addChild(thumbnailNode)
         }
     }
-    
-    // MARK: - Actions
-    
 }
 
 extension CloudNode: InteractiveNode {
-    
     var interactionNode: SKNode? {
         return self.cloudNode ? self : self.parent?.interactionNode
     }
-    
 }
