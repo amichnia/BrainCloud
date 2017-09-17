@@ -15,15 +15,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.0</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>217</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We use access to photos to allow exporting cloud images and using saved images as skill images.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>We use camera to allow you adding skill images.</string>
+	<string>246</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -33,6 +29,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>We use camera to allow you adding skill images.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We use access to photos to allow exporting cloud images and using saved images as skill images.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-Light.ttf</string>
