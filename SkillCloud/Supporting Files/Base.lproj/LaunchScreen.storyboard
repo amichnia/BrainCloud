@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-screen-image.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="jlU-VO-gmd">
+                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-image.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="jlU-VO-gmd">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.043137256056070328" green="0.08235294371843338" blue="0.094117648899555206" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
@@ -41,6 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch-screen-image.jpg" width="414" height="736"/>
+        <image name="launch-image.jpg" width="375" height="667"/>
     </resources>
 </document>

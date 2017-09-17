@@ -37,7 +37,7 @@ class GeneratorViewController: CloudViewController {
 
     // MARK: - Setup Once
     lazy var showZoomPossibility: () -> Void = {
-        self.scene.cameraZoomTickle(1.0)
+        self.scene.cameraZoomTickle()
         return {}
     }()
 
@@ -52,7 +52,12 @@ class GeneratorViewController: CloudViewController {
         super.viewWillAppear(animated)
 
         skView.setNeedsLayout()
-        showZoomPossibility()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+//        showZoomPossibility()
     }
 
     override func viewDidLayoutSubviews() {
@@ -75,6 +80,7 @@ class GeneratorViewController: CloudViewController {
 
             self.scene = scene
             skView.presentScene(scene)
+            self.scene.cameraZoomTickle(1.6)
         }
     }
 
