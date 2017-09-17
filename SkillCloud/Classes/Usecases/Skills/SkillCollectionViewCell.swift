@@ -46,9 +46,13 @@ class SkillCollectionViewCell: UICollectionViewCell {
         self.imageView.image = skill.circleImage
     }
     
-    func configureEmpty() {
+    func configureEmpty(indexPath: IndexPath) {
         self.nameLabel.text = nil
         self.imageView.image = nil
     }
-    
+
+    func applies(to indexPath: IndexPath) -> Bool {
+        guard let path = self.indexPath else { return false }
+        return indexPath == path
+    }
 }

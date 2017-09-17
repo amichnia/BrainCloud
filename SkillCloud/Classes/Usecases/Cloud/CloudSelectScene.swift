@@ -10,9 +10,6 @@ import UIKit
 import SpriteKit
 
 class CloudSelectScene: SKScene {
-
-    // MARK: - Outlets
-    
     // MARK: - Properties
     lazy var cloudNodes: [CloudNode] = {
         var nodes: [CloudNode] = []
@@ -75,17 +72,12 @@ class CloudSelectScene: SKScene {
     }
     
     func updateClouds() {
-        self.enumerateChildNodes(withName: "EmptyNode") { node,_ in
-            node.alpha = 0.5
-        }
-        
         for i in 0..<self.cloudNodes.count {
             self.cloudNodes[i].configureWithCloud(self.selectionDelegate?.cloudForNumber(i))
         }
     }
     
     // MARK: - Touches Handling
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             let location = touch.location(in: self)
@@ -109,23 +101,18 @@ class CloudSelectScene: SKScene {
         
         self.lastTime = currentTime
     }
-    
 }
 
 extension CGVector {
-    
     func randomVector() -> CGVector {
         let randomX = CGFloat(Int(arc4random())).truncatingRemainder(dividingBy: (2 * self.dx)) - self.dx
         let randomY = CGFloat(Int(arc4random())).truncatingRemainder(dividingBy: (2 * self.dy)) - self.dy
         return CGVector(dx: randomX, dy: randomY)
     }
-    
 }
 
 extension Array {
-    
     func randomElement() -> Element {
         return self[(Int(arc4random()) % self.count)]
     }
-    
 }

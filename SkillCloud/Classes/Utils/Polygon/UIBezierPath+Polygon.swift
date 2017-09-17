@@ -5,7 +5,7 @@ extension UIBezierPath {
         assert(n >= 3, "Number of edges should be greater or equal 3 !!!")
         assert(cornerRadius < radius, "Corner radius should be less than radius !!!")
 
-        let offset = Scalar.halfPi
+        let offset: Scalar = 0
         let radius = Scalar(radius)
         let cornerRadius = Scalar(cornerRadius)
 
@@ -41,7 +41,7 @@ extension UIBezierPath {
     }
 
     private func applyArcs(_ n: Int, center: CGPoint, angle: Scalar, radius R: CGFloat, cornerRadius r: CGFloat) {
-        let offset = Scalar.halfPi
+        let offset: Scalar = 0
         let alpha = Scalar(angle / 2)
         let h = Scalar(r / cos(alpha))
         let verticeVector = Vector2(R, 0).rotated(by: offset)

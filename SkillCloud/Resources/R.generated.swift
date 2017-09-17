@@ -682,7 +682,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 68 images.
+  /// This `R.image` struct is generated, and contains static references to 74 images.
   struct image {
     /// Image `background-image`.
     static let backgroundImage = Rswift.ImageResource(bundle: R.hostingBundle, name: "background-image")
@@ -818,6 +818,18 @@ struct R: Rswift.Validatable {
     static let skillCloudBrain = Rswift.ImageResource(bundle: R.hostingBundle, name: "skill cloud brain")
     /// Image `skillcloud`.
     static let skillcloud = Rswift.ImageResource(bundle: R.hostingBundle, name: "skillcloud")
+    /// Image `slot1`.
+    static let slot1 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot1")
+    /// Image `slot2`.
+    static let slot2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot2")
+    /// Image `slot3`.
+    static let slot3 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot3")
+    /// Image `slot4`.
+    static let slot4 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot4")
+    /// Image `slot5`.
+    static let slot5 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot5")
+    /// Image `slot6`.
+    static let slot6 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot6")
     /// Image `sprite-node`.
     static let spriteNode = Rswift.ImageResource(bundle: R.hostingBundle, name: "sprite-node")
     
@@ -1156,9 +1168,94 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.skillcloud, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "slot1", bundle: ..., traitCollection: ...)`
+    static func slot1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.slot1, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "slot2", bundle: ..., traitCollection: ...)`
+    static func slot2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.slot2, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "slot3", bundle: ..., traitCollection: ...)`
+    static func slot3(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.slot3, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "slot4", bundle: ..., traitCollection: ...)`
+    static func slot4(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.slot4, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "slot5", bundle: ..., traitCollection: ...)`
+    static func slot5(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.slot5, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "slot6", bundle: ..., traitCollection: ...)`
+    static func slot6(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.slot6, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "sprite-node", bundle: ..., traitCollection: ...)`
     static func spriteNode(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.spriteNode, compatibleWith: traitCollection)
+    }
+    
+    /// This `R.image.dashboard` struct is generated, and contains static references to 7 images.
+    struct dashboard {
+      /// Image `Dashboard`.
+      static let dashboard = Rswift.ImageResource(bundle: R.hostingBundle, name: "Dashboard/Dashboard")
+      /// Image `background`.
+      static let background = Rswift.ImageResource(bundle: R.hostingBundle, name: "Dashboard/background")
+      /// Image `poly1`.
+      static let poly1 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Dashboard/poly1")
+      /// Image `poly2`.
+      static let poly2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Dashboard/poly2")
+      /// Image `poly3`.
+      static let poly3 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Dashboard/poly3")
+      /// Image `slot-assigned`.
+      static let slotAssigned = Rswift.ImageResource(bundle: R.hostingBundle, name: "Dashboard/slot-assigned")
+      /// Image `slot-unassigned`.
+      static let slotUnassigned = Rswift.ImageResource(bundle: R.hostingBundle, name: "Dashboard/slot-unassigned")
+      
+      /// `UIImage(named: "Dashboard", bundle: ..., traitCollection: ...)`
+      static func dashboard(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.dashboard.dashboard, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "background", bundle: ..., traitCollection: ...)`
+      static func background(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.dashboard.background, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "poly1", bundle: ..., traitCollection: ...)`
+      static func poly1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.dashboard.poly1, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "poly2", bundle: ..., traitCollection: ...)`
+      static func poly2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.dashboard.poly2, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "poly3", bundle: ..., traitCollection: ...)`
+      static func poly3(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.dashboard.poly3, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "slot-assigned", bundle: ..., traitCollection: ...)`
+      static func slotAssigned(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.dashboard.slotAssigned, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "slot-unassigned", bundle: ..., traitCollection: ...)`
+      static func slotUnassigned(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.dashboard.slotUnassigned, compatibleWith: traitCollection)
+      }
+      
+      fileprivate init() {}
     }
     
     /// This `R.image.help` struct is generated, and contains static references to 6 images.

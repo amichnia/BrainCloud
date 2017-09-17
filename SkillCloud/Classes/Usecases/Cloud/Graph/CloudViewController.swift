@@ -130,6 +130,7 @@ class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentati
             // Insert new skill
             self.skills.append(savedEntity.skill)
             self.collectionView.reloadData()
+            self.skillToAdd = savedEntity.skill
 
             _ = savedEntity.skill.promiseInsertTo(DatabaseType.public)  // Help building explore section
 
@@ -185,7 +186,7 @@ extension CloudViewController: UICollectionViewDataSource {
         } else if indexPath.section == 1, indexPath.row == skills.count {
             cell.configureAsAddCell(indexPath)
         } else {
-            cell.configureEmpty()
+            cell.configureEmpty(indexPath: indexPath)
             cell.isSelected = false
         }
 
@@ -222,7 +223,8 @@ extension CloudViewController: UICollectionViewDelegate {
             collectionView.reloadItems(at: [indexPath, lastIndex])
         } else if indexPath.row == skills.count {
             guard let cell = self.collectionView.visibleCells.first(where: {
-                $0 is SkillCollectionViewCell ? ($0 as! SkillCollectionViewCell).indexPath.row == indexPath.row : false
+                guard let cell  = $0 as? SkillCollectionViewCell else { return false }
+                return cell.applies(to: indexPath)
             }) else {
                 return
             }

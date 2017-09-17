@@ -14,26 +14,17 @@ class CloudNode: SKSpriteNode {
     var slot: Int = 0
     var cloudNode: Bool = false
     
-    lazy var outlineNode: SKSpriteNode = {
-        return (self.childNode(withName: "CloudNodeOutline") as? SKSpriteNode) ?? SKSpriteNode()
-    }()
-    lazy var backgroundNode: SKShapeNode = {
-        let bgr = SKShapeNode(circleOfRadius: self.size.width / 2 - 2)
-        bgr.fillColor = UIColor(white: 0.9, alpha: 0.15)
-        bgr.zPosition = (self.plusNode?.zPosition ?? (self.zPosition + 0.2)) - 0.15
-        bgr.blendMode = SKBlendMode.screen
-        self.addChild(bgr)
-        return bgr
-    }()
-    lazy var plusNode: SKLabelNode? = {
-        return self.childNode(withName: "Number") as? SKLabelNode
-    }()
-    lazy var numberNode: SKNode? = {
-        return self.childNode(withName: "NumberNode")
+    lazy var filledNode: SKSpriteNode = {
+        return (self.childNode(withName: "CloudFilledNode") as? SKSpriteNode) ?? SKSpriteNode()
     }()
 
+    lazy var emptyNode: SKSpriteNode = {
+        return (self.childNode(withName: "CloudEmptyNode") as? SKSpriteNode) ?? SKSpriteNode()
+    }()
+
+    var thumbnailNode: SKNode? { return self.childNode(withName: "ThumbnailNode") }
     var sortNumber: CGFloat { return self.position.distanceTo(self.scene?.frame.centerOfMass ?? CGPoint.zero) }
-    
+
     // MARK: - Configuration
     func configurePhysics() {
         let radius: CGFloat = self.size.width / 2
@@ -52,29 +43,37 @@ class CloudNode: SKSpriteNode {
     }
     
     func configureWithCloud(_ cloud: GraphCloudEntity?) {
-        self.childNode(withName: "ThumbnailNode")?.removeFromParent()
-        self.numberNode?.isHidden = true
-        
-        guard let cloud = cloud else {
-            self.plusNode?.isHidden = false
-            self.outlineNode.isHidden = true
-            self.backgroundNode.isHidden = true
-            return
-        }
-        
-        self.plusNode?.isHidden = true
-        self.outlineNode.isHidden = false
-        self.backgroundNode.isHidden = false
+        self.thumbnailNode?.removeFromParent()
+        self.emptyNode.isHidden = cloud != nil
+        self.filledNode.isHidden = cloud == nil
+
+        guard let cloud = cloud else { return }
         
         if let thumbnail = cloud.thumbnail {
-            let texture = SKTexture(image: thumbnail.RBCircleImage())
-            let inset = self.size.width * 0.1
-            let thumbnailNode = SKSpriteNode(texture: texture, size: CGSizeInset(self.size,inset,inset))
-            thumbnailNode.zPosition = (self.plusNode?.zPosition ?? (self.zPosition + 0.2)) - 0.1
-            thumbnailNode.name = "ThumbnailNode"
-            
-            self.addChild(thumbnailNode)
+           setupThumbnail(with: thumbnail)
         }
+    }
+
+    func setupThumbnail(with image: UIImage) {
+        let path = UIBezierPath(equilateralPolygonEdges: 6, radius: 52)
+        let shape = SKShapeNode(path: path.cgPath)
+        shape.strokeColor = UIColor(netHex: 0xB0BEC2)
+        shape.fillColor = UIColor(netHex: 0xB0BEC2)
+
+        let texture = SKTexture(image: image)
+        let imageNode = SKSpriteNode(texture: texture, size: CGSize(width: 100, height: 104))
+
+        let thumbnailNode = SKCropNode()
+        thumbnailNode.maskNode = shape
+        thumbnailNode.zPosition = self.zPosition + 1
+        thumbnailNode.name = "ThumbnailNode"
+        thumbnailNode.addChild(shape)
+        thumbnailNode.addChild(imageNode)
+
+        imageNode.alpha = 0.71
+        shape.alpha = 0.71
+
+        self.addChild(thumbnailNode)
     }
 }
 
