@@ -20,7 +20,9 @@ class ExploreViewController: UIViewController {
 
     // MARK: - Properties
     var skillsResult: CKPageableResult = CKPageableResult(type: Skill.self, skillsPredicate: SkillsPredicate.accepted, database: .public)
-    var updating = false
+    var updating = false {
+        didSet { self.tableView.reloadData() }
+    }
     var preparedScene: AddScene?
     let menuOffset = 12
     var firstLayout = true
@@ -170,6 +172,17 @@ class ExploreViewController: UIViewController {
         cell.selectedBackgroundView?.backgroundColor = UIColor.interpolate(topColor, B: botColor, t: factor)
     }
 
+    func configureLoaderFor(_ cell: UITableViewCell) {
+        let tag = 121334
+        guard let loader = cell.contentView.viewWithTag(tag) as? UIActivityIndicatorView else { return }
+
+        if self.updating {
+            loader.startAnimating()
+        } else {
+            loader.stopAnimating()
+        }
+    }
+
     // MARK: - Promises
     func promiseShowSkillWith(_ rect: CGRect?, withSkill skill: Skill) throws {
         MRProgressOverlayView.show()
@@ -251,6 +264,9 @@ extension ExploreViewController: UITableViewDataSource {
         guard indexPath.section == 1 else {
             let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.emptyCell, for: indexPath)!
             configureColorFor(cell)
+            if indexPath.section == 2, indexPath.row == 0 {
+                configureLoaderFor(cell)
+            }
             return cell
         }
 
@@ -291,8 +307,8 @@ extension ExploreViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.tableView.visibleCells.forEach(configureColorFor)
 
-        let bound = self.tableView.contentSize.height - 200
-        let offset = self.tableView.contentOffset.y + self.tableView.bounds.height
+        let bound = tableView.contentSize.height - (CGFloat(menuOffset) * tableView.rowHeight) - 200
+        let offset = tableView.contentOffset.y + tableView.bounds.height
 
         guard !updating, offset >= bound, skillsResult.hasNextPage else {
             return
