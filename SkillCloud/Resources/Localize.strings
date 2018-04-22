@@ -1,0 +1,84 @@
+/* 
+  Localize.strings
+  SkillCloud
+
+  Created by Andrzej Michnia on 03.09.2017.
+  Copyright © 2017 amichnia. All rights reserved.
+*/
+
+// Graphs
+"cloud.graphs.navigation.title" = "Cloud Graphs";
+"cloud.graph.option.export" = "Export graph";
+"cloud.graph.option.delete" = "Delete graph";
+"cloud.graph.option.cancel" = "Cancel";
+"cloud.graph.skill.option.delete" = "Remove node";
+"cloud.graph.skill.option.cancel" = "Cancel";
+
+// Skills
+"skills.navigation.title" = "Skills";
+
+"skill.add.option.changeImage" = "Change image";
+"skill.add.option.removeSkill" = "Remove skill";
+"skill.add.option.cancel" = "Cancel";
+
+"skill.add.new.item" = "Add new";
+"skill.add.name.placeholder" = "enter skill name";
+"skill.add.image.option.takePhoto" = "Take photo";
+"skill.add.image.option.photoLibrary" = "Photo library";
+"skill.add.image.option.googleImages" = "Google images";
+"skill.add.image.option.cancel" = "Cancel";
+
+"skill.add.snackBar.message" = "New skill added.";
+"skill.update.snackBar.message" = "Skill updated.";
+"skill.delete.snackBar.message" = "Skill deleted!";
+
+// Google Images
+"images.search.button" = "Search";
+"images.cancel.button" = "Cancel";
+"images.confirm.button" = "Confirm";
+
+// Explore
+"explore.search.placeholder" = "Explore all skills";
+
+// Info
+"info.navigation.title" = "Info";
+"info.option.help.title" = "Help & HowTo";
+"info.option.help.subtitle" = "How to use SkillCloud application";
+"info.option.about.title" = "About";
+"info.option.about.subtitle" = "About SkillCloud and GirAppe Studio";
+"info.option.licenses.title" = "Licenses";
+"info.option.licenses.subtitle" = "Licenses and 3rd party libraries";
+"info.option.feedback.title" = "Feedback";
+"info.option.feedback.subtitle" = "Send us your feedback";
+"info.option.rate.title" = "Rate";
+"info.option.rate.subtitle" = "Rate us on AppStore";
+
+// About
+"about.navigation.title" = "About";
+
+"about.appSection.title" = "SkillCloud";
+"about.appSection.subtitle" = "About application";
+
+// Help
+"help.page.1.top" = "Tap + to create new graph";
+"help.page.1.bottom" = "Select existing graphs to update";
+"help.page.2.top" = "Tap on graph to add skill node";
+"help.page.2.bottom" = "Select skill to add";
+"help.page.3.top" = "Long press to select skill node";
+"help.page.3.bottom" = "Remove or scale selected node";
+"help.page.4.top" = "Manage list of your skills";
+"help.page.4.bottom" = "Add new custom skill";
+"help.page.5.top" = "Fill details, like proficency or image";
+"help.page.5.bottom" = "Add skill to you’r list";
+
+// Feedback
+"feedback.sent.success.snackBar.message" = "Thank you for sending feedback.";
+"feedback.sent.failure.snackBar.message" = "Sending failed. Please verify you email settings.";
+
+// Generic
+"alert.ok" = "OK";
+"alert.cancel" = "Cancel";
+
+// Errors
+"error.unknown" = "Unknown error occured!";
+"error.serialization" = "Serialization error";

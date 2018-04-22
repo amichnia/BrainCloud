@@ -1,0 +1,31 @@
+# OSX
+#
+.DS_Store
+
+### Objective-C template
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.swp
+
+Artifacts/
+
+# AppCode
+#
+.idea/
+
+# Carthage
+#
+#Carthage/
+
+# CocoaPods
+#
+#Pods/
