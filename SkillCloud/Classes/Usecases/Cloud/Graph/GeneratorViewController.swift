@@ -57,7 +57,7 @@ class GeneratorViewController: CloudViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        showZoomPossibility()
+//        showZoomPossibility()
     }
 
     override func viewDidLayoutSubviews() {
@@ -80,6 +80,7 @@ class GeneratorViewController: CloudViewController {
 
             self.scene = scene
             skView.presentScene(scene)
+            self.scene.cameraZoomTickle(1.6)
         }
     }
 

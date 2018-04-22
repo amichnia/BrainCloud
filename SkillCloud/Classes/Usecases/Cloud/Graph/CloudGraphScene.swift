@@ -241,7 +241,7 @@ class CloudGraphScene: SKScene, DTOModel {
     func cameraZoomTickle(_ duration: TimeInterval = 0.5) {
         guard let camera = self.camera else { return }
 
-        let scaleAction = SKAction.scaleTo(maxScale, duration: duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: -100.0)
+        let scaleAction = SKAction.scaleTo(maxScale, duration: duration, delay: 0.0, usingSpringWithDamping: 0.6, initialSpringVelocity: -140.0)
 
         camera.run(scaleAction, completion: {
             self.cameraSettings.scale = camera.xScale

@@ -61,7 +61,7 @@ class CloudNode: SKSpriteNode {
         shape.fillColor = UIColor(netHex: 0xB0BEC2)
 
         let texture = SKTexture(image: image)
-        let imageNode = SKSpriteNode(texture: texture, size: CGSize(width: 100, height: 104))
+        let imageNode = SKSpriteNode(texture: texture, size: CGSize(width: 104, height: 104))
 
         let thumbnailNode = SKCropNode()
         thumbnailNode.maskNode = shape

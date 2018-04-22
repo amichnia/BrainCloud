@@ -533,12 +533,12 @@ struct R: Rswift.Validatable {
     static let licensesMd = Rswift.FileResource(bundle: R.hostingBundle, name: "Licenses", pathExtension: "md")
     /// Resource file `brain_graph_v0.1.json`.
     static let brain_graph_v01Json = Rswift.FileResource(bundle: R.hostingBundle, name: "brain_graph_v0.1", pathExtension: "json")
-    /// Resource file `launch-screen-image.jpg`.
-    static let launchScreenImageJpg = Rswift.FileResource(bundle: R.hostingBundle, name: "launch-screen-image", pathExtension: "jpg")
-    /// Resource file `launch-screen-image@2x.jpg`.
-    static let launchScreenImage2xJpg = Rswift.FileResource(bundle: R.hostingBundle, name: "launch-screen-image@2x", pathExtension: "jpg")
-    /// Resource file `launch-screen-image@3x.jpg`.
-    static let launchScreenImage3xJpg = Rswift.FileResource(bundle: R.hostingBundle, name: "launch-screen-image@3x", pathExtension: "jpg")
+    /// Resource file `launch-image.jpg`.
+    static let launchImageJpg = Rswift.FileResource(bundle: R.hostingBundle, name: "launch-image", pathExtension: "jpg")
+    /// Resource file `launch-image@2x.jpg`.
+    static let launchImage2xJpg = Rswift.FileResource(bundle: R.hostingBundle, name: "launch-image@2x", pathExtension: "jpg")
+    /// Resource file `launch-image@3x.jpg`.
+    static let launchImage3xJpg = Rswift.FileResource(bundle: R.hostingBundle, name: "launch-image@3x", pathExtension: "jpg")
     
     /// `bundle.url(forResource: "AddScene", withExtension: "sks")`
     static func addSceneSks(_: Void = ()) -> Foundation.URL? {
@@ -636,21 +636,21 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
     
-    /// `bundle.url(forResource: "launch-screen-image", withExtension: "jpg")`
-    static func launchScreenImageJpg(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.launchScreenImageJpg
+    /// `bundle.url(forResource: "launch-image", withExtension: "jpg")`
+    static func launchImageJpg(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.launchImageJpg
       return fileResource.bundle.url(forResource: fileResource)
     }
     
-    /// `bundle.url(forResource: "launch-screen-image@2x", withExtension: "jpg")`
-    static func launchScreenImage2xJpg(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.launchScreenImage2xJpg
+    /// `bundle.url(forResource: "launch-image@2x", withExtension: "jpg")`
+    static func launchImage2xJpg(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.launchImage2xJpg
       return fileResource.bundle.url(forResource: fileResource)
     }
     
-    /// `bundle.url(forResource: "launch-screen-image@3x", withExtension: "jpg")`
-    static func launchScreenImage3xJpg(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.launchScreenImage3xJpg
+    /// `bundle.url(forResource: "launch-image@3x", withExtension: "jpg")`
+    static func launchImage3xJpg(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.launchImage3xJpg
       return fileResource.bundle.url(forResource: fileResource)
     }
     
@@ -682,14 +682,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 74 images.
+  /// This `R.image` struct is generated, and contains static references to 66 images.
   struct image {
     /// Image `background-image`.
     static let backgroundImage = Rswift.ImageResource(bundle: R.hostingBundle, name: "background-image")
-    /// Image `flat_brain_background`.
-    static let flat_brain_background = Rswift.ImageResource(bundle: R.hostingBundle, name: "flat_brain_background")
-    /// Image `flat_brain_foreground`.
-    static let flat_brain_foreground = Rswift.ImageResource(bundle: R.hostingBundle, name: "flat_brain_foreground")
     /// Image `ic-add`.
     static let icAdd = Rswift.ImageResource(bundle: R.hostingBundle, name: "ic-add")
     /// Image `ic-big-blue-outline`.
@@ -806,10 +802,10 @@ struct R: Rswift.Validatable {
     static let iconXBlack = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon-x-black")
     /// Image `icon-x`.
     static let iconX = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon-x")
+    /// Image `launch-image.jpg`.
+    static let launchImageJpg = Rswift.ImageResource(bundle: R.hostingBundle, name: "launch-image.jpg")
     /// Image `launch-logo-image`.
     static let launchLogoImage = Rswift.ImageResource(bundle: R.hostingBundle, name: "launch-logo-image")
-    /// Image `launch-screen-image.jpg`.
-    static let launchScreenImageJpg = Rswift.ImageResource(bundle: R.hostingBundle, name: "launch-screen-image.jpg")
     /// Image `logo-girappe-small`.
     static let logoGirappeSmall = Rswift.ImageResource(bundle: R.hostingBundle, name: "logo-girappe-small")
     /// Image `logo-girappe-yellow-small`.
@@ -818,34 +814,12 @@ struct R: Rswift.Validatable {
     static let skillCloudBrain = Rswift.ImageResource(bundle: R.hostingBundle, name: "skill cloud brain")
     /// Image `skillcloud`.
     static let skillcloud = Rswift.ImageResource(bundle: R.hostingBundle, name: "skillcloud")
-    /// Image `slot1`.
-    static let slot1 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot1")
-    /// Image `slot2`.
-    static let slot2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot2")
-    /// Image `slot3`.
-    static let slot3 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot3")
-    /// Image `slot4`.
-    static let slot4 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot4")
-    /// Image `slot5`.
-    static let slot5 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot5")
-    /// Image `slot6`.
-    static let slot6 = Rswift.ImageResource(bundle: R.hostingBundle, name: "slot6")
     /// Image `sprite-node`.
     static let spriteNode = Rswift.ImageResource(bundle: R.hostingBundle, name: "sprite-node")
     
     /// `UIImage(named: "background-image", bundle: ..., traitCollection: ...)`
     static func backgroundImage(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.backgroundImage, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "flat_brain_background", bundle: ..., traitCollection: ...)`
-    static func flat_brain_background(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.flat_brain_background, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "flat_brain_foreground", bundle: ..., traitCollection: ...)`
-    static func flat_brain_foreground(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.flat_brain_foreground, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "ic-add", bundle: ..., traitCollection: ...)`
@@ -1138,14 +1112,14 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.iconXBlack, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "launch-image.jpg", bundle: ..., traitCollection: ...)`
+    static func launchImageJpg(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.launchImageJpg, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "launch-logo-image", bundle: ..., traitCollection: ...)`
     static func launchLogoImage(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.launchLogoImage, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "launch-screen-image.jpg", bundle: ..., traitCollection: ...)`
-    static func launchScreenImageJpg(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.launchScreenImageJpg, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "logo-girappe-small", bundle: ..., traitCollection: ...)`
@@ -1166,36 +1140,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "skillcloud", bundle: ..., traitCollection: ...)`
     static func skillcloud(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.skillcloud, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "slot1", bundle: ..., traitCollection: ...)`
-    static func slot1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.slot1, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "slot2", bundle: ..., traitCollection: ...)`
-    static func slot2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.slot2, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "slot3", bundle: ..., traitCollection: ...)`
-    static func slot3(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.slot3, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "slot4", bundle: ..., traitCollection: ...)`
-    static func slot4(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.slot4, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "slot5", bundle: ..., traitCollection: ...)`
-    static func slot5(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.slot5, compatibleWith: traitCollection)
-    }
-    
-    /// `UIImage(named: "slot6", bundle: ..., traitCollection: ...)`
-    static func slot6(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.slot6, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "sprite-node", bundle: ..., traitCollection: ...)`
@@ -1354,7 +1298,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 12 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 11 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `AddSkillCellLight`.
     static let addSkillCellLight: Rswift.ReuseIdentifier<SkillCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "AddSkillCellLight")
@@ -1368,8 +1312,6 @@ struct R: Rswift.Validatable {
     static let exploreSkillCell: Rswift.ReuseIdentifier<SkillTableViewCell> = Rswift.ReuseIdentifier(identifier: "ExploreSkillCell")
     /// Reuse identifier `GoogleImageCell`.
     static let googleImageCell: Rswift.ReuseIdentifier<GoogleImageCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "GoogleImageCell")
-    /// Reuse identifier `HeaderCell`.
-    static let headerCell: Rswift.ReuseIdentifier<SkillTableViewCell> = Rswift.ReuseIdentifier(identifier: "HeaderCell")
     /// Reuse identifier `HelpCollectionViewCell`.
     static let helpCollectionViewCell: Rswift.ReuseIdentifier<HelpCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "HelpCollectionViewCell")
     /// Reuse identifier `MenuCell`.
@@ -1942,7 +1884,7 @@ struct _R: Rswift.Validatable {
       let name = "LaunchScreen"
       
       static func validate() throws {
-        if UIKit.UIImage(named: "launch-screen-image.jpg") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'launch-screen-image.jpg' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "launch-image.jpg") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'launch-image.jpg' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
       }
       
       fileprivate init() {}
