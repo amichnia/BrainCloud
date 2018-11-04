@@ -26,7 +26,14 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.menu = [.help,.about,.licenses,.feedback,.rate(rated: iRate.sharedInstance().ratedThisVersion)]
+        self.menu = [
+            .help,
+            .about,
+            .licenses,
+            .feedback,
+            .rate(rated: iRate.sharedInstance().ratedThisVersion),
+            .privacyPolicy
+        ]
         (self.tableView as UIScrollView).delegate = self
     }
     
@@ -98,10 +105,6 @@ class InfoViewController: UIViewController {
         
         cell.backgroundColor = UIColor.interpolate(topColor, B: botColor, t: factor)
         cell.selectedBackgroundView?.backgroundColor = UIColor.interpolate(topColor, B: botColor, t: factor)
-//        let selectedTopColor = self.colors[2].0
-//        let selectedBotColor = self.colors[2].1
-//        
-//        cell.selectedBackgroundView?.backgroundColor = UIColor.interpolate(selectedTopColor, B: selectedBotColor, t: factor)
     }
     
 }
@@ -148,16 +151,18 @@ extension InfoViewController: UITableViewDelegate {
         
         switch self.menu[indexPath.row] {
         case .help:
-            self.tabBarController?.performSegue(withIdentifier: "ShowHelp", sender: self)
+            tabBarController?.performSegue(withIdentifier: R.segue.rootTabBarViewController.showHelp.identifier, sender: self)
         case .about:
-            self.performSegue(withIdentifier: "ShowAbout", sender: self)
+            self.performSegue(withIdentifier: R.segue.infoViewController.showAbout, sender: self)
         case .licenses:
-            self.performSegue(withIdentifier: "ShowLicenses", sender: self)
+            self.performSegue(withIdentifier: R.segue.infoViewController.showLicenses, sender: self)
         case .feedback:
             self.sendFeedback()
         case .rate:
             iRate.sharedInstance().delegate = self
             iRate.sharedInstance().promptForRating()
+        case .privacyPolicy:
+            self.performSegue(withIdentifier: R.segue.infoViewController.showPrivacyPolicy, sender: self)
         }
         
         self.tableView.deselectRow(at: indexPath, animated: true)

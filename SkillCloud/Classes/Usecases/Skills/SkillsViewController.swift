@@ -24,27 +24,14 @@ class SkillsViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        preload()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        firstly {
-            Skill.fetchAll()
-        }
-        .then(on: DispatchQueue.main) { skills -> Void in
-            self.skills = skills
-            self.collectionView.reloadData()
-        }
-        .catch { error in
-            print("Error: \(error)")
-        }
-        
-        if let scene = AddScene(fileNamed:"AddScene") {
-            self.preparedScene = scene
-            scene.size = self.view.bounds.size
-        }
+
+        preload()
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,7 +51,26 @@ class SkillsViewController: UIViewController {
         
         self.collectionView.contentInset = UIEdgeInsets(top: -sectionHeight, left: 0, bottom: -sectionHeight, right: 0)
     }
-    
+
+    // MARK: - Setup
+    private func preload() {
+        firstly {
+            Skill.fetchAll()
+        }
+        .then(on: DispatchQueue.main) { skills -> Void in
+            self.skills = skills
+            self.collectionView.reloadData()
+        }
+        .catch { error in
+            print("Error: \(error)")
+        }
+
+        if let scene = AddScene(fileNamed:"AddScene") {
+            self.preparedScene = scene
+            scene.size = self.view.bounds.size
+        }
+    }
+
     // MARK: - Actions
     @IBAction func addSkillAction(_ sender: UIView) {
         let rect = self.view.convert(sender.bounds, from: sender)

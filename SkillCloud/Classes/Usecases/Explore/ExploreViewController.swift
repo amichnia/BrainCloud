@@ -41,6 +41,7 @@ class ExploreViewController: UIViewController {
         self.skillsResult.desiredKeys = ["name", "experienceValue", "thumbnail", "desc"]
         self.skillsResult.limit = 10
 
+        debugPrint("Explore loaded - loading info")
         self.refetchSelfSkills()
         self.updateIfNeeded()
     }
@@ -94,7 +95,6 @@ class ExploreViewController: UIViewController {
         self.updating = true
 
         updateUI()
-        MRProgressOverlayView.show()
 
         return firstly {
             self.skillsResult.promiseNextPage()
@@ -109,7 +109,6 @@ class ExploreViewController: UIViewController {
         .always { [weak self] in
             print("Update finished")
             self?.updating = false
-            MRProgressOverlayView.hide()
         }
         .asVoid()
     }

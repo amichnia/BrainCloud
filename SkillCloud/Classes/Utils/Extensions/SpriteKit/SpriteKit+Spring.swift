@@ -261,7 +261,8 @@ extension SKAction {
                 if dampingRatio < 1 {
                     
                     A = A ?? initialDistance
-                    B = B ?? (dampingRatio * naturalFrequency - velocity) * initialDistance / dampedFrequency
+                    let fallbackB: CGFloat = (dampingRatio * naturalFrequency - velocity) * initialDistance / dampedFrequency
+                    B = B ?? fallbackB
                     
                     currentValue = finalValue - exp(-dampingRatio * naturalFrequency * elapsedTime) * (A * cos(dampedFrequency * elapsedTime) + B * sin(dampedFrequency * elapsedTime))
                 }
@@ -273,9 +274,15 @@ extension SKAction {
                     currentValue = finalValue - exp(-dampingRatio * naturalFrequency * elapsedTime) * (A + B * elapsedTime)
                 }
                 else {
-                    
-                    A = A ?? (t1 * t2 / (t1 - t2)) * initialDistance * (1/t2 - velocity)
-                    B = B ?? (t1 * t2 / (t2 - t1)) * initialDistance * (1/t1 - velocity)
+
+                    var fallbackA: CGFloat = (t1 * t2 / (t1 - t2))
+                    fallbackA *= initialDistance
+                    fallbackA *= (1/t2 - velocity)
+                    var fallbackB: CGFloat = (t1 * t2 / (t2 - t1))
+                    fallbackB *= initialDistance
+                    fallbackB *= (1/t1 - velocity)
+                    A = A ?? fallbackA
+                    B = B ?? fallbackB
                     
                     let first: CGFloat = (A! * exp(-elapsedTime/t1!))
                     let second: CGFloat = (B! * exp(-elapsedTime/t2!))

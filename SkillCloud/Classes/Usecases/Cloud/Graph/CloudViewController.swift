@@ -62,6 +62,8 @@ class CloudViewController: UIViewController, SkillsProvider, UIPopoverPresentati
             self.preparedScene = scene
             scene.size = self.view.bounds.size
         }
+
+        MRProgressOverlayView.hide()
     }
 
     override func viewDidLayoutSubviews() {

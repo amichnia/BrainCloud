@@ -11,7 +11,6 @@ import CoreData
 import PromiseKit
 
 class SkillEntity: NSManagedObject, CoreDataEntity {
-
     static var entityName = "SkillEntity"
     static var uniqueIdentifier = "name"
     
@@ -40,12 +39,10 @@ class SkillEntity: NSManagedObject, CoreDataEntity {
             self.modified           = skill.modified?.timeIntervalSince1970 ?? Date().timeIntervalSince1970
         }
     }
-    
 }
 
 // MARK: - DTO model
 extension SkillEntity {
-    
     var skill : Skill {
         let skill = Skill(title: self.name!, thumbnail: self.thumbnail!, experience: Skill.Experience(rawValue: Int(self.experienceValue))!, description: self.desc)
         
@@ -60,15 +57,12 @@ extension SkillEntity {
         
         return skill
     }
-    
 }
 
 // MARK: - Fetching unsynced
 extension SkillEntity {
-    
     class func fetchAllUnsynced() -> Promise<[SkillEntity]> {
-        let predicate = NSPredicate(format: "offline == %@", true as CVarArg)
+        let predicate = NSPredicate(format: "offline == YES")
         return SkillEntity.fetchAllWithPredicate(predicate)
     }
-    
 }

@@ -31,12 +31,12 @@ extension Skill {
     }
 
     class func fetchAllNotDeleted() -> Promise<[Skill]> {
-        let predicate = NSPredicate(format: "toDelete == %@", false as CVarArg)
+        let predicate = NSPredicate(format: "toDelete == %@", NSNumber(booleanLiteral: false))
         return self.fetchAllWithPredicate(predicate)
     }
 
     class func fetchAllToDelete() -> Promise<[Skill]> {
-        let predicate = NSPredicate(format: "toDelete == %@", true as CVarArg)
+        let predicate = NSPredicate(format: "toDelete == %@", NSNumber(booleanLiteral: true))
         return self.fetchAllWithPredicate(predicate)
     }
 }

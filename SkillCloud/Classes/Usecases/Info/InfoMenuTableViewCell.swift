@@ -35,6 +35,7 @@ enum InfoMenuItem {
     case licenses
     case feedback
     case rate(rated: Bool)
+    case privacyPolicy
     
     func title() -> String {
         switch self {
@@ -48,6 +49,8 @@ enum InfoMenuItem {
             return R.string.localize.infoOptionFeedbackTitle()
         case .rate:
             return R.string.localize.infoOptionRateTitle()
+        case .privacyPolicy:
+            return R.string.localize.infoOptionPolicyTitle()
         }
     }
     
@@ -63,6 +66,8 @@ enum InfoMenuItem {
             return R.string.localize.infoOptionFeedbackSubtitle()
         case .rate:
             return R.string.localize.infoOptionRateSubtitle()
+        case .privacyPolicy:
+            return R.string.localize.infoOptionPolicySubtitle()
         }
     }
     
@@ -78,6 +83,8 @@ enum InfoMenuItem {
             return R.image.iconFeedback()
         case .rate(let rated):
             return rated ? R.image.iconRated() : R.image.iconRate()
+        case .privacyPolicy:
+            return R.image.iconPolicy()
         }
     }
 }

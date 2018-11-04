@@ -45,6 +45,8 @@ class RootTabBarViewController: UITabBarController {
         .catch { error in
             print("Error: \(error)")
         }
+
+        loadTabs()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -55,6 +57,17 @@ class RootTabBarViewController: UITabBarController {
             performSegue(withIdentifier: R.segue.rootTabBarViewController.showHelp.identifier, sender: nil)
         } else if self.isSyncing {
             MRProgressOverlayView.show()
+        }
+    }
+
+    private func loadTabs() {
+        debugPrint("TABS:")
+        debugPrint(viewControllers?.count ?? -1)
+        viewControllers?.forEach {
+            $0.view.setNeedsLayout()
+            ($0 as? UINavigationController)?.viewControllers.forEach({
+                $0.view.setNeedsLayout()
+            })
         }
     }
 }

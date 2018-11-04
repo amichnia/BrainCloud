@@ -9,6 +9,7 @@
 import UIKit
 import PromiseKit
 import SpriteKit
+import MRProgress
 
 let ShowCloudViewSegueIdentifier = "ShowCloudView"
 
@@ -143,6 +144,7 @@ extension CloudSelectionViewController: CloudSelectionDelegate {
             return
         }
 
+        MRProgressOverlayView.show()
         self.selectedCloud = self.clouds[slot]
         self.selectedSlot = slot
         self.performSegue(withIdentifier: ShowCloudViewSegueIdentifier, sender: self)

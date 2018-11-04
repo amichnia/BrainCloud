@@ -52,6 +52,8 @@
 "info.option.feedback.subtitle" = "Send us your feedback";
 "info.option.rate.title" = "Rate";
 "info.option.rate.subtitle" = "Rate us on AppStore";
+"info.option.policy.title" = "Privacy Policy";
+"info.option.policy.subtitle" = "Skillcloud data privacy policy";
 
 // About
 "about.navigation.title" = "About";

@@ -499,7 +499,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 19 files.
+  /// This `R.file` struct is generated, and contains static references to 20 files.
   struct file {
     /// Resource file `AddScene.sks`.
     static let addSceneSks = Rswift.FileResource(bundle: R.hostingBundle, name: "AddScene", pathExtension: "sks")
@@ -531,6 +531,8 @@ struct R: Rswift.Validatable {
     static let latoRegularTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "Lato-Regular", pathExtension: "ttf")
     /// Resource file `Licenses.md`.
     static let licensesMd = Rswift.FileResource(bundle: R.hostingBundle, name: "Licenses", pathExtension: "md")
+    /// Resource file `PrivacyPolicy.md`.
+    static let privacyPolicyMd = Rswift.FileResource(bundle: R.hostingBundle, name: "PrivacyPolicy", pathExtension: "md")
     /// Resource file `brain_graph_v0.1.json`.
     static let brain_graph_v01Json = Rswift.FileResource(bundle: R.hostingBundle, name: "brain_graph_v0.1", pathExtension: "json")
     /// Resource file `launch-image.jpg`.
@@ -630,6 +632,12 @@ struct R: Rswift.Validatable {
       return fileResource.bundle.url(forResource: fileResource)
     }
     
+    /// `bundle.url(forResource: "PrivacyPolicy", withExtension: "md")`
+    static func privacyPolicyMd(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.privacyPolicyMd
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
     /// `bundle.url(forResource: "brain_graph_v0.1", withExtension: "json")`
     static func brain_graph_v01Json(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.brain_graph_v01Json
@@ -682,7 +690,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.image` struct is generated, and contains static references to 66 images.
+  /// This `R.image` struct is generated, and contains static references to 68 images.
   struct image {
     /// Image `background-image`.
     static let backgroundImage = Rswift.ImageResource(bundle: R.hostingBundle, name: "background-image")
@@ -772,6 +780,8 @@ struct R: Rswift.Validatable {
     static let iconPlaceholder = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon-placeholder")
     /// Image `icon-plus`.
     static let iconPlus = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon-plus")
+    /// Image `icon-policy`.
+    static let iconPolicy = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon-policy")
     /// Image `icon-rate`.
     static let iconRate = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon-rate")
     /// Image `icon-rated`.
@@ -782,6 +792,8 @@ struct R: Rswift.Validatable {
     static let iconSettingBlack = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon-setting-black")
     /// Image `icon-setting-small-black`.
     static let iconSettingSmallBlack = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon-setting-small-black")
+    /// Image `icon-setting-small`.
+    static let iconSettingSmall = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon-setting-small")
     /// Image `icon-setting`.
     static let iconSetting = Rswift.ImageResource(bundle: R.hostingBundle, name: "icon-setting")
     /// Image `icon-skill-beginner`.
@@ -1037,6 +1049,11 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.iconPlus, compatibleWith: traitCollection)
     }
     
+    /// `UIImage(named: "icon-policy", bundle: ..., traitCollection: ...)`
+    static func iconPolicy(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.iconPolicy, compatibleWith: traitCollection)
+    }
+    
     /// `UIImage(named: "icon-rate", bundle: ..., traitCollection: ...)`
     static func iconRate(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.iconRate, compatibleWith: traitCollection)
@@ -1060,6 +1077,11 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "icon-setting-black", bundle: ..., traitCollection: ...)`
     static func iconSettingBlack(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.iconSettingBlack, compatibleWith: traitCollection)
+    }
+    
+    /// `UIImage(named: "icon-setting-small", bundle: ..., traitCollection: ...)`
+    static func iconSettingSmall(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.iconSettingSmall, compatibleWith: traitCollection)
     }
     
     /// `UIImage(named: "icon-setting-small-black", bundle: ..., traitCollection: ...)`
@@ -1367,12 +1389,14 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This struct is generated for `InfoViewController`, and contains static references to 2 segues.
+    /// This struct is generated for `InfoViewController`, and contains static references to 3 segues.
     struct infoViewController {
       /// Segue identifier `ShowAbout`.
       static let showAbout: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, InfoViewController, AboutViewController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowAbout")
       /// Segue identifier `ShowLicenses`.
       static let showLicenses: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, InfoViewController, LicensesViewController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowLicenses")
+      /// Segue identifier `ShowPrivacyPolicy`.
+      static let showPrivacyPolicy: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, InfoViewController, PrivacyPolicyViewController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowPrivacyPolicy")
       
       /// Optionally returns a typed version of segue `ShowAbout`.
       /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
@@ -1386,6 +1410,13 @@ struct R: Rswift.Validatable {
       /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
       static func showLicenses(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, InfoViewController, LicensesViewController>? {
         return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.infoViewController.showLicenses, segue: segue)
+      }
+      
+      /// Optionally returns a typed version of segue `ShowPrivacyPolicy`.
+      /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
+      /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
+      static func showPrivacyPolicy(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, InfoViewController, PrivacyPolicyViewController>? {
+        return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.infoViewController.showPrivacyPolicy, segue: segue)
       }
       
       fileprivate init() {}
@@ -1445,7 +1476,7 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localize` struct is generated, and contains static references to 53 localization keys.
+    /// This `R.string.localize` struct is generated, and contains static references to 55 localization keys.
     struct localize {
       /// Value: About
       static let aboutNavigationTitle = Rswift.StringResource(key: "about.navigation.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -1511,6 +1542,8 @@ struct R: Rswift.Validatable {
       static let alertOk = Rswift.StringResource(key: "alert.ok", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Photo library
       static let skillAddImageOptionPhotoLibrary = Rswift.StringResource(key: "skill.add.image.option.photoLibrary", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Privacy Policy
+      static let infoOptionPolicyTitle = Rswift.StringResource(key: "info.option.policy.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Rate
       static let infoOptionRateTitle = Rswift.StringResource(key: "info.option.rate.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Rate us on AppStore
@@ -1539,6 +1572,8 @@ struct R: Rswift.Validatable {
       static let skillUpdateSnackBarMessage = Rswift.StringResource(key: "skill.update.snackBar.message", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: SkillCloud
       static let aboutAppSectionTitle = Rswift.StringResource(key: "about.appSection.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Skillcloud data privacy policy
+      static let infoOptionPolicySubtitle = Rswift.StringResource(key: "info.option.policy.subtitle", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Skills
       static let skillsNavigationTitle = Rswift.StringResource(key: "skills.navigation.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Take photo
@@ -1714,6 +1749,11 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("skill.add.image.option.photoLibrary", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
+      /// Value: Privacy Policy
+      static func infoOptionPolicyTitle(_: Void = ()) -> String {
+        return NSLocalizedString("info.option.policy.title", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// Value: Rate
       static func infoOptionRateTitle(_: Void = ()) -> String {
         return NSLocalizedString("info.option.rate.title", tableName: "Localize", bundle: R.hostingBundle, comment: "")
@@ -1782,6 +1822,11 @@ struct R: Rswift.Validatable {
       /// Value: SkillCloud
       static func aboutAppSectionTitle(_: Void = ()) -> String {
         return NSLocalizedString("about.appSection.title", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Skillcloud data privacy policy
+      static func infoOptionPolicySubtitle(_: Void = ()) -> String {
+        return NSLocalizedString("info.option.policy.subtitle", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: Skills

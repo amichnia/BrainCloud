@@ -145,9 +145,8 @@ class CloudContainer {
     func promiseSyncFrom() -> Promise<Void> {
         let predicate: NSPredicate? = {
             if let lastSyncDate = self.lastSyncDate {
-                return NSPredicate(format: "modificationDate >= %@", lastSyncDate as CVarArg)
-            }
-            else {
+                return NSPredicate(format: "modificationDate >= %@", lastSyncDate as NSDate)
+            } else {
                 return nil
             }
         }()
@@ -288,12 +287,14 @@ class CKPageableResult<T:CKRecordSyncable> {
         if let cursor = self.cursor {
             let operation = CKQueryOperation(cursor: cursor)
             operation.resultsLimit = self.limit
+            operation.qualityOfService = .userInteractive
             operation.desiredKeys ?= self.desiredKeys
             return operation
         }
         else {
             let operation = CKQueryOperation(query: query)
             operation.resultsLimit = self.limit
+            operation.qualityOfService = .userInteractive
             operation.desiredKeys ?= self.desiredKeys
             return operation
         }

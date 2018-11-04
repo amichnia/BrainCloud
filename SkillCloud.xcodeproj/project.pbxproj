@@ -78,6 +78,8 @@
 		CC9B20C01F69417700C2D6DF /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B20BE1F69417700C2D6DF /* VectorMath.swift */; };
 		CC9B20C21F6941D700C2D6DF /* UIBezierPath+Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9B20C11F6941D700C2D6DF /* UIBezierPath+Polygon.swift */; };
 		CC9E4D411E0C480900ABB5A7 /* SpriteKit+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */; };
+		CC9EE2C8218F142700865248 /* PrivacyPolicy.md in Resources */ = {isa = PBXBuildFile; fileRef = CC9EE2C7218F142700865248 /* PrivacyPolicy.md */; };
+		CC9EE2CA218F144A00865248 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9EE2C9218F144A00865248 /* PrivacyPolicyViewController.swift */; };
 		CCD455D81F6160F300258E4A /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD455D71F6160F300258E4A /* HelpViewController.swift */; };
 		CCD455DA1F61623A00258E4A /* HelpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD455D91F61623A00258E4A /* HelpCollectionViewCell.swift */; };
 		CCE7878A1F6946550086ED12 /* CGPoint+Vector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE787891F6946550086ED12 /* CGPoint+Vector2.swift */; };
@@ -211,6 +213,8 @@
 		CC9B20BE1F69417700C2D6DF /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorMath.swift; sourceTree = "<group>"; };
 		CC9B20C11F6941D700C2D6DF /* UIBezierPath+Polygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBezierPath+Polygon.swift"; sourceTree = "<group>"; };
 		CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SpriteKit+Spring.swift"; sourceTree = "<group>"; };
+		CC9EE2C7218F142700865248 /* PrivacyPolicy.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = PrivacyPolicy.md; sourceTree = "<group>"; };
+		CC9EE2C9218F144A00865248 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		CCD455D71F6160F300258E4A /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		CCD455D91F61623A00258E4A /* HelpCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpCollectionViewCell.swift; sourceTree = "<group>"; };
 		CCE787891F6946550086ED12 /* CGPoint+Vector2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Vector2.swift"; sourceTree = "<group>"; };
@@ -298,6 +302,7 @@
 		C83BF8411D5C751200FDA60C /* Markdown */ = {
 			isa = PBXGroup;
 			children = (
+				CC9EE2C7218F142700865248 /* PrivacyPolicy.md */,
 				C83BF8461D5C784300FDA60C /* Licenses.md */,
 			);
 			path = Markdown;
@@ -336,6 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				CC6E68651F5C24D0006750BF /* LicensesViewController.swift */,
+				CC9EE2C9218F144A00865248 /* PrivacyPolicyViewController.swift */,
 			);
 			path = Licenses;
 			sourceTree = "<group>";
@@ -790,6 +796,7 @@
 				CCFDFF121F5E153A000FF966 /* GraphPaletteLavander.clr in Resources */,
 				FE31DB1A1C9CA1240006D9EE /* Main.storyboard in Resources */,
 				C88EB4881CB50580002B9592 /* GoogleImages.storyboard in Resources */,
+				CC9EE2C8218F142700865248 /* PrivacyPolicy.md in Resources */,
 				FEB31DA51D31934800E7C203 /* Lato-Light.ttf in Resources */,
 				CCFDFF061F5DF0D4000FF966 /* GraphPaletteTurquiseSimple.clr in Resources */,
 				CCFDFF041F5DF0D4000FF966 /* GraphPaletteSteelAndGlass.clr in Resources */,
@@ -953,6 +960,7 @@
 				FE31DB0D1C9CA1240006D9EE /* Skill.swift in Sources */,
 				CC2D3E141E166CF000047519 /* DispatchQueue+Delay.swift in Sources */,
 				CC6E68831F5C24D0006750BF /* SkillsSearchTableViewCell.swift in Sources */,
+				CC9EE2CA218F144A00865248 /* PrivacyPolicyViewController.swift in Sources */,
 				CC9E4D411E0C480900ABB5A7 /* SpriteKit+Spring.swift in Sources */,
 				CC6E688C1F5C24D0006750BF /* LicensesViewController.swift in Sources */,
 				CC2D3E011E1585E000047519 /* Palette.swift in Sources */,
