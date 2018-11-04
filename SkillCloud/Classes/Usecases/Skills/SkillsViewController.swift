@@ -73,8 +73,8 @@ class SkillsViewController: UIViewController {
 
     // MARK: - Actions
     @IBAction func addSkillAction(_ sender: UIView) {
-        let rect = self.view.convert(sender.bounds, from: sender)
-        try! self.promiseAddSkillWith(self.view.convert(rect, to: self.view.window!))
+//        let rect = self.view.convert(sender.bounds, from: sender)
+        try! self.promiseAddSkillWith(sender.convert(sender.bounds, to: self.view.window!))
     }
     
     func addSkillActionFromCell(_ cell: UICollectionViewCell) {
@@ -246,7 +246,10 @@ extension SkillsViewController: UICollectionViewDelegate {
         guard indexPath.section == 1 else {
             return
         }
-        
+
+        collectionView.reloadData()
+        collectionView.layoutIfNeeded()
+
         if indexPath.row < self.skills.count, let cell = self.collectionView.visibleCells.filter({
             $0 is SkillCollectionViewCell ? ($0 as! SkillCollectionViewCell).indexPath.row == indexPath.row : false
         }).first {

@@ -24,7 +24,7 @@ extension CKDatabase {
      */
     func promiseRecordWithID(_ recordID: CKRecordID) -> Promise<CKRecord> {
         return Promise<CKRecord> { fulfill,reject in
-            DispatchQueue.global().async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 self.fetch(withRecordID: recordID) { fetchedRecord,error in
                     if let record = fetchedRecord, error == nil {
                         fulfill(record)
@@ -49,7 +49,7 @@ extension CKDatabase {
      */
     func promiseInsertRecord(_ record: CKRecord) -> Promise<CKRecord> {
         return Promise<CKRecord> { fulfill,reject in
-            DispatchQueue.global().async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 self.save(record) { savedRecord,error in
                     if let savedRecord = savedRecord, error == nil {
                         fulfill(savedRecord)
@@ -74,7 +74,7 @@ extension CKDatabase {
      */
     func promiseUpdateRecord(_ record: CKRecord) -> Promise<CKRecord> {
         return Promise<CKRecord> { fulfill,reject in
-            DispatchQueue.global().async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 let updateRecordOperation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
                 
                 updateRecordOperation.savePolicy = .changedKeys
@@ -106,7 +106,7 @@ extension CKDatabase {
      */
     func promiseDeleteRecord(_ recordID: CKRecordID) -> Promise<Void> {
         return Promise<Void> { fulfill,reject in
-            DispatchQueue.global().async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 self.delete(withRecordID: recordID) { deletedID,error in
                     if error == nil {
                         fulfill()
@@ -138,7 +138,7 @@ extension CKDatabase {
         }
         
         return Promise<[CKRecord]> { fulfill,reject in
-            DispatchQueue.global().async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 let insertRecordsOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
                 
                 insertRecordsOperation.savePolicy = .ifServerRecordUnchanged // Only save non existing
@@ -172,7 +172,7 @@ extension CKDatabase {
         }
         
         return Promise<[CKRecord]> { fulfill,reject in
-            DispatchQueue.global().async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 let updateRecordsOperation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
                 
                 updateRecordsOperation.savePolicy = .allKeys // Update all keys
@@ -219,7 +219,7 @@ extension CKDatabase {
      */
     func promiseFetchRecordsWithIDS(_ recordIDS: [CKRecordID]) -> Promise<[CKRecord]> {
         return Promise<[CKRecord]> { fulfill,reject in
-            DispatchQueue.global().async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 let fetchOperation = CKFetchRecordsOperation()
                 fetchOperation.recordIDs = recordIDS
                 
@@ -253,7 +253,7 @@ extension CKDatabase {
      */
     func promiseAllRecordsWith(_ type: String, andPredicate: NSPredicate? = nil) -> Promise<[CKRecord]> {
         return Promise<[CKRecord]>() { fulfill, reject in
-            DispatchQueue.global().async {
+            DispatchQueue.global(qos: .userInteractive).async {
                 let predicate = andPredicate ?? NSPredicate(value: true)
                 let query = CKQuery(recordType: type, predicate: predicate)
                 

@@ -153,19 +153,19 @@ extension InfoViewController: UITableViewDelegate {
         case .help:
             tabBarController?.performSegue(withIdentifier: R.segue.rootTabBarViewController.showHelp.identifier, sender: self)
         case .about:
-            self.performSegue(withIdentifier: R.segue.infoViewController.showAbout, sender: self)
+            performSegue(withIdentifier: R.segue.infoViewController.showAbout, sender: self)
         case .licenses:
-            self.performSegue(withIdentifier: R.segue.infoViewController.showLicenses, sender: self)
+            performSegue(withIdentifier: R.segue.infoViewController.showLicenses, sender: self)
         case .feedback:
-            self.sendFeedback()
+            sendFeedback()
         case .rate:
             iRate.sharedInstance().delegate = self
             iRate.sharedInstance().promptForRating()
         case .privacyPolicy:
-            self.performSegue(withIdentifier: R.segue.infoViewController.showPrivacyPolicy, sender: self)
+            performSegue(withIdentifier: R.segue.infoViewController.showPrivacyPolicy, sender: self)
         }
         
-        self.tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

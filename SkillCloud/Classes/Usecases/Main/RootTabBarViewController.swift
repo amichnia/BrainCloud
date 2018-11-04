@@ -14,6 +14,15 @@ import MRProgress
 class RootTabBarViewController: UITabBarController {
     // MARK: - Properties
     var isSyncing: Bool = false
+    var policyAccepted: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "policyAccepted.v1.0.1")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "policyAccepted.v1.0.1")
+            UserDefaults.standard.synchronize()
+        }
+    }
     var howToShown: Bool {
         get {
             return UserDefaults.standard.bool(forKey: "howToShown")
@@ -52,9 +61,11 @@ class RootTabBarViewController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if !howToShown {
+        if !policyAccepted {
+            performSegue(withIdentifier: R.segue.rootTabBarViewController.showGDPR, sender: nil)
+        } else if !howToShown {
             howToShown = true
-            performSegue(withIdentifier: R.segue.rootTabBarViewController.showHelp.identifier, sender: nil)
+            performSegue(withIdentifier: R.segue.rootTabBarViewController.showHelp, sender: nil)
         } else if self.isSyncing {
             MRProgressOverlayView.show()
         }

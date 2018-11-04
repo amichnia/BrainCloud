@@ -55,6 +55,14 @@
 "info.option.policy.title" = "Privacy Policy";
 "info.option.policy.subtitle" = "Skillcloud data privacy policy";
 
+// Privacy policy
+"policy.settings.title" = "Privacy Settings";
+"policy.settings.option.download.title" = "View and download your data";
+"policy.settings.option.delete.title" = "Delete all your personal data";
+"policy.delete.confirm.title" = "Delete all personal data?";
+"policy.delete.confirm.message" = "If you continue, all local and cloud data will be removed. You won't be able to recover these data, including skills and graphs. Are you sure you want to continue?";
+"policy.delete.confirm.delete" = "Delete";
+
 // About
 "about.navigation.title" = "About";
 
@@ -80,6 +88,7 @@
 // Generic
 "alert.ok" = "OK";
 "alert.cancel" = "Cancel";
+"alert.error.title" = "Error";
 
 // Errors
 "error.unknown" = "Unknown error occured!";

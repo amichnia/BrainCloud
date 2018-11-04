@@ -108,9 +108,7 @@ class CloudContainer {
             }
         }
     }
-    
-    
-    
+
     // MARK: - Sync promises
     func promiseUserID() -> Promise<CKRecordID> {
         guard self.userRecordID == nil else {
@@ -181,7 +179,54 @@ class CloudContainer {
             })
         }
     }
-    
+
+    // MARK: - Download and Delete promises
+    func promiseDeleteAll() -> Promise<Void> {
+        let database = self.database(.private)
+
+        return Promise<Void> { fulfill, reject in
+            database.fetchAllRecordZones { zones, error in
+                guard let zones = zones, error == nil else {
+                    print("Error fetching zones.")
+                    reject(error!)
+                    return
+                }
+
+                let zoneIDs = zones.map { $0.zoneID }
+                let deletionOperation = CKModifyRecordZonesOperation(recordZonesToSave: nil, recordZoneIDsToDelete: zoneIDs)
+
+                deletionOperation.modifyRecordZonesCompletionBlock = { _, deletedZones, error in
+                    guard error == nil else {
+                        let error = error!
+
+                        print("Error deleting records.", error)
+                        return
+                    }
+
+                    print("Records successfully deleted in this zone.")
+                }
+
+                database.add(deletionOperation)
+                fulfill()
+            }
+        }
+    }
+
+    func promiseAllData() -> Promise<String> {
+        return database(.private)
+        .promiseAllRecordsWith(Skill.recordType)
+        .then { (records: [CKRecord]) -> String in
+            var recordsData: String = ""
+            for record in records {
+                recordsData += "\n\n====== \(record.recordID) ======"
+                for key in record.allKeys() {
+                    let value = record[key]
+                    recordsData.append("\n\n" + key + ": \n(" + (value?.description ?? "") + ")")
+                }
+            }
+            return recordsData
+        }
+    }
 }
 
 class CKPageableResult<T:CKRecordSyncable> {
@@ -235,7 +280,7 @@ class CKPageableResult<T:CKRecordSyncable> {
         self.delta = []
         
         self.currentPromise = Promise<[T]> { fulfill,reject in
-            DispatchQueue.global().async { [weak self] in
+            DispatchQueue.global(qos: .userInteractive).async { [weak self] in
                 // Query CloudKit
                 guard let operation = self?.operation() else {
                     reject(CommonError.operationFailed as Error)

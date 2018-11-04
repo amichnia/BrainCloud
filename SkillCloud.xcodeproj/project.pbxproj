@@ -80,6 +80,7 @@
 		CC9E4D411E0C480900ABB5A7 /* SpriteKit+Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */; };
 		CC9EE2C8218F142700865248 /* PrivacyPolicy.md in Resources */ = {isa = PBXBuildFile; fileRef = CC9EE2C7218F142700865248 /* PrivacyPolicy.md */; };
 		CC9EE2CA218F144A00865248 /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9EE2C9218F144A00865248 /* PrivacyPolicyViewController.swift */; };
+		CC9EE2CC218F3B1600865248 /* PrivacyDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9EE2CB218F3B1600865248 /* PrivacyDataViewController.swift */; };
 		CCD455D81F6160F300258E4A /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD455D71F6160F300258E4A /* HelpViewController.swift */; };
 		CCD455DA1F61623A00258E4A /* HelpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD455D91F61623A00258E4A /* HelpCollectionViewCell.swift */; };
 		CCE7878A1F6946550086ED12 /* CGPoint+Vector2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE787891F6946550086ED12 /* CGPoint+Vector2.swift */; };
@@ -215,6 +216,7 @@
 		CC9E4D401E0C480900ABB5A7 /* SpriteKit+Spring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SpriteKit+Spring.swift"; sourceTree = "<group>"; };
 		CC9EE2C7218F142700865248 /* PrivacyPolicy.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = PrivacyPolicy.md; sourceTree = "<group>"; };
 		CC9EE2C9218F144A00865248 /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		CC9EE2CB218F3B1600865248 /* PrivacyDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyDataViewController.swift; sourceTree = "<group>"; };
 		CCD455D71F6160F300258E4A /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		CCD455D91F61623A00258E4A /* HelpCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpCollectionViewCell.swift; sourceTree = "<group>"; };
 		CCE787891F6946550086ED12 /* CGPoint+Vector2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Vector2.swift"; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 			children = (
 				CC6E68651F5C24D0006750BF /* LicensesViewController.swift */,
 				CC9EE2C9218F144A00865248 /* PrivacyPolicyViewController.swift */,
+				CC9EE2CB218F3B1600865248 /* PrivacyDataViewController.swift */,
 			);
 			path = Licenses;
 			sourceTree = "<group>";
@@ -914,6 +917,7 @@
 				FE31DB201C9CA1DC0006D9EE /* SkillCloud.xcdatamodeld in Sources */,
 				CC6E68781F5C24D0006750BF /* CloudViewController.swift in Sources */,
 				CC6E688B1F5C24D0006750BF /* InfoViewController.swift in Sources */,
+				CC9EE2CC218F3B1600865248 /* PrivacyDataViewController.swift in Sources */,
 				FE0522E21CB01BBF00315468 /* Node.swift in Sources */,
 				CC6E68901F5C24D0006750BF /* AddViewController.swift in Sources */,
 				CC6E68961F5C24D0006750BF /* SkillsViewController.swift in Sources */,

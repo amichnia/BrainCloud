@@ -1348,7 +1348,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.segue` struct is generated, and contains static references to 4 view controllers.
+  /// This `R.segue` struct is generated, and contains static references to 5 view controllers.
   struct segue {
     /// This struct is generated for `CloudSelectionViewController`, and contains static references to 1 segues.
     struct cloudSelectionViewController {
@@ -1422,10 +1422,34 @@ struct R: Rswift.Validatable {
       fileprivate init() {}
     }
     
-    /// This struct is generated for `RootTabBarViewController`, and contains static references to 1 segues.
+    /// This struct is generated for `PrivacyPolicyViewController`, and contains static references to 1 segues.
+    struct privacyPolicyViewController {
+      /// Segue identifier `ShowData`.
+      static let showData: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, PrivacyPolicyViewController, PrivacyDataViewController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowData")
+      
+      /// Optionally returns a typed version of segue `ShowData`.
+      /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
+      /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
+      static func showData(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, PrivacyPolicyViewController, PrivacyDataViewController>? {
+        return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.privacyPolicyViewController.showData, segue: segue)
+      }
+      
+      fileprivate init() {}
+    }
+    
+    /// This struct is generated for `RootTabBarViewController`, and contains static references to 2 segues.
     struct rootTabBarViewController {
+      /// Segue identifier `ShowGDPR`.
+      static let showGDPR: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, RootTabBarViewController, UIKit.UINavigationController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowGDPR")
       /// Segue identifier `ShowHelp`.
       static let showHelp: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, RootTabBarViewController, HelpViewController> = Rswift.StoryboardSegueIdentifier(identifier: "ShowHelp")
+      
+      /// Optionally returns a typed version of segue `ShowGDPR`.
+      /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
+      /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
+      static func showGDPR(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, RootTabBarViewController, UIKit.UINavigationController>? {
+        return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.rootTabBarViewController.showGDPR, segue: segue)
+      }
       
       /// Optionally returns a typed version of segue `ShowHelp`.
       /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
@@ -1476,7 +1500,7 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localize` struct is generated, and contains static references to 55 localization keys.
+    /// This `R.string.localize` struct is generated, and contains static references to 62 localization keys.
     struct localize {
       /// Value: About
       static let aboutNavigationTitle = Rswift.StringResource(key: "about.navigation.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -1510,8 +1534,16 @@ struct R: Rswift.Validatable {
       static let cloudGraphsNavigationTitle = Rswift.StringResource(key: "cloud.graphs.navigation.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Confirm
       static let imagesConfirmButton = Rswift.StringResource(key: "images.confirm.button", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Delete
+      static let policyDeleteConfirmDelete = Rswift.StringResource(key: "policy.delete.confirm.delete", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Delete all personal data?
+      static let policyDeleteConfirmTitle = Rswift.StringResource(key: "policy.delete.confirm.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Delete all your personal data
+      static let policySettingsOptionDeleteTitle = Rswift.StringResource(key: "policy.settings.option.delete.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Delete graph
       static let cloudGraphOptionDelete = Rswift.StringResource(key: "cloud.graph.option.delete", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Error
+      static let alertErrorTitle = Rswift.StringResource(key: "alert.error.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Explore all skills
       static let exploreSearchPlaceholder = Rswift.StringResource(key: "explore.search.placeholder", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Export graph
@@ -1526,6 +1558,8 @@ struct R: Rswift.Validatable {
       static let infoOptionHelpTitle = Rswift.StringResource(key: "info.option.help.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: How to use SkillCloud application
       static let infoOptionHelpSubtitle = Rswift.StringResource(key: "info.option.help.subtitle", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: If you continue, all local and cloud data will be removed. You won't be able to recover these data, including skills and graphs. Are you sure you want to continue?
+      static let policyDeleteConfirmMessage = Rswift.StringResource(key: "policy.delete.confirm.message", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Info
       static let infoNavigationTitle = Rswift.StringResource(key: "info.navigation.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Licenses
@@ -1544,6 +1578,8 @@ struct R: Rswift.Validatable {
       static let skillAddImageOptionPhotoLibrary = Rswift.StringResource(key: "skill.add.image.option.photoLibrary", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Privacy Policy
       static let infoOptionPolicyTitle = Rswift.StringResource(key: "info.option.policy.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Privacy Settings
+      static let policySettingsTitle = Rswift.StringResource(key: "policy.settings.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Rate
       static let infoOptionRateTitle = Rswift.StringResource(key: "info.option.rate.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Rate us on AppStore
@@ -1586,6 +1622,8 @@ struct R: Rswift.Validatable {
       static let feedbackSentSuccessSnackBarMessage = Rswift.StringResource(key: "feedback.sent.success.snackBar.message", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Unknown error occured!
       static let errorUnknown = Rswift.StringResource(key: "error.unknown", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: View and download your data
+      static let policySettingsOptionDownloadTitle = Rswift.StringResource(key: "policy.settings.option.download.title", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: enter skill name
       static let skillAddNamePlaceholder = Rswift.StringResource(key: "skill.add.name.placeholder", tableName: "Localize", bundle: R.hostingBundle, locales: [], comment: nil)
       
@@ -1669,9 +1707,29 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("images.confirm.button", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
+      /// Value: Delete
+      static func policyDeleteConfirmDelete(_: Void = ()) -> String {
+        return NSLocalizedString("policy.delete.confirm.delete", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Delete all personal data?
+      static func policyDeleteConfirmTitle(_: Void = ()) -> String {
+        return NSLocalizedString("policy.delete.confirm.title", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Delete all your personal data
+      static func policySettingsOptionDeleteTitle(_: Void = ()) -> String {
+        return NSLocalizedString("policy.settings.option.delete.title", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// Value: Delete graph
       static func cloudGraphOptionDelete(_: Void = ()) -> String {
         return NSLocalizedString("cloud.graph.option.delete", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Error
+      static func alertErrorTitle(_: Void = ()) -> String {
+        return NSLocalizedString("alert.error.title", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: Explore all skills
@@ -1707,6 +1765,11 @@ struct R: Rswift.Validatable {
       /// Value: How to use SkillCloud application
       static func infoOptionHelpSubtitle(_: Void = ()) -> String {
         return NSLocalizedString("info.option.help.subtitle", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: If you continue, all local and cloud data will be removed. You won't be able to recover these data, including skills and graphs. Are you sure you want to continue?
+      static func policyDeleteConfirmMessage(_: Void = ()) -> String {
+        return NSLocalizedString("policy.delete.confirm.message", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: Info
@@ -1752,6 +1815,11 @@ struct R: Rswift.Validatable {
       /// Value: Privacy Policy
       static func infoOptionPolicyTitle(_: Void = ()) -> String {
         return NSLocalizedString("info.option.policy.title", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Privacy Settings
+      static func policySettingsTitle(_: Void = ()) -> String {
+        return NSLocalizedString("policy.settings.title", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: Rate
@@ -1859,6 +1927,11 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("error.unknown", tableName: "Localize", bundle: R.hostingBundle, comment: "")
       }
       
+      /// Value: View and download your data
+      static func policySettingsOptionDownloadTitle(_: Void = ()) -> String {
+        return NSLocalizedString("policy.settings.option.download.title", tableName: "Localize", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// Value: enter skill name
       static func skillAddNamePlaceholder(_: Void = ()) -> String {
         return NSLocalizedString("skill.add.name.placeholder", tableName: "Localize", bundle: R.hostingBundle, comment: "")
@@ -1913,10 +1986,17 @@ struct _R: Rswift.Validatable {
       
       let bundle = R.hostingBundle
       let name = "Help"
+      let policyViewController = StoryboardViewControllerResource<UIKit.UINavigationController>(identifier: "PolicyViewController")
+      
+      func policyViewController(_: Void = ()) -> UIKit.UINavigationController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: policyViewController)
+      }
       
       static func validate() throws {
+        if UIKit.UIImage(named: "background-image") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'background-image' is used in storyboard 'Help', but couldn't be loaded.") }
         if UIKit.UIImage(named: "Help/frame") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Help/frame' is used in storyboard 'Help', but couldn't be loaded.") }
         if UIKit.UIImage(named: "Help/image1") == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Help/image1' is used in storyboard 'Help', but couldn't be loaded.") }
+        if _R.storyboard.help().policyViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'policyViewController' could not be loaded from storyboard 'Help' as 'UIKit.UINavigationController'.") }
       }
       
       fileprivate init() {}

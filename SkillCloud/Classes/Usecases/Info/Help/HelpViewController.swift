@@ -13,12 +13,18 @@ struct HelpPage {
 }
 
 class HelpViewController: UIViewController {
+    // MARK: - Outlet
     @IBOutlet weak var collectionView: PagedCollectionView!
     @IBOutlet weak var skipButton: UIButton!
     @IBOutlet weak var topInfoLabel: LTMorphingLabel!
     @IBOutlet weak var bottomInfoLabel: LTMorphingLabel!
     @IBOutlet weak var pageControl: UIPageControl!
 
+    // MARK: - Appearance
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
+    }
+    // MARK: - Properties
     var pages = [
         HelpPage(image: R.image.help.image1(), top: R.string.localize.helpPage1Top(), bottom: R.string.localize.helpPage1Bottom()),
         HelpPage(image: R.image.help.image2(), top: R.string.localize.helpPage2Top(), bottom: R.string.localize.helpPage2Bottom()),
@@ -28,6 +34,7 @@ class HelpViewController: UIViewController {
         HelpPage(image: nil, top: "", bottom: "")
     ]
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,6 +52,7 @@ class HelpViewController: UIViewController {
     }
 }
 
+// MARK: - PagedCollectionViewDelegate
 extension HelpViewController: PagedCollectionViewDelegate {
     func didSelectItem(atIndex: Int) {
         pageControl.currentPage = atIndex
@@ -59,6 +67,7 @@ extension HelpViewController: PagedCollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension HelpViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pages.count
